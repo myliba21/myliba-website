@@ -1,0 +1,80 @@
+frontend/src/lib/strapi.ts
+  s_c5970c71f2e38c::t_789645012793f1 37-46
+frontend/src/app/[locale]/page.tsx
+  s_c5970c71f2e38c::t_df9684ab5bffc7 2-79,92,95,102-103,162,165,168-169,183-185,187,209-210,213,235,238-239,251,253-254
+frontend/src/app/[locale]/faq/page.tsx
+  s_c5970c71f2e38c::t_56b3f660eacba3 6-9,12-13,35-36,38-41,43,51,57,59
+  s_c5970c71f2e38c::t_d7aa48ad30f25b 2-4,11,14-34,37,42,44-50,52,58,60
+.sisyphus/plans/strapi-cms-integration.md
+  s_5af9f08263b83c::t_db6c2efff0bbf1 555-1322
+  s_5af9f08263b83c::t_3f7bcdda3a80e5 1-138,1323-1379
+  s_5af9f08263b83c::t_7c6ef7879f56f7 139-554
+frontend/src/app/[locale]/okr-culture-academy/page.tsx
+  s_c5970c71f2e38c::t_eae43db5568041 2-48,54-61,71
+.sisyphus/plans/strapi-best-practices.md
+  s_5af9f08263b83c::t_dfdad73c59348a 2,4-6,8,10,18,20-21,27-28,30-32,34,36,51-52,57,59,62,66-68,70,72,78,80-81,91,96-99,101,103,109-110,112-113,116-117,119,122,126-130,132,145-149,151,153-154,159,162-163,165,167,171-174,181-182,189,195-197,199,201,206,212,217,219,227,229,231-232,241,243-244,247,257,259,261,271,276-279,292,294,296,303-305
+  s_5af9f08263b83c::t_acc5384f3e9010 1,3,7,9,11-17,19,22-26,29,33,35,37-50,53-56,58,60-61,63-65,69,71,73-77,79,82-90,92-95,100,102,104-108,111,114-115,118,120-121,123-125,131,133-144,150,152,155-158,160-161,164,166,168-170,175-180,183-188,190-194,198,200,202-205,207-211,213-216,218,220-226,228,230,233-240,242,245-246,248-256,258,260,262-270,272-275,280-291,293,295,297-302,306-319
+frontend/src/components/faq/FaqAccordion.tsx
+  s_c5970c71f2e38c::t_7c748814a2298e 1-37
+frontend/src/lib/renderMarkdown.tsx
+  s_c5970c71f2e38c::t_1b8f2313fa1426 1-40
+frontend/src/app/[locale]/our-story/page.tsx
+  s_c5970c71f2e38c::t_9603aafbd8f71d 1-3,5-69,75-82,84
+.sisyphus/plans/strapi-content-migration.md
+  s_c5970c71f2e38c::t_00b8785dae0868 1-1029
+frontend/src/app/[locale]/our-products/page.tsx
+  s_c5970c71f2e38c::t_6e89f5398adc7d 2-3,5-47,53-55,57-73,81
+frontend/src/app/[locale]/security/page.tsx
+  s_c5970c71f2e38c::t_fc0311ac14d5fb 2-48,53-60,62
+frontend/src/app/[locale]/ethics-counsel/page.tsx
+  s_c5970c71f2e38c::t_ae9952f7a720b3 2-48,54-61,63,65
+scripts/seed-content.mjs
+  s_c5970c71f2e38c::t_3565619c1c63ca 618
+  s_c5970c71f2e38c::t_8f78332e0950fb 1-617,619-855
+backend/src/index.js
+  s_c5970c71f2e38c::t_0c19e58ccfead7 3-373,377-379
+frontend/src/app/[locale]/privacy-policy/page.tsx
+  s_c5970c71f2e38c::t_d86f2e7176d730 2-4,6-11,13-30,32-37,39-48,50-60,62
+frontend/src/app/[locale]/culture-analysis/page.tsx
+  s_c5970c71f2e38c::t_daec59d9b50477 2-48,54-66,114
+frontend/src/app/[locale]/layout.tsx
+  s_c5970c71f2e38c::t_71f4aa9a1b8e71 8-47
+frontend/src/app/layout.tsx
+  s_c5970c71f2e38c::t_5b3ee14c7b5c59 11
+.sisyphus/plans/i18n-strapi-tr-en.md
+  s_0eeafd7aa4459b::t_6dfa79734182a5 307,313,315-316,320-321,323-335,339,341,343-348
+  s_0eeafd7aa4459b::t_accdeb71368eeb 352-354
+  s_0eeafd7aa4459b::t_e91d9d129a0196 1-306,308-312,314,317-319,322,336-338,340,342,349-351,355-518
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "5b6cf6e344a361eac5fcc714dacab4d330f48a1a",
+  "prompts": {},
+  "sessions": {
+    "s_0eeafd7aa4459b": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1bf2360d5ffesfSnd6EnM2fbAY",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "Okan TOPER <okan.toper@turkcell.com.tr>"
+    },
+    "s_5af9f08263b83c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c06d4082ffenGcPCzdM7UfuQt",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "Okan TOPER <okan.toper@turkcell.com.tr>"
+    },
+    "s_c5970c71f2e38c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c01dfce5ffeLBJArsTM5mTPc9",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "Okan TOPER <okan.toper@turkcell.com.tr>"
+    }
+  }
+}
