@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: myliba
+      POSTGRES_USER: myliba
+      POSTGRES_PASSWORD: myliba_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myliba"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  strapi:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "1337:1337"
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: myliba
+      DATABASE_USERNAME: myliba
+      DATABASE_PASSWORD: myliba_pass
+      DATABASE_SSL: "false"
+      HOST: 0.0.0.0
+      PORT: 1337
+      APP_KEYS: myKey1RandomString,myKey2RandomString
+      API_TOKEN_SALT: myApiTokenSaltRandom
+      ADMIN_JWT_SECRET: myAdminJwtSecretRandom
+      TRANSFER_TOKEN_SALT: myTransferTokenSaltRandom
+      JWT_SECRET: myJwtSecretRandom
+    volumes:
+      - ./backend:/srv/app
+      - backend_node_modules:/srv/app/node_modules
+      - ./backend/public/uploads:/srv/app/public/uploads
+    restart: unless-stopped
+
+  # nextjs:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - strapi
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     NEXT_PUBLIC_STRAPI_URL: http://strapi:1337
+  #   restart: unless-stopped
+
+volumes:
+  postgres_data:
+  backend_node_modules:
