@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #5b7cfa;
+  --primary-dark: #3451d1;
+  --secondary: #090d18;
+  --accent: #8b5cf6;
+  --accent-dark: #6d28d9;
+  --success: #14b884;
+  --success-dark: #0e8d66;
+  --background: #fbfcff;
+  --surface: #f3f6fb;
+  --foreground: #101523;
+  --text-secondary: #657084;
+  --border: #dde4f0;
+  --graphite: #111827;
+  --cyan: #16c7f2;
+  --coral: #ff7a59;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-success: var(--success);
+  --color-success-dark: var(--success-dark);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  scroll-behavior: smooth;
+  text-rendering: geometricPrecision;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(91, 124, 250, 0.22);
+}
+
+.myliba-grid {
+  background-image:
+    linear-gradient(rgba(91, 124, 250, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 124, 250, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.reveal {
+  animation: reveal-up 720ms ease both;
+}
+
+.float-soft {
+  animation: float-soft 7s ease-in-out infinite;
+}
+
+.float-delay {
+  animation: float-soft 8s ease-in-out 1.2s infinite;
+}
+
+.glass-panel {
+  background: linear-gradient(135deg, rgba(255,255,255,0.78), rgba(255,255,255,0.42));
+  border: 1px solid rgba(255,255,255,0.62);
+  box-shadow: 0 24px 80px rgba(13, 24, 45, 0.12);
+  backdrop-filter: blur(22px);
+}
+
+.dark-glass {
+  background: linear-gradient(135deg, rgba(18,24,40,0.86), rgba(18,24,40,0.54));
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 24px 90px rgba(0,0,0,0.25);
+  backdrop-filter: blur(24px);
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-soft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}

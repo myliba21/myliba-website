@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "products": "Ürünlerimiz",
+    "academy": "OKR Kültür & Akademi",
+    "cultureAnalysis": "Kültür Analizi",
+    "ethicsCounsel": "Etik Hat",
+    "blog": "Blog",
+    "events": "Etkinlikler",
+    "contact": "İletişim",
+    "ourStory": "Hikayemiz",
+    "faq": "S.S.S",
+    "security": "Güvenlik",
+    "privacyPolicy": "Gizlilik Politikası"
+  },
+  "common": {
+    "requestDemo": "Demo Talep Et",
+    "getQuote": "Teklif Al",
+    "getOffer": "Teklif Al",
+    "readMore": "Devamını Oku",
+    "viewAll": "Tümünü Gör",
+    "whatsapp": "WhatsApp",
+    "callNow": "Hemen Ara!",
+    "copyright": "Copyright © 2026 Myliba"
+  },
+  "contact": {
+    "name": "Ad Soyad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "company": "Şirket",
+    "message": "Mesaj",
+    "type": "Talep Türü",
+    "typeContact": "İletişim",
+    "typeDemo": "Demo Talep",
+    "submit": "Mesaj Gönder",
+    "success": "Mesajınız başarıyla gönderildi!",
+    "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+  }
+}

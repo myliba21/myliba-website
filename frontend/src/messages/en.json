@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "products": "Our Products",
+    "academy": "OKR Culture & Academy",
+    "cultureAnalysis": "Culture Analysis",
+    "ethicsCounsel": "Ethics Counsel",
+    "blog": "Blog",
+    "events": "Events",
+    "contact": "Contact",
+    "ourStory": "Our Story",
+    "faq": "F.A.Q",
+    "security": "Security",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "common": {
+    "requestDemo": "Request a Demo",
+    "getQuote": "Get a Quote",
+    "getOffer": "Get an Offer",
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "whatsapp": "WhatsApp",
+    "callNow": "Call Now!",
+    "copyright": "Copyright © 2026 Myliba"
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "company": "Company",
+    "message": "Message",
+    "type": "Inquiry Type",
+    "typeContact": "Contact",
+    "typeDemo": "Request a Demo",
+    "submit": "Send Message",
+    "success": "Your message has been sent successfully!",
+    "error": "Something went wrong. Please try again."
+  }
+}
