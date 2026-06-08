@@ -103,6 +103,10 @@ function render_settings(): void
                     <td><textarea class="regular-text" id="myliba-footer-note" name="myliba_options[footer_note]" rows="3"><?php echo esc_textarea($options['footer_note']); ?></textarea></td>
                 </tr>
                 <tr>
+                    <th scope="row"><label for="myliba-footer-cta-title"><?php esc_html_e('Footer CTA title', 'myliba'); ?></label></th>
+                    <td><input class="regular-text" id="myliba-footer-cta-title" name="myliba_options[footer_cta_title]" value="<?php echo esc_attr($options['footer_cta_title']); ?>"></td>
+                </tr>
+                <tr>
                     <th scope="row"><?php esc_html_e('Social links', 'myliba'); ?></th>
                     <td>
                         <input class="regular-text" type="url" name="myliba_options[linkedin_url]" value="<?php echo esc_attr($options['linkedin_url']); ?>" placeholder="LinkedIn URL">

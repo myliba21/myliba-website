@@ -10,6 +10,12 @@ function myliba_theme_setup(): void
     add_theme_support('post-thumbnails');
     add_theme_support('html5', ['search-form', 'gallery', 'caption', 'style', 'script']);
     add_theme_support('automatic-feed-links');
+    add_theme_support('custom-logo', [
+        'height' => 80,
+        'width' => 240,
+        'flex-height' => true,
+        'flex-width' => true,
+    ]);
 
     register_nav_menus([
         'primary' => __('Primary Navigation', 'myliba'),
@@ -212,4 +218,47 @@ function myliba_demo_url(): string
     $page_url = myliba_page_url('demo');
 
     return $page_url ?: (string) myliba_option('demo_url', '/en/demo/');
+}
+
+function myliba_brand_link(string $modifier = ''): void
+{
+    $classes = trim('site-brand ' . $modifier);
+    echo '<a class="' . esc_attr($classes) . '" href="' . esc_url(home_url('/')) . '" aria-label="' . esc_attr(get_bloginfo('name')) . '">';
+
+    $custom_logo_id = get_theme_mod('custom_logo');
+    if ($custom_logo_id) {
+        echo wp_get_attachment_image($custom_logo_id, 'full', false, [
+            'class' => 'site-brand__logo',
+            'alt' => get_bloginfo('name'),
+        ]);
+    } else {
+        echo '<span class="site-brand__mark" aria-hidden="true"><span></span><span></span><span></span></span>';
+        echo '<span class="site-brand__text">Myliba</span>';
+    }
+
+    echo '</a>';
+}
+
+function myliba_home_value(string $key, mixed $fallback = ''): mixed
+{
+    return myliba_meta('_myliba_home_' . $key, get_queried_object_id(), $fallback);
+}
+
+function myliba_home_lines(string $key, array $fallback = []): array
+{
+    $value = (string) myliba_home_value($key, implode("\n", $fallback));
+
+    return myliba_lines($value);
+}
+
+function myliba_home_rows(string $key, array $fallback = []): array
+{
+    $rows = [];
+    $raw_rows = myliba_home_lines($key, array_map(static fn ($row) => implode('|', $row), $fallback));
+
+    foreach ($raw_rows as $row) {
+        $rows[] = array_map('trim', explode('|', $row));
+    }
+
+    return $rows;
 }

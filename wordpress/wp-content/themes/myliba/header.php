@@ -14,10 +14,7 @@ if (!defined('ABSPATH')) {
 <?php wp_body_open(); ?>
 <header class="site-header">
     <div class="site-header__inner">
-        <a class="site-brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php bloginfo('name'); ?>">
-            <span class="site-brand__mark">M</span>
-            <span class="site-brand__text"><?php bloginfo('name'); ?></span>
-        </a>
+        <?php myliba_brand_link(); ?>
 
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
             <span></span>
@@ -27,9 +24,23 @@ if (!defined('ABSPATH')) {
         </button>
 
         <nav id="site-navigation" class="site-nav" aria-label="<?php esc_attr_e('Primary navigation', 'myliba'); ?>">
-            <?php foreach (myliba_nav_items() as $key => $label) : ?>
-                <a href="<?php echo esc_url(myliba_page_url($key)); ?>"><?php echo esc_html($label); ?></a>
-            <?php endforeach; ?>
+            <?php if (has_nav_menu('primary')) : ?>
+                <?php
+                wp_nav_menu([
+                    'theme_location' => 'primary',
+                    'container' => false,
+                    'menu_class' => 'site-nav__menu',
+                    'depth' => 1,
+                    'fallback_cb' => false,
+                ]);
+                ?>
+            <?php else : ?>
+                <div class="site-nav__menu site-nav__menu--fallback">
+                    <?php foreach (myliba_nav_items() as $key => $label) : ?>
+                        <a href="<?php echo esc_url(myliba_page_url($key)); ?>"><?php echo esc_html($label); ?></a>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
             <a class="site-nav__mobile-cta" href="<?php echo esc_url(myliba_option('phone_url', 'tel:+905539868699')); ?>">
                 <?php esc_html_e('Call now', 'myliba'); ?>
             </a>

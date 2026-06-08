@@ -28,30 +28,33 @@ class Commands
             'indexing_enabled' => '0',
             'contact_email' => get_option('admin_email'),
             'demo_url' => '/en/demo/',
+            'footer_cta_title' => 'Ready to make culture measurable?',
             'primary_cta_url' => '/en/contact/',
         ]));
 
         $this->cleanup_default_content();
 
-        $en = $this->upsert_page('Myliba', 'en', $this->starter_content('home_en'), [
+        $en = $this->upsert_page('Myliba', 'en', $this->starter_content('home_en'), array_merge([
             '_myliba_language' => 'en',
+            '_myliba_eyebrow' => 'OKR, KPI, CFR and performance culture',
             '_myliba_hero_title' => 'Build a stronger culture around clear goals',
             '_myliba_hero_subtitle' => 'Myliba helps teams turn OKRs, ethics, security, and culture into measurable operating habits.',
             '_myliba_cta_label' => 'Contact us',
             '_myliba_cta_url' => '/en/contact/',
             '_myliba_seo_title' => 'Myliba | OKR, Culture, Ethics and Security Consulting',
             '_myliba_seo_description' => 'Myliba helps organizations build measurable operating culture with OKR, culture analysis, ethics counsel, and security guidance.',
-        ]);
+        ], $this->home_meta_defaults('en')));
 
-        $tr = $this->upsert_page('Myliba TR', 'tr', $this->starter_content('home_tr'), [
+        $tr = $this->upsert_page('Myliba TR', 'tr', $this->starter_content('home_tr'), array_merge([
             '_myliba_language' => 'tr',
+            '_myliba_eyebrow' => 'OKR, KPI, CFR ve performans kulturu',
             '_myliba_hero_title' => 'Hedefleri net, kulturu guclu ekipler kurun',
             '_myliba_hero_subtitle' => 'Myliba OKR, etik, guvenlik ve kultur calismalarini olculebilir aliskanliklara donusturur.',
             '_myliba_cta_label' => 'Iletisime gec',
             '_myliba_cta_url' => '/tr/iletisim/',
             '_myliba_seo_title' => 'Myliba | OKR, Kultur, Etik ve Guvenlik Danismanligi',
             '_myliba_seo_description' => 'Myliba kurumlarin OKR, kultur analizi, etik danismanlik ve guvenlik rehberligi ile olculebilir is kulturu kurmasina yardimci olur.',
-        ]);
+        ], $this->home_meta_defaults('tr')));
 
         update_option('show_on_front', 'page');
         update_option('page_on_front', $en);
@@ -102,6 +105,8 @@ class Commands
                 '_myliba_seo_description' => $hero_subtitle,
             ], $parent, $template);
         }
+
+        $this->seed_navigation();
 
         $this->upsert_post('A practical OKR operating rhythm', 'practical-okr-operating-rhythm', 'en');
         $this->upsert_post('OKR rutinini pratik hale getirmek', 'okr-rutinini-pratik-hale-getirmek', 'tr');
@@ -419,6 +424,197 @@ class Commands
                 '_myliba_seo_title' => $title . ' | Myliba',
                 '_myliba_seo_description' => $subtitle,
             ], 0, 'template-landing.php');
+        }
+    }
+
+    private function home_meta_defaults(string $language): array
+    {
+        if ($language === 'tr') {
+            return [
+                '_myliba_home_hero_proof' => "Stratejiden aksiyona\nSurekli performans\nAkademi + yazilim",
+                '_myliba_home_dashboard_brand' => 'Myliba',
+                '_myliba_home_dashboard_title' => 'Performance OS',
+                '_myliba_home_dashboard_nav' => "OKR\nKPI\nCFR\n1:1\nAkademi",
+                '_myliba_home_dashboard_objective_label' => 'Sirket hedefi',
+                '_myliba_home_dashboard_objective_title' => 'Strateji uygulama gorunurlugunu artirin',
+                '_myliba_home_dashboard_progress' => '76',
+                '_myliba_home_dashboard_rows' => "Liderlik ritmi aktif | IK | Yolunda | green\nTakim OKR uyumu | Strateji | Incele | blue\n1:1 aksiyon takibi | Liderler | Odak | orange",
+                '_myliba_home_dashboard_col_1' => 'Ana sonuc',
+                '_myliba_home_dashboard_col_2' => 'Sahip',
+                '_myliba_home_dashboard_col_3' => 'Durum',
+                '_myliba_home_metric_1_value' => '72%',
+                '_myliba_home_metric_1_label' => 'OKR ilerleme',
+                '_myliba_home_metric_2_value' => '148',
+                '_myliba_home_metric_2_label' => '1:1 notu',
+                '_myliba_home_feedback_title' => 'Geri bildirim karti',
+                '_myliba_home_feedback_text' => 'Kocluk notlari, takdir ve aksiyonlar hedeflerle bagli kalir.',
+                '_myliba_home_trust_title' => 'Performans kulturunu ciddiyetle yoneten ekipler icin.',
+                '_myliba_home_trust_items' => "OKR\nKPI\nCFR\n1:1",
+                '_myliba_home_problem_eyebrow' => 'Problem',
+                '_myliba_home_problem_title' => 'Hedefler, aksiyonlar ve geri bildirim farkli sistemlerde kaldiginda strateji kaybolur.',
+                '_myliba_home_problem_cards' => "Parcali rutinler | OKR calismalari, KPI reviewlari, performans gorusmeleri ve geri bildirim notlari kopuk ritullere donusur.\nZayif gorunurluk | Liderlik, IK ve ekipler katkiyi, engelleri ve ilerlemeyi tek ritimde goremez.",
+                '_myliba_home_solution_eyebrow' => 'Myliba cozumu',
+                '_myliba_home_solution_title' => 'Hedefler, performans gorusmeleri, aksiyonlar ve kultur gelisimi icin tek platform.',
+                '_myliba_home_products_button' => 'Urunleri incele',
+                '_myliba_home_module_button' => 'Modulu gor',
+                '_myliba_home_academy_eyebrow' => 'Akademi + yazilim',
+                '_myliba_home_academy_title' => 'Yazilim gucu, akademi deneyimi.',
+                '_myliba_home_academy_text' => 'Myliba kurumlarin sadece hedef tanimlamasina degil, liderlik gelisimi, performans koclugu, atolyeler ve kultur donusumu programlariyla hedef odakli calismayi surdurulebilir hale getirmesine yardimci olur.',
+                '_myliba_home_academy_items' => "OKR kulturu ve adaptasyon programlari\nLiderlik ve kocluk rutinleri\nSurekli performans gelisimi\nInsan ve kultur odakli donusum",
+                '_myliba_home_academy_button' => 'Akademiyi incele',
+                '_myliba_home_use_cases_eyebrow' => 'Kullanim alanlari',
+                '_myliba_home_use_cases_title' => 'Ust yonetim, IK, strateji ekipleri ve liderler icin amaca gore yollar.',
+                '_myliba_home_solution_button' => 'Cozumu gor',
+                '_myliba_home_outcomes_eyebrow' => 'Is sonuclari',
+                '_myliba_home_outcomes_title' => 'Performans kulturunu gorunur, gelistirilebilir ve olculebilir hale getirin.',
+                '_myliba_home_outcomes_cards' => "Hizalanma | Sirket stratejisini takim ve bireysel katkiyla baglayin.\nSeffaflik | Toplanti beklemeden ilerlemeyi, engelleri ve sahipligi gorun.\nGelisim | 1:1, geri bildirim ve koclugu surekli rutine donusturun.\nUygulama | Oncelikleri aksiyonlara, sahipliklere ve olculebilir sonuclara donusturun.",
+                '_myliba_home_b2b_trust_eyebrow' => 'Guven',
+                '_myliba_home_b2b_trust_title' => 'B2B guveni icin tasarlandi.',
+                '_myliba_home_b2b_trust_text' => 'Rol bazli erisim, gizlilik odakli formlar, guvenlik mesajlari ve yasal sayfalar WordPress migrasyon temelinin parcasidir.',
+                '_myliba_home_b2b_trust_button' => 'Guvenligi gor',
+                '_myliba_home_resources_eyebrow' => 'Kaynaklar',
+                '_myliba_home_resources_title' => 'OKR, performans ve kultur konulari icin SEO hazir icerik.',
+                '_myliba_home_faq_eyebrow' => 'SSS',
+                '_myliba_home_faq_title' => 'Demo talep etmeden once sik sorulan sorular.',
+                '_myliba_home_final_eyebrow' => 'Sonraki adim',
+                '_myliba_home_final_title' => 'Myliba strateji, performans ve kultur rutinlerinizi nasil baglar gorun.',
+                '_myliba_home_final_text' => 'Ekip buyuklugunuzu ve onceliklerinizi paylasin. Kurumunuza uyan modul ve akademi yolunu gosterelim.',
+            ];
+        }
+
+        return [
+            '_myliba_home_hero_proof' => "Strategy to action\nContinuous performance\nAcademy + software",
+            '_myliba_home_dashboard_brand' => 'Myliba',
+            '_myliba_home_dashboard_title' => 'Performance OS',
+            '_myliba_home_dashboard_nav' => "OKR\nKPI\nCFR\n1:1\nAcademy",
+            '_myliba_home_dashboard_objective_label' => 'Company objective',
+            '_myliba_home_dashboard_objective_title' => 'Increase strategy execution visibility',
+            '_myliba_home_dashboard_progress' => '76',
+            '_myliba_home_dashboard_rows' => "Leadership rhythm active | HR | On track | green\nTeam OKR alignment | Strategy | Review | blue\n1:1 action follow-up | Leads | Focus | orange",
+            '_myliba_home_dashboard_col_1' => 'Key Result',
+            '_myliba_home_dashboard_col_2' => 'Owner',
+            '_myliba_home_dashboard_col_3' => 'Status',
+            '_myliba_home_metric_1_value' => '72%',
+            '_myliba_home_metric_1_label' => 'OKR progress',
+            '_myliba_home_metric_2_value' => '148',
+            '_myliba_home_metric_2_label' => '1:1 notes',
+            '_myliba_home_feedback_title' => 'Feedback card',
+            '_myliba_home_feedback_text' => 'Coaching notes, recognition and actions stay connected to goals.',
+            '_myliba_home_trust_title' => 'Built for teams that manage performance culture seriously.',
+            '_myliba_home_trust_items' => "OKR\nKPI\nCFR\n1:1",
+            '_myliba_home_problem_eyebrow' => 'The problem',
+            '_myliba_home_problem_title' => 'Strategy gets lost when goals, actions and feedback live in separate systems.',
+            '_myliba_home_problem_cards' => "Fragmented routines | OKR workshops, KPI reviews, performance interviews and feedback notes become disconnected rituals.\nWeak visibility | Leadership, HR and teams cannot see contribution, blockers and progress in one operating rhythm.",
+            '_myliba_home_solution_eyebrow' => 'The Myliba solution',
+            '_myliba_home_solution_title' => 'One platform for goals, performance conversations, actions and culture development.',
+            '_myliba_home_products_button' => 'Explore products',
+            '_myliba_home_module_button' => 'View module',
+            '_myliba_home_academy_eyebrow' => 'Academy + software',
+            '_myliba_home_academy_title' => 'Software power, academy experience.',
+            '_myliba_home_academy_text' => 'Myliba helps organizations not only define goals, but also make goal-oriented work sustainable through leadership development, performance coaching, workshops and cultural transformation programs.',
+            '_myliba_home_academy_items' => "OKR culture and adoption programs\nLeadership and coaching routines\nContinuous performance development\nHuman and culture-focused transformation",
+            '_myliba_home_academy_button' => 'Explore academy',
+            '_myliba_home_use_cases_eyebrow' => 'Use cases',
+            '_myliba_home_use_cases_title' => 'Purpose-built paths for executives, HR, strategy teams and leaders.',
+            '_myliba_home_solution_button' => 'See solution',
+            '_myliba_home_outcomes_eyebrow' => 'Business outcomes',
+            '_myliba_home_outcomes_title' => 'Make performance culture visible, coachable and measurable.',
+            '_myliba_home_outcomes_cards' => "Alignment | Connect company strategy with team and individual contribution.\nTransparency | See progress, blockers and ownership without waiting for meetings.\nDevelopment | Turn 1:1, feedback and coaching into a continuous routine.\nExecution | Transform priorities into actions, ownership and measurable results.",
+            '_myliba_home_b2b_trust_eyebrow' => 'Trust',
+            '_myliba_home_b2b_trust_title' => 'Designed for B2B confidence.',
+            '_myliba_home_b2b_trust_text' => 'Role-based access, privacy-first forms, security messaging and legal pages are part of the WordPress migration foundation.',
+            '_myliba_home_b2b_trust_button' => 'View security',
+            '_myliba_home_resources_eyebrow' => 'Resources',
+            '_myliba_home_resources_title' => 'SEO-ready content for OKR, performance and culture topics.',
+            '_myliba_home_faq_eyebrow' => 'FAQ',
+            '_myliba_home_faq_title' => 'Common questions before requesting a demo.',
+            '_myliba_home_final_eyebrow' => 'Next step',
+            '_myliba_home_final_title' => 'See how Myliba can connect your strategy, performance and culture routines.',
+            '_myliba_home_final_text' => 'Share your team size and priorities. We will show the modules and academy path that fit your organization.',
+        ];
+    }
+
+    private function seed_navigation(): void
+    {
+        $primary_id = $this->ensure_menu('Myliba Primary');
+        $footer_id = $this->ensure_menu('Myliba Footer');
+
+        if ($primary_id) {
+            $this->seed_menu_items($primary_id, [
+                ['en/our-products', 'Products'],
+                ['en/okr-culture-academy', 'Academy'],
+                ['en/solutions', 'Solutions'],
+                ['en/our-story', 'Our Story'],
+                ['en/blog', 'Blog'],
+                ['en/contact', 'Contact'],
+            ]);
+        }
+
+        if ($footer_id) {
+            $this->seed_menu_items($footer_id, [
+                ['en/blog', 'Blog'],
+                ['en/our-story', 'Our Story'],
+                ['en/faq', 'FAQ'],
+                ['en/security', 'Security'],
+                ['en/privacy-policy', 'Privacy'],
+            ]);
+        }
+
+        $locations = get_theme_mod('nav_menu_locations', []);
+        $locations = is_array($locations) ? $locations : [];
+
+        if ($primary_id) {
+            $locations['primary'] = $primary_id;
+        }
+
+        if ($footer_id) {
+            $locations['footer'] = $footer_id;
+        }
+
+        set_theme_mod('nav_menu_locations', $locations);
+    }
+
+    private function ensure_menu(string $name): int
+    {
+        $menu = wp_get_nav_menu_object($name);
+
+        if ($menu) {
+            return (int) $menu->term_id;
+        }
+
+        $menu_id = wp_create_nav_menu($name);
+
+        return is_wp_error($menu_id) ? 0 : (int) $menu_id;
+    }
+
+    private function seed_menu_items(int $menu_id, array $items): void
+    {
+        $existing_items = wp_get_nav_menu_items($menu_id, ['post_status' => 'any']);
+
+        if (is_array($existing_items) && count($existing_items) > 0) {
+            return;
+        }
+
+        foreach ($items as [$path, $label]) {
+            $page = get_page_by_path($path);
+
+            if ($page) {
+                wp_update_nav_menu_item($menu_id, 0, [
+                    'menu-item-title' => $label,
+                    'menu-item-object-id' => (int) $page->ID,
+                    'menu-item-object' => 'page',
+                    'menu-item-type' => 'post_type',
+                    'menu-item-status' => 'publish',
+                ]);
+                continue;
+            }
+
+            wp_update_nav_menu_item($menu_id, 0, [
+                'menu-item-title' => $label,
+                'menu-item-url' => home_url('/' . trim($path, '/') . '/'),
+                'menu-item-type' => 'custom',
+                'menu-item-status' => 'publish',
+            ]);
         }
     }
 
