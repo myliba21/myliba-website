@@ -1,0 +1,30 @@
+.DS_Store
+
+# Local environment files
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# Node
+node_modules/
+.next/
+dist/
+build/
+
+# WordPress local state
+wordpress/.env
+wordpress/wp-content/uploads/*
+!wordpress/wp-content/uploads/.gitkeep
+wordpress/wp-content/upgrade/
+wordpress/wp-content/cache/
+wordpress/wp-content/debug.log
+wordpress/wp-content/plugins/akismet/
+wordpress/wp-content/plugins/hello.php
+wordpress/wp-content/themes/twentytwenty*/
+
+# Database and dumps
+*.sql
+*.sql.gz
+*.sqlite
+*.db

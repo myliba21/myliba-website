@@ -1,0 +1,67 @@
+services:
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: ${WORDPRESS_DB_NAME:-myliba_wp}
+      MARIADB_USER: ${WORDPRESS_DB_USER:-myliba_wp}
+      MARIADB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-myliba_wp_pass}
+      MARIADB_ROOT_PASSWORD: ${WORDPRESS_DB_ROOT_PASSWORD:-myliba_wp_root}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  wordpress:
+    image: wordpress:php8.3-apache
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${WORDPRESS_PORT:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-myliba_wp}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-myliba_wp}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-myliba_wp_pass}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_ENVIRONMENT_TYPE', 'local');
+        if (!defined('WP_DEBUG')) {
+          define('WP_DEBUG', true);
+        }
+        if (!defined('WP_DEBUG_LOG')) {
+          define('WP_DEBUG_LOG', true);
+        }
+        if (!defined('DISALLOW_FILE_EDIT')) {
+          define('DISALLOW_FILE_EDIT', true);
+        }
+        if (!defined('AUTOMATIC_UPDATER_DISABLED')) {
+          define('AUTOMATIC_UPDATER_DISABLED', false);
+        }
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+    restart: unless-stopped
+
+  wpcli:
+    image: wordpress:cli-php8.3
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-myliba_wp}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-myliba_wp}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-myliba_wp_pass}
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+    working_dir: /var/www/html
+    profiles: ["tools"]
+
+volumes:
+  db_data:
+  wordpress_data:
