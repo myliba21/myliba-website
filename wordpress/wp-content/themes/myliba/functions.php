@@ -102,6 +102,28 @@ function myliba_nav_items(): array
     ];
 }
 
+function myliba_portal_url(): string
+{
+    return 'https://portal.myliba.com/';
+}
+
+function myliba_header_menu(): array
+{
+    return [
+        ['key' => 'products', 'label' => __('Products', 'myliba'), 'url' => myliba_page_url('products')],
+        ['key' => 'academy', 'label' => __('Academy', 'myliba'), 'url' => myliba_page_url('academy')],
+        ['key' => 'solutions', 'label' => __('Solutions', 'myliba'), 'url' => myliba_page_url('solutions')],
+        ['key' => 'story', 'label' => __('Our Story', 'myliba'), 'url' => myliba_page_url('story')],
+        ['key' => 'blog', 'label' => __('Blog', 'myliba'), 'url' => myliba_page_url('blog')],
+        ['key' => 'contact', 'label' => __('Contact', 'myliba'), 'url' => myliba_page_url('contact')],
+    ];
+}
+
+function myliba_mega_menu_products(): WP_Query
+{
+    return myliba_get_entries('myliba_product', 10);
+}
+
 function myliba_language_links(): array
 {
     if (function_exists('pll_the_languages')) {
@@ -129,6 +151,15 @@ function myliba_language_links(): array
     }
 
     return $links;
+}
+
+function myliba_language_flag(string $label): string
+{
+    return match (strtolower($label)) {
+        'tr' => '🇹🇷',
+        'en' => '🇬🇧',
+        default => strtoupper(substr($label, 0, 2)),
+    };
 }
 
 function myliba_post_language_filter(\WP_Query $query): void

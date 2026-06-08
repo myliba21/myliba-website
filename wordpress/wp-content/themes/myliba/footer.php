@@ -43,8 +43,8 @@ if (!defined('ABSPATH')) {
     <a class="mobile-sticky-cta__demo" href="<?php echo esc_url(myliba_demo_url()); ?>">
         <?php echo esc_html(myliba_option('demo_cta_label', __('Request a demo', 'myliba'))); ?>
     </a>
-    <a class="mobile-sticky-cta__call" href="<?php echo esc_url(myliba_option('phone_url', 'tel:+905539868699')); ?>">
-        <?php esc_html_e('Call now', 'myliba'); ?>
+    <a class="mobile-sticky-cta__portal" href="<?php echo esc_url(myliba_portal_url()); ?>">
+        <?php esc_html_e('Portal login', 'myliba'); ?>
     </a>
 </div>
 <?php wp_footer(); ?>
