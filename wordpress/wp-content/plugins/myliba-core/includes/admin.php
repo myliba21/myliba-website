@@ -13,6 +13,30 @@ function boot(): void
     add_action('admin_menu', __NAMESPACE__ . '\\register_menu');
     add_action('admin_notices', __NAMESPACE__ . '\\admin_notices');
     add_action('dashboard_glance_items', __NAMESPACE__ . '\\dashboard_counts');
+    add_filter('use_block_editor_for_post_type', __NAMESPACE__ . '\\use_classic_editor_for_myliba_content', 10, 2);
+}
+
+function use_classic_editor_for_myliba_content(bool $use_block_editor, string $post_type): bool
+{
+    $classic_post_types = [
+        'page',
+        'myliba_product',
+        'myliba_solution',
+        'myliba_academy',
+        'myliba_case_study',
+        'myliba_testimonial',
+        'myliba_faq',
+        'myliba_landing',
+        'myliba_event',
+        'myliba_team',
+        'myliba_client_logo',
+    ];
+
+    if (in_array($post_type, $classic_post_types, true)) {
+        return false;
+    }
+
+    return $use_block_editor;
 }
 
 function register_menu(): void

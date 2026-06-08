@@ -12,6 +12,12 @@ function boot(): void
 {
     add_action('add_meta_boxes', __NAMESPACE__ . '\\register_meta_boxes');
     add_action('save_post', __NAMESPACE__ . '\\save', 10, 2);
+    add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\enqueue_admin_assets');
+}
+
+function enqueue_admin_assets(): void
+{
+    wp_enqueue_script('jquery-ui-sortable');
 }
 
 function register_meta_boxes(string $post_type): void
@@ -127,6 +133,11 @@ function render_homepage_box(\WP_Post $post): void
     nonce();
 
     echo '<p class="description">' . esc_html__('These fields are used by the custom front page template. Edit the page selected under Settings > Reading as the homepage.', 'myliba') . '</p>';
+    render_homepage_builder($post);
+
+    echo '<hr>';
+    echo '<h3>' . esc_html__('Section Content Fields', 'myliba') . '</h3>';
+    echo '<p class="description">' . esc_html__('Use these fields to edit the text shown inside the enabled homepage components above.', 'myliba') . '</p>';
 
     field_textarea('_myliba_home_hero_proof', __('Hero proof pills', 'myliba'), get_post_meta($post->ID, '_myliba_home_hero_proof', true), __('One item per line.', 'myliba'));
     field_text('_myliba_home_dashboard_brand', __('Dashboard brand label', 'myliba'), get_post_meta($post->ID, '_myliba_home_dashboard_brand', true));
@@ -184,6 +195,73 @@ function render_homepage_box(\WP_Post $post): void
     field_text('_myliba_home_final_eyebrow', __('Final CTA eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_home_final_eyebrow', true));
     field_textarea('_myliba_home_final_title', __('Final CTA title', 'myliba'), get_post_meta($post->ID, '_myliba_home_final_title', true));
     field_textarea('_myliba_home_final_text', __('Final CTA text', 'myliba'), get_post_meta($post->ID, '_myliba_home_final_text', true));
+}
+
+function render_homepage_builder(\WP_Post $post): void
+{
+    $sections = homepage_sections($post->ID);
+    $definitions = homepage_section_definitions();
+
+    echo '<style>
+        .myliba-builder{display:grid;gap:12px;margin:16px 0 22px}
+        .myliba-builder-card{background:#fff;border:1px solid #dcdcde;border-radius:8px;padding:14px}
+        .myliba-builder-card__head{align-items:center;display:grid;gap:10px;grid-template-columns:auto auto 80px 1fr;min-height:34px}
+        .myliba-builder-card__handle{background:#f6f7f7;border:1px solid #dcdcde;border-radius:6px;cursor:grab;font-weight:700;padding:6px 9px}
+        .myliba-builder-card__head label{font-weight:700}
+        .myliba-builder-card__order{width:72px}
+        .myliba-builder-card__meta{color:#646970;margin:8px 0 0}
+        .myliba-builder-card__preview{background:#f6f7f7;border-radius:6px;color:#1d2327;margin:10px 0 0;padding:10px}
+        .myliba-builder-card__preview strong{display:block;margin-bottom:4px}
+    </style>';
+
+    echo '<h3>' . esc_html__('Homepage Builder', 'myliba') . '</h3>';
+    echo '<p class="description">' . esc_html__('Enable, disable, and reorder homepage components. The real visual preview is available with the WordPress Preview button.', 'myliba') . '</p>';
+    echo '<div class="myliba-builder">';
+
+    foreach ($sections as $section) {
+        $key = $section['key'];
+        $label = $definitions[$key]['label'] ?? $key;
+        $summary = homepage_section_summary($post->ID, $key);
+
+        echo '<div class="myliba-builder-card">';
+        echo '<div class="myliba-builder-card__head">';
+        echo '<span class="myliba-builder-card__handle" aria-hidden="true">::</span>';
+        printf(
+            '<label><input type="checkbox" name="_myliba_home_builder[%1$s][enabled]" value="1" %2$s> %3$s</label>',
+            esc_attr($key),
+            checked(!empty($section['enabled']), true, false),
+            esc_html($label)
+        );
+        printf(
+            '<input class="myliba-builder-card__order" type="number" name="_myliba_home_builder[%1$s][order]" value="%2$d" aria-label="%3$s">',
+            esc_attr($key),
+            (int) $section['order'],
+            esc_attr__('Section order', 'myliba')
+        );
+        echo '<span class="description">' . esc_html($definitions[$key]['source'] ?? '') . '</span>';
+        echo '</div>';
+        echo '<input type="hidden" name="_myliba_home_builder[' . esc_attr($key) . '][key]" value="' . esc_attr($key) . '">';
+        echo '<p class="myliba-builder-card__meta">' . esc_html($definitions[$key]['fields'] ?? '') . '</p>';
+        echo '<div class="myliba-builder-card__preview"><strong>' . esc_html__('Current preview', 'myliba') . '</strong>' . esc_html($summary) . '</div>';
+        echo '</div>';
+    }
+
+    echo '</div>';
+    echo '<script>
+        jQuery(function($){
+            var $builder = $(".myliba-builder");
+            if ($builder.sortable) {
+                $builder.sortable({
+                    handle: ".myliba-builder-card__handle",
+                    update: function(){
+                        $builder.find(".myliba-builder-card__order").each(function(index){
+                            $(this).val((index + 1) * 10);
+                        });
+                    }
+                });
+            }
+        });
+    </script>';
 }
 
 function render_team_box(\WP_Post $post): void
@@ -246,6 +324,135 @@ function render_submission_box(\WP_Post $post): void
     echo '</tbody></table>';
 }
 
+function homepage_section_definitions(): array
+{
+    return [
+        'hero' => [
+            'label' => __('Hero + dashboard preview', 'myliba'),
+            'source' => __('Page hero fields + dashboard fields', 'myliba'),
+            'fields' => __('Hero title, subtitle, proof pills, dashboard labels, metrics, and table rows.', 'myliba'),
+        ],
+        'trust_bar' => [
+            'label' => __('Trust bar', 'myliba'),
+            'source' => __('Homepage text fields', 'myliba'),
+            'fields' => __('Trust section title and one item per line.', 'myliba'),
+        ],
+        'problem' => [
+            'label' => __('Problem cards', 'myliba'),
+            'source' => __('Homepage text fields', 'myliba'),
+            'fields' => __('Eyebrow, title, and cards using Title | Text rows.', 'myliba'),
+        ],
+        'products' => [
+            'label' => __('Product grid', 'myliba'),
+            'source' => __('Products content type', 'myliba'),
+            'fields' => __('Section heading fields plus cards from Products.', 'myliba'),
+        ],
+        'academy' => [
+            'label' => __('Academy block', 'myliba'),
+            'source' => __('Homepage text fields', 'myliba'),
+            'fields' => __('Academy eyebrow, title, text, bullets, and button label.', 'myliba'),
+        ],
+        'solutions' => [
+            'label' => __('Solutions grid', 'myliba'),
+            'source' => __('Solutions content type', 'myliba'),
+            'fields' => __('Section heading fields plus cards from Solutions.', 'myliba'),
+        ],
+        'outcomes' => [
+            'label' => __('Business outcomes', 'myliba'),
+            'source' => __('Homepage text fields', 'myliba'),
+            'fields' => __('Outcomes eyebrow, title, and cards using Title | Text rows.', 'myliba'),
+        ],
+        'testimonials' => [
+            'label' => __('Trust + testimonials', 'myliba'),
+            'source' => __('Testimonials content type', 'myliba'),
+            'fields' => __('Trust text fields plus cards from Testimonials.', 'myliba'),
+        ],
+        'resources' => [
+            'label' => __('Resources / blog', 'myliba'),
+            'source' => __('Blog posts', 'myliba'),
+            'fields' => __('Resources eyebrow and title, then latest posts for the current language.', 'myliba'),
+        ],
+        'faq' => [
+            'label' => __('FAQ', 'myliba'),
+            'source' => __('FAQs content type', 'myliba'),
+            'fields' => __('FAQ eyebrow and title, then cards from FAQs.', 'myliba'),
+        ],
+        'final_cta' => [
+            'label' => __('Final CTA', 'myliba'),
+            'source' => __('Homepage text fields + global demo CTA', 'myliba'),
+            'fields' => __('Final eyebrow, title, text, and global demo button label.', 'myliba'),
+        ],
+    ];
+}
+
+function homepage_default_sections(): array
+{
+    $sections = [];
+    $order = 10;
+
+    foreach (array_keys(homepage_section_definitions()) as $key) {
+        $sections[$key] = [
+            'key' => $key,
+            'enabled' => true,
+            'order' => $order,
+        ];
+        $order += 10;
+    }
+
+    return $sections;
+}
+
+function homepage_sections(int $post_id): array
+{
+    $sections = homepage_default_sections();
+    $definitions = homepage_section_definitions();
+    $raw = get_post_meta($post_id, '_myliba_home_builder', true);
+    $saved = is_string($raw) && $raw !== '' ? json_decode($raw, true) : [];
+
+    if (is_array($saved)) {
+        foreach ($saved as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $key = sanitize_key((string) ($item['key'] ?? ''));
+            if (!isset($definitions[$key])) {
+                continue;
+            }
+
+            $sections[$key] = [
+                'key' => $key,
+                'enabled' => !empty($item['enabled']),
+                'order' => isset($item['order']) ? (int) $item['order'] : ($sections[$key]['order'] ?? 999),
+            ];
+        }
+    }
+
+    uasort($sections, static function (array $a, array $b): int {
+        return ($a['order'] <=> $b['order']) ?: strcmp($a['key'], $b['key']);
+    });
+
+    return array_values($sections);
+}
+
+function homepage_section_summary(int $post_id, string $key): string
+{
+    return match ($key) {
+        'hero' => get_post_meta($post_id, '_myliba_hero_title', true) ?: get_the_title($post_id),
+        'trust_bar' => get_post_meta($post_id, '_myliba_home_trust_title', true),
+        'problem' => get_post_meta($post_id, '_myliba_home_problem_title', true),
+        'products' => get_post_meta($post_id, '_myliba_home_solution_title', true),
+        'academy' => get_post_meta($post_id, '_myliba_home_academy_title', true),
+        'solutions' => get_post_meta($post_id, '_myliba_home_use_cases_title', true),
+        'outcomes' => get_post_meta($post_id, '_myliba_home_outcomes_title', true),
+        'testimonials' => get_post_meta($post_id, '_myliba_home_b2b_trust_title', true),
+        'resources' => get_post_meta($post_id, '_myliba_home_resources_title', true),
+        'faq' => get_post_meta($post_id, '_myliba_home_faq_title', true),
+        'final_cta' => get_post_meta($post_id, '_myliba_home_final_title', true),
+        default => '',
+    } ?: __('No summary yet. Fill the content fields below.', 'myliba');
+}
+
 function save(int $post_id, \WP_Post $post): void
 {
     if (!isset($_POST['myliba_meta_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['myliba_meta_nonce'])), 'myliba_meta')) {
@@ -263,6 +470,11 @@ function save(int $post_id, \WP_Post $post): void
     $fields = field_definitions($post->post_type);
 
     foreach ($fields as $field => $type) {
+        if ($type === 'builder') {
+            save_homepage_builder($post_id);
+            continue;
+        }
+
         $raw = $_POST[$field] ?? '';
         $value = is_string($raw) ? wp_unslash($raw) : $raw;
 
@@ -290,6 +502,39 @@ function save(int $post_id, \WP_Post $post): void
     }
 }
 
+function save_homepage_builder(int $post_id): void
+{
+    if (!isset($_POST['_myliba_home_builder']) || !is_array($_POST['_myliba_home_builder'])) {
+        return;
+    }
+
+    $definitions = homepage_section_definitions();
+    $sections = [];
+
+    foreach ($_POST['_myliba_home_builder'] as $raw_key => $raw_section) {
+        if (!is_array($raw_section)) {
+            continue;
+        }
+
+        $key = sanitize_key((string) ($raw_section['key'] ?? $raw_key));
+        if (!isset($definitions[$key])) {
+            continue;
+        }
+
+        $sections[] = [
+            'key' => $key,
+            'enabled' => !empty($raw_section['enabled']),
+            'order' => isset($raw_section['order']) ? max(0, (int) $raw_section['order']) : 999,
+        ];
+    }
+
+    usort($sections, static function (array $a, array $b): int {
+        return ($a['order'] <=> $b['order']) ?: strcmp($a['key'], $b['key']);
+    });
+
+    update_post_meta($post_id, '_myliba_home_builder', wp_json_encode($sections));
+}
+
 function field_definitions(string $post_type): array
 {
     $fields = [
@@ -309,6 +554,7 @@ function field_definitions(string $post_type): array
         '_myliba_benefits' => 'textarea',
         '_myliba_related_modules' => 'textarea',
         '_myliba_faq_items' => 'textarea',
+        '_myliba_home_builder' => 'builder',
         '_myliba_home_hero_proof' => 'textarea',
         '_myliba_home_dashboard_brand' => 'text',
         '_myliba_home_dashboard_title' => 'text',

@@ -262,3 +262,71 @@ function myliba_home_rows(string $key, array $fallback = []): array
 
     return $rows;
 }
+
+function myliba_home_section_definitions(): array
+{
+    return [
+        'hero' => __('Hero + dashboard preview', 'myliba'),
+        'trust_bar' => __('Trust bar', 'myliba'),
+        'problem' => __('Problem cards', 'myliba'),
+        'products' => __('Product grid', 'myliba'),
+        'academy' => __('Academy block', 'myliba'),
+        'solutions' => __('Solutions grid', 'myliba'),
+        'outcomes' => __('Business outcomes', 'myliba'),
+        'testimonials' => __('Trust + testimonials', 'myliba'),
+        'resources' => __('Resources / blog', 'myliba'),
+        'faq' => __('FAQ', 'myliba'),
+        'final_cta' => __('Final CTA', 'myliba'),
+    ];
+}
+
+function myliba_home_default_sections(): array
+{
+    $sections = [];
+    $order = 10;
+
+    foreach (array_keys(myliba_home_section_definitions()) as $key) {
+        $sections[$key] = [
+            'key' => $key,
+            'enabled' => true,
+            'order' => $order,
+        ];
+        $order += 10;
+    }
+
+    return $sections;
+}
+
+function myliba_home_sections(int $post_id = 0): array
+{
+    $post_id = $post_id ?: get_queried_object_id();
+    $definitions = myliba_home_section_definitions();
+    $sections = myliba_home_default_sections();
+    $raw = $post_id ? get_post_meta($post_id, '_myliba_home_builder', true) : '';
+    $saved = is_string($raw) && $raw !== '' ? json_decode($raw, true) : [];
+
+    if (is_array($saved)) {
+        foreach ($saved as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $key = sanitize_key((string) ($item['key'] ?? ''));
+            if (!isset($definitions[$key])) {
+                continue;
+            }
+
+            $sections[$key] = [
+                'key' => $key,
+                'enabled' => !empty($item['enabled']),
+                'order' => isset($item['order']) ? (int) $item['order'] : ($sections[$key]['order'] ?? 999),
+            ];
+        }
+    }
+
+    uasort($sections, static function (array $a, array $b): int {
+        return ($a['order'] <=> $b['order']) ?: strcmp($a['key'], $b['key']);
+    });
+
+    return array_values($sections);
+}

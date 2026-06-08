@@ -431,6 +431,7 @@ class Commands
     {
         if ($language === 'tr') {
             return [
+                '_myliba_home_builder' => $this->home_builder_defaults(),
                 '_myliba_home_hero_proof' => "Stratejiden aksiyona\nSurekli performans\nAkademi + yazilim",
                 '_myliba_home_dashboard_brand' => 'Myliba',
                 '_myliba_home_dashboard_title' => 'Performance OS',
@@ -483,6 +484,7 @@ class Commands
         }
 
         return [
+            '_myliba_home_builder' => $this->home_builder_defaults(),
             '_myliba_home_hero_proof' => "Strategy to action\nContinuous performance\nAcademy + software",
             '_myliba_home_dashboard_brand' => 'Myliba',
             '_myliba_home_dashboard_title' => 'Performance OS',
@@ -532,6 +534,24 @@ class Commands
             '_myliba_home_final_title' => 'See how Myliba can connect your strategy, performance and culture routines.',
             '_myliba_home_final_text' => 'Share your team size and priorities. We will show the modules and academy path that fit your organization.',
         ];
+    }
+
+    private function home_builder_defaults(): string
+    {
+        $keys = ['hero', 'trust_bar', 'problem', 'products', 'academy', 'solutions', 'outcomes', 'testimonials', 'resources', 'faq', 'final_cta'];
+        $sections = [];
+        $order = 10;
+
+        foreach ($keys as $key) {
+            $sections[] = [
+                'key' => $key,
+                'enabled' => true,
+                'order' => $order,
+            ];
+            $order += 10;
+        }
+
+        return wp_json_encode($sections);
     }
 
     private function seed_navigation(): void
