@@ -162,6 +162,41 @@
     }
   });
 
+  const revealTargets = Array.from(document.querySelectorAll([
+    ".section__heading",
+    ".section--split > div",
+    ".feature-card",
+    ".module-card",
+    ".testimonial-card",
+    ".post-row",
+    ".quick-start-stepper",
+    ".quick-start-step",
+    ".quick-start-section__cta",
+  ].join(",")));
+
+  if (revealTargets.length > 0 && !reducedMotion.matches && "IntersectionObserver" in window) {
+    revealTargets.forEach((target, index) => {
+      target.classList.add("reveal-on-scroll");
+      target.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 70}ms`);
+    });
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, {
+      rootMargin: "0px 0px -8% 0px",
+      threshold: 0.16,
+    });
+
+    revealTargets.forEach((target) => revealObserver.observe(target));
+  }
+
   document.querySelectorAll("[data-rotating-title]").forEach((rotator) => {
     const items = Array.from(rotator.querySelectorAll(".hero-title-rotator__item"));
 
@@ -177,5 +212,30 @@
       activeIndex = (activeIndex + 1) % items.length;
       items[activeIndex].classList.add("is-active");
     }, 3600);
+  });
+
+  document.querySelectorAll("[data-hero-media-rotator]").forEach((rotator) => {
+    const slides = Array.from(rotator.querySelectorAll("[data-hero-media-slide]"));
+    const dots = Array.from(rotator.querySelectorAll("[data-hero-media-dot]"));
+
+    if (slides.length < 2 || reducedMotion.matches) {
+      return;
+    }
+
+    let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+    activeIndex = activeIndex >= 0 ? activeIndex : 0;
+
+    window.setInterval(() => {
+      slides[activeIndex].classList.remove("is-active");
+      if (dots[activeIndex]) {
+        dots[activeIndex].classList.remove("is-active");
+      }
+
+      activeIndex = (activeIndex + 1) % slides.length;
+      slides[activeIndex].classList.add("is-active");
+      if (dots[activeIndex]) {
+        dots[activeIndex].classList.add("is-active");
+      }
+    }, 4800);
   });
 })();

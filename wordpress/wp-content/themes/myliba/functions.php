@@ -52,6 +52,80 @@ function myliba_option(string $key, mixed $fallback = ''): mixed
     return $fallback;
 }
 
+function myliba_env(string $key, string $fallback = ''): string
+{
+    $value = getenv($key);
+
+    if ($value === false && isset($_ENV[$key])) {
+        $value = $_ENV[$key];
+    }
+
+    if ($value === false && isset($_SERVER[$key])) {
+        $value = $_SERVER[$key];
+    }
+
+    if ($value === false && defined($key)) {
+        $value = constant($key);
+    }
+
+    if ($value === false && function_exists('apache_getenv')) {
+        $value = apache_getenv($key);
+    }
+
+    return is_string($value) && trim($value) !== '' ? trim($value) : $fallback;
+}
+
+function myliba_asset_url_from_env(string $value): string
+{
+    $value = trim($value);
+
+    if ($value === '') {
+        return '';
+    }
+
+    if (str_starts_with($value, 'http://') || str_starts_with($value, 'https://')) {
+        return $value;
+    }
+
+    if (str_starts_with($value, '/')) {
+        return home_url($value);
+    }
+
+    return get_template_directory_uri() . '/' . ltrim($value, '/');
+}
+
+function myliba_hero_banner_images(): array
+{
+    $combined = myliba_env('MYLIBA_HERO_BANNER_IMAGES');
+    $sources = $combined !== ''
+        ? preg_split('/[\r\n|,]+/', $combined) ?: []
+        : [
+            myliba_env('MYLIBA_HERO_BANNER_IMAGE_1', 'assets/images/hero-1.png'),
+            myliba_env('MYLIBA_HERO_BANNER_IMAGE_2', 'assets/images/hero-2.png'),
+        ];
+
+    $alts = [
+        myliba_env('MYLIBA_HERO_BANNER_ALT_1', __('Myliba weekly focus dashboard preview', 'myliba')),
+        myliba_env('MYLIBA_HERO_BANNER_ALT_2', __('Myliba goal map dashboard preview', 'myliba')),
+    ];
+
+    $images = [];
+    foreach ($sources as $index => $source) {
+        $url = myliba_asset_url_from_env((string) $source);
+
+        if ($url === '') {
+            continue;
+        }
+
+        $images[] = [
+            'url' => $url,
+            'alt' => $alts[$index] ?? sprintf(__('Myliba product dashboard preview %d', 'myliba'), $index + 1),
+        ];
+    }
+
+    return $images;
+}
+
 function myliba_meta(string $key, int $post_id = 0, mixed $fallback = ''): mixed
 {
     $post_id = $post_id ?: get_queried_object_id();
@@ -345,12 +419,10 @@ function myliba_home_section_definitions(): array
         'problem' => __('Problem cards', 'myliba'),
         'products' => __('Product grid', 'myliba'),
         'academy' => __('Academy block', 'myliba'),
-        'solutions' => __('Solutions grid', 'myliba'),
+        'solutions' => __('Quick start stepper', 'myliba'),
         'outcomes' => __('Business outcomes', 'myliba'),
         'testimonials' => __('Trust + testimonials', 'myliba'),
         'resources' => __('Resources / blog', 'myliba'),
-        'faq' => __('FAQ', 'myliba'),
-        'final_cta' => __('Final CTA', 'myliba'),
     ];
 }
 

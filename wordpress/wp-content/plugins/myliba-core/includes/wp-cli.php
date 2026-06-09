@@ -1107,9 +1107,11 @@ class Commands
                 '_myliba_home_academy_text' => 'Myliba kurumlarin sadece hedef tanimlamasina degil, liderlik gelisimi, performans koclugu, atolyeler ve kultur donusumu programlariyla hedef odakli calismayi surdurulebilir hale getirmesine yardimci olur.',
                 '_myliba_home_academy_items' => "OKR kulturu ve adaptasyon programlari\nLiderlik ve kocluk rutinleri\nSurekli performans gelisimi\nInsan ve kultur odakli donusum",
                 '_myliba_home_academy_button' => 'Akademiyi incele',
-                '_myliba_home_use_cases_eyebrow' => 'Kullanim alanlari',
-                '_myliba_home_use_cases_title' => 'Ust yonetim, IK, strateji ekipleri ve liderler icin amaca gore yollar.',
-                '_myliba_home_solution_button' => 'Cozumu gor',
+                '_myliba_home_stepper_eyebrow' => 'Baslamak kolay',
+                '_myliba_home_stepper_title' => 'Myliba yazilimini kullanmak icin sunlari yapman yeterli.',
+                '_myliba_home_stepper_text' => 'Kisa bir baslangic akisiyle ihtiyaci anlar, yolu netlestirir ve ilk performans ritmini birlikte baslatiriz.',
+                '_myliba_home_stepper_steps' => "Demo talep et | Kisa formdan bize ulas; ekip yapini ve ana hedefini anlayalim.\nEkibini ve onceliklerini paylas | Hangi performans rutinlerini kurmak istedigini beraber netlestirelim.\nSana uygun yolu belirleyelim | Modul, akademi ve baslangic planini kurumuna gore eslestirelim.\nIlk ritmi baslat | OKR, aksiyon ve 1:1 rutinlerini kullanima acip takip etmeye basla.",
+                '_myliba_home_stepper_cta_label' => 'Demo Talep Et',
                 '_myliba_home_outcomes_eyebrow' => 'Is sonuclari',
                 '_myliba_home_outcomes_title' => 'Performans kulturunu gorunur, gelistirilebilir ve olculebilir hale getirin.',
                 '_myliba_home_outcomes_cards' => "Hizalanma | Sirket stratejisini takim ve bireysel katkiyla baglayin.\nSeffaflik | Toplanti beklemeden ilerlemeyi, engelleri ve sahipligi gorun.\nGelisim | 1:1, geri bildirim ve koclugu surekli rutine donusturun.\nUygulama | Oncelikleri aksiyonlara, sahipliklere ve olculebilir sonuclara donusturun.",
@@ -1119,11 +1121,6 @@ class Commands
                 '_myliba_home_b2b_trust_button' => 'Guvenligi gor',
                 '_myliba_home_resources_eyebrow' => 'Kaynaklar',
                 '_myliba_home_resources_title' => 'OKR, performans ve kultur konulari icin SEO hazir icerik.',
-                '_myliba_home_faq_eyebrow' => 'SSS',
-                '_myliba_home_faq_title' => 'Demo talep etmeden once sik sorulan sorular.',
-                '_myliba_home_final_eyebrow' => 'Sonraki adim',
-                '_myliba_home_final_title' => 'Myliba strateji, performans ve kultur rutinlerinizi nasil baglar gorun.',
-                '_myliba_home_final_text' => 'Ekip buyuklugunuzu ve onceliklerinizi paylasin. Kurumunuza uyan modul ve akademi yolunu gosterelim.',
             ];
         }
 
@@ -1161,9 +1158,11 @@ class Commands
             '_myliba_home_academy_text' => 'Myliba helps organizations not only define goals, but also make goal-oriented work sustainable through leadership development, performance coaching, workshops and cultural transformation programs.',
             '_myliba_home_academy_items' => "OKR culture and adoption programs\nLeadership and coaching routines\nContinuous performance development\nHuman and culture-focused transformation",
             '_myliba_home_academy_button' => 'Explore academy',
-            '_myliba_home_use_cases_eyebrow' => 'Use cases',
-            '_myliba_home_use_cases_title' => 'Purpose-built paths for executives, HR, strategy teams and leaders.',
-            '_myliba_home_solution_button' => 'See solution',
+            '_myliba_home_stepper_eyebrow' => 'Quick start',
+            '_myliba_home_stepper_title' => 'Everything you need to start using Myliba.',
+            '_myliba_home_stepper_text' => 'A clear onboarding flow helps us understand your needs, define the right path and launch the first performance rhythm together.',
+            '_myliba_home_stepper_steps' => "Request a demo | Reach us through the short form so we can understand your team and main goal.\nShare your team and priorities | Clarify the performance routines you want to build first.\nChoose the right module and academy path | Match the software, academy and launch plan to your organization.\nLaunch your first OKR, action and 1:1 rhythm | Start using the first routines and track progress with your team.",
+            '_myliba_home_stepper_cta_label' => 'Request a demo',
             '_myliba_home_outcomes_eyebrow' => 'Business outcomes',
             '_myliba_home_outcomes_title' => 'Make performance culture visible, coachable and measurable.',
             '_myliba_home_outcomes_cards' => "Alignment | Connect company strategy with team and individual contribution.\nTransparency | See progress, blockers and ownership without waiting for meetings.\nDevelopment | Turn 1:1, feedback and coaching into a continuous routine.\nExecution | Transform priorities into actions, ownership and measurable results.",
@@ -1173,17 +1172,12 @@ class Commands
             '_myliba_home_b2b_trust_button' => 'View security',
             '_myliba_home_resources_eyebrow' => 'Resources',
             '_myliba_home_resources_title' => 'SEO-ready content for OKR, performance and culture topics.',
-            '_myliba_home_faq_eyebrow' => 'FAQ',
-            '_myliba_home_faq_title' => 'Common questions before requesting a demo.',
-            '_myliba_home_final_eyebrow' => 'Next step',
-            '_myliba_home_final_title' => 'See how Myliba can connect your strategy, performance and culture routines.',
-            '_myliba_home_final_text' => 'Share your team size and priorities. We will show the modules and academy path that fit your organization.',
         ];
     }
 
     private function home_builder_defaults(): string
     {
-        $keys = ['hero', 'trust_bar', 'problem', 'products', 'academy', 'solutions', 'outcomes', 'testimonials', 'resources', 'faq', 'final_cta'];
+        $keys = ['hero', 'trust_bar', 'problem', 'products', 'academy', 'solutions', 'outcomes', 'testimonials', 'resources'];
         $sections = [];
         $order = 10;
 
