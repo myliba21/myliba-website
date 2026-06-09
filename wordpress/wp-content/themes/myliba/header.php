@@ -12,6 +12,34 @@ if (!defined('ABSPATH')) {
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<?php
+$promo_enabled = myliba_option('promo_enabled', '0') === '1';
+$promo_left = trim((string) myliba_option('promo_left_text', ''));
+$promo_message = trim((string) myliba_option('promo_message', ''));
+$promo_right = trim((string) myliba_option('promo_right_text', ''));
+$promo_url = trim((string) myliba_option('promo_url', ''));
+$promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
+?>
+<?php if ($promo_enabled && ($promo_left !== '' || $promo_message !== '' || $promo_right !== '')) : ?>
+    <div class="site-promo" data-site-promo="<?php echo esc_attr(md5($promo_left . $promo_message . $promo_right . $promo_url)); ?>">
+        <?php if ($promo_url !== '') : ?>
+            <a class="site-promo__content" href="<?php echo esc_url($promo_url); ?>">
+        <?php else : ?>
+            <div class="site-promo__content">
+        <?php endif; ?>
+                <span class="site-promo__side"><?php echo esc_html($promo_left); ?></span>
+                <strong><?php echo esc_html($promo_message); ?></strong>
+                <span class="site-promo__side site-promo__side--right"><?php echo esc_html($promo_right); ?></span>
+        <?php if ($promo_url !== '') : ?>
+            </a>
+        <?php else : ?>
+            </div>
+        <?php endif; ?>
+        <?php if ($promo_dismissible) : ?>
+            <button class="site-promo__dismiss" type="button" aria-label="<?php esc_attr_e('Dismiss promotion', 'myliba'); ?>">&times;</button>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
 <header class="site-header">
     <div class="site-header__inner">
         <?php myliba_brand_link(); ?>
@@ -26,11 +54,17 @@ if (!defined('ABSPATH')) {
         <nav id="site-navigation" class="site-nav" aria-label="<?php esc_attr_e('Primary navigation', 'myliba'); ?>">
             <ul class="site-nav__menu">
                 <?php foreach (myliba_header_menu() as $item) : ?>
+                    <?php
+                    $is_active = myliba_header_menu_item_is_active((string) $item['key'], (string) $item['url']);
+                    $item_classes = trim('site-nav__item ' . ($is_active ? 'is-active' : ''));
+                    $link_classes = trim('site-nav__link ' . ($is_active ? 'is-active' : ''));
+                    $aria_current = $is_active ? ' aria-current="page"' : '';
+                    ?>
                     <?php if ($item['key'] === 'solutions') :
                         $mega_products = myliba_mega_menu_products();
                         ?>
-                        <li class="site-nav__item site-nav__item--mega">
-                            <a class="site-nav__link" href="<?php echo esc_url($item['url']); ?>" aria-haspopup="true" aria-expanded="false" aria-controls="solutions-mega-menu">
+                        <li class="<?php echo esc_attr(trim($item_classes . ' site-nav__item--mega')); ?>">
+                            <a class="<?php echo esc_attr($link_classes); ?>" href="<?php echo esc_url($item['url']); ?>" aria-haspopup="true" aria-expanded="false" aria-controls="solutions-mega-menu"<?php echo $aria_current; ?>>
                                 <?php echo esc_html($item['label']); ?>
                             </a>
                             <div id="solutions-mega-menu" class="mega-menu" aria-label="<?php esc_attr_e('Solutions menu', 'myliba'); ?>">
@@ -42,7 +76,10 @@ if (!defined('ABSPATH')) {
                                 </div>
                                 <div class="mega-menu__grid">
                                     <?php while ($mega_products->have_posts()) : $mega_products->the_post(); ?>
-                                        <a class="mega-menu__card" href="<?php the_permalink(); ?>">
+                                        <?php
+                                        $is_card_active = is_singular('myliba_product') && get_queried_object_id() === get_the_ID();
+                                        ?>
+                                        <a class="<?php echo esc_attr(trim('mega-menu__card ' . ($is_card_active ? 'is-active' : ''))); ?>" href="<?php the_permalink(); ?>"<?php echo $is_card_active ? ' aria-current="page"' : ''; ?>>
                                             <span><?php echo esc_html(substr(get_the_title(), 0, 1)); ?></span>
                                             <strong><?php the_title(); ?></strong>
                                             <small><?php echo esc_html(myliba_excerpt(get_the_ID(), 11)); ?></small>
@@ -52,7 +89,7 @@ if (!defined('ABSPATH')) {
                             </div>
                         </li>
                     <?php else : ?>
-                        <li class="site-nav__item"><a class="site-nav__link" href="<?php echo esc_url($item['url']); ?>"><?php echo esc_html($item['label']); ?></a></li>
+                        <li class="<?php echo esc_attr($item_classes); ?>"><a class="<?php echo esc_attr($link_classes); ?>" href="<?php echo esc_url($item['url']); ?>"<?php echo $aria_current; ?>><?php echo esc_html($item['label']); ?></a></li>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </ul>

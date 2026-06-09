@@ -25,6 +25,12 @@ function defaults(): array
         'primary_cta_label' => 'Contact us',
         'primary_cta_url' => '/en/contact/',
         'demo_cta_label' => 'Request a demo',
+        'promo_enabled' => '0',
+        'promo_left_text' => 'Backed by Plug and Play',
+        'promo_message' => 'Chosen for Endeavor Turkey\'s ScaleUp Program!',
+        'promo_right_text' => 'Endeavor',
+        'promo_url' => '',
+        'promo_dismissible' => '1',
     ];
 }
 
@@ -107,5 +113,11 @@ function sanitize(array $input): array
         'primary_cta_label' => sanitize_text_field($input['primary_cta_label'] ?? $defaults['primary_cta_label']),
         'primary_cta_url' => esc_url_raw($input['primary_cta_url'] ?? $defaults['primary_cta_url']),
         'demo_cta_label' => sanitize_text_field($input['demo_cta_label'] ?? $defaults['demo_cta_label']),
+        'promo_enabled' => !empty($input['promo_enabled']) ? '1' : '0',
+        'promo_left_text' => sanitize_text_field($input['promo_left_text'] ?? $defaults['promo_left_text']),
+        'promo_message' => sanitize_text_field($input['promo_message'] ?? $defaults['promo_message']),
+        'promo_right_text' => sanitize_text_field($input['promo_right_text'] ?? $defaults['promo_right_text']),
+        'promo_url' => esc_url_raw($input['promo_url'] ?? $defaults['promo_url']),
+        'promo_dismissible' => !empty($input['promo_dismissible']) ? '1' : '0',
     ];
 }

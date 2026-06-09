@@ -137,6 +137,8 @@ class Commands
      *
      * [--yes]
      * : Confirm the operation.
+     *
+     * @subcommand import-strapi
      */
     public function import_strapi(array $args, array $assoc_args): void
     {
@@ -191,6 +193,87 @@ class Commands
         $this->import_collection($base, $token, 'client-logos', 'myliba_client_logo');
 
         \WP_CLI::success('Strapi import completed.');
+    }
+
+    /**
+     * Import public content from the current myliba.com website.
+     *
+     * ## OPTIONS
+     *
+     * [--source=<url>]
+     * : Public source URL. Defaults to https://myliba.com.
+     *
+     * [--yes]
+     * : Confirm the operation.
+     *
+     * @subcommand import-current
+     */
+    public function import_current(array $args, array $assoc_args): void
+    {
+        $source = rtrim((string) ($assoc_args['source'] ?? 'https://myliba.com'), '/');
+
+        if (empty($assoc_args['yes'])) {
+            \WP_CLI::confirm('Import public Myliba content from ' . $source . '? Existing matching slugs will be updated.');
+        }
+
+        $home_en = $this->import_current_page($source, '/', 'Myliba', 'en', 'en');
+        $home_tr = $this->import_current_page($source, '/tr/', 'Myliba TR', 'tr', 'tr');
+
+        if ($home_en) {
+            update_option('show_on_front', 'page');
+            update_option('page_on_front', $home_en);
+        }
+
+        $pages = [
+            ['/our-products/', 'Our Products', 'our-products', 'en', $home_en],
+            ['/okr-culture-academy/', 'OKR Culture Academy', 'okr-culture-academy', 'en', $home_en],
+            ['/culture-analysis/', 'Culture Analysis', 'culture-analysis', 'en', $home_en],
+            ['/ethics-counsel/', 'Ethics Counsel', 'ethics-counsel', 'en', $home_en],
+            ['/our-story/', 'Our Story', 'our-story', 'en', $home_en],
+            ['/faq/', 'FAQ', 'faq', 'en', $home_en],
+            ['/security/', 'Security', 'security', 'en', $home_en],
+            ['/privacy-policy/', 'Privacy Policy', 'privacy-policy', 'en', $home_en],
+            ['/tr/urunlerimiz/', 'Urunlerimiz', 'urunler', 'tr', $home_tr],
+            ['/tr/okr-ve-kultur-akademisi/', 'OKR Kultur Akademisi', 'okr-kultur-akademisi', 'tr', $home_tr],
+            ['/tr/kultur-analizi/', 'Kultur Analizi', 'kultur-analizi', 'tr', $home_tr],
+            ['/tr/etik-hat/', 'Etik Hat', 'etik-danismanlik', 'tr', $home_tr],
+            ['/tr/hikayemiz/', 'Hikayemiz', 'hikayemiz', 'tr', $home_tr],
+            ['/tr/sss/', 'SSS', 'sss', 'tr', $home_tr],
+            ['/tr/guvenlik/', 'Guvenlik', 'guvenlik', 'tr', $home_tr],
+            ['/tr/kvkk-aydinlatma-metni/', 'KVKK Aydinlatma Metni', 'kvkk-aydinlatma-metni', 'tr', $home_tr],
+        ];
+
+        foreach ($pages as [$path, $fallback_title, $slug, $language, $parent]) {
+            $this->import_current_page($source, $path, $fallback_title, $slug, $language, (int) $parent);
+        }
+
+        $home_html_en = $this->fetch_public_html($source . '/');
+        $home_html_tr = $this->fetch_public_html($source . '/tr/');
+
+        if ($home_html_en !== '') {
+            $this->import_current_home_meta($home_en, $home_html_en, 'en', $source . '/');
+            $this->import_current_team($home_html_en, 'en', $source);
+            $this->import_current_client_logos($home_html_en, $source);
+        }
+
+        if ($home_html_tr !== '') {
+            $this->import_current_home_meta($home_tr, $home_html_tr, 'tr', $source . '/tr/');
+            $this->import_current_team($home_html_tr, 'tr', $source);
+        }
+
+        $products_html = $this->fetch_public_html($source . '/our-products/');
+        if ($products_html !== '') {
+            $this->import_current_products($products_html, 'en', $source . '/our-products/');
+        }
+
+        $academy_html = $this->fetch_public_html($source . '/okr-culture-academy/');
+        if ($academy_html !== '') {
+            $this->import_current_academy($academy_html, 'en', $source . '/okr-culture-academy/');
+        }
+
+        $this->import_current_rest_posts($source);
+
+        \WP_CLI::success('Public Myliba import completed.');
     }
 
     private function import_collection(string $base, string $token, string $endpoint, string $post_type): void
@@ -250,6 +333,566 @@ class Commands
         $data = json_decode($body, true);
 
         return is_array($data) ? $data : [];
+    }
+
+    private function import_current_page(string $source, string $path, string $fallback_title, string $slug, string $language, int $parent = 0): int
+    {
+        $url = $source . $path;
+        $html = $this->fetch_public_html($url);
+
+        if ($html === '') {
+            return 0;
+        }
+
+        $title = in_array($slug, ['en', 'tr'], true) ? $fallback_title : $this->extract_page_title($html, $fallback_title);
+        $content = $this->extract_readable_html($html);
+        $excerpt = $this->extract_excerpt($html);
+        $post_id = $this->upsert_page($title, $slug, $content, [
+            '_myliba_language' => $language,
+            '_myliba_translation_key' => $slug,
+            '_myliba_hero_title' => $title,
+            '_myliba_hero_subtitle' => $excerpt,
+            '_myliba_source_url' => $url,
+            '_myliba_seo_title' => $title . ' | Myliba',
+            '_myliba_seo_description' => $excerpt,
+        ], $parent);
+
+        $content = $this->replace_remote_images($content, $source, $post_id, true);
+        wp_update_post([
+            'ID' => $post_id,
+            'post_content' => $content,
+        ]);
+
+        \WP_CLI::log('Imported public page: ' . $title);
+
+        return $post_id;
+    }
+
+    private function import_current_home_meta(int $post_id, string $html, string $language, string $source_url): void
+    {
+        if (!$post_id) {
+            return;
+        }
+
+        $lines = $this->extract_text_lines($html);
+        $is_tr = $language === 'tr';
+        $hero_title = $is_tr
+            ? $this->join_existing_lines($lines, ['Yuksek', 'Performans', 'Kulturu Yaratiyoruz!'], 3)
+            : $this->join_existing_lines($lines, ['We Create', 'a High Performance', 'Culture!'], 3);
+
+        if ($hero_title === '') {
+            $hero_title = get_post_meta($post_id, '_myliba_hero_title', true) ?: get_the_title($post_id);
+        }
+
+        if (in_array($hero_title, ['Myliba', 'Myliba TR'], true)) {
+            $hero_title = $is_tr ? 'Yüksek Performans Kültürü Yaratıyoruz!' : 'We Create a High Performance Culture!';
+        }
+
+        $hero_subtitle = $this->line_after_sequence($lines, $is_tr ? 'Kulturu Yaratiyoruz!' : 'Culture!');
+        if ($hero_subtitle === '') {
+            $hero_subtitle = $is_tr
+                ? 'Stratejiyi Eyleme Dönüştürün: Stratejiyi hedeflere, hedefleri aksiyonlara dönüştürerek, katkıyı şeffaflaştırın. İstekli, bağlı ve yetkin bir ekip geliştirerek en önemli olana odaklanın.'
+                : 'Turn Strategy into Action: Make the contribution transparent by turning strategy into goals and goals into actions. Focus on what matters most by developing a motivated, committed and competent team.';
+        }
+        $proof = $is_tr ? "OKR ve Kultur Yazilimi\nOKR ve Kultur Akademisi" : "OKR and Culture Software\nOKR and Culture Academy";
+
+        $meta = array_merge($this->home_meta_defaults($language), [
+            '_myliba_hero_title' => $hero_title,
+            '_myliba_hero_subtitle' => $hero_subtitle,
+            '_myliba_home_hero_rotating_titles' => $hero_title . "\n" . ($is_tr ? 'Stratejiyi eyleme indiren performans platformu' : 'The performance platform that turns strategy into action'),
+            '_myliba_home_hero_proof' => $proof,
+            '_myliba_source_url' => $source_url,
+        ]);
+
+        $this->save_meta($post_id, $meta);
+    }
+
+    private function import_current_products(string $html, string $language, string $source_url): void
+    {
+        $lines = $this->extract_text_lines($html);
+        $titles = ['Goals', 'Conversations', '1:1s', 'Feedback and Feedforward', 'Manager Effectiveness', 'Calibration'];
+        $fallbacks = [
+            'Goals' => 'Align all teams according to your most important strategic priorities. Increase collaboration through transparent goal setting and progress sharing.',
+            'Conversations' => 'Create a culture of continuous learning and development through structured check-ins for goal setting, growth-focused coaching, dialogue and performance reviews.',
+            '1:1s' => 'Boost collaboration, alignment, and productivity by facilitating 1:1 meetings between your people.',
+            'Feedback and Feedforward' => 'Create an environment where employees feel goal-oriented, prepared to achieve success with real-time feedback and feed-forward, and inspired to consistently do their best work.',
+            'Manager Effectiveness' => 'Transform your managers into superstar coaches with Myliba.',
+            'Calibration' => 'Make employee decisions fairly by identifying talent development opportunities without bias by providing data-driven insights.',
+        ];
+
+        foreach ($titles as $index => $title) {
+            $excerpt = $this->extract_snippet_after($lines, $title, $titles);
+            if ($excerpt === '' && isset($fallbacks[$title])) {
+                $excerpt = $fallbacks[$title];
+            }
+            if ($excerpt === '') {
+                continue;
+            }
+
+            $post_id = $this->upsert_post_type('myliba_product', $title, sanitize_title($title), '<p>' . esc_html($excerpt) . '</p>', [
+                '_myliba_language' => $language,
+                '_myliba_label' => 'Product module',
+                '_myliba_hero_title' => $title,
+                '_myliba_hero_subtitle' => $excerpt,
+                '_myliba_solution' => $excerpt,
+                '_myliba_cta_label' => 'Request a demo',
+                '_myliba_cta_url' => '/en/demo/',
+                '_myliba_order' => (string) (($index + 1) * 10),
+                '_myliba_source_url' => $source_url . '#' . sanitize_title($title),
+                '_myliba_seo_title' => $title . ' | Myliba',
+                '_myliba_seo_description' => $excerpt,
+            ]);
+
+            $image = $this->find_image_by_alt($html, $title, $source_url);
+            if ($image !== '') {
+                $attachment_id = $this->sideload_image($image, $post_id);
+                if ($attachment_id) {
+                    set_post_thumbnail($post_id, $attachment_id);
+                }
+            }
+
+            \WP_CLI::log('Imported public product: ' . $title);
+        }
+    }
+
+    private function import_current_academy(string $html, string $language, string $source_url): void
+    {
+        $lines = $this->extract_text_lines($html);
+        $titles = ['Goal Coaching', 'Performance Coaching', 'Culture Coaching'];
+        $fallbacks = [
+            'Goal Coaching' => 'Gains basic skills to coach other leaders in performance management, along with experience in designing and implementing next-generation performance development tools.',
+            'Performance Coaching' => 'Coaches acquire essential skills to coach other leaders in performance management and design next-generation performance development tools.',
+            'Culture Coaching' => 'Learns to develop and manage a culture of meaningful and continuous dialogue, feedback, feedforward, appreciation and recognition based on corporate values.',
+        ];
+
+        foreach ($titles as $index => $title) {
+            $excerpt = $this->extract_snippet_after($lines, $title, $titles);
+            if ($excerpt === '' && isset($fallbacks[$title])) {
+                $excerpt = $fallbacks[$title];
+            }
+            if ($excerpt === '') {
+                continue;
+            }
+
+            $this->upsert_post_type('myliba_academy', $title, sanitize_title($title), '<p>' . esc_html($excerpt) . '</p>', [
+                '_myliba_language' => $language,
+                '_myliba_label' => 'Academy program',
+                '_myliba_hero_title' => $title,
+                '_myliba_hero_subtitle' => $excerpt,
+                '_myliba_solution' => $excerpt,
+                '_myliba_order' => (string) (($index + 1) * 10),
+                '_myliba_source_url' => $source_url . '#' . sanitize_title($title),
+            ]);
+
+            \WP_CLI::log('Imported public academy program: ' . $title);
+        }
+    }
+
+    private function import_current_team(string $html, string $language, string $source): void
+    {
+        $lines = $this->extract_text_lines($html);
+        $names = ['Dilek Mete', 'Aysel Eker', 'Huri Sankur'];
+        $fallbacks = [
+            'en' => [
+                'Dilek Mete' => 'Managing Partner, Cultural Transformation Consultant, Executive Coach, PCC, OKR Coach',
+                'Aysel Eker' => 'Partner, Cultural Transformation Consultant, Executive Coach, PCC, OKR Coach',
+                'Huri Sankur' => 'People and Culture Advisor, Academy Coordinator, OKR Coach',
+            ],
+            'tr' => [
+                'Dilek Mete' => 'Yonetici Ortak, Kulturel Donusum Danismani, Yonetici Kocu, PCC, OKR Kocu',
+                'Aysel Eker' => 'Ortak, Kulturel Donusum Danismani, Yonetici Kocu, PCC, OKR Kocu',
+                'Huri Sankur' => 'Insan ve Kultur Danismani, Akademi Koordinatoru, OKR Kocu',
+            ],
+        ];
+
+        foreach ($names as $index => $name) {
+            $role = $this->extract_snippet_after($lines, $name, $names, 4);
+            if ($role === '') {
+                $role = $fallbacks[$language][$name] ?? '';
+            }
+            if ($role === '') {
+                continue;
+            }
+
+            $post_id = $this->upsert_post_type('myliba_team', $name, sanitize_title($name . '-' . $language), '<p>' . esc_html($role) . '</p>', [
+                '_myliba_language' => $language,
+                '_myliba_person_role' => $role,
+                '_myliba_order' => (string) (($index + 1) * 10),
+            ]);
+
+            $image = $this->find_image_by_alt($html, $name, $source);
+            if ($image !== '') {
+                $attachment_id = $this->sideload_image($image, $post_id);
+                if ($attachment_id) {
+                    set_post_thumbnail($post_id, $attachment_id);
+                }
+            }
+        }
+    }
+
+    private function import_current_client_logos(string $html, string $source): void
+    {
+        $images = $this->extract_images($html, $source);
+        $excluded = ['slider', 'mobil', 'myliba', 'basliksiz', 'strateji', 'seffaf', 'ikon', 'not-stresi', 'hiyerarsi', 'rekabet', 'veri', 'dilek', 'aysel', 'huri'];
+        $order = 10;
+
+        foreach ($images as $image) {
+            $label = $image['alt'] !== '' ? $image['alt'] : basename((string) wp_parse_url($image['src'], PHP_URL_PATH));
+            $key = strtolower(sanitize_title($label . ' ' . basename((string) wp_parse_url($image['src'], PHP_URL_PATH))));
+            $skip = false;
+
+            foreach ($excluded as $needle) {
+                if (str_contains($key, $needle)) {
+                    $skip = true;
+                    break;
+                }
+            }
+
+            if ($skip || $label === '') {
+                continue;
+            }
+
+            $post_id = $this->upsert_logo($label, $order);
+            update_post_meta($post_id, '_myliba_source_url', $image['src']);
+            $attachment_id = $this->sideload_image($image['src'], $post_id);
+            if ($attachment_id) {
+                set_post_thumbnail($post_id, $attachment_id);
+                $order += 10;
+            }
+
+            if ($order > 240) {
+                break;
+            }
+        }
+    }
+
+    private function import_current_rest_posts(string $source): void
+    {
+        $payload = $this->fetch_public_json($source . '/wp-json/wp/v2/posts?per_page=100&_embed=1');
+        $posts = $payload ?: [];
+
+        if (!$posts) {
+            \WP_CLI::warning('Public posts REST endpoint returned no posts.');
+            return;
+        }
+
+        foreach ($posts as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $title = wp_strip_all_tags($item['title']['rendered'] ?? 'Untitled');
+            $slug = sanitize_title((string) ($item['slug'] ?? $title));
+            $content = wp_kses_post($item['content']['rendered'] ?? '');
+            $excerpt = wp_strip_all_tags($item['excerpt']['rendered'] ?? '');
+            $post_id = $this->upsert_post_type('post', $title, $slug, $content, [
+                '_myliba_language' => str_starts_with((string) ($item['link'] ?? ''), $source . '/tr/') ? 'tr' : 'en',
+                '_myliba_hero_title' => $title,
+                '_myliba_source_url' => (string) ($item['link'] ?? ''),
+                '_myliba_seo_title' => $title . ' | Myliba',
+                '_myliba_seo_description' => $excerpt,
+            ]);
+
+            $content = $this->replace_remote_images($content, $source, $post_id, true);
+            wp_update_post([
+                'ID' => $post_id,
+                'post_content' => $content,
+            ]);
+        }
+    }
+
+    private function fetch_public_html(string $url): string
+    {
+        $response = wp_remote_get($url, [
+            'timeout' => 25,
+            'redirection' => 5,
+            'headers' => [
+                'User-Agent' => 'Myliba WordPress Importer',
+            ],
+        ]);
+
+        if (is_wp_error($response)) {
+            \WP_CLI::warning($url . ' failed: ' . $response->get_error_message());
+            return '';
+        }
+
+        $code = (int) wp_remote_retrieve_response_code($response);
+        if ($code < 200 || $code >= 300) {
+            \WP_CLI::warning($url . ' returned HTTP ' . $code);
+            return '';
+        }
+
+        return (string) wp_remote_retrieve_body($response);
+    }
+
+    private function fetch_public_json(string $url): array
+    {
+        $body = $this->fetch_public_html($url);
+        $data = json_decode($body, true);
+
+        return is_array($data) ? $data : [];
+    }
+
+    private function extract_page_title(string $html, string $fallback): string
+    {
+        $dom = $this->dom_from_html($html);
+        $headings = $dom ? (new \DOMXPath($dom))->query('//h1') : null;
+
+        if ($headings && $headings->length > 0) {
+            $title = trim($headings->item(0)?->textContent ?? '');
+            if ($title !== '') {
+                return $title;
+            }
+        }
+
+        return $fallback;
+    }
+
+    private function extract_excerpt(string $html): string
+    {
+        $lines = $this->extract_text_lines($html);
+        foreach ($lines as $line) {
+            if (strlen($line) > 80 && !str_contains(strtolower($line), 'cookie')) {
+                return wp_trim_words($line, 28);
+            }
+        }
+
+        return '';
+    }
+
+    private function extract_readable_html(string $html): string
+    {
+        $dom = $this->dom_from_html($html);
+        if (!$dom) {
+            return '';
+        }
+
+        $xpath = new \DOMXPath($dom);
+        $nodes = $xpath->query('//main');
+        $node = ($nodes && $nodes->length > 0) ? $nodes->item(0) : $dom->getElementsByTagName('body')->item(0);
+        if (!$node) {
+            return '';
+        }
+
+        $content = '';
+        foreach ($node->childNodes as $child) {
+            $content .= $dom->saveHTML($child);
+        }
+
+        $content = preg_replace('/<(script|style|noscript|form)\b[^>]*>.*?<\/\1>/is', '', $content) ?? $content;
+
+        return wp_kses_post($content);
+    }
+
+    private function extract_text_lines(string $html): array
+    {
+        $dom = $this->dom_from_html($html);
+        if (!$dom) {
+            return [];
+        }
+
+        $xpath = new \DOMXPath($dom);
+        $nodes = $xpath->query('//h1|//h2|//h3|//h4|//h5|//h6|//p|//li|//a|//span');
+        $lines = [];
+
+        if (!$nodes) {
+            return [];
+        }
+
+        foreach ($nodes as $node) {
+            $text = trim(preg_replace('/\s+/', ' ', $node->textContent ?? '') ?? '');
+            if ($text === '' || in_array($text, $lines, true)) {
+                continue;
+            }
+            $lines[] = $text;
+        }
+
+        return $lines;
+    }
+
+    private function extract_snippet_after(array $lines, string $title, array $stop_titles, int $max_lines = 2): string
+    {
+        $start = array_search($title, $lines, true);
+        if ($start === false) {
+            return '';
+        }
+
+        $parts = [];
+        for ($index = $start + 1; $index < count($lines); $index++) {
+            $line = $lines[$index];
+            if (in_array($line, ['Request a Demo', 'Contact Us', 'GET AN OFFER!', 'Teklif Al', 'Demo Iste'], true)) {
+                if ($parts) {
+                    break;
+                }
+                continue;
+            }
+            if (in_array($line, $stop_titles, true)) {
+                break;
+            }
+            if (strlen($line) < 8) {
+                continue;
+            }
+            $parts[] = $line;
+            if (count($parts) >= $max_lines) {
+                break;
+            }
+        }
+
+        return trim(implode(' ', $parts));
+    }
+
+    private function join_existing_lines(array $lines, array $candidates, int $limit): string
+    {
+        $matches = [];
+        foreach ($candidates as $candidate) {
+            foreach ($lines as $line) {
+                if (sanitize_title($line) === sanitize_title($candidate)) {
+                    $matches[] = $line;
+                    break;
+                }
+            }
+        }
+
+        return implode(' ', array_slice($matches, 0, $limit));
+    }
+
+    private function line_after_sequence(array $lines, string $needle): string
+    {
+        foreach ($lines as $index => $line) {
+            if (sanitize_title($line) === sanitize_title($needle) && !empty($lines[$index + 1])) {
+                return $lines[$index + 1];
+            }
+        }
+
+        return '';
+    }
+
+    private function extract_images(string $html, string $source): array
+    {
+        $dom = $this->dom_from_html($html);
+        if (!$dom) {
+            return [];
+        }
+
+        $images = [];
+        foreach ($dom->getElementsByTagName('img') as $image) {
+            $src = $image->getAttribute('src') ?: $image->getAttribute('data-src');
+            if ($src === '') {
+                continue;
+            }
+            $images[] = [
+                'src' => $this->absolute_url($src, $source),
+                'alt' => trim($image->getAttribute('alt')),
+            ];
+        }
+
+        return $images;
+    }
+
+    private function find_image_by_alt(string $html, string $needle, string $source = 'https://myliba.com'): string
+    {
+        foreach ($this->extract_images($html, $source) as $image) {
+            if ($image['alt'] !== '' && str_contains(sanitize_title($image['alt']), sanitize_title($needle))) {
+                return $image['src'];
+            }
+        }
+
+        return '';
+    }
+
+    private function replace_remote_images(string $content, string $source, int $post_id, bool $set_featured = false): string
+    {
+        if (!preg_match_all('/<img[^>]+src=["\']([^"\']+)["\']/i', $content, $matches)) {
+            return $content;
+        }
+
+        foreach (array_unique($matches[1]) as $src) {
+            $absolute = $this->absolute_url($src, $source);
+            $attachment_id = $this->sideload_image($absolute, $post_id);
+            if (!$attachment_id) {
+                continue;
+            }
+            if ($set_featured && !has_post_thumbnail($post_id)) {
+                set_post_thumbnail($post_id, $attachment_id);
+            }
+            $local_url = wp_get_attachment_url($attachment_id);
+            if ($local_url) {
+                $content = str_replace($src, $local_url, $content);
+            }
+        }
+
+        return $content;
+    }
+
+    private function sideload_image(string $url, int $post_id): int
+    {
+        $url = esc_url_raw($url);
+        if ($url === '') {
+            return 0;
+        }
+
+        $existing = get_posts([
+            'post_type' => 'attachment',
+            'post_status' => 'inherit',
+            'fields' => 'ids',
+            'numberposts' => 1,
+            'meta_key' => '_myliba_source_url',
+            'meta_value' => $url,
+        ]);
+
+        if ($existing) {
+            return (int) $existing[0];
+        }
+
+        require_once ABSPATH . 'wp-admin/includes/media.php';
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+
+        $attachment_id = media_sideload_image($url, $post_id, null, 'id');
+        if (is_wp_error($attachment_id)) {
+            \WP_CLI::warning('Image import failed: ' . $url . ' - ' . $attachment_id->get_error_message());
+            return 0;
+        }
+
+        update_post_meta((int) $attachment_id, '_myliba_source_url', $url);
+
+        return (int) $attachment_id;
+    }
+
+    private function absolute_url(string $url, string $source): string
+    {
+        if (str_starts_with($url, '//')) {
+            return 'https:' . $url;
+        }
+
+        if (str_starts_with($url, 'http://') || str_starts_with($url, 'https://')) {
+            return $url;
+        }
+
+        if (str_starts_with($url, '/')) {
+            $parts = wp_parse_url($source);
+            $scheme = is_array($parts) && !empty($parts['scheme']) ? $parts['scheme'] : 'https';
+            $host = is_array($parts) && !empty($parts['host']) ? $parts['host'] : 'myliba.com';
+
+            return $scheme . '://' . $host . $url;
+        }
+
+        return rtrim($source, '/') . '/' . ltrim($url, '/');
+    }
+
+    private function dom_from_html(string $html): ?\DOMDocument
+    {
+        if ($html === '') {
+            return null;
+        }
+
+        $dom = new \DOMDocument();
+        $previous = libxml_use_internal_errors(true);
+        $loaded = $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html);
+        libxml_clear_errors();
+        libxml_use_internal_errors($previous);
+
+        return $loaded ? $dom : null;
     }
 
     private function cleanup_default_content(): void
@@ -432,6 +1075,7 @@ class Commands
         if ($language === 'tr') {
             return [
                 '_myliba_home_builder' => $this->home_builder_defaults(),
+                '_myliba_home_hero_rotating_titles' => "Hedefleri net, kulturu guclu ekipler kurun\nStratejiyi eyleme indiren performans platformu\nOKR ve kultur rutinlerini tek ritimde yonetin",
                 '_myliba_home_hero_proof' => "Stratejiden aksiyona\nSurekli performans\nAkademi + yazilim",
                 '_myliba_home_dashboard_brand' => 'Myliba',
                 '_myliba_home_dashboard_title' => 'Performance OS',
@@ -485,6 +1129,7 @@ class Commands
 
         return [
             '_myliba_home_builder' => $this->home_builder_defaults(),
+            '_myliba_home_hero_rotating_titles' => "Build a stronger culture around clear goals\nThe performance platform that turns strategy into action\nManage OKR and culture routines in one rhythm",
             '_myliba_home_hero_proof' => "Strategy to action\nContinuous performance\nAcademy + software",
             '_myliba_home_dashboard_brand' => 'Myliba',
             '_myliba_home_dashboard_title' => 'Performance OS',
@@ -558,6 +1203,7 @@ class Commands
     {
         $primary_id = $this->ensure_menu('Myliba Primary');
         $footer_id = $this->ensure_menu('Myliba Footer');
+        $footer_blog_id = $this->ensure_menu('Myliba Footer Blog Links');
 
         if ($primary_id) {
             $this->seed_menu_items($primary_id, [
@@ -580,6 +1226,15 @@ class Commands
             ]);
         }
 
+        if ($footer_blog_id) {
+            $this->seed_menu_items($footer_blog_id, [
+                ['en/blog', 'Blog'],
+                ['en/events', 'Events'],
+                ['en/okr-culture-academy', 'OKR Culture Academy'],
+                ['en/faq', 'FAQ'],
+            ]);
+        }
+
         $locations = get_theme_mod('nav_menu_locations', []);
         $locations = is_array($locations) ? $locations : [];
 
@@ -589,6 +1244,10 @@ class Commands
 
         if ($footer_id) {
             $locations['footer'] = $footer_id;
+        }
+
+        if ($footer_blog_id) {
+            $locations['footer_blog'] = $footer_blog_id;
         }
 
         set_theme_mod('nav_menu_locations', $locations);

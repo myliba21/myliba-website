@@ -139,6 +139,7 @@ function render_homepage_box(\WP_Post $post): void
     echo '<h3>' . esc_html__('Section Content Fields', 'myliba') . '</h3>';
     echo '<p class="description">' . esc_html__('Use these fields to edit the text shown inside the enabled homepage components above.', 'myliba') . '</p>';
 
+    field_textarea('_myliba_home_hero_rotating_titles', __('Hero rotating titles', 'myliba'), get_post_meta($post->ID, '_myliba_home_hero_rotating_titles', true), __('One title per line. Leave empty to use the hero title override.', 'myliba'));
     field_textarea('_myliba_home_hero_proof', __('Hero proof pills', 'myliba'), get_post_meta($post->ID, '_myliba_home_hero_proof', true), __('One item per line.', 'myliba'));
     field_text('_myliba_home_dashboard_brand', __('Dashboard brand label', 'myliba'), get_post_meta($post->ID, '_myliba_home_dashboard_brand', true));
     field_text('_myliba_home_dashboard_title', __('Dashboard label', 'myliba'), get_post_meta($post->ID, '_myliba_home_dashboard_title', true));
@@ -555,6 +556,7 @@ function field_definitions(string $post_type): array
         '_myliba_related_modules' => 'textarea',
         '_myliba_faq_items' => 'textarea',
         '_myliba_home_builder' => 'builder',
+        '_myliba_home_hero_rotating_titles' => 'textarea',
         '_myliba_home_hero_proof' => 'textarea',
         '_myliba_home_dashboard_brand' => 'text',
         '_myliba_home_dashboard_title' => 'text',

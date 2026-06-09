@@ -7,8 +7,12 @@ $products = static fn () => myliba_get_entries('myliba_product', 10);
 $solutions = static fn () => myliba_get_entries('myliba_solution', 5);
 $testimonials = static fn () => myliba_get_entries('myliba_testimonial', 2);
 $faqs = static fn () => myliba_get_entries('myliba_faq', 5);
+$client_logos = static fn () => myliba_get_entries('myliba_client_logo', 24, ['meta_query' => []]);
+$hero_title = (string) myliba_meta('_myliba_hero_title', $post_id, __('Turn strategy into goals, goals into action.', 'myliba'));
+$hero_titles = myliba_home_lines('hero_rotating_titles', [$hero_title]);
 $hero_proof = myliba_home_lines('hero_proof', ['Strategy to action', 'Continuous performance', 'Academy + software']);
 $dashboard_nav = myliba_home_lines('dashboard_nav', ['OKR', 'KPI', 'CFR', '1:1', 'Academy']);
+$dashboard_progress = max(0, min(100, (int) myliba_home_value('dashboard_progress', '76')));
 $dashboard_rows = myliba_home_rows('dashboard_rows', [
     ['Leadership rhythm active', 'HR', 'On track', 'green'],
     ['Team OKR alignment', 'Strategy', 'Review', 'blue'],
@@ -38,7 +42,11 @@ foreach (myliba_home_sections($post_id) as $section) {
             <section class="hero">
                 <div class="hero__content">
                     <p class="eyebrow"><?php echo esc_html(myliba_meta('_myliba_eyebrow', $post_id, __('OKR, KPI, CFR and performance culture', 'myliba'))); ?></p>
-                    <h1><?php echo esc_html(myliba_meta('_myliba_hero_title', $post_id, __('Turn strategy into goals, goals into action.', 'myliba'))); ?></h1>
+                    <h1 class="hero-title-rotator" data-rotating-title>
+                        <?php foreach ($hero_titles as $index => $title) : ?>
+                            <span class="hero-title-rotator__item <?php echo $index === 0 ? 'is-active' : ''; ?>"><?php echo esc_html($title); ?></span>
+                        <?php endforeach; ?>
+                    </h1>
                     <p class="hero__subtitle"><?php echo esc_html(myliba_meta('_myliba_hero_subtitle', $post_id, __('Myliba combines OKR, KPI, CFR, 1:1 meetings, feedback, action management and academy programs so organizations can build a measurable high-performance culture.', 'myliba'))); ?></p>
                     <div class="hero__actions">
                         <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>"><?php echo esc_html(myliba_option('demo_cta_label', __('Request a demo', 'myliba'))); ?></a>
@@ -50,7 +58,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                         <?php endforeach; ?>
                     </div>
                 </div>
-                <div class="dashboard-preview" aria-label="<?php esc_attr_e('Myliba product dashboard preview', 'myliba'); ?>">
+                <div class="dashboard-preview dashboard-preview--premium" aria-label="<?php esc_attr_e('Myliba product dashboard preview', 'myliba'); ?>">
                     <div class="dashboard-preview__bar">
                         <span></span><span></span><span></span>
                         <strong><?php echo esc_html(myliba_home_value('dashboard_title', __('Performance OS', 'myliba'))); ?></strong>
@@ -68,9 +76,9 @@ foreach (myliba_home_sections($post_id) as $section) {
                                     <small><?php echo esc_html(myliba_home_value('dashboard_objective_label', __('Company objective', 'myliba'))); ?></small>
                                     <h3><?php echo esc_html(myliba_home_value('dashboard_objective_title', __('Increase strategy execution visibility', 'myliba'))); ?></h3>
                                 </div>
-                                <span class="status-pill"><?php echo esc_html(myliba_home_value('dashboard_progress', '76')); ?>%</span>
+                                <span class="status-pill"><?php echo esc_html((string) $dashboard_progress); ?>%</span>
                             </div>
-                            <div class="progress-line"><span style="width:<?php echo esc_attr(myliba_home_value('dashboard_progress', '76')); ?>%"></span></div>
+                            <div class="progress-line"><span style="width:<?php echo esc_attr((string) $dashboard_progress); ?>%"></span></div>
                             <div class="objective-table">
                                 <div>
                                     <strong><?php echo esc_html(myliba_home_value('dashboard_col_1', __('Key Result', 'myliba'))); ?></strong>
@@ -83,6 +91,10 @@ foreach (myliba_home_sections($post_id) as $section) {
                                     ?>
                                     <div><span><?php echo esc_html($key_result); ?></span><span><?php echo esc_html($owner); ?></span><em class="tag tag--<?php echo esc_attr($color); ?>"><?php echo esc_html($status); ?></em></div>
                                 <?php endforeach; ?>
+                            </div>
+                            <div class="dashboard-workspace__footer">
+                                <span><?php esc_html_e('Goal health', 'myliba'); ?></span>
+                                <strong><?php esc_html_e('Ready for review', 'myliba'); ?></strong>
                             </div>
                         </div>
                         <div class="dashboard-insights">
@@ -100,12 +112,52 @@ foreach (myliba_home_sections($post_id) as $section) {
             break;
 
         case 'trust_bar':
+            $logo_query = $client_logos();
+            $logo_posts = [];
+            if ($logo_query->have_posts()) {
+                while ($logo_query->have_posts()) {
+                    $logo_query->the_post();
+                    if (has_post_thumbnail()) {
+                        $logo_posts[] = get_post();
+                    }
+                }
+                wp_reset_postdata();
+            }
             ?>
-            <section class="section band">
-                <div class="trust-row">
+            <section class="section band trust-section">
+                <div class="trust-section__heading">
                     <strong><?php echo esc_html(myliba_home_value('trust_title', __('Built for teams that manage performance culture seriously.', 'myliba'))); ?></strong>
-                    <?php foreach ($trust_items as $item) : ?><span><?php echo esc_html($item); ?></span><?php endforeach; ?>
+                    <?php if ($logo_posts) : ?>
+                        <span><?php esc_html_e('References and partners', 'myliba'); ?></span>
+                    <?php endif; ?>
                 </div>
+                <?php if ($logo_posts) : ?>
+                    <div class="trust-marquee" aria-label="<?php esc_attr_e('Client logos', 'myliba'); ?>">
+                        <div class="trust-marquee__track">
+                            <?php for ($repeat = 0; $repeat < 2; $repeat++) : ?>
+                                <?php foreach ($logo_posts as $logo_post) : ?>
+                                    <?php
+                                    $logo_url = (string) myliba_meta('_myliba_logo_url', $logo_post->ID);
+                                    $logo_name = get_the_title($logo_post);
+                                    $logo_image = get_the_post_thumbnail($logo_post->ID, 'medium', [
+                                        'loading' => 'lazy',
+                                        'alt' => $logo_name,
+                                    ]);
+                                    ?>
+                                    <?php if ($logo_url !== '') : ?>
+                                        <a class="trust-logo" href="<?php echo esc_url($logo_url); ?>" aria-label="<?php echo esc_attr($logo_name); ?>"><?php echo wp_kses_post($logo_image); ?></a>
+                                    <?php else : ?>
+                                        <span class="trust-logo"><?php echo wp_kses_post($logo_image); ?></span>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php endfor; ?>
+                        </div>
+                    </div>
+                <?php else : ?>
+                    <div class="trust-row">
+                        <?php foreach ($trust_items as $item) : ?><span><?php echo esc_html($item); ?></span><?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </section>
             <?php
             break;

@@ -6,6 +6,7 @@
   const languageTrigger = document.querySelector(".language-switcher__trigger");
   const megaItem = document.querySelector(".site-nav__item--mega");
   const megaToggle = megaItem ? megaItem.querySelector(".site-nav__link") : null;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const isMobileNav = () => window.matchMedia("(max-width: 960px)").matches;
 
   if (header) {
@@ -135,4 +136,46 @@
       }
     });
   }
+
+  document.querySelectorAll(".site-promo").forEach((promo) => {
+    const dismiss = promo.querySelector(".site-promo__dismiss");
+    const storageKey = "myliba-promo-dismissed-" + (promo.dataset.sitePromo || "default");
+
+    try {
+      if (window.sessionStorage.getItem(storageKey) === "1") {
+        promo.hidden = true;
+        return;
+      }
+    } catch (error) {
+      // Session storage can be unavailable in locked-down browsers.
+    }
+
+    if (dismiss) {
+      dismiss.addEventListener("click", () => {
+        promo.hidden = true;
+        try {
+          window.sessionStorage.setItem(storageKey, "1");
+        } catch (error) {
+          // Dismissal still works for the current render even without storage.
+        }
+      });
+    }
+  });
+
+  document.querySelectorAll("[data-rotating-title]").forEach((rotator) => {
+    const items = Array.from(rotator.querySelectorAll(".hero-title-rotator__item"));
+
+    if (items.length < 2 || reducedMotion.matches) {
+      return;
+    }
+
+    let activeIndex = items.findIndex((item) => item.classList.contains("is-active"));
+    activeIndex = activeIndex >= 0 ? activeIndex : 0;
+
+    window.setInterval(() => {
+      items[activeIndex].classList.remove("is-active");
+      activeIndex = (activeIndex + 1) % items.length;
+      items[activeIndex].classList.add("is-active");
+    }, 3600);
+  });
 })();

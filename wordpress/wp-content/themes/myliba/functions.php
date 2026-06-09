@@ -20,14 +20,26 @@ function myliba_theme_setup(): void
     register_nav_menus([
         'primary' => __('Primary Navigation', 'myliba'),
         'footer' => __('Footer Navigation', 'myliba'),
+        'footer_blog' => __('Footer Blog Links', 'myliba'),
     ]);
 }
 add_action('after_setup_theme', 'myliba_theme_setup');
 
+function myliba_asset_version(string $relative_path): string
+{
+    $path = get_template_directory() . '/' . ltrim($relative_path, '/');
+
+    if (file_exists($path)) {
+        return (string) filemtime($path);
+    }
+
+    return (string) wp_get_theme()->get('Version');
+}
+
 function myliba_enqueue_assets(): void
 {
-    wp_enqueue_style('myliba-main', get_template_directory_uri() . '/assets/css/main.css', [], wp_get_theme()->get('Version'));
-    wp_enqueue_script('myliba-main', get_template_directory_uri() . '/assets/js/main.js', [], wp_get_theme()->get('Version'), true);
+    wp_enqueue_style('myliba-main', get_template_directory_uri() . '/assets/css/main.css', [], myliba_asset_version('assets/css/main.css'));
+    wp_enqueue_script('myliba-main', get_template_directory_uri() . '/assets/js/main.js', [], myliba_asset_version('assets/js/main.js'), true);
 }
 add_action('wp_enqueue_scripts', 'myliba_enqueue_assets');
 
@@ -119,9 +131,40 @@ function myliba_header_menu(): array
     ];
 }
 
+function myliba_url_path(string $url): string
+{
+    $path = (string) wp_parse_url($url, PHP_URL_PATH);
+    $path = '/' . trim($path, '/');
+
+    return untrailingslashit($path);
+}
+
+function myliba_header_menu_item_is_active(string $key, string $url): bool
+{
+    $request_uri = isset($_SERVER['REQUEST_URI']) ? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) : '/';
+    $current_path = myliba_url_path(home_url($request_uri));
+    $item_path = myliba_url_path($url);
+
+    if ($current_path === $item_path) {
+        return true;
+    }
+
+    return match ($key) {
+        'blog' => is_home() || is_singular('post') || is_category() || is_tag(),
+        'solutions' => is_singular('myliba_product') || is_post_type_archive('myliba_product'),
+        default => false,
+    };
+}
+
 function myliba_mega_menu_products(): WP_Query
 {
-    return myliba_get_entries('myliba_product', 10);
+    $query = myliba_get_entries('myliba_product', 10);
+
+    if ($query->have_posts()) {
+        return $query;
+    }
+
+    return myliba_get_entries('myliba_product', 10, ['meta_query' => []]);
 }
 
 function myliba_language_links(): array
