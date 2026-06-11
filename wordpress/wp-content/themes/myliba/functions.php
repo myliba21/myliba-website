@@ -417,12 +417,14 @@ function myliba_home_section_definitions(): array
         'hero' => __('Hero + dashboard preview', 'myliba'),
         'trust_bar' => __('Trust bar', 'myliba'),
         'problem' => __('Problem cards', 'myliba'),
+        'solutions' => __('Strategy flow', 'myliba'),
         'products' => __('Product grid', 'myliba'),
         'academy' => __('Academy block', 'myliba'),
-        'solutions' => __('Quick start stepper', 'myliba'),
+        'role_gains' => __('Role gains', 'myliba'),
         'outcomes' => __('Business outcomes', 'myliba'),
-        'testimonials' => __('Trust + testimonials', 'myliba'),
         'resources' => __('Resources / blog', 'myliba'),
+        'faq' => __('Homepage FAQ', 'myliba'),
+        'final_cta' => __('Final CTA', 'myliba'),
     ];
 }
 
@@ -452,6 +454,9 @@ function myliba_home_sections(int $post_id = 0): array
     $saved = is_string($raw) && $raw !== '' ? json_decode($raw, true) : [];
 
     if (is_array($saved)) {
+        $saved_keys = array_map(static fn ($item) => is_array($item) ? sanitize_key((string) ($item['key'] ?? '')) : '', $saved);
+        $is_legacy_builder = $saved_keys && (!in_array('role_gains', $saved_keys, true) || in_array('testimonials', $saved_keys, true));
+
         foreach ($saved as $item) {
             if (!is_array($item)) {
                 continue;
@@ -465,7 +470,7 @@ function myliba_home_sections(int $post_id = 0): array
             $sections[$key] = [
                 'key' => $key,
                 'enabled' => !empty($item['enabled']),
-                'order' => isset($item['order']) ? (int) $item['order'] : ($sections[$key]['order'] ?? 999),
+                'order' => $is_legacy_builder ? ($sections[$key]['order'] ?? 999) : (isset($item['order']) ? (int) $item['order'] : ($sections[$key]['order'] ?? 999)),
             ];
         }
     }

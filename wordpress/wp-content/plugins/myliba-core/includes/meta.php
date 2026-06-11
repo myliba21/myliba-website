@@ -163,7 +163,13 @@ function render_homepage_box(\WP_Post $post): void
 
     field_text('_myliba_home_problem_eyebrow', __('Problem eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_home_problem_eyebrow', true));
     field_textarea('_myliba_home_problem_title', __('Problem title', 'myliba'), get_post_meta($post->ID, '_myliba_home_problem_title', true));
+    field_textarea('_myliba_home_problem_text', __('Problem intro text', 'myliba'), get_post_meta($post->ID, '_myliba_home_problem_text', true));
     field_textarea('_myliba_home_problem_cards', __('Problem cards', 'myliba'), get_post_meta($post->ID, '_myliba_home_problem_cards', true), __('One row per line as Title | Text.', 'myliba'));
+
+    field_text('_myliba_home_strategy_flow_eyebrow', __('Strategy flow eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_home_strategy_flow_eyebrow', true));
+    field_textarea('_myliba_home_strategy_flow_title', __('Strategy flow title', 'myliba'), get_post_meta($post->ID, '_myliba_home_strategy_flow_title', true));
+    field_textarea('_myliba_home_strategy_flow_text', __('Strategy flow intro text', 'myliba'), get_post_meta($post->ID, '_myliba_home_strategy_flow_text', true));
+    field_textarea('_myliba_home_strategy_flow_steps', __('Strategy flow steps', 'myliba'), get_post_meta($post->ID, '_myliba_home_strategy_flow_steps', true), __('One row per line as Title | Text | Short label.', 'myliba'));
 
     field_text('_myliba_home_solution_eyebrow', __('Solution eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_home_solution_eyebrow', true));
     field_textarea('_myliba_home_solution_title', __('Solution title', 'myliba'), get_post_meta($post->ID, '_myliba_home_solution_title', true));
@@ -182,17 +188,31 @@ function render_homepage_box(\WP_Post $post): void
     field_textarea('_myliba_home_stepper_steps', __('Start stepper steps', 'myliba'), get_post_meta($post->ID, '_myliba_home_stepper_steps', true), __('One row per line as Title | Text.', 'myliba'));
     field_text('_myliba_home_stepper_cta_label', __('Start stepper CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_home_stepper_cta_label', true));
 
+    field_text('_myliba_home_role_gains_eyebrow', __('Role gains eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_home_role_gains_eyebrow', true));
+    field_textarea('_myliba_home_role_gains_title', __('Role gains title', 'myliba'), get_post_meta($post->ID, '_myliba_home_role_gains_title', true));
+    field_textarea('_myliba_home_role_gains_text', __('Role gains intro text', 'myliba'), get_post_meta($post->ID, '_myliba_home_role_gains_text', true));
+    field_textarea('_myliba_home_role_gains_rows', __('Role gain tabs', 'myliba'), get_post_meta($post->ID, '_myliba_home_role_gains_rows', true), __('One row per line as Label | Title | Description | Primary label | Primary text | Secondary label | Secondary text.', 'myliba'));
+
     field_text('_myliba_home_outcomes_eyebrow', __('Outcomes eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_home_outcomes_eyebrow', true));
     field_textarea('_myliba_home_outcomes_title', __('Outcomes title', 'myliba'), get_post_meta($post->ID, '_myliba_home_outcomes_title', true));
+    field_textarea('_myliba_home_outcomes_text', __('Outcomes intro text', 'myliba'), get_post_meta($post->ID, '_myliba_home_outcomes_text', true));
     field_textarea('_myliba_home_outcomes_cards', __('Outcomes cards', 'myliba'), get_post_meta($post->ID, '_myliba_home_outcomes_cards', true), __('One row per line as Title | Text.', 'myliba'));
-
-    field_text('_myliba_home_b2b_trust_eyebrow', __('B2B trust eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_home_b2b_trust_eyebrow', true));
-    field_textarea('_myliba_home_b2b_trust_title', __('B2B trust title', 'myliba'), get_post_meta($post->ID, '_myliba_home_b2b_trust_title', true));
-    field_textarea('_myliba_home_b2b_trust_text', __('B2B trust text', 'myliba'), get_post_meta($post->ID, '_myliba_home_b2b_trust_text', true));
-    field_text('_myliba_home_b2b_trust_button', __('B2B trust button label', 'myliba'), get_post_meta($post->ID, '_myliba_home_b2b_trust_button', true));
 
     field_text('_myliba_home_resources_eyebrow', __('Resources eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_home_resources_eyebrow', true));
     field_textarea('_myliba_home_resources_title', __('Resources title', 'myliba'), get_post_meta($post->ID, '_myliba_home_resources_title', true));
+    field_textarea('_myliba_home_resources_text', __('Resources intro text', 'myliba'), get_post_meta($post->ID, '_myliba_home_resources_text', true));
+    field_text('_myliba_home_resources_button', __('Resources button label', 'myliba'), get_post_meta($post->ID, '_myliba_home_resources_button', true));
+
+    field_text('_myliba_home_faq_eyebrow', __('FAQ eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_home_faq_eyebrow', true));
+    field_textarea('_myliba_home_faq_title', __('FAQ title', 'myliba'), get_post_meta($post->ID, '_myliba_home_faq_title', true));
+    field_textarea('_myliba_home_faq_text', __('FAQ intro text', 'myliba'), get_post_meta($post->ID, '_myliba_home_faq_text', true));
+    field_textarea('_myliba_home_faq_items', __('FAQ fallback items', 'myliba'), get_post_meta($post->ID, '_myliba_home_faq_items', true), __('Used if no FAQ posts exist. One row per line as Question | Answer.', 'myliba'));
+
+    field_text('_myliba_home_final_cta_eyebrow', __('Final CTA eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_home_final_cta_eyebrow', true));
+    field_textarea('_myliba_home_final_cta_title', __('Final CTA title', 'myliba'), get_post_meta($post->ID, '_myliba_home_final_cta_title', true));
+    field_textarea('_myliba_home_final_cta_text', __('Final CTA text', 'myliba'), get_post_meta($post->ID, '_myliba_home_final_cta_text', true));
+    field_text('_myliba_home_final_cta_primary_label', __('Final CTA primary label', 'myliba'), get_post_meta($post->ID, '_myliba_home_final_cta_primary_label', true));
+    field_text('_myliba_home_final_cta_secondary_label', __('Final CTA secondary label', 'myliba'), get_post_meta($post->ID, '_myliba_home_final_cta_secondary_label', true));
 }
 
 function render_homepage_builder(\WP_Post $post): void
@@ -338,7 +358,12 @@ function homepage_section_definitions(): array
         'problem' => [
             'label' => __('Problem cards', 'myliba'),
             'source' => __('Homepage text fields', 'myliba'),
-            'fields' => __('Eyebrow, title, and cards using Title | Text rows.', 'myliba'),
+            'fields' => __('Eyebrow, title, intro text, and cards using Title | Text rows.', 'myliba'),
+        ],
+        'solutions' => [
+            'label' => __('Strategy flow', 'myliba'),
+            'source' => __('Homepage text fields', 'myliba'),
+            'fields' => __('Flow eyebrow, title, intro text, and steps using Title | Text | Short label rows.', 'myliba'),
         ],
         'products' => [
             'label' => __('Product grid', 'myliba'),
@@ -350,25 +375,30 @@ function homepage_section_definitions(): array
             'source' => __('Homepage text fields', 'myliba'),
             'fields' => __('Academy eyebrow, title, text, bullets, and button label.', 'myliba'),
         ],
-        'solutions' => [
-            'label' => __('Quick start stepper', 'myliba'),
+        'role_gains' => [
+            'label' => __('Role gains', 'myliba'),
             'source' => __('Homepage text fields', 'myliba'),
-            'fields' => __('Stepper eyebrow, title, intro text, steps, and CTA label.', 'myliba'),
+            'fields' => __('Role gain tabs using Label | Title | Description | Primary label | Primary text | Secondary label | Secondary text rows.', 'myliba'),
         ],
         'outcomes' => [
             'label' => __('Business outcomes', 'myliba'),
             'source' => __('Homepage text fields', 'myliba'),
             'fields' => __('Outcomes eyebrow, title, and cards using Title | Text rows.', 'myliba'),
         ],
-        'testimonials' => [
-            'label' => __('Trust + testimonials', 'myliba'),
-            'source' => __('Testimonials content type', 'myliba'),
-            'fields' => __('Trust text fields plus cards from Testimonials.', 'myliba'),
-        ],
         'resources' => [
             'label' => __('Resources / blog', 'myliba'),
             'source' => __('Blog posts', 'myliba'),
             'fields' => __('Resources eyebrow and title, then latest posts for the current language.', 'myliba'),
+        ],
+        'faq' => [
+            'label' => __('Homepage FAQ', 'myliba'),
+            'source' => __('FAQ content type + homepage fallback rows', 'myliba'),
+            'fields' => __('FAQ eyebrow, title, intro text, and optional Question | Answer fallback rows.', 'myliba'),
+        ],
+        'final_cta' => [
+            'label' => __('Final CTA', 'myliba'),
+            'source' => __('Homepage text fields + CTA options', 'myliba'),
+            'fields' => __('CTA eyebrow, title, text, primary label, and secondary label.', 'myliba'),
         ],
     ];
 }
@@ -398,6 +428,9 @@ function homepage_sections(int $post_id): array
     $saved = is_string($raw) && $raw !== '' ? json_decode($raw, true) : [];
 
     if (is_array($saved)) {
+        $saved_keys = array_map(static fn ($item) => is_array($item) ? sanitize_key((string) ($item['key'] ?? '')) : '', $saved);
+        $is_legacy_builder = $saved_keys && (!in_array('role_gains', $saved_keys, true) || in_array('testimonials', $saved_keys, true));
+
         foreach ($saved as $item) {
             if (!is_array($item)) {
                 continue;
@@ -411,7 +444,7 @@ function homepage_sections(int $post_id): array
             $sections[$key] = [
                 'key' => $key,
                 'enabled' => !empty($item['enabled']),
-                'order' => isset($item['order']) ? (int) $item['order'] : ($sections[$key]['order'] ?? 999),
+                'order' => $is_legacy_builder ? ($sections[$key]['order'] ?? 999) : (isset($item['order']) ? (int) $item['order'] : ($sections[$key]['order'] ?? 999)),
             ];
         }
     }
@@ -429,12 +462,14 @@ function homepage_section_summary(int $post_id, string $key): string
         'hero' => get_post_meta($post_id, '_myliba_hero_title', true) ?: get_the_title($post_id),
         'trust_bar' => get_post_meta($post_id, '_myliba_home_trust_title', true),
         'problem' => get_post_meta($post_id, '_myliba_home_problem_title', true),
+        'solutions' => get_post_meta($post_id, '_myliba_home_strategy_flow_title', true),
         'products' => get_post_meta($post_id, '_myliba_home_solution_title', true),
         'academy' => get_post_meta($post_id, '_myliba_home_academy_title', true),
-        'solutions' => get_post_meta($post_id, '_myliba_home_stepper_title', true),
+        'role_gains' => get_post_meta($post_id, '_myliba_home_role_gains_title', true),
         'outcomes' => get_post_meta($post_id, '_myliba_home_outcomes_title', true),
-        'testimonials' => get_post_meta($post_id, '_myliba_home_b2b_trust_title', true),
         'resources' => get_post_meta($post_id, '_myliba_home_resources_title', true),
+        'faq' => get_post_meta($post_id, '_myliba_home_faq_title', true),
+        'final_cta' => get_post_meta($post_id, '_myliba_home_final_cta_title', true),
         default => '',
     } ?: __('No summary yet. Fill the content fields below.', 'myliba');
 }
@@ -563,7 +598,12 @@ function field_definitions(string $post_type): array
         '_myliba_home_trust_items' => 'textarea',
         '_myliba_home_problem_eyebrow' => 'text',
         '_myliba_home_problem_title' => 'textarea',
+        '_myliba_home_problem_text' => 'textarea',
         '_myliba_home_problem_cards' => 'textarea',
+        '_myliba_home_strategy_flow_eyebrow' => 'text',
+        '_myliba_home_strategy_flow_title' => 'textarea',
+        '_myliba_home_strategy_flow_text' => 'textarea',
+        '_myliba_home_strategy_flow_steps' => 'textarea',
         '_myliba_home_solution_eyebrow' => 'text',
         '_myliba_home_solution_title' => 'textarea',
         '_myliba_home_products_button' => 'text',
@@ -578,15 +618,27 @@ function field_definitions(string $post_type): array
         '_myliba_home_stepper_text' => 'textarea',
         '_myliba_home_stepper_steps' => 'textarea',
         '_myliba_home_stepper_cta_label' => 'text',
+        '_myliba_home_role_gains_eyebrow' => 'text',
+        '_myliba_home_role_gains_title' => 'textarea',
+        '_myliba_home_role_gains_text' => 'textarea',
+        '_myliba_home_role_gains_rows' => 'textarea',
         '_myliba_home_outcomes_eyebrow' => 'text',
         '_myliba_home_outcomes_title' => 'textarea',
+        '_myliba_home_outcomes_text' => 'textarea',
         '_myliba_home_outcomes_cards' => 'textarea',
-        '_myliba_home_b2b_trust_eyebrow' => 'text',
-        '_myliba_home_b2b_trust_title' => 'textarea',
-        '_myliba_home_b2b_trust_text' => 'textarea',
-        '_myliba_home_b2b_trust_button' => 'text',
         '_myliba_home_resources_eyebrow' => 'text',
         '_myliba_home_resources_title' => 'textarea',
+        '_myliba_home_resources_text' => 'textarea',
+        '_myliba_home_resources_button' => 'text',
+        '_myliba_home_faq_eyebrow' => 'text',
+        '_myliba_home_faq_title' => 'textarea',
+        '_myliba_home_faq_text' => 'textarea',
+        '_myliba_home_faq_items' => 'textarea',
+        '_myliba_home_final_cta_eyebrow' => 'text',
+        '_myliba_home_final_cta_title' => 'textarea',
+        '_myliba_home_final_cta_text' => 'textarea',
+        '_myliba_home_final_cta_primary_label' => 'text',
+        '_myliba_home_final_cta_secondary_label' => 'text',
     ];
 
     if ($post_type === 'myliba_event') {
