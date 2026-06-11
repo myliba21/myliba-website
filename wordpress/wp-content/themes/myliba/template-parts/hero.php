@@ -10,7 +10,7 @@ $subtitle = myliba_meta('_myliba_hero_subtitle', $post_id);
 $cta_label = myliba_meta('_myliba_cta_label', $post_id);
 $cta_url = myliba_meta('_myliba_cta_url', $post_id);
 ?>
-<section class="hero">
+<section class="hero hero--subpage">
     <div class="hero__content">
         <?php if ($eyebrow) : ?>
             <p class="eyebrow"><?php echo esc_html($eyebrow); ?></p>
@@ -29,4 +29,3 @@ $cta_url = myliba_meta('_myliba_cta_url', $post_id);
         </div>
     <?php endif; ?>
 </section>
-

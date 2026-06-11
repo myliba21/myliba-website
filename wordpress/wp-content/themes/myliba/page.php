@@ -8,15 +8,20 @@ get_header();
 get_template_part('template-parts/hero');
 ?>
 
-<section class="section">
-    <article class="content">
-        <?php
-        while (have_posts()) :
-            the_post();
-            the_content();
-        endwhile;
-        ?>
-    </article>
-</section>
+<?php while (have_posts()) : the_post(); ?>
+    <?php
+    $raw_content = (string) get_post_field('post_content', get_the_ID());
+    $content_classes = ['content'];
+
+    if (str_contains($raw_content, 'id="post-detail"')) {
+        $content_classes[] = 'content--legacy-import';
+    }
+    ?>
+    <section class="section">
+        <article class="<?php echo esc_attr(implode(' ', $content_classes)); ?>">
+            <?php the_content(); ?>
+        </article>
+    </section>
+<?php endwhile; ?>
 
 <?php get_footer(); ?>
