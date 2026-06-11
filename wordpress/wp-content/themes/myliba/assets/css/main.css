@@ -3115,8 +3115,8 @@ a.site-promo__content:hover {
   display: flex;
   gap: 24px;
   justify-content: space-between;
-  margin-bottom: 22px;
-  max-width: none;
+  margin: 0 auto 28px;
+  max-width: var(--homepage-wide-max);
   text-align: left;
 }
 
@@ -4260,7 +4260,7 @@ a.site-promo__content:hover {
   display: flex;
   gap: 24px;
   justify-content: space-between;
-  margin: 0 auto 24px;
+  margin: 0 auto 28px;
   max-width: var(--homepage-wide-max);
 }
 
@@ -4293,6 +4293,8 @@ a.site-promo__content:hover {
   border-radius: 15px;
   box-shadow: 0 16px 42px rgba(21, 23, 34, 0.055);
   display: grid;
+  gap: 11px;
+  grid-template-rows: auto auto 1fr;
   min-height: 210px;
   padding: 22px;
 }
@@ -4304,11 +4306,10 @@ a.site-promo__content:hover {
 }
 
 .resource-card h3 {
-  align-self: end;
   color: #202635;
   font-size: 1.08rem;
   line-height: 1.24;
-  margin: 54px 0 8px;
+  margin: 18px 0 0;
 }
 
 .resource-card p {

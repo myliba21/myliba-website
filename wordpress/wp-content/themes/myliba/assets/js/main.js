@@ -8,6 +8,15 @@
   const megaToggle = megaItem ? megaItem.querySelector(".site-nav__link") : null;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const isMobileNav = () => window.matchMedia("(max-width: 960px)").matches;
+  const setLocaleCookie = (locale) => {
+    document.cookie = `myliba_locale=${locale}; path=/; max-age=31536000; samesite=lax`;
+  };
+
+  document.querySelectorAll("[data-myliba-locale]").forEach((link) => {
+    link.addEventListener("click", () => {
+      setLocaleCookie(link.dataset.mylibaLocale);
+    });
+  });
 
   if (header) {
     const syncHeader = () => {

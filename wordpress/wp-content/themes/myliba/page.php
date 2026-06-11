@@ -1,4 +1,9 @@
 <?php
+if (myliba_is_locale_landing_page()) {
+    require get_template_directory() . '/front-page.php';
+    return;
+}
+
 get_header();
 get_template_part('template-parts/hero');
 ?>
@@ -15,4 +20,3 @@ get_template_part('template-parts/hero');
 </section>
 
 <?php get_footer(); ?>
-

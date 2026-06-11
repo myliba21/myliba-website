@@ -18,6 +18,10 @@ $dashboard_rows = myliba_home_rows('dashboard_rows', [
 ]);
 $trust_items = myliba_home_lines('trust_items', ['OKR', 'KPI', 'CFR', '1:1']);
 $with_minimum_rows = static function (array $rows, array $fallback): array {
+    $fallback = array_map(static function (array $row): array {
+        return array_map(static fn ($cell) => is_string($cell) ? myliba_translate_text($cell) : $cell, $row);
+    }, $fallback);
+
     if (count($rows) >= count($fallback)) {
         return $rows;
     }
@@ -461,8 +465,8 @@ foreach (myliba_home_sections($post_id) as $section) {
                 while ($faq_query->have_posts()) {
                     $faq_query->the_post();
                     $faq_items[] = [
-                        'question' => get_the_title(),
-                        'answer' => wp_strip_all_tags(get_the_content()),
+                        'question' => myliba_translate_text(get_the_title()),
+                        'answer' => myliba_translate_text(wp_strip_all_tags(get_the_content())),
                     ];
                 }
                 wp_reset_postdata();

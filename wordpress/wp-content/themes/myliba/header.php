@@ -119,7 +119,7 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                 </button>
                 <div class="language-switcher__menu">
                     <?php foreach ($language_links as $language) : ?>
-                        <a class="<?php echo $language['active'] ? 'is-active' : ''; ?>" href="<?php echo esc_url($language['url']); ?>">
+                        <a class="<?php echo $language['active'] ? 'is-active' : ''; ?>" href="<?php echo esc_url($language['url']); ?>" data-myliba-locale="<?php echo esc_attr(strtolower((string) $language['label'])); ?>">
                             <span class="language-switcher__flag"><?php echo esc_html(myliba_language_flag((string) $language['label'])); ?></span>
                             <span><?php echo esc_html($language['label']); ?></span>
                         </a>

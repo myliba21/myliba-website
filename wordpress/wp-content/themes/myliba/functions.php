@@ -46,10 +46,26 @@ add_action('wp_enqueue_scripts', 'myliba_enqueue_assets');
 function myliba_option(string $key, mixed $fallback = ''): mixed
 {
     if (function_exists('Myliba\\Core\\Options\\get')) {
-        return \Myliba\Core\Options\get($key, $fallback);
+        $value = \Myliba\Core\Options\get($key, $fallback);
+    } else {
+        $value = $fallback;
     }
 
-    return $fallback;
+    $translatable_keys = [
+        'demo_cta_label',
+        'footer_cta_title',
+        'footer_note',
+        'primary_cta_label',
+        'promo_left_text',
+        'promo_message',
+        'promo_right_text',
+    ];
+
+    if (is_string($value) && !is_admin() && in_array($key, $translatable_keys, true)) {
+        return myliba_translate_text($value);
+    }
+
+    return $value;
 }
 
 function myliba_env(string $key, string $fallback = ''): string
@@ -145,6 +161,368 @@ function myliba_current_language(): string
     }
 
     return (string) myliba_option('default_locale', 'en');
+}
+
+function myliba_available_locales(): array
+{
+    $raw = (string) myliba_option('available_locales', "en\ntr");
+    $items = preg_split('/[\r\n,]+/', $raw) ?: [];
+    $items = array_map('sanitize_key', array_map('trim', $items));
+    $items = array_filter($items, static fn ($item) => $item !== '');
+
+    return array_values(array_unique($items)) ?: ['en', 'tr'];
+}
+
+function myliba_locale_cookie_name(): string
+{
+    return 'myliba_locale';
+}
+
+function myliba_request_path(): string
+{
+    $request_uri = isset($_SERVER['REQUEST_URI']) ? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) : '/';
+    $request_path = (string) wp_parse_url($request_uri, PHP_URL_PATH);
+    $home_path = (string) wp_parse_url(home_url('/'), PHP_URL_PATH);
+
+    $request_path = '/' . trim($request_path, '/');
+    $home_path = '/' . trim($home_path, '/');
+
+    if ($home_path !== '/' && str_starts_with($request_path . '/', $home_path . '/')) {
+        $request_path = substr($request_path, strlen($home_path));
+        $request_path = '/' . trim($request_path, '/');
+    }
+
+    return $request_path === '/' ? '/' : untrailingslashit($request_path);
+}
+
+function myliba_locale_from_path(string $path): string
+{
+    $first_segment = strtok(trim($path, '/'), '/');
+    $first_segment = $first_segment === false ? '' : sanitize_key($first_segment);
+
+    return in_array($first_segment, myliba_available_locales(), true) ? $first_segment : '';
+}
+
+function myliba_locale_from_accept_language(string $header): string
+{
+    foreach (explode(',', strtolower($header)) as $language) {
+        $locale = str_replace('_', '-', trim(explode(';', $language, 2)[0] ?? ''));
+
+        foreach (myliba_available_locales() as $available_locale) {
+            if ($locale === $available_locale || str_starts_with($locale, $available_locale . '-')) {
+                return $available_locale;
+            }
+        }
+    }
+
+    return '';
+}
+
+function myliba_preferred_locale(): string
+{
+    $default_locale = (string) myliba_option('default_locale', 'en');
+    $cookie_name = myliba_locale_cookie_name();
+    $cookie_locale = isset($_COOKIE[$cookie_name]) ? sanitize_key(wp_unslash($_COOKIE[$cookie_name])) : '';
+
+    if (in_array($cookie_locale, myliba_available_locales(), true)) {
+        return $cookie_locale;
+    }
+
+    $accept_language = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_ACCEPT_LANGUAGE'])) : '';
+    $accepted_locale = myliba_locale_from_accept_language($accept_language);
+
+    return $accepted_locale !== '' ? $accepted_locale : $default_locale;
+}
+
+function myliba_set_locale_cookie(string $locale): void
+{
+    if (!in_array($locale, myliba_available_locales(), true) || headers_sent()) {
+        return;
+    }
+
+    $path = (string) wp_parse_url(home_url('/'), PHP_URL_PATH);
+    $path = '/' . trim($path, '/');
+
+    setcookie(myliba_locale_cookie_name(), $locale, [
+        'expires' => time() + YEAR_IN_SECONDS,
+        'path' => $path === '/' ? '/' : $path,
+        'samesite' => 'Lax',
+    ]);
+}
+
+function myliba_redirect_root_to_preferred_locale(): void
+{
+    if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+        return;
+    }
+
+    if (!in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', ['GET', 'HEAD'], true)) {
+        return;
+    }
+
+    if (myliba_request_path() !== '/') {
+        return;
+    }
+
+    $preferred_locale = myliba_preferred_locale();
+    $default_locale = (string) myliba_option('default_locale', 'en');
+
+    if ($preferred_locale !== $default_locale) {
+        wp_safe_redirect(home_url('/' . $preferred_locale . '/'), 302);
+        exit;
+    }
+}
+add_action('template_redirect', 'myliba_redirect_root_to_preferred_locale', 0);
+
+function myliba_sync_current_locale_cookie(): void
+{
+    $path_locale = myliba_locale_from_path(myliba_request_path());
+    $locale = $path_locale !== '' ? $path_locale : myliba_current_language();
+
+    myliba_set_locale_cookie($locale);
+}
+add_action('template_redirect', 'myliba_sync_current_locale_cookie', 1);
+
+function myliba_filter_language_attributes(string $output): string
+{
+    $locale = myliba_current_language() === 'tr' ? 'tr-TR' : 'en-US';
+
+    if (preg_match('/\blang="[^"]*"/', $output)) {
+        return preg_replace('/\blang="[^"]*"/', 'lang="' . esc_attr($locale) . '"', $output) ?: $output;
+    }
+
+    return trim($output . ' lang="' . esc_attr($locale) . '"');
+}
+add_filter('language_attributes', 'myliba_filter_language_attributes');
+
+function myliba_translate_text(string $text): string
+{
+    $text = trim($text);
+
+    if (myliba_current_language() !== 'tr') {
+        return $text;
+    }
+
+    $translations = [
+        '1:1 notes' => '1:1 notları',
+        '1:1s' => '1:1 görüşmeler',
+        'Academy' => 'Akademi',
+        'Academy + software' => 'Akademi + yazılım',
+        'Action' => 'Aksiyon',
+        'Action Management' => 'Aksiyon Yönetimi',
+        'Alignment' => 'Uyum',
+        'Alignment map' => 'Uyum haritası',
+        'Better feedback' => 'Daha iyi geri bildirim',
+        'Blog & resources' => 'Blog ve kaynaklar',
+        'Build 1:1, CFR and learning routines around the work.' => 'İşin etrafında 1:1, CFR ve öğrenme rutinleri kurun.',
+        'Build one connected operating rhythm for priorities, ownership, action and learning.' => 'Öncelikler, sahiplik, aksiyon ve öğrenme için tek bir bağlı çalışma ritmi kurun.',
+        'Built for teams that manage performance culture seriously.' => 'Performans kültürünü ciddiyetle yöneten ekipler için tasarlandı.',
+        'Business outcomes' => 'İş sonuçları',
+        'Calibration' => 'Kalibrasyon',
+        'Can Myliba support implementation and training?' => 'Myliba uygulama ve eğitim süreçlerini destekler mi?',
+        'Coach work without losing follow-up' => 'Takibi kaybetmeden işi koçlukla yönetin',
+        'Choose the operating routines you want to strengthen across OKR, KPI, CFR, 1:1, feedback and analytics.' => 'OKR, KPI, CFR, 1:1, geri bildirim ve analitik genelinde güçlendirmek istediğiniz çalışma rutinlerini seçin.',
+        'Clear gains for every role.' => 'Her rol için net kazanımlar.',
+        'Coaching notes, recognition and actions stay connected to goals.' => 'Koçluk notları, takdirler ve aksiyonlar hedeflerle bağlantılı kalır.',
+        'Company' => 'Şirket',
+        'Company objective' => 'Şirket hedefi',
+        'Connect company strategy with team and individual contribution.' => 'Şirket stratejisini ekip ve bireysel katkıyla bağlayın.',
+        'Connect OKR and KPI ownership from company to teams.' => 'OKR ve KPI sahipliğini şirketten ekiplere bağlayın.',
+        'Connect priorities with execution' => 'Öncelikleri uygulamayla bağlayın',
+        'Contact' => 'İletişim',
+        'Contact us' => 'İletişime geçin',
+        'Contribution to company priorities becomes visible.' => 'Şirket önceliklerine katkı görünür hale gelir.',
+        'Continuous performance' => 'Sürekli performans',
+        'Continuous performance development' => 'Sürekli performans gelişimi',
+        'Conversations' => 'Görüşmeler',
+        'Copyright %1$s %2$s. All rights reserved.' => 'Copyright %1$s %2$s. Tüm hakları saklıdır.',
+        'Culture' => 'Kültür',
+        'Culture Analysis' => 'Kültür Analizi',
+        'Culture, goals and performance' => 'Kültür, hedefler ve performans',
+        'Development' => 'Gelişim',
+        'Development signals stay connected to goals and coaching.' => 'Gelişim sinyalleri hedefler ve koçlukla bağlantılı kalır.',
+        'Employee growth' => 'Çalışan gelişimi',
+        'Employees' => 'Çalışanlar',
+        'Ethics Counsel' => 'Etik Danışmanlık',
+        'Every rhythm leaves a measurable signal for better focus, coaching and decisions.' => 'Her ritim daha iyi odak, koçluk ve kararlar için ölçülebilir bir sinyal bırakır.',
+        'Execution' => 'Uygulama',
+        'Executive teams, HR, strategy offices, team leaders and employees use different views of the same operating rhythm.' => 'Üst yönetim, İK, strateji ekipleri, ekip liderleri ve çalışanlar aynı çalışma ritminin farklı görünümlerini kullanır.',
+        'Explore academy' => 'Akademiyi keşfet',
+        'Explore Myliba modules' => 'Myliba modüllerini keşfet',
+        'Fairer decisions' => 'Daha adil kararlar',
+        'FAQ' => 'SSS',
+        'Faster decisions' => 'Daha hızlı kararlar',
+        'Feedback and Feedforward' => 'Geri ve ileri bildirim',
+        'Feedback card' => 'Geri bildirim kartı',
+        'First questions in your mind.' => 'Aklınızdaki ilk sorular.',
+        'Footer blog links' => 'Footer blog bağlantıları',
+        'Footer call to action' => 'Footer aksiyon çağrısı',
+        'Footer company links' => 'Footer şirket bağlantıları',
+        'Footer page links' => 'Footer sayfa bağlantıları',
+        'Footer product links' => 'Footer ürün bağlantıları',
+        'Goal health' => 'Hedef sağlığı',
+        'Goal hierarchy gets lost' => 'Hedef hiyerarşisi kaybolur',
+        'Goal alignment across teams' => 'Ekipler arası hedef uyumu',
+        'Goals' => 'Hedefler',
+        'Give each stakeholder the view and routine they need inside the same operating system.' => 'Her paydaşa aynı çalışma sistemi içinde ihtiyaç duyduğu görünümü ve rutini verin.',
+        'HR can run cycles without spreadsheet-heavy follow-up.' => 'İK, tablo ağırlıklı takip olmadan döngüleri yürütebilir.',
+        'How is Myliba different from a classic OKR tool?' => 'Myliba klasik bir OKR aracından nasıl ayrılır?',
+        'Human Resources' => 'İnsan Kaynakları',
+        'Human and culture-focused transformation' => 'İnsan ve kültür odaklı dönüşüm',
+        'Implementation and training' => 'Uygulama ve eğitim',
+        'Insights and Analytics' => 'İçgörüler ve Analitik',
+        'Institutions that want to establish a new generation performance improvement system' => 'Yeni nesil performans geliştirme sistemi kurmak isteyen kurumlar',
+        'Key Result' => 'Anahtar Sonuç',
+        'Leadership and Coaching' => 'Liderlik ve Koçluk',
+        'Leadership and coaching routines' => 'Liderlik ve koçluk rutinleri',
+        'Leadership can focus attention on the places that need support.' => 'Liderlik dikkatini destek gereken alanlara yöneltebilir.',
+        'Lead strategy with a live operating view' => 'Stratejiyi canlı bir çalışma görünümüyle yönetin',
+        'Make company, team and individual goals visible in one hierarchy.' => 'Şirket, ekip ve bireysel hedefleri tek hiyerarşide görünür kılın.',
+        'Make one-on-ones structured, useful and connected to development.' => 'Bire bir görüşmeleri yapılandırılmış, faydalı ve gelişimle bağlantılı hale getirin.',
+        'Make performance continuous and fair' => 'Performansı sürekli ve adil hale getirin',
+        'Make performance culture visible, coachable and measurable.' => 'Performans kültürünü görünür, koçluk edilebilir ve ölçülebilir hale getirin.',
+        'Make priorities visible and shared across the organization.' => 'Öncelikleri organizasyon genelinde görünür ve paylaşılır hale getirin.',
+        'Make it actionable' => 'Aksiyona dönüştürün',
+        'Manager Effectiveness' => 'Yönetici Etkinliği',
+        'Manager rhythm' => 'Yönetici ritmi',
+        'Manual operations cost time' => 'Manuel operasyonlar zaman kaybettirir',
+        'Meetings become structured and connected to outcomes.' => 'Toplantılar yapılandırılır ve sonuçlarla bağlantılı hale gelir.',
+        'Menu' => 'Menü',
+        'Myliba combines OKR, KPI, CFR, 1:1 meetings, feedback, action management and academy programs so organizations can build a measurable high-performance culture.' => 'Myliba, kurumların ölçülebilir bir yüksek performans kültürü kurması için OKR, KPI, CFR, 1:1 görüşmeler, geri bildirim, aksiyon yönetimi ve akademi programlarını birleştirir.',
+        'Myliba combines OKR, KPI, CFR, 1:1, feedback, actions, analytics and academy routines.' => 'Myliba OKR, KPI, CFR, 1:1, geri bildirim, aksiyon, analitik ve akademi rutinlerini birleştirir.',
+        'Myliba connects goals, routines and measurable actions in one operating flow.' => 'Myliba hedefleri, rutinleri ve ölçülebilir aksiyonları tek bir çalışma akışında birleştirir.',
+        'Myliba helps organizations not only define goals, but also make goal-oriented work sustainable through leadership development, performance coaching, workshops and cultural transformation programs.' => 'Myliba kurumların yalnızca hedef tanımlamasına değil; liderlik gelişimi, performans koçluğu, atölyeler ve kültürel dönüşüm programlarıyla hedef odaklı çalışmayı sürdürülebilir hale getirmesine yardımcı olur.',
+        'Myliba product dashboard preview' => 'Myliba ürün paneli önizlemesi',
+        'Myliba product dashboard preview %d' => 'Myliba ürün paneli önizlemesi %d',
+        'Myliba product screenshots' => 'Myliba ürün ekran görüntüleri',
+        'Myliba weekly focus dashboard preview' => 'Myliba haftalık odak paneli önizlemesi',
+        'Myliba goal map dashboard preview' => 'Myliba hedef haritası paneli önizlemesi',
+        'No upcoming events at this time.' => 'Şu anda yaklaşan etkinlik yok.',
+        'OKR Management' => 'OKR Yönetimi',
+        'OKR Culture Academy' => 'OKR Kültür Akademisi',
+        'OKR culture and adoption programs' => 'OKR kültürü ve adaptasyon programları',
+        'OKR progress' => 'OKR ilerlemesi',
+        'OKR, KPI, CFR and performance culture' => 'OKR, KPI, CFR ve performans kültürü',
+        'OKR, culture, ethics, and security consulting.' => 'OKR, kültür, etik ve güvenlik danışmanlığı.',
+        'One platform for goals, performance conversations, actions and culture development.' => 'Hedefler, performans görüşmeleri, aksiyonlar ve kültür gelişimi için tek platform.',
+        'Online' => 'Online',
+        'Our Story' => 'Hikayemiz',
+        'Owner' => 'Sahip',
+        'Pages' => 'Sayfalar',
+        'Performance conversations stay detached' => 'Performans görüşmeleri kopuk kalır',
+        'Performance culture signals, risks and progress in one view.' => 'Performans kültürü sinyalleri, riskler ve ilerleme tek görünümde.',
+        'Performance Development' => 'Performans Gelişimi',
+        'Performance management becomes measurable only when goals, conversations and actions move in the same flow.' => 'Performans yönetimi ancak hedefler, görüşmeler ve aksiyonlar aynı akışta ilerlediğinde ölçülebilir hale gelir.',
+        'Performance OS' => 'Performans OS',
+        'Performance rhythm' => 'Performans ritmi',
+        'Portal login' => 'Portal girişi',
+        'Prepare 1:1s, follow actions and give feedback while keeping team goals visible.' => 'Ekip hedefleri görünür kalırken 1:1 görüşmeleri hazırlayın, aksiyonları takip edin ve geri bildirim verin.',
+        'Primary navigation' => 'Ana navigasyon',
+        'Problem' => 'Problem',
+        'Process clarity' => 'Süreç netliği',
+        'Products' => 'Ürünler',
+        'Privacy' => 'Gizlilik',
+        'Progress rhythm' => 'İlerleme ritmi',
+        'Ready for review' => 'Gözden geçirmeye hazır',
+        'Ready to make culture measurable?' => 'Kültürü ölçülebilir hale getirmeye hazır mısınız?',
+        'Read practical insights for goal management, leadership routines and performance culture.' => 'Hedef yönetimi, liderlik rutinleri ve performans kültürü için pratik içgörüler okuyun.',
+        'Real-time progress tracking' => 'Gerçek zamanlı ilerleme takibi',
+        'References and partners' => 'Referanslar ve iş ortakları',
+        'Request a demo' => 'Demo talep et',
+        'Request demo' => 'Demo talep et',
+        'Resources' => 'Kaynaklar',
+        'Review routines stay measurable and repeatable.' => 'Gözden geçirme rutinleri ölçülebilir ve tekrarlanabilir kalır.',
+        'Risk visibility' => 'Risk görünürlüğü',
+        'Role clarity' => 'Rol netliği',
+        'Role gains' => 'Rol kazanımları',
+        'Role-based value' => 'Rol bazlı değer',
+        'See all products' => 'Tüm ürünleri gör',
+        'See company priorities, team contribution and risk signals without waiting for manual reporting.' => 'Manuel raporlama beklemeden şirket önceliklerini, ekip katkısını ve risk sinyallerini görün.',
+        'See performance culture signals, risks and progress in one view.' => 'Performans kültürü sinyallerini, riskleri ve ilerlemeyi tek görünümde görün.',
+        'See progress, blockers and ownership without waiting for meetings.' => 'Toplantıları beklemeden ilerlemeyi, engelleri ve sahipliği görün.',
+        'Security' => 'Güvenlik',
+        'Senior management and strategy professionals who want to turn strategy into action' => 'Stratejiyi aksiyona dönüştürmek isteyen üst yönetim ve strateji profesyonelleri',
+        'Social links' => 'Sosyal bağlantılar',
+        'Software power, academy experience.' => 'Yazılım gücü, akademi deneyimi.',
+        'Solutions' => 'Çözümler',
+        'Solutions menu' => 'Çözümler menüsü',
+        'Spot adoption, blocker and engagement signals before they become late surprises.' => 'Adaptasyon, engel ve bağlılık sinyallerini gecikmiş sürprizlere dönüşmeden fark edin.',
+        'Start with OKR, performance conversations and academy-supported adoption in one connected flow.' => 'OKR, performans görüşmeleri ve akademi destekli adaptasyonu tek bağlı akışta başlatın.',
+        'Status' => 'Durum',
+        'Strategy' => 'Strateji',
+        'Strategy alignment' => 'Strateji uyumu',
+        'Strategy does not turn into action' => 'Strateji aksiyona dönüşmez',
+        'Strategy gets lost when goals, actions and feedback live in separate systems.' => 'Hedefler, aksiyonlar ve geri bildirim ayrı sistemlerde yaşadığında strateji kaybolur.',
+        'Strategy Office' => 'Strateji Ofisi',
+        'Strategy to action' => 'Stratejiden aksiyona',
+        'Strategy to goals, action and culture.' => 'Stratejiden hedeflere, aksiyona ve kültüre.',
+        'Strategic visibility' => 'Stratejik görünürlük',
+        'Support leaders with practical routines for clarity and accountability.' => 'Liderleri netlik ve hesap verebilirlik için pratik rutinlerle destekleyin.',
+        'Team focus' => 'Ekip odağı',
+        'Team Leaders' => 'Ekip Liderleri',
+        'The answers teams usually need before they start building a measurable performance rhythm.' => 'Ekiplerin ölçülebilir bir performans ritmi kurmaya başlamadan önce genellikle ihtiyaç duyduğu yanıtlar.',
+        'The Myliba solution' => 'Myliba çözümü',
+        'The problem' => 'Problem',
+        'Transform priorities into actions, ownership and measurable results.' => 'Öncelikleri aksiyonlara, sahipliğe ve ölçülebilir sonuçlara dönüştürün.',
+        'Translate strategic choices into OKRs, KPIs, initiatives and ownership that teams can follow.' => 'Stratejik seçimleri ekiplerin takip edebileceği OKR, KPI, inisiyatif ve sahipliğe çevirin.',
+        'Transparency' => 'Şeffaflık',
+        'Transparency gets harder' => 'Şeffaflık zorlaşır',
+        'Turn 1:1, feedback and coaching into a continuous routine.' => '1:1, geri bildirim ve koçluğu sürekli bir rutine dönüştürün.',
+        'Turn each priority into accountable actions and follow-up.' => 'Her önceliği sorumlu aksiyonlara ve takip rutinlerine dönüştürün.',
+        'Turn priorities into owners, due dates and progress routines.' => 'Öncelikleri sahiplere, teslim tarihlerine ve ilerleme rutinlerine dönüştürün.',
+        'Turn Strategy into Action: Make the contribution transparent by turning strategy into goals and goals into actions. Focus on "what matters most" by developing a motivated, committed and competent team.' => 'Stratejiyi Eyleme Dönüştürün: Stratejiyi hedeflere, hedefleri aksiyonlara dönüştürerek katkıyı şeffaflaştırın. İstekli, bağlı ve yetkin bir ekip geliştirerek "en önemli olana" odaklanın.',
+        'Turn strategy into action today.' => 'Stratejinizi bugün aksiyona dönüştürün.',
+        'Turn strategy into goals, goals into action.' => 'Stratejiyi hedeflere, hedefleri aksiyona dönüştürün.',
+        'Turn your strategy into action today.' => 'Stratejinizi bugün aksiyona dönüştürün.',
+        'Understand contribution and growth' => 'Katkıyı ve gelişimi anlayın',
+        'Use evidence from goals, conversations and actions in performance growth.' => 'Performans gelişiminde hedeflerden, görüşmelerden ve aksiyonlardan gelen kanıtları kullanın.',
+        'Use evidence from goals, conversations and actions in performance reviews.' => 'Performans değerlendirmelerinde hedef, görüşme ve aksiyon kanıtlarını kullanın.',
+        'View all' => 'Tümünü gör',
+        'View all solutions' => 'Tüm çözümleri gör',
+        'View module' => 'Modülü gör',
+        'Who uses Myliba most often?' => 'Myliba en çok kimler tarafından kullanılır?',
+        'Workshops and coaching routines' => 'Atölye ve koçluk rutinleri',
+        'Yes. The platform is supported by academy programs, workshops and coaching routines.' => 'Evet. Platform akademi programları, atölyeler ve koçluk rutinleriyle desteklenir.',
+        'You can trace each priority to goals, owners and actions.' => 'Her önceliği hedeflere, sahiplere ve aksiyonlara kadar izleyebilirsiniz.',
+        'Each priority can be traced to goals, owners and actions.' => 'Her öncelik hedeflere, sahiplere ve aksiyonlara kadar izlenebilir.',
+        'Employee contribution to company priorities becomes visible.' => 'Çalışanın şirket önceliklerine katkısı görünür hale gelir.',
+        'See goals, expectations, feedback and development actions in one place.' => 'Hedefleri, beklentileri, geri bildirimi ve gelişim aksiyonlarını tek yerde görün.',
+        'People know what matters and what changes next.' => 'İnsanlar neyin önemli olduğunu ve sırada neyin değişeceğini bilir.',
+        'Recognition and feedforward are easier to act on.' => 'Takdir ve ileri bildirimi aksiyona çevirmek kolaylaşır.',
+        'Is sonuclari' => 'İş sonuçları',
+        'Performans kulturunu gorunur, gelistirilebilir ve olculebilir hale getirin.' => 'Performans kültürünü görünür, geliştirilebilir ve ölçülebilir hale getirin.',
+        'Sirket stratejisini takim ve bireysel katkiyla baglayin.' => 'Şirket stratejisini takım ve bireysel katkıyla bağlayın.',
+        'Seffaflik' => 'Şeffaflık',
+        'Toplanti beklemeden ilerlemeyi, engelleri ve sahipligi gorun.' => 'Toplantı beklemeden ilerlemeyi, engelleri ve sahipliği görün.',
+        'Gelisim' => 'Gelişim',
+        '1:1, geri bildirim ve koclugu surekli rutine donusturun.' => '1:1, geri bildirim ve koçluğu sürekli rutine dönüştürün.',
+        'Oncelikleri aksiyonlara, sahipliklere ve olculebilir sonuclara donusturun.' => 'Öncelikleri aksiyonlara, sahipliklere ve ölçülebilir sonuçlara dönüştürün.',
+        'OKR, performans ve kultur konulari icin SEO hazir icerik.' => 'OKR, performans ve kültür konuları için SEO hazır içerik.',
+        'Demo talep etmeden once sik sorulan sorular.' => 'Demo talep etmeden önce sık sorulan sorular.',
+    ];
+
+    return $translations[$text] ?? $text;
+}
+
+function myliba_translate_gettext(string $translation, string $text, string $domain): string
+{
+    if ($domain !== 'myliba' || is_admin()) {
+        return $translation;
+    }
+
+    return myliba_translate_text($text);
+}
+add_filter('gettext', 'myliba_translate_gettext', 10, 3);
+
+function myliba_is_locale_landing_page(int $post_id = 0): bool
+{
+    $post = get_post($post_id ?: get_queried_object_id());
+
+    if (!$post || $post->post_type !== 'page') {
+        return false;
+    }
+
+    return in_array($post->post_name, myliba_available_locales(), true);
 }
 
 function myliba_page_url(string $key): string
@@ -346,7 +724,10 @@ function myliba_faq_pairs(string $value): array
     foreach (myliba_lines($value) as $line) {
         [$question, $answer] = array_pad(array_map('trim', explode('|', $line, 2)), 2, '');
         if ($question && $answer) {
-            $pairs[] = ['question' => $question, 'answer' => $answer];
+            $pairs[] = [
+                'question' => myliba_translate_text($question),
+                'answer' => myliba_translate_text($answer),
+            ];
         }
     }
 
@@ -389,23 +770,33 @@ function myliba_brand_link(string $modifier = ''): void
 
 function myliba_home_value(string $key, mixed $fallback = ''): mixed
 {
-    return myliba_meta('_myliba_home_' . $key, get_queried_object_id(), $fallback);
+    if (is_string($fallback)) {
+        $fallback = myliba_translate_text($fallback);
+    }
+
+    $value = myliba_meta('_myliba_home_' . $key, get_queried_object_id(), $fallback);
+
+    return is_string($value) ? myliba_translate_text($value) : $value;
 }
 
 function myliba_home_lines(string $key, array $fallback = []): array
 {
+    $fallback = array_map(static fn ($line) => is_string($line) ? myliba_translate_text($line) : $line, $fallback);
     $value = (string) myliba_home_value($key, implode("\n", $fallback));
 
-    return myliba_lines($value);
+    return array_map('myliba_translate_text', myliba_lines($value));
 }
 
 function myliba_home_rows(string $key, array $fallback = []): array
 {
     $rows = [];
+    $fallback = array_map(static function (array $row): array {
+        return array_map(static fn ($cell) => is_string($cell) ? myliba_translate_text($cell) : $cell, $row);
+    }, $fallback);
     $raw_rows = myliba_home_lines($key, array_map(static fn ($row) => implode('|', $row), $fallback));
 
     foreach ($raw_rows as $row) {
-        $rows[] = array_map('trim', explode('|', $row));
+        $rows[] = array_map(static fn ($cell) => myliba_translate_text(trim($cell)), explode('|', $row));
     }
 
     return $rows;

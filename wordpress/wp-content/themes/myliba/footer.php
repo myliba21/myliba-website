@@ -3,8 +3,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$footer_cta_url = (string) myliba_option('primary_cta_url', myliba_page_url('contact'));
-$footer_cta_url = $footer_cta_url !== '' ? $footer_cta_url : myliba_page_url('contact');
+$footer_cta_url_option = (string) myliba_option('primary_cta_url', myliba_page_url('contact'));
+$footer_cta_url = $footer_cta_url_option !== '' ? $footer_cta_url_option : myliba_page_url('contact');
+if (myliba_current_language() !== 'en' && str_contains($footer_cta_url, '/en/contact')) {
+    $footer_cta_url = myliba_page_url('contact');
+}
 $footer_demo_url = myliba_demo_url();
 $footer_contact_email = (string) myliba_option('contact_email', get_option('admin_email'));
 $footer_phone_label = (string) myliba_option('phone_label', '');
@@ -61,6 +64,8 @@ $footer_posts_query = new WP_Query([
     'posts_per_page' => 5,
     'post_status' => 'publish',
     'ignore_sticky_posts' => true,
+    'meta_key' => '_myliba_language',
+    'meta_value' => myliba_current_language(),
 ]);
 if ($footer_posts_query->have_posts()) {
     while ($footer_posts_query->have_posts()) {
@@ -151,7 +156,7 @@ $footer_social_links = [
 
         <nav class="site-footer__column" aria-label="<?php esc_attr_e('Footer blog links', 'myliba'); ?>">
             <h3><?php esc_html_e('Blog & resources', 'myliba'); ?></h3>
-            <?php if (has_nav_menu('footer_blog')) : ?>
+            <?php if (has_nav_menu('footer_blog') && myliba_current_language() === 'en') : ?>
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'footer_blog',
@@ -172,7 +177,7 @@ $footer_social_links = [
 
         <nav class="site-footer__column" aria-label="<?php esc_attr_e('Footer company links', 'myliba'); ?>">
             <h3><?php esc_html_e('Company', 'myliba'); ?></h3>
-            <?php if (has_nav_menu('footer')) : ?>
+            <?php if (has_nav_menu('footer') && myliba_current_language() === 'en') : ?>
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'footer',
@@ -196,7 +201,7 @@ $footer_social_links = [
         <p><?php echo esc_html(sprintf(__('Copyright %1$s %2$s. All rights reserved.', 'myliba'), date_i18n('Y'), myliba_option('organization_name', 'Myliba'))); ?></p>
         <div class="site-footer__bottom-links">
             <?php foreach ($footer_languages as $language_link) : ?>
-                <a href="<?php echo esc_url($language_link['url']); ?>" <?php echo !empty($language_link['active']) ? 'aria-current="true"' : ''; ?>>
+                <a href="<?php echo esc_url($language_link['url']); ?>" data-myliba-locale="<?php echo esc_attr(strtolower((string) $language_link['label'])); ?>" <?php echo !empty($language_link['active']) ? 'aria-current="true"' : ''; ?>>
                     <?php echo esc_html($language_link['label']); ?>
                 </a>
             <?php endforeach; ?>
