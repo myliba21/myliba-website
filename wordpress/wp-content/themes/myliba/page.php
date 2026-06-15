@@ -4,6 +4,11 @@ if (myliba_is_locale_landing_page()) {
     return;
 }
 
+if (myliba_is_academy_landing_page()) {
+    require get_template_directory() . '/template-parts/page-academy.php';
+    return;
+}
+
 get_header();
 get_template_part('template-parts/hero');
 ?>

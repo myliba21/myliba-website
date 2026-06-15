@@ -163,6 +163,17 @@ function myliba_current_language(): string
     return (string) myliba_option('default_locale', 'en');
 }
 
+function myliba_is_academy_landing_page(int $post_id = 0): bool
+{
+    $post = get_post($post_id ?: get_queried_object_id());
+
+    if (!$post || $post->post_type !== 'page') {
+        return false;
+    }
+
+    return in_array($post->post_name, ['okr-culture-academy', 'okr-kultur-akademisi'], true);
+}
+
 function myliba_available_locales(): array
 {
     $raw = (string) myliba_option('available_locales', "en\ntr");
