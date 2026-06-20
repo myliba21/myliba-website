@@ -32,9 +32,32 @@ function current_post_noindex(): bool
     return get_post_meta(get_queried_object_id(), '_myliba_noindex', true) === '1';
 }
 
+function staging_hosts(): array
+{
+    return apply_filters('myliba_staging_hosts', [
+        'test-web.myliba.com',
+    ]);
+}
+
+function current_host(): string
+{
+    $host = !empty($_SERVER['HTTP_HOST']) ? wp_unslash($_SERVER['HTTP_HOST']) : '';
+
+    if (!$host) {
+        $host = wp_parse_url(home_url('/'), PHP_URL_HOST);
+    }
+
+    return strtolower((string) preg_replace('/:\d+$/', '', (string) $host));
+}
+
+function is_staging_host(): bool
+{
+    return in_array(current_host(), array_map('strtolower', staging_hosts()), true);
+}
+
 function should_noindex(): bool
 {
-    return !Options\indexing_enabled() || current_post_noindex();
+    return is_staging_host() || !Options\indexing_enabled() || current_post_noindex();
 }
 
 function robots(array $robots): array
@@ -50,7 +73,7 @@ function robots(array $robots): array
 
 function robots_txt(string $output, bool $public): string
 {
-    if (!Options\indexing_enabled()) {
+    if (is_staging_host() || !Options\indexing_enabled()) {
         return "User-agent: *\nDisallow: /\n";
     }
 
@@ -59,7 +82,7 @@ function robots_txt(string $output, bool $public): string
 
 function sitemaps_enabled(bool $enabled): bool
 {
-    return Options\indexing_enabled() ? $enabled : false;
+    return is_staging_host() || !Options\indexing_enabled() ? false : $enabled;
 }
 
 function send_noindex_header(): void
