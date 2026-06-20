@@ -2148,13 +2148,20 @@ textarea:focus-visible {
 }
 
 /* Mega menu interaction polish */
+.site-nav .mega-menu__card {
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+  padding: 14px 16px;
+}
+
 .mega-menu__card {
   position: relative;
 }
 
 .mega-menu__card::before {
   background: linear-gradient(180deg, var(--primary), var(--brand-blue));
-  border-radius: 999px;
+  border-radius: 0 999px 999px 0;
   content: "";
   inset: 14px auto 14px 0;
   opacity: 0;
@@ -2163,17 +2170,17 @@ textarea:focus-visible {
   width: 3px;
 }
 
-.mega-menu__card:hover,
-.mega-menu__card:focus-visible {
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 14px 34px rgba(18, 19, 26, 0.06);
-  outline: 0;
-  transform: translateY(-1px);
-}
-
 .mega-menu__card:hover::before,
 .mega-menu__card:focus-visible::before {
   opacity: 1;
+}
+
+.site-nav .mega-menu__card:hover,
+.site-nav .mega-menu__card:focus-visible {
+  background: transparent;
+  box-shadow: none;
+  outline: 0;
+  transform: none;
 }
 
 .mega-menu__card span {
