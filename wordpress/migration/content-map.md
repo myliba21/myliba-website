@@ -1,6 +1,6 @@
-# Strapi to WordPress Content Map
+# WordPress Content Map
 
-| Strapi content type | WordPress target | Notes |
+| Content type | WordPress target | Notes |
 | --- | --- | --- |
 | `homepage` | Page: `en` / `tr` | Static front page uses the English page; translations should be linked with Polylang or WPML in production. |
 | `our-products` | Page | Hero and SEO fields are in the Myliba meta boxes. |

@@ -178,8 +178,19 @@ function handle(): void
 
 function rate_limited(): bool
 {
-    $ip = sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
-    $key = 'myliba_contact_' . md5($ip);
+    // Prefer X-Real-IP set by a trusted nginx proxy; fall back to REMOTE_ADDR.
+    $ip = '';
+    if (!empty($_SERVER['HTTP_X_REAL_IP'])) {
+        $ip = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_REAL_IP']));
+    }
+    if ($ip === '' && !empty($_SERVER['REMOTE_ADDR'])) {
+        $ip = sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR']));
+    }
+    if ($ip === '') {
+        $ip = 'unknown';
+    }
+
+    $key   = 'myliba_contact_' . md5($ip);
     $count = (int) get_transient($key);
 
     if ($count >= 5) {
@@ -210,5 +221,9 @@ function send_notification(array $data): void
         $data['message']
     );
 
-    wp_mail($to, $subject, $body, ['Reply-To: ' . $data['email']]);
+    $headers = [];
+    if (is_email($data['email'])) {
+        $headers[] = 'Reply-To: ' . $data['email'];
+    }
+    wp_mail($to, $subject, $body, $headers);
 }

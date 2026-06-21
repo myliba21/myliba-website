@@ -255,9 +255,11 @@ function myliba_set_locale_cookie(string $locale): void
     $path = '/' . trim($path, '/');
 
     setcookie(myliba_locale_cookie_name(), $locale, [
-        'expires' => time() + YEAR_IN_SECONDS,
-        'path' => $path === '/' ? '/' : $path,
+        'expires'  => time() + YEAR_IN_SECONDS,
+        'path'     => $path === '/' ? '/' : $path,
         'samesite' => 'Lax',
+        'secure'   => is_ssl(),
+        'httponly'  => false, // Keep false: JS reads this cookie to sync locale UI state.
     ]);
 }
 

@@ -123,30 +123,47 @@ function render_head(): void
 function render_fallback_meta(): void
 {
     $description = '';
+    $post_id     = is_singular() ? get_queried_object_id() : 0;
 
-    if (is_singular()) {
-        $post_id = get_queried_object_id();
+    if ($post_id) {
         $description = get_post_meta($post_id, '_myliba_seo_description', true);
 
         if (!$description) {
-            $post = get_post($post_id);
+            $post        = get_post($post_id);
             $description = $post ? wp_trim_words(wp_strip_all_tags($post->post_excerpt ?: $post->post_content), 28) : '';
         }
     } else {
         $description = get_bloginfo('description');
     }
 
+    // ── Canonical ──────────────────────────────────────────────────────
+    printf("<link rel=\"canonical\" href=\"%s\">\n", esc_url(current_url()));
+
+    // ── Description ────────────────────────────────────────────────────
     if ($description) {
         printf("<meta name=\"description\" content=\"%s\">\n", esc_attr($description));
         printf("<meta property=\"og:description\" content=\"%s\">\n", esc_attr($description));
+        printf("<meta name=\"twitter:description\" content=\"%s\">\n", esc_attr($description));
     }
 
+    // ── Open Graph ─────────────────────────────────────────────────────
+    $og_locale = function_exists('Myliba\\Core\\Options\\get') && \Myliba\Core\Options\get('default_locale') === 'tr' ? 'tr_TR' : 'en_US';
+    if (is_singular()) {
+        $lang      = get_post_meta($post_id, '_myliba_language', true);
+        $og_locale = $lang === 'tr' ? 'tr_TR' : 'en_US';
+    }
+
+    printf("<meta property=\"og:locale\" content=\"%s\">\n", esc_attr($og_locale));
+    printf("<meta property=\"og:site_name\" content=\"%s\">\n", esc_attr(get_bloginfo('name')));
     printf("<meta property=\"og:title\" content=\"%s\">\n", esc_attr(wp_get_document_title()));
     printf("<meta property=\"og:url\" content=\"%s\">\n", esc_url(current_url()));
     echo "<meta property=\"og:type\" content=\"" . (is_singular('post') ? 'article' : 'website') . "\">\n";
+
+    // ── Twitter / X Card ───────────────────────────────────────────────
     echo "<meta name=\"twitter:card\" content=\"summary_large_image\">\n";
     printf("<meta name=\"twitter:title\" content=\"%s\">\n", esc_attr(wp_get_document_title()));
 
+    // ── Featured image for OG / Twitter ────────────────────────────────
     if (is_singular() && has_post_thumbnail()) {
         $image = wp_get_attachment_image_url(get_post_thumbnail_id(), 'large');
         if ($image) {
@@ -161,6 +178,7 @@ function render_fallback_meta(): void
 function render_hreflang(): void
 {
     if (function_exists('pll_the_languages')) {
+        // Polylang handles hreflang — defer to it.
         $languages = pll_the_languages(['raw' => 1]);
         if (is_array($languages)) {
             foreach ($languages as $language) {
@@ -169,29 +187,52 @@ function render_hreflang(): void
                 }
             }
         }
+        return;
     }
+
+    // Fallback hreflang when Polylang/WPML is not yet installed.
+    $current_lang = is_singular() ? (get_post_meta(get_queried_object_id(), '_myliba_language', true) ?: 'en') : 'en';
+    printf("<link rel=\"alternate\" hreflang=\"%s\" href=\"%s\">\n", esc_attr($current_lang), esc_url(current_url()));
+    printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url(home_url('/')));
 }
 
 function render_schema(): void
 {
-    $schemas = [];
-    $same_as = array_filter([
+    $schemas  = [];
+    $same_as  = array_filter([
         Options\get('linkedin_url'),
         Options\get('instagram_url'),
     ]);
 
     $organization = [
         '@context' => 'https://schema.org',
-        '@type' => 'Organization',
-        'name' => Options\get('organization_name', 'Myliba'),
-        'url' => Options\get('organization_url', home_url('/')),
+        '@type'    => 'Organization',
+        'name'     => Options\get('organization_name', 'Myliba'),
+        'url'      => Options\get('organization_url', home_url('/')),
     ];
 
     if ($same_as) {
         $organization['sameAs'] = array_values($same_as);
     }
 
+    // WebSite schema — enables sitelinks search in Google.
+    $website = [
+        '@context'        => 'https://schema.org',
+        '@type'           => 'WebSite',
+        'name'            => Options\get('organization_name', 'Myliba'),
+        'url'             => home_url('/'),
+        'potentialAction' => [
+            '@type'       => 'SearchAction',
+            'target'      => [
+                '@type'       => 'EntryPoint',
+                'urlTemplate' => home_url('/?s={search_term_string}'),
+            ],
+            'query-input' => 'required name=search_term_string',
+        ],
+    ];
+
     $schemas[] = $organization;
+    $schemas[] = $website;
     $schemas[] = breadcrumb_schema();
 
     if (is_singular('post')) {

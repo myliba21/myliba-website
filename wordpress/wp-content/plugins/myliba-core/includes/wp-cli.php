@@ -125,74 +125,22 @@ class Commands
     }
 
     /**
-     * Import basic content from a running Strapi API.
+     * Import public content from the current myliba.com website.
      *
      * ## OPTIONS
      *
-     * --url=<url>
-     * : Strapi base URL, for example http://host.docker.internal:1337.
-     *
-     * [--token=<token>]
-     * : Optional Strapi API token.
+     * [--source=<url>]
+     * : Public source URL. Defaults to https://myliba.com.
      *
      * [--yes]
      * : Confirm the operation.
      *
-     * @subcommand import-strapi
+     * @subcommand import-current
      */
-    public function import_strapi(array $args, array $assoc_args): void
+    public function import_current_stub(array $args, array $assoc_args): void
     {
-        if (empty($assoc_args['url'])) {
-            \WP_CLI::error('Missing --url.');
-        }
-
-        if (empty($assoc_args['yes'])) {
-            \WP_CLI::confirm('Import reachable Strapi content into WordPress? Existing matching slugs will be updated.');
-        }
-
-        $base = rtrim((string) $assoc_args['url'], '/');
-        $token = $assoc_args['token'] ?? '';
-
-        $single_pages = [
-            'homepage' => ['Myliba', 'en'],
-            'our-products' => ['Our Products', 'our-products'],
-            'okr-academy' => ['OKR Culture Academy', 'okr-culture-academy'],
-            'culture-analysis' => ['Culture Analysis', 'culture-analysis'],
-            'ethics-counsel' => ['Ethics Counsel', 'ethics-counsel'],
-            'our-story' => ['Our Story', 'our-story'],
-            'faq-page' => ['FAQ', 'faq'],
-            'security-page' => ['Security', 'security'],
-            'privacy-policy' => ['Privacy Policy', 'privacy-policy'],
-        ];
-
-        foreach ($single_pages as $endpoint => [$title, $slug]) {
-            $payload = $this->fetch_strapi($base . '/api/' . $endpoint . '?populate=*', $token);
-            $item = $payload['data']['attributes'] ?? null;
-
-            if (!$item) {
-                continue;
-            }
-
-            $page_title = $item['title'] ?? $item['heroTitle'] ?? $title;
-            $content = $item['content'] ?? $this->starter_content('generic');
-
-            $this->upsert_page($page_title, $slug, $content, [
-                '_myliba_language' => $item['locale'] ?? 'en',
-                '_myliba_hero_title' => $item['heroTitle'] ?? $page_title,
-                '_myliba_hero_subtitle' => $item['heroSubtitle'] ?? '',
-                '_myliba_seo_title' => $item['seoTitle'] ?? ($page_title . ' | Myliba'),
-                '_myliba_seo_description' => $item['seoDescription'] ?? '',
-            ]);
-
-            \WP_CLI::log('Imported page: ' . $page_title);
-        }
-
-        $this->import_collection($base, $token, 'blog-posts', 'post');
-        $this->import_collection($base, $token, 'events', 'myliba_event');
-        $this->import_collection($base, $token, 'team-members', 'myliba_team');
-        $this->import_collection($base, $token, 'client-logos', 'myliba_client_logo');
-
-        \WP_CLI::success('Strapi import completed.');
+        // Removed: Strapi import is no longer used. Use import-current instead.
+        \WP_CLI::error('This command has been removed. Use "wp myliba import-current" to import public content from myliba.com.');
     }
 
     /**
@@ -276,64 +224,7 @@ class Commands
         \WP_CLI::success('Public Myliba import completed.');
     }
 
-    private function import_collection(string $base, string $token, string $endpoint, string $post_type): void
-    {
-        $payload = $this->fetch_strapi($base . '/api/' . $endpoint . '?populate=*&pagination[pageSize]=100', $token);
-        $items = $payload['data'] ?? [];
 
-        foreach ($items as $item) {
-            $attrs = $item['attributes'] ?? [];
-            $title = $attrs['title'] ?? $attrs['name'] ?? 'Untitled';
-            $slug = $attrs['slug'] ?? sanitize_title($title);
-            $content = $attrs['content'] ?? $attrs['description'] ?? $attrs['bio'] ?? '';
-
-            $post_id = $this->upsert_post_type($post_type, $title, $slug, $content, [
-                '_myliba_language' => $attrs['locale'] ?? 'en',
-                '_myliba_seo_title' => $attrs['seoTitle'] ?? '',
-                '_myliba_seo_description' => $attrs['seoDescription'] ?? ($attrs['excerpt'] ?? ''),
-            ]);
-
-            if ($post_type === 'myliba_event') {
-                update_post_meta($post_id, '_myliba_event_date', $attrs['date'] ?? '');
-                update_post_meta($post_id, '_myliba_event_location', $attrs['location'] ?? '');
-            }
-
-            if ($post_type === 'myliba_team') {
-                update_post_meta($post_id, '_myliba_person_role', $attrs['title'] ?? '');
-                update_post_meta($post_id, '_myliba_order', (string) intval($attrs['order'] ?? 0));
-            }
-
-            if ($post_type === 'myliba_client_logo') {
-                update_post_meta($post_id, '_myliba_order', (string) intval($attrs['order'] ?? 0));
-            }
-
-            \WP_CLI::log('Imported ' . $post_type . ': ' . $title);
-        }
-    }
-
-    private function fetch_strapi(string $url, string $token): array
-    {
-        $args = [
-            'timeout' => 20,
-            'headers' => [],
-        ];
-
-        if ($token !== '') {
-            $args['headers']['Authorization'] = 'Bearer ' . $token;
-        }
-
-        $response = wp_remote_get($url, $args);
-
-        if (is_wp_error($response)) {
-            \WP_CLI::warning($url . ' failed: ' . $response->get_error_message());
-            return [];
-        }
-
-        $body = wp_remote_retrieve_body($response);
-        $data = json_decode($body, true);
-
-        return is_array($data) ? $data : [];
-    }
 
     private function import_current_page(string $source, string $path, string $fallback_title, string $slug, string $language, int $parent = 0): int
     {

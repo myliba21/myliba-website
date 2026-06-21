@@ -1,10 +1,10 @@
-# Myliba WordPress Migration
+# Myliba WordPress
 
-This folder contains the local WordPress version of the site. The WordPress data model is kept in `wp-content/plugins/myliba-core`; the theme is only the presentation layer in `wp-content/themes/myliba`.
+This folder contains the WordPress version of the site. The content model is in `wp-content/plugins/myliba-core`; the theme handles only presentation in `wp-content/themes/myliba`.
 
 ## Local setup
 
-1. Copy `.env.example` to `.env` and change the passwords.
+1. Copy `.env.example` to `.env` and **change all passwords** (use `openssl rand -base64 32` for each).
 2. Bootstrap WordPress from this `wordpress/` directory:
 
 ```bash
@@ -25,26 +25,42 @@ docker compose --profile tools run --rm wpcli wp myliba seed --yes
 
 The local site will be available at `http://localhost:8080`.
 
+## Import from myliba.com
+
+To pull public content from the current live site:
+
+```bash
+docker compose --profile tools run --rm wpcli wp myliba import-current --yes
+```
+
 ## Production plugin choices
 
 For production SEO and multilingual management, keep the custom Myliba data model and add these WordPress plugins:
 
-- Multilingual: Polylang or WPML. `myliba-core` already exposes the custom post types to Polylang when it is installed.
-- SEO: Rank Math or Yoast SEO. `myliba-core` ships a minimal SEO fallback but avoids taking over from a full SEO plugin.
-- SMTP: WP Mail SMTP, FluentSMTP, or your Natro SMTP settings.
-- Forms: The built-in Myliba contact form works, but Fluent Forms or Gravity Forms can replace it later.
-- Security/cache: Wordfence or Solid Security, plus the cache layer included in your Natro hosting plan.
+- **Multilingual**: Polylang or WPML. `myliba-core` already exposes the custom post types to Polylang when it is installed.
+- **SEO**: Rank Math or Yoast SEO. `myliba-core` ships a minimal SEO fallback (canonical, OG, hreflang, schema) but defers to a full SEO plugin when active.
+- **SMTP**: WP Mail SMTP, FluentSMTP, or your Natro SMTP settings.
+- **Forms**: The built-in Myliba contact form works, but Fluent Forms or Gravity Forms can replace it later.
+- **Security/cache**: Wordfence or Solid Security, plus the cache layer included in your Natro hosting plan.
+- **Cookie consent**: CookieYes, Complianz, or similar for KVKK/GDPR banner requirements.
+- **Redirects**: Redirection plugin for 301 redirect management.
 
 ## Staging index policy
 
 Indexing is disabled by default in `Myliba > Site Settings`. While the site is on a staging subdomain, keep it disabled and add Basic Auth or IP restriction at hosting level. When the final domain goes live, enable indexing, refresh permalinks, and submit the sitemap in Search Console.
 
-## Strapi import
+## Production checklist
 
-If the existing Strapi app is running locally, import reachable content with:
-
-```bash
-docker compose --profile tools run --rm wpcli wp myliba import-strapi --url=http://host.docker.internal:1337 --yes
-```
-
-The importer maps the current Strapi content types into WordPress pages, posts, events, team members, client logos, and form submissions where possible.
+- [ ] Change all `.env` passwords (never commit `.env` to git).
+- [ ] Set `WP_ENVIRONMENT_TYPE=production`, disable `WP_DEBUG` in `wp-config.php`.
+- [ ] Remove the `all-in-one-wp-migration` plugin after migration is complete (reduces attack surface).
+- [ ] Install and configure Polylang or WPML for multilingual routing and `hreflang`.
+- [ ] Install and configure Rank Math or Yoast SEO.
+- [ ] Connect SMTP via WP Mail SMTP or FluentSMTP.
+- [ ] Enable SSL and update nginx config (uncomment HTTPS block in `nginx/default.conf`).
+- [ ] Enable HSTS header in `nginx/default.conf` (after SSL is confirmed working).
+- [ ] Add 301 redirect map for any old URL paths.
+- [ ] Enable indexing in `Myliba > Site Settings`.
+- [ ] Submit sitemap to Google Search Console.
+- [ ] Run Lighthouse mobile check (target: SEO ≥ 90).
+- [ ] Verify forms, canonical, OG tags, and hreflang before launch.
