@@ -125,10 +125,10 @@ $footer_social_links = [
                 <?php endif; ?>
             </div>
 
-            <div class="site-footer__socials" aria-label="<?php esc_attr_e('Social links', 'myliba'); ?>">
+            <div class="site-footer__socials" role="navigation" aria-label="<?php esc_attr_e('Social links', 'myliba'); ?>">
                 <?php foreach ($footer_social_links as $social_link) : ?>
                     <?php if ($social_link['url'] !== '') : ?>
-                        <a href="<?php echo esc_url($social_link['url']); ?>" aria-label="<?php echo esc_attr($social_link['label']); ?>" target="_blank" rel="noreferrer">
+                        <a href="<?php echo esc_url($social_link['url']); ?>" aria-label="<?php echo esc_attr($social_link['label']); ?>" target="_blank" rel="noopener noreferrer">
                             <?php echo esc_html($social_link['short']); ?>
                         </a>
                     <?php endif; ?>

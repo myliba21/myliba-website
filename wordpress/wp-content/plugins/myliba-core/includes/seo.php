@@ -136,6 +136,10 @@ function render_fallback_meta(): void
         $description = get_bloginfo('description');
     }
 
+    if (!$description && (is_front_page() || is_home())) {
+        $description = __('Myliba connects OKR, KPI, CFR, 1:1 meetings, feedback, actions and academy routines to help organizations build measurable performance culture.', 'myliba');
+    }
+
     // ── Canonical ──────────────────────────────────────────────────────
     printf("<link rel=\"canonical\" href=\"%s\">\n", esc_url(current_url()));
 

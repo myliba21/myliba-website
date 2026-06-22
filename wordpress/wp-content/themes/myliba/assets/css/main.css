@@ -747,7 +747,7 @@ img {
 }
 
 .mobile-sticky-cta__demo {
-  background: var(--primary);
+  background: var(--primary-dark);
   color: #fff;
 }
 
@@ -3527,7 +3527,7 @@ a.site-promo__content:hover {
 }
 
 .site-footer__bottom p {
-  color: #6d7380;
+  color: #505967;
   font-size: 0.86rem;
   margin: 0;
 }

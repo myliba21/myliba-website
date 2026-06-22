@@ -54,7 +54,7 @@ function get(string $key, mixed $fallback = null): mixed
 
 function indexing_enabled(): bool
 {
-    return get('indexing_enabled') === '1';
+    return (string) get('indexing_enabled') === '1';
 }
 
 function locales(): array

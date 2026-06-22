@@ -25,6 +25,7 @@ $myliba_core_files = [
     'includes/admin.php',
     'includes/seo.php',
     'includes/forms.php',
+    'includes/images.php',
     'includes/wp-cli.php',
 ];
 
@@ -40,6 +41,7 @@ function boot(): void
     Admin\boot();
     SEO\boot();
     Forms\boot();
+    Images\boot();
 
     if (defined('WP_CLI') && WP_CLI) {
         \WP_CLI::add_command('myliba', CLI\Commands::class);
@@ -60,4 +62,3 @@ function deactivate(): void
     flush_rewrite_rules();
 }
 register_deactivation_hook(__FILE__, __NAMESPACE__ . '\\deactivate');
-

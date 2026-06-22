@@ -97,7 +97,10 @@ foreach (myliba_home_sections($post_id) as $section) {
                                     <img
                                         src="<?php echo esc_url($image['url']); ?>"
                                         alt="<?php echo esc_attr($image['alt']); ?>"
+                                        <?php echo !empty($image['width']) ? 'width="' . esc_attr((string) $image['width']) . '"' : ''; ?>
+                                        <?php echo !empty($image['height']) ? 'height="' . esc_attr((string) $image['height']) . '"' : ''; ?>
                                         loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>"
+                                        <?php echo $index === 0 ? 'fetchpriority="high"' : 'fetchpriority="low"'; ?>
                                         decoding="async"
                                     >
                                 </figure>
@@ -351,7 +354,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                             $tab_id = 'role-gain-tab-' . $index;
                             $panel_id = 'role-gain-panel-' . $index;
                             ?>
-                            <article
+                            <div
                                 class="role-gains__panel <?php echo $index === 0 ? 'is-active' : ''; ?>"
                                 id="<?php echo esc_attr($panel_id); ?>"
                                 role="tabpanel"
@@ -372,7 +375,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                                         <small><?php echo esc_html($secondary_text); ?></small>
                                     </div>
                                 </div>
-                            </article>
+                            </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
