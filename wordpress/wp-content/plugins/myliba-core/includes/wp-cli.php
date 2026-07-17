@@ -1164,7 +1164,7 @@ class Commands
 
     private function home_builder_defaults(): string
     {
-        $keys = ['hero', 'trust_bar', 'problem', 'solutions', 'performance', 'products', 'academy', 'role_gains', 'outcomes', 'resources', 'faq', 'final_cta'];
+        $keys = ['hero', 'trust_bar', 'social_proof', 'why_myliba', 'problem', 'solutions', 'performance', 'products', 'academy', 'role_gains', 'outcomes', 'resources', 'faq', 'final_cta'];
         $sections = [];
         $order = 10;
 

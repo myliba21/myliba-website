@@ -512,6 +512,9 @@ function myliba_translate_text(string $text): string
         'Build one connected operating rhythm for priorities, ownership, action and learning.' => 'Öncelikler, sahiplik, aksiyon ve öğrenme için tek bir bağlı çalışma ritmi kurun.',
         'Built for teams that manage performance culture seriously.' => 'Performans kültürünü ciddiyetle yöneten ekipler için tasarlandı.',
         'Business outcomes' => 'İş sonuçları',
+        'Proven experience across companies, industries and leadership teams.' => 'Şirketler, sektörler ve liderlik ekipleri genelinde kanıtlanmış deneyim.',
+        'Trusted partnership' => 'Güvenilir iş ortaklığı',
+        'Measurable impact' => 'Ölçülebilir etki',
         'Calibration' => 'Kalibrasyon',
         'Can Myliba support implementation and training?' => 'Myliba uygulama ve eğitim süreçlerini destekler mi?',
         'CEO / Executive Team' => 'CEO / Üst Yönetim',
@@ -1014,7 +1017,9 @@ function myliba_home_section_definitions(): array
 {
     return [
         'hero' => __('Hero slider', 'myliba'),
-        'trust_bar' => __('Trust and Why Myliba', 'myliba'),
+        'trust_bar' => __('Client references', 'myliba'),
+        'social_proof' => __('Social proof metrics', 'myliba'),
+        'why_myliba' => __('Why Myliba', 'myliba'),
         'problem' => __('Problem cards', 'myliba'),
         'solutions' => __('Strategy flow', 'myliba'),
         'performance' => __('Performance approach', 'myliba'),
@@ -1052,6 +1057,7 @@ function myliba_home_sections(int $post_id = 0): array
     $sections = myliba_home_default_sections();
     $raw = $post_id ? get_post_meta($post_id, '_myliba_home_builder', true) : '';
     $saved = is_string($raw) && $raw !== '' ? json_decode($raw, true) : [];
+    $saved_keys = [];
 
     if (is_array($saved)) {
         $saved_keys = array_map(static fn ($item) => is_array($item) ? sanitize_key((string) ($item['key'] ?? '')) : '', $saved);
@@ -1072,6 +1078,18 @@ function myliba_home_sections(int $post_id = 0): array
                 'enabled' => !empty($item['enabled']),
                 'order' => $is_legacy_builder ? ($sections[$key]['order'] ?? 999) : (isset($item['order']) ? (int) $item['order'] : ($sections[$key]['order'] ?? 999)),
             ];
+        }
+    }
+
+    if ($saved_keys && in_array('trust_bar', $saved_keys, true)) {
+        $trust_order = (int) ($sections['trust_bar']['order'] ?? 20);
+
+        if (!in_array('social_proof', $saved_keys, true)) {
+            $sections['social_proof']['order'] = $trust_order + 1;
+        }
+
+        if (!in_array('why_myliba', $saved_keys, true)) {
+            $sections['why_myliba']['order'] = $trust_order + 2;
         }
     }
 

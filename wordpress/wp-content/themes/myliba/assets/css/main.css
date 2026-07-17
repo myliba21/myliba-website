@@ -6060,6 +6060,178 @@ a.post-row:hover::after {
   }
 }
 
+/* Software and Academy are complementary pillars, so both stay visible. */
+.why-myliba {
+  gap: clamp(34px, 4vw, 54px);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.why-myliba__intro {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
+  position: static;
+  text-align: center;
+}
+
+.why-myliba__intro .eyebrow {
+  background: var(--blue-soft);
+  border-radius: 999px;
+  margin-bottom: 0;
+  padding: 6px 10px;
+}
+
+.why-myliba .why-myliba__intro h2 {
+  font-size: clamp(2.35rem, 3.5vw, 3.55rem);
+  line-height: 1.02;
+  max-width: 920px;
+}
+
+.why-myliba__intro > p:last-child {
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 720px;
+}
+
+.offering-cards {
+  display: grid;
+  gap: clamp(18px, 2.4vw, 30px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.offering-card {
+  --offering-accent: var(--primary);
+  --offering-soft: var(--blue-soft);
+  background: #fff;
+  border: 1px solid #dbe5e5;
+  border-radius: 22px;
+  box-shadow: 0 18px 48px rgba(27, 43, 49, 0.075);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  padding: clamp(24px, 2.5vw, 34px);
+  position: relative;
+}
+
+.offering-card::before {
+  background: var(--offering-accent);
+  content: "";
+  height: 5px;
+  inset: 0 0 auto;
+  position: absolute;
+}
+
+.offering-card--2 {
+  --offering-accent: var(--brand-green);
+  --offering-soft: var(--green-soft);
+}
+
+.offering-card__header {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+}
+
+.offering-card__mark {
+  align-items: center;
+  background: var(--offering-soft);
+  border-radius: 12px;
+  color: var(--offering-accent);
+  display: inline-flex;
+  flex: 0 0 44px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  height: 44px;
+  justify-content: center;
+}
+
+.offering-card__header h3 {
+  font-size: clamp(1.25rem, 1.7vw, 1.55rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.offering-card__lead {
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1.55;
+  margin: 22px 0 6px;
+}
+
+.offering-card__benefits {
+  display: grid;
+  margin: 14px 0 26px;
+}
+
+.offering-card__benefit {
+  border-top: 1px solid #e5ebeb;
+  padding: 17px 0;
+}
+
+.offering-card__benefit strong {
+  color: var(--offering-accent);
+  display: block;
+  font-size: 0.94rem;
+  line-height: 1.35;
+}
+
+.offering-card__benefit p {
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  margin: 6px 0 0;
+}
+
+.offering-card__cta {
+  align-items: center;
+  border-top: 1px solid #e5ebeb;
+  color: var(--offering-accent);
+  display: flex;
+  font-size: 0.91rem;
+  font-weight: 850;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.offering-card__cta span:last-child {
+  font-size: 1.2rem;
+  transition: transform 180ms ease;
+}
+
+.offering-card__cta:hover span:last-child,
+.offering-card__cta:focus-visible span:last-child {
+  transform: translateX(4px);
+}
+
+@media (max-width: 720px) {
+  .why-myliba__intro {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .why-myliba .why-myliba__intro h2 {
+    font-size: clamp(2.1rem, 10vw, 2.8rem);
+  }
+
+  .offering-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .offering-card {
+    border-radius: 18px;
+  }
+}
+
 /* Imported legacy page layouts */
 .content--legacy-import {
   max-width: none;
@@ -8347,5 +8519,345 @@ body:has(.final-cta-section) .site-footer {
 
   .mobile-sticky-cta {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* Trust and social-proof showcase. */
+.trust-section {
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.trust-section::after {
+  background: rgba(23, 109, 137, 0.08);
+  border-radius: 50%;
+  content: "";
+  height: 420px;
+  pointer-events: none;
+  position: absolute;
+  right: -250px;
+  top: 30px;
+  width: 420px;
+  z-index: -1;
+}
+
+.trust-section__heading {
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.trust-section__heading-copy {
+  display: grid;
+  gap: 13px;
+  max-width: 760px;
+}
+
+.trust-section__heading strong {
+  max-width: 760px;
+}
+
+.trust-section__heading-copy > p {
+  color: #617078;
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 610px;
+}
+
+.trust-section__heading .trust-section__eyebrow {
+  align-items: center;
+  background: rgba(52, 125, 103, 0.1);
+  border: 1px solid rgba(52, 125, 103, 0.18);
+  box-shadow: none;
+  color: #28634f;
+  display: inline-flex;
+  font-size: 0.72rem;
+  justify-self: start;
+  letter-spacing: 0.11em;
+  padding: 8px 12px 8px 9px;
+}
+
+.trust-section__eyebrow svg,
+.trust-section__assurance svg,
+.proof-stat__icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.trust-section__eyebrow svg {
+  height: 20px;
+  margin-right: 7px;
+  width: 20px;
+}
+
+.trust-section__assurance {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(27, 43, 49, 0.09);
+  border-radius: 16px;
+  box-shadow: 0 16px 38px rgba(27, 43, 49, 0.07);
+  display: flex;
+  flex: 0 0 auto;
+  gap: 12px;
+  padding: 12px 15px 12px 12px;
+}
+
+.trust-section__assurance-icon {
+  align-items: center;
+  background: #e6f2ed;
+  border-radius: 12px;
+  color: #347d67;
+  display: inline-flex;
+  height: 43px;
+  justify-content: center;
+  width: 43px;
+}
+
+.trust-section__assurance svg {
+  height: 25px;
+  width: 25px;
+}
+
+.trust-section__assurance > span:last-child {
+  display: grid;
+  gap: 2px;
+}
+
+.trust-section__assurance small {
+  color: #7a888e;
+  font-size: 0.69rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.trust-section__assurance b {
+  color: #193640;
+  font-size: 0.87rem;
+}
+
+.trust-marquee {
+  padding-bottom: 14px;
+  padding-top: 8px;
+}
+
+.trust-marquee__track {
+  gap: 14px;
+}
+
+.trust-logo {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(27, 43, 49, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 10px 26px rgba(27, 43, 49, 0.055);
+  height: 86px;
+  padding: 18px 26px;
+  width: 188px;
+}
+
+.trust-logo img {
+  filter: grayscale(1) contrast(0.95);
+  max-height: 44px;
+  max-width: 132px;
+  opacity: 0.62;
+}
+
+.trust-logo:hover {
+  background: #fff;
+  border-color: rgba(23, 109, 137, 0.25);
+  box-shadow: 0 18px 40px rgba(27, 43, 49, 0.1);
+}
+
+.proof-grid {
+  background:
+    radial-gradient(circle at 100% 0, rgba(40, 127, 159, 0.3), transparent 31%),
+    radial-gradient(circle at 0 100%, rgba(52, 125, 103, 0.2), transparent 28%),
+    #142f39;
+  border-radius: 22px;
+  gap: 8px;
+  margin-top: 36px;
+  padding: 10px;
+}
+
+.proof-stat,
+.proof-stat:first-child {
+  align-content: start;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 14px;
+  gap: 15px;
+  min-height: 170px;
+  padding: 20px 17px 18px;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.proof-stat:hover {
+  background: rgba(255, 255, 255, 0.075);
+  border-color: rgba(255, 255, 255, 0.13);
+  transform: translateY(-2px);
+}
+
+.proof-stat__icon {
+  align-items: center;
+  background: rgba(93, 179, 151, 0.13);
+  border: 1px solid rgba(124, 205, 178, 0.16);
+  border-radius: 10px;
+  color: #91d3bd;
+  display: inline-flex;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
+}
+
+.proof-stat:nth-child(3n + 2) .proof-stat__icon {
+  background: rgba(68, 156, 190, 0.14);
+  border-color: rgba(101, 186, 218, 0.17);
+  color: #8acbe2;
+}
+
+.proof-stat:nth-child(3n) .proof-stat__icon {
+  background: rgba(218, 171, 50, 0.12);
+  border-color: rgba(226, 185, 78, 0.16);
+  color: #e1c166;
+}
+
+.proof-stat__icon svg {
+  height: 21px;
+  width: 21px;
+}
+
+.proof-stat__content {
+  display: grid;
+  gap: 6px;
+}
+
+.proof-stat__content strong {
+  font-size: clamp(2rem, 2.65vw, 2.85rem);
+}
+
+.proof-stat__content > span {
+  color: rgba(235, 244, 246, 0.76);
+  font-size: 0.79rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 1120px) {
+  .trust-section__assurance {
+    display: none;
+  }
+
+  .proof-stat,
+  .proof-stat:first-child,
+  .proof-stat:nth-child(4) {
+    border: 1px solid rgba(255, 255, 255, 0.075);
+  }
+}
+
+@media (max-width: 720px) {
+  .trust-section__heading {
+    margin-bottom: 22px;
+  }
+
+  .trust-section__heading-copy {
+    gap: 11px;
+  }
+
+  .trust-section__heading strong {
+    font-size: clamp(2rem, 10vw, 2.75rem);
+  }
+
+  .trust-section__heading-copy > p {
+    font-size: 0.93rem;
+  }
+
+  .trust-marquee {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  }
+
+  .trust-logo {
+    height: 72px;
+    padding: 15px 21px;
+    width: 154px;
+  }
+
+  .trust-logo img {
+    max-height: 36px;
+    max-width: 110px;
+  }
+
+  .proof-grid {
+    gap: 6px;
+    margin-top: 28px;
+  }
+
+  .proof-stat,
+  .proof-stat:first-child,
+  .proof-stat:nth-child(4) {
+    gap: 12px;
+    min-height: 156px;
+    padding: 16px 13px;
+  }
+
+  .proof-stat__icon {
+    height: 34px;
+    width: 34px;
+  }
+
+  .proof-stat__content strong {
+    font-size: clamp(1.75rem, 9vw, 2.25rem);
+  }
+
+  .proof-stat__content > span {
+    font-size: 0.73rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proof-stat,
+  .proof-stat:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Independently sortable homepage proof sections. */
+.trust-section {
+  padding-bottom: clamp(34px, 4vw, 56px);
+}
+
+.social-proof-section {
+  padding-bottom: clamp(54px, 6vw, 88px);
+  padding-top: clamp(34px, 4vw, 56px);
+}
+
+.social-proof-section .proof-grid {
+  margin-top: 0;
+}
+
+.why-myliba-section {
+  padding-bottom: clamp(54px, 6vw, 88px);
+  padding-top: 0;
+}
+
+.why-myliba-section .why-myliba {
+  padding-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .trust-section {
+    padding-bottom: 28px;
+  }
+
+  .social-proof-section {
+    padding-bottom: 54px;
+    padding-top: 26px;
+  }
+
+  .why-myliba-section {
+    padding-bottom: 54px;
   }
 }

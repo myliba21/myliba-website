@@ -345,11 +345,17 @@ function render_section_fields(\WP_Post $post, string $key): void
             field_textarea('_myliba_home_trust_title', __('Trust section title', 'myliba'), get_post_meta($id, '_myliba_home_trust_title', true));
             field_text('_myliba_home_trust_logo_label', __('Client logos label', 'myliba'), get_post_meta($id, '_myliba_home_trust_logo_label', true));
             field_textarea('_myliba_home_trust_items', __('Trust section items', 'myliba'), get_post_meta($id, '_myliba_home_trust_items', true), __('One item per line.', 'myliba'));
+            break;
+
+        case 'social_proof':
             field_textarea('_myliba_home_social_proof_items', __('Social proof metrics', 'myliba'), get_post_meta($id, '_myliba_home_social_proof_items', true), __('One row per line as Value | Label.', 'myliba'));
+            break;
+
+        case 'why_myliba':
             field_text('_myliba_home_why_eyebrow', __('Why Myliba eyebrow', 'myliba'), get_post_meta($id, '_myliba_home_why_eyebrow', true));
             field_textarea('_myliba_home_why_title', __('Why Myliba title', 'myliba'), get_post_meta($id, '_myliba_home_why_title', true));
             field_textarea('_myliba_home_why_text', __('Why Myliba text', 'myliba'), get_post_meta($id, '_myliba_home_why_text', true));
-            field_textarea('_myliba_home_offering_rows', __('Software and Academy tabs', 'myliba'), get_post_meta($id, '_myliba_home_offering_rows', true), __('One row per line as Label | Intro | Benefit 1 title | Benefit 1 text | Benefit 2 title | Benefit 2 text | Benefit 3 title | Benefit 3 text | Benefit 4 title | Benefit 4 text | CTA label | CTA URL.', 'myliba'));
+            field_textarea('_myliba_home_offering_rows', __('Software and Academy cards', 'myliba'), get_post_meta($id, '_myliba_home_offering_rows', true), __('One row per line as Label | Intro | Benefit 1 title | Benefit 1 text | Benefit 2 title | Benefit 2 text | Benefit 3 title | Benefit 3 text | Benefit 4 title | Benefit 4 text | CTA label | CTA URL.', 'myliba'));
             break;
 
         case 'problem':
@@ -501,9 +507,19 @@ function homepage_section_definitions(): array
             'fields' => __('Three synchronized slides with eyebrow, title, text, CTA links, proof pills, and product imagery.', 'myliba'),
         ],
         'trust_bar' => [
-            'label' => __('Trust and Why Myliba', 'myliba'),
+            'label' => __('Client references', 'myliba'),
             'source' => __('Client logos + homepage text fields', 'myliba'),
-            'fields' => __('Reference logos, social proof metrics, Why Myliba copy, and Software / Academy tabs.', 'myliba'),
+            'fields' => __('Reference heading, label, and logos from the Client Logos content type.', 'myliba'),
+        ],
+        'social_proof' => [
+            'label' => __('Social proof metrics', 'myliba'),
+            'source' => __('Homepage text fields', 'myliba'),
+            'fields' => __('Trust metrics using Value | Label rows.', 'myliba'),
+        ],
+        'why_myliba' => [
+            'label' => __('Why Myliba', 'myliba'),
+            'source' => __('Homepage text fields', 'myliba'),
+            'fields' => __('Why Myliba copy and Software / Academy cards.', 'myliba'),
         ],
         'problem' => [
             'label' => __('Problem cards', 'myliba'),
@@ -581,6 +597,7 @@ function homepage_sections(int $post_id): array
     $definitions = homepage_section_definitions();
     $raw = get_post_meta($post_id, '_myliba_home_builder', true);
     $saved = is_string($raw) && $raw !== '' ? json_decode($raw, true) : [];
+    $saved_keys = [];
 
     if (is_array($saved)) {
         $saved_keys = array_map(static fn ($item) => is_array($item) ? sanitize_key((string) ($item['key'] ?? '')) : '', $saved);
@@ -604,6 +621,18 @@ function homepage_sections(int $post_id): array
         }
     }
 
+    if ($saved_keys && in_array('trust_bar', $saved_keys, true)) {
+        $trust_order = (int) ($sections['trust_bar']['order'] ?? 20);
+
+        if (!in_array('social_proof', $saved_keys, true)) {
+            $sections['social_proof']['order'] = $trust_order + 1;
+        }
+
+        if (!in_array('why_myliba', $saved_keys, true)) {
+            $sections['why_myliba']['order'] = $trust_order + 2;
+        }
+    }
+
     uasort($sections, static function (array $a, array $b): int {
         return ($a['order'] <=> $b['order']) ?: strcmp($a['key'], $b['key']);
     });
@@ -616,6 +645,8 @@ function homepage_section_summary(int $post_id, string $key): string
     return match ($key) {
         'hero' => get_post_meta($post_id, '_myliba_hero_title', true) ?: get_the_title($post_id),
         'trust_bar' => get_post_meta($post_id, '_myliba_home_trust_title', true),
+        'social_proof' => get_post_meta($post_id, '_myliba_home_social_proof_items', true),
+        'why_myliba' => get_post_meta($post_id, '_myliba_home_why_title', true),
         'problem' => get_post_meta($post_id, '_myliba_home_problem_title', true),
         'solutions' => get_post_meta($post_id, '_myliba_home_strategy_flow_title', true),
         'performance' => get_post_meta($post_id, '_myliba_home_performance_title', true),
