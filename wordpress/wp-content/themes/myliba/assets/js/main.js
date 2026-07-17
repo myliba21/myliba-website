@@ -218,6 +218,110 @@
     });
   });
 
+  document.querySelectorAll("[data-home-tabs]").forEach((component) => {
+    const tabs = Array.from(component.querySelectorAll("[data-home-tab]"));
+    const panels = Array.from(component.querySelectorAll("[data-home-panel]"));
+
+    if (tabs.length === 0 || panels.length === 0) {
+      return;
+    }
+
+    const activate = (nextTab, moveFocus = false) => {
+      tabs.forEach((tab) => {
+        const isActive = tab === nextTab;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", String(isActive));
+        tab.tabIndex = isActive ? 0 : -1;
+      });
+
+      panels.forEach((panel) => {
+        const isActive = panel.id === nextTab.getAttribute("aria-controls");
+        panel.classList.toggle("is-active", isActive);
+        panel.hidden = !isActive;
+      });
+
+      if (moveFocus) {
+        nextTab.focus();
+      }
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.tabIndex = index === 0 ? 0 : -1;
+      tab.addEventListener("click", () => activate(tab));
+      tab.addEventListener("keydown", (event) => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+          return;
+        }
+
+        event.preventDefault();
+        let nextIndex = index;
+        if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+        if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === "Home") nextIndex = 0;
+        if (event.key === "End") nextIndex = tabs.length - 1;
+        activate(tabs[nextIndex], true);
+      });
+    });
+  });
+
+  document.querySelectorAll("[data-hero-slider]").forEach((slider) => {
+    const slides = Array.from(slider.querySelectorAll("[data-hero-slide]"));
+    const dots = Array.from(slider.querySelectorAll("[data-hero-dot]"));
+    const previous = slider.querySelector("[data-hero-prev]");
+    const next = slider.querySelector("[data-hero-next]");
+
+    if (slides.length < 2) {
+      return;
+    }
+
+    let activeIndex = Math.max(0, slides.findIndex((slide) => slide.classList.contains("is-active")));
+    let autoplay;
+
+    const show = (nextIndex, announce = false) => {
+      activeIndex = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, index) => {
+        const isActive = index === activeIndex;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", String(!isActive));
+        slide.querySelectorAll("a, button, input, select, textarea").forEach((control) => {
+          control.tabIndex = isActive ? 0 : -1;
+        });
+      });
+      dots.forEach((dot, index) => {
+        const isActive = index === activeIndex;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-selected", String(isActive));
+        dot.tabIndex = isActive ? 0 : -1;
+      });
+      slider.querySelector(".hero-slider__viewport").setAttribute("aria-live", announce ? "polite" : "off");
+    };
+
+    const stop = () => window.clearInterval(autoplay);
+    const start = () => {
+      stop();
+      if (!reducedMotion.matches) {
+        autoplay = window.setInterval(() => show(activeIndex + 1), 6500);
+      }
+    };
+
+    previous?.addEventListener("click", () => { show(activeIndex - 1, true); start(); });
+    next?.addEventListener("click", () => { show(activeIndex + 1, true); start(); });
+    dots.forEach((dot, index) => dot.addEventListener("click", () => { show(index, true); start(); }));
+    slider.addEventListener("mouseenter", stop);
+    slider.addEventListener("mouseleave", start);
+    slider.addEventListener("focusin", stop);
+    slider.addEventListener("focusout", (event) => {
+      if (!slider.contains(event.relatedTarget)) start();
+    });
+    slider.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") { show(activeIndex - 1, true); start(); }
+      if (event.key === "ArrowRight") { show(activeIndex + 1, true); start(); }
+    });
+
+    show(activeIndex);
+    start();
+  });
+
   const revealTargets = Array.from(document.querySelectorAll([
     ".section__heading",
     ".section--split > div",

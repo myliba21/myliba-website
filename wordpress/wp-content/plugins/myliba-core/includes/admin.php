@@ -127,7 +127,7 @@ function render_settings(): void
                     <td>
                         <label>
                             <input type="checkbox" name="myliba_options[promo_enabled]" value="1" <?php checked($options['promo_enabled'], '1'); ?>>
-                            <?php esc_html_e('Show the global promo banner above the header', 'myliba'); ?>
+                            <?php esc_html_e('Show the 50px global announcement bar above the header', 'myliba'); ?>
                         </label>
                         <p>
                             <input name="myliba_options[promo_left_text]" value="<?php echo esc_attr($options['promo_left_text']); ?>" placeholder="Backed by Plug and Play">
@@ -137,6 +137,7 @@ function render_settings(): void
                         <p>
                             <input class="regular-text" type="url" name="myliba_options[promo_url]" value="<?php echo esc_attr($options['promo_url']); ?>" placeholder="https://...">
                         </p>
+                        <p class="description"><?php esc_html_e('Add the workshop, event, or campaign URL to make the full announcement clickable.', 'myliba'); ?></p>
                         <label>
                             <input type="checkbox" name="myliba_options[promo_dismissible]" value="1" <?php checked($options['promo_dismissible'], '1'); ?>>
                             <?php esc_html_e('Allow visitors to dismiss it for the current browser session', 'myliba'); ?>

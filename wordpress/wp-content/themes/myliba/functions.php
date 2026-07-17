@@ -38,13 +38,33 @@ function myliba_asset_version(string $relative_path): string
 
 function myliba_enqueue_assets(): void
 {
-    wp_enqueue_style('myliba-main', get_template_directory_uri() . '/assets/css/main.css', [], myliba_asset_version('assets/css/main.css'));
+    wp_enqueue_style(
+        'myliba-fonts',
+        'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap',
+        [],
+        null
+    );
+    wp_enqueue_style('myliba-main', get_template_directory_uri() . '/assets/css/main.css', ['myliba-fonts'], myliba_asset_version('assets/css/main.css'));
     wp_enqueue_script('myliba-main', get_template_directory_uri() . '/assets/js/main.js', [], myliba_asset_version('assets/js/main.js'), [
         'strategy' => 'defer',
         'in_footer' => true,
     ]);
 }
 add_action('wp_enqueue_scripts', 'myliba_enqueue_assets');
+
+function myliba_resource_hints(array $urls, string $relation_type): array
+{
+    if ($relation_type === 'preconnect') {
+        $urls[] = 'https://fonts.googleapis.com';
+        $urls[] = [
+            'href' => 'https://fonts.gstatic.com',
+            'crossorigin' => 'anonymous',
+        ];
+    }
+
+    return $urls;
+}
+add_filter('wp_resource_hints', 'myliba_resource_hints', 10, 2);
 
 function myliba_cleanup_head(): void
 {
@@ -83,7 +103,8 @@ function myliba_render_critical_css(): void
 {
     ?>
     <style id="myliba-critical-css">
-        :root{--primary:#ff5a2f;--primary-dark:#dc3e18;--accent:#2f6df6;--success:#16b887;--background:#fffdfb;--surface:#f8fafc;--foreground:#12131a;--text-secondary:#667085;--border:#eceff4;--shadow:0 24px 70px rgba(18,19,26,.10);--page-max:1440px;--content-gutter:max(24px,calc((100vw - var(--page-max))/2))}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#fffdfb 0%,#fff 34%,#f8fbff 100%);color:var(--foreground);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}img{display:block;height:auto;max-width:100%}.site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(18,19,26,.06);background:rgba(255,253,251,.84);backdrop-filter:blur(18px)}.site-header__inner{align-items:center;display:flex;gap:28px;margin:0 auto;max-width:1240px;min-height:68px;padding-left:24px;padding-right:24px}.site-brand{align-items:center;display:inline-flex;gap:10px;font-weight:900}.site-brand__logo{display:block;max-height:40px;max-width:min(220px,44vw);object-fit:contain;width:auto}.site-brand__mark{background:transparent;border-radius:0;display:grid;gap:3px;grid-template-columns:repeat(3,8px);height:30px;place-content:center;width:32px}.site-brand__mark span{border-radius:999px;display:block;width:8px}.site-brand__mark span:nth-child(1){background:var(--primary);height:23px}.site-brand__mark span:nth-child(2){background:var(--accent);height:30px}.site-brand__mark span:nth-child(3){background:var(--success);height:18px}.site-brand__text{font-size:1.04rem;letter-spacing:0}.site-nav{align-items:center;display:flex;flex:1;gap:6px;justify-content:center}.site-nav__menu{align-items:center;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;list-style:none;margin:0;padding:0}.site-nav a{border-radius:999px;color:#303645;font-size:.86rem;font-weight:700;padding:8px 11px}.site-actions{align-items:center;display:flex;gap:14px}.site-nav__mobile-cta,.nav-toggle{display:none}.myliba-button{align-items:center;border:1px solid transparent;border-radius:999px;display:inline-flex;font-size:.9rem;font-weight:900;justify-content:center;min-height:44px;padding:11px 18px}.myliba-button--small,.myliba-button--primary{background:linear-gradient(135deg,var(--primary),#ff764f);box-shadow:0 14px 30px rgba(255,90,47,.22);color:#fff}.myliba-button--ghost{background:#fff;border-color:var(--border);box-shadow:0 12px 30px rgba(18,19,26,.06);color:var(--foreground)}.hero{align-items:center;background:radial-gradient(circle at 76% 12%,rgba(47,109,246,.14),transparent 28%),radial-gradient(circle at 18% 28%,rgba(255,107,74,.14),transparent 30%),linear-gradient(180deg,#fffdfa 0%,#f7fbff 100%);display:grid;gap:clamp(36px,4vw,72px);grid-template-columns:minmax(430px,.86fr) minmax(600px,1.14fr);margin:0 auto;min-height:700px;padding:86px var(--content-gutter) 56px;position:relative;width:100%}.hero::before{background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(245,248,252,.66)),linear-gradient(90deg,rgba(255,107,74,.08),rgba(47,109,246,.07),rgba(22,184,135,.07));border:1px solid rgba(18,19,26,.04);border-radius:0 0 40px 40px;content:"";inset:0;position:absolute;z-index:-1}.eyebrow{color:var(--primary-dark);font-size:.72rem;font-weight:900;letter-spacing:.12em;margin:0 0 12px;text-transform:uppercase}.hero__content h1{font-size:clamp(3rem,4.6vw,5rem);letter-spacing:0;line-height:.96;margin:0;max-width:760px}.hero-title-rotator{display:grid;max-width:780px;overflow-wrap:anywhere}.hero-title-rotator__item{grid-area:1/1;opacity:0}.hero-title-rotator__item.is-active{opacity:1}.hero__subtitle{color:#586174;font-size:1.08rem;line-height:1.75;margin-top:20px;max-width:720px}.hero__actions,.hero__proof{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}.hero__proof{color:var(--text-secondary);font-size:.9rem;font-weight:800;gap:10px;margin-top:22px}.hero__proof span{background:rgba(255,255,255,.82);border:1px solid rgba(18,19,26,.08);border-radius:999px;box-shadow:0 10px 24px rgba(18,19,26,.04);padding:7px 11px}.hero-media-rotator{align-self:center;aspect-ratio:16/10;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(247,250,255,.9)),radial-gradient(circle at 82% 8%,rgba(47,109,246,.14),transparent 34%);border:1px solid rgba(47,109,246,.13);border-radius:22px;box-shadow:0 32px 92px rgba(18,19,26,.17);overflow:hidden;padding:10px;position:relative}.hero-media-rotator__frame{background:#eef3fb;border:1px solid rgba(21,23,34,.08);border-radius:16px;height:100%;overflow:hidden;position:relative}.hero-media-rotator__slide{inset:0;margin:0;opacity:0;position:absolute}.hero-media-rotator__slide.is-active{opacity:1;z-index:1}.hero-media-rotator__slide img{display:block;height:100%;object-fit:cover;object-position:top left;width:100%}@media(max-width:1120px){.hero{grid-template-columns:1fr;min-height:auto}.site-actions{display:none}.nav-toggle{display:inline-flex}}@media(max-width:640px){.site-header__inner{min-height:64px;padding-left:18px;padding-right:18px}.hero{gap:28px;padding:44px 18px 40px}.hero__content h1{font-size:clamp(2.35rem,14vw,3.45rem)}.hero-media-rotator{border-radius:16px;padding:6px}}
+        :root{--primary:#ff5a2f;--primary-dark:#dc3e18;--accent:#2f6df6;--success:#16b887;--background:#fffdfb;--surface:#f8fafc;--foreground:#12131a;--text-secondary:#667085;--border:#eceff4;--shadow:0 24px 70px rgba(18,19,26,.10);--page-max:1440px;--content-gutter:max(24px,calc((100vw - var(--page-max))/2))}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#fffdfb 0%,#fff 34%,#f8fbff 100%);color:var(--foreground);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}img{display:block;height:auto;max-width:100%}.site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(18,19,26,.06);background:rgba(255,253,251,.84);backdrop-filter:blur(18px)}.site-header__inner{align-items:center;display:flex;gap:28px;margin:0 auto;max-width:1240px;min-height:68px;padding-left:24px;padding-right:24px}.site-brand{align-items:center;display:inline-flex;gap:10px;font-weight:900}.site-brand__logo{display:block;max-height:40px;max-width:min(220px,44vw);object-fit:contain;width:auto}.site-brand__mark{background:transparent;border-radius:0;display:grid;gap:3px;grid-template-columns:repeat(3,8px);height:30px;place-content:center;width:32px}.site-brand__mark span{border-radius:999px;display:block;width:8px}.site-brand__mark span:nth-child(1){background:var(--primary);height:23px}.site-brand__mark span:nth-child(2){background:var(--accent);height:30px}.site-brand__mark span:nth-child(3){background:var(--success);height:18px}.site-brand__text{font-size:1.04rem;letter-spacing:0}.site-nav{align-items:center;display:flex;flex:1;gap:6px;justify-content:center}.site-nav__menu{align-items:center;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;list-style:none;margin:0;padding:0}.site-nav a{border-radius:999px;color:#303645;font-size:.86rem;font-weight:700;padding:8px 11px}.site-actions{align-items:center;display:flex;gap:14px}.site-nav__mobile-cta,.nav-toggle{display:none}.myliba-button{align-items:center;border:1px solid transparent;border-radius:999px;display:inline-flex;font-size:.9rem;font-weight:900;justify-content:center;min-height:44px;padding:11px 18px}.myliba-button--small,.myliba-button--primary{background:linear-gradient(135deg,var(--primary),#ff764f);box-shadow:0 14px 30px rgba(255,90,47,.22);color:#fff}.myliba-button--ghost{background:#fff;border-color:var(--border);box-shadow:0 12px 30px rgba(18,19,26,.06);color:var(--foreground)}.hero{align-items:center;background:radial-gradient(circle at 76% 12%,rgba(47,109,246,.14),transparent 28%),radial-gradient(circle at 18% 28%,rgba(255,107,74,.14),transparent 30%),linear-gradient(180deg,#fffdfa 0%,#f7fbff 100%);display:grid;gap:clamp(36px,4vw,72px);grid-template-columns:minmax(430px,.86fr) minmax(600px,1.14fr);margin:0 auto;min-height:700px;padding:86px var(--content-gutter) 56px;position:relative;width:100%}.hero::before{background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(245,248,252,.66)),linear-gradient(90deg,rgba(255,107,74,.08),rgba(47,109,246,.07),rgba(22,184,135,.07));border:1px solid rgba(18,19,26,.04);border-radius:0 0 40px 40px;content:"";inset:0;position:absolute;z-index:-1}.eyebrow{color:var(--primary-dark);font-size:.72rem;font-weight:900;letter-spacing:.12em;margin:0 0 12px;text-transform:uppercase}.hero__content h1{font-size:clamp(3rem,4.6vw,5rem);letter-spacing:0;line-height:.96;margin:0;max-width:760px}.hero-title-rotator{display:grid;max-width:780px;overflow-wrap:anywhere}.hero-title-rotator__item{grid-area:1/1;opacity:0}.hero-title-rotator__item.is-active{opacity:1}.hero__subtitle{color:#586174;font-size:1.08rem;line-height:1.75;margin-top:20px;max-width:720px}.hero__actions,.hero__proof{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}.hero__proof{color:var(--text-secondary);font-size:.9rem;font-weight:800;gap:10px;margin-top:22px}.hero__proof span{background:rgba(255,255,255,.82);border:1px solid rgba(18,19,26,.08);border-radius:999px;box-shadow:0 10px 24px rgba(18,19,26,.04);padding:7px 11px}.hero-media-rotator{align-self:center;aspect-ratio:16/10;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(247,250,255,.9)),radial-gradient(circle at 82% 8%,rgba(47,109,246,.14),transparent 34%);border:1px solid rgba(47,109,246,.13);border-radius:22px;box-shadow:0 32px 92px rgba(18,19,26,.17);overflow:hidden;padding:10px;position:relative}.hero-media-rotator__frame{background:#eef3fb;border:1px solid rgba(21,23,34,.08);border-radius:16px;height:100%;overflow:hidden;position:relative}.hero-media-rotator__slide{inset:0;margin:0;opacity:0;position:absolute}.hero-media-rotator__slide.is-active{opacity:1;z-index:1}.hero-media-rotator__slide img{display:block;height:100%;object-fit:cover;object-position:top left;width:100%}.site-promo,.site-promo__content{height:50px;min-height:50px}.site-promo{border-radius:0;margin:0;max-width:none;width:100%}.site-promo__content{padding-bottom:0;padding-top:0}@media(max-width:1120px){.hero{grid-template-columns:1fr;min-height:auto}.site-actions{display:none}.nav-toggle{display:inline-flex}}@media(max-width:640px){.site-header__inner{min-height:64px;padding-left:18px;padding-right:18px}.hero{gap:28px;padding:44px 18px 40px}.hero__content h1{font-size:clamp(2.35rem,14vw,3.45rem)}.hero-media-rotator{border-radius:16px;padding:6px}}
+        :root{--primary:#287f9f;--primary-dark:#155c75;--accent:#b63a48;--success:#3c9276;--background:#fbfcfb;--surface:#f4f8f7;--foreground:#26343a;--text-secondary:#607078;--border:#dce7e6;--brand-blue:#287f9f;--brand-yellow:#d2a51f;--brand-red:#b63a48;--brand-green:#3c9276;--blue-soft:#e1f0f5;--green-soft:#e4f2ed;--yellow-soft:#fff3c7;--red-soft:#f8e3e6;--shadow:0 24px 70px rgba(38,52,58,.10)}body{background:linear-gradient(180deg,#fbfcfb 0%,#fff 38%,#f3f8f7 100%);font-family:Manrope,Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.site-brand__mark{grid-template-columns:repeat(4,7px);width:37px}.site-brand__mark span{width:7px}.site-brand__mark span:nth-child(1){background:var(--brand-green)}.site-brand__mark span:nth-child(2){background:var(--brand-yellow)}.site-brand__mark span:nth-child(3){background:var(--brand-red)}.site-brand__mark span:nth-child(4){background:var(--brand-blue);height:27px}.myliba-button--small,.myliba-button--primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));box-shadow:0 14px 30px rgba(40,127,159,.22)}.hero{background:radial-gradient(circle at 78% 10%,rgba(40,127,159,.16),transparent 30%),radial-gradient(circle at 14% 22%,rgba(60,146,118,.14),transparent 31%),linear-gradient(180deg,#fbfcfb 0%,#f4f9f7 100%)}
     </style>
     <?php
 }
@@ -242,7 +263,7 @@ function myliba_render_theme_meta(): void
 {
     $favicon = get_template_directory_uri() . '/assets/images/favicon.svg';
 
-    echo '<meta name="theme-color" content="#ff5a2f">' . "\n";
+    echo '<meta name="theme-color" content="#287f9f">' . "\n";
     printf("<link rel=\"icon\" type=\"image/svg+xml\" href=\"%s\">\n", esc_url($favicon));
     printf("<link rel=\"apple-touch-icon\" href=\"%s\">\n", esc_url($favicon));
 }
@@ -439,11 +460,13 @@ function myliba_translate_text(string $text): string
         'Business outcomes' => 'İş sonuçları',
         'Calibration' => 'Kalibrasyon',
         'Can Myliba support implementation and training?' => 'Myliba uygulama ve eğitim süreçlerini destekler mi?',
+        'CEO / Executive Team' => 'CEO / Üst Yönetim',
         'Coach work without losing follow-up' => 'Takibi kaybetmeden işi koçlukla yönetin',
         'Choose the operating routines you want to strengthen across OKR, KPI, CFR, 1:1, feedback and analytics.' => 'OKR, KPI, CFR, 1:1, geri bildirim ve analitik genelinde güçlendirmek istediğiniz çalışma rutinlerini seçin.',
         'Clear gains for every role.' => 'Her rol için net kazanımlar.',
         'Coaching notes, recognition and actions stay connected to goals.' => 'Koçluk notları, takdirler ve aksiyonlar hedeflerle bağlantılı kalır.',
         'Company' => 'Şirket',
+        'Companies' => 'Şirket',
         'Company objective' => 'Şirket hedefi',
         'Connect company strategy with team and individual contribution.' => 'Şirket stratejisini ekip ve bireysel katkıyla bağlayın.',
         'Connect OKR and KPI ownership from company to teams.' => 'OKR ve KPI sahipliğini şirketten ekiplere bağlayın.',
@@ -454,6 +477,7 @@ function myliba_translate_text(string $text): string
         'Continuous performance' => 'Sürekli performans',
         'Continuous performance development' => 'Sürekli performans gelişimi',
         'Conversations' => 'Görüşmeler',
+        'companies' => 'şirket',
         'Copyright %1$s %2$s. All rights reserved.' => 'Copyright %1$s %2$s. Tüm hakları saklıdır.',
         'Culture' => 'Kültür',
         'Culture Analysis' => 'Kültür Analizi',
@@ -462,6 +486,11 @@ function myliba_translate_text(string $text): string
         'Development signals stay connected to goals and coaching.' => 'Gelişim sinyalleri hedefler ve koçlukla bağlantılı kalır.',
         'Employee growth' => 'Çalışan gelişimi',
         'Employees' => 'Çalışanlar',
+        'ICF-accredited training' => 'ICF akreditasyonlu eğitim',
+        'Industries' => 'Sektör',
+        'Leaders' => 'Lider',
+        'Living and sustainable culture commitment' => 'Yaşayan ve sürdürülebilir kültür taahhüdü',
+        'leaders' => 'lider',
         'Ethics Counsel' => 'Etik Danışmanlık',
         'Every rhythm leaves a measurable signal for better focus, coaching and decisions.' => 'Her ritim daha iyi odak, koçluk ve kararlar için ölçülebilir bir sinyal bırakır.',
         'Execution' => 'Uygulama',
@@ -601,6 +630,7 @@ function myliba_translate_text(string $text): string
         'View module' => 'Modülü gör',
         'Who uses Myliba most often?' => 'Myliba en çok kimler tarafından kullanılır?',
         'Workshops and coaching routines' => 'Atölye ve koçluk rutinleri',
+        'Years of HR and organizational development experience' => 'Yıllık İK ve organizasyonel gelişim deneyimi',
         'Yes. The platform is supported by academy programs, workshops and coaching routines.' => 'Evet. Platform akademi programları, atölyeler ve koçluk rutinleriyle desteklenir.',
         'You can trace each priority to goals, owners and actions.' => 'Her önceliği hedeflere, sahiplere ve aksiyonlara kadar izleyebilirsiniz.',
         'Each priority can be traced to goals, owners and actions.' => 'Her öncelik hedeflere, sahiplere ve aksiyonlara kadar izlenebilir.',
@@ -611,6 +641,7 @@ function myliba_translate_text(string $text): string
         'Is sonuclari' => 'İş sonuçları',
         'Performans kulturunu gorunur, gelistirilebilir ve olculebilir hale getirin.' => 'Performans kültürünü görünür, geliştirilebilir ve ölçülebilir hale getirin.',
         'Sirket stratejisini takim ve bireysel katkiyla baglayin.' => 'Şirket stratejisini takım ve bireysel katkıyla bağlayın.',
+        'stronger goals' => 'daha güçlü hedefler',
         'Seffaflik' => 'Şeffaflık',
         'Toplanti beklemeden ilerlemeyi, engelleri ve sahipligi gorun.' => 'Toplantı beklemeden ilerlemeyi, engelleri ve sahipliği görün.',
         'Gelisim' => 'Gelişim',
@@ -884,7 +915,7 @@ function myliba_brand_link(string $modifier = ''): void
             'sizes' => '(max-width: 640px) 44vw, 220px',
         ]);
     } else {
-        echo '<span class="site-brand__mark" aria-hidden="true"><span></span><span></span><span></span></span>';
+        echo '<span class="site-brand__mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>';
         echo '<span class="site-brand__text">Myliba</span>';
     }
 
@@ -928,10 +959,11 @@ function myliba_home_rows(string $key, array $fallback = []): array
 function myliba_home_section_definitions(): array
 {
     return [
-        'hero' => __('Hero + dashboard preview', 'myliba'),
-        'trust_bar' => __('Trust bar', 'myliba'),
+        'hero' => __('Hero slider', 'myliba'),
+        'trust_bar' => __('Trust and Why Myliba', 'myliba'),
         'problem' => __('Problem cards', 'myliba'),
         'solutions' => __('Strategy flow', 'myliba'),
+        'performance' => __('Performance approach', 'myliba'),
         'products' => __('Product grid', 'myliba'),
         'academy' => __('Academy block', 'myliba'),
         'role_gains' => __('Role gains', 'myliba'),

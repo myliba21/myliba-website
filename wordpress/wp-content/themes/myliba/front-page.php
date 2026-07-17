@@ -5,18 +5,26 @@ $post_id = get_queried_object_id();
 $demo_url = myliba_demo_url();
 $products = static fn () => myliba_get_entries('myliba_product', 9);
 $client_logos = static fn () => myliba_get_entries('myliba_client_logo', 24, ['meta_query' => []]);
-$hero_title = (string) myliba_meta('_myliba_hero_title', $post_id, __('Turn strategy into goals, goals into action.', 'myliba'));
-$hero_titles = myliba_home_lines('hero_rotating_titles', [$hero_title]);
 $hero_banner_images = myliba_hero_banner_images();
 $hero_proof = myliba_home_lines('hero_proof', ['Strategy to action', 'Continuous performance', 'Academy + software']);
-$dashboard_nav = myliba_home_lines('dashboard_nav', ['OKR', 'KPI', 'CFR', '1:1', 'Academy']);
-$dashboard_progress = max(0, min(100, (int) myliba_home_value('dashboard_progress', '76')));
-$dashboard_rows = myliba_home_rows('dashboard_rows', [
-    ['Leadership rhythm active', 'HR', 'On track', 'green'],
-    ['Team OKR alignment', 'Strategy', 'Review', 'blue'],
-    ['1:1 action follow-up', 'Leads', 'Focus', 'orange'],
+$hero_slides = myliba_home_rows('hero_slides', [
+    ['Performance & Culture Platform', 'Build the operating system behind high performance.', 'Myliba brings strategy, goals, actions and culture into one measurable flow, so transformation does not stop at another software rollout.', 'Contact us', myliba_page_url('contact'), 'Explore Myliba', myliba_page_url('products')],
+    ['Myliba Software', 'Performance is built every day, not scored once a year.', 'Keep strategic priorities alive with a platform designed to connect goals, continuous feedback, action and measurable progress.', 'Request a demo', $demo_url, 'Explore software', myliba_page_url('products')],
+    ['Myliba Academy', 'The world’s first ICF-approved OKR & Culture Coaching program.', 'Develop the leaders who will turn a strong platform into lasting organizational change through an accredited 40-hour certification journey.', 'Apply to the program', myliba_page_url('academy'), 'Explore academy', myliba_page_url('academy')],
 ]);
 $trust_items = myliba_home_lines('trust_items', ['OKR', 'KPI', 'CFR', '1:1']);
+$social_proof_items = myliba_home_rows('social_proof_items', [
+    ['25+', 'Years of HR and organizational development experience'],
+    ['44', 'Companies'],
+    ['16', 'Industries'],
+    ['500+', 'Leaders'],
+    ['40 CCE', 'ICF-accredited training'],
+    ['100%', 'Living and sustainable culture commitment'],
+]);
+$offering_rows = myliba_home_rows('offering_rows', [
+    ['Myliba Software', 'Manage culture digitally and measurably.', '85% cost advantage', 'Bring performance development into one platform and reduce reliance on fragmented systems.', '40+ days saved', 'Give HR teams and leaders more time for strategic work.', '2x stronger performance', 'Build a fair, evidence-based and development-led performance rhythm.', '67% stronger goals', 'Improve strategic alignment and help teams set more ambitious goals.', 'Explore software', myliba_page_url('products')],
+    ['Myliba Academy', 'Develop the leaders who will guide your transformation.', 'A world first', 'Join the first ICF 40 CCE-accredited OKR & Culture Coaching certification program.', 'Community', 'Access an ongoing learning community and complimentary update sessions.', 'Platform', 'Experience culture, leadership and self-discipline through immersive simulations.', 'Transformation at work', 'Turn coaching, powerful questions and strategic leadership into daily practice.', 'Explore academy', myliba_page_url('academy')],
+]);
 $with_minimum_rows = static function (array $rows, array $fallback): array {
     $fallback = array_map(static function (array $row): array {
         return array_map(static fn ($cell) => is_string($cell) ? myliba_translate_text($cell) : $cell, $row);
@@ -42,6 +50,12 @@ $strategy_flow_steps = myliba_home_rows('strategy_flow_steps', [
     ['Goals', 'Connect OKR and KPI ownership from company to teams.', 'G'],
     ['Action', 'Turn each priority into accountable actions and follow-up.', 'A'],
     ['Culture', 'Build 1:1, CFR and learning routines around the work.', 'C'],
+]);
+$performance_tabs = myliba_home_rows('performance_tabs', [
+    ['Goal management', 'Align work with business outcomes.', 'Carry strategy to every level of the organization with connected OKRs, KPIs and action management.'],
+    ['Performance development', 'Make development continuous.', 'Reveal potential through ongoing feedback, feedforward and development-focused performance conversations.'],
+    ['AI-powered insight', 'Read the DNA of your organization.', 'Spot signals around engagement, belonging and culture early with AI-supported analysis.'],
+    ['Decision reports', 'Make fair decisions with evidence.', 'Use goals, actions, leadership signals and 360-degree insights to support objective promotion, reward and development decisions.'],
 ]);
 $academy_items = myliba_home_lines('academy_items', ['OKR culture and adoption programs', 'Leadership and coaching routines', 'Continuous performance development', 'Human and culture-focused transformation']);
 $outcomes_card_defaults = [
@@ -70,100 +84,54 @@ foreach (myliba_home_sections($post_id) as $section) {
     switch ($section['key']) {
         case 'hero':
             ?>
-            <section class="hero">
-                <div class="hero__content">
-                    <p class="eyebrow"><?php echo esc_html(myliba_meta('_myliba_eyebrow', $post_id, __('OKR, KPI, CFR and performance culture', 'myliba'))); ?></p>
-                    <h1 class="hero-title-rotator" data-rotating-title>
-                        <?php foreach ($hero_titles as $index => $title) : ?>
-                            <span class="hero-title-rotator__item <?php echo $index === 0 ? 'is-active' : ''; ?>"><?php echo esc_html($title); ?></span>
-                        <?php endforeach; ?>
-                    </h1>
-                    <p class="hero__subtitle"><?php echo esc_html(myliba_meta('_myliba_hero_subtitle', $post_id, __('Myliba combines OKR, KPI, CFR, 1:1 meetings, feedback, action management and academy programs so organizations can build a measurable high-performance culture.', 'myliba'))); ?></p>
-                    <div class="hero__actions">
-                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>"><?php echo esc_html(myliba_option('demo_cta_label', __('Request a demo', 'myliba'))); ?></a>
-                        <a class="myliba-button myliba-button--ghost" href="<?php echo esc_url(myliba_page_url('products')); ?>"><?php echo esc_html(myliba_home_value('products_button', __('Explore products', 'myliba'))); ?></a>
-                    </div>
-                    <div class="hero__proof">
-                        <?php foreach ($hero_proof as $item) : ?>
-                            <span><?php echo esc_html($item); ?></span>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <?php if ($hero_banner_images) : ?>
-                    <div class="hero-media-rotator" data-hero-media-rotator aria-label="<?php esc_attr_e('Myliba product screenshots', 'myliba'); ?>">
-                        <div class="hero-media-rotator__frame">
-                            <?php foreach ($hero_banner_images as $index => $image) : ?>
-                                <figure class="hero-media-rotator__slide <?php echo $index === 0 ? 'is-active' : ''; ?>" data-hero-media-slide>
-                                    <img
-                                        src="<?php echo esc_url($image['url']); ?>"
-                                        alt="<?php echo esc_attr($image['alt']); ?>"
-                                        <?php echo !empty($image['width']) ? 'width="' . esc_attr((string) $image['width']) . '"' : ''; ?>
-                                        <?php echo !empty($image['height']) ? 'height="' . esc_attr((string) $image['height']) . '"' : ''; ?>
-                                        loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>"
-                                        <?php echo $index === 0 ? 'fetchpriority="high"' : 'fetchpriority="low"'; ?>
-                                        decoding="async"
-                                    >
-                                </figure>
-                            <?php endforeach; ?>
-                        </div>
-                        <?php if (count($hero_banner_images) > 1) : ?>
-                            <div class="hero-media-rotator__dots" aria-hidden="true">
-                                <?php foreach ($hero_banner_images as $index => $image) : ?>
-                                    <span class="<?php echo $index === 0 ? 'is-active' : ''; ?>" data-hero-media-dot></span>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                <?php else : ?>
-                <div class="dashboard-preview dashboard-preview--premium" aria-label="<?php esc_attr_e('Myliba product dashboard preview', 'myliba'); ?>">
-                    <div class="dashboard-preview__bar">
-                        <span></span><span></span><span></span>
-                        <strong><?php echo esc_html(myliba_home_value('dashboard_title', __('Performance OS', 'myliba'))); ?></strong>
-                    </div>
-                    <div class="dashboard-preview__body">
-                        <aside class="dashboard-sidebar">
-                            <strong><?php echo esc_html(myliba_home_value('dashboard_brand', myliba_option('organization_name', __('Myliba', 'myliba')))); ?></strong>
-                            <?php foreach ($dashboard_nav as $index => $item) : ?>
-                                <span class="<?php echo $index === 0 ? 'is-active' : ''; ?>"><?php echo esc_html($item); ?></span>
-                            <?php endforeach; ?>
-                        </aside>
-                        <div class="dashboard-workspace">
-                            <div class="dashboard-topline">
-                                <div>
-                                    <small><?php echo esc_html(myliba_home_value('dashboard_objective_label', __('Company objective', 'myliba'))); ?></small>
-                                    <h3><?php echo esc_html(myliba_home_value('dashboard_objective_title', __('Increase strategy execution visibility', 'myliba'))); ?></h3>
+            <section class="hero-slider" data-hero-slider aria-roledescription="carousel" aria-label="<?php esc_attr_e('Myliba highlights', 'myliba'); ?>">
+                <div class="hero-slider__viewport" aria-live="off">
+                    <?php foreach ($hero_slides as $index => $row) :
+                        [$eyebrow, $title, $text, $primary_label, $primary_url, $secondary_label, $secondary_url] = array_pad($row, 7, '');
+                        $image = $hero_banner_images ? $hero_banner_images[$index % count($hero_banner_images)] : [];
+                        ?>
+                        <article id="hero-slide-<?php echo esc_attr((string) $index); ?>" class="hero-slide <?php echo $index === 0 ? 'is-active' : ''; ?>" data-hero-slide aria-hidden="<?php echo $index === 0 ? 'false' : 'true'; ?>">
+                            <div class="hero-slide__content">
+                                <p class="eyebrow"><?php echo esc_html($eyebrow); ?></p>
+                                <<?php echo $index === 0 ? 'h1' : 'h2'; ?> class="hero-slide__title"><?php echo esc_html($title); ?></<?php echo $index === 0 ? 'h1' : 'h2'; ?>>
+                                <p class="hero-slide__text"><?php echo esc_html($text); ?></p>
+                                <div class="hero__actions">
+                                    <?php if ($primary_label !== '') : ?><a class="myliba-button myliba-button--primary" href="<?php echo esc_url($primary_url ?: $demo_url); ?>" <?php echo $index === 0 ? '' : 'tabindex="-1"'; ?>><?php echo esc_html($primary_label); ?></a><?php endif; ?>
+                                    <?php if ($secondary_label !== '') : ?><a class="myliba-button myliba-button--ghost" href="<?php echo esc_url($secondary_url ?: myliba_page_url('products')); ?>" <?php echo $index === 0 ? '' : 'tabindex="-1"'; ?>><?php echo esc_html($secondary_label); ?></a><?php endif; ?>
                                 </div>
-                                <span class="status-pill"><?php echo esc_html((string) $dashboard_progress); ?>%</span>
-                            </div>
-                            <div class="progress-line"><span style="width:<?php echo esc_attr((string) $dashboard_progress); ?>%"></span></div>
-                            <div class="objective-table">
-                                <div>
-                                    <strong><?php echo esc_html(myliba_home_value('dashboard_col_1', __('Key Result', 'myliba'))); ?></strong>
-                                    <strong><?php echo esc_html(myliba_home_value('dashboard_col_2', __('Owner', 'myliba'))); ?></strong>
-                                    <strong><?php echo esc_html(myliba_home_value('dashboard_col_3', __('Status', 'myliba'))); ?></strong>
+                                <div class="hero__proof">
+                                    <?php foreach ($hero_proof as $item) : ?><span><?php echo esc_html($item); ?></span><?php endforeach; ?>
                                 </div>
-                                <?php foreach ($dashboard_rows as $row) :
-                                    [$key_result, $owner, $status, $color] = array_pad($row, 4, '');
-                                    $color = in_array($color, ['green', 'blue', 'orange'], true) ? $color : 'blue';
-                                    ?>
-                                    <div><span><?php echo esc_html($key_result); ?></span><span><?php echo esc_html($owner); ?></span><em class="tag tag--<?php echo esc_attr($color); ?>"><?php echo esc_html($status); ?></em></div>
-                                <?php endforeach; ?>
                             </div>
-                            <div class="dashboard-workspace__footer">
-                                <span><?php esc_html_e('Goal health', 'myliba'); ?></span>
-                                <strong><?php esc_html_e('Ready for review', 'myliba'); ?></strong>
+                            <div class="hero-slide__visual-wrap">
+                                <div class="hero-slide__visual">
+                                    <?php if (!empty($image['url'])) : ?>
+                                        <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>" <?php echo $index === 0 ? 'fetchpriority="high"' : ''; ?> decoding="async">
+                                    <?php else : ?>
+                                        <div class="hero-slide__placeholder"><strong><?php esc_html_e('Myliba Performance OS', 'myliba'); ?></strong><span><?php echo esc_html($eyebrow); ?></span></div>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="hero-slide__metric hero-slide__metric--companies" aria-hidden="true">
+                                    <span></span><strong>44</strong><small><?php esc_html_e('companies', 'myliba'); ?></small>
+                                </div>
+                                <div class="hero-slide__metric hero-slide__metric--leaders" aria-hidden="true">
+                                    <span></span><strong>500+</strong><small><?php esc_html_e('leaders', 'myliba'); ?></small>
+                                </div>
+                                <div class="hero-slide__metric hero-slide__metric--impact" aria-hidden="true">
+                                    <span></span><strong>67%</strong><small><?php esc_html_e('stronger goals', 'myliba'); ?></small>
+                                </div>
                             </div>
-                        </div>
-                        <div class="dashboard-insights">
-                            <div class="metric-card"><strong><?php echo esc_html(myliba_home_value('metric_1_value', '72%')); ?></strong><small><?php echo esc_html(myliba_home_value('metric_1_label', __('OKR progress', 'myliba'))); ?></small></div>
-                            <div class="metric-card"><strong><?php echo esc_html(myliba_home_value('metric_2_value', '148')); ?></strong><small><?php echo esc_html(myliba_home_value('metric_2_label', __('1:1 notes', 'myliba'))); ?></small></div>
-                        </div>
-                        <div class="feedback-card">
-                            <h3><?php echo esc_html(myliba_home_value('feedback_title', __('Feedback card', 'myliba'))); ?></h3>
-                            <p><?php echo esc_html(myliba_home_value('feedback_text', __('Coaching notes, recognition and actions stay connected to goals.', 'myliba'))); ?></p>
-                        </div>
-                    </div>
+                        </article>
+                    <?php endforeach; ?>
                 </div>
+                <?php if (count($hero_slides) > 1) : ?>
+                    <div class="hero-slider__controls">
+                        <button class="hero-slider__arrow" type="button" data-hero-prev aria-label="<?php esc_attr_e('Previous slide', 'myliba'); ?>">&#8592;</button>
+                        <div class="hero-slider__dots" role="tablist" aria-label="<?php esc_attr_e('Choose slide', 'myliba'); ?>">
+                            <?php foreach ($hero_slides as $index => $row) : ?><button class="<?php echo $index === 0 ? 'is-active' : ''; ?>" type="button" role="tab" aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-controls="hero-slide-<?php echo esc_attr((string) $index); ?>" data-hero-dot data-slide-label="<?php echo esc_attr(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?>"></button><?php endforeach; ?>
+                        </div>
+                        <button class="hero-slider__arrow" type="button" data-hero-next aria-label="<?php esc_attr_e('Next slide', 'myliba'); ?>">&#8594;</button>
+                    </div>
                 <?php endif; ?>
             </section>
             <?php
@@ -216,6 +184,42 @@ foreach (myliba_home_sections($post_id) as $section) {
                         <?php foreach ($trust_items as $item) : ?><span><?php echo esc_html($item); ?></span><?php endforeach; ?>
                     </div>
                 <?php endif; ?>
+                <div class="proof-grid" aria-label="<?php esc_attr_e('Myliba in numbers', 'myliba'); ?>">
+                    <?php foreach ($social_proof_items as $item) :
+                        [$value, $label] = array_pad($item, 2, '');
+                        ?>
+                        <div class="proof-stat"><strong><?php echo esc_html($value); ?></strong><span><?php echo esc_html($label); ?></span></div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="why-myliba">
+                    <div class="why-myliba__intro">
+                        <p class="eyebrow"><?php echo esc_html(myliba_home_value('why_eyebrow', __('Why Myliba?', 'myliba'))); ?></p>
+                        <h2><?php echo esc_html(myliba_home_value('why_title', __('Change cannot be delivered by software or training alone.', 'myliba'))); ?></h2>
+                        <p><?php echo esc_html(myliba_home_value('why_text', __('Our formula for cultural transformation combines people, technology and academy. We develop transformation leaders, then make the new operating rhythm part of everyday work.', 'myliba'))); ?></p>
+                    </div>
+                    <div class="offering-tabs" data-home-tabs>
+                        <div class="offering-tabs__nav" role="tablist" aria-label="<?php esc_attr_e('Myliba solutions', 'myliba'); ?>">
+                            <?php foreach ($offering_rows as $index => $row) :
+                                [$label] = array_pad($row, 1, '');
+                                ?>
+                                <button id="offering-tab-<?php echo esc_attr((string) $index); ?>" class="<?php echo $index === 0 ? 'is-active' : ''; ?>" type="button" role="tab" aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-controls="offering-panel-<?php echo esc_attr((string) $index); ?>" data-home-tab><?php echo esc_html($label); ?></button>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php foreach ($offering_rows as $index => $row) :
+                            [$label, $intro, $item_1_title, $item_1_text, $item_2_title, $item_2_text, $item_3_title, $item_3_text, $item_4_title, $item_4_text, $cta_label, $cta_url] = array_pad($row, 12, '');
+                            ?>
+                            <div id="offering-panel-<?php echo esc_attr((string) $index); ?>" class="offering-tabs__panel <?php echo $index === 0 ? 'is-active' : ''; ?>" role="tabpanel" aria-labelledby="offering-tab-<?php echo esc_attr((string) $index); ?>" data-home-panel <?php echo $index === 0 ? '' : 'hidden'; ?>>
+                                <p class="offering-tabs__lead"><?php echo esc_html($intro); ?></p>
+                                <div class="offering-tabs__benefits">
+                                    <?php foreach ([[$item_1_title, $item_1_text], [$item_2_title, $item_2_text], [$item_3_title, $item_3_text], [$item_4_title, $item_4_text]] as $benefit) : ?>
+                                        <article><h3><?php echo esc_html($benefit[0]); ?></h3><p><?php echo esc_html($benefit[1]); ?></p></article>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?php if ($cta_label !== '') : ?><a class="myliba-button myliba-button--ghost" href="<?php echo esc_url($cta_url); ?>"><?php echo esc_html($cta_label); ?></a><?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
             </section>
             <?php
             break;
@@ -406,6 +410,38 @@ foreach (myliba_home_sections($post_id) as $section) {
             <?php
             break;
 
+        case 'performance':
+            ?>
+            <section class="section band strategy-flow-section performance-method-section">
+                <div class="performance-method">
+                    <div class="section__heading homepage-section-heading">
+                        <p class="eyebrow"><?php echo esc_html(myliba_home_value('performance_eyebrow', __('Performance management approach', 'myliba'))); ?></p>
+                        <h2><?php echo esc_html(myliba_home_value('performance_title', __('Turn performance management into a strategic advantage.', 'myliba'))); ?></h2>
+                        <p><?php echo esc_html(myliba_home_value('performance_text', __('Move beyond an annual, stressful scoring cycle with a fair and evidence-based approach that supports continuous growth.', 'myliba'))); ?></p>
+                    </div>
+                    <div class="performance-tabs" data-home-tabs>
+                        <div class="performance-tabs__nav" role="tablist" aria-label="<?php esc_attr_e('Performance management capabilities', 'myliba'); ?>">
+                            <?php foreach ($performance_tabs as $index => $row) :
+                                [$label] = array_pad($row, 1, '');
+                                ?>
+                                <button id="performance-tab-<?php echo esc_attr((string) $index); ?>" class="<?php echo $index === 0 ? 'is-active' : ''; ?>" type="button" role="tab" aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-controls="performance-panel-<?php echo esc_attr((string) $index); ?>" data-home-tab><?php echo esc_html($label); ?></button>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php foreach ($performance_tabs as $index => $row) :
+                            [$label, $title, $text] = array_pad($row, 3, '');
+                            $image = $hero_banner_images ? $hero_banner_images[$index % count($hero_banner_images)] : [];
+                            ?>
+                            <div id="performance-panel-<?php echo esc_attr((string) $index); ?>" class="performance-tabs__panel <?php echo $index === 0 ? 'is-active' : ''; ?>" role="tabpanel" aria-labelledby="performance-tab-<?php echo esc_attr((string) $index); ?>" data-home-panel <?php echo $index === 0 ? '' : 'hidden'; ?>>
+                                <div><span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span><h3><?php echo esc_html($title); ?></h3><p><?php echo esc_html($text); ?></p><a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('products')); ?>"><?php esc_html_e('Explore Myliba products', 'myliba'); ?></a></div>
+                                <?php if (!empty($image['url'])) : ?><figure><img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" loading="lazy" decoding="async"></figure><?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </section>
+            <?php
+            break;
+
         case 'outcomes':
             ?>
             <section class="section outcomes-section">
@@ -501,10 +537,10 @@ foreach (myliba_home_sections($post_id) as $section) {
             <section class="section final-cta-section">
                 <div class="final-cta">
                     <p class="eyebrow"><?php echo esc_html(myliba_home_value('final_cta_eyebrow', __('Make it actionable', 'myliba'))); ?></p>
-                    <h2><?php echo esc_html(myliba_home_value('final_cta_title', __('Turn your strategy into action today.', 'myliba'))); ?></h2>
-                    <p><?php echo esc_html(myliba_home_value('final_cta_text', __('Start with OKR, performance conversations and academy-supported adoption in one connected flow.', 'myliba'))); ?></p>
+                    <h2><?php echo esc_html(myliba_home_value('final_cta_title', __('Begin your high-performance journey today.', 'myliba'))); ?></h2>
+                    <p><?php echo esc_html(myliba_home_value('final_cta_text', __('Bring strategy, performance development and culture into one connected operating rhythm with Myliba.', 'myliba'))); ?></p>
                     <div class="final-cta__actions">
-                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>"><?php echo esc_html(myliba_home_value('final_cta_primary_label', myliba_option('demo_cta_label', __('Request a demo', 'myliba')))); ?></a>
+                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>"><?php echo esc_html(myliba_home_value('final_cta_primary_label', __('Talk to Myliba experts', 'myliba'))); ?></a>
                         <a class="myliba-button myliba-button--ghost" href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html(myliba_home_value('final_cta_secondary_label', __('Contact us', 'myliba'))); ?></a>
                     </div>
                 </div>

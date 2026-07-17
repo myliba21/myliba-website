@@ -333,7 +333,7 @@ function render_section_fields(\WP_Post $post, string $key): void
                 echo '<p class="myliba-builder-card__notice description">' . esc_html__('Hero eyebrow, title, and subtitle are edited in the Myliba Hero box. When this page is selected as the homepage, those fields appear here.', 'myliba') . '</p>';
             }
 
-            field_textarea('_myliba_home_hero_rotating_titles', __('Hero rotating titles', 'myliba'), get_post_meta($id, '_myliba_home_hero_rotating_titles', true), __('One title per line. Leave empty to use the hero title override.', 'myliba'));
+            field_textarea('_myliba_home_hero_slides', __('Hero slides', 'myliba'), get_post_meta($id, '_myliba_home_hero_slides', true), __('One slide per line as Eyebrow | Title | Text | Primary label | Primary URL | Secondary label | Secondary URL. Three slides are recommended.', 'myliba'));
             field_textarea('_myliba_home_hero_proof', __('Hero proof pills', 'myliba'), get_post_meta($id, '_myliba_home_hero_proof', true), __('One item per line.', 'myliba'));
             field_text('_myliba_home_dashboard_brand', __('Dashboard brand label', 'myliba'), get_post_meta($id, '_myliba_home_dashboard_brand', true));
             field_text('_myliba_home_dashboard_title', __('Dashboard label', 'myliba'), get_post_meta($id, '_myliba_home_dashboard_title', true));
@@ -356,6 +356,11 @@ function render_section_fields(\WP_Post $post, string $key): void
         case 'trust_bar':
             field_textarea('_myliba_home_trust_title', __('Trust section title', 'myliba'), get_post_meta($id, '_myliba_home_trust_title', true));
             field_textarea('_myliba_home_trust_items', __('Trust section items', 'myliba'), get_post_meta($id, '_myliba_home_trust_items', true), __('One item per line.', 'myliba'));
+            field_textarea('_myliba_home_social_proof_items', __('Social proof metrics', 'myliba'), get_post_meta($id, '_myliba_home_social_proof_items', true), __('One row per line as Value | Label.', 'myliba'));
+            field_text('_myliba_home_why_eyebrow', __('Why Myliba eyebrow', 'myliba'), get_post_meta($id, '_myliba_home_why_eyebrow', true));
+            field_textarea('_myliba_home_why_title', __('Why Myliba title', 'myliba'), get_post_meta($id, '_myliba_home_why_title', true));
+            field_textarea('_myliba_home_why_text', __('Why Myliba text', 'myliba'), get_post_meta($id, '_myliba_home_why_text', true));
+            field_textarea('_myliba_home_offering_rows', __('Software and Academy tabs', 'myliba'), get_post_meta($id, '_myliba_home_offering_rows', true), __('One row per line as Label | Intro | Benefit 1 title | Benefit 1 text | Benefit 2 title | Benefit 2 text | Benefit 3 title | Benefit 3 text | Benefit 4 title | Benefit 4 text | CTA label | CTA URL.', 'myliba'));
             break;
 
         case 'problem':
@@ -370,6 +375,13 @@ function render_section_fields(\WP_Post $post, string $key): void
             field_textarea('_myliba_home_strategy_flow_title', __('Strategy flow title', 'myliba'), get_post_meta($id, '_myliba_home_strategy_flow_title', true));
             field_textarea('_myliba_home_strategy_flow_text', __('Strategy flow intro text', 'myliba'), get_post_meta($id, '_myliba_home_strategy_flow_text', true));
             field_textarea('_myliba_home_strategy_flow_steps', __('Strategy flow steps', 'myliba'), get_post_meta($id, '_myliba_home_strategy_flow_steps', true), __('One row per line as Title | Text | Short label.', 'myliba'));
+            break;
+
+        case 'performance':
+            field_text('_myliba_home_performance_eyebrow', __('Performance approach eyebrow', 'myliba'), get_post_meta($id, '_myliba_home_performance_eyebrow', true));
+            field_textarea('_myliba_home_performance_title', __('Performance approach title', 'myliba'), get_post_meta($id, '_myliba_home_performance_title', true));
+            field_textarea('_myliba_home_performance_text', __('Performance approach text', 'myliba'), get_post_meta($id, '_myliba_home_performance_text', true));
+            field_textarea('_myliba_home_performance_tabs', __('Performance approach tabs', 'myliba'), get_post_meta($id, '_myliba_home_performance_tabs', true), __('One row per line as Tab label | Title | Text.', 'myliba'));
             break;
 
         case 'products':
@@ -489,14 +501,14 @@ function homepage_section_definitions(): array
 {
     return [
         'hero' => [
-            'label' => __('Hero + dashboard preview', 'myliba'),
-            'source' => __('Page hero fields + dashboard fields', 'myliba'),
-            'fields' => __('Hero title, subtitle, proof pills, dashboard labels, metrics, and table rows.', 'myliba'),
+            'label' => __('Hero slider', 'myliba'),
+            'source' => __('Homepage slider fields', 'myliba'),
+            'fields' => __('Three synchronized slides with eyebrow, title, text, CTA links, proof pills, and product imagery.', 'myliba'),
         ],
         'trust_bar' => [
-            'label' => __('Trust bar', 'myliba'),
-            'source' => __('Homepage text fields', 'myliba'),
-            'fields' => __('Trust section title and one item per line.', 'myliba'),
+            'label' => __('Trust and Why Myliba', 'myliba'),
+            'source' => __('Client logos + homepage text fields', 'myliba'),
+            'fields' => __('Reference logos, social proof metrics, Why Myliba copy, and Software / Academy tabs.', 'myliba'),
         ],
         'problem' => [
             'label' => __('Problem cards', 'myliba'),
@@ -506,7 +518,12 @@ function homepage_section_definitions(): array
         'solutions' => [
             'label' => __('Strategy flow', 'myliba'),
             'source' => __('Homepage text fields', 'myliba'),
-            'fields' => __('Flow eyebrow, title, intro text, and steps using Title | Text | Short label rows.', 'myliba'),
+            'fields' => __('Strategy flow heading and steps.', 'myliba'),
+        ],
+        'performance' => [
+            'label' => __('Performance approach', 'myliba'),
+            'source' => __('Homepage text fields', 'myliba'),
+            'fields' => __('Interactive performance management approach tabs.', 'myliba'),
         ],
         'products' => [
             'label' => __('Product grid', 'myliba'),
@@ -606,6 +623,7 @@ function homepage_section_summary(int $post_id, string $key): string
         'trust_bar' => get_post_meta($post_id, '_myliba_home_trust_title', true),
         'problem' => get_post_meta($post_id, '_myliba_home_problem_title', true),
         'solutions' => get_post_meta($post_id, '_myliba_home_strategy_flow_title', true),
+        'performance' => get_post_meta($post_id, '_myliba_home_performance_title', true),
         'products' => get_post_meta($post_id, '_myliba_home_solution_title', true),
         'academy' => get_post_meta($post_id, '_myliba_home_academy_title', true),
         'role_gains' => get_post_meta($post_id, '_myliba_home_role_gains_title', true),
@@ -726,7 +744,7 @@ function field_definitions(string $post_type): array
         '_myliba_related_modules' => 'textarea',
         '_myliba_faq_items' => 'textarea',
         '_myliba_home_builder' => 'builder',
-        '_myliba_home_hero_rotating_titles' => 'textarea',
+        '_myliba_home_hero_slides' => 'textarea',
         '_myliba_home_hero_proof' => 'textarea',
         '_myliba_home_dashboard_brand' => 'text',
         '_myliba_home_dashboard_title' => 'text',
@@ -746,6 +764,11 @@ function field_definitions(string $post_type): array
         '_myliba_home_feedback_text' => 'textarea',
         '_myliba_home_trust_title' => 'textarea',
         '_myliba_home_trust_items' => 'textarea',
+        '_myliba_home_social_proof_items' => 'textarea',
+        '_myliba_home_why_eyebrow' => 'text',
+        '_myliba_home_why_title' => 'textarea',
+        '_myliba_home_why_text' => 'textarea',
+        '_myliba_home_offering_rows' => 'textarea',
         '_myliba_home_problem_eyebrow' => 'text',
         '_myliba_home_problem_title' => 'textarea',
         '_myliba_home_problem_text' => 'textarea',
@@ -754,6 +777,10 @@ function field_definitions(string $post_type): array
         '_myliba_home_strategy_flow_title' => 'textarea',
         '_myliba_home_strategy_flow_text' => 'textarea',
         '_myliba_home_strategy_flow_steps' => 'textarea',
+        '_myliba_home_performance_eyebrow' => 'text',
+        '_myliba_home_performance_title' => 'textarea',
+        '_myliba_home_performance_text' => 'textarea',
+        '_myliba_home_performance_tabs' => 'textarea',
         '_myliba_home_solution_eyebrow' => 'text',
         '_myliba_home_solution_title' => 'textarea',
         '_myliba_home_products_button' => 'text',
