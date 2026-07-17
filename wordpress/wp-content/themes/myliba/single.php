@@ -61,7 +61,7 @@ $headings = $matches[1] ?? [];
             $related->the_post();
             ?>
             <a class="post-row" href="<?php the_permalink(); ?>">
-                <span><?php echo esc_html(get_the_date()); ?> &middot; <?php echo esc_html(myliba_reading_time()); ?> min</span>
+                <span><?php echo esc_html(get_the_date()); ?> &middot; <?php echo esc_html(myliba_reading_time()); ?> <?php esc_html_e('min read', 'myliba'); ?></span>
                 <strong><?php the_title(); ?></strong>
                 <p><?php echo esc_html(myliba_excerpt(get_the_ID(), 18)); ?></p>
             </a>

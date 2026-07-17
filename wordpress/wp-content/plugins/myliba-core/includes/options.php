@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 function defaults(): array
 {
-    return [
+    $defaults = [
         'indexing_enabled' => '0',
         'default_locale' => 'en',
         'available_locales' => "en\ntr",
@@ -31,6 +31,29 @@ function defaults(): array
         'promo_right_text' => 'View details',
         'promo_url' => '',
         'promo_dismissible' => '1',
+    ];
+
+    foreach (localized_keys() as $key) {
+        $defaults[$key . '_en'] = '';
+        $defaults[$key . '_tr'] = '';
+    }
+
+    return $defaults;
+}
+
+function localized_keys(): array
+{
+    return [
+        'demo_cta_label',
+        'demo_url',
+        'footer_cta_title',
+        'footer_note',
+        'primary_cta_label',
+        'primary_cta_url',
+        'promo_left_text',
+        'promo_message',
+        'promo_right_text',
+        'promo_url',
     ];
 }
 
@@ -96,7 +119,7 @@ function sanitize(array $input): array
 {
     $defaults = defaults();
 
-    return [
+    $sanitized = [
         'indexing_enabled' => !empty($input['indexing_enabled']) ? '1' : '0',
         'default_locale' => sanitize_key($input['default_locale'] ?? $defaults['default_locale']),
         'available_locales' => sanitize_textarea_field($input['available_locales'] ?? $defaults['available_locales']),
@@ -120,4 +143,18 @@ function sanitize(array $input): array
         'promo_url' => esc_url_raw($input['promo_url'] ?? $defaults['promo_url']),
         'promo_dismissible' => !empty($input['promo_dismissible']) ? '1' : '0',
     ];
+
+    $url_keys = ['demo_url', 'primary_cta_url', 'promo_url'];
+    $textarea_keys = ['footer_note'];
+    foreach (localized_keys() as $key) {
+        foreach (['en', 'tr'] as $locale) {
+            $localized_key = $key . '_' . $locale;
+            $raw = $input[$localized_key] ?? '';
+            $sanitized[$localized_key] = in_array($key, $url_keys, true)
+                ? esc_url_raw($raw)
+                : (in_array($key, $textarea_keys, true) ? sanitize_textarea_field($raw) : sanitize_text_field($raw));
+        }
+    }
+
+    return $sanitized;
 }

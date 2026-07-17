@@ -153,6 +153,43 @@ function render_settings(): void
                     <td><input class="regular-text" id="myliba-footer-cta-title" name="myliba_options[footer_cta_title]" value="<?php echo esc_attr($options['footer_cta_title']); ?>"></td>
                 </tr>
                 <tr>
+                    <th scope="row"><?php esc_html_e('TR / EN global content', 'myliba'); ?></th>
+                    <td>
+                        <p class="description"><?php esc_html_e('Optional language-specific values. When left blank, the existing value and built-in translation remain active.', 'myliba'); ?></p>
+                        <div style="display:grid;gap:16px;margin-top:12px;max-width:980px">
+                            <?php
+                            $localized_labels = [
+                                'demo_cta_label' => __('Demo button label', 'myliba'),
+                                'demo_url' => __('Demo URL', 'myliba'),
+                                'footer_cta_title' => __('Footer CTA title', 'myliba'),
+                                'footer_note' => __('Footer note', 'myliba'),
+                                'primary_cta_label' => __('Primary CTA label', 'myliba'),
+                                'primary_cta_url' => __('Primary CTA URL', 'myliba'),
+                                'promo_left_text' => __('Promo left text', 'myliba'),
+                                'promo_message' => __('Promo message', 'myliba'),
+                                'promo_right_text' => __('Promo right text', 'myliba'),
+                                'promo_url' => __('Promo URL', 'myliba'),
+                            ];
+                            foreach ($localized_labels as $localized_key => $localized_label) :
+                                ?>
+                                <div>
+                                    <strong style="display:block;margin-bottom:6px"><?php echo esc_html($localized_label); ?></strong>
+                                    <div style="display:grid;grid-template-columns:repeat(2,minmax(240px,1fr));gap:10px">
+                                        <?php foreach (['en' => 'English', 'tr' => 'Türkçe'] as $locale => $locale_label) :
+                                            $option_key = $localized_key . '_' . $locale;
+                                            ?>
+                                            <label>
+                                                <span class="screen-reader-text"><?php echo esc_html($localized_label . ' — ' . $locale_label); ?></span>
+                                                <input class="widefat" name="myliba_options[<?php echo esc_attr($option_key); ?>]" value="<?php echo esc_attr($options[$option_key] ?? ''); ?>" placeholder="<?php echo esc_attr($locale_label); ?>">
+                                            </label>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <th scope="row"><?php esc_html_e('Footer link menus', 'myliba'); ?></th>
                     <td>
                         <p class="description">

@@ -114,6 +114,12 @@ function myliba_option(string $key, mixed $fallback = ''): mixed
 {
     if (function_exists('Myliba\\Core\\Options\\get')) {
         $value = \Myliba\Core\Options\get($key, $fallback);
+        if (!is_admin() && function_exists('Myliba\\Core\\Options\\localized_keys') && in_array($key, \Myliba\Core\Options\localized_keys(), true)) {
+            $localized_value = \Myliba\Core\Options\get($key . '_' . myliba_current_language(), '');
+            if (is_string($localized_value) && trim($localized_value) !== '') {
+                return $localized_value;
+            }
+        }
     } else {
         $value = $fallback;
     }
@@ -179,6 +185,12 @@ function myliba_asset_url_from_env(string $value): string
 
 function myliba_hero_banner_images(): array
 {
+    $page_id = (int) get_queried_object_id();
+    $managed_images = myliba_home_media_images('hero', $page_id);
+    if ($managed_images) {
+        return $managed_images;
+    }
+
     $combined = myliba_env('MYLIBA_HERO_BANNER_IMAGES');
     $sources = $combined !== ''
         ? preg_split('/[\r\n|,]+/', $combined) ?: []
@@ -204,6 +216,39 @@ function myliba_hero_banner_images(): array
             'url' => $url,
             'alt' => $alts[$index] ?? sprintf(__('Myliba product dashboard preview %d', 'myliba'), $index + 1),
             ...myliba_image_dimensions_for_source((string) $source, $url),
+        ];
+    }
+
+    return $images;
+}
+
+function myliba_home_media_images(string $group, int $post_id = 0): array
+{
+    $post_id = $post_id ?: (int) get_queried_object_id();
+    if (!$post_id || !in_array($group, ['hero', 'performance'], true)) {
+        return [];
+    }
+
+    $images = [];
+    for ($index = 1; $index <= 3; $index++) {
+        $attachment_id = absint(get_post_meta($post_id, '_myliba_home_' . $group . '_image_' . $index, true));
+        if (!$attachment_id) {
+            continue;
+        }
+
+        $source = wp_get_attachment_image_src($attachment_id, 'full');
+        if (!$source) {
+            continue;
+        }
+
+        $custom_alt = trim((string) get_post_meta($post_id, '_myliba_home_' . $group . '_image_' . $index . '_alt', true));
+        $media_alt = trim((string) get_post_meta($attachment_id, '_wp_attachment_image_alt', true));
+        $images[] = [
+            'url' => (string) $source[0],
+            'alt' => $custom_alt !== '' ? $custom_alt : $media_alt,
+            'width' => (int) $source[1],
+            'height' => (int) $source[2],
+            'attachment_id' => $attachment_id,
         ];
     }
 
@@ -261,10 +306,11 @@ add_action('wp_head', 'myliba_preload_lcp_hero_image', 1);
 
 function myliba_render_theme_meta(): void
 {
-    $favicon = get_template_directory_uri() . '/assets/images/favicon.svg';
+    $site_icon = (int) get_option('site_icon');
+    $favicon = $site_icon ? (string) wp_get_attachment_image_url($site_icon, 'full') : get_template_directory_uri() . '/assets/images/favicon.svg';
 
     echo '<meta name="theme-color" content="#287f9f">' . "\n";
-    printf("<link rel=\"icon\" type=\"image/svg+xml\" href=\"%s\">\n", esc_url($favicon));
+    printf("<link rel=\"icon\" href=\"%s\">\n", esc_url($favicon));
     printf("<link rel=\"apple-touch-icon\" href=\"%s\">\n", esc_url($favicon));
 }
 add_action('wp_head', 'myliba_render_theme_meta', 2);
@@ -438,8 +484,16 @@ add_filter('language_attributes', 'myliba_filter_language_attributes');
 function myliba_translate_text(string $text): string
 {
     $text = trim($text);
+    $locale = myliba_current_language();
 
-    if (myliba_current_language() !== 'tr') {
+    if (function_exists('Myliba\\Core\\Content\\override')) {
+        $override = \Myliba\Core\Content\override($text, $locale);
+        if ($override !== null) {
+            return $override;
+        }
+    }
+
+    if ($locale !== 'tr') {
         return $text;
     }
 
@@ -916,7 +970,7 @@ function myliba_brand_link(string $modifier = ''): void
         ]);
     } else {
         echo '<span class="site-brand__mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>';
-        echo '<span class="site-brand__text">Myliba</span>';
+        echo '<span class="site-brand__text">' . esc_html((string) myliba_option('organization_name', get_bloginfo('name'))) . '</span>';
     }
 
     echo '</a>';

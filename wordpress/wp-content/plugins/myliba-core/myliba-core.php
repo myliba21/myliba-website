@@ -20,6 +20,7 @@ define('MYLIBA_CORE_URL', plugin_dir_url(__FILE__));
 
 $myliba_core_files = [
     'includes/options.php',
+    'includes/content.php',
     'includes/post-types.php',
     'includes/meta.php',
     'includes/admin.php',
@@ -36,6 +37,7 @@ foreach ($myliba_core_files as $myliba_core_file) {
 function boot(): void
 {
     Options\boot();
+    Content\boot();
     PostTypes\boot();
     Meta\boot();
     Admin\boot();

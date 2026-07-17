@@ -125,6 +125,42 @@ class Commands
     }
 
     /**
+     * Copy starter homepage content into empty admin fields without overwriting edits.
+     *
+     * ## OPTIONS
+     *
+     * [--yes]
+     * : Confirm the operation.
+     *
+     * @subcommand materialize-home
+     */
+    public function materialize_home(array $args, array $assoc_args): void
+    {
+        if (empty($assoc_args['yes'])) {
+            \WP_CLI::confirm('Fill only empty TR/EN homepage fields from the starter dataset?');
+        }
+
+        $updated = 0;
+        foreach (['en', 'tr'] as $language) {
+            $page = get_page_by_path($language);
+            if (!$page) {
+                \WP_CLI::warning('Homepage not found for language: ' . $language);
+                continue;
+            }
+
+            foreach ($this->home_meta_defaults($language) as $key => $value) {
+                if (get_post_meta($page->ID, $key, true) !== '') {
+                    continue;
+                }
+                update_post_meta($page->ID, $key, $value);
+                $updated++;
+            }
+        }
+
+        \WP_CLI::success(sprintf('%d empty homepage fields materialized into WordPress.', $updated));
+    }
+
+    /**
      * Import public content from the current myliba.com website.
      *
      * ## OPTIONS
@@ -966,6 +1002,8 @@ class Commands
         if ($language === 'tr') {
             return [
                 '_myliba_home_builder' => $this->home_builder_defaults(),
+                '_myliba_home_hero_slides' => "Performans ve Kultur Platformu | Yuksek performansin arkasindaki calisma sistemini kurun. | Myliba strateji, hedef, aksiyon ve kulturu olculebilir tek bir akista birlestirir. | Iletisime gecin | /tr/iletisim/ | Myliba'yi kesfedin | /tr/urunler/\nMyliba Yazilim | Performans yilda bir kez puanlanmaz, her gun insa edilir. | Stratejik oncelikleri surekli geri bildirim, aksiyon ve olculebilir ilerlemeyle canli tutun. | Demo talep edin | /tr/demo/ | Yazilimi kesfedin | /tr/urunler/\nMyliba Akademi | Dunyanin ilk ICF onayli OKR ve Kultur Koclugu programi. | Kalici kurumsal degisime liderlik edecek liderleri 40 saatlik akredite yolculukla gelistirin. | Programa basvurun | /tr/okr-kultur-akademisi/ | Akademiyi kesfedin | /tr/okr-kultur-akademisi/",
+                '_myliba_home_hero_metrics' => "44 | Sirket\n500+ | Lider\n67% | Daha guclu hedefler",
                 '_myliba_home_hero_rotating_titles' => "Hedefleri net, kulturu guclu ekipler kurun\nStratejiyi eyleme indiren performans platformu\nOKR ve kultur rutinlerini tek ritimde yonetin",
                 '_myliba_home_hero_proof' => "Stratejiden aksiyona\nSurekli performans\nAkademi + yazilim",
                 '_myliba_home_dashboard_brand' => 'Myliba',
@@ -985,7 +1023,13 @@ class Commands
                 '_myliba_home_feedback_title' => 'Geri bildirim karti',
                 '_myliba_home_feedback_text' => 'Kocluk notlari, takdir ve aksiyonlar hedeflerle bagli kalir.',
                 '_myliba_home_trust_title' => 'Performans kulturunu ciddiyetle yoneten ekipler icin.',
+                '_myliba_home_trust_logo_label' => 'Referanslar ve is ortaklari',
                 '_myliba_home_trust_items' => "OKR\nKPI\nCFR\n1:1",
+                '_myliba_home_social_proof_items' => "25+ | Yillik IK ve organizasyonel gelisim deneyimi\n44 | Sirket\n16 | Sektor\n500+ | Lider\n40 CCE | ICF akreditasyonlu egitim\n100% | Yasayan ve surdurulebilir kultur taahhudu",
+                '_myliba_home_why_eyebrow' => 'Neden Myliba?',
+                '_myliba_home_why_title' => 'Degisim yalnizca yazilimla veya egitimle gerceklesmez.',
+                '_myliba_home_why_text' => 'Kulturel donusum formulümüz insan, teknoloji ve akademiyi birlestirir. Donusum liderlerini gelistirir, yeni calisma ritmini gunluk isin parcasi haline getiririz.',
+                '_myliba_home_offering_rows' => "Myliba Yazilim | Kulturu dijital ve olculebilir yonetin. | %85 maliyet avantaji | Performans gelisimini tek platformda toplayin. | 40+ gun kazanc | IK ekiplerine stratejik isler icin zaman kazandirin. | 2 kat guclu performans | Adil ve kanita dayali bir performans ritmi kurun. | %67 daha guclu hedefler | Stratejik uyumu ve hedef kalitesini guclendirin. | Yazilimi kesfedin | /tr/urunler/\nMyliba Akademi | Donusumunuza liderlik edecek kisileri gelistirin. | Dunyada bir ilk | ICF 40 CCE akreditasyonlu OKR ve Kultur Koclugu programina katilin. | Topluluk | Surekli ogrenme topluluguna ve guncelleme oturumlarina erisin. | Platform | Kultur, liderlik ve oz disiplini simulasyonlarla deneyimleyin. | Is yerinde donusum | Kocluk ve stratejik liderligi gunluk pratige donusturun. | Akademiyi kesfedin | /tr/okr-kultur-akademisi/",
                 '_myliba_home_problem_eyebrow' => 'Problem',
                 '_myliba_home_problem_title' => 'Hedefler hiyerarsisinde kayboluyor, geri bildirim donemsel kaliyor.',
                 '_myliba_home_problem_text' => 'Performans yonetimi ancak hedefler, gorusmeler ve aksiyonlar ayni akista ilerlediginde olculebilir hale gelir.',
@@ -994,6 +1038,11 @@ class Commands
                 '_myliba_home_strategy_flow_title' => 'Strateji, hedef, aksiyon ve kultur tek akista.',
                 '_myliba_home_strategy_flow_text' => 'Oncelik, sahiplik, aksiyon ve ogrenme rutinlerini birbirine baglayan tek bir calisma ritmi kurun.',
                 '_myliba_home_strategy_flow_steps' => "Strateji | Oncelikleri kurum genelinde gorunur ve ortak hale getirin. | S\nHedef | OKR ve KPI sahipligini sirketten takimlara baglayin. | H\nAksiyon | Her onceligi sorumlu, tarih ve takip adimina donusturun. | A\nKultur | 1:1, CFR ve ogrenme rutinlerini isin etrafina yerlestirin. | K",
+                '_myliba_home_performance_eyebrow' => 'Performans yonetimi yaklasimi',
+                '_myliba_home_performance_title' => 'Performans yonetimini stratejik avantaja donusturun.',
+                '_myliba_home_performance_text' => 'Yillik ve stresli puanlama dongusunun otesine gecerek surekli gelisimi destekleyen adil ve kanita dayali bir yaklasim kurun.',
+                '_myliba_home_performance_tabs' => "Hedef yonetimi | Calismayi is sonuclariyla hizalayin. | Baglantili OKR, KPI ve aksiyon yonetimiyle stratejiyi organizasyonun her seviyesine tasiyin.\nPerformans gelisimi | Gelisimi surekli hale getirin. | Surekli geri bildirim ve gelisim odakli performans gorusmeleriyle potansiyeli aciga cikarin.\nYapay zeka destekli icgoru | Organizasyonunuzun DNA'sini okuyun. | Baglilik, aidiyet ve kultur sinyallerini yapay zeka destekli analizle erken fark edin.\nKarar raporlari | Kanitla adil kararlar alin. | Terfi, odul ve gelisim kararlarini hedef, aksiyon ve 360 derece icgorulerle destekleyin.",
+                '_myliba_home_performance_button' => 'Myliba urunlerini kesfedin',
                 '_myliba_home_solution_eyebrow' => 'Myliba cozumu',
                 '_myliba_home_solution_title' => 'Hedefler, performans gorusmeleri, aksiyonlar ve kultur gelisimi icin tek platform.',
                 '_myliba_home_products_button' => 'Urunleri incele',
@@ -1034,6 +1083,8 @@ class Commands
 
         return [
             '_myliba_home_builder' => $this->home_builder_defaults(),
+            '_myliba_home_hero_slides' => "Performance & Culture Platform | Build the operating system behind high performance. | Myliba brings strategy, goals, actions and culture into one measurable flow, so transformation does not stop at another software rollout. | Contact us | /en/contact/ | Explore Myliba | /en/our-products/\nMyliba Software | Performance is built every day, not scored once a year. | Keep strategic priorities alive with a platform designed to connect goals, continuous feedback, action and measurable progress. | Request a demo | /en/demo/ | Explore software | /en/our-products/\nMyliba Academy | The world's first ICF-approved OKR & Culture Coaching program. | Develop the leaders who will turn a strong platform into lasting organizational change through an accredited 40-hour certification journey. | Apply to the program | /en/okr-culture-academy/ | Explore academy | /en/okr-culture-academy/",
+            '_myliba_home_hero_metrics' => "44 | Companies\n500+ | Leaders\n67% | Stronger goals",
             '_myliba_home_hero_rotating_titles' => "Build a stronger culture around clear goals\nThe performance platform that turns strategy into action\nManage OKR and culture routines in one rhythm",
             '_myliba_home_hero_proof' => "Strategy to action\nContinuous performance\nAcademy + software",
             '_myliba_home_dashboard_brand' => 'Myliba',
@@ -1053,7 +1104,13 @@ class Commands
             '_myliba_home_feedback_title' => 'Feedback card',
             '_myliba_home_feedback_text' => 'Coaching notes, recognition and actions stay connected to goals.',
             '_myliba_home_trust_title' => 'Built for teams that manage performance culture seriously.',
+            '_myliba_home_trust_logo_label' => 'References and partners',
             '_myliba_home_trust_items' => "OKR\nKPI\nCFR\n1:1",
+            '_myliba_home_social_proof_items' => "25+ | Years of HR and organizational development experience\n44 | Companies\n16 | Industries\n500+ | Leaders\n40 CCE | ICF-accredited training\n100% | Living and sustainable culture commitment",
+            '_myliba_home_why_eyebrow' => 'Why Myliba?',
+            '_myliba_home_why_title' => 'Change cannot be delivered by software or training alone.',
+            '_myliba_home_why_text' => 'Our formula for cultural transformation combines people, technology and academy. We develop transformation leaders, then make the new operating rhythm part of everyday work.',
+            '_myliba_home_offering_rows' => "Myliba Software | Manage culture digitally and measurably. | 85% cost advantage | Bring performance development into one platform and reduce reliance on fragmented systems. | 40+ days saved | Give HR teams and leaders more time for strategic work. | 2x stronger performance | Build a fair, evidence-based and development-led performance rhythm. | 67% stronger goals | Improve strategic alignment and help teams set more ambitious goals. | Explore software | /en/our-products/\nMyliba Academy | Develop the leaders who will guide your transformation. | A world first | Join the first ICF 40 CCE-accredited OKR & Culture Coaching certification program. | Community | Access an ongoing learning community and complimentary update sessions. | Platform | Experience culture, leadership and self-discipline through immersive simulations. | Transformation at work | Turn coaching, powerful questions and strategic leadership into daily practice. | Explore academy | /en/okr-culture-academy/",
             '_myliba_home_problem_eyebrow' => 'The problem',
             '_myliba_home_problem_title' => 'Goal hierarchies get lost, feedback stays periodic.',
             '_myliba_home_problem_text' => 'Performance management becomes measurable only when goals, conversations and actions move in the same flow.',
@@ -1062,6 +1119,11 @@ class Commands
             '_myliba_home_strategy_flow_title' => 'Strategy to goals, action and culture.',
             '_myliba_home_strategy_flow_text' => 'Build one connected operating rhythm for priorities, ownership, action and learning.',
             '_myliba_home_strategy_flow_steps' => "Strategy | Make priorities visible and shared across the organization. | S\nGoals | Connect OKR and KPI ownership from company to teams. | G\nAction | Turn each priority into accountable actions and follow-up. | A\nCulture | Build 1:1, CFR and learning routines around the work. | C",
+            '_myliba_home_performance_eyebrow' => 'Performance management approach',
+            '_myliba_home_performance_title' => 'Turn performance management into a strategic advantage.',
+            '_myliba_home_performance_text' => 'Move beyond an annual, stressful scoring cycle with a fair and evidence-based approach that supports continuous growth.',
+            '_myliba_home_performance_tabs' => "Goal management | Align work with business outcomes. | Carry strategy to every level of the organization with connected OKRs, KPIs and action management.\nPerformance development | Make development continuous. | Reveal potential through ongoing feedback, feedforward and development-focused performance conversations.\nAI-powered insight | Read the DNA of your organization. | Spot signals around engagement, belonging and culture early with AI-supported analysis.\nDecision reports | Make fair decisions with evidence. | Use goals, actions, leadership signals and 360-degree insights to support objective promotion, reward and development decisions.",
+            '_myliba_home_performance_button' => 'Explore Myliba products',
             '_myliba_home_solution_eyebrow' => 'The Myliba solution',
             '_myliba_home_solution_title' => 'One platform for goals, performance conversations, actions and culture development.',
             '_myliba_home_products_button' => 'Explore products',
@@ -1102,7 +1164,7 @@ class Commands
 
     private function home_builder_defaults(): string
     {
-        $keys = ['hero', 'trust_bar', 'problem', 'solutions', 'products', 'academy', 'role_gains', 'outcomes', 'resources', 'faq', 'final_cta'];
+        $keys = ['hero', 'trust_bar', 'problem', 'solutions', 'performance', 'products', 'academy', 'role_gains', 'outcomes', 'resources', 'faq', 'final_cta'];
         $sections = [];
         $order = 10;
 
