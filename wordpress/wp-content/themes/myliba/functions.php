@@ -335,10 +335,10 @@ function myliba_current_language(): string
     }
 
     if (is_singular()) {
-        return (string) myliba_meta('_myliba_language', get_queried_object_id(), myliba_option('default_locale', 'tr'));
+        return (string) myliba_meta('_myliba_language', get_queried_object_id(), myliba_option('default_locale', 'en'));
     }
 
-    return (string) myliba_option('default_locale', 'tr');
+    return (string) myliba_option('default_locale', 'en');
 }
 
 function myliba_is_academy_landing_page(int $post_id = 0): bool
@@ -354,12 +354,12 @@ function myliba_is_academy_landing_page(int $post_id = 0): bool
 
 function myliba_available_locales(): array
 {
-    $raw = (string) myliba_option('available_locales', 'tr');
+    $raw = (string) myliba_option('available_locales', "en\ntr");
     $items = preg_split('/[\r\n,]+/', $raw) ?: [];
     $items = array_map('sanitize_key', array_map('trim', $items));
     $items = array_filter($items, static fn ($item) => $item !== '');
 
-    return array_values(array_unique($items)) ?: ['tr'];
+    return array_values(array_unique(array_merge($items, ['en', 'tr'])));
 }
 
 function myliba_locale_cookie_name(): string
@@ -409,7 +409,7 @@ function myliba_locale_from_accept_language(string $header): string
 
 function myliba_preferred_locale(): string
 {
-    $default_locale = (string) myliba_option('default_locale', 'tr');
+    $default_locale = (string) myliba_option('default_locale', 'en');
     $cookie_name = myliba_locale_cookie_name();
     $cookie_locale = isset($_COOKIE[$cookie_name]) ? sanitize_key(wp_unslash($_COOKIE[$cookie_name])) : '';
 
@@ -455,13 +455,53 @@ function myliba_redirect_root_to_preferred_locale(): void
         return;
     }
 
-    $preferred_locale = myliba_preferred_locale();
-    $locale_page = get_page_by_path($preferred_locale);
-
-    if ($locale_page) {
-        wp_safe_redirect(home_url('/' . $preferred_locale . '/'), count(myliba_available_locales()) === 1 ? 301 : 302);
+    $cookie_name = myliba_locale_cookie_name();
+    $cookie_locale = isset($_COOKIE[$cookie_name]) ? sanitize_key(wp_unslash($_COOKIE[$cookie_name])) : '';
+    if (in_array($cookie_locale, myliba_available_locales(), true)) {
+        wp_safe_redirect(home_url('/' . $cookie_locale . '/'), 302);
         exit;
     }
+
+    $browser_fallback = myliba_preferred_locale();
+    $home_base = trailingslashit(home_url('/'));
+    nocache_headers();
+    status_header(200);
+    ?>
+    <!doctype html>
+    <html lang="<?php echo esc_attr($browser_fallback === 'tr' ? 'tr-TR' : 'en-US'); ?>">
+    <head>
+        <meta charset="<?php bloginfo('charset'); ?>">
+        <meta name="robots" content="noindex,follow">
+        <meta http-equiv="refresh" content="1;url=<?php echo esc_url(home_url('/' . $browser_fallback . '/')); ?>">
+        <title><?php echo esc_html(get_bloginfo('name')); ?></title>
+    </head>
+    <body>
+        <script>
+        (() => {
+            const supported = ["tr", "en"];
+            let stored = "";
+            try {
+                stored = window.localStorage.getItem("myliba_locale") || "";
+            } catch (error) {}
+            const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
+                ? navigator.languages
+                : [navigator.language || ""];
+            const browserLocale = browserLanguages.some((language) => String(language).toLowerCase().startsWith("tr"))
+                ? "tr"
+                : "en";
+            const locale = supported.includes(stored) ? stored : browserLocale;
+            try {
+                window.localStorage.setItem("myliba_locale", locale);
+            } catch (error) {}
+            document.cookie = `myliba_locale=${locale}; path=/; max-age=31536000; samesite=lax`;
+            window.location.replace(<?php echo wp_json_encode($home_base); ?> + locale + "/");
+        })();
+        </script>
+        <p><a href="<?php echo esc_url(home_url('/' . $browser_fallback . '/')); ?>"><?php esc_html_e('Continue', 'myliba'); ?></a></p>
+    </body>
+    </html>
+    <?php
+    exit;
 }
 add_action('template_redirect', 'myliba_redirect_root_to_preferred_locale', 0);
 
@@ -469,6 +509,11 @@ function myliba_register_turkish_post_rewrites(): void
 {
     add_rewrite_rule(
         '^tr/yazilar/([^/]+)/?$',
+        'index.php?name=$matches[1]',
+        'top'
+    );
+    add_rewrite_rule(
+        '^en/blog/([^/]+)/?$',
         'index.php?name=$matches[1]',
         'top'
     );
@@ -482,11 +527,15 @@ function myliba_turkish_post_link(string $permalink, \WP_Post $post): string
     }
 
     $language = (string) get_post_meta($post->ID, '_myliba_language', true);
-    if ($language !== 'tr') {
+    $bases = [
+        'tr' => 'tr/yazilar',
+        'en' => 'en/blog',
+    ];
+    if (!isset($bases[$language])) {
         return $permalink;
     }
 
-    return home_url('/tr/yazilar/' . $post->post_name . '/');
+    return home_url('/' . $bases[$language] . '/' . $post->post_name . '/');
 }
 add_filter('post_link', 'myliba_turkish_post_link', 10, 2);
 
@@ -502,24 +551,6 @@ function myliba_redirect_legacy_urls(): void
 
     $path = myliba_request_path();
     $page_redirects = [
-        '/en' => 'home',
-        '/en/our-products' => 'products',
-        '/en/okr-culture-academy' => 'academy',
-        '/en/culture-analysis' => 'culture',
-        '/en/ethics-counsel' => 'ethics',
-        '/en/blog' => 'blog',
-        '/en/solutions' => 'solutions',
-        '/en/development-center' => 'development',
-        '/en/events' => 'events',
-        '/en/contact' => 'contact',
-        '/en/demo' => 'demo',
-        '/en/our-story' => 'story',
-        '/en/faq' => 'faq',
-        '/en/security' => 'security',
-        '/en/privacy-policy' => 'privacy',
-        '/en/kvkk' => 'privacy',
-        '/en/cookie-policy' => 'privacy',
-        '/en/terms-of-use' => 'privacy',
         '/tr/urunler' => 'products',
         '/products' => 'products',
         '/solutions' => 'solutions',
@@ -531,9 +562,15 @@ function myliba_redirect_legacy_urls(): void
     ];
 
     if (isset($page_redirects[$path])) {
-        $destination = $page_redirects[$path] === 'home'
-            ? home_url('/tr/')
-            : myliba_page_url($page_redirects[$path]);
+        if ($path === '/solutions') {
+            $destination = myliba_preferred_locale() === 'tr'
+                ? home_url('/tr/cozumler/')
+                : home_url('/en/solutions/');
+        } else {
+            $destination = $page_redirects[$path] === 'home'
+                ? home_url('/tr/')
+                : myliba_page_url($page_redirects[$path]);
+        }
 
         if (myliba_url_path($destination) !== $path) {
             wp_safe_redirect($destination, 301);
@@ -992,9 +1029,11 @@ function myliba_solution_catalog(): array
 function myliba_solution_url(string $slug): string
 {
     static $urls = [];
+    $language = myliba_current_language();
+    $cache_key = $language . ':' . $slug;
 
-    if (isset($urls[$slug])) {
-        return $urls[$slug];
+    if (isset($urls[$cache_key])) {
+        return $urls[$cache_key];
     }
 
     $posts = get_posts([
@@ -1004,15 +1043,22 @@ function myliba_solution_url(string $slug): string
         'posts_per_page' => 1,
         'fields' => 'ids',
         'suppress_filters' => false,
+        'meta_key' => '_myliba_language',
+        'meta_value' => $language,
     ]);
 
     if ($posts) {
-        $urls[$slug] = get_permalink((int) $posts[0]);
-        return $urls[$slug];
+        $urls[$cache_key] = get_permalink((int) $posts[0]);
+        return $urls[$cache_key];
     }
 
-    $urls[$slug] = home_url('/tr/cozumler/' . $slug . '/');
-    return $urls[$slug];
+    if ($language === 'en') {
+        $urls[$cache_key] = myliba_page_url('solutions');
+        return $urls[$cache_key];
+    }
+
+    $urls[$cache_key] = home_url('/tr/cozumler/' . $slug . '/');
+    return $urls[$cache_key];
 }
 
 function myliba_development_center_page_id(): int
@@ -1043,6 +1089,7 @@ function myliba_development_center_context(): array
 
 function myliba_development_center_items(): array
 {
+    $language = myliba_current_language();
     $page_id = myliba_development_center_page_id();
     $blog_page_url = myliba_page_url('blog');
     $events_page_url = myliba_page_url('events');
@@ -1054,13 +1101,13 @@ function myliba_development_center_items(): array
         'ebooks' => [
             'label' => $page_id ? (string) myliba_meta('_myliba_development_ebook_label', $page_id, $ebook_type?->labels->name ?: 'e-Kitaplar') : ($ebook_type?->labels->name ?: 'e-Kitaplar'),
             'description' => $page_id ? (string) myliba_meta('_myliba_development_ebook_text', $page_id, '') : '',
-            'url' => home_url('/tr/gelisim-merkezi/e-kitaplar/'),
+            'url' => home_url($language === 'en' ? '/en/development-center/ebooks/' : '/tr/gelisim-merkezi/e-kitaplar/'),
             'post_type' => 'myliba_ebook',
         ],
         'reports' => [
             'label' => $page_id ? (string) myliba_meta('_myliba_development_report_label', $page_id, $report_type?->labels->name ?: 'Raporlar ve Trendler') : ($report_type?->labels->name ?: 'Raporlar ve Trendler'),
             'description' => $page_id ? (string) myliba_meta('_myliba_development_report_text', $page_id, '') : '',
-            'url' => home_url('/tr/gelisim-merkezi/raporlar-ve-trendler/'),
+            'url' => home_url($language === 'en' ? '/en/development-center/reports/' : '/tr/gelisim-merkezi/raporlar-ve-trendler/'),
             'post_type' => 'myliba_report',
         ],
         'blog' => [
@@ -1104,28 +1151,86 @@ function myliba_header_menu_item_is_active(string $key, string $url): bool
     };
 }
 
+function myliba_language_context_url(string $language): string
+{
+    $language = in_array($language, ['tr', 'en'], true) ? $language : 'en';
+    $solution_index = $language === 'tr' ? '/tr/cozumler/' : '/en/solutions/';
+
+    if (is_page(['cozumler', 'solutions'])) {
+        return home_url($solution_index);
+    }
+
+    if (is_singular('myliba_solution')) {
+        if (myliba_current_language() === $language) {
+            return get_permalink(get_queried_object_id());
+        }
+
+        $translation_key = trim((string) get_post_meta(get_queried_object_id(), '_myliba_translation_key', true));
+        if ($translation_key !== '') {
+            $translations = get_posts([
+                'post_type' => 'myliba_solution',
+                'post_status' => 'publish',
+                'posts_per_page' => 1,
+                'fields' => 'ids',
+                'meta_query' => [
+                    [
+                        'key' => '_myliba_translation_key',
+                        'value' => $translation_key,
+                    ],
+                    [
+                        'key' => '_myliba_language',
+                        'value' => $language,
+                    ],
+                ],
+                'suppress_filters' => false,
+            ]);
+
+            if ($translations) {
+                return get_permalink((int) $translations[0]);
+            }
+        }
+
+        return home_url($solution_index);
+    }
+
+    return home_url('/' . $language . '/');
+}
+
 function myliba_language_links(): array
 {
     if (function_exists('pll_the_languages')) {
         $languages = pll_the_languages(['raw' => 1]);
 
         if (is_array($languages) && $languages) {
-            return array_map(static function (array $language): array {
+            $links = array_map(static function (array $language): array {
                 return [
                     'label' => strtoupper((string) $language['slug']),
                     'url' => (string) $language['url'],
                     'active' => !empty($language['current_lang']),
                 ];
             }, $languages);
+
+            $existing = array_map(static fn (array $link): string => strtolower((string) $link['label']), $links);
+            foreach (['tr', 'en'] as $language) {
+                if (!in_array($language, $existing, true)) {
+                    $links[] = [
+                        'label' => strtoupper($language),
+                        'url' => myliba_language_context_url($language),
+                        'active' => myliba_current_language() === $language,
+                    ];
+                }
+            }
+
+            return $links;
         }
     }
 
     $links = [];
-    foreach (myliba_available_locales() as $language) {
+    foreach (['tr', 'en'] as $language) {
         $page = get_page_by_path($language);
         $links[] = [
             'label' => strtoupper($language),
-            'url' => home_url('/' . $language . '/'),
+            'url' => myliba_language_context_url($language),
             'active' => myliba_current_language() === $language,
         ];
     }

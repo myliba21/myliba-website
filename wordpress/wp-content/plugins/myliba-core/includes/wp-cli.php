@@ -27,8 +27,8 @@ class Commands
         update_option('myliba_options', array_merge(Options\defaults(), [
             'indexing_enabled' => '0',
             'contact_email' => get_option('admin_email'),
-            'default_locale' => 'tr',
-            'available_locales' => 'tr',
+            'default_locale' => 'en',
+            'available_locales' => "en\ntr",
             'demo_url' => '/tr/demo/',
             'footer_cta_title' => 'Kültürü ölçülebilir hale getirmeye hazır mısınız?',
             'primary_cta_url' => '/tr/iletisim/',
@@ -180,35 +180,46 @@ class Commands
         $this->upsert_team('Strategy Lead', 'OKR and culture strategy', 10);
         $this->upsert_logo('Example Client', 10);
 
-        $trashed = $this->apply_turkish_only_mode();
+        $trashed = $this->apply_tr_first_mode();
 
         \WP_CLI::success(sprintf(
-            'Myliba WordPress structure seeded in Turkish-only mode. %d English items were moved to Trash. Indexing is disabled for staging.',
+            'Myliba WordPress structure seeded in TR-first bilingual mode. %d unfinished English items were moved to Trash. Indexing is disabled for staging.',
             $trashed
         ));
     }
 
     /**
-     * Make Turkish the only public locale and move English content to Trash.
+     * Keep TR and EN routing active while moving unfinished English subpages to Trash.
      *
      * ## OPTIONS
      *
      * [--yes]
      * : Confirm the operation.
      *
+     * @subcommand tr-first
+     */
+    public function tr_first(array $args, array $assoc_args): void
+    {
+        if (empty($assoc_args['yes'])) {
+            \WP_CLI::confirm('Keep TR/EN routing active and move unfinished English subpages to Trash?');
+        }
+
+        $trashed = $this->apply_tr_first_mode();
+        \WP_CLI::success(sprintf(
+            'TR-first bilingual routing enabled. %d unfinished English items were moved to Trash.',
+            $trashed
+        ));
+    }
+
+    /**
+     * Backward-compatible alias for the previous command name.
+     *
      * @subcommand turkish-only
      */
     public function turkish_only(array $args, array $assoc_args): void
     {
-        if (empty($assoc_args['yes'])) {
-            \WP_CLI::confirm('Use /tr/ as the homepage and move all English content to Trash?');
-        }
-
-        $trashed = $this->apply_turkish_only_mode();
-        \WP_CLI::success(sprintf(
-            'Turkish-only routing enabled. %d English items were moved to Trash.',
-            $trashed
-        ));
+        \WP_CLI::warning('The "turkish-only" command is deprecated; use "tr-first". English routing remains enabled.');
+        $this->tr_first($args, $assoc_args);
     }
 
     /**
@@ -1611,7 +1622,7 @@ class Commands
         }
 
         $this->save_meta($post_id, $meta);
-        $this->set_polylang_language($post_id, $meta['_myliba_language'] ?? Options\get('default_locale', 'tr'));
+        $this->set_polylang_language($post_id, $meta['_myliba_language'] ?? Options\get('default_locale', 'en'));
 
         return (int) $post_id;
     }
@@ -1623,11 +1634,11 @@ class Commands
         }
     }
 
-    private function apply_turkish_only_mode(): int
+    private function apply_tr_first_mode(): int
     {
         $options = Options\get_all();
-        $options['default_locale'] = 'tr';
-        $options['available_locales'] = 'tr';
+        $options['default_locale'] = 'en';
+        $options['available_locales'] = "en\ntr";
         $options['demo_url'] = '/tr/demo/';
         $options['primary_cta_url'] = '/tr/iletisim/';
         $options['demo_cta_label'] = 'Demo talep et';
@@ -1652,6 +1663,62 @@ class Commands
             }
         }
 
+        $english_home_ids = get_posts([
+            'post_type' => 'page',
+            'post_status' => ['publish', 'draft', 'trash'],
+            'post_parent' => 0,
+            'posts_per_page' => -1,
+            'fields' => 'ids',
+            'meta_key' => '_myliba_language',
+            'meta_value' => 'en',
+            'orderby' => 'ID',
+            'order' => 'ASC',
+            'suppress_filters' => true,
+        ]);
+        $english_home_id = $english_home_ids ? (int) $english_home_ids[0] : 0;
+        if ($english_home_id && get_post_status($english_home_id) === 'trash') {
+            wp_untrash_post($english_home_id);
+        }
+        if ($english_home_id && get_post_status($english_home_id) !== 'publish') {
+            wp_update_post([
+                'ID' => $english_home_id,
+                'post_status' => 'publish',
+                'post_name' => 'en',
+            ]);
+        }
+
+        $protected_english_ids = $english_home_id ? [$english_home_id] : [];
+        if ($english_home_id) {
+            $english_shell_pages = get_posts([
+                'post_type' => 'page',
+                'post_status' => ['publish', 'draft', 'trash'],
+                'post_parent' => $english_home_id,
+                'posts_per_page' => -1,
+                'meta_key' => '_myliba_language',
+                'meta_value' => 'en',
+                'suppress_filters' => true,
+            ]);
+
+            foreach ($english_shell_pages as $shell_page) {
+                $desired_slug = (string) get_post_meta($shell_page->ID, '_wp_desired_post_slug', true);
+                $current_slug = preg_replace('/__trashed$/', '', $shell_page->post_name) ?: $shell_page->post_name;
+                if ($desired_slug !== 'solutions' && $current_slug !== 'solutions') {
+                    continue;
+                }
+
+                if (get_post_status($shell_page) === 'trash') {
+                    wp_untrash_post($shell_page->ID);
+                }
+                wp_update_post([
+                    'ID' => $shell_page->ID,
+                    'post_status' => 'publish',
+                    'post_parent' => $english_home_id,
+                    'post_name' => 'solutions',
+                ]);
+                $protected_english_ids[] = (int) $shell_page->ID;
+            }
+        }
+
         $english_ids = get_posts([
             'post_type' => array_values(get_post_types(['show_ui' => true], 'names')),
             'post_status' => ['publish', 'draft', 'pending', 'private', 'future'],
@@ -1659,6 +1726,7 @@ class Commands
             'fields' => 'ids',
             'meta_key' => '_myliba_language',
             'meta_value' => 'en',
+            'post__not_in' => $protected_english_ids,
             'suppress_filters' => true,
         ]);
 

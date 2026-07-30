@@ -9294,10 +9294,6 @@ h4 {
   overflow: hidden;
 }
 
-.performance-tabs__nav {
-  padding: 8px;
-}
-
 .performance-tabs__panel {
   gap: clamp(34px, 5vw, 72px);
   padding: clamp(30px, 5vw, 58px);

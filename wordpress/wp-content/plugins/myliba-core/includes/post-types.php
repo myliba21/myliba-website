@@ -9,8 +9,143 @@ if (!defined('ABSPATH')) {
 function boot(): void
 {
     add_action('init', __NAMESPACE__ . '\\register');
+    add_action('init', __NAMESPACE__ . '\\register_localized_rewrite_rules', 20);
+    add_filter('post_type_link', __NAMESPACE__ . '\\localized_post_type_link', 10, 2);
+    add_filter('query_vars', __NAMESPACE__ . '\\localized_query_vars');
+    add_action('pre_get_posts', __NAMESPACE__ . '\\enforce_route_locale');
+    add_action('template_redirect', __NAMESPACE__ . '\\redirect_missing_localized_solution', 1);
     add_filter('pll_get_post_types', __NAMESPACE__ . '\\polylang_post_types', 10, 2);
     add_filter('pll_get_taxonomies', __NAMESPACE__ . '\\polylang_taxonomies', 10, 2);
+}
+
+function localized_bases(): array
+{
+    return [
+        'myliba_product' => [
+            'tr' => 'tr/yazilim',
+            'en' => 'en/our-products',
+        ],
+        'myliba_solution' => [
+            'tr' => 'tr/cozumler',
+            'en' => 'en/solutions',
+        ],
+        'myliba_academy' => [
+            'tr' => 'tr/okr-kultur-akademisi',
+            'en' => 'en/okr-culture-academy',
+        ],
+        'myliba_case_study' => [
+            'tr' => 'tr/vaka-calismalari',
+            'en' => 'en/case-studies',
+        ],
+        'myliba_landing' => [
+            'tr' => 'tr/icerikler',
+            'en' => 'en/content',
+        ],
+        'myliba_event' => [
+            'tr' => 'tr/etkinlikler',
+            'en' => 'en/events',
+        ],
+        'myliba_ebook' => [
+            'tr' => 'tr/gelisim-merkezi/e-kitaplar',
+            'en' => 'en/development-center/ebooks',
+        ],
+        'myliba_report' => [
+            'tr' => 'tr/gelisim-merkezi/raporlar-ve-trendler',
+            'en' => 'en/development-center/reports',
+        ],
+        'myliba_team' => [
+            'tr' => 'tr/ekibimiz',
+            'en' => 'en/team',
+        ],
+    ];
+}
+
+function register_localized_rewrite_rules(): void
+{
+    foreach (localized_bases() as $post_type => $locale_bases) {
+        foreach ($locale_bases as $locale => $base) {
+            add_rewrite_rule(
+                '^' . preg_quote($base, '#') . '/([^/]+)/?$',
+                'index.php?post_type=' . $post_type . '&name=$matches[1]&myliba_route_locale=' . $locale,
+                'top'
+            );
+        }
+    }
+
+    add_rewrite_rule(
+        '^en/development-center/ebooks/?$',
+        'index.php?post_type=myliba_ebook&myliba_route_locale=en',
+        'top'
+    );
+    add_rewrite_rule(
+        '^en/development-center/reports/?$',
+        'index.php?post_type=myliba_report&myliba_route_locale=en',
+        'top'
+    );
+}
+
+function localized_query_vars(array $query_vars): array
+{
+    $query_vars[] = 'myliba_route_locale';
+
+    return $query_vars;
+}
+
+function enforce_route_locale(\WP_Query $query): void
+{
+    if (is_admin()) {
+        return;
+    }
+
+    $locale = sanitize_key((string) $query->get('myliba_route_locale'));
+    $post_type = $query->get('post_type');
+    $post_types = is_array($post_type) ? $post_type : [$post_type];
+    $supported_types = array_keys(localized_bases());
+
+    if (!in_array($locale, ['tr', 'en'], true) || !array_intersect($post_types, $supported_types)) {
+        return;
+    }
+
+    $meta_query = $query->get('meta_query');
+    $meta_query = is_array($meta_query) ? $meta_query : [];
+    $meta_query[] = [
+        'key' => '_myliba_language',
+        'value' => $locale,
+        'compare' => '=',
+    ];
+    $query->set('meta_query', $meta_query);
+}
+
+function redirect_missing_localized_solution(): void
+{
+    if (!is_404() || is_admin()) {
+        return;
+    }
+
+    $locale = sanitize_key((string) get_query_var('myliba_route_locale'));
+    $post_type = get_query_var('post_type');
+    if (!in_array($locale, ['tr', 'en'], true) || $post_type !== 'myliba_solution') {
+        return;
+    }
+
+    $destination = $locale === 'tr' ? home_url('/tr/cozumler/') : home_url('/en/solutions/');
+    wp_safe_redirect($destination, 302);
+    exit;
+}
+
+function localized_post_type_link(string $permalink, \WP_Post $post): string
+{
+    $bases = localized_bases();
+    if (!isset($bases[$post->post_type])) {
+        return $permalink;
+    }
+
+    $language = sanitize_key((string) get_post_meta($post->ID, '_myliba_language', true));
+    if (!isset($bases[$post->post_type][$language])) {
+        $language = 'tr';
+    }
+
+    return home_url('/' . $bases[$post->post_type][$language] . '/' . $post->post_name . '/');
 }
 
 function register(): void

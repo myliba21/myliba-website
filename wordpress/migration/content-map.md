@@ -2,7 +2,7 @@
 
 | Content type | WordPress target | Notes |
 | --- | --- | --- |
-| `homepage` | Page: `tr` | `/` redirects to `/tr/`. English pages are in Trash until English publishing resumes. |
+| `homepage` | Pages: `tr` / `en` | `/` chooses TR for Turkish browser languages and EN for all others, then remembers the explicit language-switcher choice. |
 | `our-products` | Page | Hero and SEO fields are in the Myliba meta boxes. |
 | `okr-academy` | Page | Use the block editor for body content and featured image for hero image. |
 | `culture-analysis` | Page | Same page model as service pages. |

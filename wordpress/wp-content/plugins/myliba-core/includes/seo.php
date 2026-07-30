@@ -195,10 +195,28 @@ function render_hreflang(): void
         return;
     }
 
+    if (is_page()) {
+        $current_page = get_post(get_queried_object_id());
+        if ($current_page && in_array($current_page->post_name, ['tr', 'en'], true)) {
+            foreach (Options\locales() as $locale) {
+                $locale_page = get_page_by_path($locale);
+                if ($locale_page && get_post_status($locale_page) === 'publish') {
+                    printf(
+                        "<link rel=\"alternate\" hreflang=\"%s\" href=\"%s\">\n",
+                        esc_attr($locale),
+                        esc_url(home_url('/' . $locale . '/'))
+                    );
+                }
+            }
+            printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url(home_url('/')));
+            return;
+        }
+    }
+
     // Fallback hreflang when Polylang/WPML is not yet installed.
     $current_lang = is_singular() ? (get_post_meta(get_queried_object_id(), '_myliba_language', true) ?: 'tr') : 'tr';
     printf("<link rel=\"alternate\" hreflang=\"%s\" href=\"%s\">\n", esc_attr($current_lang), esc_url(current_url()));
-    printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url(home_url('/tr/')));
+    printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url(home_url('/')));
 }
 
 function render_schema(): void

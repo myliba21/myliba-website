@@ -10,8 +10,8 @@ function defaults(): array
 {
     $defaults = [
         'indexing_enabled' => '0',
-        'default_locale' => 'tr',
-        'available_locales' => 'tr',
+        'default_locale' => 'en',
+        'available_locales' => "en\ntr",
         'contact_email' => get_option('admin_email'),
         'phone_label' => '+90 553 986 86 99',
         'phone_url' => 'tel:+905539868699',
@@ -82,12 +82,12 @@ function indexing_enabled(): bool
 
 function locales(): array
 {
-    $raw = (string) get('available_locales', 'tr');
+    $raw = (string) get('available_locales', "en\ntr");
     $items = preg_split('/[\r\n,]+/', $raw) ?: [];
     $items = array_map('trim', $items);
     $items = array_filter($items, static fn ($item) => $item !== '');
 
-    return array_values(array_unique($items)) ?: ['tr'];
+    return array_values(array_unique(array_merge($items, ['en', 'tr'])));
 }
 
 function ensure_defaults(): void

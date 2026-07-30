@@ -25,11 +25,14 @@ docker compose --profile tools run --rm wpcli wp myliba seed --yes
 
 The local site will be available at `http://localhost:8080`.
 
-## URL structure
+## URL and language structure
 
-Turkish is the only public locale for now:
+The project permanently supports Turkish and English. Turkish pages are being
+completed first; unfinished English subpages stay in Trash until they are cloned
+from the approved Turkish pages.
 
-- Homepage: `/tr/` (`/` redirects with HTTP 301)
+- Turkish homepage: `/tr/`
+- English homepage: `/en/`
 - Software: `/tr/yazilim/`
 - Solutions: `/tr/cozumler/`
 - Academy: `/tr/okr-kultur-akademisi/`
@@ -39,16 +42,20 @@ Turkish is the only public locale for now:
 - e-Books: `/tr/gelisim-merkezi/e-kitaplar/{slug}/`
 - Reports: `/tr/gelisim-merkezi/raporlar-ve-trendler/{slug}/`
 
-English content is retained in the WordPress Trash so it can be restored later.
-To apply the same routing and cleanup safely to another database:
+When `/` is opened without a saved choice, Turkish browser languages go to
+`/tr/`; every other browser language goes to `/en/`. A language-switcher choice
+is saved in localStorage and mirrored to a one-year cookie, so later visits keep
+the same locale.
+
+To apply the same TR-first bilingual setup safely to another database:
 
 ```bash
-docker compose --profile tools run --rm wpcli wp myliba turkish-only --yes
+docker compose --profile tools run --rm wpcli wp myliba tr-first --yes
 ```
 
-The command also refreshes permalink rules and points site CTAs to their Turkish
-destinations. Known legacy English and old custom-post URLs redirect to their
-current Turkish counterparts with HTTP 301.
+The command keeps both language routes active, restores the English homepage,
+moves unfinished English subpages to Trash, refreshes permalink rules, and
+points the currently completed CTAs to their Turkish destinations.
 
 ## Import from myliba.com
 

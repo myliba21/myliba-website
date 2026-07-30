@@ -7,13 +7,36 @@
   const megaItems = Array.from(document.querySelectorAll(".site-nav__item--mega"));
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const isMobileNav = () => window.matchMedia("(max-width: 960px)").matches;
+  const supportedLocales = ["tr", "en"];
   const setLocaleCookie = (locale) => {
     document.cookie = `myliba_locale=${locale}; path=/; max-age=31536000; samesite=lax`;
   };
+  const setLocalePreference = (locale) => {
+    if (!supportedLocales.includes(locale)) {
+      return;
+    }
+
+    try {
+      window.localStorage.setItem("myliba_locale", locale);
+    } catch (error) {
+      // Cookies remain as the fallback when localStorage is unavailable.
+    }
+
+    setLocaleCookie(locale);
+  };
+
+  const pathLocale = window.location.pathname
+    .split("/")
+    .filter(Boolean)
+    .find((segment) => supportedLocales.includes(segment));
+
+  if (pathLocale) {
+    setLocalePreference(pathLocale);
+  }
 
   document.querySelectorAll("[data-myliba-locale]").forEach((link) => {
     link.addEventListener("click", () => {
-      setLocaleCookie(link.dataset.mylibaLocale);
+      setLocalePreference(link.dataset.mylibaLocale);
     });
   });
 
