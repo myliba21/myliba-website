@@ -60,33 +60,63 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                     $link_classes = trim('site-nav__link ' . ($is_active ? 'is-active' : ''));
                     $aria_current = $is_active ? ' aria-current="page"' : '';
                     ?>
-                    <?php if ($item['key'] === 'solutions') :
-                        $mega_products = myliba_mega_menu_products();
-                        ?>
+                    <?php if (in_array($item['key'], ['solutions', 'development'], true)) : ?>
                         <li class="<?php echo esc_attr(trim($item_classes . ' site-nav__item--mega')); ?>">
-                            <a class="<?php echo esc_attr($link_classes); ?>" href="<?php echo esc_url($item['url']); ?>" aria-haspopup="true" aria-expanded="false" aria-controls="solutions-mega-menu"<?php echo $aria_current; ?>>
+                            <?php $mega_menu_id = $item['key'] . '-mega-menu'; ?>
+                            <a class="<?php echo esc_attr($link_classes); ?>" href="<?php echo esc_url($item['url']); ?>" aria-haspopup="true" aria-expanded="false" aria-controls="<?php echo esc_attr($mega_menu_id); ?>"<?php echo $aria_current; ?>>
                                 <?php echo esc_html($item['label']); ?>
                             </a>
-                            <div id="solutions-mega-menu" class="mega-menu" aria-label="<?php esc_attr_e('Solutions menu', 'myliba'); ?>">
-                                <div class="mega-menu__intro">
-                                    <span><?php esc_html_e('Solutions', 'myliba'); ?></span>
-                                    <strong><?php esc_html_e('Explore Myliba modules', 'myliba'); ?></strong>
-                                    <p><?php esc_html_e('Choose the operating routines you want to strengthen across OKR, KPI, CFR, 1:1, feedback and analytics.', 'myliba'); ?></p>
-                                    <a href="<?php echo esc_url($item['url']); ?>"><?php esc_html_e('View all solutions', 'myliba'); ?></a>
+                            <?php if ($item['key'] === 'solutions') : ?>
+                                <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu" aria-label="<?php esc_attr_e('Solutions menu', 'myliba'); ?>">
+                                    <div class="mega-menu__intro">
+                                        <span>Çözümlerimiz</span>
+                                        <strong>Birbiri ile entegre, bütünleşik çözümler</strong>
+                                        <p>İster tek tek kullanın, ister bütünleştirin; kültürünüzü ve iş sonuçlarınızı birlikte dönüştürün.</p>
+                                        <a href="<?php echo esc_url($item['url']); ?>">Tüm çözümleri inceleyin</a>
+                                    </div>
+                                    <div class="mega-menu__grid">
+                                        <?php foreach (myliba_solution_catalog() as $solution_slug => $solution) : ?>
+                                            <?php
+                                            $is_card_active = is_singular('myliba_solution') && get_post_field('post_name', get_queried_object_id()) === $solution_slug;
+                                            ?>
+                                            <a class="<?php echo esc_attr(trim('mega-menu__card ' . ($is_card_active ? 'is-active' : ''))); ?>" href="<?php echo esc_url(myliba_solution_url($solution_slug)); ?>"<?php echo $is_card_active ? ' aria-current="page"' : ''; ?>>
+                                                <span><?php echo esc_html(substr($solution['title'], 0, 1)); ?></span>
+                                                <strong><?php echo esc_html($solution['title']); ?></strong>
+                                                <small><?php echo esc_html($solution['summary']); ?></small>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </div>
-                                <div class="mega-menu__grid">
-                                    <?php while ($mega_products->have_posts()) : $mega_products->the_post(); ?>
-                                        <?php
-                                        $is_card_active = is_singular('myliba_product') && get_queried_object_id() === get_the_ID();
-                                        ?>
-                                        <a class="<?php echo esc_attr(trim('mega-menu__card ' . ($is_card_active ? 'is-active' : ''))); ?>" href="<?php the_permalink(); ?>"<?php echo $is_card_active ? ' aria-current="page"' : ''; ?>>
-                                            <span><?php echo esc_html(substr(get_the_title(), 0, 1)); ?></span>
-                                            <strong><?php the_title(); ?></strong>
-                                            <small><?php echo esc_html(myliba_excerpt(get_the_ID(), 11)); ?></small>
-                                        </a>
-                                    <?php endwhile; wp_reset_postdata(); ?>
+                            <?php else :
+                                $development_context = myliba_development_center_context();
+                                $development_items = myliba_development_center_items();
+                                ?>
+                                <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu mega-menu--development" aria-label="Gelişim Merkezi menüsü">
+                                    <div class="mega-menu__intro">
+                                        <span><?php echo esc_html($development_context['eyebrow']); ?></span>
+                                        <strong><?php echo esc_html($development_context['title']); ?></strong>
+                                        <p><?php echo esc_html($development_context['subtitle']); ?></p>
+                                        <a href="<?php echo esc_url($item['url']); ?>">Gelişim Merkezi’ni keşfedin</a>
+                                    </div>
+                                    <div class="mega-menu__grid">
+                                        <?php foreach ($development_items as $development_item) : ?>
+                                            <?php
+                                            $request_uri = isset($_SERVER['REQUEST_URI']) ? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) : '/';
+                                            $is_card_active = myliba_url_path(home_url($request_uri)) === myliba_url_path($development_item['url'])
+                                                || is_post_type_archive($development_item['post_type'])
+                                                || is_singular($development_item['post_type']);
+                                            ?>
+                                            <a class="<?php echo esc_attr(trim('mega-menu__card ' . ($is_card_active ? 'is-active' : ''))); ?>" href="<?php echo esc_url($development_item['url']); ?>"<?php echo $is_card_active ? ' aria-current="page"' : ''; ?>>
+                                                <span><?php echo esc_html(substr($development_item['label'], 0, 1)); ?></span>
+                                                <strong><?php echo esc_html($development_item['label']); ?></strong>
+                                                <?php if ($development_item['description'] !== '') : ?>
+                                                    <small><?php echo esc_html($development_item['description']); ?></small>
+                                                <?php endif; ?>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                         </li>
                     <?php else : ?>
                         <li class="<?php echo esc_attr($item_classes); ?>"><a class="<?php echo esc_attr($link_classes); ?>" href="<?php echo esc_url($item['url']); ?>"<?php echo $aria_current; ?>><?php echo esc_html($item['label']); ?></a></li>

@@ -9,8 +9,18 @@ if (myliba_is_academy_landing_page()) {
     return;
 }
 
-if (is_page('yazilim')) {
+if (is_page(['yazilim', 'urunler'])) {
     require get_template_directory() . '/template-parts/page-software.php';
+    return;
+}
+
+if (is_page(['solutions', 'cozumler'])) {
+    require get_template_directory() . '/template-parts/page-solutions.php';
+    return;
+}
+
+if (is_page(['development-center', 'gelisim-merkezi'])) {
+    require get_template_directory() . '/template-parts/page-development-center.php';
     return;
 }
 

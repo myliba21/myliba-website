@@ -66,6 +66,7 @@ class Commands
             ['Ethics Counsel', 'ethics-counsel', $en, 'en', 'Ethics Counsel', 'Build practical ethics routines for leaders and teams.'],
             ['Blog', 'blog', $en, 'en', 'Blog', 'Articles, guides, and operating notes from Myliba.', 'template-blog.php'],
             ['Solutions', 'solutions', $en, 'en', 'Solutions for every performance culture owner.', 'Persona-based paths for executives, HR, strategy teams, leaders and employees.'],
+            ['Development Center', 'development-center', $en, 'en', 'Develop your growth mindset.', 'A continuous development and transformation center for new knowledge, research, experiences, and events.'],
             ['Events', 'events', $en, 'en', 'Events', 'Upcoming webinars, workshops, and community sessions.', 'template-events.php'],
             ['Demo', 'demo', $en, 'en', 'Request a Myliba demo', 'See how OKR, KPI, CFR, 1:1, feedback, actions and academy programs connect in one platform.', 'template-demo.php'],
             ['Contact', 'contact', $en, 'en', 'Contact Myliba', 'Tell us what you are building and we will route the request.', 'template-contact.php'],
@@ -82,6 +83,7 @@ class Commands
             ['Etik Danismanlik', 'etik-danismanlik', $tr, 'tr', 'Etik Danismanlik', 'Liderler ve ekipler icin uygulanabilir etik rutinleri kurun.'],
             ['Yazilar', 'yazilar', $tr, 'tr', 'Yazilar', 'Myliba yazilari, rehberleri ve operasyon notlari.', 'template-blog.php'],
             ['Cozumler', 'cozumler', $tr, 'tr', 'Performans kulturu sahipleri icin cozumler.', 'Ust yonetim, IK, strateji ekipleri, liderler ve calisanlar icin persona bazli akislar.'],
+            ['Gelişim Merkezi', 'gelisim-merkezi', $tr, 'tr', 'Gelişim zihniyetini geliştirin!', 'Gelişim zihniyeti sürekli yeni bilgi ve tecrübe ile beslenmeyi gerektirir. Myliba yüksek performans kültürü inşa ederken performans geliştirme zihniyetine geçiş için sürekli içerikler üretir.'],
             ['Etkinlikler', 'etkinlikler', $tr, 'tr', 'Etkinlikler', 'Webinar, atolye ve topluluk bulusmalari.', 'template-events.php'],
             ['Demo', 'demo', $tr, 'tr', 'Myliba demosu isteyin', 'OKR, KPI, CFR, 1:1, geri bildirim, aksiyon ve akademi akislarini tek platformda gorun.', 'template-demo.php'],
             ['Iletisim', 'iletisim', $tr, 'tr', 'Myliba ile iletisime gecin', 'Ihtiyacinizi anlatin, talebinizi dogru ekibe yonlendirelim.', 'template-contact.php'],
@@ -98,13 +100,52 @@ class Commands
         foreach ($pages as $page) {
             [$title, $slug, $parent, $language, $hero_title, $hero_subtitle] = $page;
             $template = $page[6] ?? '';
-            $this->upsert_page($title, $slug, $this->starter_content('generic'), [
+            $meta = [
                 '_myliba_language' => $language,
                 '_myliba_hero_title' => $hero_title,
                 '_myliba_hero_subtitle' => $hero_subtitle,
                 '_myliba_seo_title' => $title . ' | Myliba',
                 '_myliba_seo_description' => $hero_subtitle,
-            ], $parent, $template);
+            ];
+
+            if ($slug === 'gelisim-merkezi') {
+                $meta += [
+                    '_myliba_eyebrow' => 'Sürekli gelişim ve dönüşüm merkezi',
+                    '_myliba_development_section_eyebrow' => 'Alt sayfalar',
+                    '_myliba_development_section_title' => 'Gelişim zihniyetini sürekli yeni bilgi ve tecrübe ile besleyin.',
+                    '_myliba_development_section_text' => 'e-Kitaplar, raporlar, blog yazıları ve etkinliklerle gelişim yolculuğunuzu sürdürün.',
+                    '_myliba_development_ebook_label' => 'e-Kitaplar',
+                    '_myliba_development_ebook_text' => 'Yüksek performans kültürü ve yönetim pratikleri üzerine indirilebilir kaynaklar.',
+                    '_myliba_development_report_label' => 'Raporlar ve Trendler',
+                    '_myliba_development_report_text' => 'İş dünyasını ve performans kültürünü şekillendiren güncel araştırmalar.',
+                    '_myliba_development_blog_label' => 'Blog',
+                    '_myliba_development_blog_text' => 'Myliba yazıları, rehberleri ve uygulama notları.',
+                    '_myliba_development_events_label' => 'Etkinlikler',
+                    '_myliba_development_events_text' => 'Webinar, workshop ve topluluk buluşmaları.',
+                    '_myliba_development_card_cta' => 'İçerikleri inceleyin',
+                ];
+            }
+
+            if ($slug === 'development-center') {
+                $meta += [
+                    '_myliba_eyebrow' => 'Continuous development and transformation center',
+                    '_myliba_development_section_eyebrow' => 'Resources',
+                    '_myliba_development_section_title' => 'Keep your growth mindset supplied with new knowledge and experience.',
+                    '_myliba_development_section_text' => 'Continue your development journey with e-books, reports, articles, and events.',
+                    '_myliba_development_ebook_label' => 'e-Books',
+                    '_myliba_development_ebook_text' => 'Downloadable resources about high-performance culture and management practices.',
+                    '_myliba_development_report_label' => 'Reports and Trends',
+                    '_myliba_development_report_text' => 'Current research shaping work and performance culture.',
+                    '_myliba_development_blog_label' => 'Blog',
+                    '_myliba_development_blog_text' => 'Myliba articles, guides, and implementation notes.',
+                    '_myliba_development_events_label' => 'Events',
+                    '_myliba_development_events_text' => 'Webinars, workshops, and community sessions.',
+                    '_myliba_development_card_cta' => 'Explore content',
+                ];
+            }
+
+            $content = in_array($slug, ['gelisim-merkezi', 'development-center'], true) ? '' : $this->starter_content('generic');
+            $this->upsert_page($title, $slug, $content, $meta, $parent, $template);
         }
 
         $this->seed_navigation();
@@ -119,6 +160,21 @@ class Commands
         $this->seed_landing_pages();
         $this->upsert_event('Myliba Culture Session', 'myliba-culture-session', 'en', '+30 days', 'Online');
         $this->upsert_event('Myliba Kultur Oturumu', 'myliba-kultur-oturumu', 'tr', '+45 days', 'Online');
+        $this->upsert_post_type(
+            'myliba_ebook',
+            'Yüksek Performans Kültürü Yaratmak',
+            'yuksek-performans-kulturu-yaratmak',
+            '<p>Nasrettin Hoca yönetim danışmanı olursa yüksek performans kültürünü nasıl ele alırdı? e-Kitabın açıklamasını ve indirme bağlantısını WordPress yönetiminden güncelleyin.</p>',
+            [
+                '_myliba_language' => 'tr',
+                '_myliba_hero_title' => 'Yüksek Performans Kültürü Yaratmak',
+                '_myliba_hero_subtitle' => 'Nasrettin Hoca yönetim danışmanı olursa yüksek performans kültürüne nasıl yaklaşırdı?',
+                '_myliba_label' => 'e-Kitap',
+                '_myliba_cta_label' => 'e-Kitabı İndirin',
+                '_myliba_order' => '10',
+                '_myliba_seo_description' => 'Yüksek performans kültürü yaratmak için pratik yönetim içgörüleri.',
+            ]
+        );
         $this->upsert_team('Strategy Lead', 'OKR and culture strategy', 10);
         $this->upsert_logo('Example Client', 10);
 
@@ -917,25 +973,52 @@ class Commands
     private function seed_solutions(): void
     {
         $items = [
-            ['For Executives', 'executives', 'Turn strategy into transparent goals, actions and progress signals.', 'Executives cannot see strategy execution in real time.', 'Myliba shows company goals, contribution, risks and progress in one operating view.', 10],
-            ['For Human Resources', 'human-resources', 'Build continuous performance, feedback and development routines.', 'HR needs a fair, continuous and measurable performance system.', 'Myliba connects 1:1, feedback, development and academy adoption.', 20],
-            ['For Strategy Office', 'strategy-office', 'Connect strategic priorities with measurable OKRs, KPIs and actions.', 'Strategy teams struggle to connect priorities with daily execution.', 'Myliba links OKRs, KPIs, actions and progress reporting.', 30],
-            ['For Team Leaders', 'team-leaders', 'Run better 1:1 meetings, follow up actions and coach progress.', 'Leaders need practical routines that create clarity.', 'Myliba gives leaders agenda, feedback, action and progress visibility.', 40],
-            ['For Employees', 'employees', 'See goals, contribution, feedback and growth path clearly.', 'Employees need clarity on contribution and development.', 'Myliba makes ownership, feedback and recognition visible.', 50],
+            [
+                'Kurumsal Gelişim Programları',
+                'kurumsal-gelisim-programlari',
+                'Hedefleri değerlerle yönetmek için kurumunuza özel, uygulamalı gelişim yolculukları tasarlayın.',
+                'Gelişim programları günlük iş hedeflerinden koptuğunda öğrenme kalıcı davranışa dönüşmez.',
+                'Myliba, kurum hedeflerini canlı öğrenme, işbaşı uygulama ve ölçülebilir gelişim takibiyle birleştirir.',
+                10,
+            ],
+            [
+                'Simülasyonlar ve Takım Koçluğu',
+                'simulasyonlar-ve-takim-koclugu',
+                'Gerçek iş senaryolarını güvenli bir laboratuvar ortamında deneyimleyin, ekip davranışlarını görünür hale getirin.',
+                'Ekipler geri bildirim, bağlılık ve otonomi alanındaki davranış örüntülerini günlük akışta fark etmekte zorlanır.',
+                'Myliba simülasyonları ve takım koçluğu, ekiplerin davranışı deneyimleyerek görmesini ve yeni çalışma anlaşmaları kurmasını sağlar.',
+                20,
+            ],
+            [
+                'Danışmanlık',
+                'danismanlik',
+                'Stratejik hedeflerinizi netleştirin ve kurumunuza özel performans gelişim sistemini birlikte kurun.',
+                'Hedef ve performans modelleri organizasyonun gerçek yapısına uyarlanmadığında uygulama sürdürülebilir olmaz.',
+                'Myliba, stratejik hedef haritasından performans gelişim sisteminin kurulumuna kadar organizasyonunuza özel bir model tasarlar.',
+                30,
+            ],
+            [
+                'Kültür Analizi',
+                'kultur-analizi',
+                'Kurum kültürünüzü derinlemesine analiz edin, potansiyel engelleri belirleyin ve çalışan bağlılığını güçlendirin.',
+                'Kültür görünür ve ölçülebilir olmadığında bağlılık, isteklilik ve performans riskleri geç fark edilir.',
+                'Myliba Kültür Analizi; anket, saha araştırması ve gelişim planını birleştirerek dönüşüm için veriye dayalı içgörüler sunar.',
+                40,
+            ],
         ];
 
         foreach ($items as [$title, $slug, $excerpt, $problem, $solution, $order]) {
             $this->upsert_post_type('myliba_solution', $title, $slug, '<p>' . esc_html($excerpt) . '</p>', [
-                '_myliba_language' => 'en',
-                '_myliba_label' => 'Use case',
+                '_myliba_language' => 'tr',
+                '_myliba_label' => 'Myliba Çözümü',
                 '_myliba_hero_title' => $title,
                 '_myliba_hero_subtitle' => $excerpt,
                 '_myliba_problem' => $problem,
                 '_myliba_solution' => $solution,
-                '_myliba_benefits' => "Role clarity\nFaster decisions\nMeasurable routines",
-                '_myliba_related_modules' => "OKR\nKPI\nCFR\n1:1\nAnalytics",
-                '_myliba_cta_label' => 'Request a demo',
-                '_myliba_cta_url' => '/en/demo/',
+                '_myliba_benefits' => "Ölçülebilir gelişim\nKuruma özel tasarım\nSürdürülebilir dönüşüm",
+                '_myliba_related_modules' => "Yazılım\nAkademi\nDanışmanlık\nAnaliz",
+                '_myliba_cta_label' => 'Uzmanlarımızla Görüşün',
+                '_myliba_cta_url' => '/tr/iletisim/',
                 '_myliba_order' => (string) $order,
             ]);
         }
@@ -1318,12 +1401,12 @@ class Commands
 
         if ($primary_id) {
             $this->seed_menu_items($primary_id, [
-                ['en/our-products', 'Products'],
-                ['en/okr-culture-academy', 'Academy'],
-                ['en/solutions', 'Solutions'],
-                ['en/our-story', 'Our Story'],
-                ['en/blog', 'Blog'],
-                ['en/contact', 'Contact'],
+                ['tr/urunler', 'Yazılım'],
+                ['tr/okr-kultur-akademisi', 'Akademi'],
+                ['tr/cozumler', 'Çözümlerimiz'],
+                ['tr/gelisim-merkezi', 'Gelişim Merkezi'],
+                ['tr/hikayemiz', 'Biz Kimiz'],
+                ['tr/iletisim', 'İletişim'],
             ]);
         }
 

@@ -117,6 +117,36 @@ function register(): void
         'rewrite' => ['slug' => 'events'],
     ]);
 
+    register_post_type('myliba_ebook', [
+        'labels' => [
+            'name' => 'e-Kitaplar',
+            'singular_name' => 'e-Kitap',
+            'add_new_item' => 'Yeni e-Kitap Ekle',
+            'edit_item' => 'e-Kitabı Düzenle',
+        ],
+        'public' => true,
+        'has_archive' => 'e-kitaplar',
+        'menu_icon' => 'dashicons-book-alt',
+        'show_in_rest' => true,
+        'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions'],
+        'rewrite' => ['slug' => 'e-kitaplar'],
+    ]);
+
+    register_post_type('myliba_report', [
+        'labels' => [
+            'name' => 'Raporlar ve Trendler',
+            'singular_name' => 'Rapor veya Trend',
+            'add_new_item' => 'Yeni Rapor veya Trend Ekle',
+            'edit_item' => 'Raporu veya Trendi Düzenle',
+        ],
+        'public' => true,
+        'has_archive' => 'raporlar-ve-trendler',
+        'menu_icon' => 'dashicons-chart-area',
+        'show_in_rest' => true,
+        'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions'],
+        'rewrite' => ['slug' => 'raporlar-ve-trendler'],
+    ]);
+
     register_post_type('myliba_team', [
         'labels' => [
             'name' => __('Team Members', 'myliba'),
@@ -165,6 +195,8 @@ function polylang_post_types(array $post_types, bool $is_settings): array
     $post_types['myliba_faq'] = 'myliba_faq';
     $post_types['myliba_landing'] = 'myliba_landing';
     $post_types['myliba_event'] = 'myliba_event';
+    $post_types['myliba_ebook'] = 'myliba_ebook';
+    $post_types['myliba_report'] = 'myliba_report';
     $post_types['myliba_team'] = 'myliba_team';
 
     return $post_types;

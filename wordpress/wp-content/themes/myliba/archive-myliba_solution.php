@@ -1,19 +1,24 @@
 <?php
 get_header();
+$solutions = myliba_solution_catalog();
 ?>
-<section class="archive-hero">
-    <p class="eyebrow"><?php esc_html_e('Solutions', 'myliba'); ?></p>
-    <h1><?php esc_html_e('Role-based paths for measurable performance culture.', 'myliba'); ?></h1>
+<section class="solutions-hero">
+    <div class="solutions-shell">
+        <p class="eyebrow">Myliba Çözümlerimiz</p>
+        <h1>Birbiri ile entegre,<br>bütünleşik çözümler</h1>
+        <p>Neye ihtiyacınız varsa Myliba çözümleri ile kültürünüzü geliştirin.</p>
+    </div>
 </section>
-<section class="section">
-    <div class="card-grid card-grid--three">
-        <?php while (have_posts()) : the_post(); ?>
-            <a class="use-case-card" href="<?php the_permalink(); ?>">
-                <h2><?php the_title(); ?></h2>
-                <p><?php echo esc_html(myliba_excerpt(get_the_ID(), 24)); ?></p>
+<section class="solutions-index solutions-shell">
+    <div class="solutions-index__grid">
+        <?php foreach ($solutions as $slug => $solution) : ?>
+            <a class="solution-index-card" href="<?php echo esc_url(myliba_solution_url($slug)); ?>">
+                <p><?php echo esc_html($solution['kicker']); ?></p>
+                <h2><?php echo esc_html($solution['title']); ?></h2>
+                <span class="solution-index-card__summary"><?php echo esc_html($solution['summary']); ?></span>
+                <strong>Çözümü inceleyin <span aria-hidden="true">→</span></strong>
             </a>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
     </div>
 </section>
 <?php get_footer(); ?>
-

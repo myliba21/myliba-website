@@ -28,6 +28,8 @@ function use_classic_editor_for_myliba_content(bool $use_block_editor, string $p
         'myliba_faq',
         'myliba_landing',
         'myliba_event',
+        'myliba_ebook',
+        'myliba_report',
         'myliba_team',
         'myliba_client_logo',
     ];
@@ -235,6 +237,8 @@ function dashboard_counts(): void
         'myliba_solution' => __('Solutions', 'myliba'),
         'myliba_academy' => __('Academy Programs', 'myliba'),
         'myliba_event' => __('Events', 'myliba'),
+        'myliba_ebook' => 'e-Kitaplar',
+        'myliba_report' => 'Raporlar ve Trendler',
         'myliba_team' => __('Team Members', 'myliba'),
         'myliba_submission' => __('Form Submissions', 'myliba'),
     ];

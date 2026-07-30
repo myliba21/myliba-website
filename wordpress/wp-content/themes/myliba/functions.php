@@ -742,6 +742,7 @@ function myliba_page_url(string $key): string
         'ethics' => ['en' => 'en/ethics-counsel', 'tr' => 'tr/etik-danismanlik'],
         'blog' => ['en' => 'en/blog', 'tr' => 'tr/yazilar'],
         'solutions' => ['en' => 'en/solutions', 'tr' => 'tr/cozumler'],
+        'development' => ['en' => 'en/development-center', 'tr' => 'tr/gelisim-merkezi'],
         'events' => ['en' => 'en/events', 'tr' => 'tr/etkinlikler'],
         'contact' => ['en' => 'en/contact', 'tr' => 'tr/iletisim'],
         'demo' => ['en' => 'en/demo', 'tr' => 'tr/demo'],
@@ -764,12 +765,12 @@ function myliba_page_url(string $key): string
 function myliba_nav_items(): array
 {
     return [
-        'products' => __('Products', 'myliba'),
-        'academy' => __('Academy', 'myliba'),
-        'solutions' => __('Solutions', 'myliba'),
-        'story' => __('Our Story', 'myliba'),
-        'blog' => __('Blog', 'myliba'),
-        'contact' => __('Contact', 'myliba'),
+        'products' => 'Yazılım',
+        'academy' => 'Akademi',
+        'solutions' => 'Çözümlerimiz',
+        'development' => 'Gelişim Merkezi',
+        'story' => 'Biz Kimiz',
+        'contact' => 'İletişim',
     ];
 }
 
@@ -781,12 +782,178 @@ function myliba_portal_url(): string
 function myliba_header_menu(): array
 {
     return [
-        ['key' => 'products', 'label' => __('Products', 'myliba'), 'url' => myliba_page_url('products')],
-        ['key' => 'academy', 'label' => __('Academy', 'myliba'), 'url' => myliba_page_url('academy')],
-        ['key' => 'solutions', 'label' => __('Solutions', 'myliba'), 'url' => myliba_page_url('solutions')],
-        ['key' => 'story', 'label' => __('Our Story', 'myliba'), 'url' => myliba_page_url('story')],
-        ['key' => 'blog', 'label' => __('Blog', 'myliba'), 'url' => myliba_page_url('blog')],
-        ['key' => 'contact', 'label' => __('Contact', 'myliba'), 'url' => myliba_page_url('contact')],
+        ['key' => 'products', 'label' => 'Yazılım', 'url' => myliba_page_url('products')],
+        ['key' => 'academy', 'label' => 'Akademi', 'url' => myliba_page_url('academy')],
+        ['key' => 'solutions', 'label' => 'Çözümlerimiz', 'url' => myliba_page_url('solutions')],
+        ['key' => 'development', 'label' => 'Gelişim Merkezi', 'url' => myliba_page_url('development')],
+        ['key' => 'story', 'label' => 'Biz Kimiz', 'url' => myliba_page_url('story')],
+        ['key' => 'contact', 'label' => 'İletişim', 'url' => myliba_page_url('contact')],
+    ];
+}
+
+function myliba_solution_catalog(): array
+{
+    return [
+        'kurumsal-gelisim-programlari' => [
+            'title' => 'Kurumsal Gelişim Programları',
+            'kicker' => 'İşbaşı gelişim programları',
+            'summary' => 'Hedefleri değerlerle yönetmek için kurumunuza özel, uygulamalı gelişim yolculukları tasarlayın.',
+            'intro' => 'Stratejik hedefleri kurum kültürü ve liderlik davranışlarıyla buluşturan programlarla öğrenmeyi günlük iş akışının parçası haline getirin.',
+            'items' => [
+                'Kurum hedefleri ve değerleriyle bağlantılı gelişim tasarımı',
+                'Canlı öğrenme, işbaşı uygulama ve ölçülebilir takip',
+                'Liderler ve ekipler için sürdürülebilir gelişim ritmi',
+            ],
+            'steps' => [
+                ['title' => 'İhtiyaç Analizi', 'text' => 'Kurumun hedefleri, kültürü ve gelişim öncelikleri birlikte değerlendirilir.'],
+                ['title' => 'Program Tasarımı', 'text' => 'İçerik, gerçek iş hedefleri ve ekip dinamikleri etrafında yapılandırılır.'],
+                ['title' => 'Uygulama ve Takip', 'text' => 'Öğrenme işbaşında uygulanır, gelişim göstergeleri düzenli olarak izlenir.'],
+            ],
+        ],
+        'simulasyonlar-ve-takim-koclugu' => [
+            'title' => 'Simülasyonlar ve Takım Koçluğu',
+            'kicker' => 'Deneyimleyerek öğrenme',
+            'summary' => 'Gerçek iş senaryolarını güvenli bir laboratuvar ortamında deneyimleyin, ekip davranışlarını görünür hale getirin.',
+            'intro' => 'Simülasyonlar ve takım koçluğu, ekiplerin hedef, bağlılık ve iş birliği pratiklerini birlikte keşfetmesini ve geliştirmesini sağlar.',
+            'items' => [
+                'Hedef Mars Simülasyonu — oyunlaştırılmış dijital laboratuvar',
+                'Radikal Samimiyet Simülasyonu — geri bildirim isteyen ekipler yaratın',
+                'Başarı Sahnesi Simülasyonu — otonom ekipleri anlamlı hedefler etrafında geliştirin',
+            ],
+            'steps' => [
+                ['title' => 'Senaryoyu Yaşayın', 'text' => 'Ekipler gerçek iş yaşamını temsil eden karar ve iletişim anlarını deneyimler.'],
+                ['title' => 'Davranışı Görün', 'text' => 'Koç eşliğinde güçlü yönler, engeller ve takım örüntüleri görünür hale gelir.'],
+                ['title' => 'Yeni Ritmi Kurun', 'text' => 'Öğrenilenler somut takım anlaşmalarına ve takip aksiyonlarına dönüşür.'],
+            ],
+        ],
+        'danismanlik' => [
+            'title' => 'Danışmanlık',
+            'kicker' => 'Stratejiden sürdürülebilir sisteme',
+            'summary' => 'Stratejik hedeflerinizi netleştirin ve kurumunuza özel performans gelişim sistemini birlikte kurun.',
+            'intro' => 'Danışmanlık çalışmalarımız, hedef belirlemeden uygulama ritmine kadar organizasyonunuzun ihtiyaçlarına göre yapılandırılır.',
+            'items' => [
+                'Stratejik Hedef Haritası Oluşturma — şirket tepe hedeflerinin belirlenmesi ve otonom ekiplerin oluşturulması',
+                'Performans Gelişim Sistemi Kurulumu — performans gelişim altyapısının kurumunuza özel yapılandırılması',
+                'Uygulama, iletişim ve liderlik rutinlerinin organizasyonla birlikte tasarlanması',
+            ],
+            'steps' => [
+                ['title' => 'Mevcut Durum', 'text' => 'Hedef, performans ve liderlik süreçlerinin bugünkü resmi çıkarılır.'],
+                ['title' => 'Hedef Sistem', 'text' => 'Organizasyona uygun model, roller ve çalışma ritimleri tasarlanır.'],
+                ['title' => 'Kurulum', 'text' => 'Sistem ekiplerle birlikte devreye alınır ve gelişim göstergeleri takip edilir.'],
+            ],
+        ],
+        'kultur-analizi' => [
+            'title' => 'Kültür Analizi',
+            'kicker' => 'Veriye dayalı kültür dönüşümü',
+            'summary' => 'Kurum kültürünüzü derinlemesine analiz edin, potansiyel engelleri belirleyin ve çalışan bağlılığını güçlendirin.',
+            'intro' => 'Myliba Kültür Analizi, çalışanların gerçekten çalışmaktan keyif aldığı bir ortam oluşturmak için kültürü ölçülebilir içgörülere dönüştürür.',
+            'items' => [
+                'Mevcut kültürün güçlü ve zayıf yönlerinin keşfedilmesi',
+                'Çalışan bağlılığı ve iş performansının artması',
+                'Kurum içi sinerji ve iletişimin güçlenmesi',
+                'Stratejik dönüşüm için veriye dayalı içgörüler edinilmesi',
+            ],
+            'metrics' => [
+                ['title' => 'Employee NPS', 'text' => 'Çalışan tavsiye skoru'],
+                ['title' => 'Culture Fit', 'text' => 'Departmanlar arası kültürel uyum'],
+                ['title' => 'Willingness', 'text' => 'Çalışanın işe olan isteği'],
+                ['title' => 'Engagement', 'text' => 'Kuruma, işe ve lidere bağlılık'],
+            ],
+            'steps' => [
+                ['title' => 'Anket Aşaması', 'text' => 'Kültür analizi, bağlılık analizi ve isteklilik analizi uygulanır.'],
+                ['title' => 'Saha Araştırması', 'text' => 'Odak grup, yönetici görüşmeleri, doküman analizi ve gözlem yapılır.'],
+                ['title' => 'Gelişim Planı', 'text' => 'Detaylı rapor, öncelikli alanlar, OKR/KPI hedefleri ve uygulama takvimi oluşturulur.'],
+            ],
+        ],
+    ];
+}
+
+function myliba_solution_url(string $slug): string
+{
+    static $urls = [];
+
+    if (isset($urls[$slug])) {
+        return $urls[$slug];
+    }
+
+    $posts = get_posts([
+        'post_type' => 'myliba_solution',
+        'name' => $slug,
+        'post_status' => 'publish',
+        'posts_per_page' => 1,
+        'fields' => 'ids',
+        'suppress_filters' => false,
+    ]);
+
+    if ($posts) {
+        $urls[$slug] = get_permalink((int) $posts[0]);
+        return $urls[$slug];
+    }
+
+    $urls[$slug] = home_url('/solutions/' . $slug . '/');
+    return $urls[$slug];
+}
+
+function myliba_development_center_page_id(): int
+{
+    $path = myliba_current_language() === 'tr' ? 'tr/gelisim-merkezi' : 'en/development-center';
+    $page = get_page_by_path($path);
+
+    return $page ? (int) $page->ID : 0;
+}
+
+function myliba_development_center_context(): array
+{
+    $page_id = myliba_development_center_page_id();
+    $page_title = $page_id ? get_the_title($page_id) : 'Gelişim Merkezi';
+    $page_excerpt = $page_id ? trim((string) get_post_field('post_excerpt', $page_id)) : '';
+
+    return [
+        'page_id' => $page_id,
+        'eyebrow' => $page_id ? (string) myliba_meta('_myliba_eyebrow', $page_id, 'Sürekli gelişim ve dönüşüm merkezi') : 'Sürekli gelişim ve dönüşüm merkezi',
+        'title' => $page_id ? (string) myliba_meta('_myliba_hero_title', $page_id, $page_title) : $page_title,
+        'subtitle' => $page_id ? (string) myliba_meta('_myliba_hero_subtitle', $page_id, $page_excerpt) : $page_excerpt,
+        'section_eyebrow' => $page_id ? (string) myliba_meta('_myliba_development_section_eyebrow', $page_id, 'Gelişim kaynakları') : 'Gelişim kaynakları',
+        'section_title' => $page_id ? (string) myliba_meta('_myliba_development_section_title', $page_id, 'Gelişim zihniyetini sürekli yeni bilgi ve tecrübeyle besleyin.') : 'Gelişim zihniyetini sürekli yeni bilgi ve tecrübeyle besleyin.',
+        'section_text' => $page_id ? (string) myliba_meta('_myliba_development_section_text', $page_id, '') : '',
+        'card_cta' => $page_id ? (string) myliba_meta('_myliba_development_card_cta', $page_id, 'İçerikleri inceleyin') : 'İçerikleri inceleyin',
+    ];
+}
+
+function myliba_development_center_items(): array
+{
+    $page_id = myliba_development_center_page_id();
+    $blog_page_url = myliba_page_url('blog');
+    $events_page_url = myliba_page_url('events');
+    $events_page_id = url_to_postid($events_page_url);
+    $ebook_type = get_post_type_object('myliba_ebook');
+    $report_type = get_post_type_object('myliba_report');
+
+    return [
+        'ebooks' => [
+            'label' => $page_id ? (string) myliba_meta('_myliba_development_ebook_label', $page_id, $ebook_type?->labels->name ?: 'e-Kitaplar') : ($ebook_type?->labels->name ?: 'e-Kitaplar'),
+            'description' => $page_id ? (string) myliba_meta('_myliba_development_ebook_text', $page_id, '') : '',
+            'url' => (string) (get_post_type_archive_link('myliba_ebook') ?: home_url('/e-kitaplar/')),
+            'post_type' => 'myliba_ebook',
+        ],
+        'reports' => [
+            'label' => $page_id ? (string) myliba_meta('_myliba_development_report_label', $page_id, $report_type?->labels->name ?: 'Raporlar ve Trendler') : ($report_type?->labels->name ?: 'Raporlar ve Trendler'),
+            'description' => $page_id ? (string) myliba_meta('_myliba_development_report_text', $page_id, '') : '',
+            'url' => (string) (get_post_type_archive_link('myliba_report') ?: home_url('/raporlar-ve-trendler/')),
+            'post_type' => 'myliba_report',
+        ],
+        'blog' => [
+            'label' => $page_id ? (string) myliba_meta('_myliba_development_blog_label', $page_id, 'Blog') : 'Blog',
+            'description' => $page_id ? (string) myliba_meta('_myliba_development_blog_text', $page_id, '') : '',
+            'url' => $blog_page_url,
+            'post_type' => 'post',
+        ],
+        'events' => [
+            'label' => $page_id ? (string) myliba_meta('_myliba_development_events_label', $page_id, $events_page_id ? get_the_title($events_page_id) : 'Etkinlikler') : ($events_page_id ? get_the_title($events_page_id) : 'Etkinlikler'),
+            'description' => $page_id ? (string) myliba_meta('_myliba_development_events_text', $page_id, '') : '',
+            'url' => $events_page_url,
+            'post_type' => 'myliba_event',
+        ],
     ];
 }
 
@@ -809,22 +976,11 @@ function myliba_header_menu_item_is_active(string $key, string $url): bool
     }
 
     return match ($key) {
-        'blog' => is_home() || is_singular('post') || is_category() || is_tag(),
-        'products' => is_page('yazilim'),
-        'solutions' => is_singular('myliba_product') || is_post_type_archive('myliba_product'),
+        'development' => is_page(['development-center', 'gelisim-merkezi', 'blog', 'yazilar', 'events', 'etkinlikler']) || is_home() || is_singular('post') || is_category() || is_tag() || is_post_type_archive(['myliba_event', 'myliba_ebook', 'myliba_report']) || is_singular(['myliba_event', 'myliba_ebook', 'myliba_report']),
+        'products' => is_page(['yazilim', 'urunler']) || is_singular('myliba_product') || is_post_type_archive('myliba_product'),
+        'solutions' => is_page(['solutions', 'cozumler']) || is_singular('myliba_solution') || is_post_type_archive('myliba_solution'),
         default => false,
     };
-}
-
-function myliba_mega_menu_products(): WP_Query
-{
-    $query = myliba_get_entries('myliba_product', 10);
-
-    if ($query->have_posts()) {
-        return $query;
-    }
-
-    return myliba_get_entries('myliba_product', 10, ['meta_query' => []]);
 }
 
 function myliba_language_links(): array

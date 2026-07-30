@@ -23,22 +23,23 @@ function enqueue_admin_assets(): void
 
 function register_meta_boxes(string $post_type): void
 {
-    if (in_array($post_type, ['page', 'post', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_case_study', 'myliba_landing', 'myliba_event', 'myliba_team', 'myliba_client_logo', 'myliba_faq', 'myliba_testimonial'], true)) {
+    if (in_array($post_type, ['page', 'post', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_case_study', 'myliba_landing', 'myliba_event', 'myliba_ebook', 'myliba_report', 'myliba_team', 'myliba_client_logo', 'myliba_faq', 'myliba_testimonial'], true)) {
         add_meta_box('myliba_language', __('Myliba Language', 'myliba'), __NAMESPACE__ . '\\render_language_box', $post_type, 'side');
     }
 
-    if (in_array($post_type, ['page', 'post', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_case_study', 'myliba_landing', 'myliba_event'], true)) {
+    if (in_array($post_type, ['page', 'post', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_case_study', 'myliba_landing', 'myliba_event', 'myliba_ebook', 'myliba_report'], true)) {
         add_meta_box('myliba_hero', __('Myliba Hero', 'myliba'), __NAMESPACE__ . '\\render_hero_box', $post_type, 'normal', 'high');
         add_meta_box('myliba_seo', __('Myliba SEO', 'myliba'), __NAMESPACE__ . '\\render_seo_box', $post_type, 'normal');
     }
 
-    if (in_array($post_type, ['page', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_landing'], true)) {
+    if (in_array($post_type, ['page', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_landing', 'myliba_ebook', 'myliba_report'], true)) {
         add_meta_box('myliba_conversion_content', __('Conversion Content', 'myliba'), __NAMESPACE__ . '\\render_conversion_box', $post_type, 'normal');
     }
 
     if ($post_type === 'page') {
         add_meta_box('myliba_homepage_sections', __('Myliba Homepage Sections', 'myliba'), __NAMESPACE__ . '\\render_homepage_box', $post_type, 'normal');
         add_meta_box('myliba_academy_page', __('Myliba Academy Landing Page', 'myliba'), __NAMESPACE__ . '\\render_academy_page_box', $post_type, 'normal');
+        add_meta_box('myliba_development_center', 'Myliba Gelişim Merkezi', __NAMESPACE__ . '\\render_development_center_box', $post_type, 'normal');
     }
 
     if ($post_type === 'myliba_academy') {
@@ -138,6 +139,25 @@ function render_conversion_box(\WP_Post $post): void
     field_textarea('_myliba_faq_items', __('FAQ items', 'myliba'), get_post_meta($post->ID, '_myliba_faq_items', true), __('Use one item per line as Question | Answer.', 'myliba'));
     field_text('_myliba_cta_label', __('CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_cta_label', true));
     field_url('_myliba_cta_url', __('CTA URL', 'myliba'), get_post_meta($post->ID, '_myliba_cta_url', true));
+}
+
+function render_development_center_box(\WP_Post $post): void
+{
+    nonce();
+
+    echo '<p class="description">Bu alanlar yalnızca Gelişim Merkezi sayfasının dinamik metinlerini yönetir.</p>';
+    field_text('_myliba_development_section_eyebrow', 'Alt sayfalar üst etiketi', get_post_meta($post->ID, '_myliba_development_section_eyebrow', true));
+    field_textarea('_myliba_development_section_title', 'Alt sayfalar bölüm başlığı', get_post_meta($post->ID, '_myliba_development_section_title', true));
+    field_textarea('_myliba_development_section_text', 'Alt sayfalar bölüm açıklaması', get_post_meta($post->ID, '_myliba_development_section_text', true));
+    field_text('_myliba_development_ebook_label', 'e-Kitaplar kart başlığı', get_post_meta($post->ID, '_myliba_development_ebook_label', true));
+    field_textarea('_myliba_development_ebook_text', 'e-Kitaplar kart açıklaması', get_post_meta($post->ID, '_myliba_development_ebook_text', true));
+    field_text('_myliba_development_report_label', 'Raporlar ve Trendler kart başlığı', get_post_meta($post->ID, '_myliba_development_report_label', true));
+    field_textarea('_myliba_development_report_text', 'Raporlar ve Trendler kart açıklaması', get_post_meta($post->ID, '_myliba_development_report_text', true));
+    field_text('_myliba_development_blog_label', 'Blog kart başlığı', get_post_meta($post->ID, '_myliba_development_blog_label', true));
+    field_textarea('_myliba_development_blog_text', 'Blog kart açıklaması', get_post_meta($post->ID, '_myliba_development_blog_text', true));
+    field_text('_myliba_development_events_label', 'Etkinlikler kart başlığı', get_post_meta($post->ID, '_myliba_development_events_label', true));
+    field_textarea('_myliba_development_events_text', 'Etkinlikler kart açıklaması', get_post_meta($post->ID, '_myliba_development_events_text', true));
+    field_text('_myliba_development_card_cta', 'Kart bağlantı etiketi', get_post_meta($post->ID, '_myliba_development_card_cta', true));
 }
 
 function render_academy_page_box(\WP_Post $post): void
@@ -965,6 +985,18 @@ function field_definitions(string $post_type): array
         '_myliba_academy_form_button' => 'text',
         '_myliba_academy_form_success' => 'textarea',
         '_myliba_academy_kvkk_text' => 'textarea',
+        '_myliba_development_section_eyebrow' => 'text',
+        '_myliba_development_section_title' => 'textarea',
+        '_myliba_development_section_text' => 'textarea',
+        '_myliba_development_ebook_label' => 'text',
+        '_myliba_development_ebook_text' => 'textarea',
+        '_myliba_development_report_label' => 'text',
+        '_myliba_development_report_text' => 'textarea',
+        '_myliba_development_blog_label' => 'text',
+        '_myliba_development_blog_text' => 'textarea',
+        '_myliba_development_events_label' => 'text',
+        '_myliba_development_events_text' => 'textarea',
+        '_myliba_development_card_cta' => 'text',
     ];
 
     if ($post_type === 'myliba_event') {
