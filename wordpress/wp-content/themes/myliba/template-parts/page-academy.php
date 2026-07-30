@@ -3,192 +3,450 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$post_id = get_queried_object_id();
-$lang = myliba_current_language();
-$is_tr = $lang === 'tr';
-$demo_url = myliba_demo_url();
-$contact_url = myliba_page_url('contact');
-$hero_title = $is_tr ? 'OKR Kultur Akademisi' : 'OKR Culture Academy';
-$hero_subtitle = $is_tr
-    ? 'OKR, CFR, KPI ve kocluk rutinlerini kurum icinde uygulanabilir bir performans kulturu haline getiren hibrit gelisim programi.'
-    : 'A hybrid development program that turns OKR, CFR, KPI and coaching routines into a practical performance culture inside the organization.';
-$hero_eyebrow = $is_tr ? 'Akademi programi' : 'Academy program';
-$hero_stats = $is_tr
-    ? [
-        ['40', 'saat hibrit gelisim'],
-        ['ICF', 'CCE akreditasyonu'],
-        ['OKR', 'kultur ve kocluk rutini'],
-    ]
-    : [
-        ['40', 'hours of hybrid development'],
-        ['ICF', 'CCE accredited'],
-        ['OKR', 'culture and coaching routines'],
+$page_id = get_queried_object_id();
+$meta = static fn(string $key): string => trim((string) get_post_meta($page_id, $key, true));
+$rows = static function (string $value, int $parts = 2): array {
+    $items = [];
+    foreach (myliba_lines($value) as $line) {
+        $item = array_pad(array_map('trim', explode('|', $line, $parts)), $parts, '');
+        if ($item[0] !== '') {
+            $items[] = $item;
+        }
+    }
+    return $items;
+};
+$image = static function (string $key, string $class = '', bool $eager = false) use ($page_id): string {
+    $attachment_id = absint(get_post_meta($page_id, $key, true));
+    if (!$attachment_id) {
+        return '';
+    }
+    return wp_get_attachment_image($attachment_id, 'large', false, [
+        'class' => $class,
+        'loading' => $eager ? 'eager' : 'lazy',
+        'fetchpriority' => $eager ? 'high' : 'auto',
+        'decoding' => 'async',
+    ]);
+};
+
+$programs = myliba_get_entries('myliba_academy', -1);
+$logos = myliba_get_entries('myliba_client_logo', 30, ['meta_query' => []]);
+$logo_items = [];
+while ($logos->have_posts()) {
+    $logos->the_post();
+    if (!has_post_thumbnail()) {
+        continue;
+    }
+    $logo_items[] = [
+        'id' => get_the_ID(),
+        'title' => get_the_title(),
+        'url' => (string) get_post_meta(get_the_ID(), '_myliba_logo_url', true),
     ];
-$proof_points = $is_tr
-    ? ['Ust yonetimden takimlara net hedef ritmi', 'Uygulama atolyeleri ve kocluk pratikleri', 'Surekli performans ve geri bildirim kulturu']
-    : ['A clear goal rhythm from leadership to teams', 'Implementation workshops and coaching practice', 'Continuous performance and feedback culture'];
-$audience_items = $is_tr
-    ? [
-        ['Kurum ici OKR koclari', 'OKR disiplinini ekiplerin gunluk is akisina tasiyacak lider ve HR profesyonelleri.'],
-        ['Liderlik ekipleri', 'Strateji, hedef ve aksiyon takibini ayni yonetim ritminde birlestirmek isteyen yoneticiler.'],
-        ['Kultur ve insan ekipleri', 'Geri bildirim, takdir, 1:1 ve gelisim konusmalarini olculebilir hale getiren ekipler.'],
-    ]
-    : [
-        ['Internal OKR coaches', 'Leaders and HR professionals who will carry OKR discipline into daily team routines.'],
-        ['Leadership teams', 'Executives who want strategy, goals and action follow-up in the same operating rhythm.'],
-        ['People and culture teams', 'Teams making feedback, recognition, 1:1 and development conversations measurable.'],
+}
+wp_reset_postdata();
+$testimonials = myliba_get_entries('myliba_testimonial', 12);
+$faq_group = $meta('_myliba_academy_faq_group');
+$faq_args = [];
+if ($faq_group !== '') {
+    $faq_args['meta_query'] = [
+        'relation' => 'AND',
+        [
+            'key' => '_myliba_language',
+            'value' => myliba_current_language(),
+        ],
+        [
+            'key' => '_myliba_label',
+            'value' => $faq_group,
+        ],
     ];
-$journey_steps = $is_tr
-    ? [
-        ['01', 'Farkindalik', 'Hedef sistemleri, OKR prensipleri ve kurum kulturu arasindaki bag netlesir.'],
-        ['02', 'Tasarim', 'Sirket, takim ve birey seviyesinde OKR/KPI mimarisi uygulanabilir hale gelir.'],
-        ['03', 'Kocluk', 'CFR, 1:1, geri bildirim ve feedforward pratikleri davranis rutinine donusur.'],
-        ['04', 'Surdurme', 'Raporlama, aksiyon takipleri ve gelisim donguleriyle ritim korunur.'],
-    ]
-    : [
-        ['01', 'Awareness', 'The link between goal systems, OKR principles and culture becomes clear.'],
-        ['02', 'Design', 'Company, team and individual OKR/KPI architecture becomes practical.'],
-        ['03', 'Coaching', 'CFR, 1:1, feedback and feedforward practices turn into behavior routines.'],
-        ['04', 'Sustain', 'Reporting, action follow-up and development loops keep the rhythm alive.'],
+}
+$faqs = myliba_get_entries('myliba_faq', -1, $faq_args);
+$faq_items = [];
+while ($faqs->have_posts()) {
+    $faqs->the_post();
+    $faq_items[] = [
+        'question' => get_the_title(),
+        'answer' => (string) get_the_content(),
     ];
-$curriculum_items = $is_tr
-    ? [
-        'Hedef yonetimi tarihi, OKR anatomisi ve KPI baglantisi',
-        'Kurumsal, takim ve bireysel OKR ornekleri',
-        'OKR haritalari, hizalanma ve onceliklendirme',
-        'CFR, geri bildirim, feedforward ve takdir pratikleri',
-        'Performans gelisimi, 1:1 gorusmeler ve aksiyon yonetimi',
-        'OKR koclugu, fasilitasyon ve kurum ici yayilim plani',
-    ]
-    : [
-        'Goal management history, OKR anatomy and KPI connection',
-        'Corporate, team and individual OKR examples',
-        'OKR maps, alignment and prioritization',
-        'CFR, feedback, feedforward and recognition practices',
-        'Performance development, 1:1 meetings and action management',
-        'OKR coaching, facilitation and internal rollout planning',
+}
+wp_reset_postdata();
+
+$hero_badges = $rows($meta('_myliba_academy_hero_badges'));
+$nav_items = $rows($meta('_myliba_academy_nav_items'));
+$approach_steps = $rows($meta('_myliba_academy_approach_steps'));
+$stats = $rows($meta('_myliba_academy_stats'));
+$hero_visuals = array_filter([
+    $image('_myliba_academy_certificate_image', 'academy-v2-hero__certificate', true),
+    $image('_myliba_academy_icf_image', 'academy-v2-hero__icf', true),
+    $image('_myliba_academy_digital_badge_image', 'academy-v2-hero__badge', true),
+    $image('_myliba_academy_platform_image', 'academy-v2-hero__platform', true),
+]);
+$program_cards = [];
+$featured_program = [];
+foreach ($programs->posts as $program_index => $program_post) {
+    $layout = (string) get_post_meta($program_post->ID, '_myliba_academy_layout', true);
+    $card = [
+        'number' => str_pad((string) ($program_index + 1), 2, '0', STR_PAD_LEFT),
+        'title' => get_the_title($program_post),
+        'eyebrow' => (string) get_post_meta($program_post->ID, '_myliba_academy_program_eyebrow', true),
+        'layout' => $layout ?: 'standard',
+        'period' => (string) get_post_meta($program_post->ID, '_myliba_academy_start_period', true),
+        'certificate' => (string) get_post_meta($program_post->ID, '_myliba_academy_certificate_info', true),
+        'badges' => myliba_lines((string) get_post_meta($program_post->ID, '_myliba_academy_program_badges', true)),
     ];
-$training_cards = $is_tr
-    ? [
-        ['Hedef Yonetimi ve OKR', 'OKR tasarimi, hizalanma ve olcumleme pratikleri.'],
-        ['Performans Koclugu', 'Liderlerin ekiplerle daha etkili gelisim konusmalari yapmasi.'],
-        ['Kultur Koclugu', 'Degerler, diyalog, takdir ve psikolojik guven rutinleri.'],
-    ]
-    : [
-        ['Goal Management and OKR', 'OKR design, alignment and measurement practices.'],
-        ['Performance Coaching', 'Helping leaders hold better development conversations with teams.'],
-        ['Culture Coaching', 'Values, dialogue, recognition and psychological safety routines.'],
-    ];
+    $program_cards[] = $card;
+    if ($layout === 'featured') {
+        $featured_program = $card;
+    }
+}
+$available_anchors = array_filter([
+    'programlar' => $programs->found_posts > 0,
+    'yaklasim' => $approach_steps && $meta('_myliba_academy_approach_title') !== '',
+    'yorumlar' => $testimonials->found_posts > 0 && $meta('_myliba_academy_testimonials_title') !== '',
+    'sss' => $faq_items && $meta('_myliba_academy_faq_title') !== '',
+    'iletisim' => $meta('_myliba_academy_final_title') !== '',
+]);
+$nav_items = array_values(array_filter($nav_items, static fn(array $item): bool => isset($available_anchors[sanitize_title($item[1] ?? '')])));
 
 get_header();
 ?>
 
-<div class="academy-page">
-    <section class="academy-hero">
-        <div class="academy-hero__content">
-            <p class="eyebrow"><?php echo esc_html($hero_eyebrow); ?></p>
-            <h1><?php echo esc_html($hero_title); ?></h1>
-            <p><?php echo esc_html($hero_subtitle); ?></p>
-            <div class="academy-hero__actions">
-                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>"><?php echo esc_html($is_tr ? 'Programi goruselim' : 'Discuss the program'); ?></a>
-                <a class="myliba-button myliba-button--ghost" href="#academy-curriculum"><?php echo esc_html($is_tr ? 'Mufredati incele' : 'View curriculum'); ?></a>
-            </div>
-        </div>
-        <div class="academy-hero__visual" aria-label="<?php echo esc_attr($hero_title); ?>">
-            <?php if (has_post_thumbnail($post_id)) : ?>
-                <?php echo get_the_post_thumbnail($post_id, 'large'); ?>
-            <?php endif; ?>
-            <div class="academy-hero__stat-grid">
-                <?php foreach ($hero_stats as $stat) : ?>
-                    <div>
-                        <strong><?php echo esc_html($stat[0]); ?></strong>
-                        <span><?php echo esc_html($stat[1]); ?></span>
+<div class="academy-page academy-v2">
+    <?php if ($meta('_myliba_hero_title') !== ''): ?>
+        <section class="academy-v2-hero">
+            <div class="academy-v2-hero__content">
+                <?php if ($meta('_myliba_eyebrow') !== ''): ?>
+                    <p class="eyebrow"><?php echo esc_html($meta('_myliba_eyebrow')); ?></p>
+                <?php endif; ?>
+                <h1><?php echo esc_html($meta('_myliba_hero_title')); ?></h1>
+                <?php if ($meta('_myliba_hero_subtitle') !== ''): ?>
+                    <p class="academy-v2-hero__lead"><?php echo esc_html($meta('_myliba_hero_subtitle')); ?></p>
+                <?php endif; ?>
+                <div class="academy-v2-hero__actions">
+                    <?php if ($meta('_myliba_cta_label') !== ''): ?>
+                        <?php if ($meta('_myliba_cta_url') !== ''): ?><a class="myliba-button myliba-button--primary"
+                                href="<?php echo esc_url($meta('_myliba_cta_url')); ?>"><?php echo esc_html($meta('_myliba_cta_label')); ?></a>
+                        <?php else: ?><button class="myliba-button myliba-button--primary" type="button"
+                                data-academy-form-open><?php echo esc_html($meta('_myliba_cta_label')); ?></button><?php endif; ?>
+                    <?php endif; ?>
+                    <?php if ($meta('_myliba_academy_hero_secondary_label') !== ''): ?>
+                        <?php if ($meta('_myliba_academy_hero_secondary_url') !== ''): ?><a
+                                class="myliba-button myliba-button--ghost"
+                                href="<?php echo esc_url($meta('_myliba_academy_hero_secondary_url')); ?>"><?php echo esc_html($meta('_myliba_academy_hero_secondary_label')); ?></a>
+                        <?php else: ?><button class="myliba-button myliba-button--ghost" type="button" data-academy-form-open
+                                data-participation="corporate"><?php echo esc_html($meta('_myliba_academy_hero_secondary_label')); ?></button><?php endif; ?>
+                    <?php endif; ?>
+                    <?php if ($meta('_myliba_academy_hero_tertiary_label') !== '' && $meta('_myliba_academy_hero_tertiary_url') !== ''): ?>
+                        <a class="academy-v2-link"
+                            href="<?php echo esc_url($meta('_myliba_academy_hero_tertiary_url')); ?>"><?php echo esc_html($meta('_myliba_academy_hero_tertiary_label')); ?></a>
+                    <?php endif; ?>
+                </div>
+                <?php if ($hero_badges): ?>
+                    <div class="academy-v2-hero__proof" aria-label="<?php echo esc_attr($meta('_myliba_eyebrow')); ?>">
+                        <?php foreach ($hero_badges as [$value, $label]): ?>
+                            <span><strong><?php echo esc_html($value); ?></strong><?php echo esc_html($label); ?></span>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
+                <?php endif; ?>
             </div>
-        </div>
-    </section>
+            <?php if ($hero_visuals || $featured_program): ?>
+                <div class="academy-v2-hero__visual" aria-hidden="true">
+                    <span class="academy-v2-orbit academy-v2-orbit--one"></span>
+                    <span class="academy-v2-orbit academy-v2-orbit--two"></span>
+                    <?php if ($hero_visuals): ?>
+                        <?php echo implode('', $hero_visuals); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php else: ?>
+                        <div class="academy-v2-hero-card">
+                            <div class="academy-v2-hero-card__top">
+                                <span><?php echo esc_html($featured_program['eyebrow']); ?></span>
+                                <?php if ($featured_program['number']): ?><strong><?php echo esc_html($featured_program['number']); ?></strong><?php endif; ?>
+                            </div>
+                            <h2><?php echo esc_html($featured_program['title']); ?></h2>
+                            <?php if ($featured_program['period'] || $featured_program['certificate']): ?>
+                                <div class="academy-v2-hero-card__credential">
+                                    <?php if ($featured_program['period']): ?><strong><?php echo esc_html($featured_program['period']); ?></strong><?php endif; ?>
+                                    <?php if ($featured_program['certificate']): ?><span><?php echo esc_html($featured_program['certificate']); ?></span><?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($featured_program['badges']): ?>
+                                <div class="academy-v2-hero-card__badges">
+                                    <?php foreach (array_slice($featured_program['badges'], 0, 4) as $badge): ?><span><?php echo esc_html($badge); ?></span><?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class="academy-v2-hero-card__signal"><i></i><i></i><i></i><i></i><i></i></div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        </section>
+    <?php endif; ?>
 
-    <section class="academy-proof">
-        <?php foreach ($proof_points as $point) : ?>
-            <div><?php echo esc_html($point); ?></div>
-        <?php endforeach; ?>
-    </section>
+    <?php if ($logo_items && $meta('_myliba_academy_trust_title') !== ''): ?>
+        <section class="section band trust-section academy-v2-trust-section" aria-labelledby="academy-trust-title">
+            <div class="trust-section__heading">
+                <div class="trust-section__heading-copy">
+                    <?php if ($meta('_myliba_academy_trust_label') !== ''): ?>
+                        <span class="trust-section__eyebrow">
+                            <svg aria-hidden="true" viewBox="0 0 24 24">
+                                <path d="m9 12 2 2 4-4" />
+                                <path d="M12 3 4.5 6v5.5c0 4.6 3.2 7.7 7.5 9.5 4.3-1.8 7.5-4.9 7.5-9.5V6L12 3Z" />
+                            </svg>
+                            <?php echo esc_html($meta('_myliba_academy_trust_label')); ?>
+                        </span>
+                    <?php endif; ?>
+                    <strong id="academy-trust-title"><?php echo esc_html($meta('_myliba_academy_trust_title')); ?></strong>
+                    <?php if ($meta('_myliba_academy_trust_text') !== ''): ?>
+                        <p><?php echo esc_html($meta('_myliba_academy_trust_text')); ?></p><?php endif; ?>
+                </div>
+            </div>
+            <div class="trust-marquee" aria-label="<?php echo esc_attr($meta('_myliba_academy_trust_title')); ?>">
+                <div class="trust-marquee__track">
+                    <?php for ($repeat = 0; $repeat < 2; $repeat++): ?>
+                        <?php foreach ($logo_items as $logo_item): ?>
+                            <?php $logo_image = get_the_post_thumbnail($logo_item['id'], 'medium', ['loading' => 'lazy', 'alt' => $logo_item['title']]); ?>
+                            <?php if ($logo_item['url']): ?><a class="trust-logo" href="<?php echo esc_url($logo_item['url']); ?>"
+                                    aria-label="<?php echo esc_attr($logo_item['title']); ?>"><?php echo wp_kses_post($logo_image); ?></a>
+                            <?php else: ?><span class="trust-logo"><?php echo wp_kses_post($logo_image); ?></span><?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endfor; ?>
+                </div>
+            </div>
+        </section>
+    <?php endif; ?>
 
-    <section class="section academy-section academy-section--intro">
-        <div class="academy-section__heading">
-            <p class="eyebrow"><?php echo esc_html($is_tr ? 'Kimler icin' : 'Who it is for'); ?></p>
-            <h2><?php echo esc_html($is_tr ? 'OKR davranisini kuruma yaymak isteyen ekipler icin tasarlandi.' : 'Designed for teams that want OKR behavior to scale across the organization.'); ?></h2>
+    <?php if ($meta('_myliba_academy_programs_title') !== ''): ?>
+        <section id="programlar" class="section academy-v2-intro">
+            <div class="academy-v2-intro__copy">
+                <div>
+                    <?php if ($meta('_myliba_academy_programs_eyebrow') !== ''): ?>
+                        <p class="eyebrow"><?php echo esc_html($meta('_myliba_academy_programs_eyebrow')); ?></p><?php endif; ?>
+                    <h2><?php echo esc_html($meta('_myliba_academy_programs_title')); ?></h2>
+                </div>
+                <?php if ($meta('_myliba_academy_programs_text') !== ''): ?>
+                    <p><?php echo esc_html($meta('_myliba_academy_programs_text')); ?></p><?php endif; ?>
+            </div>
+            <?php if ($program_cards): ?>
+                <div class="academy-v2-program-index">
+                    <?php foreach ($program_cards as $card_index => $card): ?>
+                        <a class="<?php echo esc_attr('academy-v2-program-index__item academy-v2-program-index__item--' . sanitize_html_class($card['layout'])); ?>"
+                            href="#program-<?php echo esc_attr((string) ($card_index + 1)); ?>">
+                            <span><?php echo esc_html($card['number']); ?></span>
+                            <div>
+                                <small><?php echo esc_html($card['eyebrow']); ?></small><strong><?php echo esc_html($card['title']); ?></strong>
+                            </div>
+                            <i aria-hidden="true">↘</i>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </section>
+    <?php endif; ?>
+
+    <?php if ($programs->have_posts()): ?>
+        <div class="academy-v2-programs">
+            <?php $program_index = 0; ?>
+            <?php while ($programs->have_posts()):
+                $programs->the_post(); ?>
+                <?php
+                $program_index++;
+                $program_id = get_the_ID();
+                $layout = get_post_meta($program_id, '_myliba_academy_layout', true) ?: 'standard';
+                $benefits = myliba_lines((string) get_post_meta($program_id, '_myliba_academy_program_benefits', true));
+                $badges = myliba_lines((string) get_post_meta($program_id, '_myliba_academy_program_badges', true));
+                $modules = $rows((string) get_post_meta($program_id, '_myliba_academy_program_modules', true));
+                $primary_label = trim((string) get_post_meta($program_id, '_myliba_academy_program_primary_label', true));
+                $primary_url = trim((string) get_post_meta($program_id, '_myliba_academy_program_primary_url', true));
+                $secondary_label = trim((string) get_post_meta($program_id, '_myliba_academy_program_secondary_label', true));
+                $secondary_url = trim((string) get_post_meta($program_id, '_myliba_academy_program_secondary_url', true));
+                $eyebrow = trim((string) get_post_meta($program_id, '_myliba_academy_program_eyebrow', true));
+                $start_period = trim((string) get_post_meta($program_id, '_myliba_academy_start_period', true));
+                $certificate = trim((string) get_post_meta($program_id, '_myliba_academy_certificate_info', true));
+                $content = trim((string) get_post_field('post_content', $program_id));
+                $excerpt = trim((string) get_the_excerpt());
+                $show_detailed_content = $content !== '' && trim(wp_strip_all_tags($content)) !== trim(wp_strip_all_tags($excerpt));
+                ?>
+                <section id="<?php echo esc_attr('program-' . $program_index); ?>"
+                    class="academy-v2-program academy-v2-program--<?php echo esc_attr(sanitize_html_class($layout)); ?>">
+                    <div class="section academy-v2-program__inner">
+                        <div class="academy-v2-program__content">
+                            <?php if ($eyebrow !== ''): ?>
+                                <p class="eyebrow"><?php echo esc_html($eyebrow); ?></p><?php endif; ?>
+                            <h2><?php the_title(); ?></h2>
+                            <?php if ($excerpt !== ''): ?>
+                                <p class="academy-v2-program__lead"><?php echo esc_html($excerpt); ?></p><?php endif; ?>
+                            <?php if ($show_detailed_content): ?>
+                                <div class="academy-v2-program__description">
+                                    <?php echo wp_kses_post(apply_filters('the_content', $content)); ?></div><?php endif; ?>
+                            <?php if ($start_period !== '' || $certificate !== ''): ?>
+                                <div class="academy-v2-program__meta">
+                                    <?php if ($start_period !== ''): ?><strong><?php echo esc_html($start_period); ?></strong><?php endif; ?>
+                                    <?php if ($certificate !== ''): ?><span><?php echo esc_html($certificate); ?></span><?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($badges): ?>
+                                <div class="academy-v2-badges">
+                                    <?php foreach ($badges as $badge): ?><span><?php echo esc_html($badge); ?></span><?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class="academy-v2-program__actions">
+                                <?php if ($secondary_label !== ''): ?>
+                                    <?php if ($secondary_url !== ''): ?><a class="myliba-button myliba-button--ghost"
+                                            href="<?php echo esc_url($secondary_url); ?>"><?php echo esc_html($secondary_label); ?></a>
+                                    <?php else: ?><button class="myliba-button myliba-button--ghost" type="button"
+                                            data-academy-form-open
+                                            data-program="<?php echo esc_attr(get_the_title()); ?>"><?php echo esc_html($secondary_label); ?></button><?php endif; ?>
+                                <?php endif; ?>
+                                <?php if ($primary_label !== ''): ?>
+                                    <?php if ($primary_url !== ''): ?><a class="myliba-button myliba-button--primary"
+                                            href="<?php echo esc_url($primary_url); ?>"><?php echo esc_html($primary_label); ?></a>
+                                    <?php else: ?><button class="myliba-button myliba-button--primary" type="button"
+                                            data-academy-form-open
+                                            data-program="<?php echo esc_attr(get_the_title()); ?>"><?php echo esc_html($primary_label); ?></button><?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="academy-v2-program__details">
+                            <?php if ($benefits): ?>
+                                <?php if ($meta('_myliba_academy_benefits_title') !== ''): ?>
+                                    <h3><?php echo esc_html($meta('_myliba_academy_benefits_title')); ?></h3><?php endif; ?>
+                                <ul class="academy-v2-benefits">
+                                    <?php foreach ($benefits as $benefit): ?>
+                                        <li><?php echo esc_html($benefit); ?></li><?php endforeach; ?>
+                                </ul>
+                            <?php elseif (has_post_thumbnail()): ?>
+                                <?php echo get_the_post_thumbnail($program_id, 'large', ['loading' => 'lazy']); ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php if ($modules): ?>
+                        <div class="section academy-v2-modules">
+                            <?php if ($meta('_myliba_academy_modules_title') !== ''): ?>
+                                <h3><?php echo esc_html($meta('_myliba_academy_modules_title')); ?></h3><?php endif; ?>
+                            <div class="academy-v2-modules__grid">
+                                <?php foreach ($modules as $module_index => [$module_title, $module_details]): ?>
+                                    <article>
+                                        <span><?php echo esc_html(str_pad((string) ($module_index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                                        <h4><?php echo esc_html($module_title); ?></h4>
+                                        <?php if ($module_details !== ''): ?>
+                                            <ul>
+                                                <?php foreach (array_filter(array_map('trim', explode(';', $module_details))) as $detail): ?>
+                                                    <li><?php echo esc_html($detail); ?></li><?php endforeach; ?>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </article>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </section>
+            <?php endwhile;
+            wp_reset_postdata(); ?>
         </div>
-        <div class="academy-audience-grid">
-            <?php foreach ($audience_items as $item) : ?>
-                <article class="academy-card">
-                    <h3><?php echo esc_html($item[0]); ?></h3>
-                    <p><?php echo esc_html($item[1]); ?></p>
+    <?php endif; ?>
+
+    <?php if ($approach_steps && $meta('_myliba_academy_approach_title') !== ''): ?>
+        <section id="yaklasim" class="academy-v2-approach">
+            <div class="section">
+                <h2><?php echo esc_html($meta('_myliba_academy_approach_title')); ?></h2>
+                <div class="academy-v2-process">
+                    <?php foreach ($approach_steps as $index => [$title, $description]): ?>
+                        <article><span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                            <h3><?php echo esc_html($title); ?></h3>
+                            <p><?php echo esc_html($description); ?></p>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+    <?php endif; ?>
+
+    <?php if ($stats): ?>
+        <section class="section academy-v2-stats"
+            aria-label="<?php echo esc_attr($meta('_myliba_academy_approach_title')); ?>">
+            <?php foreach ($stats as $stat_index => [$value, $label]): ?>
+                <article>
+                    <span class="academy-v2-stats__index" aria-hidden="true"><?php echo esc_html(str_pad((string) ($stat_index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                    <div>
+                        <strong><?php echo esc_html($value); ?></strong>
+                        <span class="academy-v2-stats__label"><?php echo esc_html($label); ?></span>
+                    </div>
                 </article>
             <?php endforeach; ?>
-        </div>
-    </section>
+        </section>
+    <?php endif; ?>
 
-    <section class="section academy-section academy-section--journey">
-        <div class="academy-section__heading">
-            <p class="eyebrow"><?php echo esc_html($is_tr ? 'Program akisi' : 'Program journey'); ?></p>
-            <h2><?php echo esc_html($is_tr ? 'Egitim, atelye ve kocluk ayni is ritminde ilerler.' : 'Training, workshops and coaching move in one operating rhythm.'); ?></h2>
-        </div>
-        <div class="academy-journey">
-            <?php foreach ($journey_steps as $step) : ?>
-                <article class="academy-journey__step">
-                    <span><?php echo esc_html($step[0]); ?></span>
-                    <h3><?php echo esc_html($step[1]); ?></h3>
-                    <p><?php echo esc_html($step[2]); ?></p>
-                </article>
-            <?php endforeach; ?>
-        </div>
-    </section>
+    <?php if ($testimonials->have_posts() && $meta('_myliba_academy_testimonials_title') !== ''): ?>
+        <section id="yorumlar" class="section academy-v2-testimonials" data-academy-slider>
+            <div class="academy-v2-section-head">
+                <h2><?php echo esc_html($meta('_myliba_academy_testimonials_title')); ?></h2>
+                <div class="academy-v2-slider-controls">
+                    <button type="button" data-slider-previous
+                        aria-label="<?php esc_attr_e('Previous testimonial', 'myliba'); ?>">←</button>
+                    <button type="button" data-slider-next
+                        aria-label="<?php esc_attr_e('Next testimonial', 'myliba'); ?>">→</button>
+                </div>
+            </div>
+            <div class="academy-v2-testimonials__track" data-slider-track>
+                <?php while ($testimonials->have_posts()):
+                    $testimonials->the_post(); ?>
+                    <article>
+                        <div class="academy-v2-testimonial__person">
+                            <?php if (has_post_thumbnail()): ?>            <?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail', ['loading' => 'lazy']); ?>        <?php endif; ?>
+                            <div>
+                                <h3><?php the_title(); ?></h3>
+                                <p><?php echo esc_html(get_post_meta(get_the_ID(), '_myliba_person_role', true)); ?> ·
+                                    <?php echo esc_html(get_post_meta(get_the_ID(), '_myliba_company', true)); ?></p>
+                            </div>
+                        </div>
+                        <blockquote><?php echo wp_kses_post(get_the_content()); ?></blockquote>
+                        <?php $testimonial_program = get_post_meta(get_the_ID(), '_myliba_academy_testimonial_program', true); ?>
+                        <?php if ($testimonial_program): ?><span
+                                class="academy-v2-testimonial__program"><?php echo esc_html($testimonial_program); ?></span><?php endif; ?>
+                    </article>
+                <?php endwhile;
+                wp_reset_postdata(); ?>
+            </div>
+        </section>
+    <?php endif; ?>
 
-    <section id="academy-curriculum" class="section academy-section academy-curriculum">
-        <div class="academy-curriculum__panel">
+    <?php
+    get_template_part('template-parts/expand', null, [
+        'id' => 'sss',
+        'title' => $meta('_myliba_academy_faq_title'),
+        'items' => $faq_items,
+    ]);
+    ?>
+
+    <?php if ($meta('_myliba_academy_final_title') !== ''): ?>
+        <section id="iletisim" class="section academy-v2-final">
             <div>
-                <p class="eyebrow"><?php echo esc_html($is_tr ? '40 saatlik hibrit icerik' : '40-hour hybrid content'); ?></p>
-                <h2><?php echo esc_html($is_tr ? 'Teoriden uygulamaya uzanan kompakt bir OKR kocluk cercevesi.' : 'A compact OKR coaching framework from theory to application.'); ?></h2>
-                <p><?php echo esc_html($is_tr ? 'Program, katilimcilarin OKR sistemini sadece anlatmasini degil, kendi kurumlarinda uygulamaya alabilecek bir ritim kurmasini hedefler.' : 'The program helps participants move beyond explaining OKRs and build a rhythm they can implement in their own organizations.'); ?></p>
+                <h2><?php echo esc_html($meta('_myliba_academy_final_title')); ?></h2>
+                <?php if ($meta('_myliba_academy_final_text') !== ''): ?>
+                    <p><?php echo esc_html($meta('_myliba_academy_final_text')); ?></p><?php endif; ?>
             </div>
-            <ul class="academy-check-list">
-                <?php foreach ($curriculum_items as $item) : ?>
-                    <li><?php echo esc_html($item); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </section>
-
-    <section class="section academy-section">
-        <div class="academy-section__heading">
-            <p class="eyebrow"><?php echo esc_html($is_tr ? 'Akademi egitimleri' : 'Academy trainings'); ?></p>
-            <h2><?php echo esc_html($is_tr ? 'Programi guclendiren uzmanlik alanlari.' : 'Specialized tracks that strengthen the program.'); ?></h2>
-        </div>
-        <div class="academy-training-grid">
-            <?php foreach ($training_cards as $card) : ?>
-                <article class="academy-training-card">
-                    <h3><?php echo esc_html($card[0]); ?></h3>
-                    <p><?php echo esc_html($card[1]); ?></p>
-                </article>
-            <?php endforeach; ?>
-        </div>
-    </section>
-
-    <section class="section academy-final">
-        <div class="academy-final__inner">
-            <div>
-                <p class="eyebrow"><?php echo esc_html($is_tr ? 'Sonraki adim' : 'Next step'); ?></p>
-                <h2><?php echo esc_html($is_tr ? 'Kurumunuz icin dogru akademi yolunu birlikte netlestirelim.' : 'Clarify the right academy path for your organization.'); ?></h2>
-                <p><?php echo esc_html($is_tr ? 'Ekip yapinizi, mevcut hedef yonetimi olgunlugunuzu ve yayilim ihtiyacinizi anlayip size uygun program akisini onerebiliriz.' : 'We can understand your team structure, goal-management maturity and rollout needs, then recommend the right program flow.'); ?></p>
+            <div class="academy-v2-final__actions">
+                <?php if ($meta('_myliba_academy_final_primary_label') !== ''): ?><button
+                        class="myliba-button myliba-button--primary" type="button"
+                        data-academy-form-open><?php echo esc_html($meta('_myliba_academy_final_primary_label')); ?></button><?php endif; ?>
+                <?php if ($meta('_myliba_academy_final_secondary_label') !== ''): ?><a
+                        class="myliba-button myliba-button--ghost"
+                        href="#programlar"><?php echo esc_html($meta('_myliba_academy_final_secondary_label')); ?></a><?php endif; ?>
             </div>
-            <div class="academy-final__actions">
-                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>"><?php echo esc_html($is_tr ? 'Demo talep et' : 'Request a demo'); ?></a>
-                <a class="myliba-button myliba-button--ghost" href="<?php echo esc_url($contact_url); ?>"><?php echo esc_html($is_tr ? 'Iletisime gec' : 'Contact us'); ?></a>
-            </div>
-        </div>
-    </section>
+        </section>
+    <?php endif; ?>
 </div>
+
+<?php if ($meta('_myliba_academy_contact_title') !== ''): ?>
+    <dialog class="academy-v2-dialog" data-academy-dialog aria-labelledby="academy-dialog-title">
+        <button class="academy-v2-dialog__close" type="button" data-academy-form-close
+            aria-label="<?php esc_attr_e('Close', 'myliba'); ?>">×</button>
+        <div class="academy-v2-dialog__intro">
+            <p class="eyebrow"><?php echo esc_html($meta('_myliba_eyebrow')); ?></p>
+            <h2 id="academy-dialog-title"><?php echo esc_html($meta('_myliba_academy_contact_title')); ?></h2>
+            <?php if ($meta('_myliba_academy_contact_text') !== ''): ?>
+                <p><?php echo esc_html($meta('_myliba_academy_contact_text')); ?></p><?php endif; ?>
+        </div>
+        <?php echo do_shortcode('[myliba_academy_form]'); ?>
+    </dialog>
+<?php endif; ?>
 
 <?php get_footer(); ?>

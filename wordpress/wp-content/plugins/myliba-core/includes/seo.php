@@ -102,6 +102,7 @@ function document_title(array $parts): array
 
     if ($seo_title) {
         $parts['title'] = $seo_title;
+        unset($parts['site'], $parts['tagline']);
     }
 
     return $parts;
@@ -239,6 +240,11 @@ function render_schema(): void
     $schemas[] = $website;
     $schemas[] = breadcrumb_schema();
 
+    if (is_academy_landing()) {
+        $schemas[] = educational_organization_schema();
+        $schemas = array_merge($schemas, academy_course_schemas());
+    }
+
     if (is_singular('post')) {
         $schemas[] = article_schema();
     }
@@ -325,7 +331,8 @@ function faq_schema(): array
         return [];
     }
 
-    $items = get_post_meta(get_queried_object_id(), '_myliba_faq_items', true);
+    $post_id = get_queried_object_id();
+    $items = get_post_meta($post_id, '_myliba_faq_items', true);
     $pairs = [];
 
     foreach (preg_split('/\r\n|\r|\n/', (string) $items) ?: [] as $line) {
@@ -342,6 +349,52 @@ function faq_schema(): array
         }
     }
 
+    if (is_academy_landing()) {
+        $group = trim((string) get_post_meta($post_id, '_myliba_academy_faq_group', true));
+        $meta_query = [];
+
+        if ($group !== '') {
+            $meta_query[] = [
+                'key' => '_myliba_label',
+                'value' => $group,
+            ];
+        }
+
+        $language = get_post_meta($post_id, '_myliba_language', true);
+        if ($language !== '' && !function_exists('pll_current_language')) {
+            $meta_query[] = [
+                'key' => '_myliba_language',
+                'value' => $language,
+            ];
+        }
+
+        $faq_query = new \WP_Query([
+            'post_type' => 'myliba_faq',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'meta_key' => '_myliba_order',
+            'orderby' => ['meta_value_num' => 'ASC', 'date' => 'DESC'],
+            'meta_query' => $meta_query,
+        ]);
+
+        while ($faq_query->have_posts()) {
+            $faq_query->the_post();
+            $answer = trim(wp_strip_all_tags((string) get_post_field('post_content', get_the_ID())));
+            if ($answer === '') {
+                continue;
+            }
+            $pairs[] = [
+                '@type' => 'Question',
+                'name' => get_the_title(),
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => $answer,
+                ],
+            ];
+        }
+        wp_reset_postdata();
+    }
+
     if (!$pairs) {
         return [];
     }
@@ -351,6 +404,84 @@ function faq_schema(): array
         '@type' => 'FAQPage',
         'mainEntity' => $pairs,
     ];
+}
+
+function is_academy_landing(): bool
+{
+    if (!is_page()) {
+        return false;
+    }
+
+    $post = get_post(get_queried_object_id());
+
+    return $post && in_array($post->post_name, ['okr-culture-academy', 'okr-kultur-akademisi'], true);
+}
+
+function educational_organization_schema(): array
+{
+    $academy_name = trim((string) get_post_meta(get_queried_object_id(), '_myliba_academy_organization_name', true));
+
+    return [
+        '@context' => 'https://schema.org',
+        '@type' => 'EducationalOrganization',
+        'name' => $academy_name ?: Options\get('organization_name', 'Myliba'),
+        'url' => current_url(),
+        'parentOrganization' => [
+            '@type' => 'Organization',
+            'name' => Options\get('organization_name', 'Myliba'),
+            'url' => Options\get('organization_url', home_url('/')),
+        ],
+    ];
+}
+
+function academy_course_schemas(): array
+{
+    $language = get_post_meta(get_queried_object_id(), '_myliba_language', true);
+    $academy_name = trim((string) get_post_meta(get_queried_object_id(), '_myliba_academy_organization_name', true));
+    $meta_query = [];
+    if ($language !== '' && !function_exists('pll_current_language')) {
+        $meta_query[] = [
+            'key' => '_myliba_language',
+            'value' => $language,
+        ];
+    }
+
+    $query = new \WP_Query([
+        'post_type' => 'myliba_academy',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'meta_key' => '_myliba_order',
+        'orderby' => ['meta_value_num' => 'ASC', 'date' => 'DESC'],
+        'meta_query' => $meta_query,
+    ]);
+    $schemas = [];
+
+    while ($query->have_posts()) {
+        $query->the_post();
+        $program_id = get_the_ID();
+        $description = get_the_excerpt() ?: wp_trim_words(wp_strip_all_tags((string) get_post_field('post_content', $program_id)), 32);
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Course',
+            'name' => get_the_title(),
+            'description' => $description,
+            'url' => current_url() . '#program-' . (count($schemas) + 1),
+            'provider' => [
+                '@type' => 'EducationalOrganization',
+                'name' => $academy_name ?: Options\get('organization_name', 'Myliba'),
+                'url' => current_url(),
+            ],
+        ];
+
+        $certificate = trim((string) get_post_meta($program_id, '_myliba_academy_certificate_info', true));
+        if ($certificate !== '') {
+            $schema['educationalCredentialAwarded'] = $certificate;
+        }
+        $schemas[] = $schema;
+    }
+    wp_reset_postdata();
+
+    return $schemas;
 }
 
 function current_url(): string

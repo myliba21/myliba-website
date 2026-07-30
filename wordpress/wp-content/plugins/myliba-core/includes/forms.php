@@ -12,6 +12,7 @@ function boot(): void
 {
     add_shortcode('myliba_contact_form', __NAMESPACE__ . '\\shortcode');
     add_shortcode('myliba_demo_form', __NAMESPACE__ . '\\demo_shortcode');
+    add_shortcode('myliba_academy_form', __NAMESPACE__ . '\\academy_shortcode');
     add_action('admin_post_nopriv_myliba_contact_form', __NAMESPACE__ . '\\handle');
     add_action('admin_post_myliba_contact_form', __NAMESPACE__ . '\\handle');
 }
@@ -26,10 +27,40 @@ function demo_shortcode(): string
     return render_form('demo');
 }
 
+function academy_shortcode(): string
+{
+    return render_form('academy');
+}
+
 function render_form(string $context): string
 {
     $status = isset($_GET['myliba_form']) ? sanitize_key(wp_unslash($_GET['myliba_form'])) : '';
     $is_demo = $context === 'demo';
+    $is_academy = $context === 'academy';
+    $page_id = get_queried_object_id();
+    $success_message = $is_academy ? get_post_meta($page_id, '_myliba_academy_form_success', true) : '';
+    $button_label = $is_academy ? get_post_meta($page_id, '_myliba_academy_form_button', true) : '';
+    $kvkk_text = $is_academy ? get_post_meta($page_id, '_myliba_academy_kvkk_text', true) : '';
+    $programs = [];
+
+    if ($is_academy) {
+        $program_query = new \WP_Query([
+            'post_type' => 'myliba_academy',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'meta_key' => '_myliba_order',
+            'orderby' => ['meta_value_num' => 'ASC', 'title' => 'ASC'],
+            'meta_query' => function_exists('pll_current_language') ? [] : [[
+                'key' => '_myliba_language',
+                'value' => function_exists('myliba_current_language') ? myliba_current_language() : 'tr',
+            ]],
+        ]);
+        while ($program_query->have_posts()) {
+            $program_query->the_post();
+            $programs[] = get_the_title();
+        }
+        wp_reset_postdata();
+    }
 
     ob_start();
     ?>
@@ -43,7 +74,7 @@ function render_form(string $context): string
         </div>
 
         <?php if ($status === 'success') : ?>
-            <p class="myliba-form__status myliba-form__status--success"><?php esc_html_e('Your message has been received.', 'myliba'); ?></p>
+            <p class="myliba-form__status myliba-form__status--success" role="status"><?php echo esc_html($success_message ?: __('Your message has been received.', 'myliba')); ?></p>
         <?php elseif ($status === 'error') : ?>
             <p class="myliba-form__status myliba-form__status--error"><?php esc_html_e('The form could not be sent. Please try again.', 'myliba'); ?></p>
         <?php endif; ?>
@@ -65,17 +96,19 @@ function render_form(string $context): string
             </label>
             <label>
                 <span><?php esc_html_e('Phone', 'myliba'); ?></span>
-                <input name="phone" inputmode="tel" <?php echo $is_demo ? 'required' : ''; ?>>
+                <input name="phone" inputmode="tel" <?php echo ($is_demo || $is_academy) ? 'required' : ''; ?>>
             </label>
             <label>
                 <span><?php esc_html_e('Company', 'myliba'); ?></span>
-                <input name="company" <?php echo $is_demo ? 'required' : ''; ?>>
+                <input name="company" <?php echo ($is_demo || $is_academy) ? 'required' : ''; ?>>
             </label>
-            <?php if ($is_demo) : ?>
+            <?php if ($is_demo || $is_academy) : ?>
                 <label>
                     <span><?php esc_html_e('Title', 'myliba'); ?></span>
-                    <input name="job_title">
+                    <input name="job_title" <?php echo $is_academy ? 'required' : ''; ?>>
                 </label>
+            <?php endif; ?>
+            <?php if ($is_demo) : ?>
                 <label>
                     <span><?php esc_html_e('Employee count', 'myliba'); ?></span>
                     <select name="employee_count">
@@ -86,23 +119,39 @@ function render_form(string $context): string
                     </select>
                 </label>
             <?php endif; ?>
+            <?php if ($is_academy) : ?>
+                <label>
+                    <span><?php esc_html_e('Program you are interested in', 'myliba'); ?></span>
+                    <select name="program" required data-academy-program-select>
+                        <option value=""><?php esc_html_e('Select a program', 'myliba'); ?></option>
+                        <?php foreach ($programs as $program) : ?>
+                            <option value="<?php echo esc_attr($program); ?>"><?php echo esc_html($program); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </label>
+                <fieldset class="myliba-form__choice">
+                    <legend><?php esc_html_e('Participation type', 'myliba'); ?></legend>
+                    <label><input type="radio" name="participation_type" value="individual" required> <span><?php esc_html_e('Individual', 'myliba'); ?></span></label>
+                    <label><input type="radio" name="participation_type" value="corporate" required> <span><?php esc_html_e('Corporate', 'myliba'); ?></span></label>
+                </fieldset>
+            <?php endif; ?>
         </div>
-        <?php if (!$is_demo) : ?>
+        <?php if (!$is_demo && !$is_academy) : ?>
             <label>
                 <span><?php esc_html_e('Subject', 'myliba'); ?></span>
                 <input name="subject" required>
             </label>
         <?php endif; ?>
-        <input type="hidden" name="type" value="<?php echo esc_attr($is_demo ? 'demo' : 'contact'); ?>">
+        <input type="hidden" name="type" value="<?php echo esc_attr($is_demo ? 'demo' : ($is_academy ? 'academy' : 'contact')); ?>">
         <label>
             <span><?php esc_html_e('Message', 'myliba'); ?></span>
             <textarea name="message" rows="6" <?php echo $is_demo ? '' : 'required'; ?>></textarea>
         </label>
         <label class="myliba-form__consent">
             <input type="checkbox" name="kvkk" value="1" required>
-            <span><?php esc_html_e('I consent to being contacted about this request and accept the privacy notice.', 'myliba'); ?></span>
+            <span><?php echo esc_html($kvkk_text ?: __('I consent to being contacted about this request and accept the privacy notice.', 'myliba')); ?></span>
         </label>
-        <button class="myliba-button myliba-button--primary" type="submit"><?php echo esc_html($is_demo ? __('Request demo', 'myliba') : __('Send', 'myliba')); ?></button>
+        <button class="myliba-button myliba-button--primary" type="submit"><?php echo esc_html($button_label ?: ($is_demo ? __('Request demo', 'myliba') : __('Send', 'myliba'))); ?></button>
     </form>
     <?php
 
@@ -136,6 +185,8 @@ function handle(): void
         'company' => sanitize_text_field(wp_unslash($_POST['company'] ?? '')),
         'job_title' => sanitize_text_field(wp_unslash($_POST['job_title'] ?? '')),
         'employee_count' => sanitize_text_field(wp_unslash($_POST['employee_count'] ?? '')),
+        'program' => sanitize_text_field(wp_unslash($_POST['program'] ?? '')),
+        'participation_type' => sanitize_key(wp_unslash($_POST['participation_type'] ?? '')),
         'subject' => sanitize_text_field(wp_unslash($_POST['subject'] ?? '')),
         'type' => sanitize_key(wp_unslash($_POST['type'] ?? 'contact')),
         'form_context' => sanitize_key(wp_unslash($_POST['form_context'] ?? 'contact')),
@@ -154,6 +205,11 @@ function handle(): void
     }
 
     if ($data['form_context'] === 'demo' && (!$data['last_name'] || !$data['phone'] || !$data['company'])) {
+        wp_safe_redirect(add_query_arg('myliba_form', 'error', $redirect));
+        exit;
+    }
+
+    if ($data['form_context'] === 'academy' && (!$data['phone'] || !$data['company'] || !$data['job_title'] || !$data['program'] || !in_array($data['participation_type'], ['individual', 'corporate'], true))) {
         wp_safe_redirect(add_query_arg('myliba_form', 'error', $redirect));
         exit;
     }
@@ -207,7 +263,7 @@ function send_notification(array $data): void
     $to = Options\get('contact_email', get_option('admin_email'));
     $subject = sprintf('[Myliba] %s request from %s', ucfirst($data['type']), $data['name']);
     $body = sprintf(
-        "Name: %s %s\nEmail: %s\nPhone: %s\nCompany: %s\nTitle: %s\nEmployee count: %s\nSubject: %s\nType: %s\nKVKK: %s\n\nMessage:\n%s",
+        "Name: %s %s\nEmail: %s\nPhone: %s\nCompany: %s\nTitle: %s\nEmployee count: %s\nProgram: %s\nParticipation: %s\nSubject: %s\nType: %s\nKVKK: %s\n\nMessage:\n%s",
         $data['name'],
         $data['last_name'],
         $data['email'],
@@ -215,6 +271,8 @@ function send_notification(array $data): void
         $data['company'],
         $data['job_title'],
         $data['employee_count'],
+        $data['program'],
+        $data['participation_type'],
         $data['subject'],
         $data['type'],
         $data['kvkk'],

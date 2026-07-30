@@ -161,6 +161,26 @@ class Commands
     }
 
     /**
+     * Materialize the Academy landing page, programs and FAQ records.
+     *
+     * ## OPTIONS
+     *
+     * [--yes]
+     * : Confirm the operation.
+     *
+     * @subcommand materialize-academy
+     */
+    public function materialize_academy(array $args, array $assoc_args): void
+    {
+        if (empty($assoc_args['yes'])) {
+            \WP_CLI::confirm('Create or update the database-driven Myliba Academy content?');
+        }
+
+        $this->seed_academy();
+        \WP_CLI::success('Myliba Academy page fields, program records and FAQ records were materialized into WordPress.');
+    }
+
+    /**
      * Import public content from the current myliba.com website.
      *
      * ## OPTIONS
@@ -923,21 +943,130 @@ class Commands
     private function seed_academy(): void
     {
         $items = [
-            ['OKR Culture Program', 'okr-culture-program', 'Workshops and coaching that help teams adopt OKR discipline.', 10],
-            ['Leadership Development Program', 'leadership-development-program', 'Programs that help leaders coach, align and follow up better.', 20],
-            ['Performance Coaching Program', 'performance-coaching-program', 'Practical routines for feedback, 1:1 and continuous development.', 30],
+            [
+                'Dünyanın İlk ve Tek ICF Onaylı OKR & Kültür Koçluğu Sertifika Programı',
+                'icf-onayli-okr-kultur-koclugu',
+                '40 CCE akredite yapısıyla OKR, KPI, CFR ve koçluğu bir arada sunan, Türkiye’de ve dünyada ilk ve tek program. Myliba yazılımı üzerinde gerçek uygulamalı deneyim yaşayın, tüm oturumları canlı olarak tamamlayın.',
+                'Öne Çıkan Program',
+                'featured',
+                "Uluslararası geçerliliğe sahip sertifika, dijital rozet ve 40 saat ICF CCE kredisi\nOKR, KPI, CFR ve kültürü tek çatı altında buluşturan Myliba modeli\nKurumlarda kişilere bağımlı olmayan sürdürülebilir OKR ve performans sistemleri kurma yetkinliği\nCanlı oturumlar, işbaşı gerçek hedefler ve Myliba platformu üzerinde uygulamalı öğrenme\nSüpervizyon ve ustalaşma süreci\nMezun liderler için sürekli gelişim, güncel içerikler ve networking ağı",
+                "40 CCE\nCanlı Oturumlar\nUygulamalı Eğitim\nICF Onaylı\nDijital Sertifika\nSüpervizyon",
+                "Bilgi ve Farkındalık Modülü | 12 saat eğitim; 4 saat uygulama\nBeceri Geliştirme Modülü | 4 saat eğitim; 12 saat uygulama\nUstalaşma Modülü | 3 saat işbaşı uygulama; 3 saat süpervizyon; Tamamlama sınavı",
+                'Eylül 2026 Dönemi Kayıtları',
+                'Program Detaylarını İndir',
+                'Eylül 2026',
+                '40 saat ICF CCE, dijital sertifika ve Myliba dijital rozeti',
+                10,
+            ],
+            [
+                'İşbaşı Liderlik ve Performans Gelişim Programı',
+                'isbasi-liderlik-performans-gelisim',
+                'Liderleriniz ve ekiplerinizle yüksek performans kültürü oluşturun. İlham veren hedefleri ortaya çıkarırken kültürel dönüşüm için gerekli becerileri edinin.',
+                'İşbaşı Gelişim Programı',
+                'leadership',
+                "Liderler teorik senaryolarla değil, şirketin gerçek hedefleriyle çalışır.\nYıl sonu stresini azaltan, günlük iş akışına yayılan anlık takdir ve geri-ileri bildirim kültürü kazandırır.\nKültürü ve performansı ölçen göstergelerle daha adil kararlar alma ve yönetme deneyimi sunar.",
+                "Gerçek Kurum Hedefleri\nCanlı Öğrenme\nÖlçülebilir Gelişim",
+                "Bilgi ve Farkındalık Modülü | Canlı eğitim; Kurum hedefleriyle çalışma\nBeceri Geliştirme Modülü | İşbaşı uygulama; Geri-ileri bildirim pratikleri",
+                'Kurumunuza Özel Teklif Alın',
+                '',
+                '',
+                '',
+                20,
+            ],
+            [
+                'Hedef ve Kültürel Dönüşüm Danışmanlığı',
+                'hedef-kulturel-donusum-danismanligi',
+                'İlham veren hedeflerle kültürünüzü dönüştürün. Uçtan uca insan odaklı, yeni nesil yüksek performans kültürü oluşturun; farklı sektör ve şirketlerde dönüşüm yolculuklarını yönetmiş deneyimli uzmanlarla ilerleyin.',
+                'Kurumsal Danışmanlık',
+                'consulting',
+                "Strateji ve hedef yönetimi\nLiderlik ve kültür dönüşümü\nPerformans ve geri bildirim sistemleri",
+                "Uçtan Uca Dönüşüm\nÖlçülebilir Kültür\nDeneyimli Uzmanlar",
+                '',
+                'İhtiyacınıza Özel Teklif Alın',
+                '',
+                '',
+                '',
+                30,
+            ],
         ];
 
-        foreach ($items as [$title, $slug, $excerpt, $order]) {
+        foreach ($items as [$title, $slug, $excerpt, $eyebrow, $layout, $benefits, $badges, $modules, $primary_label, $secondary_label, $period, $certificate, $order]) {
             $this->upsert_post_type('myliba_academy', $title, $slug, '<p>' . esc_html($excerpt) . '</p>', [
-                '_myliba_language' => 'en',
-                '_myliba_label' => 'Academy program',
+                '_myliba_language' => 'tr',
+                '_myliba_label' => 'Akademi programı',
                 '_myliba_hero_title' => $title,
                 '_myliba_hero_subtitle' => $excerpt,
-                '_myliba_problem' => 'Software alone does not create sustainable behavior change.',
-                '_myliba_solution' => 'Myliba academy programs combine training, coaching and implementation routines.',
-                '_myliba_benefits' => "Adoption support\nLeader capability\nSustainable routines",
-                '_myliba_related_modules' => "Academy\nLeadership\nOKR\nPerformance",
+                '_myliba_seo_description' => $excerpt,
+                '_myliba_academy_program_eyebrow' => $eyebrow,
+                '_myliba_academy_layout' => $layout,
+                '_myliba_academy_program_benefits' => $benefits,
+                '_myliba_academy_program_badges' => $badges,
+                '_myliba_academy_program_modules' => $modules,
+                '_myliba_academy_program_primary_label' => $primary_label,
+                '_myliba_academy_program_secondary_label' => $secondary_label,
+                '_myliba_academy_start_period' => $period,
+                '_myliba_academy_certificate_info' => $certificate,
+                '_myliba_order' => (string) $order,
+            ]);
+        }
+
+        $academy_page = get_page_by_path('tr/okr-kultur-akademisi');
+        if ($academy_page) {
+            $this->save_meta($academy_page->ID, [
+                '_myliba_eyebrow' => 'Myliba Akademi | Dönüşümün Liderlerini Yetiştiren Gelişim Akademisi',
+                '_myliba_hero_title' => 'Liderlerinizi Hedef ve Kültür Koçuna, Çalışanlarınızı Kurum İçi Girişimciye Dönüştürün',
+                '_myliba_hero_subtitle' => 'Yüksek performans kültürü, onu yaşatacak liderlerle inşa edilir. OKR, CFR, geri-ileri bildirim kültürü ve koçluk gelişimini işbaşı gerçek hedeflerinizle ve Myliba altyapısıyla sunuyor; dünyanın ilk ve tek ICF onaylı sertifika programımızla organizasyonel dönüşümünüze liderlik ediyoruz.',
+                '_myliba_cta_label' => 'OKR & Kültür Koçluğu Sertifika Programına Kayıt Olun',
+                '_myliba_cta_url' => '',
+                '_myliba_academy_hero_secondary_label' => 'İşbaşı Liderlik Gelişim Programları için Bizimle İletişime Geçin',
+                '_myliba_academy_hero_tertiary_label' => 'Kurumsal Danışmanlık Hizmetlerimizi İnceleyin',
+                '_myliba_academy_hero_tertiary_url' => '#program-3',
+                '_myliba_academy_hero_badges' => "40 CCE | ICF kredisi\nCanlı | Oturumlar\n3 Aşama | Gelişim modeli",
+                '_myliba_academy_nav_items' => "Programlar | programlar\nMyliba Yaklaşımı | yaklasim\nYorumlar | yorumlar\nSSS | sss\nİletişim | iletisim",
+                '_myliba_academy_trust_title' => 'Dönüşüm Yolculuğunda Bizi Tercih Eden Kurumlar',
+                '_myliba_academy_trust_label' => 'Güvenilir iş ortaklığı',
+                '_myliba_academy_trust_text' => 'Şirketler, sektörler ve liderlik ekipleri genelinde kanıtlanmış dönüşüm deneyimi.',
+                '_myliba_academy_organization_name' => 'Myliba Akademi',
+                '_myliba_academy_programs_eyebrow' => 'Myliba Akademi Programları',
+                '_myliba_academy_programs_title' => 'Bilgiden Uygulamaya, Uygulamadan Kurumsal Dönüşüme',
+                '_myliba_academy_programs_text' => 'Myliba Akademi programları yalnızca teorik bilgi aktarmakla kalmaz. Katılımcılar gerçek kurum hedefleri, canlı oturumlar, uygulamalı çalışmalar ve Myliba platformu üzerinden sürdürülebilir gelişim deneyimi yaşar.',
+                '_myliba_academy_benefits_title' => 'Neden Bu Program?',
+                '_myliba_academy_modules_title' => 'Programın Gelişim Yapısı',
+                '_myliba_academy_approach_title' => 'Sadece Eğitim Değil, Uygulamalı Bir Dönüşüm Deneyimi',
+                '_myliba_academy_approach_steps' => "İhtiyaç Analizi | Kurumun hedefleri, kültürü ve gelişim ihtiyaçları değerlendirilir.\nCanlı Öğrenme | Katılımcılar uzman eğitmenlerle canlı ve etkileşimli oturumlara katılır.\nİşbaşı Uygulama | Öğrenilen bilgiler gerçek hedefler ve ekip süreçleri üzerinde uygulanır.\nSürekli Gelişim | Süpervizyon, güncel içerikler, topluluk ve networking desteğiyle gelişim devam eder.",
+                '_myliba_academy_stats' => "40 Saat | ICF CCE\n3 Aşamalı | Gelişim Modeli\nCanlı ve Uygulamalı | Oturumlar\nSürekli | Mezun Gelişim Ağı",
+                '_myliba_academy_testimonials_title' => 'Katılımcılarımızın ve Kurumların Deneyimleri',
+                '_myliba_academy_faq_title' => 'Myliba Akademi Hakkında Merak Edilenler',
+                '_myliba_academy_faq_group' => 'Myliba Akademi',
+                '_myliba_academy_final_title' => 'Dönüşümü Yönetecek Liderleri Myliba Akademi ile Yetiştirin',
+                '_myliba_academy_final_text' => 'Dönüşüm insanla başlar. Ekiplerinize organizasyonunuzu geleceğe taşıyacak liderlik yetkinlikleri kazandırın.',
+                '_myliba_academy_final_primary_label' => 'Gelişim Yolculuğunuzu Planlayın',
+                '_myliba_academy_final_secondary_label' => 'Akademi Programlarını İnceleyin',
+                '_myliba_academy_contact_title' => 'Gelişim Yolculuğunuzu Birlikte Planlayalım',
+                '_myliba_academy_contact_text' => 'İhtiyacınızı ve ilgilendiğiniz programı paylaşın; Myliba Akademi ekibi sizinle iletişime geçsin.',
+                '_myliba_academy_form_button' => 'Görüşme Talebi Oluştur',
+                '_myliba_academy_form_success' => 'Talebiniz bize ulaştı. Myliba Akademi ekibi en kısa sürede sizinle iletişime geçecektir.',
+                '_myliba_academy_kvkk_text' => 'KVKK aydınlatma metnini okudum ve talebimle ilgili iletişim kurulmasını onaylıyorum.',
+                '_myliba_seo_title' => 'Myliba Akademi | ICF Onaylı OKR ve Kültür Koçluğu Programı',
+                '_myliba_seo_description' => 'Myliba Akademi’nin ICF onaylı OKR ve Kültür Koçluğu Sertifika Programı, işbaşı liderlik gelişimi ve kurumsal dönüşüm çözümlerini keşfedin.',
+            ]);
+        }
+
+        $faqs = [
+            ['Program kimler için uygundur?', 'Program; OKR, performans, liderlik ve kültürel dönüşüm süreçlerine liderlik eden yöneticiler, insan ve kültür profesyonelleri, strateji ekipleri, kurum içi koçlar ve gelişimini bu alanlarda ilerletmek isteyen profesyoneller için uygundur.', 110],
+            ['Program bireysel ve kurumsal katılıma açık mı?', 'Evet. ICF onaylı sertifika programına bireysel katılım mümkündür. Kurumlar ayrıca ekipleri için işbaşı liderlik gelişim programı veya ihtiyaçlarına göre uyarlanmış kurumsal akademi yolculuğu talep edebilir.', 120],
+            ['Program tamamlandıktan sonra destek devam ediyor mu?', 'Evet. Mezunlar süpervizyon, güncel içerikler, gelişim buluşmaları, topluluk ve networking olanaklarıyla desteklenen sürekli gelişim ağına katılır.', 130],
+            ['ICF 40 CCE sertifikası bana ve kurumuma ne kazandırır?', '40 saatlik ICF CCE kredisi katılımcının koçluk yetkinliklerini geliştirmesine ve uygun olduğu durumlarda ICF unvan yenileme sürecindeki sürekli eğitim gereksinimlerine katkı sağlar. Kurumlar ise hedef, performans ve koçluk pratiklerini birlikte yürütebilen dönüşüm liderleri yetiştirir.', 140],
+            ['Kurumumuz için özel program tasarlanabilir mi?', 'Evet. Kurumun hedef yönetimi olgunluğu, kültürü, liderlik ihtiyaçları ve stratejik öncelikleri analiz edilerek gerçek kurum hedefleri üzerinde çalışan özel program ve uygulama akışı tasarlanabilir.', 150],
+            ['OKR & Kültür Koçluğu Programı ile geleneksel OKR eğitimleri arasındaki fark nedir?', 'Program yalnızca OKR yazmayı öğretmez; KPI, CFR, koçluk, geri-ileri bildirim ve kültür dönüşümünü tek modelde birleştirir. Canlı oturumlar, gerçek hedeflerle işbaşı uygulama, Myliba platformu ve süpervizyon sayesinde bilginin kalıcı bir yönetim rutinine dönüşmesini amaçlar.', 160],
+            ['ICF CCE kredisi nedir ve koçluk unvanlama sürecinde nasıl kullanılır?', 'CCE, International Coaching Federation tarafından koçların sürekli gelişimini desteklemek için tanımlanan eğitim kredileridir. Kredilerin unvan başvurusu veya yenilemesinde nasıl kullanılacağı katılımcının mevcut unvanına ve güncel ICF koşullarına göre değerlendirilmelidir.', 170],
+            ['Myliba Akademi mezunlarına Myliba yazılımına geçişte avantaj sağlanıyor mu?', 'Mezunların Myliba yazılımıyla uygulamaya geçiş ihtiyaçları ayrıca değerlendirilir. Güncel mezun avantajları, lisanslama seçenekleri ve kurumsal geçiş koşulları görüşme sırasında paylaşılır.', 180],
+        ];
+
+        foreach ($faqs as [$question, $answer, $order]) {
+            $this->upsert_post_type('myliba_faq', $question, 'akademi-' . sanitize_title($question), '<p>' . esc_html($answer) . '</p>', [
+                '_myliba_language' => 'tr',
+                '_myliba_label' => 'Myliba Akademi',
                 '_myliba_order' => (string) $order,
             ]);
         }
@@ -1356,7 +1485,7 @@ class Commands
             'post_content' => $content,
         ];
 
-        if ($post_type === 'post') {
+        if ($post_type === 'post' || isset($meta['_myliba_seo_description'])) {
             $postarr['post_excerpt'] = $meta['_myliba_seo_description'] ?? '';
         }
 

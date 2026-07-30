@@ -404,4 +404,62 @@
       }
     }, 4800);
   });
+
+  const academyDialog = document.querySelector("[data-academy-dialog]");
+  if (academyDialog) {
+    const academyProgramSelect = academyDialog.querySelector("[data-academy-program-select]");
+    const academyParticipationInputs = Array.from(academyDialog.querySelectorAll('[name="participation_type"]'));
+    const closeAcademyDialog = () => {
+      if (academyDialog.open) {
+        academyDialog.close();
+      }
+    };
+
+    document.querySelectorAll("[data-academy-form-open]").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const program = trigger.dataset.program || "";
+        const participation = trigger.dataset.participation || "";
+
+        if (academyProgramSelect && program) {
+          academyProgramSelect.value = program;
+        }
+        if (participation) {
+          const input = academyParticipationInputs.find((item) => item.value === participation);
+          if (input) input.checked = true;
+        }
+
+        if (typeof academyDialog.showModal === "function") {
+          academyDialog.showModal();
+        } else {
+          academyDialog.setAttribute("open", "");
+        }
+      });
+    });
+
+    academyDialog.querySelector("[data-academy-form-close]")?.addEventListener("click", closeAcademyDialog);
+    academyDialog.addEventListener("click", (event) => {
+      if (event.target === academyDialog) closeAcademyDialog();
+    });
+
+    const academyFormStatus = new URLSearchParams(window.location.search).get("myliba_form");
+    if (academyFormStatus && typeof academyDialog.showModal === "function") {
+      academyDialog.showModal();
+    }
+  }
+
+  document.querySelectorAll("[data-academy-slider]").forEach((slider) => {
+    const track = slider.querySelector("[data-slider-track]");
+    const previous = slider.querySelector("[data-slider-previous]");
+    const next = slider.querySelector("[data-slider-next]");
+    if (!track) return;
+
+    const move = (direction) => {
+      const card = track.querySelector("article");
+      const distance = card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.85;
+      track.scrollBy({ left: distance * direction, behavior: reducedMotion.matches ? "auto" : "smooth" });
+    };
+
+    previous?.addEventListener("click", () => move(-1));
+    next?.addEventListener("click", () => move(1));
+  });
 })();
