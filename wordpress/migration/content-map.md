@@ -2,7 +2,7 @@
 
 | Content type | WordPress target | Notes |
 | --- | --- | --- |
-| `homepage` | Page: `en` / `tr` | Static front page uses the English page; translations should be linked with Polylang or WPML in production. |
+| `homepage` | Page: `tr` | `/` redirects to `/tr/`. English pages are in Trash until English publishing resumes. |
 | `our-products` | Page | Hero and SEO fields are in the Myliba meta boxes. |
 | `okr-academy` | Page | Use the block editor for body content and featured image for hero image. |
 | `culture-analysis` | Page | Same page model as service pages. |
@@ -24,6 +24,5 @@
 - Preserve every existing public URL or add a 301 redirect.
 - Fill SEO title and meta description for every important page.
 - Add featured images for Open Graph sharing.
-- Install Polylang or WPML before final launch and verify `hreflang`.
+- Install Polylang or WPML before English publishing resumes and then verify `hreflang`.
 - Keep indexing disabled on staging until content, redirects, sitemap, and Search Console are ready.
-

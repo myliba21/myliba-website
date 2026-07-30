@@ -134,7 +134,7 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
         <div class="site-actions">
             <?php
             $language_links = myliba_language_links();
-            $active_language = $language_links[0] ?? ['label' => 'EN', 'url' => home_url('/'), 'active' => true];
+            $active_language = $language_links[0] ?? ['label' => 'TR', 'url' => home_url('/tr/'), 'active' => true];
             foreach ($language_links as $language) {
                 if (!empty($language['active'])) {
                     $active_language = $language;

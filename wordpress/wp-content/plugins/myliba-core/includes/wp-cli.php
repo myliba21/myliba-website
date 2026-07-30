@@ -27,9 +27,11 @@ class Commands
         update_option('myliba_options', array_merge(Options\defaults(), [
             'indexing_enabled' => '0',
             'contact_email' => get_option('admin_email'),
-            'demo_url' => '/en/demo/',
-            'footer_cta_title' => 'Ready to make culture measurable?',
-            'primary_cta_url' => '/en/contact/',
+            'default_locale' => 'tr',
+            'available_locales' => 'tr',
+            'demo_url' => '/tr/demo/',
+            'footer_cta_title' => 'Kültürü ölçülebilir hale getirmeye hazır mısınız?',
+            'primary_cta_url' => '/tr/iletisim/',
         ]));
 
         $this->cleanup_default_content();
@@ -56,8 +58,8 @@ class Commands
             '_myliba_seo_description' => 'Myliba kurumlarin OKR, kultur analizi, etik danismanlik ve guvenlik rehberligi ile olculebilir is kulturu kurmasina yardimci olur.',
         ], $this->home_meta_defaults('tr')));
 
-        update_option('show_on_front', 'page');
-        update_option('page_on_front', $en);
+        update_option('show_on_front', 'posts');
+        update_option('page_on_front', 0);
 
         $pages = [
             ['Our Products', 'our-products', $en, 'en', 'Products that make operating culture visible.', 'Explore product modules, assessment flows, and advisory packages.'],
@@ -178,7 +180,35 @@ class Commands
         $this->upsert_team('Strategy Lead', 'OKR and culture strategy', 10);
         $this->upsert_logo('Example Client', 10);
 
-        \WP_CLI::success('Myliba WordPress structure seeded. Indexing is disabled for staging.');
+        $trashed = $this->apply_turkish_only_mode();
+
+        \WP_CLI::success(sprintf(
+            'Myliba WordPress structure seeded in Turkish-only mode. %d English items were moved to Trash. Indexing is disabled for staging.',
+            $trashed
+        ));
+    }
+
+    /**
+     * Make Turkish the only public locale and move English content to Trash.
+     *
+     * ## OPTIONS
+     *
+     * [--yes]
+     * : Confirm the operation.
+     *
+     * @subcommand turkish-only
+     */
+    public function turkish_only(array $args, array $assoc_args): void
+    {
+        if (empty($assoc_args['yes'])) {
+            \WP_CLI::confirm('Use /tr/ as the homepage and move all English content to Trash?');
+        }
+
+        $trashed = $this->apply_turkish_only_mode();
+        \WP_CLI::success(sprintf(
+            'Turkish-only routing enabled. %d English items were moved to Trash.',
+            $trashed
+        ));
     }
 
     /**
@@ -1581,7 +1611,7 @@ class Commands
         }
 
         $this->save_meta($post_id, $meta);
-        $this->set_polylang_language($post_id, $meta['_myliba_language'] ?? Options\get('default_locale', 'en'));
+        $this->set_polylang_language($post_id, $meta['_myliba_language'] ?? Options\get('default_locale', 'tr'));
 
         return (int) $post_id;
     }
@@ -1591,6 +1621,65 @@ class Commands
         foreach ($meta as $key => $value) {
             update_post_meta($post_id, $key, $value);
         }
+    }
+
+    private function apply_turkish_only_mode(): int
+    {
+        $options = Options\get_all();
+        $options['default_locale'] = 'tr';
+        $options['available_locales'] = 'tr';
+        $options['demo_url'] = '/tr/demo/';
+        $options['primary_cta_url'] = '/tr/iletisim/';
+        $options['demo_cta_label'] = 'Demo talep et';
+        $options['primary_cta_label'] = 'İletişime geçin';
+        $options['footer_note'] = 'OKR, kültür, etik ve güvenlik danışmanlığı.';
+        $options['footer_cta_title'] = 'Kültürü ölçülebilir hale getirmeye hazır mısınız?';
+        $options['promo_left_text'] = 'Yaklaşan atölye';
+        $options['promo_message'] = 'Bir sonraki atölyemizde yerinizi ayırtın.';
+        $options['promo_right_text'] = 'Detay';
+        update_option('myliba_options', $options);
+
+        $tr_home = get_page_by_path('tr');
+        if ($tr_home) {
+            update_option('show_on_front', 'posts');
+            update_option('page_on_front', 0);
+        }
+
+        foreach (['kurumsal-gelisim-programlari', 'simulasyonlar-ve-takim-koclugu', 'danismanlik', 'kultur-analizi'] as $slug) {
+            $solution = get_page_by_path($slug, OBJECT, 'myliba_solution');
+            if ($solution) {
+                update_post_meta($solution->ID, '_myliba_language', 'tr');
+            }
+        }
+
+        $english_ids = get_posts([
+            'post_type' => array_values(get_post_types(['show_ui' => true], 'names')),
+            'post_status' => ['publish', 'draft', 'pending', 'private', 'future'],
+            'posts_per_page' => -1,
+            'fields' => 'ids',
+            'meta_key' => '_myliba_language',
+            'meta_value' => 'en',
+            'suppress_filters' => true,
+        ]);
+
+        $trashed = 0;
+        foreach ($english_ids as $post_id) {
+            if (wp_trash_post((int) $post_id)) {
+                $trashed++;
+            }
+        }
+
+        $legacy_products_page = get_page_by_path('tr/urunler');
+        $software_page = get_page_by_path('tr/yazilim');
+        if ($legacy_products_page && $software_page && get_post_status($legacy_products_page) !== 'trash') {
+            if (wp_trash_post((int) $legacy_products_page->ID)) {
+                $trashed++;
+            }
+        }
+
+        flush_rewrite_rules();
+
+        return $trashed;
     }
 
     private function set_polylang_language(int $post_id, string $language): void

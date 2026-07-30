@@ -10,25 +10,25 @@ function defaults(): array
 {
     $defaults = [
         'indexing_enabled' => '0',
-        'default_locale' => 'en',
-        'available_locales' => "en\ntr",
+        'default_locale' => 'tr',
+        'available_locales' => 'tr',
         'contact_email' => get_option('admin_email'),
         'phone_label' => '+90 553 986 86 99',
         'phone_url' => 'tel:+905539868699',
-        'demo_url' => '/en/demo/',
+        'demo_url' => '/tr/demo/',
         'organization_name' => 'Myliba',
         'organization_url' => home_url('/'),
         'linkedin_url' => '',
         'instagram_url' => '',
-        'footer_note' => 'OKR, culture, ethics, and security consulting.',
-        'footer_cta_title' => 'Ready to make culture measurable?',
-        'primary_cta_label' => 'Contact us',
-        'primary_cta_url' => '/en/contact/',
-        'demo_cta_label' => 'Request a demo',
+        'footer_note' => 'OKR, kültür, etik ve güvenlik danışmanlığı.',
+        'footer_cta_title' => 'Kültürü ölçülebilir hale getirmeye hazır mısınız?',
+        'primary_cta_label' => 'İletişime geçin',
+        'primary_cta_url' => '/tr/iletisim/',
+        'demo_cta_label' => 'Demo talep et',
         'promo_enabled' => '1',
-        'promo_left_text' => 'Upcoming workshop',
-        'promo_message' => 'Reserve your place for our next workshop.',
-        'promo_right_text' => 'View details',
+        'promo_left_text' => 'Yaklaşan atölye',
+        'promo_message' => 'Bir sonraki atölyemizde yerinizi ayırtın.',
+        'promo_right_text' => 'Detay',
         'promo_url' => '',
         'promo_dismissible' => '1',
     ];
@@ -82,12 +82,12 @@ function indexing_enabled(): bool
 
 function locales(): array
 {
-    $raw = (string) get('available_locales', "en\ntr");
+    $raw = (string) get('available_locales', 'tr');
     $items = preg_split('/[\r\n,]+/', $raw) ?: [];
     $items = array_map('trim', $items);
     $items = array_filter($items, static fn ($item) => $item !== '');
 
-    return array_values(array_unique($items)) ?: ['en', 'tr'];
+    return array_values(array_unique($items)) ?: ['tr'];
 }
 
 function ensure_defaults(): void

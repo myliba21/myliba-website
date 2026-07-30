@@ -80,7 +80,7 @@ function render_language_box(\WP_Post $post): void
         return;
     }
 
-    $language = get_post_meta($post->ID, '_myliba_language', true) ?: Options\get('default_locale', 'en');
+    $language = get_post_meta($post->ID, '_myliba_language', true) ?: Options\get('default_locale', 'tr');
     $translation_key = get_post_meta($post->ID, '_myliba_translation_key', true);
 
     field_select('_myliba_language', __('Language', 'myliba'), $language, array_combine(Options\locales(), Options\locales()));

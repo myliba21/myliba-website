@@ -121,7 +121,7 @@ function render_settings(): void
                     <th scope="row"><?php esc_html_e('Demo CTA', 'myliba'); ?></th>
                     <td>
                         <input name="myliba_options[demo_cta_label]" value="<?php echo esc_attr($options['demo_cta_label']); ?>" placeholder="Request a demo">
-                        <input class="regular-text" name="myliba_options[demo_url]" value="<?php echo esc_attr($options['demo_url']); ?>" placeholder="/en/demo/">
+                        <input class="regular-text" name="myliba_options[demo_url]" value="<?php echo esc_attr($options['demo_url']); ?>" placeholder="/tr/demo/">
                     </td>
                 </tr>
                 <tr>

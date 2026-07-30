@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 
 $footer_cta_url_option = (string) myliba_option('primary_cta_url', myliba_page_url('contact'));
 $footer_cta_url = $footer_cta_url_option !== '' ? $footer_cta_url_option : myliba_page_url('contact');
-if (myliba_current_language() !== 'en' && str_contains($footer_cta_url, '/en/contact')) {
+if (str_contains($footer_cta_url, '/en/contact')) {
     $footer_cta_url = myliba_page_url('contact');
 }
 $footer_demo_url = myliba_demo_url();

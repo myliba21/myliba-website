@@ -21,11 +21,11 @@ function register(): void
             'singular_name' => __('Product', 'myliba'),
         ],
         'public' => true,
-        'has_archive' => true,
+        'has_archive' => false,
         'menu_icon' => 'dashicons-screenoptions',
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions'],
-        'rewrite' => ['slug' => 'products'],
+        'rewrite' => ['slug' => 'tr/yazilim', 'with_front' => false],
     ]);
 
     register_post_type('myliba_solution', [
@@ -34,11 +34,11 @@ function register(): void
             'singular_name' => __('Solution', 'myliba'),
         ],
         'public' => true,
-        'has_archive' => true,
+        'has_archive' => false,
         'menu_icon' => 'dashicons-businessperson',
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions'],
-        'rewrite' => ['slug' => 'solutions'],
+        'rewrite' => ['slug' => 'tr/cozumler', 'with_front' => false],
     ]);
 
     register_post_type('myliba_academy', [
@@ -47,11 +47,11 @@ function register(): void
             'singular_name' => __('Academy Program', 'myliba'),
         ],
         'public' => true,
-        'has_archive' => true,
+        'has_archive' => false,
         'menu_icon' => 'dashicons-welcome-learn-more',
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions'],
-        'rewrite' => ['slug' => 'academy'],
+        'rewrite' => ['slug' => 'tr/okr-kultur-akademisi', 'with_front' => false],
     ]);
 
     register_post_type('myliba_case_study', [
@@ -60,11 +60,11 @@ function register(): void
             'singular_name' => __('Case Study', 'myliba'),
         ],
         'public' => true,
-        'has_archive' => true,
+        'has_archive' => false,
         'menu_icon' => 'dashicons-chart-line',
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions'],
-        'rewrite' => ['slug' => 'case-studies'],
+        'rewrite' => ['slug' => 'tr/vaka-calismalari', 'with_front' => false],
     ]);
 
     register_post_type('myliba_testimonial', [
@@ -101,7 +101,7 @@ function register(): void
         'menu_icon' => 'dashicons-search',
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions'],
-        'rewrite' => ['slug' => 'landing-pages'],
+        'rewrite' => ['slug' => 'tr/icerikler', 'with_front' => false],
     ]);
 
     register_post_type('myliba_event', [
@@ -110,11 +110,11 @@ function register(): void
             'singular_name' => __('Event', 'myliba'),
         ],
         'public' => true,
-        'has_archive' => true,
+        'has_archive' => false,
         'menu_icon' => 'dashicons-calendar-alt',
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions'],
-        'rewrite' => ['slug' => 'events'],
+        'rewrite' => ['slug' => 'tr/etkinlikler', 'with_front' => false],
     ]);
 
     register_post_type('myliba_ebook', [
@@ -125,11 +125,11 @@ function register(): void
             'edit_item' => 'e-Kitabı Düzenle',
         ],
         'public' => true,
-        'has_archive' => 'e-kitaplar',
+        'has_archive' => 'tr/gelisim-merkezi/e-kitaplar',
         'menu_icon' => 'dashicons-book-alt',
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions'],
-        'rewrite' => ['slug' => 'e-kitaplar'],
+        'rewrite' => ['slug' => 'tr/gelisim-merkezi/e-kitaplar', 'with_front' => false],
     ]);
 
     register_post_type('myliba_report', [
@@ -140,11 +140,11 @@ function register(): void
             'edit_item' => 'Raporu veya Trendi Düzenle',
         ],
         'public' => true,
-        'has_archive' => 'raporlar-ve-trendler',
+        'has_archive' => 'tr/gelisim-merkezi/raporlar-ve-trendler',
         'menu_icon' => 'dashicons-chart-area',
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions'],
-        'rewrite' => ['slug' => 'raporlar-ve-trendler'],
+        'rewrite' => ['slug' => 'tr/gelisim-merkezi/raporlar-ve-trendler', 'with_front' => false],
     ]);
 
     register_post_type('myliba_team', [
@@ -157,7 +157,7 @@ function register(): void
         'menu_icon' => 'dashicons-groups',
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'thumbnail', 'page-attributes', 'revisions'],
-        'rewrite' => ['slug' => 'team'],
+        'rewrite' => ['slug' => 'tr/ekibimiz', 'with_front' => false],
     ]);
 
     register_post_type('myliba_client_logo', [

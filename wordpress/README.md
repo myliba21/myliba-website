@@ -25,6 +25,31 @@ docker compose --profile tools run --rm wpcli wp myliba seed --yes
 
 The local site will be available at `http://localhost:8080`.
 
+## URL structure
+
+Turkish is the only public locale for now:
+
+- Homepage: `/tr/` (`/` redirects with HTTP 301)
+- Software: `/tr/yazilim/`
+- Solutions: `/tr/cozumler/`
+- Academy: `/tr/okr-kultur-akademisi/`
+- Development Center: `/tr/gelisim-merkezi/`
+- Articles: `/tr/yazilar/{slug}/`
+- Events: `/tr/etkinlikler/{slug}/`
+- e-Books: `/tr/gelisim-merkezi/e-kitaplar/{slug}/`
+- Reports: `/tr/gelisim-merkezi/raporlar-ve-trendler/{slug}/`
+
+English content is retained in the WordPress Trash so it can be restored later.
+To apply the same routing and cleanup safely to another database:
+
+```bash
+docker compose --profile tools run --rm wpcli wp myliba turkish-only --yes
+```
+
+The command also refreshes permalink rules and points site CTAs to their Turkish
+destinations. Known legacy English and old custom-post URLs redirect to their
+current Turkish counterparts with HTTP 301.
+
 ## Import from myliba.com
 
 To pull public content from the current live site:
@@ -37,7 +62,7 @@ docker compose --profile tools run --rm wpcli wp myliba import-current --yes
 
 For production SEO and multilingual management, keep the custom Myliba data model and add these WordPress plugins:
 
-- **Multilingual**: Polylang or WPML. `myliba-core` already exposes the custom post types to Polylang when it is installed.
+- **Multilingual (when English returns)**: Polylang or WPML. `myliba-core` already exposes the custom post types to Polylang when it is installed.
 - **SEO**: Rank Math or Yoast SEO. `myliba-core` ships a minimal SEO fallback (canonical, OG, hreflang, schema) but defers to a full SEO plugin when active.
 - **SMTP**: WP Mail SMTP, FluentSMTP, or your Natro SMTP settings.
 - **Forms**: The built-in Myliba contact form works, but Fluent Forms or Gravity Forms can replace it later.
@@ -54,7 +79,7 @@ Indexing is disabled by default in `Myliba > Site Settings`. While the site is o
 - [ ] Change all `.env` passwords (never commit `.env` to git).
 - [ ] Set `WP_ENVIRONMENT_TYPE=production`, disable `WP_DEBUG` in `wp-config.php`.
 - [ ] Remove the `all-in-one-wp-migration` plugin after migration is complete (reduces attack surface).
-- [ ] Install and configure Polylang or WPML for multilingual routing and `hreflang`.
+- [ ] Install and configure Polylang or WPML before restoring English publishing.
 - [ ] Install and configure Rank Math or Yoast SEO.
 - [ ] Connect SMTP via WP Mail SMTP or FluentSMTP.
 - [ ] Enable SSL and update nginx config (uncomment HTTPS block in `nginx/default.conf`).

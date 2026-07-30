@@ -196,9 +196,9 @@ function render_hreflang(): void
     }
 
     // Fallback hreflang when Polylang/WPML is not yet installed.
-    $current_lang = is_singular() ? (get_post_meta(get_queried_object_id(), '_myliba_language', true) ?: 'en') : 'en';
+    $current_lang = is_singular() ? (get_post_meta(get_queried_object_id(), '_myliba_language', true) ?: 'tr') : 'tr';
     printf("<link rel=\"alternate\" hreflang=\"%s\" href=\"%s\">\n", esc_attr($current_lang), esc_url(current_url()));
-    printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url(home_url('/')));
+    printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url(home_url('/tr/')));
 }
 
 function render_schema(): void
@@ -489,6 +489,7 @@ function current_url(): string
     global $wp;
 
     $path = isset($wp->request) ? '/' . ltrim((string) $wp->request, '/') : '/';
+    $path = $path === '/' ? '/' : user_trailingslashit($path);
 
     return home_url($path);
 }
