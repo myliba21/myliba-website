@@ -92,6 +92,7 @@ class Commands
             ['KVKK', 'kvkk', $tr, 'tr', 'KVKK ve GDPR yaklasimi', 'Kisisel veri koruma, onay ve kurumsal gizlilik yaklasimi.'],
             ['Cerez Politikasi', 'cerez-politikasi', $tr, 'tr', 'Cerez Politikasi', 'Cerez kullanimi ve takip tercihleri.'],
             ['Kullanim Sartlari', 'kullanim-sartlari', $tr, 'tr', 'Kullanim Sartlari', 'Web sitesi ve servis kullanim sartlari.'],
+            ['Myliba Yazilim', 'yazilim', $tr, 'tr', 'Myliba Yazilim', 'OKR, KPI, kultur ve yapay zeka icgoruleriyle canli ve objektif performans yonetimi.'],
         ];
 
         foreach ($pages as $page) {

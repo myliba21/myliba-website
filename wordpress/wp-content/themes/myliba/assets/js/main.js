@@ -171,6 +171,22 @@
     }
   });
 
+  document.querySelectorAll(".software-faq").forEach((faq) => {
+    faq.querySelectorAll("details").forEach((item) => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) {
+          return;
+        }
+
+        faq.querySelectorAll("details[open]").forEach((openItem) => {
+          if (openItem !== item) {
+            openItem.removeAttribute("open");
+          }
+        });
+      });
+    });
+  });
+
   document.querySelectorAll("[data-role-gains]").forEach((component) => {
     const tabs = Array.from(component.querySelectorAll("[data-role-tab]"));
     const panels = Array.from(component.querySelectorAll("[data-role-panel]"));

@@ -810,6 +810,7 @@ function myliba_header_menu_item_is_active(string $key, string $url): bool
 
     return match ($key) {
         'blog' => is_home() || is_singular('post') || is_category() || is_tag(),
+        'products' => is_page('yazilim'),
         'solutions' => is_singular('myliba_product') || is_post_type_archive('myliba_product'),
         default => false,
     };
