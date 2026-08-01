@@ -1,0 +1,15 @@
+{
+  "projectRoot": "/Users/okantoper/Documents/Myliba Projects/myliba-website",
+  "batchFiles": [
+    {"path": "wordpress/.env.example", "language": "config", "sizeLines": 25, "fileCategory": "config"},
+    {"path": "wordpress/Makefile", "language": "makefile", "sizeLines": 31, "fileCategory": "infra"},
+    {"path": "wordpress/README.md", "language": "markdown", "sizeLines": 98, "fileCategory": "docs"},
+    {"path": "wordpress/docker-compose.yml", "language": "yaml", "sizeLines": 73, "fileCategory": "infra"}
+  ],
+  "batchImportData": {
+    "wordpress/.env.example": [],
+    "wordpress/Makefile": [],
+    "wordpress/README.md": [],
+    "wordpress/docker-compose.yml": []
+  }
+}

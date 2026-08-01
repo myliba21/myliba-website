@@ -1,0 +1,505 @@
+{
+  "scriptCompleted": true,
+  "commonPathPrefix": "",
+  "directoryGroups": {
+    "wordpress": [
+      "config:wordpress/.env.example",
+      "pipeline:wordpress/Makefile",
+      "document:wordpress/README.md",
+      "service:wordpress/docker-compose.yml",
+      "file:wordpress/wp-content/themes/myliba/404.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "file:wordpress/wp-content/themes/index.php",
+      "document:wordpress/migration/content-map.md",
+      "document:wordpress/migration/review-report.md",
+      "file:wordpress/wp-content/index.php",
+      "file:wordpress/wp-content/plugins/index.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/content.php",
+      "file:wordpress/wp-content/themes/myliba/assets/css/main.css",
+      "file:wordpress/wp-content/themes/myliba/assets/js/main.js",
+      "file:wordpress/wp-content/themes/myliba/footer.php",
+      "file:wordpress/wp-content/themes/myliba/front-page.php",
+      "file:wordpress/wp-content/themes/myliba/functions.php",
+      "file:wordpress/wp-content/themes/myliba/header.php",
+      "file:wordpress/wp-content/themes/myliba/index.php",
+      "file:wordpress/wp-content/themes/myliba/page.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_product.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php",
+      "file:wordpress/wp-content/themes/myliba/single.php",
+      "file:wordpress/wp-content/themes/myliba/style.css",
+      "file:wordpress/wp-content/themes/myliba/template-blog.php",
+      "file:wordpress/wp-content/themes/myliba/template-contact.php",
+      "file:wordpress/wp-content/themes/myliba/template-demo.php",
+      "file:wordpress/wp-content/themes/myliba/template-events.php",
+      "file:wordpress/wp-content/themes/myliba/template-landing.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php"
+    ],
+    "root": [
+      "file:.DS_Store"
+    ],
+    ".understand-anything": [
+      "file:.understand-anything/.understandignore"
+    ],
+    "nginx": [
+      "file:nginx/default.conf"
+    ]
+  },
+  "nodeTypeGroups": {
+    "config": [
+      "config:wordpress/.env.example"
+    ],
+    "pipeline": [
+      "pipeline:wordpress/Makefile"
+    ],
+    "document": [
+      "document:wordpress/README.md",
+      "document:wordpress/migration/content-map.md",
+      "document:wordpress/migration/review-report.md"
+    ],
+    "service": [
+      "service:wordpress/docker-compose.yml"
+    ],
+    "file": [
+      "file:wordpress/wp-content/themes/myliba/404.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "file:wordpress/wp-content/themes/index.php",
+      "file:.DS_Store",
+      "file:.understand-anything/.understandignore",
+      "file:nginx/default.conf",
+      "file:wordpress/wp-content/index.php",
+      "file:wordpress/wp-content/plugins/index.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/content.php",
+      "file:wordpress/wp-content/themes/myliba/assets/css/main.css",
+      "file:wordpress/wp-content/themes/myliba/assets/js/main.js",
+      "file:wordpress/wp-content/themes/myliba/footer.php",
+      "file:wordpress/wp-content/themes/myliba/front-page.php",
+      "file:wordpress/wp-content/themes/myliba/functions.php",
+      "file:wordpress/wp-content/themes/myliba/header.php",
+      "file:wordpress/wp-content/themes/myliba/index.php",
+      "file:wordpress/wp-content/themes/myliba/page.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_product.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php",
+      "file:wordpress/wp-content/themes/myliba/single.php",
+      "file:wordpress/wp-content/themes/myliba/style.css",
+      "file:wordpress/wp-content/themes/myliba/template-blog.php",
+      "file:wordpress/wp-content/themes/myliba/template-contact.php",
+      "file:wordpress/wp-content/themes/myliba/template-demo.php",
+      "file:wordpress/wp-content/themes/myliba/template-events.php",
+      "file:wordpress/wp-content/themes/myliba/template-landing.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php"
+    ]
+  },
+  "importAdjacency": {
+    "config:wordpress/.env.example": [],
+    "pipeline:wordpress/Makefile": [],
+    "document:wordpress/README.md": [],
+    "service:wordpress/docker-compose.yml": [],
+    "file:wordpress/wp-content/themes/myliba/404.php": [],
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php": [],
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php": [],
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php": [],
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php": [],
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php": [],
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php": [],
+    "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php": [],
+    "file:wordpress/wp-content/plugins/myliba-core/includes/images.php": [],
+    "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php": [],
+    "file:wordpress/wp-content/plugins/myliba-core/includes/options.php": [],
+    "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php": [],
+    "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php": [],
+    "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php": [],
+    "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php": [],
+    "file:wordpress/wp-content/themes/index.php": [],
+    "file:.DS_Store": [],
+    "file:.understand-anything/.understandignore": [],
+    "file:nginx/default.conf": [],
+    "document:wordpress/migration/content-map.md": [],
+    "document:wordpress/migration/review-report.md": [],
+    "file:wordpress/wp-content/index.php": [],
+    "file:wordpress/wp-content/plugins/index.php": [],
+    "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php": [],
+    "file:wordpress/wp-content/plugins/myliba-core/includes/content.php": [],
+    "file:wordpress/wp-content/themes/myliba/assets/css/main.css": [],
+    "file:wordpress/wp-content/themes/myliba/assets/js/main.js": [],
+    "file:wordpress/wp-content/themes/myliba/footer.php": [],
+    "file:wordpress/wp-content/themes/myliba/front-page.php": [],
+    "file:wordpress/wp-content/themes/myliba/functions.php": [],
+    "file:wordpress/wp-content/themes/myliba/header.php": [],
+    "file:wordpress/wp-content/themes/myliba/index.php": [],
+    "file:wordpress/wp-content/themes/myliba/page.php": [],
+    "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php": [],
+    "file:wordpress/wp-content/themes/myliba/single-myliba_event.php": [],
+    "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php": [],
+    "file:wordpress/wp-content/themes/myliba/single-myliba_product.php": [],
+    "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php": [],
+    "file:wordpress/wp-content/themes/myliba/single.php": [],
+    "file:wordpress/wp-content/themes/myliba/style.css": [],
+    "file:wordpress/wp-content/themes/myliba/template-blog.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-contact.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-demo.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-events.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-landing.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-parts/expand.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-parts/hero.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php": [],
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php": []
+  },
+  "groupImportAdjacency": {
+    "wordpress": {
+      "importsFrom": [],
+      "importedBy": []
+    },
+    "root": {
+      "importsFrom": [],
+      "importedBy": []
+    },
+    ".understand-anything": {
+      "importsFrom": [],
+      "importedBy": []
+    },
+    "nginx": {
+      "importsFrom": [],
+      "importedBy": []
+    }
+  },
+  "crossCategoryEdges": [
+    {
+      "fromType": "config",
+      "toType": "pipeline",
+      "edgeType": "configures",
+      "count": 1
+    },
+    {
+      "fromType": "config",
+      "toType": "service",
+      "edgeType": "configures",
+      "count": 1
+    },
+    {
+      "fromType": "pipeline",
+      "toType": "service",
+      "edgeType": "depends_on",
+      "count": 1
+    },
+    {
+      "fromType": "document",
+      "toType": "config",
+      "edgeType": "documents",
+      "count": 1
+    },
+    {
+      "fromType": "document",
+      "toType": "pipeline",
+      "edgeType": "documents",
+      "count": 1
+    },
+    {
+      "fromType": "document",
+      "toType": "service",
+      "edgeType": "documents",
+      "count": 1
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "depends_on",
+      "count": 10
+    }
+  ],
+  "nonCodeConnections": [
+    {
+      "source": "config:wordpress/.env.example",
+      "target": "pipeline:wordpress/Makefile",
+      "edgeType": "configures"
+    },
+    {
+      "source": "config:wordpress/.env.example",
+      "target": "service:wordpress/docker-compose.yml",
+      "edgeType": "configures"
+    },
+    {
+      "source": "pipeline:wordpress/Makefile",
+      "target": "service:wordpress/docker-compose.yml",
+      "edgeType": "depends_on"
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "config:wordpress/.env.example",
+      "edgeType": "documents"
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "pipeline:wordpress/Makefile",
+      "edgeType": "documents"
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "service:wordpress/docker-compose.yml",
+      "edgeType": "documents"
+    }
+  ],
+  "interGroupImports": [],
+  "intraGroupDensity": {
+    "wordpress": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "root": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    ".understand-anything": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "nginx": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    }
+  },
+  "patternMatches": {
+    "wordpress": null,
+    "root": null,
+    ".understand-anything": null,
+    "nginx": null
+  },
+  "filePatternMatches": {
+    "pipeline:wordpress/Makefile": "infrastructure",
+    "document:wordpress/README.md": "documentation",
+    "service:wordpress/docker-compose.yml": "infrastructure",
+    "document:wordpress/migration/content-map.md": "documentation",
+    "document:wordpress/migration/review-report.md": "documentation"
+  },
+  "deploymentTopology": {
+    "hasDockerfile": false,
+    "hasCompose": true,
+    "hasK8s": false,
+    "hasTerraform": false,
+    "hasCI": false,
+    "infraFiles": [
+      "wordpress/Makefile",
+      "wordpress/docker-compose.yml"
+    ]
+  },
+  "dataPipeline": {
+    "schemaFiles": [],
+    "migrationFiles": [
+      "wordpress/migration/content-map.md",
+      "wordpress/migration/review-report.md"
+    ],
+    "dataModelFiles": [
+      "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "wordpress/migration/content-map.md"
+    ],
+    "apiHandlerFiles": [
+      "wordpress/wp-content/themes/myliba/assets/js/main.js"
+    ]
+  },
+  "docCoverage": {
+    "groupsWithDocs": 1,
+    "totalGroups": 4,
+    "coverageRatio": 0.25,
+    "undocumentedGroups": [
+      "root",
+      ".understand-anything",
+      "nginx"
+    ]
+  },
+  "dependencyDirection": [],
+  "fileStats": {
+    "totalFileNodes": 58,
+    "filesPerGroup": {
+      "wordpress": 55,
+      "root": 1,
+      ".understand-anything": 1,
+      "nginx": 1
+    },
+    "nodeTypeCounts": {
+      "config": 1,
+      "pipeline": 1,
+      "document": 3,
+      "service": 1,
+      "file": 52
+    }
+  },
+  "fileFanIn": {
+    "config:wordpress/.env.example": 0,
+    "pipeline:wordpress/Makefile": 0,
+    "document:wordpress/README.md": 0,
+    "service:wordpress/docker-compose.yml": 0,
+    "file:wordpress/wp-content/themes/myliba/404.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/images.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/options.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php": 0,
+    "file:wordpress/wp-content/themes/index.php": 0,
+    "file:.DS_Store": 0,
+    "file:.understand-anything/.understandignore": 0,
+    "file:nginx/default.conf": 0,
+    "document:wordpress/migration/content-map.md": 0,
+    "document:wordpress/migration/review-report.md": 0,
+    "file:wordpress/wp-content/index.php": 0,
+    "file:wordpress/wp-content/plugins/index.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/content.php": 0,
+    "file:wordpress/wp-content/themes/myliba/assets/css/main.css": 0,
+    "file:wordpress/wp-content/themes/myliba/assets/js/main.js": 0,
+    "file:wordpress/wp-content/themes/myliba/footer.php": 0,
+    "file:wordpress/wp-content/themes/myliba/front-page.php": 0,
+    "file:wordpress/wp-content/themes/myliba/functions.php": 0,
+    "file:wordpress/wp-content/themes/myliba/header.php": 0,
+    "file:wordpress/wp-content/themes/myliba/index.php": 0,
+    "file:wordpress/wp-content/themes/myliba/page.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single-myliba_event.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single-myliba_product.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single.php": 0,
+    "file:wordpress/wp-content/themes/myliba/style.css": 0,
+    "file:wordpress/wp-content/themes/myliba/template-blog.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-contact.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-demo.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-events.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-landing.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/expand.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/hero.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php": 0
+  },
+  "fileFanOut": {
+    "config:wordpress/.env.example": 0,
+    "pipeline:wordpress/Makefile": 0,
+    "document:wordpress/README.md": 0,
+    "service:wordpress/docker-compose.yml": 0,
+    "file:wordpress/wp-content/themes/myliba/404.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php": 0,
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/images.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/options.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php": 0,
+    "file:wordpress/wp-content/themes/index.php": 0,
+    "file:.DS_Store": 0,
+    "file:.understand-anything/.understandignore": 0,
+    "file:nginx/default.conf": 0,
+    "document:wordpress/migration/content-map.md": 0,
+    "document:wordpress/migration/review-report.md": 0,
+    "file:wordpress/wp-content/index.php": 0,
+    "file:wordpress/wp-content/plugins/index.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php": 0,
+    "file:wordpress/wp-content/plugins/myliba-core/includes/content.php": 0,
+    "file:wordpress/wp-content/themes/myliba/assets/css/main.css": 0,
+    "file:wordpress/wp-content/themes/myliba/assets/js/main.js": 0,
+    "file:wordpress/wp-content/themes/myliba/footer.php": 0,
+    "file:wordpress/wp-content/themes/myliba/front-page.php": 0,
+    "file:wordpress/wp-content/themes/myliba/functions.php": 0,
+    "file:wordpress/wp-content/themes/myliba/header.php": 0,
+    "file:wordpress/wp-content/themes/myliba/index.php": 0,
+    "file:wordpress/wp-content/themes/myliba/page.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single-myliba_event.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single-myliba_product.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php": 0,
+    "file:wordpress/wp-content/themes/myliba/single.php": 0,
+    "file:wordpress/wp-content/themes/myliba/style.css": 0,
+    "file:wordpress/wp-content/themes/myliba/template-blog.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-contact.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-demo.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-events.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-landing.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/expand.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/hero.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php": 0,
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php": 0
+  }
+}

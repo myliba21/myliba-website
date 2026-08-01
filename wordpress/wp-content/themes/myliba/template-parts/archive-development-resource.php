@@ -35,6 +35,7 @@ $archive_content = $is_report ? [
     'empty_text' => 'Yeni kaynaklar yayınlandığında bu alanda otomatik olarak yerini alacak. Bu sırada güncel yazılarımızı keşfedebilirsiniz.',
     'topics' => ['OKR ve hedef yönetimi', 'Liderlik pratikleri', 'Kültür ve performans'],
 ];
+$archive_content = myliba_content_values($archive_content);
 $resource_navigation = myliba_development_center_items();
 ?>
 <div class="development-resource-archive development-resource-archive--<?php echo esc_attr($archive_key); ?>">
@@ -42,13 +43,13 @@ $resource_navigation = myliba_development_center_items();
     <div class="development-shell">
         <div class="development-archive-hero__grid">
             <div class="development-archive-hero__copy">
-                <a class="development-archive-hero__back" href="<?php echo esc_url(myliba_page_url('development')); ?>">← Gelişim Merkezi</a>
+                <a class="development-archive-hero__back" href="<?php echo esc_url(myliba_page_url('development')); ?>">← <?php echo esc_html(myliba_text('Gelişim Merkezi')); ?></a>
                 <p class="eyebrow"><?php echo esc_html($archive_content['kicker']); ?></p>
                 <h1><?php echo esc_html($title); ?></h1>
                 <p class="development-archive-hero__lead"><?php echo esc_html($archive_content['lead']); ?></p>
                 <div class="development-archive-hero__actions">
-                    <a class="myliba-button myliba-button--primary" href="#kaynaklar">Kaynakları keşfedin</a>
-                    <a class="development-archive-hero__text-link" href="<?php echo esc_url(myliba_page_url('development')); ?>">Tüm gelişim içerikleri <span aria-hidden="true">→</span></a>
+                    <a class="myliba-button myliba-button--primary" href="#kaynaklar"><?php echo esc_html(myliba_text('Kaynakları keşfedin')); ?></a>
+                    <a class="development-archive-hero__text-link" href="<?php echo esc_url(myliba_page_url('development')); ?>"><?php echo esc_html(myliba_text('Tüm gelişim içerikleri')); ?> <span aria-hidden="true">→</span></a>
                 </div>
             </div>
 
@@ -69,7 +70,7 @@ $resource_navigation = myliba_development_center_items();
             </div>
         </div>
 
-        <div class="development-archive-hero__principles" aria-label="Kaynakların temel özellikleri">
+        <div class="development-archive-hero__principles" aria-label="<?php echo esc_attr(myliba_text('Kaynakların temel özellikleri')); ?>">
             <?php foreach ($archive_content['principles'] as $index => $principle) : ?>
                 <span><b><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></b><?php echo esc_html($principle); ?></span>
             <?php endforeach; ?>
@@ -77,7 +78,7 @@ $resource_navigation = myliba_development_center_items();
     </div>
 </section>
 
-<nav class="development-resource-nav development-shell" aria-label="Gelişim Merkezi içerik türleri">
+<nav class="development-resource-nav development-shell" aria-label="<?php echo esc_attr(myliba_text('Gelişim Merkezi içerik türleri')); ?>">
     <?php foreach ($resource_navigation as $resource_key => $resource_item) : ?>
         <a href="<?php echo esc_url($resource_item['url']); ?>" <?php echo $resource_key === $archive_key ? 'aria-current="page"' : ''; ?>>
             <span><?php echo esc_html($resource_item['label']); ?></span>
@@ -106,12 +107,12 @@ $resource_navigation = myliba_development_center_items();
                         </div>
                     <?php endif; ?>
                     <div class="development-resource-card__meta">
-                        <span><?php echo esc_html($is_report ? 'Rapor ve trend' : 'e‑Kitap'); ?></span>
+                        <span><?php echo esc_html(myliba_text($is_report ? 'Rapor ve trend' : 'e‑Kitap')); ?></span>
                         <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
                     </div>
                     <h3><?php the_title(); ?></h3>
                     <p><?php echo esc_html(myliba_excerpt(get_the_ID(), 28)); ?></p>
-                    <strong>İçeriği inceleyin <span aria-hidden="true">→</span></strong>
+                    <strong><?php echo esc_html(myliba_text('İçeriği inceleyin')); ?> <span aria-hidden="true">→</span></strong>
                 </a>
                 <?php $resource_index++; ?>
             <?php endwhile; ?>
@@ -121,12 +122,12 @@ $resource_navigation = myliba_development_center_items();
         <div class="development-resource-list__empty">
             <div class="development-resource-list__empty-copy">
                 <span aria-hidden="true">+</span>
-                <p class="eyebrow">Çok yakında</p>
+                <p class="eyebrow"><?php echo esc_html(myliba_text('Çok yakında')); ?></p>
                 <h3><?php echo esc_html($archive_content['empty_title']); ?></h3>
                 <p><?php echo esc_html($archive_content['empty_text']); ?></p>
-                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('blog')); ?>">Blog yazılarını keşfedin</a>
+                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('blog')); ?>"><?php echo esc_html(myliba_text('Blog yazılarını keşfedin')); ?></a>
             </div>
-            <div class="development-resource-list__topics" aria-label="Yaklaşan içerik konuları">
+            <div class="development-resource-list__topics" aria-label="<?php echo esc_attr(myliba_text('Yaklaşan içerik konuları')); ?>">
                 <?php foreach ($archive_content['topics'] as $index => $topic) : ?>
                     <span><b><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></b><?php echo esc_html($topic); ?></span>
                 <?php endforeach; ?>

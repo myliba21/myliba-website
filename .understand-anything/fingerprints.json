@@ -1,0 +1,2801 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "a98fab9b8a275dbdcb2362a0799fb1cc5c4a77dd",
+  "generatedAt": "2026-08-01T21:52:36.401Z",
+  "files": {
+    ".DS_Store": {
+      "filePath": ".DS_Store",
+      "contentHash": "4018dde4076068fa7d3e3a5fa035d46834c935d8cfc317d8c8a757c0789af6e7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": false
+    },
+    ".understand-anything/.understandignore": {
+      "filePath": ".understand-anything/.understandignore",
+      "contentHash": "512fcc4a6ad853244c9146169cec0c5132781ee105ac4a0629e939e45520622a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 68,
+      "hasStructuralAnalysis": false
+    },
+    "nginx/default.conf": {
+      "filePath": "nginx/default.conf",
+      "contentHash": "281e57cd629d8ac80307b13b3a08ac96501f1034ede37e2b48769ac17d2a6db3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 139,
+      "hasStructuralAnalysis": false
+    },
+    "wordpress/.env.example": {
+      "filePath": "wordpress/.env.example",
+      "contentHash": "3e0c0ebba3c85f8177630d17ae3c23f18a59318848735cd796d2038509b853cd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 26,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/docker-compose.yml": {
+      "filePath": "wordpress/docker-compose.yml",
+      "contentHash": "6c12cc4974f36d2d7cf4fadd58390a4a87b20ece6ba5a95b9531518c88f366da",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 74,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/Makefile": {
+      "filePath": "wordpress/Makefile",
+      "contentHash": "82cfd1d3b5699845bbed46bf9e0f872fdfb2c7c7e6a2a893920ff0c4f56ae197",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/migration/content-map.md": {
+      "filePath": "wordpress/migration/content-map.md",
+      "contentHash": "a2a4e98b46e962c16108c433f6a5b967d4c4f855eb04eab79c74188ef8f99d85",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/migration/review-report.md": {
+      "filePath": "wordpress/migration/review-report.md",
+      "contentHash": "7e2857ec6494873e999ee4e8429cef949a6560faa7e066e8bc4b7041c6a9e07f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 103,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/README.md": {
+      "filePath": "wordpress/README.md",
+      "contentHash": "03dd72a553aa3ddbe48692a06ad95d53354f8b9e5be9016518816b746d73655b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 99,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/index.php": {
+      "filePath": "wordpress/wp-content/index.php",
+      "contentHash": "bd48c24ce4500e60d2524571756787283f0d3fbfa50b116331309c09773f0cd1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/index.php": {
+      "filePath": "wordpress/wp-content/plugins/index.php",
+      "contentHash": "bd48c24ce4500e60d2524571756787283f0d3fbfa50b116331309c09773f0cd1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/myliba-core/includes/admin.php": {
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/admin.php",
+      "contentHash": "fc5cf3c75c48e1fc6a2cef52c62aa6cfe6170e87625178e1e899ff21e3ed5ba6",
+      "functions": [
+        {
+          "name": "boot",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "use_classic_editor_for_myliba_content",
+          "params": [
+            "$use_block_editor",
+            "$post_type"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "register_menu",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "render_settings",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 160
+        },
+        {
+          "name": "admin_notices",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "dashboard_counts",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 21
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "Myliba\\Core\\Options",
+          "specifiers": [
+            "Options"
+          ]
+        }
+      ],
+      "exports": [
+        "boot",
+        "use_classic_editor_for_myliba_content",
+        "register_menu",
+        "render_settings",
+        "admin_notices",
+        "dashboard_counts"
+      ],
+      "totalLines": 254,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/myliba-core/includes/content.php": {
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/content.php",
+      "contentHash": "292ac8d1a8288b68587643e3a68af49bf4e01a21d5552b1fb2c092f5afca3917",
+      "functions": [
+        {
+          "name": "boot",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "register_menu",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "all_overrides",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "override",
+          "params": [
+            "$source",
+            "$locale"
+          ],
+          "returnType": "?string",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "save_overrides",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "frontend_catalog",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 29
+        },
+        {
+          "name": "render_page",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 47
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "boot",
+        "register_menu",
+        "all_overrides",
+        "override",
+        "save_overrides",
+        "frontend_catalog",
+        "render_page"
+      ],
+      "totalLines": 151,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/myliba-core/includes/forms.php": {
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "contentHash": "da984be3afe634f9c39c9102e1ceb3b7e5619506970e7e8ab7735316a3cec858",
+      "functions": [
+        {
+          "name": "boot",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "shortcode",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "demo_shortcode",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "academy_shortcode",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "render_form",
+          "params": [
+            "$context"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 125
+        },
+        {
+          "name": "handle",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 73
+        },
+        {
+          "name": "rate_limited",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "send_notification",
+          "params": [
+            "$data"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 27
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "Myliba\\Core\\Options",
+          "specifiers": [
+            "Options"
+          ]
+        }
+      ],
+      "exports": [
+        "boot",
+        "shortcode",
+        "demo_shortcode",
+        "academy_shortcode",
+        "render_form",
+        "handle",
+        "rate_limited",
+        "send_notification"
+      ],
+      "totalLines": 288,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/myliba-core/includes/images.php": {
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "contentHash": "b468d9bae35c3afc12d4ac002702243c2be9b2a59622c022d55101f28f8c450c",
+      "functions": [
+        {
+          "name": "boot",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "restrict_upload_mimes",
+          "params": [
+            "$mimes"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "validate_upload",
+          "params": [
+            "$file"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "check_filetype_and_ext",
+          "params": [
+            "$checked",
+            "$file",
+            "$filename",
+            "$mimes"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "sanitize_svg_file",
+          "params": [
+            "$tmp_path"
+          ],
+          "exported": true,
+          "lineCount": 92
+        },
+        {
+          "name": "admin_upload_notice",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "boot",
+        "restrict_upload_mimes",
+        "validate_upload",
+        "check_filetype_and_ext",
+        "sanitize_svg_file",
+        "admin_upload_notice"
+      ],
+      "totalLines": 214,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/myliba-core/includes/meta.php": {
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "contentHash": "f70f5eb92a16804e0acd2efb7b6437cff8364598ba4dacd6227249263a6ec2cb",
+      "functions": [
+        {
+          "name": "boot",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "enqueue_admin_assets",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "register_meta_boxes",
+          "params": [
+            "$post_type"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 49
+        },
+        {
+          "name": "render_language_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "render_hero_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "render_seo_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "render_event_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "render_conversion_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "render_development_center_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "render_academy_page_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 47
+        },
+        {
+          "name": "render_academy_program_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "render_homepage_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "render_homepage_builder",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 176
+        },
+        {
+          "name": "render_section_fields",
+          "params": [
+            "$post",
+            "$key"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 117
+        },
+        {
+          "name": "render_team_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "render_logo_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "render_testimonial_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "render_faq_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "render_submission_box",
+          "params": [
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "homepage_section_definitions",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 75
+        },
+        {
+          "name": "homepage_default_sections",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "homepage_sections",
+          "params": [
+            "$post_id"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 48
+        },
+        {
+          "name": "homepage_section_summary",
+          "params": [
+            "$post_id",
+            "$key"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "is_homepage_post",
+          "params": [
+            "$post_id"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "save",
+          "params": [
+            "$post_id",
+            "$post"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 48
+        },
+        {
+          "name": "save_homepage_builder",
+          "params": [
+            "$post_id"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "field_definitions",
+          "params": [
+            "$post_type"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 208
+        },
+        {
+          "name": "nonce",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "field_media",
+          "params": [
+            "$name",
+            "$label",
+            "$value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "field_text",
+          "params": [
+            "$name",
+            "$label",
+            "$value",
+            "$description"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "field_url",
+          "params": [
+            "$name",
+            "$label",
+            "$value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "field_number",
+          "params": [
+            "$name",
+            "$label",
+            "$value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "field_textarea",
+          "params": [
+            "$name",
+            "$label",
+            "$value",
+            "$description"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "field_checkbox",
+          "params": [
+            "$name",
+            "$label",
+            "$checked"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "field_select",
+          "params": [
+            "$name",
+            "$label",
+            "$value",
+            "$options"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "Myliba\\Core\\Options",
+          "specifiers": [
+            "Options"
+          ]
+        }
+      ],
+      "exports": [
+        "boot",
+        "enqueue_admin_assets",
+        "register_meta_boxes",
+        "render_language_box",
+        "render_hero_box",
+        "render_seo_box",
+        "render_event_box",
+        "render_conversion_box",
+        "render_development_center_box",
+        "render_academy_page_box",
+        "render_academy_program_box",
+        "render_homepage_box",
+        "render_homepage_builder",
+        "render_section_fields",
+        "render_team_box",
+        "render_logo_box",
+        "render_testimonial_box",
+        "render_faq_box",
+        "render_submission_box",
+        "homepage_section_definitions",
+        "homepage_default_sections",
+        "homepage_sections",
+        "homepage_section_summary",
+        "is_homepage_post",
+        "save",
+        "save_homepage_builder",
+        "field_definitions",
+        "nonce",
+        "field_media",
+        "field_text",
+        "field_url",
+        "field_number",
+        "field_textarea",
+        "field_checkbox",
+        "field_select"
+      ],
+      "totalLines": 1186,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/myliba-core/includes/options.php": {
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "contentHash": "bc72c5b8772537bfab7e2f36e301eaa1e7e7b72ecd05bd4db835f74180b2e3cb",
+      "functions": [
+        {
+          "name": "defaults",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 34
+        },
+        {
+          "name": "localized_keys",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "get_all",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "get",
+          "params": [
+            "$key",
+            "$fallback"
+          ],
+          "returnType": "mixed",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "indexing_enabled",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "locales",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "ensure_defaults",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "boot",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "register_settings",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "sanitize",
+          "params": [
+            "$input"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 43
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "defaults",
+        "localized_keys",
+        "get_all",
+        "get",
+        "indexing_enabled",
+        "locales",
+        "ensure_defaults",
+        "boot",
+        "register_settings",
+        "sanitize"
+      ],
+      "totalLines": 161,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/myliba-core/includes/post-types.php": {
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "contentHash": "90b3d6da5b7014093f6ae47c4385bcc96198c7eedef6118691993179cc41a135",
+      "functions": [
+        {
+          "name": "boot",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "localized_bases",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 41
+        },
+        {
+          "name": "register_localized_rewrite_rules",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "localized_query_vars",
+          "params": [
+            "$query_vars"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "enforce_route_locale",
+          "params": [
+            "$query"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "redirect_missing_localized_solution",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "localized_post_type_link",
+          "params": [
+            "$permalink",
+            "$post"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "register",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 172
+        },
+        {
+          "name": "polylang_post_types",
+          "params": [
+            "$post_types",
+            "$is_settings"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "polylang_taxonomies",
+          "params": [
+            "$taxonomies",
+            "$is_settings"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "boot",
+        "localized_bases",
+        "register_localized_rewrite_rules",
+        "localized_query_vars",
+        "enforce_route_locale",
+        "redirect_missing_localized_solution",
+        "localized_post_type_link",
+        "register",
+        "polylang_post_types",
+        "polylang_taxonomies"
+      ],
+      "totalLines": 347,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/myliba-core/includes/seo.php": {
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "contentHash": "b9fcf0df290dd54cea14958a62b64c18210d587cee897e5201237fd49bddc3cd",
+      "functions": [
+        {
+          "name": "boot",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "seo_plugin_active",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "current_post_noindex",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "staging_hosts",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "current_host",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "is_staging_host",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "should_noindex",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "robots",
+          "params": [
+            "$robots"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "robots_txt",
+          "params": [
+            "$output",
+            "$public"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "sitemaps_enabled",
+          "params": [
+            "$enabled"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "send_noindex_header",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "document_title",
+          "params": [
+            "$parts"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "render_head",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "render_fallback_meta",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 58
+        },
+        {
+          "name": "render_hreflang",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 38
+        },
+        {
+          "name": "render_schema",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 57
+        },
+        {
+          "name": "breadcrumb_schema",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 39
+        },
+        {
+          "name": "article_schema",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "faq_schema",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 80
+        },
+        {
+          "name": "is_academy_landing",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "educational_organization_schema",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "academy_course_schemas",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 49
+        },
+        {
+          "name": "current_url",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "Myliba\\Core\\Options",
+          "specifiers": [
+            "Options"
+          ]
+        }
+      ],
+      "exports": [
+        "boot",
+        "seo_plugin_active",
+        "current_post_noindex",
+        "staging_hosts",
+        "current_host",
+        "is_staging_host",
+        "should_noindex",
+        "robots",
+        "robots_txt",
+        "sitemaps_enabled",
+        "send_noindex_header",
+        "document_title",
+        "render_head",
+        "render_fallback_meta",
+        "render_hreflang",
+        "render_schema",
+        "breadcrumb_schema",
+        "article_schema",
+        "faq_schema",
+        "is_academy_landing",
+        "educational_organization_schema",
+        "academy_course_schemas",
+        "current_url"
+      ],
+      "totalLines": 514,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php": {
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "contentHash": "0b3a9164f2d4f27d0b9b9d8b4ca57e21b0aa3f9a3d90a7c552e666435e954b9d",
+      "functions": [
+        {
+          "name": "seed",
+          "params": [
+            "$args",
+            "$assoc_args"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 169
+        },
+        {
+          "name": "tr_first",
+          "params": [
+            "$args",
+            "$assoc_args"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "turkish_only",
+          "params": [
+            "$args",
+            "$assoc_args"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "materialize_home",
+          "params": [
+            "$args",
+            "$assoc_args"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "materialize_academy",
+          "params": [
+            "$args",
+            "$assoc_args"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "import_current_stub",
+          "params": [
+            "$args",
+            "$assoc_args"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "import_current",
+          "params": [
+            "$args",
+            "$assoc_args"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 67
+        },
+        {
+          "name": "import_current_page",
+          "params": [
+            "$source",
+            "$path",
+            "$fallback_title",
+            "$slug",
+            "$language",
+            "$parent"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 32
+        },
+        {
+          "name": "import_current_home_meta",
+          "params": [
+            "$post_id",
+            "$html",
+            "$language",
+            "$source_url"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 38
+        },
+        {
+          "name": "import_current_products",
+          "params": [
+            "$html",
+            "$language",
+            "$source_url"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 47
+        },
+        {
+          "name": "import_current_academy",
+          "params": [
+            "$html",
+            "$language",
+            "$source_url"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 32
+        },
+        {
+          "name": "import_current_team",
+          "params": [
+            "$html",
+            "$language",
+            "$source"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 41
+        },
+        {
+          "name": "import_current_client_logos",
+          "params": [
+            "$html",
+            "$source"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 35
+        },
+        {
+          "name": "import_current_rest_posts",
+          "params": [
+            "$source"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "fetch_public_html",
+          "params": [
+            "$url"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "fetch_public_json",
+          "params": [
+            "$url"
+          ],
+          "returnType": "array",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "extract_page_title",
+          "params": [
+            "$html",
+            "$fallback"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "extract_excerpt",
+          "params": [
+            "$html"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "extract_readable_html",
+          "params": [
+            "$html"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "extract_text_lines",
+          "params": [
+            "$html"
+          ],
+          "returnType": "array",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "extract_snippet_after",
+          "params": [
+            "$lines",
+            "$title",
+            "$stop_titles",
+            "$max_lines"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 30
+        },
+        {
+          "name": "join_existing_lines",
+          "params": [
+            "$lines",
+            "$candidates",
+            "$limit"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "line_after_sequence",
+          "params": [
+            "$lines",
+            "$needle"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "extract_images",
+          "params": [
+            "$html",
+            "$source"
+          ],
+          "returnType": "array",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "find_image_by_alt",
+          "params": [
+            "$html",
+            "$needle",
+            "$source"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "replace_remote_images",
+          "params": [
+            "$content",
+            "$source",
+            "$post_id",
+            "$set_featured"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "sideload_image",
+          "params": [
+            "$url",
+            "$post_id"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "absolute_url",
+          "params": [
+            "$url",
+            "$source"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "dom_from_html",
+          "params": [
+            "$html"
+          ],
+          "returnType": "?\\DOMDocument",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "cleanup_default_content",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "seed_categories",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "seed_products",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "seed_solutions",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 53
+        },
+        {
+          "name": "seed_academy",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 131
+        },
+        {
+          "name": "seed_trust_content",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "seed_landing_pages",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "home_meta_defaults",
+          "params": [
+            "$language"
+          ],
+          "returnType": "array",
+          "exported": false,
+          "lineCount": 164
+        },
+        {
+          "name": "home_builder_defaults",
+          "params": [],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "seed_navigation",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 53
+        },
+        {
+          "name": "ensure_menu",
+          "params": [
+            "$name"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "seed_menu_items",
+          "params": [
+            "$menu_id",
+            "$items"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 30
+        },
+        {
+          "name": "upsert_page",
+          "params": [
+            "$title",
+            "$slug",
+            "$content",
+            "$meta",
+            "$parent",
+            "$template"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "upsert_post",
+          "params": [
+            "$title",
+            "$slug",
+            "$language"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "upsert_event",
+          "params": [
+            "$title",
+            "$slug",
+            "$language",
+            "$date",
+            "$location"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "upsert_team",
+          "params": [
+            "$name",
+            "$role",
+            "$order"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "upsert_logo",
+          "params": [
+            "$name",
+            "$order"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "upsert_post_type",
+          "params": [
+            "$post_type",
+            "$title",
+            "$slug",
+            "$content",
+            "$meta",
+            "$status"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "save_meta",
+          "params": [
+            "$post_id",
+            "$meta"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "apply_tr_first_mode",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 115
+        },
+        {
+          "name": "set_polylang_language",
+          "params": [
+            "$post_id",
+            "$language"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "starter_content",
+          "params": [
+            "$key"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 10
+        }
+      ],
+      "classes": [
+        {
+          "name": "Commands",
+          "methods": [
+            "seed",
+            "tr_first",
+            "turkish_only",
+            "materialize_home",
+            "materialize_academy",
+            "import_current_stub",
+            "import_current",
+            "import_current_page",
+            "import_current_home_meta",
+            "import_current_products",
+            "import_current_academy",
+            "import_current_team",
+            "import_current_client_logos",
+            "import_current_rest_posts",
+            "fetch_public_html",
+            "fetch_public_json",
+            "extract_page_title",
+            "extract_excerpt",
+            "extract_readable_html",
+            "extract_text_lines",
+            "extract_snippet_after",
+            "join_existing_lines",
+            "line_after_sequence",
+            "extract_images",
+            "find_image_by_alt",
+            "replace_remote_images",
+            "sideload_image",
+            "absolute_url",
+            "dom_from_html",
+            "cleanup_default_content",
+            "seed_categories",
+            "seed_products",
+            "seed_solutions",
+            "seed_academy",
+            "seed_trust_content",
+            "seed_landing_pages",
+            "home_meta_defaults",
+            "home_builder_defaults",
+            "seed_navigation",
+            "ensure_menu",
+            "seed_menu_items",
+            "upsert_page",
+            "upsert_post",
+            "upsert_event",
+            "upsert_team",
+            "upsert_logo",
+            "upsert_post_type",
+            "save_meta",
+            "apply_tr_first_mode",
+            "set_polylang_language",
+            "starter_content"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 1760
+        }
+      ],
+      "imports": [
+        {
+          "source": "Myliba\\Core\\Options",
+          "specifiers": [
+            "Options"
+          ]
+        }
+      ],
+      "exports": [
+        "Commands"
+      ],
+      "totalLines": 1771,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/plugins/myliba-core/myliba-core.php": {
+      "filePath": "wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "contentHash": "094ee83bca2813132e8b08f2ea89994f86efa235ffca8fc641a76fd5b65e1c63",
+      "functions": [
+        {
+          "name": "boot",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "activate",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "deactivate",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "boot",
+        "activate",
+        "deactivate"
+      ],
+      "totalLines": 67,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/index.php": {
+      "filePath": "wordpress/wp-content/themes/index.php",
+      "contentHash": "bd48c24ce4500e60d2524571756787283f0d3fbfa50b116331309c09773f0cd1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/404.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/404.php",
+      "contentHash": "a6a714002cb7e1ef494943ef8f6835be78a804e06f4099ae4c5b563a065885cd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/archive-myliba_academy.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_academy.php",
+      "contentHash": "d3112ba69a3edf7936e6d16ef33c641c35f2f98db9b238ff361d1c14073683db",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/archive-myliba_ebook.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_ebook.php",
+      "contentHash": "08cc61f3b31bcdf4120841ada83501d9d495fe61c7c82c024e9a45fc276b5702",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/archive-myliba_event.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_event.php",
+      "contentHash": "45b62ff66702f2dcb7f32f799a824edaecfa4d8f5640021057d6bf4b1bd24928",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/archive-myliba_product.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_product.php",
+      "contentHash": "afe1bfda9e3c73b81e28f0ddfe5aa6a7a9f5807db4e6273e2039b92f5c21cf75",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/archive-myliba_report.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_report.php",
+      "contentHash": "08cc61f3b31bcdf4120841ada83501d9d495fe61c7c82c024e9a45fc276b5702",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/archive-myliba_solution.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_solution.php",
+      "contentHash": "dd47e90b3dc3ac719b196ccfd720e7aa2977d3fffdb0eed7c54a756f8005b5fd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 25,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/assets/css/main.css": {
+      "filePath": "wordpress/wp-content/themes/myliba/assets/css/main.css",
+      "contentHash": "e3ed8e5612904e2c7d4d0cc5f7f64f23c33b09d6d90775c782a70d323d9db0c2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 14849,
+      "hasStructuralAnalysis": false
+    },
+    "wordpress/wp-content/themes/myliba/assets/js/main.js": {
+      "filePath": "wordpress/wp-content/themes/myliba/assets/js/main.js",
+      "contentHash": "933487ee8f295a1c06a5515d55155972e66d83ef7ee236e3b19056b23d638a4c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 514,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/footer.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/footer.php",
+      "contentHash": "227d285a1409872fce3a6e9a76aa5c42651ea781960221103ee3eb013764b7ab",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 224,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/front-page.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/front-page.php",
+      "contentHash": "225fafb013b5eb5287aa80873d570eabb0442bbbbbb7e6be7870411f7abedea2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 529,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/functions.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/functions.php",
+      "contentHash": "0a1bfacd95a3a51054117603b659f02aa4d834f0d2bd602fe7d213fbfd21fe85",
+      "functions": [
+        {
+          "name": "myliba_theme_setup",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "myliba_asset_version",
+          "params": [
+            "$relative_path"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "myliba_enqueue_assets",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "myliba_resource_hints",
+          "params": [
+            "$urls",
+            "$relation_type"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "myliba_cleanup_head",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "myliba_dequeue_block_styles",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "myliba_preload_main_stylesheet",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "myliba_render_critical_css",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "myliba_option",
+          "params": [
+            "$key",
+            "$fallback"
+          ],
+          "returnType": "mixed",
+          "exported": true,
+          "lineCount": 30
+        },
+        {
+          "name": "myliba_env",
+          "params": [
+            "$key",
+            "$fallback"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "myliba_asset_url_from_env",
+          "params": [
+            "$value"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "myliba_hero_banner_images",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 38
+        },
+        {
+          "name": "myliba_home_media_images",
+          "params": [
+            "$group",
+            "$post_id"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "myliba_image_dimensions_for_source",
+          "params": [
+            "$source",
+            "$url"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "myliba_lcp_hero_image",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "myliba_preload_lcp_hero_image",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "myliba_render_theme_meta",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "myliba_meta",
+          "params": [
+            "$key",
+            "$post_id",
+            "$fallback"
+          ],
+          "returnType": "mixed",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "myliba_current_language",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "myliba_is_academy_landing_page",
+          "params": [
+            "$post_id"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "myliba_available_locales",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "myliba_locale_cookie_name",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "myliba_request_path",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "myliba_locale_from_path",
+          "params": [
+            "$path"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "myliba_locale_from_accept_language",
+          "params": [
+            "$header"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "myliba_preferred_locale",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "myliba_set_locale_cookie",
+          "params": [
+            "$locale"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "myliba_redirect_root_to_preferred_locale",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 62
+        },
+        {
+          "name": "myliba_register_turkish_post_rewrites",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "myliba_turkish_post_link",
+          "params": [
+            "$permalink",
+            "$post"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "myliba_redirect_legacy_urls",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 75
+        },
+        {
+          "name": "myliba_sync_current_locale_cookie",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "myliba_filter_language_attributes",
+          "params": [
+            "$output"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "myliba_translate_text",
+          "params": [
+            "$text"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 229
+        },
+        {
+          "name": "myliba_translate_gettext",
+          "params": [
+            "$translation",
+            "$text",
+            "$domain"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "myliba_is_locale_landing_page",
+          "params": [
+            "$post_id"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "myliba_page_url",
+          "params": [
+            "$key"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "myliba_nav_items",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "myliba_portal_url",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "myliba_header_menu",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "myliba_solution_catalog",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 96
+        },
+        {
+          "name": "myliba_solution_url",
+          "params": [
+            "$slug"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 34
+        },
+        {
+          "name": "myliba_development_center_page_id",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "myliba_development_center_context",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "myliba_development_center_items",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "myliba_url_path",
+          "params": [
+            "$url"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "myliba_header_menu_item_is_active",
+          "params": [
+            "$key",
+            "$url"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "myliba_language_context_url",
+          "params": [
+            "$language"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 44
+        },
+        {
+          "name": "myliba_language_links",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 41
+        },
+        {
+          "name": "myliba_language_flag",
+          "params": [
+            "$label"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "myliba_post_language_filter",
+          "params": [
+            "$query"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "myliba_excerpt",
+          "params": [
+            "$post_id",
+            "$words"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "myliba_get_entries",
+          "params": [
+            "$post_type",
+            "$limit",
+            "$args"
+          ],
+          "returnType": "WP_Query",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "myliba_client_logo_posts",
+          "params": [
+            "$limit"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "myliba_lines",
+          "params": [
+            "$value"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "myliba_faq_pairs",
+          "params": [
+            "$value"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "myliba_reading_time",
+          "params": [
+            "$post_id"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "myliba_demo_url",
+          "params": [],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "myliba_brand_link",
+          "params": [
+            "$modifier"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "myliba_home_value",
+          "params": [
+            "$key",
+            "$fallback"
+          ],
+          "returnType": "mixed",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "myliba_home_lines",
+          "params": [
+            "$key",
+            "$fallback"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "myliba_home_rows",
+          "params": [
+            "$key",
+            "$fallback"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "myliba_home_section_definitions",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "myliba_home_default_sections",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "myliba_home_sections",
+          "params": [
+            "$post_id"
+          ],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 49
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "myliba_theme_setup",
+        "myliba_asset_version",
+        "myliba_enqueue_assets",
+        "myliba_resource_hints",
+        "myliba_cleanup_head",
+        "myliba_dequeue_block_styles",
+        "myliba_preload_main_stylesheet",
+        "myliba_render_critical_css",
+        "myliba_option",
+        "myliba_env",
+        "myliba_asset_url_from_env",
+        "myliba_hero_banner_images",
+        "myliba_home_media_images",
+        "myliba_image_dimensions_for_source",
+        "myliba_lcp_hero_image",
+        "myliba_preload_lcp_hero_image",
+        "myliba_render_theme_meta",
+        "myliba_meta",
+        "myliba_current_language",
+        "myliba_is_academy_landing_page",
+        "myliba_available_locales",
+        "myliba_locale_cookie_name",
+        "myliba_request_path",
+        "myliba_locale_from_path",
+        "myliba_locale_from_accept_language",
+        "myliba_preferred_locale",
+        "myliba_set_locale_cookie",
+        "myliba_redirect_root_to_preferred_locale",
+        "myliba_register_turkish_post_rewrites",
+        "myliba_turkish_post_link",
+        "myliba_redirect_legacy_urls",
+        "myliba_sync_current_locale_cookie",
+        "myliba_filter_language_attributes",
+        "myliba_translate_text",
+        "myliba_translate_gettext",
+        "myliba_is_locale_landing_page",
+        "myliba_page_url",
+        "myliba_nav_items",
+        "myliba_portal_url",
+        "myliba_header_menu",
+        "myliba_solution_catalog",
+        "myliba_solution_url",
+        "myliba_development_center_page_id",
+        "myliba_development_center_context",
+        "myliba_development_center_items",
+        "myliba_url_path",
+        "myliba_header_menu_item_is_active",
+        "myliba_language_context_url",
+        "myliba_language_links",
+        "myliba_language_flag",
+        "myliba_post_language_filter",
+        "myliba_excerpt",
+        "myliba_get_entries",
+        "myliba_client_logo_posts",
+        "myliba_lines",
+        "myliba_faq_pairs",
+        "myliba_reading_time",
+        "myliba_demo_url",
+        "myliba_brand_link",
+        "myliba_home_value",
+        "myliba_home_lines",
+        "myliba_home_rows",
+        "myliba_home_section_definitions",
+        "myliba_home_default_sections",
+        "myliba_home_sections"
+      ],
+      "totalLines": 1522,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/header.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/header.php",
+      "contentHash": "415c23b1abdc1953e148de09ab61b29c6eb7ba60498fce6bcc0fb8270019e22f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 182,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/index.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/index.php",
+      "contentHash": "ef538978da1b7988007c42c419da5070f605bfc32bb8dec755ab907170c702be",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/page.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/page.php",
+      "contentHash": "c0bb9c2394af4103bd57c0b559395cd55a2f4f1ffef4c502020652a199009aa4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 48,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/single-myliba_academy.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "contentHash": "96fb4a1245662b103c184ee26c4b43892d288d6dc881850089b564bb9c920972",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/single-myliba_event.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "contentHash": "bde277930994d77beb58cd2b5777e292ca9cd2212a07cb4135833ceac58f3fe0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/single-myliba_landing.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_landing.php",
+      "contentHash": "96fb4a1245662b103c184ee26c4b43892d288d6dc881850089b564bb9c920972",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/single-myliba_product.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_product.php",
+      "contentHash": "96fb4a1245662b103c184ee26c4b43892d288d6dc881850089b564bb9c920972",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/single-myliba_solution.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_solution.php",
+      "contentHash": "324af191c51587a7053856b7b4c1fdb7fcb55eb9be69abe322e684e836a39e58",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 194,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/single.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/single.php",
+      "contentHash": "32e01a8694a70aba777b6000a4f27adf36ac3616f5f2a589ea87ed9553f3de0c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 73,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/style.css": {
+      "filePath": "wordpress/wp-content/themes/myliba/style.css",
+      "contentHash": "c8e38733dd1a8f2fc093f8ca4e6335aeeddff8390de3390e55eca376255eeb70",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": false
+    },
+    "wordpress/wp-content/themes/myliba/template-blog.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-blog.php",
+      "contentHash": "986bb64c2dc357871008bd454e14022e90b7904d6157846c0925e783e53d8299",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 56,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-contact.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-contact.php",
+      "contentHash": "551b5f627ca2fddbbd5ac73afb347bd1fd8a229ca2d8b550676f7b84ba73026f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 26,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-demo.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-demo.php",
+      "contentHash": "a855d8e8e56701437784a7ad0d88fb1c062b7e3040a9167e0048fc1f217e9dfa",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-events.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-events.php",
+      "contentHash": "6a5c5c26c1f7f0fbfd1e43789388e136c3b4f0765c23626a72f6abba4249cee2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 45,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-landing.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-landing.php",
+      "contentHash": "b1300fc0d9f113e5c6c0f6cb3ad7b7ac852bc6939e06e5a0092f6b73edce244b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "contentHash": "916bd608bb078a2385f882402471dae70a1e2b5052ab45d5537f60e0d35bbd6c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 138,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "contentHash": "7d093b46c232f8d98c5c7af22426026c1583646ddd1eb85de1476889ca02c5fa",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 82,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "contentHash": "0ee9d9dac0eecdfffb32616a9593eaffdacd745ac47e695754bfbd8b06dd75a2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 90,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-parts/expand.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "contentHash": "a18ef4a50d4d1349850084bb287ca739f34f9bb6406c0896e49e8bc58d71f247",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-parts/hero.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "contentHash": "b2ac44d941818cd5cf9f291dd4e705e2e9c2407bfa7f75348dafd406740c62b6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-parts/page-academy.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "contentHash": "5af4fd5fb74132b83b358268bae055d326d1b82a1dd25020f8071c6a66cae3df",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 452,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-parts/page-development-center.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "contentHash": "6cb3f829973983990c5b7aa9a59203b59f8a20122defd5fdedc8669fbec27aa7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 83,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-parts/page-software.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "contentHash": "d237a0f618a51dfedd8be5a698dde63ebb16b2de89cbb1caaba58702a2f61bb4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 300,
+      "hasStructuralAnalysis": true
+    },
+    "wordpress/wp-content/themes/myliba/template-parts/page-solutions.php": {
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
+      "contentHash": "9b2d521f6b4ffde68346d5d1605791b0cd40439ab3b4c5742affed59bdc7da06",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 45,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "nodes": [
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/404.php",
+      "type": "file",
+      "name": "404.php",
+      "filePath": "wordpress/wp-content/themes/myliba/404.php",
+      "summary": "Bulunamayan sayfalar için ürünlere, bloga, demo isteğine ve ana sayfaya yönlendiren dönüşüm odaklı 404 şablonudur.",
+      "tags": [
+        "tema-şablonu",
+        "404",
+        "dönüşüm"
+      ],
+      "complexity": "simple",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php",
+      "type": "file",
+      "name": "archive-myliba_academy.php",
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_academy.php",
+      "summary": "Akademi programlarını WordPress sorgusundan başlık, özet ve detay bağlantılarıyla üç sütunlu kart ızgarasında listeler.",
+      "tags": [
+        "tema-şablonu",
+        "arşiv",
+        "dinamik-içerik"
+      ],
+      "complexity": "simple",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php",
+      "type": "file",
+      "name": "archive-myliba_ebook.php",
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_ebook.php",
+      "summary": "E-kitap arşivini ortak geliştirme kaynağı arşiv parçası üzerinden oluşturan ince tema şablonudur.",
+      "tags": [
+        "tema-şablonu",
+        "arşiv",
+        "dinamik-içerik"
+      ],
+      "complexity": "simple",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php",
+      "type": "file",
+      "name": "archive-myliba_event.php",
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_event.php",
+      "summary": "Etkinlik yazılarını tarih, başlık, özet ve konum metalarıyla listeler; sonuç olmadığında boş durum mesajı gösterir.",
+      "tags": [
+        "tema-şablonu",
+        "arşiv",
+        "dinamik-içerik"
+      ],
+      "complexity": "simple",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php",
+      "type": "file",
+      "name": "archive-myliba_product.php",
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_product.php",
+      "summary": "Myliba ürün modüllerini başlık, baş harf ikonu ve yönetilen özetleriyle kart ızgarasında listeleyen arşiv şablonudur.",
+      "tags": [
+        "tema-şablonu",
+        "arşiv",
+        "dinamik-içerik"
+      ],
+      "complexity": "simple",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php",
+      "type": "file",
+      "name": "archive-myliba_report.php",
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_report.php",
+      "summary": "Rapor arşivini ortak geliştirme kaynağı arşiv parçasına devreden ince tema şablonudur.",
+      "tags": [
+        "tema-şablonu",
+        "arşiv",
+        "dinamik-içerik"
+      ],
+      "complexity": "simple",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php",
+      "type": "file",
+      "name": "archive-myliba_solution.php",
+      "filePath": "wordpress/wp-content/themes/myliba/archive-myliba_solution.php",
+      "summary": "Çözüm kataloğunu tema yardımcısından alıp başlık, özet ve dinamik URL içeren kartlara dönüştüren çözüm arşivi şablonudur.",
+      "tags": [
+        "tema-şablonu",
+        "arşiv",
+        "dinamik-içerik"
+      ],
+      "complexity": "simple",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    }
+  ],
+  "edges": []
+}

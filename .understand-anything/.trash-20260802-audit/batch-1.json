@@ -1,0 +1,87 @@
+{
+  "nodes": [
+    {
+      "id": "config:wordpress/.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": "wordpress/.env.example",
+      "summary": "Yerel WordPress kurulumu için bağlantı noktası, veritabanı, yönetici hesabı ve site kimliği varsayılanlarını tanımlar. Ayrıca ana sayfa hero görsellerinin yollarını ve alternatif metinlerini ortam değişkenleriyle yapılandırır.",
+      "tags": ["yapılandırma", "ortam-değişkenleri", "wordpress", "güvenlik", "hero-içeriği"],
+      "complexity": "simple",
+      "languageNotes": "Örnek ortam dosyası hassas değerler için değiştirilmesi gereken yer tutucular, içerik görselleri içinse varsayılan tema yolları kullanır."
+    },
+    {
+      "id": "pipeline:wordpress/Makefile",
+      "type": "pipeline",
+      "name": "Makefile",
+      "filePath": "wordpress/Makefile",
+      "summary": "Docker tabanlı yerel WordPress yaşam döngüsünü; servisleri başlatma, WordPress'i kurma, Myliba tema ve eklentisini etkinleştirme, başlangıç içeriğini ekme ve logları izleme hedefleriyle otomatikleştirir.",
+      "tags": ["build-system", "yerel-geliştirme", "otomasyon", "wp-cli", "docker"],
+      "complexity": "simple",
+      "languageNotes": "Make hedefleri birleştirilerek `bootstrap` üzerinden up, install ve seed adımları sıralı biçimde çalıştırılır."
+    },
+    {
+      "id": "document:wordpress/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "wordpress/README.md",
+      "summary": "Myliba WordPress sürümünün yerel kurulumu, Türkçe/İngilizce URL yapısı, canlı siteden içerik aktarımı, üretim eklentisi tercihleri ve yayına alma kontrol listesini açıklar. İçerik modelinin myliba-core eklentisinde, sunum katmanının ise myliba temasında tutulduğunu belirtir.",
+      "tags": ["dokümantasyon", "wordpress", "yerel-kurulum", "çok-dilli", "yayına-alma"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:wordpress/docker-compose.yml",
+      "type": "service",
+      "name": "docker-compose.yml",
+      "filePath": "wordpress/docker-compose.yml",
+      "summary": "Yerel geliştirme için MariaDB, Apache üzerinde WordPress ve isteğe bağlı WP-CLI servislerini kalıcı veri birimleri ve sağlık denetimleriyle orkestre eder. wp-content dizinini çalışma alanından bağlayarak özel tema ve eklenti geliştirmesini konteynerlere taşır.",
+      "tags": ["orchestration", "infrastructure", "containerization", "wordpress", "mariadb"],
+      "complexity": "moderate",
+      "languageNotes": "Compose tanımı veritabanı sağlığına bağlı servis başlangıcı, araç profili ve ortam değişkeni geri dönüş değerleri kullanır."
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:wordpress/.env.example",
+      "target": "pipeline:wordpress/Makefile",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:wordpress/.env.example",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:wordpress/Makefile",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "config:wordpress/.env.example",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "pipeline:wordpress/Makefile",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

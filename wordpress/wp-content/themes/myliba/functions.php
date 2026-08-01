@@ -318,9 +318,11 @@ add_action('wp_head', 'myliba_render_theme_meta', 2);
 function myliba_meta(string $key, int $post_id = 0, mixed $fallback = ''): mixed
 {
     $post_id = $post_id ?: get_queried_object_id();
-    $value = $post_id ? get_post_meta($post_id, $key, true) : '';
+    if (!$post_id || !metadata_exists('post', $post_id, $key)) {
+        return $fallback;
+    }
 
-    return $value !== '' ? $value : $fallback;
+    return get_post_meta($post_id, $key, true);
 }
 
 function myliba_current_language(): string
@@ -637,23 +639,9 @@ function myliba_filter_language_attributes(string $output): string
 }
 add_filter('language_attributes', 'myliba_filter_language_attributes');
 
-function myliba_translate_text(string $text): string
+function myliba_translation_defaults(): array
 {
-    $text = trim($text);
-    $locale = myliba_current_language();
-
-    if (function_exists('Myliba\\Core\\Content\\override')) {
-        $override = \Myliba\Core\Content\override($text, $locale);
-        if ($override !== null) {
-            return $override;
-        }
-    }
-
-    if ($locale !== 'tr') {
-        return $text;
-    }
-
-    $translations = [
+    return [
         '1:1 notes' => '1:1 notları',
         '1:1s' => '1:1 görüşmeler',
         'Academy' => 'Akademi',
@@ -864,7 +852,21 @@ function myliba_translate_text(string $text): string
         'Demo talep etmeden once sik sorulan sorular.' => 'Demo talep etmeden önce sık sorulan sorular.',
     ];
 
-    return $translations[$text] ?? $text;
+}
+
+function myliba_translate_text(string $text): string
+{
+    $text = trim($text);
+    if ($text === '' || !function_exists('Myliba\\Core\\Content\\materialize')) {
+        return '';
+    }
+
+    return \Myliba\Core\Content\materialize($text, myliba_current_language());
+}
+
+function myliba_text(string $source): string
+{
+    return myliba_translate_text($source);
 }
 
 function myliba_translate_gettext(string $translation, string $text, string $domain): string
@@ -923,12 +925,12 @@ function myliba_page_url(string $key): string
 function myliba_nav_items(): array
 {
     return [
-        'products' => 'Yazılım',
-        'academy' => 'Akademi',
-        'solutions' => 'Çözümlerimiz',
-        'development' => 'Gelişim Merkezi',
-        'story' => 'Biz Kimiz',
-        'contact' => 'İletişim',
+        'products' => myliba_text('Yazılım'),
+        'academy' => myliba_text('Akademi'),
+        'solutions' => myliba_text('Çözümlerimiz'),
+        'development' => myliba_text('Gelişim Merkezi'),
+        'story' => myliba_text('Biz Kimiz'),
+        'contact' => myliba_text('İletişim'),
     ];
 }
 
@@ -940,18 +942,31 @@ function myliba_portal_url(): string
 function myliba_header_menu(): array
 {
     return [
-        ['key' => 'products', 'label' => 'Yazılım', 'url' => myliba_page_url('products')],
-        ['key' => 'academy', 'label' => 'Akademi', 'url' => myliba_page_url('academy')],
-        ['key' => 'solutions', 'label' => 'Çözümlerimiz', 'url' => myliba_page_url('solutions')],
-        ['key' => 'development', 'label' => 'Gelişim Merkezi', 'url' => myliba_page_url('development')],
-        ['key' => 'story', 'label' => 'Biz Kimiz', 'url' => myliba_page_url('story')],
-        ['key' => 'contact', 'label' => 'İletişim', 'url' => myliba_page_url('contact')],
+        ['key' => 'products', 'label' => myliba_text('Yazılım'), 'url' => myliba_page_url('products')],
+        ['key' => 'academy', 'label' => myliba_text('Akademi'), 'url' => myliba_page_url('academy')],
+        ['key' => 'solutions', 'label' => myliba_text('Çözümlerimiz'), 'url' => myliba_page_url('solutions')],
+        ['key' => 'development', 'label' => myliba_text('Gelişim Merkezi'), 'url' => myliba_page_url('development')],
+        ['key' => 'story', 'label' => myliba_text('Biz Kimiz'), 'url' => myliba_page_url('story')],
+        ['key' => 'contact', 'label' => myliba_text('İletişim'), 'url' => myliba_page_url('contact')],
     ];
+}
+
+function myliba_content_values(array $values): array
+{
+    foreach ($values as $key => $value) {
+        if (is_array($value)) {
+            $values[$key] = myliba_content_values($value);
+        } elseif (is_string($value) && $value !== '') {
+            $values[$key] = myliba_text($value);
+        }
+    }
+
+    return $values;
 }
 
 function myliba_solution_catalog(): array
 {
-    return [
+    $catalog = [
         'kurumsal-gelisim-programlari' => [
             'title' => 'Kurumsal Gelişim Programları',
             'kicker' => 'İşbaşı gelişim programları',
@@ -1044,6 +1059,8 @@ function myliba_solution_catalog(): array
             ],
         ],
     ];
+
+    return myliba_content_values($catalog);
 }
 
 function myliba_solution_url(string $slug): string
@@ -1092,18 +1109,18 @@ function myliba_development_center_page_id(): int
 function myliba_development_center_context(): array
 {
     $page_id = myliba_development_center_page_id();
-    $page_title = $page_id ? get_the_title($page_id) : 'Gelişim Merkezi';
+    $page_title = $page_id ? get_the_title($page_id) : myliba_text('Gelişim Merkezi');
     $page_excerpt = $page_id ? trim((string) get_post_field('post_excerpt', $page_id)) : '';
 
     return [
         'page_id' => $page_id,
-        'eyebrow' => $page_id ? (string) myliba_meta('_myliba_eyebrow', $page_id, 'Sürekli gelişim ve dönüşüm merkezi') : 'Sürekli gelişim ve dönüşüm merkezi',
+        'eyebrow' => $page_id ? (string) myliba_meta('_myliba_eyebrow', $page_id, myliba_text('Sürekli gelişim ve dönüşüm merkezi')) : myliba_text('Sürekli gelişim ve dönüşüm merkezi'),
         'title' => $page_id ? (string) myliba_meta('_myliba_hero_title', $page_id, $page_title) : $page_title,
         'subtitle' => $page_id ? (string) myliba_meta('_myliba_hero_subtitle', $page_id, $page_excerpt) : $page_excerpt,
-        'section_eyebrow' => $page_id ? (string) myliba_meta('_myliba_development_section_eyebrow', $page_id, 'Gelişim kaynakları') : 'Gelişim kaynakları',
-        'section_title' => $page_id ? (string) myliba_meta('_myliba_development_section_title', $page_id, 'Gelişim zihniyetini sürekli yeni bilgi ve tecrübeyle besleyin.') : 'Gelişim zihniyetini sürekli yeni bilgi ve tecrübeyle besleyin.',
+        'section_eyebrow' => $page_id ? (string) myliba_meta('_myliba_development_section_eyebrow', $page_id, myliba_text('Gelişim kaynakları')) : myliba_text('Gelişim kaynakları'),
+        'section_title' => $page_id ? (string) myliba_meta('_myliba_development_section_title', $page_id, myliba_text('Gelişim zihniyetini sürekli yeni bilgi ve tecrübeyle besleyin.')) : myliba_text('Gelişim zihniyetini sürekli yeni bilgi ve tecrübeyle besleyin.'),
         'section_text' => $page_id ? (string) myliba_meta('_myliba_development_section_text', $page_id, '') : '',
-        'card_cta' => $page_id ? (string) myliba_meta('_myliba_development_card_cta', $page_id, 'İçerikleri inceleyin') : 'İçerikleri inceleyin',
+        'card_cta' => $page_id ? (string) myliba_meta('_myliba_development_card_cta', $page_id, myliba_text('İçerikleri inceleyin')) : myliba_text('İçerikleri inceleyin'),
     ];
 }
 
@@ -1119,25 +1136,25 @@ function myliba_development_center_items(): array
 
     return [
         'ebooks' => [
-            'label' => $page_id ? (string) myliba_meta('_myliba_development_ebook_label', $page_id, $ebook_type?->labels->name ?: 'e-Kitaplar') : ($ebook_type?->labels->name ?: 'e-Kitaplar'),
+            'label' => $page_id ? (string) myliba_meta('_myliba_development_ebook_label', $page_id, $ebook_type?->labels->name ?: myliba_text('e-Kitaplar')) : ($ebook_type?->labels->name ?: myliba_text('e-Kitaplar')),
             'description' => $page_id ? (string) myliba_meta('_myliba_development_ebook_text', $page_id, '') : '',
             'url' => home_url($language === 'en' ? '/en/development-center/ebooks/' : '/tr/gelisim-merkezi/e-kitaplar/'),
             'post_type' => 'myliba_ebook',
         ],
         'reports' => [
-            'label' => $page_id ? (string) myliba_meta('_myliba_development_report_label', $page_id, $report_type?->labels->name ?: 'Raporlar ve Trendler') : ($report_type?->labels->name ?: 'Raporlar ve Trendler'),
+            'label' => $page_id ? (string) myliba_meta('_myliba_development_report_label', $page_id, $report_type?->labels->name ?: myliba_text('Raporlar ve Trendler')) : ($report_type?->labels->name ?: myliba_text('Raporlar ve Trendler')),
             'description' => $page_id ? (string) myliba_meta('_myliba_development_report_text', $page_id, '') : '',
             'url' => home_url($language === 'en' ? '/en/development-center/reports/' : '/tr/gelisim-merkezi/raporlar-ve-trendler/'),
             'post_type' => 'myliba_report',
         ],
         'blog' => [
-            'label' => $page_id ? (string) myliba_meta('_myliba_development_blog_label', $page_id, 'Blog') : 'Blog',
+            'label' => $page_id ? (string) myliba_meta('_myliba_development_blog_label', $page_id, myliba_text('Blog')) : myliba_text('Blog'),
             'description' => $page_id ? (string) myliba_meta('_myliba_development_blog_text', $page_id, '') : '',
             'url' => $blog_page_url,
             'post_type' => 'post',
         ],
         'events' => [
-            'label' => $page_id ? (string) myliba_meta('_myliba_development_events_label', $page_id, $events_page_id ? get_the_title($events_page_id) : 'Etkinlikler') : ($events_page_id ? get_the_title($events_page_id) : 'Etkinlikler'),
+            'label' => $page_id ? (string) myliba_meta('_myliba_development_events_label', $page_id, $events_page_id ? get_the_title($events_page_id) : myliba_text('Etkinlikler')) : ($events_page_id ? get_the_title($events_page_id) : myliba_text('Etkinlikler')),
             'description' => $page_id ? (string) myliba_meta('_myliba_development_events_text', $page_id, '') : '',
             'url' => $events_page_url,
             'post_type' => 'myliba_event',

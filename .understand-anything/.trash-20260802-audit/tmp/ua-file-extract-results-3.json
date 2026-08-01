@@ -1,0 +1,3842 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "wordpress/wp-content/themes/myliba/assets/css/main.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 14848,
+      "nonEmptyLines": 12585,
+      "metrics": {}
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/assets/js/main.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 513,
+      "nonEmptyLines": 440,
+      "callGraph": [
+        {
+          "caller": "isMobileNav",
+          "callee": "window.matchMedia",
+          "lineNumber": 9
+        },
+        {
+          "caller": "setLocalePreference",
+          "callee": "supportedLocales.includes",
+          "lineNumber": 15
+        },
+        {
+          "caller": "setLocalePreference",
+          "callee": "window.localStorage.setItem",
+          "lineNumber": 20
+        },
+        {
+          "caller": "setLocalePreference",
+          "callee": "setLocaleCookie",
+          "lineNumber": 25
+        },
+        {
+          "caller": "syncHeader",
+          "callee": "header.classList.toggle",
+          "lineNumber": 45
+        },
+        {
+          "caller": "closeMobileNav",
+          "callee": "toggle.setAttribute",
+          "lineNumber": 54
+        },
+        {
+          "caller": "closeMobileNav",
+          "callee": "document.body.classList.remove",
+          "lineNumber": 55
+        },
+        {
+          "caller": "closeMobileNav",
+          "callee": "megaItems.forEach",
+          "lineNumber": 57
+        },
+        {
+          "caller": "closeMobileNav",
+          "callee": "megaItem.classList.remove",
+          "lineNumber": 58
+        },
+        {
+          "caller": "closeMobileNav",
+          "callee": "megaItem.querySelector(\".site-nav__link\")?.setAttribute",
+          "lineNumber": 59
+        },
+        {
+          "caller": "closeMobileNav",
+          "callee": "megaItem.querySelector",
+          "lineNumber": 59
+        },
+        {
+          "caller": "openMega",
+          "callee": "isMobileNav",
+          "lineNumber": 136
+        },
+        {
+          "caller": "openMega",
+          "callee": "megaItems.forEach",
+          "lineNumber": 140
+        },
+        {
+          "caller": "openMega",
+          "callee": "otherMegaItem.classList.remove",
+          "lineNumber": 142
+        },
+        {
+          "caller": "openMega",
+          "callee": "otherMegaItem.querySelector(\".site-nav__link\")?.setAttribute",
+          "lineNumber": 143
+        },
+        {
+          "caller": "openMega",
+          "callee": "otherMegaItem.querySelector",
+          "lineNumber": 143
+        },
+        {
+          "caller": "openMega",
+          "callee": "window.clearTimeout",
+          "lineNumber": 146
+        },
+        {
+          "caller": "openMega",
+          "callee": "megaItem.classList.add",
+          "lineNumber": 147
+        },
+        {
+          "caller": "openMega",
+          "callee": "megaToggle.setAttribute",
+          "lineNumber": 149
+        },
+        {
+          "caller": "queueCloseMega",
+          "callee": "isMobileNav",
+          "lineNumber": 153
+        },
+        {
+          "caller": "queueCloseMega",
+          "callee": "window.clearTimeout",
+          "lineNumber": 157
+        },
+        {
+          "caller": "queueCloseMega",
+          "callee": "window.setTimeout",
+          "lineNumber": 158
+        },
+        {
+          "caller": "queueCloseMega",
+          "callee": "megaItem.classList.remove",
+          "lineNumber": 159
+        },
+        {
+          "caller": "queueCloseMega",
+          "callee": "megaToggle.setAttribute",
+          "lineNumber": 161
+        },
+        {
+          "caller": "activateTab",
+          "callee": "tabs.forEach",
+          "lineNumber": 231
+        },
+        {
+          "caller": "activateTab",
+          "callee": "tab.classList.toggle",
+          "lineNumber": 233
+        },
+        {
+          "caller": "activateTab",
+          "callee": "tab.setAttribute",
+          "lineNumber": 234
+        },
+        {
+          "caller": "activateTab",
+          "callee": "String",
+          "lineNumber": 234
+        },
+        {
+          "caller": "activateTab",
+          "callee": "panels.forEach",
+          "lineNumber": 237
+        },
+        {
+          "caller": "activateTab",
+          "callee": "nextTab.getAttribute",
+          "lineNumber": 238
+        },
+        {
+          "caller": "activateTab",
+          "callee": "panel.classList.toggle",
+          "lineNumber": 239
+        },
+        {
+          "caller": "activate",
+          "callee": "tabs.forEach",
+          "lineNumber": 278
+        },
+        {
+          "caller": "activate",
+          "callee": "tab.classList.toggle",
+          "lineNumber": 280
+        },
+        {
+          "caller": "activate",
+          "callee": "tab.setAttribute",
+          "lineNumber": 281
+        },
+        {
+          "caller": "activate",
+          "callee": "String",
+          "lineNumber": 281
+        },
+        {
+          "caller": "activate",
+          "callee": "panels.forEach",
+          "lineNumber": 285
+        },
+        {
+          "caller": "activate",
+          "callee": "nextTab.getAttribute",
+          "lineNumber": 286
+        },
+        {
+          "caller": "activate",
+          "callee": "panel.classList.toggle",
+          "lineNumber": 287
+        },
+        {
+          "caller": "activate",
+          "callee": "nextTab.focus",
+          "lineNumber": 292
+        },
+        {
+          "caller": "show",
+          "callee": "slides.forEach",
+          "lineNumber": 330
+        },
+        {
+          "caller": "show",
+          "callee": "slide.classList.toggle",
+          "lineNumber": 332
+        },
+        {
+          "caller": "show",
+          "callee": "slide.setAttribute",
+          "lineNumber": 333
+        },
+        {
+          "caller": "show",
+          "callee": "String",
+          "lineNumber": 333
+        },
+        {
+          "caller": "show",
+          "callee": "slide.querySelectorAll(\"a, button, input, select, textarea\").forEach",
+          "lineNumber": 334
+        },
+        {
+          "caller": "show",
+          "callee": "slide.querySelectorAll",
+          "lineNumber": 334
+        },
+        {
+          "caller": "show",
+          "callee": "dots.forEach",
+          "lineNumber": 338
+        },
+        {
+          "caller": "show",
+          "callee": "dot.classList.toggle",
+          "lineNumber": 340
+        },
+        {
+          "caller": "show",
+          "callee": "dot.setAttribute",
+          "lineNumber": 341
+        },
+        {
+          "caller": "show",
+          "callee": "String",
+          "lineNumber": 341
+        },
+        {
+          "caller": "show",
+          "callee": "slider.querySelector(\".hero-slider__viewport\").setAttribute",
+          "lineNumber": 344
+        },
+        {
+          "caller": "show",
+          "callee": "slider.querySelector",
+          "lineNumber": 344
+        },
+        {
+          "caller": "stop",
+          "callee": "window.clearInterval",
+          "lineNumber": 347
+        },
+        {
+          "caller": "start",
+          "callee": "stop",
+          "lineNumber": 349
+        },
+        {
+          "caller": "start",
+          "callee": "window.setInterval",
+          "lineNumber": 351
+        },
+        {
+          "caller": "start",
+          "callee": "show",
+          "lineNumber": 351
+        },
+        {
+          "caller": "closeAcademyDialog",
+          "callee": "academyDialog.close",
+          "lineNumber": 462
+        },
+        {
+          "caller": "move",
+          "callee": "track.querySelector",
+          "lineNumber": 505
+        },
+        {
+          "caller": "move",
+          "callee": "card.getBoundingClientRect",
+          "lineNumber": 506
+        },
+        {
+          "caller": "move",
+          "callee": "track.scrollBy",
+          "lineNumber": 507
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/footer.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 223,
+      "nonEmptyLines": 207,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/front-page.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 528,
+      "nonEmptyLines": 510,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/functions.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 1521,
+      "nonEmptyLines": 1322,
+      "functions": [
+        {
+          "name": "myliba_theme_setup",
+          "startLine": 7,
+          "endLine": 25,
+          "params": []
+        },
+        {
+          "name": "myliba_asset_version",
+          "startLine": 28,
+          "endLine": 37,
+          "params": [
+            "$relative_path"
+          ]
+        },
+        {
+          "name": "myliba_enqueue_assets",
+          "startLine": 39,
+          "endLine": 52,
+          "params": []
+        },
+        {
+          "name": "myliba_resource_hints",
+          "startLine": 55,
+          "endLine": 66,
+          "params": [
+            "$urls",
+            "$relation_type"
+          ]
+        },
+        {
+          "name": "myliba_cleanup_head",
+          "startLine": 69,
+          "endLine": 81,
+          "params": []
+        },
+        {
+          "name": "myliba_dequeue_block_styles",
+          "startLine": 84,
+          "endLine": 92,
+          "params": []
+        },
+        {
+          "name": "myliba_preload_main_stylesheet",
+          "startLine": 95,
+          "endLine": 99,
+          "params": []
+        },
+        {
+          "name": "myliba_render_critical_css",
+          "startLine": 102,
+          "endLine": 110,
+          "params": []
+        },
+        {
+          "name": "myliba_option",
+          "startLine": 113,
+          "endLine": 142,
+          "params": [
+            "$key",
+            "$fallback"
+          ]
+        },
+        {
+          "name": "myliba_env",
+          "startLine": 144,
+          "endLine": 165,
+          "params": [
+            "$key",
+            "$fallback"
+          ]
+        },
+        {
+          "name": "myliba_asset_url_from_env",
+          "startLine": 167,
+          "endLine": 184,
+          "params": [
+            "$value"
+          ]
+        },
+        {
+          "name": "myliba_hero_banner_images",
+          "startLine": 186,
+          "endLine": 223,
+          "params": []
+        },
+        {
+          "name": "myliba_home_media_images",
+          "startLine": 225,
+          "endLine": 256,
+          "params": [
+            "$group",
+            "$post_id"
+          ]
+        },
+        {
+          "name": "myliba_image_dimensions_for_source",
+          "startLine": 258,
+          "endLine": 282,
+          "params": [
+            "$source",
+            "$url"
+          ]
+        },
+        {
+          "name": "myliba_lcp_hero_image",
+          "startLine": 284,
+          "endLine": 293,
+          "params": []
+        },
+        {
+          "name": "myliba_preload_lcp_hero_image",
+          "startLine": 295,
+          "endLine": 304,
+          "params": []
+        },
+        {
+          "name": "myliba_render_theme_meta",
+          "startLine": 307,
+          "endLine": 315,
+          "params": []
+        },
+        {
+          "name": "myliba_meta",
+          "startLine": 318,
+          "endLine": 324,
+          "params": [
+            "$key",
+            "$post_id",
+            "$fallback"
+          ]
+        },
+        {
+          "name": "myliba_current_language",
+          "startLine": 326,
+          "endLine": 342,
+          "params": []
+        },
+        {
+          "name": "myliba_is_academy_landing_page",
+          "startLine": 344,
+          "endLine": 353,
+          "params": [
+            "$post_id"
+          ]
+        },
+        {
+          "name": "myliba_available_locales",
+          "startLine": 355,
+          "endLine": 363,
+          "params": []
+        },
+        {
+          "name": "myliba_locale_cookie_name",
+          "startLine": 365,
+          "endLine": 368,
+          "params": []
+        },
+        {
+          "name": "myliba_request_path",
+          "startLine": 370,
+          "endLine": 385,
+          "params": []
+        },
+        {
+          "name": "myliba_locale_from_path",
+          "startLine": 387,
+          "endLine": 393,
+          "params": [
+            "$path"
+          ]
+        },
+        {
+          "name": "myliba_locale_from_accept_language",
+          "startLine": 395,
+          "endLine": 408,
+          "params": [
+            "$header"
+          ]
+        },
+        {
+          "name": "myliba_preferred_locale",
+          "startLine": 410,
+          "endLine": 424,
+          "params": []
+        },
+        {
+          "name": "myliba_set_locale_cookie",
+          "startLine": 426,
+          "endLine": 442,
+          "params": [
+            "$locale"
+          ]
+        },
+        {
+          "name": "myliba_redirect_root_to_preferred_locale",
+          "startLine": 444,
+          "endLine": 505,
+          "params": []
+        },
+        {
+          "name": "myliba_register_turkish_post_rewrites",
+          "startLine": 508,
+          "endLine": 520,
+          "params": []
+        },
+        {
+          "name": "myliba_turkish_post_link",
+          "startLine": 523,
+          "endLine": 539,
+          "params": [
+            "$permalink",
+            "$post"
+          ]
+        },
+        {
+          "name": "myliba_redirect_legacy_urls",
+          "startLine": 542,
+          "endLine": 616,
+          "params": []
+        },
+        {
+          "name": "myliba_sync_current_locale_cookie",
+          "startLine": 619,
+          "endLine": 625,
+          "params": []
+        },
+        {
+          "name": "myliba_filter_language_attributes",
+          "startLine": 628,
+          "endLine": 637,
+          "params": [
+            "$output"
+          ]
+        },
+        {
+          "name": "myliba_translate_text",
+          "startLine": 640,
+          "endLine": 868,
+          "params": [
+            "$text"
+          ]
+        },
+        {
+          "name": "myliba_translate_gettext",
+          "startLine": 870,
+          "endLine": 877,
+          "params": [
+            "$translation",
+            "$text",
+            "$domain"
+          ]
+        },
+        {
+          "name": "myliba_is_locale_landing_page",
+          "startLine": 880,
+          "endLine": 889,
+          "params": [
+            "$post_id"
+          ]
+        },
+        {
+          "name": "myliba_page_url",
+          "startLine": 891,
+          "endLine": 921,
+          "params": [
+            "$key"
+          ]
+        },
+        {
+          "name": "myliba_nav_items",
+          "startLine": 923,
+          "endLine": 933,
+          "params": []
+        },
+        {
+          "name": "myliba_portal_url",
+          "startLine": 935,
+          "endLine": 938,
+          "params": []
+        },
+        {
+          "name": "myliba_header_menu",
+          "startLine": 940,
+          "endLine": 950,
+          "params": []
+        },
+        {
+          "name": "myliba_solution_catalog",
+          "startLine": 952,
+          "endLine": 1047,
+          "params": []
+        },
+        {
+          "name": "myliba_solution_url",
+          "startLine": 1049,
+          "endLine": 1082,
+          "params": [
+            "$slug"
+          ]
+        },
+        {
+          "name": "myliba_development_center_page_id",
+          "startLine": 1084,
+          "endLine": 1090,
+          "params": []
+        },
+        {
+          "name": "myliba_development_center_context",
+          "startLine": 1092,
+          "endLine": 1108,
+          "params": []
+        },
+        {
+          "name": "myliba_development_center_items",
+          "startLine": 1110,
+          "endLine": 1146,
+          "params": []
+        },
+        {
+          "name": "myliba_url_path",
+          "startLine": 1148,
+          "endLine": 1154,
+          "params": [
+            "$url"
+          ]
+        },
+        {
+          "name": "myliba_header_menu_item_is_active",
+          "startLine": 1156,
+          "endLine": 1172,
+          "params": [
+            "$key",
+            "$url"
+          ]
+        },
+        {
+          "name": "myliba_language_context_url",
+          "startLine": 1174,
+          "endLine": 1217,
+          "params": [
+            "$language"
+          ]
+        },
+        {
+          "name": "myliba_language_links",
+          "startLine": 1219,
+          "endLine": 1259,
+          "params": []
+        },
+        {
+          "name": "myliba_language_flag",
+          "startLine": 1261,
+          "endLine": 1268,
+          "params": [
+            "$label"
+          ]
+        },
+        {
+          "name": "myliba_post_language_filter",
+          "startLine": 1270,
+          "endLine": 1285,
+          "params": [
+            "$query"
+          ]
+        },
+        {
+          "name": "myliba_excerpt",
+          "startLine": 1288,
+          "endLine": 1298,
+          "params": [
+            "$post_id",
+            "$words"
+          ]
+        },
+        {
+          "name": "myliba_get_entries",
+          "startLine": 1300,
+          "endLine": 1321,
+          "params": [
+            "$post_type",
+            "$limit",
+            "$args"
+          ]
+        },
+        {
+          "name": "myliba_client_logo_posts",
+          "startLine": 1323,
+          "endLine": 1337,
+          "params": [
+            "$limit"
+          ]
+        },
+        {
+          "name": "myliba_lines",
+          "startLine": 1339,
+          "endLine": 1345,
+          "params": [
+            "$value"
+          ]
+        },
+        {
+          "name": "myliba_faq_pairs",
+          "startLine": 1347,
+          "endLine": 1361,
+          "params": [
+            "$value"
+          ]
+        },
+        {
+          "name": "myliba_reading_time",
+          "startLine": 1363,
+          "endLine": 1369,
+          "params": [
+            "$post_id"
+          ]
+        },
+        {
+          "name": "myliba_demo_url",
+          "startLine": 1371,
+          "endLine": 1376,
+          "params": []
+        },
+        {
+          "name": "myliba_brand_link",
+          "startLine": 1378,
+          "endLine": 1400,
+          "params": [
+            "$modifier"
+          ]
+        },
+        {
+          "name": "myliba_home_value",
+          "startLine": 1402,
+          "endLine": 1411,
+          "params": [
+            "$key",
+            "$fallback"
+          ]
+        },
+        {
+          "name": "myliba_home_lines",
+          "startLine": 1413,
+          "endLine": 1419,
+          "params": [
+            "$key",
+            "$fallback"
+          ]
+        },
+        {
+          "name": "myliba_home_rows",
+          "startLine": 1421,
+          "endLine": 1434,
+          "params": [
+            "$key",
+            "$fallback"
+          ]
+        },
+        {
+          "name": "myliba_home_section_definitions",
+          "startLine": 1436,
+          "endLine": 1454,
+          "params": []
+        },
+        {
+          "name": "myliba_home_default_sections",
+          "startLine": 1456,
+          "endLine": 1471,
+          "params": []
+        },
+        {
+          "name": "myliba_home_sections",
+          "startLine": 1473,
+          "endLine": 1521,
+          "params": [
+            "$post_id"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "myliba_theme_setup",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_asset_version",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_enqueue_assets",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_resource_hints",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_cleanup_head",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_dequeue_block_styles",
+          "line": 84,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_preload_main_stylesheet",
+          "line": 95,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_render_critical_css",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_option",
+          "line": 113,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_env",
+          "line": 144,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_asset_url_from_env",
+          "line": 167,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_hero_banner_images",
+          "line": 186,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_home_media_images",
+          "line": 225,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_image_dimensions_for_source",
+          "line": 258,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_lcp_hero_image",
+          "line": 284,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_preload_lcp_hero_image",
+          "line": 295,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_render_theme_meta",
+          "line": 307,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_meta",
+          "line": 318,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_current_language",
+          "line": 326,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_is_academy_landing_page",
+          "line": 344,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_available_locales",
+          "line": 355,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_locale_cookie_name",
+          "line": 365,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_request_path",
+          "line": 370,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_locale_from_path",
+          "line": 387,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_locale_from_accept_language",
+          "line": 395,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_preferred_locale",
+          "line": 410,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_set_locale_cookie",
+          "line": 426,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_redirect_root_to_preferred_locale",
+          "line": 444,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_register_turkish_post_rewrites",
+          "line": 508,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_turkish_post_link",
+          "line": 523,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_redirect_legacy_urls",
+          "line": 542,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_sync_current_locale_cookie",
+          "line": 619,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_filter_language_attributes",
+          "line": 628,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_translate_text",
+          "line": 640,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_translate_gettext",
+          "line": 870,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_is_locale_landing_page",
+          "line": 880,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_page_url",
+          "line": 891,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_nav_items",
+          "line": 923,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_portal_url",
+          "line": 935,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_header_menu",
+          "line": 940,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_solution_catalog",
+          "line": 952,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_solution_url",
+          "line": 1049,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_development_center_page_id",
+          "line": 1084,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_development_center_context",
+          "line": 1092,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_development_center_items",
+          "line": 1110,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_url_path",
+          "line": 1148,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_header_menu_item_is_active",
+          "line": 1156,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_language_context_url",
+          "line": 1174,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_language_links",
+          "line": 1219,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_language_flag",
+          "line": 1261,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_post_language_filter",
+          "line": 1270,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_excerpt",
+          "line": 1288,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_get_entries",
+          "line": 1300,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_client_logo_posts",
+          "line": 1323,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_lines",
+          "line": 1339,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_faq_pairs",
+          "line": 1347,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_reading_time",
+          "line": 1363,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_demo_url",
+          "line": 1371,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_brand_link",
+          "line": 1378,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_home_value",
+          "line": 1402,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_home_lines",
+          "line": 1413,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_home_rows",
+          "line": 1421,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_home_section_definitions",
+          "line": 1436,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_home_default_sections",
+          "line": 1456,
+          "isDefault": false
+        },
+        {
+          "name": "myliba_home_sections",
+          "line": 1473,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "myliba_theme_setup",
+          "callee": "add_theme_support",
+          "lineNumber": 9
+        },
+        {
+          "caller": "myliba_theme_setup",
+          "callee": "add_theme_support",
+          "lineNumber": 10
+        },
+        {
+          "caller": "myliba_theme_setup",
+          "callee": "add_theme_support",
+          "lineNumber": 11
+        },
+        {
+          "caller": "myliba_theme_setup",
+          "callee": "add_theme_support",
+          "lineNumber": 12
+        },
+        {
+          "caller": "myliba_theme_setup",
+          "callee": "add_theme_support",
+          "lineNumber": 13
+        },
+        {
+          "caller": "myliba_theme_setup",
+          "callee": "register_nav_menus",
+          "lineNumber": 20
+        },
+        {
+          "caller": "myliba_theme_setup",
+          "callee": "__",
+          "lineNumber": 21
+        },
+        {
+          "caller": "myliba_theme_setup",
+          "callee": "__",
+          "lineNumber": 22
+        },
+        {
+          "caller": "myliba_theme_setup",
+          "callee": "__",
+          "lineNumber": 23
+        },
+        {
+          "caller": "myliba_asset_version",
+          "callee": "get_template_directory",
+          "lineNumber": 30
+        },
+        {
+          "caller": "myliba_asset_version",
+          "callee": "ltrim",
+          "lineNumber": 30
+        },
+        {
+          "caller": "myliba_asset_version",
+          "callee": "file_exists",
+          "lineNumber": 32
+        },
+        {
+          "caller": "myliba_asset_version",
+          "callee": "filemtime",
+          "lineNumber": 33
+        },
+        {
+          "caller": "myliba_asset_version",
+          "callee": "wp_get_theme()->get",
+          "lineNumber": 36
+        },
+        {
+          "caller": "myliba_asset_version",
+          "callee": "wp_get_theme",
+          "lineNumber": 36
+        },
+        {
+          "caller": "myliba_enqueue_assets",
+          "callee": "wp_enqueue_style",
+          "lineNumber": 41
+        },
+        {
+          "caller": "myliba_enqueue_assets",
+          "callee": "wp_enqueue_style",
+          "lineNumber": 47
+        },
+        {
+          "caller": "myliba_enqueue_assets",
+          "callee": "get_template_directory_uri",
+          "lineNumber": 47
+        },
+        {
+          "caller": "myliba_enqueue_assets",
+          "callee": "myliba_asset_version",
+          "lineNumber": 47
+        },
+        {
+          "caller": "myliba_enqueue_assets",
+          "callee": "wp_enqueue_script",
+          "lineNumber": 48
+        },
+        {
+          "caller": "myliba_enqueue_assets",
+          "callee": "get_template_directory_uri",
+          "lineNumber": 48
+        },
+        {
+          "caller": "myliba_enqueue_assets",
+          "callee": "myliba_asset_version",
+          "lineNumber": 48
+        },
+        {
+          "caller": "myliba_cleanup_head",
+          "callee": "remove_action",
+          "lineNumber": 71
+        },
+        {
+          "caller": "myliba_cleanup_head",
+          "callee": "remove_action",
+          "lineNumber": 72
+        },
+        {
+          "caller": "myliba_cleanup_head",
+          "callee": "remove_action",
+          "lineNumber": 73
+        },
+        {
+          "caller": "myliba_cleanup_head",
+          "callee": "remove_action",
+          "lineNumber": 74
+        },
+        {
+          "caller": "myliba_cleanup_head",
+          "callee": "remove_action",
+          "lineNumber": 75
+        },
+        {
+          "caller": "myliba_cleanup_head",
+          "callee": "remove_action",
+          "lineNumber": 76
+        },
+        {
+          "caller": "myliba_cleanup_head",
+          "callee": "remove_action",
+          "lineNumber": 77
+        },
+        {
+          "caller": "myliba_cleanup_head",
+          "callee": "remove_action",
+          "lineNumber": 78
+        },
+        {
+          "caller": "myliba_cleanup_head",
+          "callee": "remove_action",
+          "lineNumber": 79
+        },
+        {
+          "caller": "myliba_cleanup_head",
+          "callee": "add_filter",
+          "lineNumber": 80
+        },
+        {
+          "caller": "myliba_dequeue_block_styles",
+          "callee": "is_admin",
+          "lineNumber": 86
+        },
+        {
+          "caller": "myliba_dequeue_block_styles",
+          "callee": "wp_dequeue_style",
+          "lineNumber": 87
+        },
+        {
+          "caller": "myliba_dequeue_block_styles",
+          "callee": "wp_dequeue_style",
+          "lineNumber": 88
+        },
+        {
+          "caller": "myliba_dequeue_block_styles",
+          "callee": "wp_dequeue_style",
+          "lineNumber": 89
+        },
+        {
+          "caller": "myliba_dequeue_block_styles",
+          "callee": "wp_dequeue_style",
+          "lineNumber": 90
+        },
+        {
+          "caller": "myliba_preload_main_stylesheet",
+          "callee": "get_template_directory_uri",
+          "lineNumber": 97
+        },
+        {
+          "caller": "myliba_preload_main_stylesheet",
+          "callee": "rawurlencode",
+          "lineNumber": 97
+        },
+        {
+          "caller": "myliba_preload_main_stylesheet",
+          "callee": "myliba_asset_version",
+          "lineNumber": 97
+        },
+        {
+          "caller": "myliba_preload_main_stylesheet",
+          "callee": "printf",
+          "lineNumber": 98
+        },
+        {
+          "caller": "myliba_preload_main_stylesheet",
+          "callee": "esc_url",
+          "lineNumber": 98
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "function_exists",
+          "lineNumber": 115
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "is_admin",
+          "lineNumber": 117
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "function_exists",
+          "lineNumber": 117
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "in_array",
+          "lineNumber": 117
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "myliba_current_language",
+          "lineNumber": 118
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "is_string",
+          "lineNumber": 119
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "trim",
+          "lineNumber": 119
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "is_string",
+          "lineNumber": 137
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "is_admin",
+          "lineNumber": 137
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "in_array",
+          "lineNumber": 137
+        },
+        {
+          "caller": "myliba_option",
+          "callee": "myliba_translate_text",
+          "lineNumber": 138
+        },
+        {
+          "caller": "myliba_env",
+          "callee": "getenv",
+          "lineNumber": 146
+        },
+        {
+          "caller": "myliba_env",
+          "callee": "isset",
+          "lineNumber": 148
+        },
+        {
+          "caller": "myliba_env",
+          "callee": "isset",
+          "lineNumber": 152
+        },
+        {
+          "caller": "myliba_env",
+          "callee": "defined",
+          "lineNumber": 156
+        },
+        {
+          "caller": "myliba_env",
+          "callee": "constant",
+          "lineNumber": 157
+        },
+        {
+          "caller": "myliba_env",
+          "callee": "function_exists",
+          "lineNumber": 160
+        },
+        {
+          "caller": "myliba_env",
+          "callee": "apache_getenv",
+          "lineNumber": 161
+        },
+        {
+          "caller": "myliba_env",
+          "callee": "is_string",
+          "lineNumber": 164
+        },
+        {
+          "caller": "myliba_env",
+          "callee": "trim",
+          "lineNumber": 164
+        },
+        {
+          "caller": "myliba_env",
+          "callee": "trim",
+          "lineNumber": 164
+        },
+        {
+          "caller": "myliba_asset_url_from_env",
+          "callee": "trim",
+          "lineNumber": 169
+        },
+        {
+          "caller": "myliba_asset_url_from_env",
+          "callee": "str_starts_with",
+          "lineNumber": 175
+        },
+        {
+          "caller": "myliba_asset_url_from_env",
+          "callee": "str_starts_with",
+          "lineNumber": 175
+        },
+        {
+          "caller": "myliba_asset_url_from_env",
+          "callee": "str_starts_with",
+          "lineNumber": 179
+        },
+        {
+          "caller": "myliba_asset_url_from_env",
+          "callee": "home_url",
+          "lineNumber": 180
+        },
+        {
+          "caller": "myliba_asset_url_from_env",
+          "callee": "get_template_directory_uri",
+          "lineNumber": 183
+        },
+        {
+          "caller": "myliba_asset_url_from_env",
+          "callee": "ltrim",
+          "lineNumber": 183
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "get_queried_object_id",
+          "lineNumber": 188
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "myliba_home_media_images",
+          "lineNumber": 189
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "myliba_env",
+          "lineNumber": 194
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "preg_split",
+          "lineNumber": 196
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "myliba_env",
+          "lineNumber": 198
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "myliba_env",
+          "lineNumber": 199
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "myliba_env",
+          "lineNumber": 203
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "__",
+          "lineNumber": 203
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "myliba_env",
+          "lineNumber": 204
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "__",
+          "lineNumber": 204
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "myliba_asset_url_from_env",
+          "lineNumber": 209
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "sprintf",
+          "lineNumber": 217
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "__",
+          "lineNumber": 217
+        },
+        {
+          "caller": "myliba_hero_banner_images",
+          "callee": "myliba_image_dimensions_for_source",
+          "lineNumber": 218
+        },
+        {
+          "caller": "myliba_home_media_images",
+          "callee": "get_queried_object_id",
+          "lineNumber": 227
+        },
+        {
+          "caller": "myliba_home_media_images",
+          "callee": "in_array",
+          "lineNumber": 228
+        },
+        {
+          "caller": "myliba_home_media_images",
+          "callee": "absint",
+          "lineNumber": 234
+        },
+        {
+          "caller": "myliba_home_media_images",
+          "callee": "get_post_meta",
+          "lineNumber": 234
+        },
+        {
+          "caller": "myliba_home_media_images",
+          "callee": "wp_get_attachment_image_src",
+          "lineNumber": 239
+        },
+        {
+          "caller": "myliba_home_media_images",
+          "callee": "trim",
+          "lineNumber": 244
+        },
+        {
+          "caller": "myliba_home_media_images",
+          "callee": "get_post_meta",
+          "lineNumber": 244
+        },
+        {
+          "caller": "myliba_home_media_images",
+          "callee": "trim",
+          "lineNumber": 245
+        },
+        {
+          "caller": "myliba_home_media_images",
+          "callee": "get_post_meta",
+          "lineNumber": 245
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "str_starts_with",
+          "lineNumber": 262
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "str_starts_with",
+          "lineNumber": 262
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "str_starts_with",
+          "lineNumber": 262
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "get_template_directory",
+          "lineNumber": 263
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "ltrim",
+          "lineNumber": 263
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "str_starts_with",
+          "lineNumber": 264
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "get_template_directory_uri",
+          "lineNumber": 264
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "get_template_directory",
+          "lineNumber": 265
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "str_replace",
+          "lineNumber": 265
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "get_template_directory_uri",
+          "lineNumber": 265
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "file_exists",
+          "lineNumber": 268
+        },
+        {
+          "caller": "myliba_image_dimensions_for_source",
+          "callee": "getimagesize",
+          "lineNumber": 272
+        },
+        {
+          "caller": "myliba_lcp_hero_image",
+          "callee": "is_front_page",
+          "lineNumber": 286
+        },
+        {
+          "caller": "myliba_lcp_hero_image",
+          "callee": "myliba_hero_banner_images",
+          "lineNumber": 290
+        },
+        {
+          "caller": "myliba_preload_lcp_hero_image",
+          "callee": "myliba_lcp_hero_image",
+          "lineNumber": 297
+        },
+        {
+          "caller": "myliba_preload_lcp_hero_image",
+          "callee": "empty",
+          "lineNumber": 299
+        },
+        {
+          "caller": "myliba_preload_lcp_hero_image",
+          "callee": "printf",
+          "lineNumber": 303
+        },
+        {
+          "caller": "myliba_preload_lcp_hero_image",
+          "callee": "esc_url",
+          "lineNumber": 303
+        },
+        {
+          "caller": "myliba_render_theme_meta",
+          "callee": "get_option",
+          "lineNumber": 309
+        },
+        {
+          "caller": "myliba_render_theme_meta",
+          "callee": "wp_get_attachment_image_url",
+          "lineNumber": 310
+        },
+        {
+          "caller": "myliba_render_theme_meta",
+          "callee": "get_template_directory_uri",
+          "lineNumber": 310
+        },
+        {
+          "caller": "myliba_render_theme_meta",
+          "callee": "printf",
+          "lineNumber": 313
+        },
+        {
+          "caller": "myliba_render_theme_meta",
+          "callee": "esc_url",
+          "lineNumber": 313
+        },
+        {
+          "caller": "myliba_render_theme_meta",
+          "callee": "printf",
+          "lineNumber": 314
+        },
+        {
+          "caller": "myliba_render_theme_meta",
+          "callee": "esc_url",
+          "lineNumber": 314
+        },
+        {
+          "caller": "myliba_meta",
+          "callee": "get_queried_object_id",
+          "lineNumber": 320
+        },
+        {
+          "caller": "myliba_meta",
+          "callee": "get_post_meta",
+          "lineNumber": 321
+        },
+        {
+          "caller": "myliba_current_language",
+          "callee": "function_exists",
+          "lineNumber": 328
+        },
+        {
+          "caller": "myliba_current_language",
+          "callee": "pll_current_language",
+          "lineNumber": 329
+        },
+        {
+          "caller": "myliba_current_language",
+          "callee": "myliba_locale_from_path",
+          "lineNumber": 332
+        },
+        {
+          "caller": "myliba_current_language",
+          "callee": "myliba_request_path",
+          "lineNumber": 332
+        },
+        {
+          "caller": "myliba_current_language",
+          "callee": "is_singular",
+          "lineNumber": 337
+        },
+        {
+          "caller": "myliba_current_language",
+          "callee": "myliba_meta",
+          "lineNumber": 338
+        },
+        {
+          "caller": "myliba_current_language",
+          "callee": "get_queried_object_id",
+          "lineNumber": 338
+        },
+        {
+          "caller": "myliba_current_language",
+          "callee": "myliba_option",
+          "lineNumber": 338
+        },
+        {
+          "caller": "myliba_current_language",
+          "callee": "myliba_option",
+          "lineNumber": 341
+        },
+        {
+          "caller": "myliba_is_academy_landing_page",
+          "callee": "get_post",
+          "lineNumber": 346
+        },
+        {
+          "caller": "myliba_is_academy_landing_page",
+          "callee": "get_queried_object_id",
+          "lineNumber": 346
+        },
+        {
+          "caller": "myliba_is_academy_landing_page",
+          "callee": "in_array",
+          "lineNumber": 352
+        },
+        {
+          "caller": "myliba_available_locales",
+          "callee": "myliba_option",
+          "lineNumber": 357
+        },
+        {
+          "caller": "myliba_available_locales",
+          "callee": "preg_split",
+          "lineNumber": 358
+        },
+        {
+          "caller": "myliba_available_locales",
+          "callee": "array_map",
+          "lineNumber": 359
+        },
+        {
+          "caller": "myliba_available_locales",
+          "callee": "array_map",
+          "lineNumber": 359
+        },
+        {
+          "caller": "myliba_available_locales",
+          "callee": "array_filter",
+          "lineNumber": 360
+        },
+        {
+          "caller": "myliba_available_locales",
+          "callee": "array_values",
+          "lineNumber": 362
+        },
+        {
+          "caller": "myliba_available_locales",
+          "callee": "array_unique",
+          "lineNumber": 362
+        },
+        {
+          "caller": "myliba_available_locales",
+          "callee": "array_merge",
+          "lineNumber": 362
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "isset",
+          "lineNumber": 372
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "sanitize_text_field",
+          "lineNumber": 372
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "wp_unslash",
+          "lineNumber": 372
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "wp_parse_url",
+          "lineNumber": 373
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "wp_parse_url",
+          "lineNumber": 374
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "home_url",
+          "lineNumber": 374
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "trim",
+          "lineNumber": 376
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "trim",
+          "lineNumber": 377
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "str_starts_with",
+          "lineNumber": 379
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "substr",
+          "lineNumber": 380
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "strlen",
+          "lineNumber": 380
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "trim",
+          "lineNumber": 381
+        },
+        {
+          "caller": "myliba_request_path",
+          "callee": "untrailingslashit",
+          "lineNumber": 384
+        },
+        {
+          "caller": "myliba_locale_from_path",
+          "callee": "strtok",
+          "lineNumber": 389
+        },
+        {
+          "caller": "myliba_locale_from_path",
+          "callee": "trim",
+          "lineNumber": 389
+        },
+        {
+          "caller": "myliba_locale_from_path",
+          "callee": "sanitize_key",
+          "lineNumber": 390
+        },
+        {
+          "caller": "myliba_locale_from_path",
+          "callee": "in_array",
+          "lineNumber": 392
+        },
+        {
+          "caller": "myliba_locale_from_path",
+          "callee": "myliba_available_locales",
+          "lineNumber": 392
+        },
+        {
+          "caller": "myliba_locale_from_accept_language",
+          "callee": "explode",
+          "lineNumber": 397
+        },
+        {
+          "caller": "myliba_locale_from_accept_language",
+          "callee": "strtolower",
+          "lineNumber": 397
+        },
+        {
+          "caller": "myliba_locale_from_accept_language",
+          "callee": "str_replace",
+          "lineNumber": 398
+        },
+        {
+          "caller": "myliba_locale_from_accept_language",
+          "callee": "trim",
+          "lineNumber": 398
+        },
+        {
+          "caller": "myliba_locale_from_accept_language",
+          "callee": "explode",
+          "lineNumber": 398
+        },
+        {
+          "caller": "myliba_locale_from_accept_language",
+          "callee": "myliba_available_locales",
+          "lineNumber": 400
+        },
+        {
+          "caller": "myliba_locale_from_accept_language",
+          "callee": "str_starts_with",
+          "lineNumber": 401
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "myliba_option",
+          "lineNumber": 412
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "myliba_locale_cookie_name",
+          "lineNumber": 413
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "isset",
+          "lineNumber": 414
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "sanitize_key",
+          "lineNumber": 414
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "wp_unslash",
+          "lineNumber": 414
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "in_array",
+          "lineNumber": 416
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "myliba_available_locales",
+          "lineNumber": 416
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "isset",
+          "lineNumber": 420
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "sanitize_text_field",
+          "lineNumber": 420
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "wp_unslash",
+          "lineNumber": 420
+        },
+        {
+          "caller": "myliba_preferred_locale",
+          "callee": "myliba_locale_from_accept_language",
+          "lineNumber": 421
+        },
+        {
+          "caller": "myliba_set_locale_cookie",
+          "callee": "in_array",
+          "lineNumber": 428
+        },
+        {
+          "caller": "myliba_set_locale_cookie",
+          "callee": "myliba_available_locales",
+          "lineNumber": 428
+        },
+        {
+          "caller": "myliba_set_locale_cookie",
+          "callee": "headers_sent",
+          "lineNumber": 428
+        },
+        {
+          "caller": "myliba_set_locale_cookie",
+          "callee": "wp_parse_url",
+          "lineNumber": 432
+        },
+        {
+          "caller": "myliba_set_locale_cookie",
+          "callee": "home_url",
+          "lineNumber": 432
+        },
+        {
+          "caller": "myliba_set_locale_cookie",
+          "callee": "trim",
+          "lineNumber": 433
+        },
+        {
+          "caller": "myliba_set_locale_cookie",
+          "callee": "setcookie",
+          "lineNumber": 435
+        },
+        {
+          "caller": "myliba_set_locale_cookie",
+          "callee": "myliba_locale_cookie_name",
+          "lineNumber": 435
+        },
+        {
+          "caller": "myliba_set_locale_cookie",
+          "callee": "time",
+          "lineNumber": 436
+        },
+        {
+          "caller": "myliba_set_locale_cookie",
+          "callee": "is_ssl",
+          "lineNumber": 439
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "is_admin",
+          "lineNumber": 446
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "wp_doing_ajax",
+          "lineNumber": 446
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "defined",
+          "lineNumber": 446
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "in_array",
+          "lineNumber": 450
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "myliba_request_path",
+          "lineNumber": 454
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "myliba_locale_cookie_name",
+          "lineNumber": 458
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "isset",
+          "lineNumber": 459
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "sanitize_key",
+          "lineNumber": 459
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "wp_unslash",
+          "lineNumber": 459
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "in_array",
+          "lineNumber": 460
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "myliba_available_locales",
+          "lineNumber": 460
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "wp_safe_redirect",
+          "lineNumber": 461
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "home_url",
+          "lineNumber": 461
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "myliba_preferred_locale",
+          "lineNumber": 465
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "trailingslashit",
+          "lineNumber": 466
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "home_url",
+          "lineNumber": 466
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "nocache_headers",
+          "lineNumber": 467
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "status_header",
+          "lineNumber": 468
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "esc_attr",
+          "lineNumber": 471
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "bloginfo",
+          "lineNumber": 473
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "esc_url",
+          "lineNumber": 475
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "home_url",
+          "lineNumber": 475
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "esc_html",
+          "lineNumber": 476
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "get_bloginfo",
+          "lineNumber": 476
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "wp_json_encode",
+          "lineNumber": 497
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "esc_url",
+          "lineNumber": 500
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "home_url",
+          "lineNumber": 500
+        },
+        {
+          "caller": "myliba_redirect_root_to_preferred_locale",
+          "callee": "esc_html_e",
+          "lineNumber": 500
+        },
+        {
+          "caller": "myliba_register_turkish_post_rewrites",
+          "callee": "add_rewrite_rule",
+          "lineNumber": 510
+        },
+        {
+          "caller": "myliba_register_turkish_post_rewrites",
+          "callee": "add_rewrite_rule",
+          "lineNumber": 515
+        },
+        {
+          "caller": "myliba_turkish_post_link",
+          "callee": "get_post_meta",
+          "lineNumber": 529
+        },
+        {
+          "caller": "myliba_turkish_post_link",
+          "callee": "isset",
+          "lineNumber": 534
+        },
+        {
+          "caller": "myliba_turkish_post_link",
+          "callee": "home_url",
+          "lineNumber": 538
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "is_admin",
+          "lineNumber": 544
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "wp_doing_ajax",
+          "lineNumber": 544
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "defined",
+          "lineNumber": 544
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "in_array",
+          "lineNumber": 548
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "myliba_request_path",
+          "lineNumber": 552
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "isset",
+          "lineNumber": 564
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "myliba_preferred_locale",
+          "lineNumber": 566
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "home_url",
+          "lineNumber": 567
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "home_url",
+          "lineNumber": 568
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "home_url",
+          "lineNumber": 571
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "myliba_page_url",
+          "lineNumber": 572
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "myliba_url_path",
+          "lineNumber": 575
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "wp_safe_redirect",
+          "lineNumber": 576
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "preg_match",
+          "lineNumber": 590
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "preg_quote",
+          "lineNumber": 590
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "get_posts",
+          "lineNumber": 594
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "sanitize_title",
+          "lineNumber": 596
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "wp_safe_redirect",
+          "lineNumber": 604
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "get_permalink",
+          "lineNumber": 604
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "preg_match",
+          "lineNumber": 609
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "get_page_by_path",
+          "lineNumber": 610
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "sanitize_title",
+          "lineNumber": 610
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "get_post_meta",
+          "lineNumber": 611
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "wp_safe_redirect",
+          "lineNumber": 612
+        },
+        {
+          "caller": "myliba_redirect_legacy_urls",
+          "callee": "get_permalink",
+          "lineNumber": 612
+        },
+        {
+          "caller": "myliba_sync_current_locale_cookie",
+          "callee": "myliba_locale_from_path",
+          "lineNumber": 621
+        },
+        {
+          "caller": "myliba_sync_current_locale_cookie",
+          "callee": "myliba_request_path",
+          "lineNumber": 621
+        },
+        {
+          "caller": "myliba_sync_current_locale_cookie",
+          "callee": "myliba_current_language",
+          "lineNumber": 622
+        },
+        {
+          "caller": "myliba_sync_current_locale_cookie",
+          "callee": "myliba_set_locale_cookie",
+          "lineNumber": 624
+        },
+        {
+          "caller": "myliba_filter_language_attributes",
+          "callee": "myliba_current_language",
+          "lineNumber": 630
+        },
+        {
+          "caller": "myliba_filter_language_attributes",
+          "callee": "preg_match",
+          "lineNumber": 632
+        },
+        {
+          "caller": "myliba_filter_language_attributes",
+          "callee": "preg_replace",
+          "lineNumber": 633
+        },
+        {
+          "caller": "myliba_filter_language_attributes",
+          "callee": "esc_attr",
+          "lineNumber": 633
+        },
+        {
+          "caller": "myliba_filter_language_attributes",
+          "callee": "trim",
+          "lineNumber": 636
+        },
+        {
+          "caller": "myliba_filter_language_attributes",
+          "callee": "esc_attr",
+          "lineNumber": 636
+        },
+        {
+          "caller": "myliba_translate_text",
+          "callee": "trim",
+          "lineNumber": 642
+        },
+        {
+          "caller": "myliba_translate_text",
+          "callee": "myliba_current_language",
+          "lineNumber": 643
+        },
+        {
+          "caller": "myliba_translate_text",
+          "callee": "function_exists",
+          "lineNumber": 645
+        },
+        {
+          "caller": "myliba_translate_gettext",
+          "callee": "is_admin",
+          "lineNumber": 872
+        },
+        {
+          "caller": "myliba_translate_gettext",
+          "callee": "myliba_translate_text",
+          "lineNumber": 876
+        },
+        {
+          "caller": "myliba_is_locale_landing_page",
+          "callee": "get_post",
+          "lineNumber": 882
+        },
+        {
+          "caller": "myliba_is_locale_landing_page",
+          "callee": "get_queried_object_id",
+          "lineNumber": 882
+        },
+        {
+          "caller": "myliba_is_locale_landing_page",
+          "callee": "in_array",
+          "lineNumber": 888
+        },
+        {
+          "caller": "myliba_is_locale_landing_page",
+          "callee": "myliba_available_locales",
+          "lineNumber": 888
+        },
+        {
+          "caller": "myliba_page_url",
+          "callee": "myliba_current_language",
+          "lineNumber": 893
+        },
+        {
+          "caller": "myliba_page_url",
+          "callee": "empty",
+          "lineNumber": 911
+        },
+        {
+          "caller": "myliba_page_url",
+          "callee": "get_page_by_path",
+          "lineNumber": 912
+        },
+        {
+          "caller": "myliba_page_url",
+          "callee": "get_permalink",
+          "lineNumber": 914
+        },
+        {
+          "caller": "myliba_page_url",
+          "callee": "home_url",
+          "lineNumber": 920
+        },
+        {
+          "caller": "myliba_page_url",
+          "callee": "trim",
+          "lineNumber": 920
+        },
+        {
+          "caller": "myliba_header_menu",
+          "callee": "myliba_page_url",
+          "lineNumber": 943
+        },
+        {
+          "caller": "myliba_header_menu",
+          "callee": "myliba_page_url",
+          "lineNumber": 944
+        },
+        {
+          "caller": "myliba_header_menu",
+          "callee": "myliba_page_url",
+          "lineNumber": 945
+        },
+        {
+          "caller": "myliba_header_menu",
+          "callee": "myliba_page_url",
+          "lineNumber": 946
+        },
+        {
+          "caller": "myliba_header_menu",
+          "callee": "myliba_page_url",
+          "lineNumber": 947
+        },
+        {
+          "caller": "myliba_header_menu",
+          "callee": "myliba_page_url",
+          "lineNumber": 948
+        },
+        {
+          "caller": "myliba_solution_url",
+          "callee": "myliba_current_language",
+          "lineNumber": 1052
+        },
+        {
+          "caller": "myliba_solution_url",
+          "callee": "isset",
+          "lineNumber": 1055
+        },
+        {
+          "caller": "myliba_solution_url",
+          "callee": "get_posts",
+          "lineNumber": 1059
+        },
+        {
+          "caller": "myliba_solution_url",
+          "callee": "get_permalink",
+          "lineNumber": 1071
+        },
+        {
+          "caller": "myliba_solution_url",
+          "callee": "myliba_page_url",
+          "lineNumber": 1076
+        },
+        {
+          "caller": "myliba_solution_url",
+          "callee": "home_url",
+          "lineNumber": 1080
+        },
+        {
+          "caller": "myliba_development_center_page_id",
+          "callee": "myliba_current_language",
+          "lineNumber": 1086
+        },
+        {
+          "caller": "myliba_development_center_page_id",
+          "callee": "get_page_by_path",
+          "lineNumber": 1087
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "myliba_development_center_page_id",
+          "lineNumber": 1094
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "get_the_title",
+          "lineNumber": 1095
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "trim",
+          "lineNumber": 1096
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "get_post_field",
+          "lineNumber": 1096
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "myliba_meta",
+          "lineNumber": 1100
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "myliba_meta",
+          "lineNumber": 1101
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "myliba_meta",
+          "lineNumber": 1102
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "myliba_meta",
+          "lineNumber": 1103
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "myliba_meta",
+          "lineNumber": 1104
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "myliba_meta",
+          "lineNumber": 1105
+        },
+        {
+          "caller": "myliba_development_center_context",
+          "callee": "myliba_meta",
+          "lineNumber": 1106
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_current_language",
+          "lineNumber": 1112
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_development_center_page_id",
+          "lineNumber": 1113
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_page_url",
+          "lineNumber": 1114
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_page_url",
+          "lineNumber": 1115
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "url_to_postid",
+          "lineNumber": 1116
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "get_post_type_object",
+          "lineNumber": 1117
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "get_post_type_object",
+          "lineNumber": 1118
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_meta",
+          "lineNumber": 1122
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_meta",
+          "lineNumber": 1123
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "home_url",
+          "lineNumber": 1124
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_meta",
+          "lineNumber": 1128
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_meta",
+          "lineNumber": 1129
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "home_url",
+          "lineNumber": 1130
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_meta",
+          "lineNumber": 1134
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_meta",
+          "lineNumber": 1135
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_meta",
+          "lineNumber": 1140
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "get_the_title",
+          "lineNumber": 1140
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "get_the_title",
+          "lineNumber": 1140
+        },
+        {
+          "caller": "myliba_development_center_items",
+          "callee": "myliba_meta",
+          "lineNumber": 1141
+        },
+        {
+          "caller": "myliba_url_path",
+          "callee": "wp_parse_url",
+          "lineNumber": 1150
+        },
+        {
+          "caller": "myliba_url_path",
+          "callee": "trim",
+          "lineNumber": 1151
+        },
+        {
+          "caller": "myliba_url_path",
+          "callee": "untrailingslashit",
+          "lineNumber": 1153
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "isset",
+          "lineNumber": 1158
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "sanitize_text_field",
+          "lineNumber": 1158
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "wp_unslash",
+          "lineNumber": 1158
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "myliba_url_path",
+          "lineNumber": 1159
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "home_url",
+          "lineNumber": 1159
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "myliba_url_path",
+          "lineNumber": 1160
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_page",
+          "lineNumber": 1167
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_home",
+          "lineNumber": 1167
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_singular",
+          "lineNumber": 1167
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_category",
+          "lineNumber": 1167
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_tag",
+          "lineNumber": 1167
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_post_type_archive",
+          "lineNumber": 1167
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_singular",
+          "lineNumber": 1167
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_page",
+          "lineNumber": 1168
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_singular",
+          "lineNumber": 1168
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_post_type_archive",
+          "lineNumber": 1168
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_page",
+          "lineNumber": 1169
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_singular",
+          "lineNumber": 1169
+        },
+        {
+          "caller": "myliba_header_menu_item_is_active",
+          "callee": "is_post_type_archive",
+          "lineNumber": 1169
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "in_array",
+          "lineNumber": 1176
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "is_page",
+          "lineNumber": 1179
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "home_url",
+          "lineNumber": 1180
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "is_singular",
+          "lineNumber": 1183
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "myliba_current_language",
+          "lineNumber": 1184
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "get_permalink",
+          "lineNumber": 1185
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "get_queried_object_id",
+          "lineNumber": 1185
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "trim",
+          "lineNumber": 1188
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "get_post_meta",
+          "lineNumber": 1188
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "get_queried_object_id",
+          "lineNumber": 1188
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "get_posts",
+          "lineNumber": 1190
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "get_permalink",
+          "lineNumber": 1209
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "home_url",
+          "lineNumber": 1213
+        },
+        {
+          "caller": "myliba_language_context_url",
+          "callee": "home_url",
+          "lineNumber": 1216
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "function_exists",
+          "lineNumber": 1221
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "pll_the_languages",
+          "lineNumber": 1222
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "is_array",
+          "lineNumber": 1224
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "array_map",
+          "lineNumber": 1225
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "strtoupper",
+          "lineNumber": 1227
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "empty",
+          "lineNumber": 1229
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "array_map",
+          "lineNumber": 1233
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "strtolower",
+          "lineNumber": 1233
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "in_array",
+          "lineNumber": 1235
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "strtoupper",
+          "lineNumber": 1237
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "myliba_language_context_url",
+          "lineNumber": 1238
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "myliba_current_language",
+          "lineNumber": 1239
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "get_page_by_path",
+          "lineNumber": 1250
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "strtoupper",
+          "lineNumber": 1252
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "myliba_language_context_url",
+          "lineNumber": 1253
+        },
+        {
+          "caller": "myliba_language_links",
+          "callee": "myliba_current_language",
+          "lineNumber": 1254
+        },
+        {
+          "caller": "myliba_language_flag",
+          "callee": "strtolower",
+          "lineNumber": 1263
+        },
+        {
+          "caller": "myliba_language_flag",
+          "callee": "strtoupper",
+          "lineNumber": 1266
+        },
+        {
+          "caller": "myliba_language_flag",
+          "callee": "substr",
+          "lineNumber": 1266
+        },
+        {
+          "caller": "myliba_post_language_filter",
+          "callee": "is_admin",
+          "lineNumber": 1272
+        },
+        {
+          "caller": "myliba_post_language_filter",
+          "callee": "$query->is_main_query",
+          "lineNumber": 1272
+        },
+        {
+          "caller": "myliba_post_language_filter",
+          "callee": "function_exists",
+          "lineNumber": 1272
+        },
+        {
+          "caller": "myliba_post_language_filter",
+          "callee": "$query->is_home",
+          "lineNumber": 1276
+        },
+        {
+          "caller": "myliba_post_language_filter",
+          "callee": "$query->is_archive",
+          "lineNumber": 1276
+        },
+        {
+          "caller": "myliba_post_language_filter",
+          "callee": "$query->set",
+          "lineNumber": 1277
+        },
+        {
+          "caller": "myliba_post_language_filter",
+          "callee": "myliba_current_language",
+          "lineNumber": 1280
+        },
+        {
+          "caller": "myliba_excerpt",
+          "callee": "get_post",
+          "lineNumber": 1290
+        },
+        {
+          "caller": "myliba_excerpt",
+          "callee": "get_the_ID",
+          "lineNumber": 1290
+        },
+        {
+          "caller": "myliba_excerpt",
+          "callee": "wp_trim_words",
+          "lineNumber": 1297
+        },
+        {
+          "caller": "myliba_excerpt",
+          "callee": "wp_strip_all_tags",
+          "lineNumber": 1297
+        },
+        {
+          "caller": "myliba_get_entries",
+          "callee": "array_merge",
+          "lineNumber": 1302
+        },
+        {
+          "caller": "myliba_get_entries",
+          "callee": "function_exists",
+          "lineNumber": 1310
+        },
+        {
+          "caller": "myliba_get_entries",
+          "callee": "isset",
+          "lineNumber": 1310
+        },
+        {
+          "caller": "myliba_get_entries",
+          "callee": "myliba_current_language",
+          "lineNumber": 1314
+        },
+        {
+          "caller": "myliba_client_logo_posts",
+          "callee": "myliba_get_entries",
+          "lineNumber": 1325
+        },
+        {
+          "caller": "myliba_client_logo_posts",
+          "callee": "$query->have_posts",
+          "lineNumber": 1328
+        },
+        {
+          "caller": "myliba_client_logo_posts",
+          "callee": "$query->the_post",
+          "lineNumber": 1329
+        },
+        {
+          "caller": "myliba_client_logo_posts",
+          "callee": "has_post_thumbnail",
+          "lineNumber": 1330
+        },
+        {
+          "caller": "myliba_client_logo_posts",
+          "callee": "get_post",
+          "lineNumber": 1331
+        },
+        {
+          "caller": "myliba_client_logo_posts",
+          "callee": "wp_reset_postdata",
+          "lineNumber": 1334
+        },
+        {
+          "caller": "myliba_lines",
+          "callee": "preg_split",
+          "lineNumber": 1341
+        },
+        {
+          "caller": "myliba_lines",
+          "callee": "array_map",
+          "lineNumber": 1342
+        },
+        {
+          "caller": "myliba_lines",
+          "callee": "array_values",
+          "lineNumber": 1344
+        },
+        {
+          "caller": "myliba_lines",
+          "callee": "array_filter",
+          "lineNumber": 1344
+        },
+        {
+          "caller": "myliba_faq_pairs",
+          "callee": "myliba_lines",
+          "lineNumber": 1350
+        },
+        {
+          "caller": "myliba_faq_pairs",
+          "callee": "array_pad",
+          "lineNumber": 1351
+        },
+        {
+          "caller": "myliba_faq_pairs",
+          "callee": "array_map",
+          "lineNumber": 1351
+        },
+        {
+          "caller": "myliba_faq_pairs",
+          "callee": "explode",
+          "lineNumber": 1351
+        },
+        {
+          "caller": "myliba_faq_pairs",
+          "callee": "myliba_translate_text",
+          "lineNumber": 1354
+        },
+        {
+          "caller": "myliba_faq_pairs",
+          "callee": "myliba_translate_text",
+          "lineNumber": 1355
+        },
+        {
+          "caller": "myliba_reading_time",
+          "callee": "get_post",
+          "lineNumber": 1365
+        },
+        {
+          "caller": "myliba_reading_time",
+          "callee": "get_the_ID",
+          "lineNumber": 1365
+        },
+        {
+          "caller": "myliba_reading_time",
+          "callee": "str_word_count",
+          "lineNumber": 1366
+        },
+        {
+          "caller": "myliba_reading_time",
+          "callee": "wp_strip_all_tags",
+          "lineNumber": 1366
+        },
+        {
+          "caller": "myliba_reading_time",
+          "callee": "max",
+          "lineNumber": 1368
+        },
+        {
+          "caller": "myliba_reading_time",
+          "callee": "ceil",
+          "lineNumber": 1368
+        },
+        {
+          "caller": "myliba_demo_url",
+          "callee": "myliba_page_url",
+          "lineNumber": 1373
+        },
+        {
+          "caller": "myliba_demo_url",
+          "callee": "myliba_option",
+          "lineNumber": 1375
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "trim",
+          "lineNumber": 1380
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "home_url",
+          "lineNumber": 1381
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "myliba_current_language",
+          "lineNumber": 1381
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "esc_attr",
+          "lineNumber": 1382
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "esc_url",
+          "lineNumber": 1382
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "esc_attr",
+          "lineNumber": 1382
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "get_bloginfo",
+          "lineNumber": 1382
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "get_theme_mod",
+          "lineNumber": 1384
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "wp_get_attachment_image",
+          "lineNumber": 1386
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "get_bloginfo",
+          "lineNumber": 1388
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "esc_html",
+          "lineNumber": 1396
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "myliba_option",
+          "lineNumber": 1396
+        },
+        {
+          "caller": "myliba_brand_link",
+          "callee": "get_bloginfo",
+          "lineNumber": 1396
+        },
+        {
+          "caller": "myliba_home_value",
+          "callee": "is_string",
+          "lineNumber": 1404
+        },
+        {
+          "caller": "myliba_home_value",
+          "callee": "myliba_translate_text",
+          "lineNumber": 1405
+        },
+        {
+          "caller": "myliba_home_value",
+          "callee": "myliba_meta",
+          "lineNumber": 1408
+        },
+        {
+          "caller": "myliba_home_value",
+          "callee": "get_queried_object_id",
+          "lineNumber": 1408
+        },
+        {
+          "caller": "myliba_home_value",
+          "callee": "is_string",
+          "lineNumber": 1410
+        },
+        {
+          "caller": "myliba_home_value",
+          "callee": "myliba_translate_text",
+          "lineNumber": 1410
+        },
+        {
+          "caller": "myliba_home_lines",
+          "callee": "array_map",
+          "lineNumber": 1415
+        },
+        {
+          "caller": "myliba_home_lines",
+          "callee": "is_string",
+          "lineNumber": 1415
+        },
+        {
+          "caller": "myliba_home_lines",
+          "callee": "myliba_translate_text",
+          "lineNumber": 1415
+        },
+        {
+          "caller": "myliba_home_lines",
+          "callee": "myliba_home_value",
+          "lineNumber": 1416
+        },
+        {
+          "caller": "myliba_home_lines",
+          "callee": "implode",
+          "lineNumber": 1416
+        },
+        {
+          "caller": "myliba_home_lines",
+          "callee": "array_map",
+          "lineNumber": 1418
+        },
+        {
+          "caller": "myliba_home_lines",
+          "callee": "myliba_lines",
+          "lineNumber": 1418
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "array_map",
+          "lineNumber": 1424
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "array_map",
+          "lineNumber": 1425
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "is_string",
+          "lineNumber": 1425
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "myliba_translate_text",
+          "lineNumber": 1425
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "myliba_home_lines",
+          "lineNumber": 1427
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "array_map",
+          "lineNumber": 1427
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "implode",
+          "lineNumber": 1427
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "array_map",
+          "lineNumber": 1430
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "myliba_translate_text",
+          "lineNumber": 1430
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "trim",
+          "lineNumber": 1430
+        },
+        {
+          "caller": "myliba_home_rows",
+          "callee": "explode",
+          "lineNumber": 1430
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1439
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1440
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1441
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1442
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1443
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1444
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1445
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1446
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1447
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1448
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1449
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1450
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1451
+        },
+        {
+          "caller": "myliba_home_section_definitions",
+          "callee": "__",
+          "lineNumber": 1452
+        },
+        {
+          "caller": "myliba_home_default_sections",
+          "callee": "array_keys",
+          "lineNumber": 1461
+        },
+        {
+          "caller": "myliba_home_default_sections",
+          "callee": "myliba_home_section_definitions",
+          "lineNumber": 1461
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "get_queried_object_id",
+          "lineNumber": 1475
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "myliba_home_section_definitions",
+          "lineNumber": 1476
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "myliba_home_default_sections",
+          "lineNumber": 1477
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "get_post_meta",
+          "lineNumber": 1478
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "is_string",
+          "lineNumber": 1479
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "json_decode",
+          "lineNumber": 1479
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "is_array",
+          "lineNumber": 1482
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "array_map",
+          "lineNumber": 1483
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "is_array",
+          "lineNumber": 1483
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "sanitize_key",
+          "lineNumber": 1483
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "in_array",
+          "lineNumber": 1484
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "in_array",
+          "lineNumber": 1484
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "is_array",
+          "lineNumber": 1487
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "sanitize_key",
+          "lineNumber": 1491
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "isset",
+          "lineNumber": 1492
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "empty",
+          "lineNumber": 1498
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "isset",
+          "lineNumber": 1499
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "in_array",
+          "lineNumber": 1504
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "in_array",
+          "lineNumber": 1507
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "in_array",
+          "lineNumber": 1511
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "uasort",
+          "lineNumber": 1516
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "strcmp",
+          "lineNumber": 1517
+        },
+        {
+          "caller": "myliba_home_sections",
+          "callee": "array_values",
+          "lineNumber": 1520
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 65,
+        "functionCount": 65,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/header.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 181,
+      "nonEmptyLines": 178,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/index.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 24,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/page.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 47,
+      "nonEmptyLines": 39,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 23,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/single-myliba_landing.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/single-myliba_product.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/single-myliba_solution.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 193,
+      "nonEmptyLines": 179,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/single.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 72,
+      "nonEmptyLines": 68,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/style.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "metrics": {}
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-blog.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 51,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-contact.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 21,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-demo.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 23,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-events.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 39,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-landing.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 11,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 137,
+      "nonEmptyLines": 131,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 81,
+      "nonEmptyLines": 76,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 81,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 33,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 30,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

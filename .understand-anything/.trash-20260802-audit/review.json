@@ -1,0 +1,60 @@
+{
+  "issues": [],
+  "warnings": [
+    "Node 'file:wordpress/wp-content/themes/myliba/404.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/archive-myliba_event.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/archive-myliba_product.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/archive-myliba_report.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/index.php' has no edges (orphan)",
+    "Node 'file:.DS_Store' has no edges (orphan)",
+    "Node 'file:.understand-anything/.understandignore' has no edges (orphan)",
+    "Node 'file:nginx/default.conf' has no edges (orphan)",
+    "Node 'document:wordpress/migration/content-map.md' has no edges (orphan)",
+    "Node 'document:wordpress/migration/review-report.md' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/index.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/plugins/index.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/assets/css/main.css' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/assets/js/main.js' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/single.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/style.css' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-blog.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-contact.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-demo.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-events.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-landing.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-parts/expand.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-parts/hero.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-parts/page-software.php' has no edges (orphan)",
+    "Node 'file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php' has no edges (orphan)"
+  ],
+  "stats": {
+    "totalNodes": 274,
+    "totalEdges": 406,
+    "totalLayers": 5,
+    "tourSteps": 10,
+    "nodeTypes": {
+      "config": 1,
+      "pipeline": 1,
+      "document": 3,
+      "service": 1,
+      "file": 52,
+      "function": 215,
+      "class": 1
+    },
+    "edgeTypes": {
+      "configures": 2,
+      "depends_on": 11,
+      "documents": 3,
+      "contains": 216,
+      "exports": 174
+    }
+  }
+}

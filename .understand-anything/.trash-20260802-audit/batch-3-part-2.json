@@ -1,0 +1,166 @@
+{
+  "nodes": [
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single.php",
+      "type": "file",
+      "name": "single.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single.php",
+      "summary": "Blog yazısını içerik tablosu, yazar/CTA alanları ve dile göre filtrelenen ilgili yazılarla sunar.",
+      "tags": [
+        "şablon",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/style.css",
+      "type": "file",
+      "name": "style.css",
+      "filePath": "wordpress/wp-content/themes/myliba/style.css",
+      "summary": "WordPress tema kimliğini ve ana stil dosyasını içe aktaran minimal tema stil giriş dosyasıdır.",
+      "tags": [
+        "tema-metadata",
+        "stil-girişi",
+        "wordpress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-blog.php",
+      "type": "file",
+      "name": "template-blog.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-blog.php",
+      "summary": "Dil bazlı blog sorgusunu arama ve kategori filtreleriyle listeleyen özel sayfa şablonudur.",
+      "tags": [
+        "sayfa-şablonu",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-contact.php",
+      "type": "file",
+      "name": "template-contact.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-contact.php",
+      "summary": "Yönetilen sayfa içeriğini ve myliba iletişim formu shortcode'unu birlikte sunan iletişim şablonudur.",
+      "tags": [
+        "sayfa-şablonu",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-demo.php",
+      "type": "file",
+      "name": "template-demo.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-demo.php",
+      "summary": "Demo talebi açıklaması ile yönetilen demo formu shortcode'unu sunan dönüşüm şablonudur.",
+      "tags": [
+        "sayfa-şablonu",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-events.php",
+      "type": "file",
+      "name": "template-events.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-events.php",
+      "summary": "Etkinlikleri dil ve tarih meta alanlarına göre sorgulayıp kronolojik kartlar halinde listeleyen sayfa şablonudur.",
+      "tags": [
+        "sayfa-şablonu",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-landing.php",
+      "type": "file",
+      "name": "template-landing.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-landing.php",
+      "summary": "SEO landing içeriklerini ortak hero ve dönüşüm detay bileşenleri üzerinden sunan özel sayfa şablonudur.",
+      "tags": [
+        "sayfa-şablonu",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "type": "file",
+      "name": "archive-development-resource.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "summary": "Rapor ve e-kitap gibi gelişim kaynaklarının arşiv başlığını, navigasyonunu ve içerik kartlarını oluşturan ortak parçadır.",
+      "tags": [
+        "şablon-parçası",
+        "bileşen",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "type": "file",
+      "name": "client-logo-marquee.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "summary": "Yönetilen müşteri logo kayıtlarını erişilebilir, kesintisiz kayan bir sosyal kanıt bileşeni olarak sunar.",
+      "tags": [
+        "şablon-parçası",
+        "bileşen",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "type": "file",
+      "name": "conversion-detail.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "summary": "İçerik meta alanlarından problem, çözüm, fayda, modül, editör içeriği, SSS ve CTA bölümlerini üreten ortak dönüşüm bileşenidir.",
+      "tags": [
+        "şablon-parçası",
+        "bileşen",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "type": "file",
+      "name": "expand.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "summary": "Verilen başlık ve öğelerden erişilebilir genişleyebilir ayrıntı/SSS bölümü oluşturan yeniden kullanılabilir şablon parçasıdır.",
+      "tags": [
+        "şablon-parçası",
+        "bileşen",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "type": "file",
+      "name": "hero.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "summary": "Yönetilen hero meta alanlarını ve öne çıkan görseli standart alt sayfa hero bileşeni olarak sunar.",
+      "tags": [
+        "şablon-parçası",
+        "bileşen",
+        "dinamik-içerik",
+        "wordpress"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

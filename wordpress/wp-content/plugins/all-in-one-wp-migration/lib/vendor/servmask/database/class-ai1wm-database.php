@@ -1186,6 +1186,16 @@ abstract class Ai1wm_Database {
 								$this->query( $query );
 							}
 
+							// Replace table default values (MySQL <= 8.0.12)
+							if ( $this->errno() === 1101 ) {
+
+								// TEXT and BLOB columns can't have a default value
+								$query = $this->replace_column_defaults( $query );
+
+								// Run SQL query
+								$this->query( $query );
+							}
+
 							// Check tablespace exists
 							if ( $this->errno() === 1813 ) {
 								throw new Ai1wm_Database_Exception( __( 'Error importing database table. <a href="https://help.servmask.com/knowledgebase/mysql-error-importing-table/" target="_blank">Technical details</a>', 'all-in-one-wp-migration' ), 503 );
@@ -1974,6 +1984,8 @@ abstract class Ai1wm_Database {
 			'/`?ENCRYPTED`?\s*=\s*\'?\w+\'?/i',
 			'/`?ENCRYPTION_KEY_ID`?\s*=\s*\'?\w+\'?/i',
 			'/(WITH|WITHOUT)\s+SYSTEM\s+VERSIONING/i',
+			'/,?\s*WITHOUT\s+ROWID/i',
+			'/,?\s*STRICT/i',
 		);
 		$replace = array(
 			'ENGINE=$1',
@@ -1987,9 +1999,28 @@ abstract class Ai1wm_Database {
 			'',
 			'',
 			'',
+			'',
+			'',
 		);
 
 		return preg_replace( $search, $replace, $input );
+	}
+
+	/**
+	 * Replace column default values
+	 *
+	 * MySQL < 8.0.13 rejects DEFAULT values on TEXT and BLOB columns (error 1101).
+	 *
+	 * @param  string $input SQL statement
+	 * @return string
+	 */
+	protected function replace_column_defaults( $input ) {
+		$pattern = array(
+			"/(\s+(?:TINYTEXT|TEXT|MEDIUMTEXT|LONGTEXT)[^,]*?)\s+DEFAULT\s+(?:'[^']*'|\S+)/i",
+			"/(\s+(?:TINYBLOB|BLOB|MEDIUMBLOB|LONGBLOB)[^,]*?)\s+DEFAULT\s+(?:'[^']*'|\S+)/i",
+		);
+
+		return (string) preg_replace( $pattern, '$1', $input );
 	}
 
 	/**

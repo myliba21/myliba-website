@@ -38,9 +38,15 @@ function render_form(string $context): string
     $is_demo = $context === 'demo';
     $is_academy = $context === 'academy';
     $page_id = get_queried_object_id();
-    $success_message = $is_academy ? get_post_meta($page_id, '_myliba_academy_form_success', true) : '';
-    $button_label = $is_academy ? get_post_meta($page_id, '_myliba_academy_form_button', true) : '';
-    $kvkk_text = $is_academy ? get_post_meta($page_id, '_myliba_academy_kvkk_text', true) : '';
+    $success_message = $is_academy && metadata_exists('post', $page_id, '_myliba_academy_form_success')
+        ? (string) get_post_meta($page_id, '_myliba_academy_form_success', true)
+        : __('Your message has been received.', 'myliba');
+    $button_label = $is_academy && metadata_exists('post', $page_id, '_myliba_academy_form_button')
+        ? (string) get_post_meta($page_id, '_myliba_academy_form_button', true)
+        : ($is_demo ? __('Request demo', 'myliba') : __('Send', 'myliba'));
+    $kvkk_text = $is_academy && metadata_exists('post', $page_id, '_myliba_academy_kvkk_text')
+        ? (string) get_post_meta($page_id, '_myliba_academy_kvkk_text', true)
+        : __('I consent to being contacted about this request and accept the privacy notice.', 'myliba');
     $programs = [];
 
     if ($is_academy) {
@@ -69,12 +75,12 @@ function render_form(string $context): string
         <input type="hidden" name="form_context" value="<?php echo esc_attr($context); ?>">
         <?php wp_nonce_field('myliba_contact_form', 'myliba_contact_nonce'); ?>
         <div class="myliba-hp-field" aria-hidden="true">
-            <label for="myliba-website">Website</label>
+            <label for="myliba-website"><?php esc_html_e('Website', 'myliba'); ?></label>
             <input id="myliba-website" name="website" tabindex="-1" autocomplete="off">
         </div>
 
         <?php if ($status === 'success') : ?>
-            <p class="myliba-form__status myliba-form__status--success" role="status"><?php echo esc_html($success_message ?: __('Your message has been received.', 'myliba')); ?></p>
+            <p class="myliba-form__status myliba-form__status--success" role="status"><?php echo esc_html($success_message); ?></p>
         <?php elseif ($status === 'error') : ?>
             <p class="myliba-form__status myliba-form__status--error"><?php esc_html_e('The form could not be sent. Please try again.', 'myliba'); ?></p>
         <?php endif; ?>
@@ -112,10 +118,10 @@ function render_form(string $context): string
                 <label>
                     <span><?php esc_html_e('Employee count', 'myliba'); ?></span>
                     <select name="employee_count">
-                        <option value="1-50">1-50</option>
-                        <option value="51-250">51-250</option>
-                        <option value="251-1000">251-1000</option>
-                        <option value="1000+">1000+</option>
+                        <option value="1-50"><?php esc_html_e('1-50', 'myliba'); ?></option>
+                        <option value="51-250"><?php esc_html_e('51-250', 'myliba'); ?></option>
+                        <option value="251-1000"><?php esc_html_e('251-1000', 'myliba'); ?></option>
+                        <option value="1000+"><?php esc_html_e('1000+', 'myliba'); ?></option>
                     </select>
                 </label>
             <?php endif; ?>
@@ -149,9 +155,9 @@ function render_form(string $context): string
         </label>
         <label class="myliba-form__consent">
             <input type="checkbox" name="kvkk" value="1" required>
-            <span><?php echo esc_html($kvkk_text ?: __('I consent to being contacted about this request and accept the privacy notice.', 'myliba')); ?></span>
+            <span><?php echo esc_html($kvkk_text); ?></span>
         </label>
-        <button class="myliba-button myliba-button--primary" type="submit"><?php echo esc_html($button_label ?: ($is_demo ? __('Request demo', 'myliba') : __('Send', 'myliba'))); ?></button>
+        <button class="myliba-button myliba-button--primary" type="submit"><?php echo esc_html($button_label); ?></button>
     </form>
     <?php
 

@@ -54,42 +54,38 @@ get_header();
 <div class="software-page">
     <section class="software-hero">
         <div class="software-hero__content">
-            <p class="eyebrow">Myliba Yazılım <span>|</span> Veriyle Konuşan, Gelişim ve İnsan Odaklı Yazılım</p>
-            <h1>Formları Tarihe Gömün: <em>%100 Objektif Verilerle</em> Anlık Performans Yönetimi</h1>
-            <p class="software-hero__lead">Performans değerlendirmeyi yılda bir kez yapılan öznel bir notlama süreci
-                olmaktan çıkarın. Myliba Yazılım ile hedef ve performans yönetimini canlı analitik verilerle takip edin.
-                Terfi, ücret ve gelişim gibi kritik lider kararlarını adil, şeffaf ve güven veren verilere dayandırın.
-            </p>
+            <p class="eyebrow"><?php echo esc_html(myliba_text('Myliba Yazılım')); ?> <span>|</span> <?php echo esc_html(myliba_text('Veriyle Konuşan, Gelişim ve İnsan Odaklı Yazılım')); ?></p>
+            <h1><?php echo esc_html(myliba_text('Formları Tarihe Gömün:')); ?> <em><?php echo esc_html(myliba_text('%100 Objektif Verilerle')); ?></em> <?php echo esc_html(myliba_text('Anlık Performans Yönetimi')); ?></h1>
+            <p class="software-hero__lead"><?php echo esc_html(myliba_text('Performans değerlendirmeyi yılda bir kez yapılan öznel bir notlama süreci olmaktan çıkarın. Myliba Yazılım ile hedef ve performans yönetimini canlı analitik verilerle takip edin. Terfi, ücret ve gelişim gibi kritik lider kararlarını adil, şeffaf ve güven veren verilere dayandırın.')); ?></p>
             <div class="software-hero__actions">
-                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>">Demo Talep
-                    Edin</a>
-                <a class="myliba-button myliba-button--ghost" href="#moduller">Modülleri Keşfedin <span
+                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>"><?php echo esc_html(myliba_text('Demo Talep Edin')); ?></a>
+                <a class="myliba-button myliba-button--ghost" href="#moduller"><?php echo esc_html(myliba_text('Modülleri Keşfedin')); ?> <span
                         aria-hidden="true">↓</span></a>
             </div>
-            <div class="software-hero__proof" aria-label="Myliba yazılım avantajları">
-                <span><i></i> Canlı veri</span>
-                <span><i></i> Adil karar</span>
-                <span><i></i> İnsan odaklı gelişim</span>
+            <div class="software-hero__proof" aria-label="<?php echo esc_attr(myliba_text('Myliba yazılım avantajları')); ?>">
+                <span><i></i> <?php echo esc_html(myliba_text('Canlı veri')); ?></span>
+                <span><i></i> <?php echo esc_html(myliba_text('Adil karar')); ?></span>
+                <span><i></i> <?php echo esc_html(myliba_text('İnsan odaklı gelişim')); ?></span>
             </div>
         </div>
 
-        <div class="software-hero__visual" aria-label="Çalışan sıralaması ve NineBox analiz ekranı">
+        <div class="software-hero__visual" aria-label="<?php echo esc_attr(myliba_text('Çalışan sıralaması ve NineBox analiz ekranı')); ?>">
             <div class="software-screen">
                 <div class="software-screen__top">
-                    <span class="software-screen__brand">Myliba <small>Analytics</small></span>
+                    <span class="software-screen__brand"><?php echo esc_html(myliba_text('Myliba')); ?> <small><?php echo esc_html(myliba_text('Analytics')); ?></small></span>
                     <div><i></i><i></i><i></i></div>
                 </div>
                 <div class="software-screen__body">
                     <aside>
-                        <span class="is-active">NineBox</span>
-                        <span>Çalışanlar</span>
-                        <span>Performans</span>
-                        <span>İçgörüler</span>
+                        <span class="is-active"><?php echo esc_html(myliba_text('NineBox')); ?></span>
+                        <span><?php echo esc_html(myliba_text('Çalışanlar')); ?></span>
+                        <span><?php echo esc_html(myliba_text('Performans')); ?></span>
+                        <span><?php echo esc_html(myliba_text('İçgörüler')); ?></span>
                     </aside>
                     <div class="software-ninebox">
                         <div class="software-ninebox__head">
-                            <div><small>Analiz</small><strong>Çalışan Sıralaması</strong></div>
-                            <span>2026 · Canlı</span>
+                            <div><small><?php echo esc_html(myliba_text('Analiz')); ?></small><strong><?php echo esc_html(myliba_text('Çalışan Sıralaması')); ?></strong></div>
+                            <span><?php echo esc_html(myliba_text('2026 · Canlı')); ?></span>
                         </div>
                         <div class="software-ninebox__chart">
                             <?php
@@ -107,28 +103,26 @@ get_header();
                             foreach ($boxes as [$label, $count, $tone]):
                                 ?>
                                 <div class="software-ninebox__cell software-ninebox__cell--<?php echo esc_attr($tone); ?>">
-                                    <span><?php echo esc_html($label); ?></span>
-                                    <strong><?php echo esc_html($count); ?></strong>
+                                    <span><?php echo esc_html(myliba_text($label)); ?></span>
+                                    <strong><?php echo esc_html(myliba_text($count)); ?></strong>
                                     <div class="software-avatars"><i></i><i></i><i></i></div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                        <span class="software-ninebox__axis software-ninebox__axis--x">Performans →</span>
-                        <span class="software-ninebox__axis software-ninebox__axis--y">Potansiyel →</span>
+                        <span class="software-ninebox__axis software-ninebox__axis--x"><?php echo esc_html(myliba_text('Performans')); ?> →</span>
+                        <span class="software-ninebox__axis software-ninebox__axis--y"><?php echo esc_html(myliba_text('Potansiyel')); ?> →</span>
                     </div>
                 </div>
             </div>
-            <div class="software-floating-card software-floating-card--score"><strong>94</strong><span>Adil Karar
-                    Skoru</span></div>
-            <div class="software-floating-card software-floating-card--ai"><span>✦ AI İçgörüsü</span><strong>3 kritik
-                    yetenek yükselişte</strong></div>
+            <div class="software-floating-card software-floating-card--score"><strong><?php echo esc_html(myliba_text('94')); ?></strong><span><?php echo esc_html(myliba_text('Adil Karar Skoru')); ?></span></div>
+            <div class="software-floating-card software-floating-card--ai"><span>✦ <?php echo esc_html(myliba_text('AI İçgörüsü')); ?></span><strong><?php echo esc_html(myliba_text('3 kritik yetenek yükselişte')); ?></strong></div>
         </div>
     </section>
 
     <?php get_template_part('template-parts/client-logo-marquee', null, [
-        'label' => 'Canlı performans kültürü kuran ekipler',
-        'title' => 'Veriyle daha adil kararlar alan kurumların yanında.',
-        'text' => 'Farklı sektörlerden ekipler hedef, performans ve gelişim ritimlerini Myliba ile tek noktada buluşturuyor.',
+        'label' => myliba_text('Canlı performans kültürü kuran ekipler'),
+        'title' => myliba_text('Veriyle daha adil kararlar alan kurumların yanında.'),
+        'text' => myliba_text('Farklı sektörlerden ekipler hedef, performans ve gelişim ritimlerini Myliba ile tek noktada buluşturuyor.'),
         'class' => 'software-trust-section',
         'heading_id' => 'software-trust-title',
     ]); ?>
@@ -136,18 +130,16 @@ get_header();
     <section id="moduller" class="software-section software-modules">
         <div class="software-section__heading">
             <div>
-                <p class="eyebrow">Tek platform. Dört güçlü odak.</p>
-                <h2>Adil Karar Yönetimi</h2>
+                <p class="eyebrow"><?php echo esc_html(myliba_text('Tek platform. Dört güçlü odak.')); ?></p>
+                <h2><?php echo esc_html(myliba_text('Adil Karar Yönetimi')); ?></h2>
             </div>
-            <p>Terfi, ücret, prim ve liderlik kararlarını; OKR, KPI, aksiyonlar, 360° analizler, kültür, bağlılık ve
-                yapay zekâ içgörüleriyle destekleyin. Dedikodu, mobbing ve adaletsizlik gibi kültürel virüsleri erkenden
-                tespit edin. <strong>Kararlarınızı adil, şeffaf ve %100 objektif verilere dayandırın.</strong></p>
+            <p><?php echo esc_html(myliba_text('Terfi, ücret, prim ve liderlik kararlarını; OKR, KPI, aksiyonlar, 360° analizler, kültür, bağlılık ve yapay zekâ içgörüleriyle destekleyin. Dedikodu, mobbing ve adaletsizlik gibi kültürel virüsleri erkenden tespit edin.')); ?> <strong><?php echo esc_html(myliba_text('Kararlarınızı adil, şeffaf ve %100 objektif verilere dayandırın.')); ?></strong></p>
         </div>
         <div class="software-modules__grid">
             <?php foreach ($modules as $module_index => $module): ?>
                 <article>
                     <div class="software-module__top">
-                        <span><?php echo esc_html($module['number']); ?></span>
+                        <span><?php echo esc_html(myliba_text($module['number'])); ?></span>
                         <i aria-hidden="true">↗</i>
                     </div>
                     <div class="software-module-visual software-module-visual--<?php echo esc_attr((string) ($module_index + 1)); ?>" aria-hidden="true">
@@ -165,11 +157,11 @@ get_header();
                             <?php for ($cell = 0; $cell < 9; $cell++): ?><span></span><?php endfor; ?>
                         <?php endif; ?>
                     </div>
-                    <h3><?php echo esc_html($module['title']); ?></h3>
-                    <p><?php echo esc_html($module['text']); ?></p>
+                    <h3><?php echo esc_html(myliba_text($module['title'])); ?></h3>
+                    <p><?php echo esc_html(myliba_text($module['text'])); ?></p>
                     <ul>
                         <?php foreach ($module['items'] as $item): ?>
-                            <li><?php echo esc_html($item); ?></li>
+                            <li><?php echo esc_html(myliba_text($item)); ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </article>
@@ -181,10 +173,10 @@ get_header();
         <div class="software-workflow__inner">
             <header class="software-workflow__heading">
                 <div>
-                    <p class="eyebrow">Tek ve sürekli bir çalışma döngüsü</p>
-                    <h2 id="software-workflow-title">Stratejiden insan kararlarına kesintisiz veri akışı.</h2>
+                    <p class="eyebrow"><?php echo esc_html(myliba_text('Tek ve sürekli bir çalışma döngüsü')); ?></p>
+                    <h2 id="software-workflow-title"><?php echo esc_html(myliba_text('Stratejiden insan kararlarına kesintisiz veri akışı.')); ?></h2>
                 </div>
-                <p>Yıl sonunu beklemeden hedefleri, aksiyonları, görüşmeleri ve gelişim sinyallerini aynı ritimde yönetin.</p>
+                <p><?php echo esc_html(myliba_text('Yıl sonunu beklemeden hedefleri, aksiyonları, görüşmeleri ve gelişim sinyallerini aynı ritimde yönetin.')); ?></p>
             </header>
             <div class="software-workflow__grid">
                 <?php
@@ -199,8 +191,8 @@ get_header();
                     <article>
                         <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
                         <div class="software-workflow__pulse" aria-hidden="true"><i></i><i></i><i></i></div>
-                        <h3><?php echo esc_html($step_title); ?></h3>
-                        <p><?php echo esc_html($step_text); ?></p>
+                        <h3><?php echo esc_html(myliba_text($step_title)); ?></h3>
+                        <p><?php echo esc_html(myliba_text($step_text)); ?></p>
                     </article>
                 <?php endforeach; ?>
             </div>
@@ -210,22 +202,21 @@ get_header();
     <section class="software-why">
         <div class="software-why__inner">
             <div class="software-why__copy">
-                <p class="eyebrow">Neden Myliba?</p>
-                <h2>Myliba Yazılım: Şirketinizin Verimliliğini Katlayan Stratejik İş Ortağı</h2>
+                <p class="eyebrow"><?php echo esc_html(myliba_text('Neden Myliba?')); ?></p>
+                <h2><?php echo esc_html(myliba_text('Myliba Yazılım: Şirketinizin Verimliliğini Katlayan Stratejik İş Ortağı')); ?></h2>
                 <div class="software-formula">
-                    <small>Formülümüz</small>
-                    <strong>Performans <span>=</span> Potansiyel <span>−</span> Müdahale</strong>
+                    <small><?php echo esc_html(myliba_text('Formülümüz')); ?></small>
+                    <strong><?php echo esc_html(myliba_text('Performans')); ?> <span>=</span> <?php echo esc_html(myliba_text('Potansiyel')); ?> <span>−</span> <?php echo esc_html(myliba_text('Müdahale')); ?></strong>
                 </div>
-                <p>İnsanlara daha fazla güven, net bir odak ve gelişim alanı sunduğunuzda performans doğal bir ritimle
-                    ortaya çıkar. Myliba Yazılım bu anlayışı canlı verilere dönüştürür.</p>
+                <p><?php echo esc_html(myliba_text('İnsanlara daha fazla güven, net bir odak ve gelişim alanı sunduğunuzda performans doğal bir ritimle ortaya çıkar. Myliba Yazılım bu anlayışı canlı verilere dönüştürür.')); ?></p>
             </div>
             <div class="software-stats">
                 <?php foreach ($stats as $index => [$value, $label, $text]): ?>
                     <article>
                         <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-                        <strong><?php echo esc_html($value); ?></strong>
-                        <h3><?php echo esc_html($label); ?></h3>
-                        <p><?php echo esc_html($text); ?></p>
+                        <strong><?php echo esc_html(myliba_text($value)); ?></strong>
+                        <h3><?php echo esc_html(myliba_text($label)); ?></h3>
+                        <p><?php echo esc_html(myliba_text($text)); ?></p>
                     </article>
                 <?php endforeach; ?>
             </div>
@@ -235,50 +226,50 @@ get_header();
     <section class="software-section software-assurance" aria-labelledby="software-assurance-title">
         <div class="software-assurance__heading">
             <div>
-                <p class="eyebrow">Kurumsal ölçekte güvenli geçiş</p>
-                <h2 id="software-assurance-title">Sistemlerinize uyum sağlayan kontrollü bir kurulum.</h2>
+                <p class="eyebrow"><?php echo esc_html(myliba_text('Kurumsal ölçekte güvenli geçiş')); ?></p>
+                <h2 id="software-assurance-title"><?php echo esc_html(myliba_text('Sistemlerinize uyum sağlayan kontrollü bir kurulum.')); ?></h2>
             </div>
-            <p>Organizasyon yapısı, hedef döngüsü, veri aktarımı ve entegrasyon kapsamı ihtiyaç analiziyle belirlenir; devreye alma süreci ekiplerinizle birlikte planlanır.</p>
+            <p><?php echo esc_html(myliba_text('Organizasyon yapısı, hedef döngüsü, veri aktarımı ve entegrasyon kapsamı ihtiyaç analiziyle belirlenir; devreye alma süreci ekiplerinizle birlikte planlanır.')); ?></p>
         </div>
         <div class="software-assurance__grid">
             <article>
-                <span>01</span>
+                <span><?php echo esc_html(myliba_text('01')); ?></span>
                 <i aria-hidden="true">↔</i>
-                <h3>API ve veri bağlantıları</h3>
-                <p>KPI ve organizasyon verilerini mevcut İK, iş zekâsı ve operasyon araçlarınızla ilişkilendirin.</p>
+                <h3><?php echo esc_html(myliba_text('API ve veri bağlantıları')); ?></h3>
+                <p><?php echo esc_html(myliba_text('KPI ve organizasyon verilerini mevcut İK, iş zekâsı ve operasyon araçlarınızla ilişkilendirin.')); ?></p>
             </article>
             <article>
-                <span>02</span>
+                <span><?php echo esc_html(myliba_text('02')); ?></span>
                 <i aria-hidden="true">◎</i>
-                <h3>Kurumunuza özel yapı</h3>
-                <p>Ekip, hedef, değerlendirme ve yetkilendirme modelini organizasyonunuzun çalışma biçimine göre kurgulayın.</p>
+                <h3><?php echo esc_html(myliba_text('Kurumunuza özel yapı')); ?></h3>
+                <p><?php echo esc_html(myliba_text('Ekip, hedef, değerlendirme ve yetkilendirme modelini organizasyonunuzun çalışma biçimine göre kurgulayın.')); ?></p>
             </article>
             <article>
-                <span>03</span>
+                <span><?php echo esc_html(myliba_text('03')); ?></span>
                 <i aria-hidden="true">✓</i>
-                <h3>Kontrollü devreye alma</h3>
-                <p>İhtiyaç analizinden veri aktarımına kadar kurulum adımlarını kademeli ve izlenebilir biçimde ilerletin.</p>
+                <h3><?php echo esc_html(myliba_text('Kontrollü devreye alma')); ?></h3>
+                <p><?php echo esc_html(myliba_text('İhtiyaç analizinden veri aktarımına kadar kurulum adımlarını kademeli ve izlenebilir biçimde ilerletin.')); ?></p>
             </article>
         </div>
-        <div class="software-assurance__rail" aria-label="Entegrasyon kapsamları">
-            <span>İK sistemleri</span><i></i><span>İş zekâsı</span><i></i><span>Operasyon verileri</span><i></i><span>API bağlantıları</span>
+        <div class="software-assurance__rail" aria-label="<?php echo esc_attr(myliba_text('Entegrasyon kapsamları')); ?>">
+            <span><?php echo esc_html(myliba_text('İK sistemleri')); ?></span><i></i><span><?php echo esc_html(myliba_text('İş zekâsı')); ?></span><i></i><span><?php echo esc_html(myliba_text('Operasyon verileri')); ?></span><i></i><span><?php echo esc_html(myliba_text('API bağlantıları')); ?></span>
         </div>
     </section>
 
     <section class="software-section software-faq">
         <div class="software-faq__heading">
-            <p class="eyebrow">Merak Edilenler</p>
-            <h2>Myliba Yazılım Hakkında Sıkça Sorulan Sorular</h2>
-            <p>Yeni nesil performans yönetimine geçerken bilmek isteyeceğiniz temel noktalar.</p>
+            <p class="eyebrow"><?php echo esc_html(myliba_text('Merak Edilenler')); ?></p>
+            <h2><?php echo esc_html(myliba_text('Myliba Yazılım Hakkında Sıkça Sorulan Sorular')); ?></h2>
+            <p><?php echo esc_html(myliba_text('Yeni nesil performans yönetimine geçerken bilmek isteyeceğiniz temel noktalar.')); ?></p>
         </div>
         <div class="software-faq__items">
             <?php foreach ($faqs as $index => [$question, $answer]): ?>
                 <details <?php echo $index === 0 ? 'open' : ''; ?>>
                     <summary>
-                        <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span><strong><?php echo esc_html($question); ?></strong><i
+                        <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span><strong><?php echo esc_html(myliba_text($question)); ?></strong><i
                             aria-hidden="true"></i></summary>
                     <div>
-                        <p><?php echo esc_html($answer); ?></p>
+                        <p><?php echo esc_html(myliba_text($answer)); ?></p>
                     </div>
                 </details>
             <?php endforeach; ?>
@@ -287,10 +278,10 @@ get_header();
 
     <section class="software-final">
         <div class="software-final__content">
-            <p class="eyebrow">Dönüşüm için ilk adım</p>
-            <h2>Performansı yılda bir kez değil, her gün geliştirin.</h2>
-            <p>Her organizasyonun performans yolculuğu farklıdır. İhtiyaçlarınıza özel kişiselleştirilmiş bir demo ile Myliba’nın şirketinizde nasıl değer yaratacağını birlikte keşfedelim.</p>
-            <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>">Kişiselleştirilmiş Demo Talep Edin <span aria-hidden="true">→</span></a>
+            <p class="eyebrow"><?php echo esc_html(myliba_text('Dönüşüm için ilk adım')); ?></p>
+            <h2><?php echo esc_html(myliba_text('Performansı yılda bir kez değil, her gün geliştirin.')); ?></h2>
+            <p><?php echo esc_html(myliba_text('Her organizasyonun performans yolculuğu farklıdır. İhtiyaçlarınıza özel kişiselleştirilmiş bir demo ile Myliba’nın şirketinizde nasıl değer yaratacağını birlikte keşfedelim.')); ?></p>
+            <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>"><?php echo esc_html(myliba_text('Kişiselleştirilmiş Demo Talep Edin')); ?> <span aria-hidden="true">→</span></a>
         </div>
         <div class="software-final__signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     </section>

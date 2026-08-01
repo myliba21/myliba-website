@@ -12,6 +12,7 @@ function boot(): void
 {
     add_action('admin_menu', __NAMESPACE__ . '\\register_menu', 20);
     add_action('admin_post_myliba_save_content_overrides', __NAMESPACE__ . '\\save_overrides');
+    add_action('init', __NAMESPACE__ . '\\ensure_catalog', 1);
 }
 
 function register_menu(): void
@@ -35,8 +36,76 @@ function all_overrides(): array
 function override(string $source, string $locale): ?string
 {
     $overrides = all_overrides();
-    $value = $overrides[$source][$locale] ?? null;
-    return is_string($value) && trim($value) !== '' ? $value : null;
+    if (!isset($overrides[$source]) || !is_array($overrides[$source]) || !array_key_exists($locale, $overrides[$source])) {
+        return null;
+    }
+
+    $value = $overrides[$source][$locale];
+    return is_string($value) ? $value : null;
+}
+
+function materialize(string $source, string $locale): string
+{
+    $stored = all_overrides();
+    if (!isset($stored[$source]) || !is_array($stored[$source])) {
+        $stored[$source] = [];
+    }
+
+    $changed = false;
+    $translations = function_exists('myliba_translation_defaults') ? \myliba_translation_defaults() : [];
+    if (!array_key_exists('en', $stored[$source])) {
+        $stored[$source]['en'] = $source;
+        $changed = true;
+    }
+    if (!array_key_exists('tr', $stored[$source])) {
+        $stored[$source]['tr'] = isset($translations[$source]) && is_string($translations[$source])
+            ? $translations[$source]
+            : $source;
+        $changed = true;
+    }
+
+    if ($changed) {
+        update_option(OPTION_NAME, $stored, false);
+    }
+
+    return isset($stored[$source][$locale]) && is_string($stored[$source][$locale])
+        ? $stored[$source][$locale]
+        : '';
+}
+
+/**
+ * Materialize every frontend text into WordPress once. Runtime rendering then
+ * reads only this option; source literals are migration defaults, not fallbacks.
+ */
+function ensure_catalog(): void
+{
+    $stored = all_overrides();
+    $catalog = array_values(array_unique(array_merge(frontend_catalog(), array_keys($stored))));
+    natcasesort($catalog);
+    $changed = false;
+    $translations = function_exists('myliba_translation_defaults') ? \myliba_translation_defaults() : [];
+
+    foreach ($catalog as $source) {
+        if (!isset($stored[$source]) || !is_array($stored[$source])) {
+            $stored[$source] = [];
+        }
+
+        if (!array_key_exists('en', $stored[$source])) {
+            $stored[$source]['en'] = $source;
+            $changed = true;
+        }
+
+        if (!array_key_exists('tr', $stored[$source])) {
+            $stored[$source]['tr'] = isset($translations[$source]) && is_string($translations[$source])
+                ? $translations[$source]
+                : $source;
+            $changed = true;
+        }
+    }
+
+    if ($changed) {
+        update_option(OPTION_NAME, $stored, false);
+    }
 }
 
 function save_overrides(): void
@@ -60,9 +129,7 @@ function save_overrides(): void
             $value = isset($values[$key][$locale]) && is_string($values[$key][$locale])
                 ? sanitize_textarea_field($values[$key][$locale])
                 : '';
-            if ($value !== '') {
-                $saved[$source][$locale] = $value;
-            }
+            $saved[$source][$locale] = $value;
         }
     }
 
@@ -79,7 +146,7 @@ function frontend_catalog(): array
         [MYLIBA_CORE_DIR . 'includes/forms.php']
     );
     $strings = [];
-    $pattern = '~(?:__|_e|esc_html_e|esc_attr_e|esc_html__|esc_attr__)\\(\\s*(["\'])((?:\\\\.|(?!\\1).)*)\\1\\s*,\\s*["\']myliba["\']~s';
+    $pattern = '~(?:(?:__|_e|esc_html_e|esc_attr_e|esc_html__|esc_attr__)\\(\\s*(["\'])((?:\\\\.|(?!\\1).)*)\\1\\s*,\\s*["\']myliba["\']|myliba_text\\(\\s*(["\'])((?:\\\\.|(?!\\3).)*)\\3\\s*\\))~s';
 
     foreach (array_unique($paths) as $path) {
         if (!is_readable($path)) {
@@ -89,7 +156,8 @@ function frontend_catalog(): array
         if (!is_string($contents) || !preg_match_all($pattern, $contents, $matches)) {
             continue;
         }
-        foreach ($matches[2] as $match) {
+        foreach ($matches[0] as $index => $_match) {
+            $match = ($matches[2][$index] ?? '') !== '' ? $matches[2][$index] : ($matches[4][$index] ?? '');
             $value = stripcslashes((string) $match);
             if ($value !== '') {
                 $strings[$value] = $value;
@@ -107,12 +175,13 @@ function render_page(): void
         return;
     }
 
-    $catalog = frontend_catalog();
     $overrides = all_overrides();
+    $catalog = array_values(array_unique(array_merge(frontend_catalog(), array_keys($overrides))));
+    natcasesort($catalog);
     ?>
     <div class="wrap">
         <h1><?php esc_html_e('Site Texts — Turkish / English', 'myliba'); ?></h1>
-        <p><?php esc_html_e('This screen covers reusable interface text in the header, footer, archives, blog, forms, 404 page, and content templates. Leave a field blank to use the built-in text.', 'myliba'); ?></p>
+        <p><?php esc_html_e('This screen is the runtime source for reusable interface text in the header, footer, archives, blog, forms, 404 page, and content templates. Blank values stay blank on the site.', 'myliba'); ?></p>
         <p><strong><?php esc_html_e('Page-specific copy:', 'myliba'); ?></strong> <?php esc_html_e('Edit the Turkish and English page/post separately. Homepage content is under Pages → the relevant language homepage → Myliba Homepage Sections.', 'myliba'); ?></p>
         <p><strong><?php esc_html_e('Images:', 'myliba'); ?></strong> <?php esc_html_e('Use Featured Image for pages, posts, products, solutions, academy items, team members and client logos. Use Settings → General → Site Icon for the favicon and Appearance → Customize → Site Identity for the logo.', 'myliba'); ?></p>
         <?php if (isset($_GET['updated'])) : ?><div class="notice notice-success is-dismissible"><p><?php esc_html_e('Site texts saved.', 'myliba'); ?></p></div><?php endif; ?>

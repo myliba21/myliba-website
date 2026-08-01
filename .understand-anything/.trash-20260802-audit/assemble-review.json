@@ -1,0 +1,14 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 0,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "Birleştirme raporundaki sayılar tutarlı: 274 düğüm ve 406 kenar değişmeden korundu; düzeltilemeyen uyarı bulunmadı.",
+    "Toplu çıktılarda kimliği eksik düğüm, bilinmeyen düğüm türü veya geçersiz karmaşıklık değeri bulunmadı.",
+    "Birleştirilmiş grafikte yinelenen düğüm kimliği, yinelenen kenar veya var olmayan düğüme bağlanan kenar bulunmadı.",
+    "scan-result.json içindeki importMap tüm dosyalar için boş olduğundan doğrulanabilir dosyalar arası import ilişkisi yoktu; bu nedenle çapraz toplu import kenarı eklenmedi."
+  ]
+}

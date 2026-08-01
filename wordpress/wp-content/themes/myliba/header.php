@@ -69,18 +69,18 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                             <?php if ($item['key'] === 'solutions') : ?>
                                 <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu" aria-label="<?php esc_attr_e('Solutions menu', 'myliba'); ?>">
                                     <div class="mega-menu__intro">
-                                        <span>Çözümlerimiz</span>
-                                        <strong>İhtiyacınıza uygun çözümü bulun.</strong>
-                                        <p>Dört uzmanlık alanını tek noktadan keşfedin.</p>
-                                        <a href="<?php echo esc_url($item['url']); ?>">Tüm çözümler</a>
+                                        <span><?php echo esc_html(myliba_text('Çözümlerimiz')); ?></span>
+                                        <strong><?php echo esc_html(myliba_text('İhtiyacınıza uygun çözümü bulun.')); ?></strong>
+                                        <p><?php echo esc_html(myliba_text('Dört uzmanlık alanını tek noktadan keşfedin.')); ?></p>
+                                        <a href="<?php echo esc_url($item['url']); ?>"><?php echo esc_html(myliba_text('Tüm çözümler')); ?></a>
                                     </div>
                                     <div class="mega-menu__grid">
                                         <?php
                                         $solution_menu_descriptions = [
-                                            'kurumsal-gelisim-programlari' => 'Kuruma özel gelişim yolculukları.',
-                                            'simulasyonlar-ve-takim-koclugu' => 'Simülasyon ve koçluk deneyimleri.',
-                                            'danismanlik' => 'Stratejiden uygulamaya destek.',
-                                            'kultur-analizi' => 'Veriye dayalı kültür içgörüleri.',
+                                            'kurumsal-gelisim-programlari' => myliba_text('Kuruma özel gelişim yolculukları.'),
+                                            'simulasyonlar-ve-takim-koclugu' => myliba_text('Simülasyon ve koçluk deneyimleri.'),
+                                            'danismanlik' => myliba_text('Stratejiden uygulamaya destek.'),
+                                            'kultur-analizi' => myliba_text('Veriye dayalı kültür içgörüleri.'),
                                         ];
                                         ?>
                                         <?php foreach (myliba_solution_catalog() as $solution_slug => $solution) : ?>
@@ -98,20 +98,20 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                             <?php else :
                                 $development_items = myliba_development_center_items();
                                 ?>
-                                <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu mega-menu--development" aria-label="Gelişim Merkezi menüsü">
+                                <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu mega-menu--development" aria-label="<?php echo esc_attr(myliba_text('Gelişim Merkezi menüsü')); ?>">
                                     <div class="mega-menu__intro">
-                                        <span>Gelişim Merkezi</span>
-                                        <strong>Güncel kaynakları keşfedin.</strong>
-                                        <p>İçerikler, araştırmalar ve etkinlikler.</p>
-                                        <a href="<?php echo esc_url($item['url']); ?>">Tüm içerikler</a>
+                                        <span><?php echo esc_html(myliba_text('Gelişim Merkezi')); ?></span>
+                                        <strong><?php echo esc_html(myliba_text('Güncel kaynakları keşfedin.')); ?></strong>
+                                        <p><?php echo esc_html(myliba_text('İçerikler, araştırmalar ve etkinlikler.')); ?></p>
+                                        <a href="<?php echo esc_url($item['url']); ?>"><?php echo esc_html(myliba_text('Tüm içerikler')); ?></a>
                                     </div>
                                     <div class="mega-menu__grid">
                                         <?php
                                         $development_menu_descriptions = [
-                                            'ebooks' => 'Rehberler ve uygulama kaynakları.',
-                                            'reports' => 'Güncel araştırmalar ve içgörüler.',
-                                            'blog' => 'Uzman yazıları ve pratik öneriler.',
-                                            'events' => 'Webinar, atölye ve buluşmalar.',
+                                            'ebooks' => myliba_text('Rehberler ve uygulama kaynakları.'),
+                                            'reports' => myliba_text('Güncel araştırmalar ve içgörüler.'),
+                                            'blog' => myliba_text('Uzman yazıları ve pratik öneriler.'),
+                                            'events' => myliba_text('Webinar, atölye ve buluşmalar.'),
                                         ];
                                         ?>
                                         <?php foreach ($development_items as $development_key => $development_item) : ?>

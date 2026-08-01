@@ -1,0 +1,45 @@
+{
+  "nodes": [
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "type": "file",
+      "name": "page-academy.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "summary": "Akademi sayfasını; sayfa meta alanları, akademi programları, referans yorumları ve SSS kayıtlarından koşullu olarak oluşturan kapsamlı WordPress şablonudur. Program kartlarını, modülleri, görselleri, istatistikleri ve iletişim diyaloğunu admin tarafından yönetilen verilerden hazırlar.",
+      "tags": ["wordpress-sablonu", "dinamik-icerik", "akademi", "ozel-yazi-turu", "bilesen"],
+      "complexity": "complex",
+      "languageNotes": "PHP kapanış-açılış bloklarıyla yoğun HTML üretir; sayfa metasına erişim için closure'lar, içerik koleksiyonları için WP_Query ve özel yardımcı fonksiyonlar kullanır."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "type": "file",
+      "name": "page-development-center.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "summary": "Gelişim Merkezi açılış ve kart dizinini tema bağlamı ile içerik türü tanımlarından oluşturan WordPress şablonudur. Her içerik türünün en güncel kaydını sorgular; kart açıklaması eksikse son yazının özetini yedek içerik olarak kullanır.",
+      "tags": ["wordpress-sablonu", "dinamik-icerik", "gelisim-merkezi", "sorgu", "bilesen"],
+      "complexity": "moderate",
+      "languageNotes": "Kart başına WP_Query çalıştırır ve Polylang yoksa özel dil meta sorgusuyla mevcut dile göre filtreleme yapar."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "type": "file",
+      "name": "page-software.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "summary": "Myliba Yazılım ürün sayfasının hero, modül, iş akışı, fayda istatistikleri, güvence, SSS ve final CTA bölümlerini render eden WordPress şablonudur. Modül metinleri, metrikler, SSS cevapları ve sayfadaki pazarlama metinlerinin büyük bölümü doğrudan PHP/HTML içinde statik tanımlanmıştır.",
+      "tags": ["wordpress-sablonu", "statik-icerik", "urun-sayfasi", "pazarlama", "bilesen"],
+      "complexity": "complex",
+      "languageNotes": "PHP dizileriyle içerik verisi tanımlayıp HTML içinde döngülerle render eder; yalnızca demo bağlantısı tema yardımcı fonksiyonundan dinamik alınır."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
+      "type": "file",
+      "name": "page-solutions.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
+      "summary": "Çözüm kataloğunu tema yardımcısından alıp çözüm kartları halinde listeleyen WordPress sayfa şablonudur. Kart verileri dinamik olsa da hero, bölüm başlıkları, açıklamalar, kart aksiyon etiketi ve kapanış CTA metinleri şablonda statik yazılmıştır.",
+      "tags": ["wordpress-sablonu", "karma-icerik", "cozum-katalogu", "pazarlama", "bilesen"],
+      "complexity": "simple",
+      "languageNotes": "Katalog verisini yardımcı fonksiyonlardan alır; çevresindeki sunum metinleri doğrudan PHP şablonundaki HTML içinde yer alır."
+    }
+  ],
+  "edges": []
+}

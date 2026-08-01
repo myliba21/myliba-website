@@ -1,0 +1,95 @@
+[
+  {
+    "id": "layer:content-admin",
+    "name": "İçerik Modeli ve Yönetim",
+    "description": "myliba-core eklentisindeki özel içerik türlerini, yönetim ekranlarını, meta alanlarını, site seçeneklerini, formları, SEO kurallarını ve içerik taşıma komutlarını kapsar.",
+    "nodeIds": [
+      "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/content.php"
+    ]
+  },
+  {
+    "id": "layer:theme-presentation",
+    "name": "Tema Sunumu",
+    "description": "Myliba özel temasının WordPress sayfa, arşiv, tekil içerik ve yeniden kullanılabilir şablonlarıyla yönetilen içeriği ziyaretçiye sunar.",
+    "nodeIds": [
+      "file:wordpress/wp-content/themes/myliba/404.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php",
+      "file:wordpress/wp-content/themes/myliba/footer.php",
+      "file:wordpress/wp-content/themes/myliba/front-page.php",
+      "file:wordpress/wp-content/themes/myliba/functions.php",
+      "file:wordpress/wp-content/themes/myliba/header.php",
+      "file:wordpress/wp-content/themes/myliba/index.php",
+      "file:wordpress/wp-content/themes/myliba/page.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_product.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php",
+      "file:wordpress/wp-content/themes/myliba/single.php",
+      "file:wordpress/wp-content/themes/myliba/template-blog.php",
+      "file:wordpress/wp-content/themes/myliba/template-contact.php",
+      "file:wordpress/wp-content/themes/myliba/template-demo.php",
+      "file:wordpress/wp-content/themes/myliba/template-events.php",
+      "file:wordpress/wp-content/themes/myliba/template-landing.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php"
+    ]
+  },
+  {
+    "id": "layer:frontend-assets",
+    "name": "Ön Yüz Varlıkları",
+    "description": "Temanın responsive tasarım sistemini, WordPress tema stil girişini ve tarayıcı tarafındaki erişilebilir etkileşim davranışlarını sağlar.",
+    "nodeIds": [
+      "file:wordpress/wp-content/themes/myliba/assets/css/main.css",
+      "file:wordpress/wp-content/themes/myliba/assets/js/main.js",
+      "file:wordpress/wp-content/themes/myliba/style.css"
+    ]
+  },
+  {
+    "id": "layer:infrastructure",
+    "name": "Altyapı ve Proje Desteği",
+    "description": "Docker Compose tabanlı WordPress ortamını, Nginx güvenlik ve önbellek ayarlarını, yerel otomasyonu, ortam yapılandırmasını ve depo koruma dosyalarını barındırır.",
+    "nodeIds": [
+      "config:wordpress/.env.example",
+      "pipeline:wordpress/Makefile",
+      "service:wordpress/docker-compose.yml",
+      "file:wordpress/wp-content/themes/index.php",
+      "file:.DS_Store",
+      "file:.understand-anything/.understandignore",
+      "file:nginx/default.conf",
+      "file:wordpress/wp-content/index.php",
+      "file:wordpress/wp-content/plugins/index.php"
+    ]
+  },
+  {
+    "id": "layer:documentation",
+    "name": "Dokümantasyon ve Geçiş Rehberleri",
+    "description": "WordPress kurulumunu, eski içeriklerin yeni yönetilebilir modele eşlenmesini ve üretime geçiş değerlendirmelerini belgeleyen proje rehberlerini içerir.",
+    "nodeIds": [
+      "document:wordpress/README.md",
+      "document:wordpress/migration/content-map.md",
+      "document:wordpress/migration/review-report.md"
+    ]
+  }
+]

@@ -72,7 +72,7 @@ $page_id = (int) $context['page_id'];
                     <p><?php echo esc_html($card_description); ?></p>
                 <?php endif; ?>
                 <?php if ($latest_title !== '') : ?>
-                    <span class="development-card__latest">Son içerik: <?php echo esc_html($latest_title); ?></span>
+                    <span class="development-card__latest"><?php echo esc_html(myliba_text('Son içerik:')); ?> <?php echo esc_html($latest_title); ?></span>
                 <?php endif; ?>
                 <strong><?php echo esc_html($context['card_cta']); ?> <span aria-hidden="true">→</span></strong>
             </a>

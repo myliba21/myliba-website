@@ -1,0 +1,35 @@
+{
+  "projectRoot": "/Users/okantoper/Documents/Myliba Projects/myliba-website",
+  "batchFiles": [
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "language": "php",
+      "sizeLines": 451,
+      "fileCategory": "code"
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "language": "php",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "language": "php",
+      "sizeLines": 299,
+      "fileCategory": "code"
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
+      "language": "php",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "wordpress/wp-content/themes/myliba/template-parts/page-academy.php": [],
+    "wordpress/wp-content/themes/myliba/template-parts/page-development-center.php": [],
+    "wordpress/wp-content/themes/myliba/template-parts/page-software.php": [],
+    "wordpress/wp-content/themes/myliba/template-parts/page-solutions.php": []
+  }
+}

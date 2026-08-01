@@ -1,0 +1,1703 @@
+{
+  "scriptCompleted": true,
+  "entryPointCandidates": [
+    {
+      "id": "file:wordpress/wp-content/index.php",
+      "score": 3,
+      "name": "index.php",
+      "summary": "wp-content dizininde doğrudan dizin listelemeyi ve istenmeyen çıktıyı önleyen sessiz WordPress koruma dosyasıdır."
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/index.php",
+      "score": 3,
+      "name": "index.php",
+      "summary": "Eklenti dizinine doğrudan erişimde içerik döndürmeyen standart WordPress koruma dosyasıdır."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/index.php",
+      "score": 3,
+      "name": "index.php",
+      "summary": "Tema dizinine doğrudan erişimde çıktı üretmeyen standart WordPress koruma dosyasıdır."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/assets/js/main.js",
+      "score": 3,
+      "name": "main.js",
+      "summary": "Navigasyon, mega menü, tanıtım çubuğu, carousel, sekme, akordeon ve kaydırma gibi tema etkileşimlerini tarayıcı tarafında yönetir."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/index.php",
+      "score": 3,
+      "name": "index.php",
+      "summary": "Varsayılan WordPress arşiv listesini başlık, tarih, özet ve sayfalama ile gösteren geri dönüş şablonudur."
+    }
+  ],
+  "fanInRanking": [
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/functions.php",
+      "fanIn": 10,
+      "name": "functions.php"
+    },
+    {
+      "id": "service:wordpress/docker-compose.yml",
+      "fanIn": 3,
+      "name": "docker-compose.yml"
+    },
+    {
+      "id": "class:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:Commands",
+      "fanIn": 2,
+      "name": "Commands"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:admin_notices",
+      "fanIn": 2,
+      "name": "admin_notices"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:boot",
+      "fanIn": 2,
+      "name": "boot"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:dashboard_counts",
+      "fanIn": 2,
+      "name": "dashboard_counts"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:register_menu",
+      "fanIn": 2,
+      "name": "register_menu"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:render_settings",
+      "fanIn": 2,
+      "name": "render_settings"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:use_classic_editor_for_myliba_content",
+      "fanIn": 2,
+      "name": "use_classic_editor_for_myliba_content"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:all_overrides",
+      "fanIn": 2,
+      "name": "all_overrides"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:boot",
+      "fanIn": 2,
+      "name": "boot"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:frontend_catalog",
+      "fanIn": 2,
+      "name": "frontend_catalog"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:override",
+      "fanIn": 2,
+      "name": "override"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:register_menu",
+      "fanIn": 2,
+      "name": "register_menu"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:render_page",
+      "fanIn": 2,
+      "name": "render_page"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:save_overrides",
+      "fanIn": 2,
+      "name": "save_overrides"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:academy_shortcode",
+      "fanIn": 2,
+      "name": "academy_shortcode"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:boot",
+      "fanIn": 2,
+      "name": "boot"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:demo_shortcode",
+      "fanIn": 2,
+      "name": "demo_shortcode"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:handle",
+      "fanIn": 2,
+      "name": "handle"
+    }
+  ],
+  "fanOutRanking": [
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/functions.php",
+      "fanOut": 130,
+      "name": "functions.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "fanOut": 70,
+      "name": "meta.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "fanOut": 46,
+      "name": "seo.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "fanOut": 44,
+      "name": "wp-cli.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "fanOut": 20,
+      "name": "options.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "fanOut": 20,
+      "name": "post-types.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "fanOut": 16,
+      "name": "forms.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/content.php",
+      "fanOut": 14,
+      "name": "content.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php",
+      "fanOut": 12,
+      "name": "admin.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "fanOut": 12,
+      "name": "images.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "fanOut": 6,
+      "name": "myliba-core.php"
+    },
+    {
+      "id": "document:wordpress/README.md",
+      "fanOut": 3,
+      "name": "README.md"
+    },
+    {
+      "id": "config:wordpress/.env.example",
+      "fanOut": 2,
+      "name": ".env.example"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/footer.php",
+      "fanOut": 1,
+      "name": "footer.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/front-page.php",
+      "fanOut": 1,
+      "name": "front-page.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/header.php",
+      "fanOut": 1,
+      "name": "header.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/index.php",
+      "fanOut": 1,
+      "name": "index.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/page.php",
+      "fanOut": 1,
+      "name": "page.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "fanOut": 1,
+      "name": "single-myliba_academy.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "fanOut": 1,
+      "name": "single-myliba_event.php"
+    }
+  ],
+  "bfsTraversal": {
+    "startNode": "file:wordpress/wp-content/index.php",
+    "order": [
+      "file:wordpress/wp-content/index.php"
+    ],
+    "depthMap": {
+      "file:wordpress/wp-content/index.php": 0
+    },
+    "byDepth": {
+      "0": [
+        "file:wordpress/wp-content/index.php"
+      ]
+    }
+  },
+  "nonCodeFiles": {
+    "documentation": [
+      {
+        "id": "document:wordpress/README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "Myliba WordPress sürümünün yerel kurulumu, Türkçe/İngilizce URL yapısı, canlı siteden içerik aktarımı, üretim eklentisi tercihleri ve yayına alma kontrol listesini açıklar. İçerik modelinin myliba-core eklentisinde, sunum katmanının ise myliba temasında tutulduğunu belirtir."
+      },
+      {
+        "id": "document:wordpress/migration/content-map.md",
+        "name": "content-map.md",
+        "type": "document",
+        "summary": "Eski site içerik türlerini WordPress sayfaları, yerel yazı türleri, Myliba özel yazı türleri ve yönetim ayarlarıyla eşleyen taşıma rehberidir; SEO geçiş kontrol listesini de içerir."
+      },
+      {
+        "id": "document:wordpress/migration/review-report.md",
+        "name": "review-report.md",
+        "type": "document",
+        "summary": "Myliba WordPress geçişinin UI, UX, SEO, responsive tasarım, içerik modeli ve üretime geçiş gereksinimlerini değerlendiren yol haritasıdır."
+      }
+    ],
+    "infrastructure": [
+      {
+        "id": "pipeline:wordpress/Makefile",
+        "name": "Makefile",
+        "type": "pipeline",
+        "summary": "Docker tabanlı yerel WordPress yaşam döngüsünü; servisleri başlatma, WordPress'i kurma, Myliba tema ve eklentisini etkinleştirme, başlangıç içeriğini ekme ve logları izleme hedefleriyle otomatikleştirir."
+      },
+      {
+        "id": "service:wordpress/docker-compose.yml",
+        "name": "docker-compose.yml",
+        "type": "service",
+        "summary": "Yerel geliştirme için MariaDB, Apache üzerinde WordPress ve isteğe bağlı WP-CLI servislerini kalıcı veri birimleri ve sağlık denetimleriyle orkestre eder. wp-content dizinini çalışma alanından bağlayarak özel tema ve eklenti geliştirmesini konteynerlere taşır."
+      }
+    ],
+    "data": [],
+    "config": [
+      {
+        "id": "config:wordpress/.env.example",
+        "name": ".env.example",
+        "type": "config",
+        "summary": "Yerel WordPress kurulumu için bağlantı noktası, veritabanı, yönetici hesabı ve site kimliği varsayılanlarını tanımlar. Ayrıca ana sayfa hero görsellerinin yollarını ve alternatif metinlerini ortam değişkenleriyle yapılandırır."
+      }
+    ]
+  },
+  "clusters": [],
+  "layers": {
+    "count": 5,
+    "list": [
+      {
+        "id": "layer:content-admin",
+        "name": "İçerik Modeli ve Yönetim",
+        "description": "myliba-core eklentisindeki özel içerik türlerini, yönetim ekranlarını, meta alanlarını, site seçeneklerini, formları, SEO kurallarını ve içerik taşıma komutlarını kapsar."
+      },
+      {
+        "id": "layer:theme-presentation",
+        "name": "Tema Sunumu",
+        "description": "Myliba özel temasının WordPress sayfa, arşiv, tekil içerik ve yeniden kullanılabilir şablonlarıyla yönetilen içeriği ziyaretçiye sunar."
+      },
+      {
+        "id": "layer:frontend-assets",
+        "name": "Ön Yüz Varlıkları",
+        "description": "Temanın responsive tasarım sistemini, WordPress tema stil girişini ve tarayıcı tarafındaki erişilebilir etkileşim davranışlarını sağlar."
+      },
+      {
+        "id": "layer:infrastructure",
+        "name": "Altyapı ve Proje Desteği",
+        "description": "Docker Compose tabanlı WordPress ortamını, Nginx güvenlik ve önbellek ayarlarını, yerel otomasyonu, ortam yapılandırmasını ve depo koruma dosyalarını barındırır."
+      },
+      {
+        "id": "layer:documentation",
+        "name": "Dokümantasyon ve Geçiş Rehberleri",
+        "description": "WordPress kurulumunu, eski içeriklerin yeni yönetilebilir modele eşlenmesini ve üretime geçiş değerlendirmelerini belgeleyen proje rehberlerini içerir."
+      }
+    ]
+  },
+  "nodeSummaryIndex": {
+    "config:wordpress/.env.example": {
+      "name": ".env.example",
+      "type": "config",
+      "summary": "Yerel WordPress kurulumu için bağlantı noktası, veritabanı, yönetici hesabı ve site kimliği varsayılanlarını tanımlar. Ayrıca ana sayfa hero görsellerinin yollarını ve alternatif metinlerini ortam değişkenleriyle yapılandırır."
+    },
+    "pipeline:wordpress/Makefile": {
+      "name": "Makefile",
+      "type": "pipeline",
+      "summary": "Docker tabanlı yerel WordPress yaşam döngüsünü; servisleri başlatma, WordPress'i kurma, Myliba tema ve eklentisini etkinleştirme, başlangıç içeriğini ekme ve logları izleme hedefleriyle otomatikleştirir."
+    },
+    "document:wordpress/README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Myliba WordPress sürümünün yerel kurulumu, Türkçe/İngilizce URL yapısı, canlı siteden içerik aktarımı, üretim eklentisi tercihleri ve yayına alma kontrol listesini açıklar. İçerik modelinin myliba-core eklentisinde, sunum katmanının ise myliba temasında tutulduğunu belirtir."
+    },
+    "service:wordpress/docker-compose.yml": {
+      "name": "docker-compose.yml",
+      "type": "service",
+      "summary": "Yerel geliştirme için MariaDB, Apache üzerinde WordPress ve isteğe bağlı WP-CLI servislerini kalıcı veri birimleri ve sağlık denetimleriyle orkestre eder. wp-content dizinini çalışma alanından bağlayarak özel tema ve eklenti geliştirmesini konteynerlere taşır."
+    },
+    "file:wordpress/wp-content/themes/myliba/404.php": {
+      "name": "404.php",
+      "type": "file",
+      "summary": "Bulunamayan sayfalar için ürünlere, bloga, demo isteğine ve ana sayfaya yönlendiren dönüşüm odaklı 404 şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php": {
+      "name": "archive-myliba_academy.php",
+      "type": "file",
+      "summary": "Akademi programlarını WordPress sorgusundan başlık, özet ve detay bağlantılarıyla üç sütunlu kart ızgarasında listeler."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php": {
+      "name": "archive-myliba_ebook.php",
+      "type": "file",
+      "summary": "E-kitap arşivini ortak geliştirme kaynağı arşiv parçası üzerinden oluşturan ince tema şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php": {
+      "name": "archive-myliba_event.php",
+      "type": "file",
+      "summary": "Etkinlik yazılarını tarih, başlık, özet ve konum metalarıyla listeler; sonuç olmadığında boş durum mesajı gösterir."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php": {
+      "name": "archive-myliba_product.php",
+      "type": "file",
+      "summary": "Myliba ürün modüllerini başlık, baş harf ikonu ve yönetilen özetleriyle kart ızgarasında listeleyen arşiv şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php": {
+      "name": "archive-myliba_report.php",
+      "type": "file",
+      "summary": "Rapor arşivini ortak geliştirme kaynağı arşiv parçasına devreden ince tema şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php": {
+      "name": "archive-myliba_solution.php",
+      "type": "file",
+      "summary": "Çözüm kataloğunu tema yardımcısından alıp başlık, özet ve dinamik URL içeren kartlara dönüştüren çözüm arşivi şablonudur."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php": {
+      "name": "forms.php",
+      "type": "file",
+      "summary": "İletişim, demo ve akademi kısa kodu formlarını oluşturur; nonce, bal küpü, hız sınırı, kayıt ve e-posta bildirimleriyle gönderimleri işler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:boot": {
+      "name": "boot",
+      "type": "function",
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:shortcode": {
+      "name": "shortcode",
+      "type": "function",
+      "summary": "Genel iletişim formu kısa kodunu ortak form rendererına yönlendirir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:demo_shortcode": {
+      "name": "demo_shortcode",
+      "type": "function",
+      "summary": "Demo talebi formu kısa kodunu demo bağlamıyla render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:academy_shortcode": {
+      "name": "academy_shortcode",
+      "type": "function",
+      "summary": "Akademi başvuru formu kısa kodunu akademi bağlamıyla render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:render_form": {
+      "name": "render_form",
+      "type": "function",
+      "summary": "Form türüne göre alanları, KVKK onayını, spam tuzağını ve başarı/hata durumlarını içeren güvenli HTML formu üretir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:handle": {
+      "name": "handle",
+      "type": "function",
+      "summary": "Form gönderimini doğrular, hız sınırı uygular, alanları temizler, başvuruyu kaydeder ve bildirim sürecini tetikler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:rate_limited": {
+      "name": "rate_limited",
+      "type": "function",
+      "summary": "İstemci ve form türüne göre geçici kayıtları kullanarak kısa süreli gönderim sınırını uygular."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:send_notification": {
+      "name": "send_notification",
+      "type": "function",
+      "summary": "Temizlenmiş form verilerini yapılandırılmış bir e-posta bildirimine dönüştürüp yönetici adresine yollar."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/images.php": {
+      "name": "images.php",
+      "type": "file",
+      "summary": "SVG yüklemelerini kısıtlayıp doğrular, tehlikeli SVG öğe ve özniteliklerini temizler ve yöneticiye güvenlik uyarısı gösterir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:boot": {
+      "name": "boot",
+      "type": "function",
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:restrict_upload_mimes": {
+      "name": "restrict_upload_mimes",
+      "type": "function",
+      "summary": "İzin verilen yükleme MIME türlerini güvenli SVG desteğiyle sınırlar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:validate_upload": {
+      "name": "validate_upload",
+      "type": "function",
+      "summary": "Yüklenen SVG dosyasının türünü, boyutunu ve içeriğini denetleyerek uygunsuz dosyaları reddeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:check_filetype_and_ext": {
+      "name": "check_filetype_and_ext",
+      "type": "function",
+      "summary": "WordPress dosya türü sonucunu doğrulanmış SVG uzantısı ve MIME bilgisiyle düzeltir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:sanitize_svg_file": {
+      "name": "sanitize_svg_file",
+      "type": "function",
+      "summary": "SVG XML ağacından script, dış kaynak, olay işleyici ve tehlikeli URI içeriklerini kaldırıp dosyayı yeniden yazar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:admin_upload_notice": {
+      "name": "admin_upload_notice",
+      "type": "function",
+      "summary": "SVG yükleme politikasını ve güvenlik beklentilerini medya yöneticilerine bildiren uyarıyı gösterir."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php": {
+      "name": "meta.php",
+      "type": "file",
+      "summary": "Sayfa ve özel yazı türleri için kahraman alanı, SEO, etkinlik, dönüşüm, akademi ve ana sayfa kurucu meta kutularını tanımlar, render eder ve kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:boot": {
+      "name": "boot",
+      "type": "function",
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:enqueue_admin_assets": {
+      "name": "enqueue_admin_assets",
+      "type": "function",
+      "summary": "Meta kutusu arayüzünün yönetici tarafı stil ve betik bağımlılıklarını yükler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:register_meta_boxes": {
+      "name": "register_meta_boxes",
+      "type": "function",
+      "summary": "Desteklenen yazı türlerine içerik modeline uygun Myliba meta kutularını kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_language_box": {
+      "name": "render_language_box",
+      "type": "function",
+      "summary": "İçerik dili seçimini düzenleyen meta kutusu alanlarını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_hero_box": {
+      "name": "render_hero_box",
+      "type": "function",
+      "summary": "Kahraman alanı başlık, vurgu, açıklama ve medya değerlerini düzenleten alanları render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_seo_box": {
+      "name": "render_seo_box",
+      "type": "function",
+      "summary": "SEO başlığı ve açıklaması gibi sayfa bazlı arama meta alanlarını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_event_box": {
+      "name": "render_event_box",
+      "type": "function",
+      "summary": "Etkinlik tarihi, konumu, durumu ve kayıt bağlantısı alanlarını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_conversion_box": {
+      "name": "render_conversion_box",
+      "type": "function",
+      "summary": "Sayfaya özgü dönüşüm mesajı ve CTA değerlerini düzenleten alanları render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_development_center_box": {
+      "name": "render_development_center_box",
+      "type": "function",
+      "summary": "Gelişim merkezi kaynağına özgü sınıflandırma ve indirme alanlarını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_academy_page_box": {
+      "name": "render_academy_page_box",
+      "type": "function",
+      "summary": "Akademi açılış sayfasının program, fayda ve çağrı alanlarını yönetilebilir şekilde render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_academy_program_box": {
+      "name": "render_academy_program_box",
+      "type": "function",
+      "summary": "Tekil akademi programının süre, hedef kitle ve program ayrıntısı alanlarını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_homepage_box": {
+      "name": "render_homepage_box",
+      "type": "function",
+      "summary": "Ana sayfa meta kutusunun temel kabuğunu ve kurucu girişini render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_homepage_builder": {
+      "name": "render_homepage_builder",
+      "type": "function",
+      "summary": "Ana sayfa bölümlerini sıralama, görünürlük ve yapılandırılmış alanlarla düzenleten kurucu arayüzünü üretir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_section_fields": {
+      "name": "render_section_fields",
+      "type": "function",
+      "summary": "Bir ana sayfa bölümünün tanımına göre metin, bağlantı, seçim ve medya alanlarını dinamik olarak render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_team_box": {
+      "name": "render_team_box",
+      "type": "function",
+      "summary": "Ekip üyesinin rol, sıra ve sosyal bağlantı alanlarını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_logo_box": {
+      "name": "render_logo_box",
+      "type": "function",
+      "summary": "Müşteri logosuna ait bağlantı ve sıralama alanlarını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_testimonial_box": {
+      "name": "render_testimonial_box",
+      "type": "function",
+      "summary": "Referans içeriğinin kişi, kurum ve rol metalarını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_faq_box": {
+      "name": "render_faq_box",
+      "type": "function",
+      "summary": "SSS kaydının soru-cevap alanlarını düzenleme ekranında sunar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_submission_box": {
+      "name": "render_submission_box",
+      "type": "function",
+      "summary": "Form başvurusunun kaynak, iletişim ve mesaj verilerini yöneticiye salt okunur özet olarak gösterir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_section_definitions": {
+      "name": "homepage_section_definitions",
+      "type": "function",
+      "summary": "Ana sayfa kurucusundaki her bölümün alan şemasını ve düzenleme etiketlerini tanımlar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_default_sections": {
+      "name": "homepage_default_sections",
+      "type": "function",
+      "summary": "Yeni ana sayfalar için varsayılan bölüm sırası ve görünürlük yapılandırmasını üretir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_sections": {
+      "name": "homepage_sections",
+      "type": "function",
+      "summary": "Kaydedilmiş ana sayfa bölüm yapılandırmasını tanımlarla birleştirip normalize eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_section_summary": {
+      "name": "homepage_section_summary",
+      "type": "function",
+      "summary": "Kurucuda gösterilmek üzere bir bölümün ayırt edici kısa özetini üretir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:is_homepage_post": {
+      "name": "is_homepage_post",
+      "type": "function",
+      "summary": "Verilen kaydın WordPress ana sayfası olarak atanıp atanmadığını belirler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:save": {
+      "name": "save",
+      "type": "function",
+      "summary": "Desteklenen yazı türlerinin Myliba meta alanlarını nonce, yetki ve otomatik kayıt kontrolleriyle kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:save_homepage_builder": {
+      "name": "save_homepage_builder",
+      "type": "function",
+      "summary": "Ana sayfa bölüm sırası, görünürlük ve alan değerlerini doğrulayıp meta olarak saklar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_definitions": {
+      "name": "field_definitions",
+      "type": "function",
+      "summary": "Yazı türlerine göre kullanılabilen meta alanlarını tip, etiket ve temizleme kurallarıyla tanımlar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:nonce": {
+      "name": "nonce",
+      "type": "function",
+      "summary": "Meta kutusu kaydı için WordPress nonce alanını üretir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_media": {
+      "name": "field_media",
+      "type": "function",
+      "summary": "Medya seçicili bir meta alanını önizleme ve kaldırma kontrolleriyle render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_text": {
+      "name": "field_text",
+      "type": "function",
+      "summary": "Tek satırlı güvenli metin meta alanını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_url": {
+      "name": "field_url",
+      "type": "function",
+      "summary": "URL doğrulamasına uygun bağlantı meta alanını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_number": {
+      "name": "field_number",
+      "type": "function",
+      "summary": "Sayısal değer ve sınır özniteliklerini destekleyen meta alanını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_textarea": {
+      "name": "field_textarea",
+      "type": "function",
+      "summary": "Çok satırlı metin meta alanını render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_checkbox": {
+      "name": "field_checkbox",
+      "type": "function",
+      "summary": "Boolean meta değerini onay kutusu olarak render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_select": {
+      "name": "field_select",
+      "type": "function",
+      "summary": "İzin verilen seçeneklerle seçim meta alanını render eder."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/options.php": {
+      "name": "options.php",
+      "type": "file",
+      "summary": "Myliba site ayarlarının varsayılanlarını, yerelleştirilebilir anahtarlarını, okuma yardımcılarını, kayıt şemasını ve güvenli temizleme kurallarını merkezileştirir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:defaults": {
+      "name": "defaults",
+      "type": "function",
+      "summary": "Site genelindeki Myliba ayarlarının güvenli varsayılan değerlerini tanımlar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:localized_keys": {
+      "name": "localized_keys",
+      "type": "function",
+      "summary": "Locale bazında ayrı değer taşıması gereken ayar anahtarlarını listeler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:get_all": {
+      "name": "get_all",
+      "type": "function",
+      "summary": "Kaydedilmiş site ayarlarını varsayılanlarla birleştirip normalize edilmiş dizi olarak döndürür."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:get": {
+      "name": "get",
+      "type": "function",
+      "summary": "Tek bir Myliba ayarını locale farkındalığı ve varsayılan geri dönüşle çözer."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:indexing_enabled": {
+      "name": "indexing_enabled",
+      "type": "function",
+      "summary": "Yönetim ayarına göre arama motoru dizinlemesinin açık olup olmadığını bildirir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:locales": {
+      "name": "locales",
+      "type": "function",
+      "summary": "Desteklenen dil ve locale değerlerini yapılandırılmış liste olarak sunar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:ensure_defaults": {
+      "name": "ensure_defaults",
+      "type": "function",
+      "summary": "Eksik site seçeneklerini varsayılan değerlerle ilk kez oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:boot": {
+      "name": "boot",
+      "type": "function",
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:register_settings": {
+      "name": "register_settings",
+      "type": "function",
+      "summary": "Myliba seçenek grubunu ve temizleme callbackini WordPress Settings API ile kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:sanitize": {
+      "name": "sanitize",
+      "type": "function",
+      "summary": "Gönderilen site ayarlarını alan tiplerine, izinli değerlere ve locale kurallarına göre temizler."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php": {
+      "name": "post-types.php",
+      "type": "file",
+      "summary": "Myliba ürün, çözüm, akademi, etkinlik ve kaynak içerik türlerini; taksonomileri, yerelleştirilmiş URL tabanlarını ve Polylang entegrasyonunu kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:boot": {
+      "name": "boot",
+      "type": "function",
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_bases": {
+      "name": "localized_bases",
+      "type": "function",
+      "summary": "Özel yazı türleri için dil bazlı kalıcı bağlantı tabanlarını tanımlar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:register_localized_rewrite_rules": {
+      "name": "register_localized_rewrite_rules",
+      "type": "function",
+      "summary": "Dil önekli özel yazı türü arşiv ve tekil URL kurallarını WordPress yönlendirme sistemine ekler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_query_vars": {
+      "name": "localized_query_vars",
+      "type": "function",
+      "summary": "Yerelleştirilmiş rotaların kullandığı ek sorgu değişkenlerini kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:enforce_route_locale": {
+      "name": "enforce_route_locale",
+      "type": "function",
+      "summary": "Çözümlenen rota dili ile içerik dili uyuşmadığında doğru locale davranışını uygular."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:redirect_missing_localized_solution": {
+      "name": "redirect_missing_localized_solution",
+      "type": "function",
+      "summary": "Yerelleştirilmiş çözüm rotası bulunamadığında uygun hedefe güvenli yönlendirme yapar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_post_type_link": {
+      "name": "localized_post_type_link",
+      "type": "function",
+      "summary": "Özel yazı türü kalıcı bağlantısını içerik diline göre yerelleştirilmiş tabanla oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:register": {
+      "name": "register",
+      "type": "function",
+      "summary": "Myliba özel yazı türlerini ve taksonomilerini yönetim etiketleri, yetenekler ve rewrite seçenekleriyle kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:polylang_post_types": {
+      "name": "polylang_post_types",
+      "type": "function",
+      "summary": "Myliba özel yazı türlerini Polylang çeviri kapsamına ekler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:polylang_taxonomies": {
+      "name": "polylang_taxonomies",
+      "type": "function",
+      "summary": "Myliba taksonomilerini Polylang çeviri kapsamına ekler."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php": {
+      "name": "seo.php",
+      "type": "file",
+      "summary": "Dizinleme politikası, robots çıktısı, belge başlığı, canonical ve hreflang etiketleri ile breadcrumb, makale, FAQ ve eğitim şemaları için SEO güvenlik ağı sağlar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:boot": {
+      "name": "boot",
+      "type": "function",
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:seo_plugin_active": {
+      "name": "seo_plugin_active",
+      "type": "function",
+      "summary": "Desteklenen harici SEO eklentilerinden birinin etkin olup olmadığını algılar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_post_noindex": {
+      "name": "current_post_noindex",
+      "type": "function",
+      "summary": "Geçerli içerik için sayfa bazlı noindex meta tercihinin açık olup olmadığını belirler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:staging_hosts": {
+      "name": "staging_hosts",
+      "type": "function",
+      "summary": "Dizinlemeye kapatılacak staging ana makine adlarını ayarlardan çözer."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_host": {
+      "name": "current_host",
+      "type": "function",
+      "summary": "Geçerli isteğin normalize edilmiş ana makine adını döndürür."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:is_staging_host": {
+      "name": "is_staging_host",
+      "type": "function",
+      "summary": "Geçerli alan adının yapılandırılmış staging desenleriyle eşleşip eşleşmediğini belirler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:should_noindex": {
+      "name": "should_noindex",
+      "type": "function",
+      "summary": "Global ayar, staging alanı ve içerik metası üzerinden noindex gereksinimini birleştirir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:robots": {
+      "name": "robots",
+      "type": "function",
+      "summary": "WordPress robots direktiflerini Myliba dizinleme politikasına göre değiştirir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:robots_txt": {
+      "name": "robots_txt",
+      "type": "function",
+      "summary": "Sanal robots.txt çıktısını dizinleme ve sitemap ayarlarına göre tamamlar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:sitemaps_enabled": {
+      "name": "sitemaps_enabled",
+      "type": "function",
+      "summary": "Myliba dizinleme politikasına göre WordPress sitemap özelliğinin kullanılabilirliğini belirler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:send_noindex_header": {
+      "name": "send_noindex_header",
+      "type": "function",
+      "summary": "Gerekli isteklerde HTTP X-Robots-Tag noindex başlığını gönderir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:document_title": {
+      "name": "document_title",
+      "type": "function",
+      "summary": "Geçerli sayfanın SEO başlığını içerik metası ve varsayılanlarla oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_head": {
+      "name": "render_head",
+      "type": "function",
+      "summary": "Harici SEO eklentisi yokken Myliba fallback meta ve şema çıktılarını wp_head içine bağlar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_fallback_meta": {
+      "name": "render_fallback_meta",
+      "type": "function",
+      "summary": "Canonical, description, Open Graph ve Twitter kart etiketlerini güvenli fallback değerlerle üretir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_hreflang": {
+      "name": "render_hreflang",
+      "type": "function",
+      "summary": "Çok dilli içerik eşlerini canonical ve x-default dahil hreflang bağlantıları olarak render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_schema": {
+      "name": "render_schema",
+      "type": "function",
+      "summary": "Sayfa bağlamına uygun JSON-LD şema parçalarını birleştirip çıktı verir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:breadcrumb_schema": {
+      "name": "breadcrumb_schema",
+      "type": "function",
+      "summary": "Geçerli içerik hiyerarşisinden Schema.org BreadcrumbList verisi oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:article_schema": {
+      "name": "article_schema",
+      "type": "function",
+      "summary": "Blog yazıları için başlık, tarih, yazar ve görsel içeren Article şemasını oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:faq_schema": {
+      "name": "faq_schema",
+      "type": "function",
+      "summary": "Yapılandırılmış SSS kayıtlarından FAQPage JSON-LD verisi oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:is_academy_landing": {
+      "name": "is_academy_landing",
+      "type": "function",
+      "summary": "Geçerli isteğin akademi açılış sayfası olup olmadığını belirler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:educational_organization_schema": {
+      "name": "educational_organization_schema",
+      "type": "function",
+      "summary": "Akademi bağlamı için EducationalOrganization şemasını site ayarlarından oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:academy_course_schemas": {
+      "name": "academy_course_schemas",
+      "type": "function",
+      "summary": "Yayımlanmış akademi programlarını Course şema nesnelerine dönüştürür."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_url": {
+      "name": "current_url",
+      "type": "function",
+      "summary": "Geçerli isteğin şema ve canonical çıktısında kullanılacak mutlak URL’sini üretir."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php": {
+      "name": "wp-cli.php",
+      "type": "file",
+      "summary": "Mevcut genel siteden içerik içe aktarma, başlangıç verisi üretme, ana sayfa ve akademi metalarını somutlaştırma, gezinme kurma ve Türkçe öncelikli moda geçme WP-CLI komutlarını uygular."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed": {
+      "name": "seed",
+      "type": "function",
+      "summary": "Site ayarları, sayfalar, özel içerikler, taksonomiler ve menüler dahil eksiksiz başlangıç verisini idempotent biçimde oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:tr_first": {
+      "name": "tr_first",
+      "type": "function",
+      "summary": "Siteyi Türkçe öncelikli çalışma moduna geçirip ilgili içerik ve ayar dönüşümünü uygular."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:materialize_home": {
+      "name": "materialize_home",
+      "type": "function",
+      "summary": "Ana sayfa kurucu varsayılanlarını seçilen sayfanın gerçek meta değerlerine yazar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current": {
+      "name": "import_current",
+      "type": "function",
+      "summary": "Mevcut genel Myliba sitesindeki sayfa, ürün, akademi, ekip, logo ve yazı içeriklerini WordPress’e aktarır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_page": {
+      "name": "import_current_page",
+      "type": "function",
+      "summary": "Uzak bir sayfanın başlık, okunabilir gövde ve görsel verisini yerel WordPress sayfasına dönüştürür."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_home_meta": {
+      "name": "import_current_home_meta",
+      "type": "function",
+      "summary": "Mevcut ana sayfa içeriğinden kurucu bölümleriyle uyumlu meta değerleri çıkarıp kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_products": {
+      "name": "import_current_products",
+      "type": "function",
+      "summary": "Mevcut sitedeki ürün içeriklerini ayrıştırıp Myliba ürün yazı türüne aktarır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_academy": {
+      "name": "import_current_academy",
+      "type": "function",
+      "summary": "Mevcut akademi sayfa ve program verilerini ilgili WordPress içerik modeline aktarır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_team": {
+      "name": "import_current_team",
+      "type": "function",
+      "summary": "Mevcut ekip üyelerini rol, görsel ve sıralama metalarıyla içe aktarır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_client_logos": {
+      "name": "import_current_client_logos",
+      "type": "function",
+      "summary": "Mevcut müşteri logolarını görselleriyle birlikte özel yazı türüne aktarır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_rest_posts": {
+      "name": "import_current_rest_posts",
+      "type": "function",
+      "summary": "Uzak WordPress REST çıktısındaki yazıları yerel blog kayıtlarına aktarır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:fetch_public_html": {
+      "name": "fetch_public_html",
+      "type": "function",
+      "summary": "Uzak genel URL’den zaman aşımı ve hata denetimiyle HTML içeriği indirir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_page_title": {
+      "name": "extract_page_title",
+      "type": "function",
+      "summary": "HTML belgesinden anlamlı sayfa başlığını çıkarıp normalize eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_excerpt": {
+      "name": "extract_excerpt",
+      "type": "function",
+      "summary": "HTML veya metin içeriğinden temiz ve sınırlı uzunlukta özet üretir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_readable_html": {
+      "name": "extract_readable_html",
+      "type": "function",
+      "summary": "Uzak sayfanın ana içerik bölümünü güvenli ve okunabilir HTML parçası olarak çıkarır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_text_lines": {
+      "name": "extract_text_lines",
+      "type": "function",
+      "summary": "HTML içeriğini temiz, benzersiz ve anlamlı metin satırlarına dönüştürür."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_snippet_after": {
+      "name": "extract_snippet_after",
+      "type": "function",
+      "summary": "Belirli başlık veya metin dizisinden sonra gelen ilgili içerik parçasını çıkarır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:join_existing_lines": {
+      "name": "join_existing_lines",
+      "type": "function",
+      "summary": "Aday metin satırlarından mevcut olanları sırasını koruyarak birleştirir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:line_after_sequence": {
+      "name": "line_after_sequence",
+      "type": "function",
+      "summary": "Bir metin dizisinin ardından gelen ilk anlamlı satırı bulur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_images": {
+      "name": "extract_images",
+      "type": "function",
+      "summary": "HTML belgesindeki görsel URL, alt metin ve bağlam verilerini toplar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:find_image_by_alt": {
+      "name": "find_image_by_alt",
+      "type": "function",
+      "summary": "Alt metin eşleşmesine göre uygun görsel adayını bulur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:replace_remote_images": {
+      "name": "replace_remote_images",
+      "type": "function",
+      "summary": "İçerikteki uzak görselleri yerel medya kitaplığına alınmış karşılıklarıyla değiştirir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:sideload_image": {
+      "name": "sideload_image",
+      "type": "function",
+      "summary": "Uzak görseli WordPress medya kitaplığına indirip ek kaydı ve dosya metadatasını oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:absolute_url": {
+      "name": "absolute_url",
+      "type": "function",
+      "summary": "Göreli veya protokolsüz bağlantıyı kaynak sayfa temelinde mutlak URL’ye çevirir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:dom_from_html": {
+      "name": "dom_from_html",
+      "type": "function",
+      "summary": "HTML metnini libxml hata yönetimiyle sorgulanabilir DOMDocument nesnesine yükler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:cleanup_default_content": {
+      "name": "cleanup_default_content",
+      "type": "function",
+      "summary": "WordPress kurulumuyla gelen örnek sayfa ve yazıları güvenli biçimde kaldırır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_categories": {
+      "name": "seed_categories",
+      "type": "function",
+      "summary": "Başlangıç blog kategorilerini yoksa oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_products": {
+      "name": "seed_products",
+      "type": "function",
+      "summary": "Myliba ürün modüllerini açıklama ve meta değerleriyle oluşturur veya günceller."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_solutions": {
+      "name": "seed_solutions",
+      "type": "function",
+      "summary": "Persona ve ihtiyaç odaklı Myliba çözüm içeriklerini başlangıç verisi olarak üretir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_academy": {
+      "name": "seed_academy",
+      "type": "function",
+      "summary": "Akademi açılış sayfası ile program kayıtlarını yapılandırılmış meta değerleriyle oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_trust_content": {
+      "name": "seed_trust_content",
+      "type": "function",
+      "summary": "Referans, SSS ve güven unsuru içeriklerini başlangıç verisi olarak oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_landing_pages": {
+      "name": "seed_landing_pages",
+      "type": "function",
+      "summary": "SEO ve dönüşüm hedefli açılış sayfalarını içerik ve meta değerleriyle oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:home_meta_defaults": {
+      "name": "home_meta_defaults",
+      "type": "function",
+      "summary": "Ana sayfanın bölüm bazlı varsayılan meta metinlerini ve bağlantılarını üretir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:home_builder_defaults": {
+      "name": "home_builder_defaults",
+      "type": "function",
+      "summary": "Ana sayfa kurucusunun varsayılan bölüm sırası ve yapılandırmasını JSON olarak üretir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_navigation": {
+      "name": "seed_navigation",
+      "type": "function",
+      "summary": "Ana, yardımcı ve alt bilgi menülerini oluşturup tema konumlarına bağlar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:ensure_menu": {
+      "name": "ensure_menu",
+      "type": "function",
+      "summary": "Adıyla bir WordPress menüsü bulur veya yoksa oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_menu_items": {
+      "name": "seed_menu_items",
+      "type": "function",
+      "summary": "Menü öğelerini sayfa ya da özel URL hedefleriyle idempotent biçimde oluşturur."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:upsert_page": {
+      "name": "upsert_page",
+      "type": "function",
+      "summary": "Slug üzerinden WordPress sayfasını oluşturur veya günceller; içerik, meta ve dil değerlerini kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:upsert_event": {
+      "name": "upsert_event",
+      "type": "function",
+      "summary": "Etkinlik kaydını tarih ve konum metalarıyla oluşturur veya günceller."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:upsert_post_type": {
+      "name": "upsert_post_type",
+      "type": "function",
+      "summary": "Herhangi bir Myliba yazı türünü slug üzerinden idempotent oluşturur veya günceller; meta ve dil bilgisini uygular."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:apply_tr_first_mode": {
+      "name": "apply_tr_first_mode",
+      "type": "function",
+      "summary": "Türkçe içeriği öne alır, İngilizce kayıtları ve rotaları düzenler, ana sayfa ayarlarını günceller ve rewrite kurallarını yeniler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:starter_content": {
+      "name": "starter_content",
+      "type": "function",
+      "summary": "Başlangıç kurulumunda kullanılacak temel içerik tanımlarını döndürür."
+    },
+    "class:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:Commands": {
+      "name": "Commands",
+      "type": "class",
+      "summary": "Myliba içeriğini kurma, taşıma, somutlaştırma ve dil modlarını yönetme komutlarını tek WP-CLI komut grubu altında toplar."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php": {
+      "name": "myliba-core.php",
+      "type": "file",
+      "summary": "Myliba Core eklentisinin giriş noktasıdır; içerik modeli bileşenlerini yükler, WordPress kancalarını başlatır ve etkinleştirme/devre dışı bırakma işlemlerini yönetir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:boot": {
+      "name": "boot",
+      "type": "function",
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:activate": {
+      "name": "activate",
+      "type": "function",
+      "summary": "Eklenti etkinleştirildiğinde içerik türlerini ve varsayılanları hazırlayıp kalıcı bağlantı kurallarını yeniler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:deactivate": {
+      "name": "deactivate",
+      "type": "function",
+      "summary": "Eklenti devre dışı bırakılırken WordPress rewrite kurallarını temizleyip yeniler."
+    },
+    "file:wordpress/wp-content/themes/index.php": {
+      "name": "index.php",
+      "type": "file",
+      "summary": "Tema dizinine doğrudan erişimde çıktı üretmeyen standart WordPress koruma dosyasıdır."
+    },
+    "file:.DS_Store": {
+      "name": ".DS_Store",
+      "type": "file",
+      "summary": "macOS Finder tarafından üretilen ikili dizin görünümü metadatasıdır; uygulamanın çalışma zamanında bir rolü yoktur."
+    },
+    "file:.understand-anything/.understandignore": {
+      "name": ".understandignore",
+      "type": "file",
+      "summary": "Bilgi grafiği taramasında üçüncü taraf paketleri, medya, yedekler ve üretilmiş dosyaları dışarıda bırakarak analizi Myliba tema ve çekirdek eklenti koduna odaklar."
+    },
+    "file:nginx/default.conf": {
+      "name": "default.conf",
+      "type": "file",
+      "summary": "WordPress konteynerine ters vekillik yapan Nginx sunucusunu; güvenlik başlıkları, sıkıştırma, statik önbellek, form hız sınırı ve hassas uç nokta kısıtlarıyla yapılandırır."
+    },
+    "document:wordpress/migration/content-map.md": {
+      "name": "content-map.md",
+      "type": "document",
+      "summary": "Eski site içerik türlerini WordPress sayfaları, yerel yazı türleri, Myliba özel yazı türleri ve yönetim ayarlarıyla eşleyen taşıma rehberidir; SEO geçiş kontrol listesini de içerir."
+    },
+    "document:wordpress/migration/review-report.md": {
+      "name": "review-report.md",
+      "type": "document",
+      "summary": "Myliba WordPress geçişinin UI, UX, SEO, responsive tasarım, içerik modeli ve üretime geçiş gereksinimlerini değerlendiren yol haritasıdır."
+    },
+    "file:wordpress/wp-content/index.php": {
+      "name": "index.php",
+      "type": "file",
+      "summary": "wp-content dizininde doğrudan dizin listelemeyi ve istenmeyen çıktıyı önleyen sessiz WordPress koruma dosyasıdır."
+    },
+    "file:wordpress/wp-content/plugins/index.php": {
+      "name": "index.php",
+      "type": "file",
+      "summary": "Eklenti dizinine doğrudan erişimde içerik döndürmeyen standart WordPress koruma dosyasıdır."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php": {
+      "name": "admin.php",
+      "type": "file",
+      "summary": "Myliba yönetim menüsünü, site ayarları ekranını, klasik editör tercihini, yönetici uyarılarını ve içerik sayaçlarını sağlar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:boot": {
+      "name": "boot",
+      "type": "function",
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:use_classic_editor_for_myliba_content": {
+      "name": "use_classic_editor_for_myliba_content",
+      "type": "function",
+      "summary": "Myliba tarafından yönetilen içerik türlerinde blok editörü yerine klasik editörün kullanılıp kullanılmayacağını belirler."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:register_menu": {
+      "name": "register_menu",
+      "type": "function",
+      "summary": "İlgili yönetim ekranını WordPress yönetici menüsüne kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:render_settings": {
+      "name": "render_settings",
+      "type": "function",
+      "summary": "Site ayarları formunu yetki kontrolü, alan değerleri ve WordPress Settings API bileşenleriyle render eder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:admin_notices": {
+      "name": "admin_notices",
+      "type": "function",
+      "summary": "Yapılandırma ve bağımlılık durumlarına göre yönetici ekranında uygulanabilir uyarılar gösterir."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/admin.php:dashboard_counts": {
+      "name": "dashboard_counts",
+      "type": "function",
+      "summary": "Önemli Myliba içerik türlerinin yayımlanmış kayıt sayılarını yönetim özeti için hesaplar."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/content.php": {
+      "name": "content.php",
+      "type": "file",
+      "summary": "Yönetilebilir metin geçersiz kılmalarını kaydeder, ön yüz içerik kataloğunu üretir ve içerik düzenleme alt sayfasını sunar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:boot": {
+      "name": "boot",
+      "type": "function",
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:register_menu": {
+      "name": "register_menu",
+      "type": "function",
+      "summary": "İlgili yönetim ekranını WordPress yönetici menüsüne kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:all_overrides": {
+      "name": "all_overrides",
+      "type": "function",
+      "summary": "Kaydedilmiş tüm ön yüz metin geçersiz kılmalarını seçenek deposundan güvenli bir dizi olarak döndürür."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:override": {
+      "name": "override",
+      "type": "function",
+      "summary": "Kaynak metin ve locale anahtarına göre yönetici tarafından tanımlanmış karşılığı çözer."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:save_overrides": {
+      "name": "save_overrides",
+      "type": "function",
+      "summary": "İçerik metni geçersiz kılmalarını nonce ve yetki kontrollerinden sonra temizleyip seçenek deposuna kaydeder."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:frontend_catalog": {
+      "name": "frontend_catalog",
+      "type": "function",
+      "summary": "Ön yüzde düzenlenebilecek kaynak metinleri locale ve kullanım bağlamıyla kataloglar."
+    },
+    "function:wordpress/wp-content/plugins/myliba-core/includes/content.php:render_page": {
+      "name": "render_page",
+      "type": "function",
+      "summary": "Yönetilebilir ön yüz metinlerini listeleyen ve düzenleten içerik yönetimi ekranını render eder."
+    },
+    "file:wordpress/wp-content/themes/myliba/assets/css/main.css": {
+      "name": "main.css",
+      "type": "file",
+      "summary": "Myliba temasının responsive yerleşimlerini, bileşenlerini, sayfa şablonlarını ve etkileşim durumlarını kapsayan ana stil katmanıdır."
+    },
+    "file:wordpress/wp-content/themes/myliba/assets/js/main.js": {
+      "name": "main.js",
+      "type": "file",
+      "summary": "Navigasyon, mega menü, tanıtım çubuğu, carousel, sekme, akordeon ve kaydırma gibi tema etkileşimlerini tarayıcı tarafında yönetir."
+    },
+    "file:wordpress/wp-content/themes/myliba/footer.php": {
+      "name": "footer.php",
+      "type": "file",
+      "summary": "Yönetim seçenekleri, içerik sorguları ve dil bağlamından üretilen bağlantılarla site altbilgisini, iletişim alanını ve CTA öğelerini sunar."
+    },
+    "file:wordpress/wp-content/themes/myliba/front-page.php": {
+      "name": "front-page.php",
+      "type": "file",
+      "summary": "Yönetim panelindeki ana sayfa alanlarını ve bölüm sıralamasını okuyup zengin, bileşen tabanlı ana sayfa sunumunu oluşturur."
+    },
+    "file:wordpress/wp-content/themes/myliba/functions.php": {
+      "name": "functions.php",
+      "type": "file",
+      "summary": "Tema kurulumu, varlıklar, seçenek/meta erişimi, yerelleştirme, yönlendirme, menüler ve ana sayfa içerik modelini bir araya getiren merkezi tema yardımcı katmanıdır."
+    },
+    "file:wordpress/wp-content/themes/myliba/header.php": {
+      "name": "header.php",
+      "type": "file",
+      "summary": "Yönetim seçenekleri ve dil bağlamına göre promosyon çubuğu, marka, mega menüler, dil değiştirici ve CTA içeren site başlığını üretir."
+    },
+    "file:wordpress/wp-content/themes/myliba/index.php": {
+      "name": "index.php",
+      "type": "file",
+      "summary": "Varsayılan WordPress arşiv listesini başlık, tarih, özet ve sayfalama ile gösteren geri dönüş şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/page.php": {
+      "name": "page.php",
+      "type": "file",
+      "summary": "Sayfa türüne göre özel alt şablonlara yönlenir; standart sayfalarda yönetilen hero ve editör içeriğini sunar."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php": {
+      "name": "single-myliba_academy.php",
+      "type": "file",
+      "summary": "Tekil akademi içeriğini ortak hero ve dönüşüm detay bileşenleri üzerinden sunar."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_event.php": {
+      "name": "single-myliba_event.php",
+      "type": "file",
+      "summary": "Tekil etkinlik içeriğini hero, editör gövdesi, tarih, konum ve kayıt bağlantısıyla gösterir."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php": {
+      "name": "single-myliba_landing.php",
+      "type": "file",
+      "summary": "Tekil dönüşüm odaklı landing içeriğini ortak hero ve dönüşüm detay bileşenleriyle oluşturur."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_product.php": {
+      "name": "single-myliba_product.php",
+      "type": "file",
+      "summary": "Tekil ürün içeriğini ortak hero ve yönetilen dönüşüm detay alanlarıyla sunar."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php": {
+      "name": "single-myliba_solution.php",
+      "type": "file",
+      "summary": "Çözüm meta alanları, katalog varsayımları ve editör içeriğini kullanarak ayrıntılı çözüm sayfasını oluşturur; bazı sunum metinleri şablon içinde sabittir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_theme_setup": {
+      "name": "myliba_theme_setup",
+      "type": "function",
+      "summary": "WordPress tema desteklerini, görsel boyutlarını ve menü konumlarını kaydeder."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_asset_version": {
+      "name": "myliba_asset_version",
+      "type": "function",
+      "summary": "Tema varlığı için dosya değişiklik zamanına dayalı cache sürümü üretir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_enqueue_assets": {
+      "name": "myliba_enqueue_assets",
+      "type": "function",
+      "summary": "Ana tema CSS ve JavaScript varlıklarını bağımlılıkları ve sürümleriyle kuyruğa ekler."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_resource_hints": {
+      "name": "myliba_resource_hints",
+      "type": "function",
+      "summary": "Seçili harici kaynaklar için preconnect kaynak ipuçlarını ekler."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_cleanup_head": {
+      "name": "myliba_cleanup_head",
+      "type": "function",
+      "summary": "Gereksiz WordPress head çıktıları ve keşif bağlantılarını kaldırır."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_dequeue_block_styles": {
+      "name": "myliba_dequeue_block_styles",
+      "type": "function",
+      "summary": "Kullanılmayan çekirdek blok stillerini kuyruktan çıkarır."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_preload_main_stylesheet": {
+      "name": "myliba_preload_main_stylesheet",
+      "type": "function",
+      "summary": "Ana stil dosyası için preload bağlantısı üretir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_render_critical_css": {
+      "name": "myliba_render_critical_css",
+      "type": "function",
+      "summary": "İlk görünüm için kritik CSS kurallarını sayfa başlığına yazar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_option": {
+      "name": "myliba_option",
+      "type": "function",
+      "summary": "Myliba ayarını eklenti seçenek katmanından güvenli bir varsayılanla okur."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_env": {
+      "name": "myliba_env",
+      "type": "function",
+      "summary": "Ortam değişkenini WordPress sabiti veya süreç ortamından varsayılanlı biçimde çözer."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_asset_url_from_env": {
+      "name": "myliba_asset_url_from_env",
+      "type": "function",
+      "summary": "Ortamdan gelen varlık değerini güvenli mutlak tema URL'sine dönüştürür."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_hero_banner_images": {
+      "name": "myliba_hero_banner_images",
+      "type": "function",
+      "summary": "Hero banner görsellerini yapılandırılmış ortam değerlerinden çözümler."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_home_media_images": {
+      "name": "myliba_home_media_images",
+      "type": "function",
+      "summary": "Ana sayfa medya grubunun görsellerini post meta ve yapılandırmadan toplar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_image_dimensions_for_source": {
+      "name": "myliba_image_dimensions_for_source",
+      "type": "function",
+      "summary": "Görsel kaynağının boyutlarını ek dosyası veya URL bilgisinden belirler."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_lcp_hero_image": {
+      "name": "myliba_lcp_hero_image",
+      "type": "function",
+      "summary": "Geçerli ana sayfanın LCP hero görselini seçer."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_preload_lcp_hero_image": {
+      "name": "myliba_preload_lcp_hero_image",
+      "type": "function",
+      "summary": "Seçilen LCP hero görselini tarayıcıya ön yükleme bağlantısıyla bildirir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_render_theme_meta": {
+      "name": "myliba_render_theme_meta",
+      "type": "function",
+      "summary": "Tema tarafından yönetilen ek meta etiketlerini head içine yazar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_meta": {
+      "name": "myliba_meta",
+      "type": "function",
+      "summary": "İçerik meta değerini belirtilen kayıt ve varsayılan üzerinden okur."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_current_language": {
+      "name": "myliba_current_language",
+      "type": "function",
+      "summary": "Geçerli site dilini Polylang veya istek bağlamından belirler."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_is_academy_landing_page": {
+      "name": "myliba_is_academy_landing_page",
+      "type": "function",
+      "summary": "Verilen sayfanın akademi landing içeriği olup olmadığını sınar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_available_locales": {
+      "name": "myliba_available_locales",
+      "type": "function",
+      "summary": "Yönetilen seçeneklerden kullanılabilir site dillerini döndürür."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_locale_cookie_name": {
+      "name": "myliba_locale_cookie_name",
+      "type": "function",
+      "summary": "Dil tercihi için kullanılan cookie adını sağlar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_request_path": {
+      "name": "myliba_request_path",
+      "type": "function",
+      "summary": "Geçerli isteğin normalize edilmiş URL yolunu döndürür."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_locale_from_path": {
+      "name": "myliba_locale_from_path",
+      "type": "function",
+      "summary": "URL yolunun başındaki desteklenen dil kodunu çıkarır."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_locale_from_accept_language": {
+      "name": "myliba_locale_from_accept_language",
+      "type": "function",
+      "summary": "Accept-Language başlığından desteklenen en uygun dili seçer."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_preferred_locale": {
+      "name": "myliba_preferred_locale",
+      "type": "function",
+      "summary": "Cookie, tarayıcı ve varsayılan ayarlardan tercih edilen dili belirler."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_set_locale_cookie": {
+      "name": "myliba_set_locale_cookie",
+      "type": "function",
+      "summary": "Seçilen dili güvenli cookie seçenekleriyle saklar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_redirect_root_to_preferred_locale": {
+      "name": "myliba_redirect_root_to_preferred_locale",
+      "type": "function",
+      "summary": "Kök isteği tercih edilen dilin landing yoluna koşullu olarak yönlendirir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_register_turkish_post_rewrites": {
+      "name": "myliba_register_turkish_post_rewrites",
+      "type": "function",
+      "summary": "Türkçe yazı URL tabanı için yeniden yazma kurallarını kaydeder."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_turkish_post_link": {
+      "name": "myliba_turkish_post_link",
+      "type": "function",
+      "summary": "Türkçe yazı kalıcı bağlantısını yerelleştirilmiş tabanla üretir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_redirect_legacy_urls": {
+      "name": "myliba_redirect_legacy_urls",
+      "type": "function",
+      "summary": "Eski veya dil içermeyen yolları güncel yerelleştirilmiş hedeflere yönlendirir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_sync_current_locale_cookie": {
+      "name": "myliba_sync_current_locale_cookie",
+      "type": "function",
+      "summary": "Geçerli rota dilini ziyaretçinin dil cookie'siyle eşitler."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_filter_language_attributes": {
+      "name": "myliba_filter_language_attributes",
+      "type": "function",
+      "summary": "HTML language_attributes çıktısını geçerli locale ile uyumlu hale getirir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_translate_text": {
+      "name": "myliba_translate_text",
+      "type": "function",
+      "summary": "Tema içinde kullanılan sabit arayüz metinleri için dile göre çeviri eşlemesi uygular."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_translate_gettext": {
+      "name": "myliba_translate_gettext",
+      "type": "function",
+      "summary": "Myliba text domain gettext çağrılarını tema çeviri eşlemesine yönlendirir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_is_locale_landing_page": {
+      "name": "myliba_is_locale_landing_page",
+      "type": "function",
+      "summary": "Geçerli sayfanın bir dil landing sayfası olup olmadığını sınar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_page_url": {
+      "name": "myliba_page_url",
+      "type": "function",
+      "summary": "Mantıksal sayfa anahtarını geçerli dildeki yönetilen URL'ye çözer."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_nav_items": {
+      "name": "myliba_nav_items",
+      "type": "function",
+      "summary": "Ana navigasyon öğelerini yönetilen ayar ve sayfa URL'lerinden üretir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_portal_url": {
+      "name": "myliba_portal_url",
+      "type": "function",
+      "summary": "Müşteri portalı URL'sini yönetim seçeneğinden döndürür."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_header_menu": {
+      "name": "myliba_header_menu",
+      "type": "function",
+      "summary": "Başlık menüsünü navigasyon öğeleri ve alt menü yapısıyla hazırlar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_solution_catalog": {
+      "name": "myliba_solution_catalog",
+      "type": "function",
+      "summary": "Çözüm kartları ve ayrıntıları için katalog verisini döndürür."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_solution_url": {
+      "name": "myliba_solution_url",
+      "type": "function",
+      "summary": "Çözüm slug'ını mevcut kayıt veya yerelleştirilmiş yedek URL ile çözer."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_development_center_page_id": {
+      "name": "myliba_development_center_page_id",
+      "type": "function",
+      "summary": "Geçerli dildeki gelişim merkezi sayfa kimliğini bulur."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_development_center_context": {
+      "name": "myliba_development_center_context",
+      "type": "function",
+      "summary": "Gelişim merkezi sayfasının başlık, özet ve bağlantı bağlamını hazırlar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_development_center_items": {
+      "name": "myliba_development_center_items",
+      "type": "function",
+      "summary": "Gelişim merkezi içerik türlerini ve hedeflerini navigasyon için üretir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_url_path": {
+      "name": "myliba_url_path",
+      "type": "function",
+      "summary": "Bir URL'yi karşılaştırılabilir normalize edilmiş yol biçimine indirger."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_header_menu_item_is_active": {
+      "name": "myliba_header_menu_item_is_active",
+      "type": "function",
+      "summary": "İstek yoluna göre başlık menü öğesinin aktif durumunu belirler."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_language_context_url": {
+      "name": "myliba_language_context_url",
+      "type": "function",
+      "summary": "Hedef dil için mevcut içerik bağlamını koruyan karşılık URL'sini üretir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_language_links": {
+      "name": "myliba_language_links",
+      "type": "function",
+      "summary": "Dil değiştirici için etiket, URL ve aktiflik verilerini hazırlar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_language_flag": {
+      "name": "myliba_language_flag",
+      "type": "function",
+      "summary": "Dil etiketinden görsel bayrak simgesini seçer."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_post_language_filter": {
+      "name": "myliba_post_language_filter",
+      "type": "function",
+      "summary": "Ana WordPress sorgusunu geçerli içerik dili meta alanıyla filtreler."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_excerpt": {
+      "name": "myliba_excerpt",
+      "type": "function",
+      "summary": "Kayıt özeti veya gövdesinden belirtilen uzunlukta temiz özet üretir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_get_entries": {
+      "name": "myliba_get_entries",
+      "type": "function",
+      "summary": "Özel içerik türlerini dil ve ek sorgu koşullarıyla getirir."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_client_logo_posts": {
+      "name": "myliba_client_logo_posts",
+      "type": "function",
+      "summary": "Yayınlanmış müşteri logo kayıtlarını gösterim sırasıyla döndürür."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_lines": {
+      "name": "myliba_lines",
+      "type": "function",
+      "summary": "Çok satırlı yönetim alanını temiz, boş olmayan öğeler dizisine ayrıştırır."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_faq_pairs": {
+      "name": "myliba_faq_pairs",
+      "type": "function",
+      "summary": "Satır tabanlı SSS değerini soru-cevap çiftlerine dönüştürür."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_reading_time": {
+      "name": "myliba_reading_time",
+      "type": "function",
+      "summary": "Yazı gövdesinden tahmini okuma süresini hesaplar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_demo_url": {
+      "name": "myliba_demo_url",
+      "type": "function",
+      "summary": "Demo CTA hedefini yönetim seçeneği ve sayfa eşlemesinden çözer."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_brand_link": {
+      "name": "myliba_brand_link",
+      "type": "function",
+      "summary": "Marka işareti ve ana sayfa bağlantısını istenen görünüm değiştiricisiyle render eder."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_home_value": {
+      "name": "myliba_home_value",
+      "type": "function",
+      "summary": "Ana sayfa alanını ilgili post meta değerinden varsayılanlı olarak okur."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_home_lines": {
+      "name": "myliba_home_lines",
+      "type": "function",
+      "summary": "Ana sayfa çok satırlı alanını öğe listesine dönüştürür."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_home_rows": {
+      "name": "myliba_home_rows",
+      "type": "function",
+      "summary": "Ana sayfa yapılandırılmış satır alanını sütunlara ayrıştırılmış kayıtlar halinde döndürür."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_home_section_definitions": {
+      "name": "myliba_home_section_definitions",
+      "type": "function",
+      "summary": "Ana sayfa oluşturucuda kullanılabilen bölüm türlerinin tanımlarını sağlar."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_home_default_sections": {
+      "name": "myliba_home_default_sections",
+      "type": "function",
+      "summary": "Ana sayfa bölümlerinin varsayılan sıra ve etkinlik yapılandırmasını döndürür."
+    },
+    "function:wordpress/wp-content/themes/myliba/functions.php:myliba_home_sections": {
+      "name": "myliba_home_sections",
+      "type": "function",
+      "summary": "Kaydedilmiş ana sayfa bölüm sırasını tanımlarla birleştirip render verisini hazırlar."
+    },
+    "file:wordpress/wp-content/themes/myliba/single.php": {
+      "name": "single.php",
+      "type": "file",
+      "summary": "Blog yazısını içerik tablosu, yazar/CTA alanları ve dile göre filtrelenen ilgili yazılarla sunar."
+    },
+    "file:wordpress/wp-content/themes/myliba/style.css": {
+      "name": "style.css",
+      "type": "file",
+      "summary": "WordPress tema kimliğini ve ana stil dosyasını içe aktaran minimal tema stil giriş dosyasıdır."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-blog.php": {
+      "name": "template-blog.php",
+      "type": "file",
+      "summary": "Dil bazlı blog sorgusunu arama ve kategori filtreleriyle listeleyen özel sayfa şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-contact.php": {
+      "name": "template-contact.php",
+      "type": "file",
+      "summary": "Yönetilen sayfa içeriğini ve myliba iletişim formu shortcode'unu birlikte sunan iletişim şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-demo.php": {
+      "name": "template-demo.php",
+      "type": "file",
+      "summary": "Demo talebi açıklaması ile yönetilen demo formu shortcode'unu sunan dönüşüm şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-events.php": {
+      "name": "template-events.php",
+      "type": "file",
+      "summary": "Etkinlikleri dil ve tarih meta alanlarına göre sorgulayıp kronolojik kartlar halinde listeleyen sayfa şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-landing.php": {
+      "name": "template-landing.php",
+      "type": "file",
+      "summary": "SEO landing içeriklerini ortak hero ve dönüşüm detay bileşenleri üzerinden sunan özel sayfa şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php": {
+      "name": "archive-development-resource.php",
+      "type": "file",
+      "summary": "Rapor ve e-kitap gibi gelişim kaynaklarının arşiv başlığını, navigasyonunu ve içerik kartlarını oluşturan ortak parçadır."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php": {
+      "name": "client-logo-marquee.php",
+      "type": "file",
+      "summary": "Yönetilen müşteri logo kayıtlarını erişilebilir, kesintisiz kayan bir sosyal kanıt bileşeni olarak sunar."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php": {
+      "name": "conversion-detail.php",
+      "type": "file",
+      "summary": "İçerik meta alanlarından problem, çözüm, fayda, modül, editör içeriği, SSS ve CTA bölümlerini üreten ortak dönüşüm bileşenidir."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/expand.php": {
+      "name": "expand.php",
+      "type": "file",
+      "summary": "Verilen başlık ve öğelerden erişilebilir genişleyebilir ayrıntı/SSS bölümü oluşturan yeniden kullanılabilir şablon parçasıdır."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/hero.php": {
+      "name": "hero.php",
+      "type": "file",
+      "summary": "Yönetilen hero meta alanlarını ve öne çıkan görseli standart alt sayfa hero bileşeni olarak sunar."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php": {
+      "name": "page-academy.php",
+      "type": "file",
+      "summary": "Akademi sayfasını; sayfa meta alanları, akademi programları, referans yorumları ve SSS kayıtlarından koşullu olarak oluşturan kapsamlı WordPress şablonudur. Program kartlarını, modülleri, görselleri, istatistikleri ve iletişim diyaloğunu admin tarafından yönetilen verilerden hazırlar."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php": {
+      "name": "page-development-center.php",
+      "type": "file",
+      "summary": "Gelişim Merkezi açılış ve kart dizinini tema bağlamı ile içerik türü tanımlarından oluşturan WordPress şablonudur. Her içerik türünün en güncel kaydını sorgular; kart açıklaması eksikse son yazının özetini yedek içerik olarak kullanır."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php": {
+      "name": "page-software.php",
+      "type": "file",
+      "summary": "Myliba Yazılım ürün sayfasının hero, modül, iş akışı, fayda istatistikleri, güvence, SSS ve final CTA bölümlerini render eden WordPress şablonudur. Modül metinleri, metrikler, SSS cevapları ve sayfadaki pazarlama metinlerinin büyük bölümü doğrudan PHP/HTML içinde statik tanımlanmıştır."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php": {
+      "name": "page-solutions.php",
+      "type": "file",
+      "summary": "Çözüm kataloğunu tema yardımcısından alıp çözüm kartları halinde listeleyen WordPress sayfa şablonudur. Kart verileri dinamik olsa da hero, bölüm başlıkları, açıklamalar, kart aksiyon etiketi ve kapanış CTA metinleri şablonda statik yazılmıştır."
+    }
+  },
+  "totalNodes": 274,
+  "totalEdges": 406
+}

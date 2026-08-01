@@ -1,0 +1,67 @@
+# .understandignore — patterns for files/dirs to exclude from analysis
+# Syntax: same as .gitignore (globs, # comments, ! negation, trailing / for dirs)
+# Lines below are suggestions — uncomment to activate.
+# Use ! prefix to force-include something excluded by defaults.
+#
+# Built-in defaults (always excluded unless negated):
+#   node_modules/, .git/, dist/, build/, obj/, *.lock, *.min.js, etc.
+#
+
+# --- From .gitignore (uncomment to exclude) ---
+
+# .DS_Store
+# .env
+# .env.*
+# !.env.example
+# !.env.local.example
+# wordpress/.env
+# wordpress/wp-content/uploads/*
+# !wordpress/wp-content/uploads/.gitkeep
+# wordpress/wp-content/upgrade/
+# wordpress/wp-content/cache/
+# wordpress/wp-content/debug.log
+# wordpress/wp-content/plugins/akismet/
+# wordpress/wp-content/plugins/hello.php
+# wordpress/wp-content/themes/twentytwenty*/
+# *.sql
+# *.sql.gz
+# *.sqlite
+# *.db
+
+# --- Project-specific analysis scope ---
+
+wordpress/wp-content/plugins/all-in-one-wp-migration/
+wordpress/wp-content/languages/
+wordpress/wp-content/ai1wm-backups/
+wordpress/wp-content/uploads/
+wordpress/wp-content.zip
+*.wpress
+*.mo
+*.webp
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.woff
+*.woff2
+*.ttf
+*.eot
+
+# --- Test file patterns (uncomment to exclude) ---
+
+# JS / TS
+# *.test.*
+# *.spec.*
+# *.snap
+# C# / .NET
+# **/*Tests.cs
+# **/*Test.cs
+# **/*Fixture.cs
+# **/*.Tests.csproj
+# Java / Kotlin
+# **/src/test/**
+# **/*Test.java
+# **/*IT.java
+# **/*Spec.kt
+# Go
+# **/*_test.go

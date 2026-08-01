@@ -65,7 +65,7 @@ function get_all(): array
         $options = [];
     }
 
-    return array_merge(defaults(), $options);
+    return $options;
 }
 
 function get(string $key, mixed $fallback = null): mixed
@@ -92,13 +92,27 @@ function locales(): array
 
 function ensure_defaults(): void
 {
-    if (!get_option('myliba_options')) {
-        add_option('myliba_options', defaults());
+    $stored = get_option('myliba_options', null);
+    if (!is_array($stored)) {
+        update_option('myliba_options', defaults(), false);
+        return;
+    }
+
+    $merged = $stored;
+    foreach (defaults() as $key => $value) {
+        if (!array_key_exists($key, $merged)) {
+            $merged[$key] = $value;
+        }
+    }
+
+    if ($merged !== $stored) {
+        update_option('myliba_options', $merged, false);
     }
 }
 
 function boot(): void
 {
+    add_action('init', __NAMESPACE__ . '\\ensure_defaults', 0);
     add_action('admin_init', __NAMESPACE__ . '\\register_settings');
 }
 

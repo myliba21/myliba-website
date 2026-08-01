@@ -1,0 +1,4232 @@
+{
+  "nodes": [
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "type": "file",
+      "name": "forms.php",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "summary": "İletişim, demo ve akademi kısa kodu formlarını oluşturur; nonce, bal küpü, hız sınırı, kayıt ve e-posta bildirimleriyle gönderimleri işler.",
+      "tags": [
+        "form-işleme",
+        "doğrulama",
+        "spam-koruması",
+        "bildirim"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:boot",
+      "type": "function",
+      "name": "boot",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "lineRange": [
+        11,
+        18
+      ],
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü",
+        "form-işleme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:shortcode",
+      "type": "function",
+      "name": "shortcode",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "lineRange": [
+        20,
+        23
+      ],
+      "summary": "Genel iletişim formu kısa kodunu ortak form rendererına yönlendirir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "form-işleme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:demo_shortcode",
+      "type": "function",
+      "name": "demo_shortcode",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "lineRange": [
+        25,
+        28
+      ],
+      "summary": "Demo talebi formu kısa kodunu demo bağlamıyla render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "form-işleme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:academy_shortcode",
+      "type": "function",
+      "name": "academy_shortcode",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "lineRange": [
+        30,
+        33
+      ],
+      "summary": "Akademi başvuru formu kısa kodunu akademi bağlamıyla render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "form-işleme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:render_form",
+      "type": "function",
+      "name": "render_form",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "lineRange": [
+        35,
+        159
+      ],
+      "summary": "Form türüne göre alanları, KVKK onayını, spam tuzağını ve başarı/hata durumlarını içeren güvenli HTML formu üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "form-işleme"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:handle",
+      "type": "function",
+      "name": "handle",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "lineRange": [
+        161,
+        233
+      ],
+      "summary": "Form gönderimini doğrular, hız sınırı uygular, alanları temizler, başvuruyu kaydeder ve bildirim sürecini tetikler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "form-işleme"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:rate_limited",
+      "type": "function",
+      "name": "rate_limited",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "lineRange": [
+        235,
+        259
+      ],
+      "summary": "İstemci ve form türüne göre geçici kayıtları kullanarak kısa süreli gönderim sınırını uygular.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "form-işleme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:send_notification",
+      "type": "function",
+      "name": "send_notification",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "lineRange": [
+        261,
+        287
+      ],
+      "summary": "Temizlenmiş form verilerini yapılandırılmış bir e-posta bildirimine dönüştürüp yönetici adresine yollar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "form-işleme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "type": "file",
+      "name": "images.php",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "summary": "SVG yüklemelerini kısıtlayıp doğrular, tehlikeli SVG öğe ve özniteliklerini temizler ve yöneticiye güvenlik uyarısı gösterir.",
+      "tags": [
+        "medya-güvenliği",
+        "svg",
+        "doğrulama",
+        "temizleme"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:boot",
+      "type": "function",
+      "name": "boot",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "lineRange": [
+        17,
+        23
+      ],
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:restrict_upload_mimes",
+      "type": "function",
+      "name": "restrict_upload_mimes",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "lineRange": [
+        31,
+        34
+      ],
+      "summary": "İzin verilen yükleme MIME türlerini güvenli SVG desteğiyle sınırlar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:validate_upload",
+      "type": "function",
+      "name": "validate_upload",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "lineRange": [
+        42,
+        73
+      ],
+      "summary": "Yüklenen SVG dosyasının türünü, boyutunu ve içeriğini denetleyerek uygunsuz dosyaları reddeder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "doğrulama"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:check_filetype_and_ext",
+      "type": "function",
+      "name": "check_filetype_and_ext",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "lineRange": [
+        84,
+        99
+      ],
+      "summary": "WordPress dosya türü sonucunu doğrulanmış SVG uzantısı ve MIME bilgisiyle düzeltir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:sanitize_svg_file",
+      "type": "function",
+      "name": "sanitize_svg_file",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "lineRange": [
+        106,
+        197
+      ],
+      "summary": "SVG XML ağacından script, dış kaynak, olay işleyici ve tehlikeli URI içeriklerini kaldırıp dosyayı yeniden yazar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "doğrulama"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:admin_upload_notice",
+      "type": "function",
+      "name": "admin_upload_notice",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "lineRange": [
+        202,
+        213
+      ],
+      "summary": "SVG yükleme politikasını ve güvenlik beklentilerini medya yöneticilerine bildiren uyarıyı gösterir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "type": "file",
+      "name": "meta.php",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "summary": "Sayfa ve özel yazı türleri için kahraman alanı, SEO, etkinlik, dönüşüm, akademi ve ana sayfa kurucu meta kutularını tanımlar, render eder ve kaydeder.",
+      "tags": [
+        "meta-kutuları",
+        "ana-sayfa-kurucu",
+        "içerik-modeli",
+        "yönetim-paneli"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:boot",
+      "type": "function",
+      "name": "boot",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        11,
+        16
+      ],
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:enqueue_admin_assets",
+      "type": "function",
+      "name": "enqueue_admin_assets",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        18,
+        22
+      ],
+      "summary": "Meta kutusu arayüzünün yönetici tarafı stil ve betik bağımlılıklarını yükler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:register_meta_boxes",
+      "type": "function",
+      "name": "register_meta_boxes",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        24,
+        72
+      ],
+      "summary": "Desteklenen yazı türlerine içerik modeline uygun Myliba meta kutularını kaydeder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_language_box",
+      "type": "function",
+      "name": "render_language_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        74,
+        88
+      ],
+      "summary": "İçerik dili seçimini düzenleyen meta kutusu alanlarını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_hero_box",
+      "type": "function",
+      "name": "render_hero_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        90,
+        106
+      ],
+      "summary": "Kahraman alanı başlık, vurgu, açıklama ve medya değerlerini düzenleten alanları render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_seo_box",
+      "type": "function",
+      "name": "render_seo_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        108,
+        115
+      ],
+      "summary": "SEO başlığı ve açıklaması gibi sayfa bazlı arama meta alanlarını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_event_box",
+      "type": "function",
+      "name": "render_event_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        117,
+        128
+      ],
+      "summary": "Etkinlik tarihi, konumu, durumu ve kayıt bağlantısı alanlarını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_conversion_box",
+      "type": "function",
+      "name": "render_conversion_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        130,
+        142
+      ],
+      "summary": "Sayfaya özgü dönüşüm mesajı ve CTA değerlerini düzenleten alanları render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_development_center_box",
+      "type": "function",
+      "name": "render_development_center_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        144,
+        161
+      ],
+      "summary": "Gelişim merkezi kaynağına özgü sınıflandırma ve indirme alanlarını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_academy_page_box",
+      "type": "function",
+      "name": "render_academy_page_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        163,
+        209
+      ],
+      "summary": "Akademi açılış sayfasının program, fayda ve çağrı alanlarını yönetilebilir şekilde render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_academy_program_box",
+      "type": "function",
+      "name": "render_academy_program_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        211,
+        232
+      ],
+      "summary": "Tekil akademi programının süre, hedef kitle ve program ayrıntısı alanlarını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_homepage_box",
+      "type": "function",
+      "name": "render_homepage_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        234,
+        240
+      ],
+      "summary": "Ana sayfa meta kutusunun temel kabuğunu ve kurucu girişini render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_homepage_builder",
+      "type": "function",
+      "name": "render_homepage_builder",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        242,
+        417
+      ],
+      "summary": "Ana sayfa bölümlerini sıralama, görünürlük ve yapılandırılmış alanlarla düzenleten kurucu arayüzünü üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_section_fields",
+      "type": "function",
+      "name": "render_section_fields",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        419,
+        535
+      ],
+      "summary": "Bir ana sayfa bölümünün tanımına göre metin, bağlantı, seçim ve medya alanlarını dinamik olarak render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_team_box",
+      "type": "function",
+      "name": "render_team_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        537,
+        544
+      ],
+      "summary": "Ekip üyesinin rol, sıra ve sosyal bağlantı alanlarını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_logo_box",
+      "type": "function",
+      "name": "render_logo_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        546,
+        553
+      ],
+      "summary": "Müşteri logosuna ait bağlantı ve sıralama alanlarını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_testimonial_box",
+      "type": "function",
+      "name": "render_testimonial_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        555,
+        563
+      ],
+      "summary": "Referans içeriğinin kişi, kurum ve rol metalarını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_faq_box",
+      "type": "function",
+      "name": "render_faq_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        565,
+        571
+      ],
+      "summary": "SSS kaydının soru-cevap alanlarını düzenleme ekranında sunar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_submission_box",
+      "type": "function",
+      "name": "render_submission_box",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        573,
+        598
+      ],
+      "summary": "Form başvurusunun kaynak, iletişim ve mesaj verilerini yöneticiye salt okunur özet olarak gösterir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_section_definitions",
+      "type": "function",
+      "name": "homepage_section_definitions",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        600,
+        674
+      ],
+      "summary": "Ana sayfa kurucusundaki her bölümün alan şemasını ve düzenleme etiketlerini tanımlar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "meta-veri"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_default_sections",
+      "type": "function",
+      "name": "homepage_default_sections",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        676,
+        691
+      ],
+      "summary": "Yeni ana sayfalar için varsayılan bölüm sırası ve görünürlük yapılandırmasını üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_sections",
+      "type": "function",
+      "name": "homepage_sections",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        693,
+        740
+      ],
+      "summary": "Kaydedilmiş ana sayfa bölüm yapılandırmasını tanımlarla birleştirip normalize eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_section_summary",
+      "type": "function",
+      "name": "homepage_section_summary",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        742,
+        761
+      ],
+      "summary": "Kurucuda gösterilmek üzere bir bölümün ayırt edici kısa özetini üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:is_homepage_post",
+      "type": "function",
+      "name": "is_homepage_post",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        763,
+        768
+      ],
+      "summary": "Verilen kaydın WordPress ana sayfası olarak atanıp atanmadığını belirler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:save",
+      "type": "function",
+      "name": "save",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        770,
+        817
+      ],
+      "summary": "Desteklenen yazı türlerinin Myliba meta alanlarını nonce, yetki ve otomatik kayıt kontrolleriyle kaydeder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "doğrulama",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:save_homepage_builder",
+      "type": "function",
+      "name": "save_homepage_builder",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        819,
+        850
+      ],
+      "summary": "Ana sayfa bölüm sırası, görünürlük ve alan değerlerini doğrulayıp meta olarak saklar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "doğrulama",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_definitions",
+      "type": "function",
+      "name": "field_definitions",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        852,
+        1059
+      ],
+      "summary": "Yazı türlerine göre kullanılabilen meta alanlarını tip, etiket ve temizleme kurallarıyla tanımlar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:nonce",
+      "type": "function",
+      "name": "nonce",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        1061,
+        1064
+      ],
+      "summary": "Meta kutusu kaydı için WordPress nonce alanını üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "doğrulama",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_media",
+      "type": "function",
+      "name": "field_media",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        1066,
+        1111
+      ],
+      "summary": "Medya seçicili bir meta alanını önizleme ve kaldırma kontrolleriyle render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_text",
+      "type": "function",
+      "name": "field_text",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        1113,
+        1125
+      ],
+      "summary": "Tek satırlı güvenli metin meta alanını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_url",
+      "type": "function",
+      "name": "field_url",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        1127,
+        1135
+      ],
+      "summary": "URL doğrulamasına uygun bağlantı meta alanını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_number",
+      "type": "function",
+      "name": "field_number",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        1137,
+        1145
+      ],
+      "summary": "Sayısal değer ve sınır özniteliklerini destekleyen meta alanını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_textarea",
+      "type": "function",
+      "name": "field_textarea",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        1147,
+        1159
+      ],
+      "summary": "Çok satırlı metin meta alanını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_checkbox",
+      "type": "function",
+      "name": "field_checkbox",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        1161,
+        1169
+      ],
+      "summary": "Boolean meta değerini onay kutusu olarak render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_select",
+      "type": "function",
+      "name": "field_select",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "lineRange": [
+        1171,
+        1185
+      ],
+      "summary": "İzin verilen seçeneklerle seçim meta alanını render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "meta-veri"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "type": "file",
+      "name": "options.php",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "summary": "Myliba site ayarlarının varsayılanlarını, yerelleştirilebilir anahtarlarını, okuma yardımcılarını, kayıt şemasını ve güvenli temizleme kurallarını merkezileştirir.",
+      "tags": [
+        "site-ayarları",
+        "yapılandırma",
+        "doğrulama",
+        "yerelleştirme"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:defaults",
+      "type": "function",
+      "name": "defaults",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "lineRange": [
+        9,
+        42
+      ],
+      "summary": "Site genelindeki Myliba ayarlarının güvenli varsayılan değerlerini tanımlar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:localized_keys",
+      "type": "function",
+      "name": "localized_keys",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "lineRange": [
+        44,
+        58
+      ],
+      "summary": "Locale bazında ayrı değer taşıması gereken ayar anahtarlarını listeler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:get_all",
+      "type": "function",
+      "name": "get_all",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "lineRange": [
+        60,
+        69
+      ],
+      "summary": "Kaydedilmiş site ayarlarını varsayılanlarla birleştirip normalize edilmiş dizi olarak döndürür.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:get",
+      "type": "function",
+      "name": "get",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "lineRange": [
+        71,
+        76
+      ],
+      "summary": "Tek bir Myliba ayarını locale farkındalığı ve varsayılan geri dönüşle çözer.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:indexing_enabled",
+      "type": "function",
+      "name": "indexing_enabled",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "lineRange": [
+        78,
+        81
+      ],
+      "summary": "Yönetim ayarına göre arama motoru dizinlemesinin açık olup olmadığını bildirir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:locales",
+      "type": "function",
+      "name": "locales",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "lineRange": [
+        83,
+        91
+      ],
+      "summary": "Desteklenen dil ve locale değerlerini yapılandırılmış liste olarak sunar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:ensure_defaults",
+      "type": "function",
+      "name": "ensure_defaults",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "lineRange": [
+        93,
+        98
+      ],
+      "summary": "Eksik site seçeneklerini varsayılan değerlerle ilk kez oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:boot",
+      "type": "function",
+      "name": "boot",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "lineRange": [
+        100,
+        103
+      ],
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:register_settings",
+      "type": "function",
+      "name": "register_settings",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "lineRange": [
+        105,
+        116
+      ],
+      "summary": "Myliba seçenek grubunu ve temizleme callbackini WordPress Settings API ile kaydeder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:sanitize",
+      "type": "function",
+      "name": "sanitize",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "lineRange": [
+        118,
+        160
+      ],
+      "summary": "Gönderilen site ayarlarını alan tiplerine, izinli değerlere ve locale kurallarına göre temizler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "doğrulama"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "type": "file",
+      "name": "post-types.php",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "summary": "Myliba ürün, çözüm, akademi, etkinlik ve kaynak içerik türlerini; taksonomileri, yerelleştirilmiş URL tabanlarını ve Polylang entegrasyonunu kaydeder.",
+      "tags": [
+        "özel-yazı-türü",
+        "taksonomi",
+        "yerelleştirilmiş-rotalar",
+        "polylang"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:boot",
+      "type": "function",
+      "name": "boot",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "lineRange": [
+        9,
+        19
+      ],
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_bases",
+      "type": "function",
+      "name": "localized_bases",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "lineRange": [
+        21,
+        61
+      ],
+      "summary": "Özel yazı türleri için dil bazlı kalıcı bağlantı tabanlarını tanımlar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:register_localized_rewrite_rules",
+      "type": "function",
+      "name": "register_localized_rewrite_rules",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "lineRange": [
+        63,
+        85
+      ],
+      "summary": "Dil önekli özel yazı türü arşiv ve tekil URL kurallarını WordPress yönlendirme sistemine ekler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_query_vars",
+      "type": "function",
+      "name": "localized_query_vars",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "lineRange": [
+        87,
+        92
+      ],
+      "summary": "Yerelleştirilmiş rotaların kullandığı ek sorgu değişkenlerini kaydeder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:enforce_route_locale",
+      "type": "function",
+      "name": "enforce_route_locale",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "lineRange": [
+        94,
+        117
+      ],
+      "summary": "Çözümlenen rota dili ile içerik dili uyuşmadığında doğru locale davranışını uygular.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:redirect_missing_localized_solution",
+      "type": "function",
+      "name": "redirect_missing_localized_solution",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "lineRange": [
+        119,
+        134
+      ],
+      "summary": "Yerelleştirilmiş çözüm rotası bulunamadığında uygun hedefe güvenli yönlendirme yapar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_post_type_link",
+      "type": "function",
+      "name": "localized_post_type_link",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "lineRange": [
+        136,
+        149
+      ],
+      "summary": "Özel yazı türü kalıcı bağlantısını içerik diline göre yerelleştirilmiş tabanla oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:register",
+      "type": "function",
+      "name": "register",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "lineRange": [
+        151,
+        322
+      ],
+      "summary": "Myliba özel yazı türlerini ve taksonomilerini yönetim etiketleri, yetenekler ve rewrite seçenekleriyle kaydeder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:polylang_post_types",
+      "type": "function",
+      "name": "polylang_post_types",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "lineRange": [
+        324,
+        338
+      ],
+      "summary": "Myliba özel yazı türlerini Polylang çeviri kapsamına ekler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:polylang_taxonomies",
+      "type": "function",
+      "name": "polylang_taxonomies",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "lineRange": [
+        340,
+        346
+      ],
+      "summary": "Myliba taksonomilerini Polylang çeviri kapsamına ekler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "type": "file",
+      "name": "seo.php",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "summary": "Dizinleme politikası, robots çıktısı, belge başlığı, canonical ve hreflang etiketleri ile breadcrumb, makale, FAQ ve eğitim şemaları için SEO güvenlik ağı sağlar.",
+      "tags": [
+        "seo",
+        "json-ld",
+        "hreflang",
+        "dizinleme"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:boot",
+      "type": "function",
+      "name": "boot",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        11,
+        19
+      ],
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:seo_plugin_active",
+      "type": "function",
+      "name": "seo_plugin_active",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        21,
+        24
+      ],
+      "summary": "Desteklenen harici SEO eklentilerinden birinin etkin olup olmadığını algılar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_post_noindex",
+      "type": "function",
+      "name": "current_post_noindex",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        26,
+        33
+      ],
+      "summary": "Geçerli içerik için sayfa bazlı noindex meta tercihinin açık olup olmadığını belirler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:staging_hosts",
+      "type": "function",
+      "name": "staging_hosts",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        35,
+        40
+      ],
+      "summary": "Dizinlemeye kapatılacak staging ana makine adlarını ayarlardan çözer.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_host",
+      "type": "function",
+      "name": "current_host",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        42,
+        51
+      ],
+      "summary": "Geçerli isteğin normalize edilmiş ana makine adını döndürür.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:is_staging_host",
+      "type": "function",
+      "name": "is_staging_host",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        53,
+        56
+      ],
+      "summary": "Geçerli alan adının yapılandırılmış staging desenleriyle eşleşip eşleşmediğini belirler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:should_noindex",
+      "type": "function",
+      "name": "should_noindex",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        58,
+        61
+      ],
+      "summary": "Global ayar, staging alanı ve içerik metası üzerinden noindex gereksinimini birleştirir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:robots",
+      "type": "function",
+      "name": "robots",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        63,
+        72
+      ],
+      "summary": "WordPress robots direktiflerini Myliba dizinleme politikasına göre değiştirir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:robots_txt",
+      "type": "function",
+      "name": "robots_txt",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        74,
+        81
+      ],
+      "summary": "Sanal robots.txt çıktısını dizinleme ve sitemap ayarlarına göre tamamlar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:sitemaps_enabled",
+      "type": "function",
+      "name": "sitemaps_enabled",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        83,
+        86
+      ],
+      "summary": "Myliba dizinleme politikasına göre WordPress sitemap özelliğinin kullanılabilirliğini belirler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:send_noindex_header",
+      "type": "function",
+      "name": "send_noindex_header",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        88,
+        93
+      ],
+      "summary": "Gerekli isteklerde HTTP X-Robots-Tag noindex başlığını gönderir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:document_title",
+      "type": "function",
+      "name": "document_title",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        95,
+        109
+      ],
+      "summary": "Geçerli sayfanın SEO başlığını içerik metası ve varsayılanlarla oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_head",
+      "type": "function",
+      "name": "render_head",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        111,
+        122
+      ],
+      "summary": "Harici SEO eklentisi yokken Myliba fallback meta ve şema çıktılarını wp_head içine bağlar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_fallback_meta",
+      "type": "function",
+      "name": "render_fallback_meta",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        124,
+        181
+      ],
+      "summary": "Canonical, description, Open Graph ve Twitter kart etiketlerini güvenli fallback değerlerle üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_hreflang",
+      "type": "function",
+      "name": "render_hreflang",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        183,
+        220
+      ],
+      "summary": "Çok dilli içerik eşlerini canonical ve x-default dahil hreflang bağlantıları olarak render eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_schema",
+      "type": "function",
+      "name": "render_schema",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        222,
+        278
+      ],
+      "summary": "Sayfa bağlamına uygun JSON-LD şema parçalarını birleştirip çıktı verir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yönetim-arayüzü",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:breadcrumb_schema",
+      "type": "function",
+      "name": "breadcrumb_schema",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        280,
+        318
+      ],
+      "summary": "Geçerli içerik hiyerarşisinden Schema.org BreadcrumbList verisi oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:article_schema",
+      "type": "function",
+      "name": "article_schema",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        320,
+        344
+      ],
+      "summary": "Blog yazıları için başlık, tarih, yazar ve görsel içeren Article şemasını oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:faq_schema",
+      "type": "function",
+      "name": "faq_schema",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        346,
+        425
+      ],
+      "summary": "Yapılandırılmış SSS kayıtlarından FAQPage JSON-LD verisi oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:is_academy_landing",
+      "type": "function",
+      "name": "is_academy_landing",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        427,
+        436
+      ],
+      "summary": "Geçerli isteğin akademi açılış sayfası olup olmadığını belirler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:educational_organization_schema",
+      "type": "function",
+      "name": "educational_organization_schema",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        438,
+        453
+      ],
+      "summary": "Akademi bağlamı için EducationalOrganization şemasını site ayarlarından oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:academy_course_schemas",
+      "type": "function",
+      "name": "academy_course_schemas",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        455,
+        503
+      ],
+      "summary": "Yayımlanmış akademi programlarını Course şema nesnelerine dönüştürür.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_url",
+      "type": "function",
+      "name": "current_url",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "lineRange": [
+        505,
+        513
+      ],
+      "summary": "Geçerli isteğin şema ve canonical çıktısında kullanılacak mutlak URL’sini üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "arama-optimizasyonu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "type": "file",
+      "name": "wp-cli.php",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "summary": "Mevcut genel siteden içerik içe aktarma, başlangıç verisi üretme, ana sayfa ve akademi metalarını somutlaştırma, gezinme kurma ve Türkçe öncelikli moda geçme WP-CLI komutlarını uygular.",
+      "tags": [
+        "wp-cli",
+        "içerik-taşıma",
+        "başlangıç-verisi",
+        "otomasyon"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed",
+      "type": "function",
+      "name": "seed",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        21,
+        189
+      ],
+      "summary": "Site ayarları, sayfalar, özel içerikler, taksonomiler ve menüler dahil eksiksiz başlangıç verisini idempotent biçimde oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:tr_first",
+      "type": "function",
+      "name": "tr_first",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        201,
+        212
+      ],
+      "summary": "Siteyi Türkçe öncelikli çalışma moduna geçirip ilgili içerik ve ayar dönüşümünü uygular.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:materialize_home",
+      "type": "function",
+      "name": "materialize_home",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        235,
+        259
+      ],
+      "summary": "Ana sayfa kurucu varsayılanlarını seçilen sayfanın gerçek meta değerlerine yazar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current",
+      "type": "function",
+      "name": "import_current",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        313,
+        379
+      ],
+      "summary": "Mevcut genel Myliba sitesindeki sayfa, ürün, akademi, ekip, logo ve yazı içeriklerini WordPress’e aktarır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_page",
+      "type": "function",
+      "name": "import_current_page",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        383,
+        414
+      ],
+      "summary": "Uzak bir sayfanın başlık, okunabilir gövde ve görsel verisini yerel WordPress sayfasına dönüştürür.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_home_meta",
+      "type": "function",
+      "name": "import_current_home_meta",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        416,
+        453
+      ],
+      "summary": "Mevcut ana sayfa içeriğinden kurucu bölümleriyle uyumlu meta değerleri çıkarıp kaydeder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_products",
+      "type": "function",
+      "name": "import_current_products",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        455,
+        501
+      ],
+      "summary": "Mevcut sitedeki ürün içeriklerini ayrıştırıp Myliba ürün yazı türüne aktarır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_academy",
+      "type": "function",
+      "name": "import_current_academy",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        503,
+        534
+      ],
+      "summary": "Mevcut akademi sayfa ve program verilerini ilgili WordPress içerik modeline aktarır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_team",
+      "type": "function",
+      "name": "import_current_team",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        536,
+        576
+      ],
+      "summary": "Mevcut ekip üyelerini rol, görsel ve sıralama metalarıyla içe aktarır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_client_logos",
+      "type": "function",
+      "name": "import_current_client_logos",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        578,
+        612
+      ],
+      "summary": "Mevcut müşteri logolarını görselleriyle birlikte özel yazı türüne aktarır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_rest_posts",
+      "type": "function",
+      "name": "import_current_rest_posts",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        614,
+        647
+      ],
+      "summary": "Uzak WordPress REST çıktısındaki yazıları yerel blog kayıtlarına aktarır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:fetch_public_html",
+      "type": "function",
+      "name": "fetch_public_html",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        649,
+        671
+      ],
+      "summary": "Uzak genel URL’den zaman aşımı ve hata denetimiyle HTML içeriği indirir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_page_title",
+      "type": "function",
+      "name": "extract_page_title",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        681,
+        694
+      ],
+      "summary": "HTML belgesinden anlamlı sayfa başlığını çıkarıp normalize eder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_excerpt",
+      "type": "function",
+      "name": "extract_excerpt",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        696,
+        706
+      ],
+      "summary": "HTML veya metin içeriğinden temiz ve sınırlı uzunlukta özet üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_readable_html",
+      "type": "function",
+      "name": "extract_readable_html",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        708,
+        730
+      ],
+      "summary": "Uzak sayfanın ana içerik bölümünü güvenli ve okunabilir HTML parçası olarak çıkarır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_text_lines",
+      "type": "function",
+      "name": "extract_text_lines",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        732,
+        756
+      ],
+      "summary": "HTML içeriğini temiz, benzersiz ve anlamlı metin satırlarına dönüştürür.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_snippet_after",
+      "type": "function",
+      "name": "extract_snippet_after",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        758,
+        787
+      ],
+      "summary": "Belirli başlık veya metin dizisinden sonra gelen ilgili içerik parçasını çıkarır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:join_existing_lines",
+      "type": "function",
+      "name": "join_existing_lines",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        789,
+        802
+      ],
+      "summary": "Aday metin satırlarından mevcut olanları sırasını koruyarak birleştirir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:line_after_sequence",
+      "type": "function",
+      "name": "line_after_sequence",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        804,
+        813
+      ],
+      "summary": "Bir metin dizisinin ardından gelen ilk anlamlı satırı bulur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_images",
+      "type": "function",
+      "name": "extract_images",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        815,
+        835
+      ],
+      "summary": "HTML belgesindeki görsel URL, alt metin ve bağlam verilerini toplar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:find_image_by_alt",
+      "type": "function",
+      "name": "find_image_by_alt",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        837,
+        846
+      ],
+      "summary": "Alt metin eşleşmesine göre uygun görsel adayını bulur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:replace_remote_images",
+      "type": "function",
+      "name": "replace_remote_images",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        848,
+        870
+      ],
+      "summary": "İçerikteki uzak görselleri yerel medya kitaplığına alınmış karşılıklarıyla değiştirir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:sideload_image",
+      "type": "function",
+      "name": "sideload_image",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        872,
+        905
+      ],
+      "summary": "Uzak görseli WordPress medya kitaplığına indirip ek kaydı ve dosya metadatasını oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-taşıma",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:absolute_url",
+      "type": "function",
+      "name": "absolute_url",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        907,
+        926
+      ],
+      "summary": "Göreli veya protokolsüz bağlantıyı kaynak sayfa temelinde mutlak URL’ye çevirir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "seo",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:dom_from_html",
+      "type": "function",
+      "name": "dom_from_html",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        928,
+        941
+      ],
+      "summary": "HTML metnini libxml hata yönetimiyle sorgulanabilir DOMDocument nesnesine yükler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:cleanup_default_content",
+      "type": "function",
+      "name": "cleanup_default_content",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        943,
+        956
+      ],
+      "summary": "WordPress kurulumuyla gelen örnek sayfa ve yazıları güvenli biçimde kaldırır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_categories",
+      "type": "function",
+      "name": "seed_categories",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        958,
+        977
+      ],
+      "summary": "Başlangıç blog kategorilerini yoksa oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_products",
+      "type": "function",
+      "name": "seed_products",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        979,
+        1012
+      ],
+      "summary": "Myliba ürün modüllerini açıklama ve meta değerleriyle oluşturur veya günceller.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_solutions",
+      "type": "function",
+      "name": "seed_solutions",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1014,
+        1066
+      ],
+      "summary": "Persona ve ihtiyaç odaklı Myliba çözüm içeriklerini başlangıç verisi olarak üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_academy",
+      "type": "function",
+      "name": "seed_academy",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1068,
+        1198
+      ],
+      "summary": "Akademi açılış sayfası ile program kayıtlarını yapılandırılmış meta değerleriyle oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_trust_content",
+      "type": "function",
+      "name": "seed_trust_content",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1200,
+        1223
+      ],
+      "summary": "Referans, SSS ve güven unsuru içeriklerini başlangıç verisi olarak oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_landing_pages",
+      "type": "function",
+      "name": "seed_landing_pages",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1225,
+        1252
+      ],
+      "summary": "SEO ve dönüşüm hedefli açılış sayfalarını içerik ve meta değerleriyle oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:home_meta_defaults",
+      "type": "function",
+      "name": "home_meta_defaults",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1254,
+        1417
+      ],
+      "summary": "Ana sayfanın bölüm bazlı varsayılan meta metinlerini ve bağlantılarını üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "wp-cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:home_builder_defaults",
+      "type": "function",
+      "name": "home_builder_defaults",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1419,
+        1435
+      ],
+      "summary": "Ana sayfa kurucusunun varsayılan bölüm sırası ve yapılandırmasını JSON olarak üretir.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_navigation",
+      "type": "function",
+      "name": "seed_navigation",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1437,
+        1489
+      ],
+      "summary": "Ana, yardımcı ve alt bilgi menülerini oluşturup tema konumlarına bağlar.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:ensure_menu",
+      "type": "function",
+      "name": "ensure_menu",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1491,
+        1502
+      ],
+      "summary": "Adıyla bir WordPress menüsü bulur veya yoksa oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_menu_items",
+      "type": "function",
+      "name": "seed_menu_items",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1504,
+        1533
+      ],
+      "summary": "Menü öğelerini sayfa ya da özel URL hedefleriyle idempotent biçimde oluşturur.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:upsert_page",
+      "type": "function",
+      "name": "upsert_page",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1535,
+        1562
+      ],
+      "summary": "Slug üzerinden WordPress sayfasını oluşturur veya günceller; içerik, meta ve dil değerlerini kaydeder.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:upsert_event",
+      "type": "function",
+      "name": "upsert_event",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1574,
+        1585
+      ],
+      "summary": "Etkinlik kaydını tarih ve konum metalarıyla oluşturur veya günceller.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:upsert_post_type",
+      "type": "function",
+      "name": "upsert_post_type",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1602,
+        1628
+      ],
+      "summary": "Herhangi bir Myliba yazı türünü slug üzerinden idempotent oluşturur veya günceller; meta ve dil bilgisini uygular.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:apply_tr_first_mode",
+      "type": "function",
+      "name": "apply_tr_first_mode",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1637,
+        1751
+      ],
+      "summary": "Türkçe içeriği öne alır, İngilizce kayıtları ve rotaları düzenler, ana sayfa ayarlarını günceller ve rewrite kurallarını yeniler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "içerik-modeli",
+        "wp-cli"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:starter_content",
+      "type": "function",
+      "name": "starter_content",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        1760,
+        1769
+      ],
+      "summary": "Başlangıç kurulumunda kullanılacak temel içerik tanımlarını döndürür.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "başlangıç-verisi",
+        "wp-cli"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:Commands",
+      "type": "class",
+      "name": "Commands",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "lineRange": [
+        11,
+        1770
+      ],
+      "summary": "Myliba içeriğini kurma, taşıma, somutlaştırma ve dil modlarını yönetme komutlarını tek WP-CLI komut grubu altında toplar.",
+      "tags": [
+        "wp-cli",
+        "komut-sınıfı",
+        "içerik-taşıma",
+        "başlangıç-verisi"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "type": "file",
+      "name": "myliba-core.php",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "summary": "Myliba Core eklentisinin giriş noktasıdır; içerik modeli bileşenlerini yükler, WordPress kancalarını başlatır ve etkinleştirme/devre dışı bırakma işlemlerini yönetir.",
+      "tags": [
+        "eklenti-giriş-noktası",
+        "wordpress-kancaları",
+        "içerik-modeli"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:boot",
+      "type": "function",
+      "name": "boot",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "lineRange": [
+        37,
+        51
+      ],
+      "summary": "İlgili modülün WordPress action ve filter kancalarını bağlayarak çalışma zamanını başlatır.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:activate",
+      "type": "function",
+      "name": "activate",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "lineRange": [
+        54,
+        59
+      ],
+      "summary": "Eklenti etkinleştirildiğinde içerik türlerini ve varsayılanları hazırlayıp kalıcı bağlantı kurallarını yeniler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:deactivate",
+      "type": "function",
+      "name": "deactivate",
+      "filePath": "wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "lineRange": [
+        62,
+        65
+      ],
+      "summary": "Eklenti devre dışı bırakılırken WordPress rewrite kurallarını temizleyip yeniler.",
+      "tags": [
+        "işlev",
+        "wordpress",
+        "yaşam-döngüsü"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/index.php",
+      "type": "file",
+      "name": "index.php",
+      "filePath": "wordpress/wp-content/themes/index.php",
+      "summary": "Tema dizinine doğrudan erişimde çıktı üretmeyen standart WordPress koruma dosyasıdır.",
+      "tags": [
+        "wordpress",
+        "dizin-koruması",
+        "güvenlik"
+      ],
+      "complexity": "simple",
+      "languageNotes": "WordPress kancaları, namespaced yardımcılar ve çıktı kaçış fonksiyonlarıyla yazılmış PHP kodudur."
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:boot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:boot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:shortcode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:shortcode",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:demo_shortcode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:demo_shortcode",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:academy_shortcode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:academy_shortcode",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:render_form",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:render_form",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:handle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:handle",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:rate_limited",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:rate_limited",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:send_notification",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/forms.php:send_notification",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:boot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:boot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:restrict_upload_mimes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:restrict_upload_mimes",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:validate_upload",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:validate_upload",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:check_filetype_and_ext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:check_filetype_and_ext",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:sanitize_svg_file",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:sanitize_svg_file",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:admin_upload_notice",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/images.php:admin_upload_notice",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:boot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:boot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:enqueue_admin_assets",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:enqueue_admin_assets",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:register_meta_boxes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:register_meta_boxes",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_language_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_language_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_hero_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_hero_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_seo_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_seo_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_event_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_event_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_conversion_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_conversion_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_development_center_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_development_center_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_academy_page_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_academy_page_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_academy_program_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_academy_program_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_homepage_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_homepage_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_homepage_builder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_homepage_builder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_section_fields",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_section_fields",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_team_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_team_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_logo_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_logo_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_testimonial_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_testimonial_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_faq_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_faq_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_submission_box",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:render_submission_box",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_section_definitions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_section_definitions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_default_sections",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_default_sections",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_sections",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_sections",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_section_summary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:homepage_section_summary",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:is_homepage_post",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:is_homepage_post",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:save",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:save",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:save_homepage_builder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:save_homepage_builder",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_definitions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_definitions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:nonce",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:nonce",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_media",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_media",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_text",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_text",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_url",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_url",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_number",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_number",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_textarea",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_textarea",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_checkbox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_checkbox",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_select",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/meta.php:field_select",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:defaults",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:defaults",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:localized_keys",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:localized_keys",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:get_all",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:get_all",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:get",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:get",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:indexing_enabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:indexing_enabled",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:locales",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:locales",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:ensure_defaults",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:ensure_defaults",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:boot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:boot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:register_settings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:register_settings",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:sanitize",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/options.php:sanitize",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:boot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:boot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_bases",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_bases",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:register_localized_rewrite_rules",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:register_localized_rewrite_rules",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_query_vars",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_query_vars",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:enforce_route_locale",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:enforce_route_locale",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:redirect_missing_localized_solution",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:redirect_missing_localized_solution",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_post_type_link",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:localized_post_type_link",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:register",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:register",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:polylang_post_types",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:polylang_post_types",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:polylang_taxonomies",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/post-types.php:polylang_taxonomies",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:boot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:boot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:seo_plugin_active",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:seo_plugin_active",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_post_noindex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_post_noindex",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:staging_hosts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:staging_hosts",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_host",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_host",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:is_staging_host",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:is_staging_host",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:should_noindex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:should_noindex",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:robots",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:robots",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:robots_txt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:robots_txt",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:sitemaps_enabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:sitemaps_enabled",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:send_noindex_header",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:send_noindex_header",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:document_title",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:document_title",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_head",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_head",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_fallback_meta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_fallback_meta",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_hreflang",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_hreflang",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_schema",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:render_schema",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:breadcrumb_schema",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:breadcrumb_schema",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:article_schema",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:article_schema",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:faq_schema",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:faq_schema",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:is_academy_landing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:is_academy_landing",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:educational_organization_schema",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:educational_organization_schema",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:academy_course_schemas",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:academy_course_schemas",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_url",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/seo.php:current_url",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:tr_first",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:materialize_home",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_page",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_home_meta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_products",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_academy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_team",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_client_logos",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:import_current_rest_posts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:fetch_public_html",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_page_title",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_excerpt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_readable_html",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_text_lines",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_snippet_after",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:join_existing_lines",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:line_after_sequence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:extract_images",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:find_image_by_alt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:replace_remote_images",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:sideload_image",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:absolute_url",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:dom_from_html",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:cleanup_default_content",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_categories",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_products",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_solutions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_academy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_trust_content",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_landing_pages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:home_meta_defaults",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:home_builder_defaults",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_navigation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:ensure_menu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:seed_menu_items",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:upsert_page",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:upsert_event",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:upsert_post_type",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:apply_tr_first_mode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:starter_content",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "class:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:Commands",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "target": "class:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php:Commands",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:boot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:boot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:activate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:activate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:deactivate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "target": "function:wordpress/wp-content/plugins/myliba-core/myliba-core.php:deactivate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

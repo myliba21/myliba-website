@@ -1,0 +1,59 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 451,
+      "nonEmptyLines": 436,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 82,
+      "nonEmptyLines": 77,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 299,
+      "nonEmptyLines": 285,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 41,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}
