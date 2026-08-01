@@ -125,6 +125,14 @@ get_header();
         </div>
     </section>
 
+    <?php get_template_part('template-parts/client-logo-marquee', null, [
+        'label' => 'Canlı performans kültürü kuran ekipler',
+        'title' => 'Veriyle daha adil kararlar alan kurumların yanında.',
+        'text' => 'Farklı sektörlerden ekipler hedef, performans ve gelişim ritimlerini Myliba ile tek noktada buluşturuyor.',
+        'class' => 'software-trust-section',
+        'heading_id' => 'software-trust-title',
+    ]); ?>
+
     <section id="moduller" class="software-section software-modules">
         <div class="software-section__heading">
             <div>
@@ -136,11 +144,26 @@ get_header();
                 tespit edin. <strong>Kararlarınızı adil, şeffaf ve %100 objektif verilere dayandırın.</strong></p>
         </div>
         <div class="software-modules__grid">
-            <?php foreach ($modules as $module): ?>
+            <?php foreach ($modules as $module_index => $module): ?>
                 <article>
                     <div class="software-module__top">
                         <span><?php echo esc_html($module['number']); ?></span>
                         <i aria-hidden="true">↗</i>
+                    </div>
+                    <div class="software-module-visual software-module-visual--<?php echo esc_attr((string) ($module_index + 1)); ?>" aria-hidden="true">
+                        <?php if ($module_index === 0): ?>
+                            <span class="software-module-visual__node is-primary"></span>
+                            <span class="software-module-visual__node"></span>
+                            <span class="software-module-visual__node"></span>
+                            <span class="software-module-visual__node"></span>
+                            <i></i><i></i><i></i>
+                        <?php elseif ($module_index === 1): ?>
+                            <span style="--value: 72%"></span><span style="--value: 46%"></span><span style="--value: 88%"></span><span style="--value: 62%"></span>
+                        <?php elseif ($module_index === 2): ?>
+                            <span><i></i><b></b></span><span><i></i><b></b></span><span><i></i><b></b></span>
+                        <?php else: ?>
+                            <?php for ($cell = 0; $cell < 9; $cell++): ?><span></span><?php endfor; ?>
+                        <?php endif; ?>
                     </div>
                     <h3><?php echo esc_html($module['title']); ?></h3>
                     <p><?php echo esc_html($module['text']); ?></p>
@@ -151,6 +174,36 @@ get_header();
                     </ul>
                 </article>
             <?php endforeach; ?>
+        </div>
+    </section>
+
+    <section class="software-workflow" aria-labelledby="software-workflow-title">
+        <div class="software-workflow__inner">
+            <header class="software-workflow__heading">
+                <div>
+                    <p class="eyebrow">Tek ve sürekli bir çalışma döngüsü</p>
+                    <h2 id="software-workflow-title">Stratejiden insan kararlarına kesintisiz veri akışı.</h2>
+                </div>
+                <p>Yıl sonunu beklemeden hedefleri, aksiyonları, görüşmeleri ve gelişim sinyallerini aynı ritimde yönetin.</p>
+            </header>
+            <div class="software-workflow__grid">
+                <?php
+                $workflow_steps = [
+                    ['Hedefleri belirle', 'Stratejiyi OKR, KPI ve sorumluluklarla görünür hale getirin.'],
+                    ['Canlı takip et', 'İlerleme, aksiyon ve risk sinyallerini tek ekranda izleyin.'],
+                    ['Görüş ve geliştir', '1:1, geri bildirim ve takdiri günlük çalışma akışına taşıyın.'],
+                    ['Adil karar al', 'Terfi, ücret ve gelişim kararlarını yıl boyunca oluşan kanıtlara dayandırın.'],
+                ];
+                ?>
+                <?php foreach ($workflow_steps as $index => [$step_title, $step_text]): ?>
+                    <article>
+                        <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                        <div class="software-workflow__pulse" aria-hidden="true"><i></i><i></i><i></i></div>
+                        <h3><?php echo esc_html($step_title); ?></h3>
+                        <p><?php echo esc_html($step_text); ?></p>
+                    </article>
+                <?php endforeach; ?>
+            </div>
         </div>
     </section>
 
@@ -179,6 +232,39 @@ get_header();
         </div>
     </section>
 
+    <section class="software-section software-assurance" aria-labelledby="software-assurance-title">
+        <div class="software-assurance__heading">
+            <div>
+                <p class="eyebrow">Kurumsal ölçekte güvenli geçiş</p>
+                <h2 id="software-assurance-title">Sistemlerinize uyum sağlayan kontrollü bir kurulum.</h2>
+            </div>
+            <p>Organizasyon yapısı, hedef döngüsü, veri aktarımı ve entegrasyon kapsamı ihtiyaç analiziyle belirlenir; devreye alma süreci ekiplerinizle birlikte planlanır.</p>
+        </div>
+        <div class="software-assurance__grid">
+            <article>
+                <span>01</span>
+                <i aria-hidden="true">↔</i>
+                <h3>API ve veri bağlantıları</h3>
+                <p>KPI ve organizasyon verilerini mevcut İK, iş zekâsı ve operasyon araçlarınızla ilişkilendirin.</p>
+            </article>
+            <article>
+                <span>02</span>
+                <i aria-hidden="true">◎</i>
+                <h3>Kurumunuza özel yapı</h3>
+                <p>Ekip, hedef, değerlendirme ve yetkilendirme modelini organizasyonunuzun çalışma biçimine göre kurgulayın.</p>
+            </article>
+            <article>
+                <span>03</span>
+                <i aria-hidden="true">✓</i>
+                <h3>Kontrollü devreye alma</h3>
+                <p>İhtiyaç analizinden veri aktarımına kadar kurulum adımlarını kademeli ve izlenebilir biçimde ilerletin.</p>
+            </article>
+        </div>
+        <div class="software-assurance__rail" aria-label="Entegrasyon kapsamları">
+            <span>İK sistemleri</span><i></i><span>İş zekâsı</span><i></i><span>Operasyon verileri</span><i></i><span>API bağlantıları</span>
+        </div>
+    </section>
+
     <section class="software-section software-faq">
         <div class="software-faq__heading">
             <p class="eyebrow">Merak Edilenler</p>
@@ -199,15 +285,15 @@ get_header();
         </div>
     </section>
 
-    <!--     <section class="software-final">
+    <section class="software-final">
         <div class="software-final__content">
             <p class="eyebrow">Dönüşüm için ilk adım</p>
-            <h2>Şirketinizin “Görünmez İşletim Sistemini” Güncelleme Vakti Geldi.</h2>
+            <h2>Performansı yılda bir kez değil, her gün geliştirin.</h2>
             <p>Her organizasyonun performans yolculuğu farklıdır. İhtiyaçlarınıza özel kişiselleştirilmiş bir demo ile Myliba’nın şirketinizde nasıl değer yaratacağını birlikte keşfedelim.</p>
-            <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>">Kişiselleştirilmiş Demo Talep Edin <span aria-hidden="true">⭐</span></a>
+            <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>">Kişiselleştirilmiş Demo Talep Edin <span aria-hidden="true">→</span></a>
         </div>
         <div class="software-final__signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    </section> -->
+    </section>
 </div>
 
 <?php get_footer(); ?>
