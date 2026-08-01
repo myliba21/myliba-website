@@ -1060,7 +1060,35 @@ function myliba_solution_catalog(): array
         ],
     ];
 
-    return myliba_content_values($catalog);
+    $catalog = myliba_content_values($catalog);
+
+    if (function_exists('Myliba\\Core\\PageContent\\document')) {
+        $solution_posts = get_posts([
+            'post_type' => 'myliba_solution',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'orderby' => ['menu_order' => 'ASC', 'title' => 'ASC'],
+            'meta_key' => '_myliba_language',
+            'meta_value' => myliba_current_language(),
+            'suppress_filters' => false,
+        ]);
+
+        foreach ($solution_posts as $solution_post) {
+            $slug = $solution_post->post_name;
+            $catalog[$slug] = [
+                'title' => \Myliba\Core\PageContent\text($solution_post->ID, 'solution', 'hero_title'),
+                'kicker' => \Myliba\Core\PageContent\text($solution_post->ID, 'solution', 'kicker'),
+                'summary' => \Myliba\Core\PageContent\text($solution_post->ID, 'solution', 'hero_summary'),
+                'intro' => \Myliba\Core\PageContent\text($solution_post->ID, 'solution', 'intro'),
+                'items' => array_column(\Myliba\Core\PageContent\collection($solution_post->ID, 'solution', 'benefits'), 'text'),
+                'audiences' => array_column(\Myliba\Core\PageContent\collection($solution_post->ID, 'solution', 'audiences'), 'text'),
+                'metrics' => \Myliba\Core\PageContent\collection($solution_post->ID, 'solution', 'metrics'),
+                'steps' => \Myliba\Core\PageContent\collection($solution_post->ID, 'solution', 'steps'),
+            ];
+        }
+    }
+
+    return $catalog;
 }
 
 function myliba_solution_url(string $slug): string

@@ -8,34 +8,25 @@ $post_type_object = get_post_type_object($post_type);
 $title = $post_type_object?->labels->name ?: post_type_archive_title('', false);
 $is_report = $post_type === 'myliba_report';
 $archive_key = $is_report ? 'reports' : 'ebooks';
-$archive_content = $is_report ? [
-    'kicker' => 'Araştırma, veri ve gelecek sinyalleri',
-    'lead' => 'İş dünyasını, performans kültürünü ve liderliği şekillendiren güncel araştırmaları uygulanabilir içgörülere dönüştürün.',
-    'visual_label' => 'Myliba trend radarı',
-    'visual_title' => 'Sinyalleri okuyun. Değişime yön verin.',
-    'journey' => ['Araştır', 'Yorumla', 'Uygula'],
-    'principles' => ['Güncel araştırmalar', 'Uygulanabilir içgörüler', 'Kurumsal perspektif'],
-    'list_kicker' => 'Seçili araştırmalar',
-    'list_title' => 'Bugünün verisiyle yarının çalışma kültürünü okuyun.',
-    'list_text' => 'Raporları, araştırma notlarını ve öne çıkan trend analizlerini tek yerde keşfedin.',
-    'empty_title' => 'İlk araştırma dosyaları hazırlanıyor.',
-    'empty_text' => 'Yeni raporlar yayınlandığında bu alanda otomatik olarak yerini alacak. Bu sırada güncel yazılarımızı keşfedebilirsiniz.',
-    'topics' => ['Performans kültürü', 'Liderlik ve dönüşüm', 'İş dünyasının geleceği'],
-] : [
-    'kicker' => 'Rehberler, araçlar ve uygulama kaynakları',
-    'lead' => 'Hedef, liderlik ve kültür pratiklerini günlük işe taşımanıza yardımcı olacak indirilebilir kaynakları keşfedin.',
-    'visual_label' => 'Myliba uygulama kütüphanesi',
-    'visual_title' => 'Bilgiyi alın. Ekibinizle uygulayın.',
-    'journey' => ['Keşfet', 'İndir', 'Uygula'],
-    'principles' => ['Pratik rehberler', 'Kullanıma hazır araçlar', 'Ekip uygulamaları'],
-    'list_kicker' => 'Kaynak kütüphanesi',
-    'list_title' => 'Gelişimi günlük çalışma ritmine taşıyan kaynaklar.',
-    'list_text' => 'İhtiyacınıza uygun rehberi seçin, ekibinizle paylaşın ve uygulamaya başlayın.',
-    'empty_title' => 'İlk e‑kitaplar hazırlanıyor.',
-    'empty_text' => 'Yeni kaynaklar yayınlandığında bu alanda otomatik olarak yerini alacak. Bu sırada güncel yazılarımızı keşfedebilirsiniz.',
-    'topics' => ['OKR ve hedef yönetimi', 'Liderlik pratikleri', 'Kültür ve performans'],
+$development_context = myliba_development_center_context();
+$development_page_id = (int) ($development_context['page_id'] ?? 0);
+$shared_copy = static fn (string $key): string => \Myliba\Core\PageContent\text($development_page_id, 'development', 'archive_' . $key);
+$archive_copy = static fn (string $key): string => \Myliba\Core\PageContent\text($development_page_id, 'development', $archive_key . '_' . $key);
+$archive_rows = static fn (string $key): array => \Myliba\Core\PageContent\collection($development_page_id, 'development', $archive_key . '_' . $key);
+$archive_content = [
+    'kicker' => $archive_copy('kicker'),
+    'lead' => $archive_copy('lead'),
+    'visual_label' => $archive_copy('visual_label'),
+    'visual_title' => $archive_copy('visual_title'),
+    'journey' => array_column($archive_rows('journey'), 'label'),
+    'principles' => array_column($archive_rows('principles'), 'label'),
+    'list_kicker' => $archive_copy('list_kicker'),
+    'list_title' => $archive_copy('list_title'),
+    'list_text' => $archive_copy('list_text'),
+    'empty_title' => $archive_copy('empty_title'),
+    'empty_text' => $archive_copy('empty_text'),
+    'topics' => array_column($archive_rows('topics'), 'label'),
 ];
-$archive_content = myliba_content_values($archive_content);
 $resource_navigation = myliba_development_center_items();
 ?>
 <div class="development-resource-archive development-resource-archive--<?php echo esc_attr($archive_key); ?>">
@@ -43,13 +34,13 @@ $resource_navigation = myliba_development_center_items();
     <div class="development-shell">
         <div class="development-archive-hero__grid">
             <div class="development-archive-hero__copy">
-                <a class="development-archive-hero__back" href="<?php echo esc_url(myliba_page_url('development')); ?>">← <?php echo esc_html(myliba_text('Gelişim Merkezi')); ?></a>
+                <a class="development-archive-hero__back" href="<?php echo esc_url(myliba_page_url('development')); ?>">← <?php echo esc_html($shared_copy('back_label')); ?></a>
                 <p class="eyebrow"><?php echo esc_html($archive_content['kicker']); ?></p>
                 <h1><?php echo esc_html($title); ?></h1>
                 <p class="development-archive-hero__lead"><?php echo esc_html($archive_content['lead']); ?></p>
                 <div class="development-archive-hero__actions">
-                    <a class="myliba-button myliba-button--primary" href="#kaynaklar"><?php echo esc_html(myliba_text('Kaynakları keşfedin')); ?></a>
-                    <a class="development-archive-hero__text-link" href="<?php echo esc_url(myliba_page_url('development')); ?>"><?php echo esc_html(myliba_text('Tüm gelişim içerikleri')); ?> <span aria-hidden="true">→</span></a>
+                    <a class="myliba-button myliba-button--primary" href="#kaynaklar"><?php echo esc_html($shared_copy('discover_label')); ?></a>
+                    <a class="development-archive-hero__text-link" href="<?php echo esc_url(myliba_page_url('development')); ?>"><?php echo esc_html($shared_copy('all_content_label')); ?> <span aria-hidden="true">→</span></a>
                 </div>
             </div>
 
@@ -70,7 +61,7 @@ $resource_navigation = myliba_development_center_items();
             </div>
         </div>
 
-        <div class="development-archive-hero__principles" aria-label="<?php echo esc_attr(myliba_text('Kaynakların temel özellikleri')); ?>">
+        <div class="development-archive-hero__principles" aria-label="<?php echo esc_attr($shared_copy('principles_aria')); ?>">
             <?php foreach ($archive_content['principles'] as $index => $principle) : ?>
                 <span><b><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></b><?php echo esc_html($principle); ?></span>
             <?php endforeach; ?>
@@ -78,7 +69,7 @@ $resource_navigation = myliba_development_center_items();
     </div>
 </section>
 
-<nav class="development-resource-nav development-shell" aria-label="<?php echo esc_attr(myliba_text('Gelişim Merkezi içerik türleri')); ?>">
+<nav class="development-resource-nav development-shell" aria-label="<?php echo esc_attr($shared_copy('nav_aria')); ?>">
     <?php foreach ($resource_navigation as $resource_key => $resource_item) : ?>
         <a href="<?php echo esc_url($resource_item['url']); ?>" <?php echo $resource_key === $archive_key ? 'aria-current="page"' : ''; ?>>
             <span><?php echo esc_html($resource_item['label']); ?></span>
@@ -107,12 +98,12 @@ $resource_navigation = myliba_development_center_items();
                         </div>
                     <?php endif; ?>
                     <div class="development-resource-card__meta">
-                        <span><?php echo esc_html(myliba_text($is_report ? 'Rapor ve trend' : 'e‑Kitap')); ?></span>
+                        <span><?php echo esc_html($shared_copy($is_report ? 'report_item_label' : 'ebook_item_label')); ?></span>
                         <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
                     </div>
                     <h3><?php the_title(); ?></h3>
                     <p><?php echo esc_html(myliba_excerpt(get_the_ID(), 28)); ?></p>
-                    <strong><?php echo esc_html(myliba_text('İçeriği inceleyin')); ?> <span aria-hidden="true">→</span></strong>
+                    <strong><?php echo esc_html($shared_copy('item_link_label')); ?> <span aria-hidden="true">→</span></strong>
                 </a>
                 <?php $resource_index++; ?>
             <?php endwhile; ?>
@@ -122,12 +113,12 @@ $resource_navigation = myliba_development_center_items();
         <div class="development-resource-list__empty">
             <div class="development-resource-list__empty-copy">
                 <span aria-hidden="true">+</span>
-                <p class="eyebrow"><?php echo esc_html(myliba_text('Çok yakında')); ?></p>
+                <p class="eyebrow"><?php echo esc_html($shared_copy('empty_eyebrow')); ?></p>
                 <h3><?php echo esc_html($archive_content['empty_title']); ?></h3>
                 <p><?php echo esc_html($archive_content['empty_text']); ?></p>
-                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('blog')); ?>"><?php echo esc_html(myliba_text('Blog yazılarını keşfedin')); ?></a>
+                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('blog')); ?>"><?php echo esc_html($shared_copy('empty_button_label')); ?></a>
             </div>
-            <div class="development-resource-list__topics" aria-label="<?php echo esc_attr(myliba_text('Yaklaşan içerik konuları')); ?>">
+            <div class="development-resource-list__topics" aria-label="<?php echo esc_attr($shared_copy('topics_aria')); ?>">
                 <?php foreach ($archive_content['topics'] as $index => $topic) : ?>
                     <span><b><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></b><?php echo esc_html($topic); ?></span>
                 <?php endforeach; ?>

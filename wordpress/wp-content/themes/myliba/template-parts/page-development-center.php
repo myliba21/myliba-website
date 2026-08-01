@@ -8,13 +8,15 @@ get_header();
 $context = myliba_development_center_context();
 $items = myliba_development_center_items();
 $page_id = (int) $context['page_id'];
+$copy = static fn (string $key): string => \Myliba\Core\PageContent\text($page_id, 'development', $key);
+$card_keys = ['ebooks' => 'ebooks', 'reports' => 'reports', 'blog' => 'blog', 'events' => 'events'];
 ?>
 <section class="development-hero">
     <div class="development-shell">
-        <p class="eyebrow"><?php echo esc_html($context['eyebrow']); ?></p>
-        <h1><?php echo esc_html($context['title']); ?></h1>
-        <?php if ($context['subtitle'] !== '') : ?>
-            <p class="development-hero__lead"><?php echo esc_html($context['subtitle']); ?></p>
+        <p class="eyebrow"><?php echo esc_html($copy('hero_eyebrow')); ?></p>
+        <h1><?php echo esc_html($copy('hero_title')); ?></h1>
+        <?php if ($copy('hero_text') !== '') : ?>
+            <p class="development-hero__lead"><?php echo esc_html($copy('hero_text')); ?></p>
         <?php endif; ?>
     </div>
 </section>
@@ -27,15 +29,18 @@ $page_id = (int) $context['page_id'];
 
 <section class="development-index development-shell">
     <header class="development-index__heading">
-        <p class="eyebrow"><?php echo esc_html($context['section_eyebrow']); ?></p>
-        <h2><?php echo esc_html($context['section_title']); ?></h2>
-        <?php if ($context['section_text'] !== '') : ?>
-            <p><?php echo esc_html($context['section_text']); ?></p>
+        <p class="eyebrow"><?php echo esc_html($copy('section_eyebrow')); ?></p>
+        <h2><?php echo esc_html($copy('section_title')); ?></h2>
+        <?php if ($copy('section_text') !== '') : ?>
+            <p><?php echo esc_html($copy('section_text')); ?></p>
         <?php endif; ?>
     </header>
 
     <div class="development-index__grid">
         <?php foreach ($items as $item_key => $item) :
+            $content_key = $card_keys[$item_key] ?? $item_key;
+            $item['label'] = $copy('card_' . $content_key . '_label');
+            $item['description'] = $copy('card_' . $content_key . '_text');
             $latest_args = [
                 'post_type' => $item['post_type'],
                 'post_status' => 'publish',
@@ -72,9 +77,9 @@ $page_id = (int) $context['page_id'];
                     <p><?php echo esc_html($card_description); ?></p>
                 <?php endif; ?>
                 <?php if ($latest_title !== '') : ?>
-                    <span class="development-card__latest"><?php echo esc_html(myliba_text('Son içerik:')); ?> <?php echo esc_html($latest_title); ?></span>
+                    <span class="development-card__latest"><?php echo esc_html($copy('latest_prefix')); ?> <?php echo esc_html($latest_title); ?></span>
                 <?php endif; ?>
-                <strong><?php echo esc_html($context['card_cta']); ?> <span aria-hidden="true">→</span></strong>
+                <strong><?php echo esc_html($copy('card_cta')); ?> <span aria-hidden="true">→</span></strong>
             </a>
         <?php endforeach; ?>
     </div>

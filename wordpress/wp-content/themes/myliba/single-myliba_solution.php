@@ -4,33 +4,20 @@ get_header();
 while (have_posts()) :
     the_post();
     $post_id = get_the_ID();
-    $slug = (string) get_post_field('post_name', $post_id);
-    $catalog = myliba_solution_catalog();
-    $solution = $catalog[$slug] ?? [
-        'title' => get_the_title(),
-        'kicker' => (string) myliba_meta('_myliba_label', $post_id, myliba_text('Myliba çözümü')),
-        'summary' => (string) myliba_meta('_myliba_hero_subtitle', $post_id, myliba_excerpt($post_id, 30)),
-        'intro' => (string) myliba_meta('_myliba_solution', $post_id, myliba_excerpt($post_id, 45)),
-        'items' => myliba_lines((string) myliba_meta('_myliba_benefits', $post_id)),
-        'steps' => [],
+    $content_copy = static fn (string $key): string => \Myliba\Core\PageContent\text($post_id, 'solution', $key);
+    $content_rows = static fn (string $key): array => \Myliba\Core\PageContent\collection($post_id, 'solution', $key);
+    $solution = [
+        'title' => $content_copy('hero_title'),
+        'kicker' => $content_copy('kicker'),
+        'summary' => $content_copy('hero_summary'),
+        'intro' => $content_copy('intro'),
+        'items' => array_column($content_rows('benefits'), 'text'),
+        'audiences' => array_column($content_rows('audiences'), 'text'),
+        'metrics' => $content_rows('metrics'),
+        'steps' => $content_rows('steps'),
     ];
-    $stored_kicker = trim((string) myliba_meta('_myliba_label', $post_id));
-    $stored_intro = trim((string) myliba_meta('_myliba_solution', $post_id));
-    $stored_items = myliba_lines((string) myliba_meta('_myliba_benefits', $post_id));
-    $post_excerpt = trim((string) get_the_excerpt());
-
-    if ($stored_kicker !== '') {
-        $solution['kicker'] = $stored_kicker;
-    }
-    if ($stored_intro !== '') {
-        $solution['intro'] = $stored_intro;
-    }
-    if ($stored_items) {
-        $solution['items'] = $stored_items;
-    }
-
-    $title = (string) myliba_meta('_myliba_hero_title', $post_id, get_the_title());
-    $summary = (string) myliba_meta('_myliba_hero_subtitle', $post_id, $post_excerpt !== '' ? $post_excerpt : $solution['summary']);
+    $title = $solution['title'];
+    $summary = $solution['summary'];
     $editor_content = trim(wp_strip_all_tags((string) get_the_content()));
     $audiences = !empty($solution['audiences']) ? $solution['audiences'] : [
         myliba_text('İnsan ve kültür ekipleri'),

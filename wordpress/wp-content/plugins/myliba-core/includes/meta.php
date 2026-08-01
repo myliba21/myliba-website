@@ -23,6 +23,11 @@ function enqueue_admin_assets(): void
 
 function register_meta_boxes(string $post_type): void
 {
+    $current_post = get_post();
+    $is_special_page = $post_type === 'page'
+        && $current_post instanceof \WP_Post
+        && (is_homepage_post($current_post->ID) || in_array($current_post->post_name, ['okr-kultur-akademisi', 'okr-culture-academy'], true));
+
     if (in_array($post_type, ['page', 'post', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_case_study', 'myliba_landing', 'myliba_event', 'myliba_ebook', 'myliba_report', 'myliba_team', 'myliba_client_logo', 'myliba_faq', 'myliba_testimonial'], true)) {
         add_meta_box('myliba_language', __('Myliba Language', 'myliba'), __NAMESPACE__ . '\\render_language_box', $post_type, 'side');
     }
@@ -32,14 +37,22 @@ function register_meta_boxes(string $post_type): void
         add_meta_box('myliba_seo', __('Myliba SEO', 'myliba'), __NAMESPACE__ . '\\render_seo_box', $post_type, 'normal');
     }
 
-    if (in_array($post_type, ['page', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_landing', 'myliba_ebook', 'myliba_report'], true)) {
+    $uses_conversion_template = in_array($post_type, ['myliba_product', 'myliba_academy', 'myliba_landing', 'myliba_ebook', 'myliba_report'], true)
+        || ($post_type === 'page'
+            && $current_post instanceof \WP_Post
+            && get_page_template_slug($current_post->ID) === 'template-landing.php');
+
+    if ($uses_conversion_template && !$is_special_page) {
         add_meta_box('myliba_conversion_content', __('Conversion Content', 'myliba'), __NAMESPACE__ . '\\render_conversion_box', $post_type, 'normal');
     }
 
     if ($post_type === 'page') {
-        add_meta_box('myliba_homepage_sections', __('Myliba Homepage Sections', 'myliba'), __NAMESPACE__ . '\\render_homepage_box', $post_type, 'normal');
-        add_meta_box('myliba_academy_page', __('Myliba Academy Landing Page', 'myliba'), __NAMESPACE__ . '\\render_academy_page_box', $post_type, 'normal');
-        add_meta_box('myliba_development_center', 'Myliba Gelişim Merkezi', __NAMESPACE__ . '\\render_development_center_box', $post_type, 'normal');
+        if ($current_post instanceof \WP_Post && is_homepage_post($current_post->ID)) {
+            add_meta_box('myliba_homepage_sections', __('Myliba Homepage Sections', 'myliba'), __NAMESPACE__ . '\\render_homepage_box', $post_type, 'normal');
+        }
+        if ($current_post instanceof \WP_Post && in_array($current_post->post_name, ['okr-kultur-akademisi', 'okr-culture-academy'], true)) {
+            add_meta_box('myliba_academy_page', __('Myliba Academy Landing Page', 'myliba'), __NAMESPACE__ . '\\render_academy_page_box', $post_type, 'normal');
+        }
     }
 
     if ($post_type === 'myliba_academy') {
@@ -762,9 +775,16 @@ function homepage_section_summary(int $post_id, string $key): string
 
 function is_homepage_post(int $post_id): bool
 {
-    return $post_id > 0
-        && get_option('show_on_front') === 'page'
-        && (int) get_option('page_on_front') === $post_id;
+    if ($post_id <= 0) {
+        return false;
+    }
+
+    if (get_option('show_on_front') === 'page' && (int) get_option('page_on_front') === $post_id) {
+        return true;
+    }
+
+    $post = get_post($post_id);
+    return $post instanceof \WP_Post && in_array($post->post_name, ['tr', 'en'], true);
 }
 
 function save(int $post_id, \WP_Post $post): void
