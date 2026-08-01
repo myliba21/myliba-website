@@ -33,12 +33,14 @@ $solutions = myliba_solution_catalog();
     </div>
 </section>
 
-<section class="solutions-cta solutions-shell">
-    <div>
-        <p class="eyebrow"><?php echo esc_html(myliba_text('Birlikte belirleyelim')); ?></p>
-        <h2><?php echo esc_html(myliba_text('Hangi çözüm size uygun?')); ?></h2>
-        <p><?php echo esc_html(myliba_text('İhtiyacınıza en uygun programı veya danışmanlık modelini bulmak için Myliba ile tanışın.')); ?></p>
+<section class="solutions-cta">
+    <div class="solutions-cta__inner solutions-shell">
+        <div class="solutions-cta__copy">
+            <p class="eyebrow"><?php echo esc_html(myliba_text('Birlikte belirleyelim')); ?></p>
+            <h2><?php echo esc_html(myliba_text('Hangi çözüm size uygun?')); ?></h2>
+            <p><?php echo esc_html(myliba_text('İhtiyacınıza en uygun programı veya danışmanlık modelini bulmak için Myliba ile tanışın.')); ?></p>
+        </div>
+        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html(myliba_text('Uzmanlarımızla görüşün')); ?></a>
     </div>
-    <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html(myliba_text('Uzmanlarımızla görüşün')); ?></a>
 </section>
 <?php get_footer(); ?>

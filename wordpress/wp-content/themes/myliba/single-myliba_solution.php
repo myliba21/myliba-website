@@ -175,15 +175,17 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <section class="solutions-cta solutions-shell">
-            <div>
-                <p class="eyebrow"><?php echo esc_html(myliba_text('30 dakikalık keşif görüşmesi')); ?></p>
-                <h2><?php echo esc_html(myliba_text('İhtiyacınıza uygun yolculuğu birlikte tasarlayalım.')); ?></h2>
-                <p><?php echo esc_html(myliba_text('Kurumunuzun hedeflerini dinleyelim; doğru programı, kapsamı ve çalışma modelini birlikte netleştirelim.')); ?></p>
-            </div>
-            <div class="solutions-cta__actions">
-                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html(myliba_text('Görüşme planlayın')); ?></a>
-                <a class="solutions-cta__secondary" href="<?php echo esc_url(myliba_page_url('solutions')); ?>"><?php echo esc_html(myliba_text('Tüm çözümleri görün')); ?></a>
+        <section class="solutions-cta">
+            <div class="solutions-cta__inner solutions-shell">
+                <div class="solutions-cta__copy">
+                    <p class="eyebrow"><?php echo esc_html(myliba_text('30 dakikalık keşif görüşmesi')); ?></p>
+                    <h2><?php echo esc_html(myliba_text('İhtiyacınıza uygun yolculuğu birlikte tasarlayalım.')); ?></h2>
+                    <p><?php echo esc_html(myliba_text('Kurumunuzun hedeflerini dinleyelim; doğru programı, kapsamı ve çalışma modelini birlikte netleştirelim.')); ?></p>
+                </div>
+                <div class="solutions-cta__actions">
+                    <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html(myliba_text('Görüşme planlayın')); ?></a>
+                    <a class="solutions-cta__secondary" href="<?php echo esc_url(myliba_page_url('solutions')); ?>"><?php echo esc_html(myliba_text('Tüm çözümleri görün')); ?></a>
+                </div>
             </div>
         </section>
     </article>
