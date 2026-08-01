@@ -29,20 +29,6 @@ $image = static function (string $key, string $class = '', bool $eager = false) 
 };
 
 $programs = myliba_get_entries('myliba_academy', -1);
-$logos = myliba_get_entries('myliba_client_logo', 30, ['meta_query' => []]);
-$logo_items = [];
-while ($logos->have_posts()) {
-    $logos->the_post();
-    if (!has_post_thumbnail()) {
-        continue;
-    }
-    $logo_items[] = [
-        'id' => get_the_ID(),
-        'title' => get_the_title(),
-        'url' => (string) get_post_meta(get_the_ID(), '_myliba_logo_url', true),
-    ];
-}
-wp_reset_postdata();
 $testimonials = myliba_get_entries('myliba_testimonial', 12);
 $faq_group = $meta('_myliba_academy_faq_group');
 $faq_args = [];
@@ -180,37 +166,15 @@ get_header();
         </section>
     <?php endif; ?>
 
-    <?php if ($logo_items && $meta('_myliba_academy_trust_title') !== ''): ?>
-        <section class="section band trust-section academy-v2-trust-section" aria-labelledby="academy-trust-title">
-            <div class="trust-section__heading">
-                <div class="trust-section__heading-copy">
-                    <?php if ($meta('_myliba_academy_trust_label') !== ''): ?>
-                        <span class="trust-section__eyebrow">
-                            <svg aria-hidden="true" viewBox="0 0 24 24">
-                                <path d="m9 12 2 2 4-4" />
-                                <path d="M12 3 4.5 6v5.5c0 4.6 3.2 7.7 7.5 9.5 4.3-1.8 7.5-4.9 7.5-9.5V6L12 3Z" />
-                            </svg>
-                            <?php echo esc_html($meta('_myliba_academy_trust_label')); ?>
-                        </span>
-                    <?php endif; ?>
-                    <strong id="academy-trust-title"><?php echo esc_html($meta('_myliba_academy_trust_title')); ?></strong>
-                    <?php if ($meta('_myliba_academy_trust_text') !== ''): ?>
-                        <p><?php echo esc_html($meta('_myliba_academy_trust_text')); ?></p><?php endif; ?>
-                </div>
-            </div>
-            <div class="trust-marquee" aria-label="<?php echo esc_attr($meta('_myliba_academy_trust_title')); ?>">
-                <div class="trust-marquee__track">
-                    <?php for ($repeat = 0; $repeat < 2; $repeat++): ?>
-                        <?php foreach ($logo_items as $logo_item): ?>
-                            <?php $logo_image = get_the_post_thumbnail($logo_item['id'], 'medium', ['loading' => 'lazy', 'alt' => $logo_item['title']]); ?>
-                            <?php if ($logo_item['url']): ?><a class="trust-logo" href="<?php echo esc_url($logo_item['url']); ?>"
-                                    aria-label="<?php echo esc_attr($logo_item['title']); ?>"><?php echo wp_kses_post($logo_image); ?></a>
-                            <?php else: ?><span class="trust-logo"><?php echo wp_kses_post($logo_image); ?></span><?php endif; ?>
-                        <?php endforeach; ?>
-                    <?php endfor; ?>
-                </div>
-            </div>
-        </section>
+    <?php if ($meta('_myliba_academy_trust_title') !== ''): ?>
+        <?php get_template_part('template-parts/client-logo-marquee', null, [
+            'label' => $meta('_myliba_academy_trust_label'),
+            'title' => $meta('_myliba_academy_trust_title'),
+            'text' => $meta('_myliba_academy_trust_text'),
+            'class' => 'academy-v2-trust-section',
+            'heading_id' => 'academy-trust-title',
+            'limit' => 30,
+        ]); ?>
     <?php endif; ?>
 
     <?php if ($meta('_myliba_academy_programs_title') !== ''): ?>
@@ -275,7 +239,8 @@ get_header();
                                 <p class="academy-v2-program__lead"><?php echo esc_html($excerpt); ?></p><?php endif; ?>
                             <?php if ($show_detailed_content): ?>
                                 <div class="academy-v2-program__description">
-                                    <?php echo wp_kses_post(apply_filters('the_content', $content)); ?></div><?php endif; ?>
+                                    <?php echo wp_kses_post(apply_filters('the_content', $content)); ?>
+                                </div><?php endif; ?>
                             <?php if ($start_period !== '' || $certificate !== ''): ?>
                                 <div class="academy-v2-program__meta">
                                     <?php if ($start_period !== ''): ?><strong><?php echo esc_html($start_period); ?></strong><?php endif; ?>
@@ -383,7 +348,8 @@ get_header();
                                 <?php else: ?>
                                     <circle cx="9" cy="9" r="3" />
                                     <circle cx="17" cy="10" r="2.25" />
-                                    <path d="M3.5 19c.5-3.1 2.3-4.7 5.5-4.7s5 1.6 5.5 4.7M14 15.3c.8-.7 1.8-1 3.1-1 2.2 0 3.4 1.2 3.8 3.5" />
+                                    <path
+                                        d="M3.5 19c.5-3.1 2.3-4.7 5.5-4.7s5 1.6 5.5 4.7M14 15.3c.8-.7 1.8-1 3.1-1 2.2 0 3.4 1.2 3.8 3.5" />
                                 <?php endif; ?>
                             </svg>
                         </span>
@@ -413,11 +379,14 @@ get_header();
                     $testimonials->the_post(); ?>
                     <article>
                         <div class="academy-v2-testimonial__person">
-                            <?php if (has_post_thumbnail()): ?>            <?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail', ['loading' => 'lazy']); ?>        <?php endif; ?>
+                            <?php if (has_post_thumbnail()): ?>
+                                <?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail', ['loading' => 'lazy']); ?>
+                            <?php endif; ?>
                             <div>
                                 <h3><?php the_title(); ?></h3>
                                 <p><?php echo esc_html(get_post_meta(get_the_ID(), '_myliba_person_role', true)); ?> ·
-                                    <?php echo esc_html(get_post_meta(get_the_ID(), '_myliba_company', true)); ?></p>
+                                    <?php echo esc_html(get_post_meta(get_the_ID(), '_myliba_company', true)); ?>
+                                </p>
                             </div>
                         </div>
                         <blockquote><?php echo wp_kses_post(get_the_content()); ?></blockquote>
@@ -439,7 +408,7 @@ get_header();
     ]);
     ?>
 
-    <?php if ($meta('_myliba_academy_final_title') !== ''): ?>
+    <!--     <?php if ($meta('_myliba_academy_final_title') !== ''): ?>
         <section id="iletisim" class="section academy-v2-final">
             <div>
                 <h2><?php echo esc_html($meta('_myliba_academy_final_title')); ?></h2>
@@ -455,7 +424,7 @@ get_header();
                         href="#programlar"><?php echo esc_html($meta('_myliba_academy_final_secondary_label')); ?></a><?php endif; ?>
             </div>
         </section>
-    <?php endif; ?>
+    <?php endif; ?> -->
 </div>
 
 <?php if ($meta('_myliba_academy_contact_title') !== ''): ?>
@@ -463,10 +432,17 @@ get_header();
         <button class="academy-v2-dialog__close" type="button" data-academy-form-close
             aria-label="<?php esc_attr_e('Close', 'myliba'); ?>">×</button>
         <div class="academy-v2-dialog__intro">
-            <p class="eyebrow"><?php echo esc_html($meta('_myliba_eyebrow')); ?></p>
-            <h2 id="academy-dialog-title"><?php echo esc_html($meta('_myliba_academy_contact_title')); ?></h2>
+            <p class="eyebrow">
+                <?php echo esc_html($meta('_myliba_eyebrow')); ?>
+            </p>
+            <h2 id="academy-dialog-title">
+                <?php echo esc_html($meta('_myliba_academy_contact_title')); ?>
+            </h2>
             <?php if ($meta('_myliba_academy_contact_text') !== ''): ?>
-                <p><?php echo esc_html($meta('_myliba_academy_contact_text')); ?></p><?php endif; ?>
+                <p>
+                    <?php echo esc_html($meta('_myliba_academy_contact_text')); ?>
+                </p>
+            <?php endif; ?>
         </div>
         <?php echo do_shortcode('[myliba_academy_form]'); ?>
     </dialog>

@@ -4,7 +4,6 @@ get_header();
 $post_id = get_queried_object_id();
 $demo_url = myliba_demo_url();
 $products = static fn() => myliba_get_entries('myliba_product', 9);
-$client_logos = static fn() => myliba_get_entries('myliba_client_logo', 24, ['meta_query' => []]);
 $hero_banner_images = myliba_hero_banner_images();
 $performance_images = myliba_home_media_images('performance', $post_id);
 $hero_metrics = myliba_home_rows('hero_metrics');
@@ -95,71 +94,12 @@ foreach (myliba_home_sections($post_id) as $section) {
             break;
 
         case 'trust_bar':
-            $logo_query = $client_logos();
-            $logo_posts = [];
-            if ($logo_query->have_posts()) {
-                while ($logo_query->have_posts()) {
-                    $logo_query->the_post();
-                    if (has_post_thumbnail()) {
-                        $logo_posts[] = get_post();
-                    }
-                }
-                wp_reset_postdata();
-            }
-            ?>
-            <section class="section band trust-section">
-                <div class="trust-section__heading">
-                    <div class="trust-section__heading-copy">
-                        <?php if ($logo_posts): ?>
-                            <span class="trust-section__eyebrow">
-                                <svg aria-hidden="true" viewBox="0 0 24 24">
-                                    <path d="m9 12 2 2 4-4" />
-                                    <path d="M12 3 4.5 6v5.5c0 4.6 3.2 7.7 7.5 9.5 4.3-1.8 7.5-4.9 7.5-9.5V6L12 3Z" />
-                                </svg>
-                                <?php echo esc_html(myliba_home_value('trust_logo_label')); ?>
-                            </span>
-                        <?php endif; ?>
-                        <strong><?php echo esc_html(myliba_home_value('trust_title')); ?></strong>
-                        <p><?php esc_html_e('Proven experience across companies, industries and leadership teams.', 'myliba'); ?>
-                        </p>
-                    </div>
-                    <!--        <div class="trust-section__assurance" aria-hidden="true">
-                        <span class="trust-section__assurance-icon">
-                            <svg viewBox="0 0 24 24"><path d="m8.5 12.5 2.2 2.2 4.8-5"/><path d="M12 2.8 5 5.6v5.6c0 4.3 2.7 7.6 7 9.7 4.3-2.1 7-5.4 7-9.7V5.6L12 2.8Z"/></svg>
-                        </span>
-                        <span><small><?php esc_html_e('Trusted partnership', 'myliba'); ?></small><b><?php esc_html_e('Measurable impact', 'myliba'); ?></b></span>
-                    </div> -->
-                </div>
-                <?php if ($logo_posts): ?>
-                    <div class="trust-marquee" aria-label="<?php esc_attr_e('Client logos', 'myliba'); ?>">
-                        <div class="trust-marquee__track">
-                            <?php for ($repeat = 0; $repeat < 2; $repeat++): ?>
-                                <?php foreach ($logo_posts as $logo_post): ?>
-                                    <?php
-                                    $logo_url = (string) myliba_meta('_myliba_logo_url', $logo_post->ID);
-                                    $logo_name = get_the_title($logo_post);
-                                    $logo_image = get_the_post_thumbnail($logo_post->ID, 'medium', [
-                                        'loading' => 'lazy',
-                                        'alt' => $logo_name,
-                                    ]);
-                                    ?>
-                                    <?php if ($logo_url !== ''): ?>
-                                        <a class="trust-logo" href="<?php echo esc_url($logo_url); ?>"
-                                            aria-label="<?php echo esc_attr($logo_name); ?>"><?php echo wp_kses_post($logo_image); ?></a>
-                                    <?php else: ?>
-                                        <span class="trust-logo"><?php echo wp_kses_post($logo_image); ?></span>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            <?php endfor; ?>
-                        </div>
-                    </div>
-                <?php else: ?>
-                    <div class="trust-row">
-                        <?php foreach ($trust_items as $item): ?><span><?php echo esc_html($item); ?></span><?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            </section>
-            <?php
+            get_template_part('template-parts/client-logo-marquee', null, [
+                'label' => myliba_home_value('trust_logo_label'),
+                'title' => myliba_home_value('trust_title'),
+                'text' => __('Proven experience across companies, industries and leadership teams.', 'myliba'),
+                'fallback_items' => $trust_items,
+            ]);
             break;
 
         case 'social_proof':

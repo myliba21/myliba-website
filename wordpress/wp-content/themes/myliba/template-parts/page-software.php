@@ -56,10 +56,15 @@ get_header();
         <div class="software-hero__content">
             <p class="eyebrow">Myliba Yazılım <span>|</span> Veriyle Konuşan, Gelişim ve İnsan Odaklı Yazılım</p>
             <h1>Formları Tarihe Gömün: <em>%100 Objektif Verilerle</em> Anlık Performans Yönetimi</h1>
-            <p class="software-hero__lead">Performans değerlendirmeyi yılda bir kez yapılan öznel bir notlama süreci olmaktan çıkarın. Myliba Yazılım ile hedef ve performans yönetimini canlı analitik verilerle takip edin. Terfi, ücret ve gelişim gibi kritik lider kararlarını adil, şeffaf ve güven veren verilere dayandırın.</p>
+            <p class="software-hero__lead">Performans değerlendirmeyi yılda bir kez yapılan öznel bir notlama süreci
+                olmaktan çıkarın. Myliba Yazılım ile hedef ve performans yönetimini canlı analitik verilerle takip edin.
+                Terfi, ücret ve gelişim gibi kritik lider kararlarını adil, şeffaf ve güven veren verilere dayandırın.
+            </p>
             <div class="software-hero__actions">
-                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>">Demo Talep Edin</a>
-                <a class="myliba-button myliba-button--ghost" href="#moduller">Modülleri Keşfedin <span aria-hidden="true">↓</span></a>
+                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>">Demo Talep
+                    Edin</a>
+                <a class="myliba-button myliba-button--ghost" href="#moduller">Modülleri Keşfedin <span
+                        aria-hidden="true">↓</span></a>
             </div>
             <div class="software-hero__proof" aria-label="Myliba yazılım avantajları">
                 <span><i></i> Canlı veri</span>
@@ -99,8 +104,8 @@ get_header();
                                 ['Uzman Katkı', '6', 'violet'],
                                 ['Kritik Yetenek', '3', 'navy'],
                             ];
-                            foreach ($boxes as [$label, $count, $tone]) :
-                            ?>
+                            foreach ($boxes as [$label, $count, $tone]):
+                                ?>
                                 <div class="software-ninebox__cell software-ninebox__cell--<?php echo esc_attr($tone); ?>">
                                     <span><?php echo esc_html($label); ?></span>
                                     <strong><?php echo esc_html($count); ?></strong>
@@ -113,8 +118,10 @@ get_header();
                     </div>
                 </div>
             </div>
-            <div class="software-floating-card software-floating-card--score"><strong>94</strong><span>Adil Karar Skoru</span></div>
-            <div class="software-floating-card software-floating-card--ai"><span>✦ AI İçgörüsü</span><strong>3 kritik yetenek yükselişte</strong></div>
+            <div class="software-floating-card software-floating-card--score"><strong>94</strong><span>Adil Karar
+                    Skoru</span></div>
+            <div class="software-floating-card software-floating-card--ai"><span>✦ AI İçgörüsü</span><strong>3 kritik
+                    yetenek yükselişte</strong></div>
         </div>
     </section>
 
@@ -124,10 +131,12 @@ get_header();
                 <p class="eyebrow">Tek platform. Dört güçlü odak.</p>
                 <h2>Adil Karar Yönetimi</h2>
             </div>
-            <p>Terfi, ücret, prim ve liderlik kararlarını; OKR, KPI, aksiyonlar, 360° analizler, kültür, bağlılık ve yapay zekâ içgörüleriyle destekleyin. Dedikodu, mobbing ve adaletsizlik gibi kültürel virüsleri erkenden tespit edin. <strong>Kararlarınızı adil, şeffaf ve %100 objektif verilere dayandırın.</strong></p>
+            <p>Terfi, ücret, prim ve liderlik kararlarını; OKR, KPI, aksiyonlar, 360° analizler, kültür, bağlılık ve
+                yapay zekâ içgörüleriyle destekleyin. Dedikodu, mobbing ve adaletsizlik gibi kültürel virüsleri erkenden
+                tespit edin. <strong>Kararlarınızı adil, şeffaf ve %100 objektif verilere dayandırın.</strong></p>
         </div>
         <div class="software-modules__grid">
-            <?php foreach ($modules as $module) : ?>
+            <?php foreach ($modules as $module): ?>
                 <article>
                     <div class="software-module__top">
                         <span><?php echo esc_html($module['number']); ?></span>
@@ -136,7 +145,7 @@ get_header();
                     <h3><?php echo esc_html($module['title']); ?></h3>
                     <p><?php echo esc_html($module['text']); ?></p>
                     <ul>
-                        <?php foreach ($module['items'] as $item) : ?>
+                        <?php foreach ($module['items'] as $item): ?>
                             <li><?php echo esc_html($item); ?></li>
                         <?php endforeach; ?>
                     </ul>
@@ -154,10 +163,11 @@ get_header();
                     <small>Formülümüz</small>
                     <strong>Performans <span>=</span> Potansiyel <span>−</span> Müdahale</strong>
                 </div>
-                <p>İnsanlara daha fazla güven, net bir odak ve gelişim alanı sunduğunuzda performans doğal bir ritimle ortaya çıkar. Myliba Yazılım bu anlayışı canlı verilere dönüştürür.</p>
+                <p>İnsanlara daha fazla güven, net bir odak ve gelişim alanı sunduğunuzda performans doğal bir ritimle
+                    ortaya çıkar. Myliba Yazılım bu anlayışı canlı verilere dönüştürür.</p>
             </div>
             <div class="software-stats">
-                <?php foreach ($stats as $index => [$value, $label, $text]) : ?>
+                <?php foreach ($stats as $index => [$value, $label, $text]): ?>
                     <article>
                         <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
                         <strong><?php echo esc_html($value); ?></strong>
@@ -176,16 +186,20 @@ get_header();
             <p>Yeni nesil performans yönetimine geçerken bilmek isteyeceğiniz temel noktalar.</p>
         </div>
         <div class="software-faq__items">
-            <?php foreach ($faqs as $index => [$question, $answer]) : ?>
+            <?php foreach ($faqs as $index => [$question, $answer]): ?>
                 <details <?php echo $index === 0 ? 'open' : ''; ?>>
-                    <summary><span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span><strong><?php echo esc_html($question); ?></strong><i aria-hidden="true"></i></summary>
-                    <div><p><?php echo esc_html($answer); ?></p></div>
+                    <summary>
+                        <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span><strong><?php echo esc_html($question); ?></strong><i
+                            aria-hidden="true"></i></summary>
+                    <div>
+                        <p><?php echo esc_html($answer); ?></p>
+                    </div>
                 </details>
             <?php endforeach; ?>
         </div>
     </section>
 
-    <section class="software-final">
+    <!--     <section class="software-final">
         <div class="software-final__content">
             <p class="eyebrow">Dönüşüm için ilk adım</p>
             <h2>Şirketinizin “Görünmez İşletim Sistemini” Güncelleme Vakti Geldi.</h2>
@@ -193,7 +207,7 @@ get_header();
             <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>">Kişiselleştirilmiş Demo Talep Edin <span aria-hidden="true">⭐</span></a>
         </div>
         <div class="software-final__signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    </section>
+    </section> -->
 </div>
 
 <?php get_footer(); ?>

@@ -962,6 +962,11 @@ function myliba_solution_catalog(): array
                 'Canlı öğrenme, işbaşı uygulama ve ölçülebilir takip',
                 'Liderler ve ekipler için sürdürülebilir gelişim ritmi',
             ],
+            'audiences' => [
+                'İnsan ve kültür ekipleri',
+                'Liderlik ekipleri',
+                'Dönüşüm ve gelişim ekipleri',
+            ],
             'steps' => [
                 ['title' => 'İhtiyaç Analizi', 'text' => 'Kurumun hedefleri, kültürü ve gelişim öncelikleri birlikte değerlendirilir.'],
                 ['title' => 'Program Tasarımı', 'text' => 'İçerik, gerçek iş hedefleri ve ekip dinamikleri etrafında yapılandırılır.'],
@@ -977,6 +982,11 @@ function myliba_solution_catalog(): array
                 'Hedef Mars Simülasyonu — oyunlaştırılmış dijital laboratuvar',
                 'Radikal Samimiyet Simülasyonu — geri bildirim isteyen ekipler yaratın',
                 'Başarı Sahnesi Simülasyonu — otonom ekipleri anlamlı hedefler etrafında geliştirin',
+            ],
+            'audiences' => [
+                'Birlikte çalışma ritmini güçlendiren ekipler',
+                'Yeni kurulan veya dönüşen ekipler',
+                'Geri bildirim kültürü geliştiren liderler',
             ],
             'steps' => [
                 ['title' => 'Senaryoyu Yaşayın', 'text' => 'Ekipler gerçek iş yaşamını temsil eden karar ve iletişim anlarını deneyimler.'],
@@ -994,6 +1004,11 @@ function myliba_solution_catalog(): array
                 'Performans Gelişim Sistemi Kurulumu — performans gelişim altyapısının kurumunuza özel yapılandırılması',
                 'Uygulama, iletişim ve liderlik rutinlerinin organizasyonla birlikte tasarlanması',
             ],
+            'audiences' => [
+                'Üst yönetim ekipleri',
+                'İnsan ve kültür liderleri',
+                'Strateji ve dönüşüm ekipleri',
+            ],
             'steps' => [
                 ['title' => 'Mevcut Durum', 'text' => 'Hedef, performans ve liderlik süreçlerinin bugünkü resmi çıkarılır.'],
                 ['title' => 'Hedef Sistem', 'text' => 'Organizasyona uygun model, roller ve çalışma ritimleri tasarlanır.'],
@@ -1010,6 +1025,11 @@ function myliba_solution_catalog(): array
                 'Çalışan bağlılığı ve iş performansının artması',
                 'Kurum içi sinerji ve iletişimin güçlenmesi',
                 'Stratejik dönüşüm için veriye dayalı içgörüler edinilmesi',
+            ],
+            'audiences' => [
+                'İnsan ve kültür liderleri',
+                'Üst yönetim ekipleri',
+                'Değişim ve dönüşüm ekipleri',
             ],
             'metrics' => [
                 ['title' => 'Employee NPS', 'text' => 'Çalışan tavsiye skoru'],
@@ -1298,6 +1318,22 @@ function myliba_get_entries(string $post_type, int $limit = 6, array $args = [])
     }
 
     return new WP_Query($query_args);
+}
+
+function myliba_client_logo_posts(int $limit = 24): array
+{
+    $query = myliba_get_entries('myliba_client_logo', $limit, ['meta_query' => []]);
+    $logos = [];
+
+    while ($query->have_posts()) {
+        $query->the_post();
+        if (has_post_thumbnail()) {
+            $logos[] = get_post();
+        }
+    }
+    wp_reset_postdata();
+
+    return $logos;
 }
 
 function myliba_lines(string $value): array
