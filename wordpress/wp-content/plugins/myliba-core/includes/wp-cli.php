@@ -1159,7 +1159,7 @@ class Commands
                 '_myliba_academy_modules_title' => 'Programın Gelişim Yapısı',
                 '_myliba_academy_approach_title' => 'Sadece Eğitim Değil, Uygulamalı Bir Dönüşüm Deneyimi',
                 '_myliba_academy_approach_steps' => "İhtiyaç Analizi | Kurumun hedefleri, kültürü ve gelişim ihtiyaçları değerlendirilir.\nCanlı Öğrenme | Katılımcılar uzman eğitmenlerle canlı ve etkileşimli oturumlara katılır.\nİşbaşı Uygulama | Öğrenilen bilgiler gerçek hedefler ve ekip süreçleri üzerinde uygulanır.\nSürekli Gelişim | Süpervizyon, güncel içerikler, topluluk ve networking desteğiyle gelişim devam eder.",
-                '_myliba_academy_stats' => "40 Saat | ICF CCE\n3 Aşamalı | Gelişim Modeli\nCanlı ve Uygulamalı | Oturumlar\nSürekli | Mezun Gelişim Ağı",
+                '_myliba_academy_stats' => "40 Saat | ICF CCE onaylı program\n3 Aşama | Öğren · Uygula · Ustalaş\nCanlı Oturumlar | Gerçek hedeflerle uygulama\nMezun Ağı | Sürekli gelişim ve networking",
                 '_myliba_academy_testimonials_title' => 'Katılımcılarımızın ve Kurumların Deneyimleri',
                 '_myliba_academy_faq_title' => 'Myliba Akademi Hakkında Merak Edilenler',
                 '_myliba_academy_faq_group' => 'Myliba Akademi',

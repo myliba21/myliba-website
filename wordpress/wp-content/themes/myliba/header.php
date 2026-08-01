@@ -70,11 +70,19 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                                 <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu" aria-label="<?php esc_attr_e('Solutions menu', 'myliba'); ?>">
                                     <div class="mega-menu__intro">
                                         <span>Çözümlerimiz</span>
-                                        <strong>Birbiri ile entegre, bütünleşik çözümler</strong>
-                                        <p>İster tek tek kullanın, ister bütünleştirin; kültürünüzü ve iş sonuçlarınızı birlikte dönüştürün.</p>
-                                        <a href="<?php echo esc_url($item['url']); ?>">Tüm çözümleri inceleyin</a>
+                                        <strong>İhtiyacınıza uygun çözümü bulun.</strong>
+                                        <p>Dört uzmanlık alanını tek noktadan keşfedin.</p>
+                                        <a href="<?php echo esc_url($item['url']); ?>">Tüm çözümler</a>
                                     </div>
                                     <div class="mega-menu__grid">
+                                        <?php
+                                        $solution_menu_descriptions = [
+                                            'kurumsal-gelisim-programlari' => 'Kuruma özel gelişim yolculukları.',
+                                            'simulasyonlar-ve-takim-koclugu' => 'Simülasyon ve koçluk deneyimleri.',
+                                            'danismanlik' => 'Stratejiden uygulamaya destek.',
+                                            'kultur-analizi' => 'Veriye dayalı kültür içgörüleri.',
+                                        ];
+                                        ?>
                                         <?php foreach (myliba_solution_catalog() as $solution_slug => $solution) : ?>
                                             <?php
                                             $is_card_active = is_singular('myliba_solution') && get_post_field('post_name', get_queried_object_id()) === $solution_slug;
@@ -82,24 +90,31 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                                             <a class="<?php echo esc_attr(trim('mega-menu__card ' . ($is_card_active ? 'is-active' : ''))); ?>" href="<?php echo esc_url(myliba_solution_url($solution_slug)); ?>"<?php echo $is_card_active ? ' aria-current="page"' : ''; ?>>
                                                 <span><?php echo esc_html(substr($solution['title'], 0, 1)); ?></span>
                                                 <strong><?php echo esc_html($solution['title']); ?></strong>
-                                                <small><?php echo esc_html($solution['summary']); ?></small>
+                                                <small><?php echo esc_html($solution_menu_descriptions[$solution_slug] ?? ''); ?></small>
                                             </a>
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
                             <?php else :
-                                $development_context = myliba_development_center_context();
                                 $development_items = myliba_development_center_items();
                                 ?>
                                 <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu mega-menu--development" aria-label="Gelişim Merkezi menüsü">
                                     <div class="mega-menu__intro">
-                                        <span><?php echo esc_html($development_context['eyebrow']); ?></span>
-                                        <strong><?php echo esc_html($development_context['title']); ?></strong>
-                                        <p><?php echo esc_html($development_context['subtitle']); ?></p>
-                                        <a href="<?php echo esc_url($item['url']); ?>">Gelişim Merkezi’ni keşfedin</a>
+                                        <span>Gelişim Merkezi</span>
+                                        <strong>Güncel kaynakları keşfedin.</strong>
+                                        <p>İçerikler, araştırmalar ve etkinlikler.</p>
+                                        <a href="<?php echo esc_url($item['url']); ?>">Tüm içerikler</a>
                                     </div>
                                     <div class="mega-menu__grid">
-                                        <?php foreach ($development_items as $development_item) : ?>
+                                        <?php
+                                        $development_menu_descriptions = [
+                                            'ebooks' => 'Rehberler ve uygulama kaynakları.',
+                                            'reports' => 'Güncel araştırmalar ve içgörüler.',
+                                            'blog' => 'Uzman yazıları ve pratik öneriler.',
+                                            'events' => 'Webinar, atölye ve buluşmalar.',
+                                        ];
+                                        ?>
+                                        <?php foreach ($development_items as $development_key => $development_item) : ?>
                                             <?php
                                             $request_uri = isset($_SERVER['REQUEST_URI']) ? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) : '/';
                                             $is_card_active = myliba_url_path(home_url($request_uri)) === myliba_url_path($development_item['url'])
@@ -109,9 +124,7 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                                             <a class="<?php echo esc_attr(trim('mega-menu__card ' . ($is_card_active ? 'is-active' : ''))); ?>" href="<?php echo esc_url($development_item['url']); ?>"<?php echo $is_card_active ? ' aria-current="page"' : ''; ?>>
                                                 <span><?php echo esc_html(substr($development_item['label'], 0, 1)); ?></span>
                                                 <strong><?php echo esc_html($development_item['label']); ?></strong>
-                                                <?php if ($development_item['description'] !== '') : ?>
-                                                    <small><?php echo esc_html($development_item['description']); ?></small>
-                                                <?php endif; ?>
+                                                <small><?php echo esc_html($development_menu_descriptions[$development_key] ?? ''); ?></small>
                                             </a>
                                         <?php endforeach; ?>
                                     </div>

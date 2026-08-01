@@ -362,15 +362,38 @@ get_header();
     <?php if ($stats): ?>
         <section class="section academy-v2-stats"
             aria-label="<?php echo esc_attr($meta('_myliba_academy_approach_title')); ?>">
-            <?php foreach ($stats as $stat_index => [$value, $label]): ?>
-                <article>
-                    <span class="academy-v2-stats__index" aria-hidden="true"><?php echo esc_html(str_pad((string) ($stat_index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-                    <div>
-                        <strong><?php echo esc_html($value); ?></strong>
-                        <span class="academy-v2-stats__label"><?php echo esc_html($label); ?></span>
-                    </div>
-                </article>
-            <?php endforeach; ?>
+            <div class="academy-v2-stats__heading">
+                <span><?php esc_html_e('Programı bir bakışta', 'myliba'); ?></span>
+                <i aria-hidden="true"></i>
+            </div>
+            <div class="academy-v2-stats__grid">
+                <?php foreach ($stats as $stat_index => [$value, $label]): ?>
+                    <article>
+                        <span class="academy-v2-stats__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <?php if ($stat_index % 4 === 0): ?>
+                                    <circle cx="12" cy="12" r="8.5" />
+                                    <path d="M12 7.5V12l3 2" />
+                                <?php elseif ($stat_index % 4 === 1): ?>
+                                    <path d="m12 4 8 4-8 4-8-4 8-4Z" />
+                                    <path d="m4 12 8 4 8-4M4 16l8 4 8-4" />
+                                <?php elseif ($stat_index % 4 === 2): ?>
+                                    <rect x="3.5" y="5" width="17" height="14" rx="3" />
+                                    <path d="m10 9 5 3-5 3V9Z" />
+                                <?php else: ?>
+                                    <circle cx="9" cy="9" r="3" />
+                                    <circle cx="17" cy="10" r="2.25" />
+                                    <path d="M3.5 19c.5-3.1 2.3-4.7 5.5-4.7s5 1.6 5.5 4.7M14 15.3c.8-.7 1.8-1 3.1-1 2.2 0 3.4 1.2 3.8 3.5" />
+                                <?php endif; ?>
+                            </svg>
+                        </span>
+                        <div>
+                            <strong><?php echo esc_html($value); ?></strong>
+                            <span class="academy-v2-stats__label"><?php echo esc_html($label); ?></span>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
         </section>
     <?php endif; ?>
 
