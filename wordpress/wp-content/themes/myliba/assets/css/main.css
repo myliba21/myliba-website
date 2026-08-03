@@ -1009,7 +1009,7 @@ img {
 }
 
 .hero-slide__title {
-  font-size: clamp(3rem, 4.65vw, 5rem);
+  font-size: clamp(3rem, 4.65vw, 3rem);
   letter-spacing: -0.045em;
   line-height: 0.98;
   margin: 0;
@@ -1174,7 +1174,7 @@ img {
   gap: clamp(36px, 5vw, 74px);
   grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
   padding-bottom: 80px;
-  padding-top: 88px;
+  padding-top: 20px;
 }
 
 .why-myliba__intro {
@@ -7223,19 +7223,6 @@ a.post-row:hover::after {
   gap: 14px;
 }
 
-.offering-card__mark {
-  align-items: center;
-  background: var(--offering-soft);
-  border-radius: 12px;
-  color: var(--offering-accent);
-  display: inline-flex;
-  flex: 0 0 44px;
-  font-size: 1.05rem;
-  font-weight: 900;
-  height: 44px;
-  justify-content: center;
-}
-
 .offering-card__header h3 {
   font-size: clamp(1.25rem, 1.7vw, 1.55rem);
   letter-spacing: -0.03em;
@@ -9036,7 +9023,7 @@ h4 {
 }
 
 .hero-slide__title {
-  font-size: clamp(3rem, 4.25vw, 4.55rem);
+  font-size: clamp(3rem, 4.25vw, 3rem);
   line-height: 1.015;
 }
 
@@ -9045,8 +9032,8 @@ h4 {
 }
 
 .section {
-  padding-bottom: clamp(78px, 7vw, 112px);
-  padding-top: clamp(78px, 7vw, 112px);
+  padding-bottom: clamp(78px, 7vw, 20px);
+  padding-top: clamp(78px, 7vw, 20px);
 }
 
 .homepage-section-heading {
@@ -9123,7 +9110,7 @@ h4 {
 
 .why-myliba {
   padding-bottom: 12px;
-  padding-top: clamp(72px, 7vw, 106px);
+  padding-top: clamp(20px, 7vw, 20px);
 }
 
 .why-myliba__intro h2 {
@@ -9207,8 +9194,8 @@ h4 {
     #102a33;
   border: 0;
   color: #fff;
-  padding-bottom: clamp(88px, 8vw, 126px);
-  padding-top: clamp(88px, 8vw, 126px);
+  padding-bottom: clamp(88px, 8vw, 20px);
+  padding-top: clamp(88px, 8vw, 20px);
   position: relative;
 }
 
@@ -9817,8 +9804,11 @@ body:has(.final-cta-section) .site-footer {
   gap: 6px;
 }
 
-.proof-stat__content strong {
+.proof-stat__content h3 {
   font-size: clamp(2rem, 2.65vw, 2.85rem);
+  line-height: 1;
+  margin: 0;
+  color: #fff;
 }
 
 .proof-stat__content > span {
@@ -11026,7 +11016,7 @@ body:has(.final-cta-section) .site-footer {
 }
 
 .academy-v2-hero h1 {
-  font-size: clamp(2.55rem, 3.85vw, 3.85rem);
+  font-size: clamp(2.55rem, 3.85vw, 3rem);
   letter-spacing: -0.045em;
   line-height: 1.025;
 }

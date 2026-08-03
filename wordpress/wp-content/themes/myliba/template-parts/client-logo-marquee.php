@@ -29,7 +29,7 @@ $aria_label = (string) ($component['title'] ?: __('Client logos', 'myliba'));
 ?>
 <section class="<?php echo esc_attr($section_classes); ?>" <?php echo $heading_id !== '' ? 'aria-labelledby="' . esc_attr($heading_id) . '"' : 'aria-label="' . esc_attr($aria_label) . '"'; ?>>
     <?php if ($component['label'] !== '' || $component['title'] !== '' || $component['text'] !== '') : ?>
-        <div class="trust-section__heading">
+<!--         <div class="trust-section__heading">
             <div class="trust-section__heading-copy">
                 <?php if ($component['label'] !== '') : ?>
                     <span class="trust-section__eyebrow">
@@ -47,7 +47,7 @@ $aria_label = (string) ($component['title'] ?: __('Client logos', 'myliba'));
                     <p><?php echo esc_html($component['text']); ?></p>
                 <?php endif; ?>
             </div>
-        </div>
+        </div> -->
     <?php endif; ?>
 
     <?php if ($logo_posts) : ?>

@@ -48,9 +48,9 @@ foreach (myliba_home_sections($post_id) as $section) {
                                     <?php if ($secondary_label !== ''): ?><a class="myliba-button myliba-button--ghost"
                                             href="<?php echo esc_url($secondary_url ?: myliba_page_url('products')); ?>" <?php echo $index === 0 ? '' : 'tabindex="-1"'; ?>><?php echo esc_html($secondary_label); ?></a><?php endif; ?>
                                 </div>
-                                <div class="hero__proof">
+                                <!--  <div class="hero__proof">
                                     <?php foreach ($hero_proof as $item): ?><span><?php echo esc_html($item); ?></span><?php endforeach; ?>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="hero-slide__visual-wrap">
                                 <div class="hero-slide__visual">
@@ -97,7 +97,7 @@ foreach (myliba_home_sections($post_id) as $section) {
             get_template_part('template-parts/client-logo-marquee', null, [
                 'label' => myliba_home_value('trust_logo_label'),
                 'title' => myliba_home_value('trust_title'),
-                'text' => __('Proven experience across companies, industries and leadership teams.', 'myliba'),
+                'text' => __('', 'myliba'),
                 'fallback_items' => $trust_items,
             ]);
             break;
@@ -145,8 +145,9 @@ foreach (myliba_home_sections($post_id) as $section) {
                                     </svg>
                                 <?php endif; ?>
                             </span>
-                            <span
-                                class="proof-stat__content"><strong><?php echo esc_html($value); ?></strong><span><?php echo esc_html($label); ?></span></span>
+                            <span class="proof-stat__content">
+                                <h3><?php echo esc_html($value); ?></h3><span><?php echo esc_html($label); ?></span>
+                            </span>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -178,8 +179,6 @@ foreach (myliba_home_sections($post_id) as $section) {
                             ?>
                             <article class="offering-card offering-card--<?php echo esc_attr((string) (($index % 2) + 1)); ?>">
                                 <header class="offering-card__header">
-                                    <span class="offering-card__mark"
-                                        aria-hidden="true"><?php echo esc_html(function_exists('mb_substr') ? mb_substr($label, 0, 1) : substr($label, 0, 1)); ?></span>
                                     <h3><?php echo esc_html($label); ?></h3>
                                 </header>
                                 <?php if ($intro !== ''): ?>
