@@ -282,10 +282,30 @@ function render_homepage_builder(\WP_Post $post): void
         .myliba-builder-card__body .widefat{background:#fff}
         .myliba-builder-card__source{color:#646970;font-size:12px;font-style:italic;margin:0 0 12px;padding:6px 10px;background:#fff;border:1px solid #e0e0e0;border-radius:4px}
         .myliba-builder-card__notice{background:#fff;border-left:4px solid #72aee6;padding:10px 12px}
+        .myliba-hero-editor{display:grid;gap:12px;margin:14px 0}
+        .myliba-hero-slide{background:#fff;border:1px solid #c3c4c7;border-radius:8px;overflow:hidden}
+        .myliba-hero-slide__head{align-items:center;background:#f6f7f7;display:grid;gap:10px;grid-template-columns:auto minmax(0,1fr) auto;padding:10px 12px}
+        .myliba-hero-slide__handle,.myliba-hero-button__handle{cursor:grab;color:#646970;font-weight:700}
+        .myliba-hero-slide__title{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .myliba-hero-slide__actions{align-items:center;display:flex;flex-wrap:wrap;gap:8px}
+        .myliba-hero-slide__body{display:grid;gap:12px;padding:14px}
+        .myliba-hero-slide.is-collapsed .myliba-hero-slide__body{display:none}
+        .myliba-hero-grid{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+        .myliba-hero-grid .myliba-hero-field--wide{grid-column:1/-1}
+        .myliba-hero-field label{display:block;font-weight:600;margin-bottom:4px}
+        .myliba-hero-buttons{display:grid;gap:8px}
+        .myliba-hero-button{align-items:end;background:#f6f7f7;border:1px solid #dcdcde;border-radius:6px;display:grid;gap:8px;grid-template-columns:auto minmax(150px,1fr) minmax(180px,1.5fr) 130px auto auto;padding:10px}
+        .myliba-hero-button label{font-size:12px;font-weight:600}
+        .myliba-hero-empty{color:#646970;font-style:italic;margin:0}
+        .myliba-hero-editor-toolbar{align-items:center;display:flex;gap:10px;margin-top:12px}
         @media (max-width:782px){
             .myliba-builder-card__head{grid-template-columns:auto minmax(0,1fr) auto}
             .myliba-builder-card__order{grid-column:2 / 3;width:100%}
             .myliba-builder-card__source-line,.myliba-builder-card__summary{white-space:normal}
+            .myliba-hero-grid{grid-template-columns:1fr}
+            .myliba-hero-grid .myliba-hero-field--wide{grid-column:auto}
+            .myliba-hero-button{align-items:stretch;grid-template-columns:auto 1fr}
+            .myliba-hero-button .myliba-hero-field{grid-column:2}
         }
     </style>';
 
@@ -429,6 +449,184 @@ function render_homepage_builder(\WP_Post $post): void
     </script>';
 }
 
+function hero_slides_v2(int $post_id): array
+{
+    if (metadata_exists('post', $post_id, '_myliba_home_hero_slides_v2')) {
+        $saved = get_post_meta($post_id, '_myliba_home_hero_slides_v2', true);
+        if (is_string($saved)) {
+            $decoded = json_decode($saved, true);
+            $saved = is_array($decoded) ? $decoded : [];
+        }
+
+        return is_array($saved) ? array_values($saved) : [];
+    }
+
+    $legacy = (string) get_post_meta($post_id, '_myliba_home_hero_slides', true);
+    $slides = [];
+    foreach (preg_split('/\r\n|\r|\n/', $legacy) ?: [] as $index => $line) {
+        if (trim($line) === '') {
+            continue;
+        }
+
+        [$eyebrow, $title, $text, $primary_label, $primary_url, $secondary_label, $secondary_url] = array_pad(array_map('trim', explode('|', $line)), 7, '');
+        $buttons = [];
+        if ($primary_label !== '') {
+            $buttons[] = ['label' => $primary_label, 'url' => $primary_url, 'style' => 'primary', 'new_tab' => false, 'aria_label' => ''];
+        }
+        if ($secondary_label !== '') {
+            $buttons[] = ['label' => $secondary_label, 'url' => $secondary_url, 'style' => 'ghost', 'new_tab' => false, 'aria_label' => ''];
+        }
+
+        $image_number = count($slides) + 1;
+        $slides[] = [
+            'id' => 'legacy-' . ($index + 1),
+            'enabled' => true,
+            'eyebrow' => $eyebrow,
+            'title' => $title,
+            'text' => $text,
+            'image_id' => $image_number <= 3 ? absint(get_post_meta($post_id, '_myliba_home_hero_image_' . $image_number, true)) : 0,
+            'image_alt' => $image_number <= 3 ? (string) get_post_meta($post_id, '_myliba_home_hero_image_' . $image_number . '_alt', true) : '',
+            'buttons' => $buttons,
+        ];
+    }
+
+    return $slides;
+}
+
+function render_hero_button_editor(array $button, string $slide_key, string $button_key): void
+{
+    $name = '_myliba_home_hero_slides_v2[' . $slide_key . '][buttons][' . $button_key . ']';
+    $style = in_array(($button['style'] ?? ''), ['primary', 'ghost', 'link'], true) ? $button['style'] : 'ghost';
+
+    echo '<div class="myliba-hero-button">';
+    echo '<span class="myliba-hero-button__handle" aria-hidden="true">&#8942;&#8942;</span>';
+    echo '<div class="myliba-hero-field"><label>' . esc_html__('Button label', 'myliba') . '</label><input class="widefat" type="text" name="' . esc_attr($name . '[label]') . '" value="' . esc_attr((string) ($button['label'] ?? '')) . '"></div>';
+    echo '<div class="myliba-hero-field"><label>' . esc_html__('URL', 'myliba') . '</label><input class="widefat" type="text" inputmode="url" name="' . esc_attr($name . '[url]') . '" value="' . esc_attr((string) ($button['url'] ?? '')) . '" placeholder="/tr/demo/"></div>';
+    echo '<div class="myliba-hero-field"><label>' . esc_html__('Style', 'myliba') . '</label><select class="widefat" name="' . esc_attr($name . '[style]') . '">';
+    foreach (['primary' => __('Primary', 'myliba'), 'ghost' => __('Secondary', 'myliba'), 'link' => __('Text link', 'myliba')] as $value => $label) {
+        echo '<option value="' . esc_attr($value) . '" ' . selected($style, $value, false) . '>' . esc_html($label) . '</option>';
+    }
+    echo '</select></div>';
+    echo '<label><input type="checkbox" name="' . esc_attr($name . '[new_tab]') . '" value="1" ' . checked(!empty($button['new_tab']), true, false) . '> ' . esc_html__('New tab', 'myliba') . '</label>';
+    echo '<button type="button" class="button-link-delete myliba-hero-button__remove">' . esc_html__('Remove', 'myliba') . '</button>';
+    echo '<input type="hidden" name="' . esc_attr($name . '[aria_label]') . '" value="' . esc_attr((string) ($button['aria_label'] ?? '')) . '">';
+    echo '</div>';
+}
+
+function render_hero_slide_editor(array $slide, string $slide_key): void
+{
+    $name = '_myliba_home_hero_slides_v2[' . $slide_key . ']';
+    $title = trim((string) ($slide['title'] ?? '')) ?: __('Untitled slide', 'myliba');
+
+    echo '<article class="myliba-hero-slide" data-slide-key="' . esc_attr($slide_key) . '">';
+    echo '<header class="myliba-hero-slide__head">';
+    echo '<span class="myliba-hero-slide__handle" aria-hidden="true">&#8942;&#8942;</span>';
+    echo '<span class="myliba-hero-slide__title">' . esc_html($title) . '</span>';
+    echo '<div class="myliba-hero-slide__actions">';
+    echo '<label><input type="hidden" name="' . esc_attr($name . '[enabled]') . '" value="0"><input type="checkbox" name="' . esc_attr($name . '[enabled]') . '" value="1" ' . checked(!isset($slide['enabled']) || !empty($slide['enabled']), true, false) . '> ' . esc_html__('Active', 'myliba') . '</label>';
+    echo '<button type="button" class="button-link myliba-hero-slide__duplicate">' . esc_html__('Duplicate', 'myliba') . '</button>';
+    echo '<button type="button" class="button-link-delete myliba-hero-slide__remove">' . esc_html__('Remove', 'myliba') . '</button>';
+    echo '<button type="button" class="button myliba-hero-slide__toggle" aria-expanded="true">' . esc_html__('Collapse', 'myliba') . '</button>';
+    echo '</div></header>';
+    echo '<div class="myliba-hero-slide__body"><div class="myliba-hero-grid">';
+    echo '<input type="hidden" name="' . esc_attr($name . '[id]') . '" value="' . esc_attr((string) ($slide['id'] ?? $slide_key)) . '">';
+    echo '<div class="myliba-hero-field"><label>' . esc_html__('Eyebrow', 'myliba') . '</label><input class="widefat" type="text" name="' . esc_attr($name . '[eyebrow]') . '" value="' . esc_attr((string) ($slide['eyebrow'] ?? '')) . '"></div>';
+    echo '<div class="myliba-hero-field"><label>' . esc_html__('Title', 'myliba') . '</label><input class="widefat myliba-hero-slide__title-input" type="text" name="' . esc_attr($name . '[title]') . '" value="' . esc_attr((string) ($slide['title'] ?? '')) . '"></div>';
+    echo '<div class="myliba-hero-field myliba-hero-field--wide"><label>' . esc_html__('Text', 'myliba') . '</label><textarea class="widefat" rows="3" name="' . esc_attr($name . '[text]') . '">' . esc_textarea((string) ($slide['text'] ?? '')) . '</textarea></div>';
+    echo '</div>';
+    field_media($name . '[image_id]', __('Slide image', 'myliba'), $slide['image_id'] ?? 0);
+    echo '<div class="myliba-hero-field"><label>' . esc_html__('Image alternative text', 'myliba') . '</label><input class="widefat" type="text" name="' . esc_attr($name . '[image_alt]') . '" value="' . esc_attr((string) ($slide['image_alt'] ?? '')) . '"></div>';
+    echo '<h4>' . esc_html__('Buttons', 'myliba') . '</h4><div class="myliba-hero-buttons">';
+    foreach (($slide['buttons'] ?? []) as $button_index => $button) {
+        if (is_array($button)) {
+            render_hero_button_editor($button, $slide_key, 'button-' . ($button_index + 1));
+        }
+    }
+    echo '<p class="myliba-hero-empty"' . (!empty($slide['buttons']) ? ' hidden' : '') . '>' . esc_html__('No buttons yet.', 'myliba') . '</p>';
+    echo '</div><p><button type="button" class="button myliba-hero-button__add">' . esc_html__('Add button', 'myliba') . '</button></p>';
+    echo '</div></article>';
+}
+
+function render_hero_slides_editor(int $post_id): void
+{
+    $slides = hero_slides_v2($post_id);
+    echo '<input type="hidden" name="_myliba_home_hero_slides_v2_present" value="1">';
+    echo '<p class="description">' . esc_html__('Add and reorder slides. Each slide can have its own image and multiple buttons. Drag cards and buttons to change their order.', 'myliba') . '</p>';
+    echo '<div class="myliba-hero-editor">';
+    foreach ($slides as $index => $slide) {
+        if (is_array($slide)) {
+            render_hero_slide_editor($slide, 'slide-' . ($index + 1));
+        }
+    }
+    echo '</div><div class="myliba-hero-editor-toolbar"><button type="button" class="button button-primary myliba-hero-slide__add">' . esc_html__('Add slide', 'myliba') . '</button><span class="description">' . esc_html__('For best visual balance, use no more than three buttons per slide.', 'myliba') . '</span></div>';
+
+    print_media_field_script();
+    echo '<script type="text/html" id="myliba-hero-slide-template">';
+    render_hero_slide_editor(['enabled' => true, 'buttons' => []], '__SLIDE__');
+    echo '</script><script type="text/html" id="myliba-hero-button-template">';
+    render_hero_button_editor([], '__SLIDE__', '__BUTTON__');
+    echo '</script>';
+    echo '<script>
+        jQuery(function($){
+            var $editor = $(".myliba-hero-editor");
+            var slideTemplate = $("#myliba-hero-slide-template").html();
+            var buttonTemplate = $("#myliba-hero-button-template").html();
+            var sequence = Date.now();
+            function nextKey(prefix){ sequence += 1; return prefix + "-" + sequence; }
+            function refreshEmpty($slide){
+                $slide.find(".myliba-hero-empty").prop("hidden", $slide.find(".myliba-hero-button").length > 0);
+            }
+            function initSortables(){
+                if ($editor.sortable) {
+                    $editor.sortable({items:"> .myliba-hero-slide",handle:".myliba-hero-slide__handle"});
+                    $editor.find(".myliba-hero-buttons").sortable({items:"> .myliba-hero-button",handle:".myliba-hero-button__handle"});
+                }
+            }
+            $(".myliba-hero-slide__add").on("click", function(){
+                var key = nextKey("slide");
+                $editor.append(slideTemplate.replaceAll("__SLIDE__", key));
+                initSortables();
+            });
+            $editor.on("click", ".myliba-hero-slide__toggle", function(){
+                var $slide = $(this).closest(".myliba-hero-slide");
+                var collapsed = !$slide.hasClass("is-collapsed");
+                $slide.toggleClass("is-collapsed", collapsed);
+                $(this).attr("aria-expanded", collapsed ? "false" : "true").text(collapsed ? ' . wp_json_encode(__('Expand', 'myliba')) . ' : ' . wp_json_encode(__('Collapse', 'myliba')) . ');
+            });
+            $editor.on("input", ".myliba-hero-slide__title-input", function(){
+                $(this).closest(".myliba-hero-slide").find(".myliba-hero-slide__title").text($(this).val() || ' . wp_json_encode(__('Untitled slide', 'myliba')) . ');
+            });
+            $editor.on("click", ".myliba-hero-slide__remove", function(){
+                if (window.confirm(' . wp_json_encode(__('Remove this slide? It will be permanently removed after updating the page.', 'myliba')) . ')) {
+                    $(this).closest(".myliba-hero-slide").remove();
+                }
+            });
+            $editor.on("click", ".myliba-hero-slide__duplicate", function(){
+                var $source = $(this).closest(".myliba-hero-slide");
+                var oldKey = String($source.data("slide-key"));
+                var newKey = nextKey("slide");
+                var $copy = $source.clone(false, false).attr("data-slide-key", newKey).removeClass("is-collapsed");
+                $copy.find("[name]").each(function(){ this.name = this.name.replace("[" + oldKey + "]", "[" + newKey + "]"); });
+                $copy.find("input[name$=\"[id]\"]").first().val(nextKey("hero"));
+                $copy.find(".myliba-hero-slide__title").append(" — ' . esc_js(__('Copy', 'myliba')) . '");
+                $source.after($copy);
+                initSortables();
+            });
+            $editor.on("click", ".myliba-hero-button__add", function(){
+                var $slide = $(this).closest(".myliba-hero-slide");
+                var slideKey = String($slide.data("slide-key"));
+                $slide.find(".myliba-hero-buttons").append(buttonTemplate.replaceAll("__SLIDE__", slideKey).replaceAll("__BUTTON__", nextKey("button")));
+                refreshEmpty($slide); initSortables();
+            });
+            $editor.on("click", ".myliba-hero-button__remove", function(){
+                var $slide = $(this).closest(".myliba-hero-slide");
+                $(this).closest(".myliba-hero-button").remove(); refreshEmpty($slide);
+            });
+            initSortables();
+        });
+    </script>';
+}
+
 function render_section_fields(\WP_Post $post, string $key): void
 {
     $id = $post->ID;
@@ -439,13 +637,7 @@ function render_section_fields(\WP_Post $post, string $key): void
                 echo '<p class="myliba-builder-card__notice description">' . esc_html__('Hero eyebrow, title, and subtitle are edited in the Myliba Hero box. When this page is selected as the homepage, those fields appear here.', 'myliba') . '</p>';
             }
 
-            field_textarea('_myliba_home_hero_slides', __('Hero slides', 'myliba'), get_post_meta($id, '_myliba_home_hero_slides', true), __('One slide per line as Eyebrow | Title | Text | Primary label | Primary URL | Secondary label | Secondary URL. Three slides are recommended.', 'myliba'));
-            echo '<h4>' . esc_html__('Hero slide images', 'myliba') . '</h4>';
-            echo '<p class="description">' . esc_html__('Choose a separate image and localized alternative text for each slide. These values replace the bundled theme images.', 'myliba') . '</p>';
-            for ($image_index = 1; $image_index <= 3; $image_index++) {
-                field_media('_myliba_home_hero_image_' . $image_index, sprintf(__('Hero slide %d image', 'myliba'), $image_index), get_post_meta($id, '_myliba_home_hero_image_' . $image_index, true));
-                field_text('_myliba_home_hero_image_' . $image_index . '_alt', sprintf(__('Hero slide %d alternative text', 'myliba'), $image_index), get_post_meta($id, '_myliba_home_hero_image_' . $image_index . '_alt', true));
-            }
+            render_hero_slides_editor($id);
             field_textarea('_myliba_home_hero_proof', __('Hero proof pills', 'myliba'), get_post_meta($id, '_myliba_home_hero_proof', true), __('One item per line.', 'myliba'));
             field_textarea('_myliba_home_hero_metrics', __('Floating hero metrics', 'myliba'), get_post_meta($id, '_myliba_home_hero_metrics', true), __('One row per line as Value | Label. Three rows are recommended.', 'myliba'));
             break;
@@ -809,6 +1001,15 @@ function save(int $post_id, \WP_Post $post): void
             continue;
         }
 
+        if ($type === 'hero_slides') {
+            save_hero_slides($post_id);
+            continue;
+        }
+
+        if (!array_key_exists($field, $_POST) && $type !== 'checkbox') {
+            continue;
+        }
+
         $raw = $_POST[$field] ?? '';
         $value = is_string($raw) ? wp_unslash($raw) : $raw;
 
@@ -834,6 +1035,74 @@ function save(int $post_id, \WP_Post $post): void
 
         update_post_meta($post_id, $field, sanitize_text_field($value));
     }
+}
+
+function save_hero_slides(int $post_id): void
+{
+    if (empty($_POST['_myliba_home_hero_slides_v2_present'])) {
+        return;
+    }
+
+    $raw_slides = isset($_POST['_myliba_home_hero_slides_v2']) && is_array($_POST['_myliba_home_hero_slides_v2'])
+        ? wp_unslash($_POST['_myliba_home_hero_slides_v2'])
+        : [];
+    update_post_meta($post_id, '_myliba_home_hero_slides_v2', sanitize_hero_slides($raw_slides));
+}
+
+function sanitize_hero_slides(array $raw_slides): array
+{
+    $slides = [];
+
+    foreach (array_slice($raw_slides, 0, 30, true) as $raw_slide) {
+        if (!is_array($raw_slide)) {
+            continue;
+        }
+
+        $buttons = [];
+        $raw_buttons = isset($raw_slide['buttons']) && is_array($raw_slide['buttons']) ? $raw_slide['buttons'] : [];
+        foreach (array_slice($raw_buttons, 0, 12, true) as $raw_button) {
+            if (!is_array($raw_button)) {
+                continue;
+            }
+
+            $label = sanitize_text_field((string) ($raw_button['label'] ?? ''));
+            $url = esc_url_raw((string) ($raw_button['url'] ?? ''));
+            if ($label === '' && $url === '') {
+                continue;
+            }
+
+            $style = sanitize_key((string) ($raw_button['style'] ?? 'ghost'));
+            $buttons[] = [
+                'label' => $label,
+                'url' => $url,
+                'style' => in_array($style, ['primary', 'ghost', 'link'], true) ? $style : 'ghost',
+                'new_tab' => !empty($raw_button['new_tab']),
+                'aria_label' => sanitize_text_field((string) ($raw_button['aria_label'] ?? '')),
+            ];
+        }
+
+        $eyebrow = sanitize_text_field((string) ($raw_slide['eyebrow'] ?? ''));
+        $title = sanitize_text_field((string) ($raw_slide['title'] ?? ''));
+        $text = sanitize_textarea_field((string) ($raw_slide['text'] ?? ''));
+        $image_id = absint($raw_slide['image_id'] ?? 0);
+        if ($eyebrow === '' && $title === '' && $text === '' && !$image_id && !$buttons) {
+            continue;
+        }
+
+        $id = sanitize_key((string) ($raw_slide['id'] ?? ''));
+        $slides[] = [
+            'id' => $id !== '' ? $id : 'hero-' . wp_generate_uuid4(),
+            'enabled' => !empty($raw_slide['enabled']),
+            'eyebrow' => $eyebrow,
+            'title' => $title,
+            'text' => $text,
+            'image_id' => $image_id,
+            'image_alt' => sanitize_text_field((string) ($raw_slide['image_alt'] ?? '')),
+            'buttons' => $buttons,
+        ];
+    }
+
+    return $slides;
 }
 
 function save_homepage_builder(int $post_id): void
@@ -889,6 +1158,7 @@ function field_definitions(string $post_type): array
         '_myliba_related_modules' => 'textarea',
         '_myliba_faq_items' => 'textarea',
         '_myliba_home_builder' => 'builder',
+        '_myliba_home_hero_slides_v2' => 'hero_slides',
         '_myliba_home_hero_slides' => 'textarea',
         '_myliba_home_hero_image_1' => 'number',
         '_myliba_home_hero_image_1_alt' => 'text',
@@ -1097,6 +1367,11 @@ function field_media(string $name, string $label, mixed $value): void
     echo '<button type="button" class="button-link-delete myliba-media-field__remove"' . ($attachment_id ? '' : ' hidden') . '>' . esc_html__('Remove image', 'myliba') . '</button>';
     echo '</div>';
 
+    print_media_field_script();
+}
+
+function print_media_field_script(): void
+{
     static $script_printed = false;
     if ($script_printed) {
         return;

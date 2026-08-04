@@ -2,13 +2,11 @@
 get_header();
 
 $post_id = get_queried_object_id();
-$demo_url = myliba_demo_url();
 $products = static fn() => myliba_get_entries('myliba_product', 9);
-$hero_banner_images = myliba_hero_banner_images();
 $performance_images = myliba_home_media_images('performance', $post_id);
 $hero_metrics = myliba_home_rows('hero_metrics');
 $hero_proof = myliba_home_lines('hero_proof');
-$hero_slides = myliba_home_rows('hero_slides');
+$hero_slides = myliba_home_hero_slides($post_id);
 $trust_items = myliba_home_lines('trust_items');
 $social_proof_items = myliba_home_rows('social_proof_items');
 $offering_rows = myliba_home_rows('offering_rows');
@@ -31,23 +29,29 @@ foreach (myliba_home_sections($post_id) as $section) {
             <section class="hero-slider" data-hero-slider aria-roledescription="carousel"
                 aria-label="<?php esc_attr_e('Myliba highlights', 'myliba'); ?>">
                 <div class="hero-slider__viewport" aria-live="off">
-                    <?php foreach ($hero_slides as $index => $row):
-                        [$eyebrow, $title, $text, $primary_label, $primary_url, $secondary_label, $secondary_url] = array_pad($row, 7, '');
-                        $image = $hero_banner_images ? $hero_banner_images[$index % count($hero_banner_images)] : [];
+                    <?php foreach ($hero_slides as $index => $slide):
+                        $image = $slide['image'] ?? [];
                         ?>
-                        <article id="hero-slide-<?php echo esc_attr((string) $index); ?>"
+                        <article id="hero-slide-<?php echo esc_attr((string) ($slide['id'] ?? $index)); ?>"
                             class="hero-slide <?php echo $index === 0 ? 'is-active' : ''; ?>" data-hero-slide
                             aria-hidden="<?php echo $index === 0 ? 'false' : 'true'; ?>">
                             <div class="hero-slide__content">
-                                <p class="eyebrow"><?php echo esc_html($eyebrow); ?></p>
-                                <<?php echo $index === 0 ? 'h1' : 'h2'; ?> class="hero-slide__title"><?php echo esc_html($title); ?></<?php echo $index === 0 ? 'h1' : 'h2'; ?>>
-                                <p class="hero-slide__text"><?php echo esc_html($text); ?></p>
-                                <div class="hero__actions">
-                                    <?php if ($primary_label !== ''): ?><a class="myliba-button myliba-button--primary"
-                                            href="<?php echo esc_url($primary_url ?: $demo_url); ?>" <?php echo $index === 0 ? '' : 'tabindex="-1"'; ?>><?php echo esc_html($primary_label); ?></a><?php endif; ?>
-                                    <?php if ($secondary_label !== ''): ?><a class="myliba-button myliba-button--ghost"
-                                            href="<?php echo esc_url($secondary_url ?: myliba_page_url('products')); ?>" <?php echo $index === 0 ? '' : 'tabindex="-1"'; ?>><?php echo esc_html($secondary_label); ?></a><?php endif; ?>
-                                </div>
+                                <p class="eyebrow"><?php echo esc_html((string) ($slide['eyebrow'] ?? '')); ?></p>
+                                <<?php echo $index === 0 ? 'h1' : 'h2'; ?> class="hero-slide__title"><?php echo esc_html((string) ($slide['title'] ?? '')); ?></<?php echo $index === 0 ? 'h1' : 'h2'; ?>>
+                                <p class="hero-slide__text"><?php echo esc_html((string) ($slide['text'] ?? '')); ?></p>
+                                <?php if (!empty($slide['buttons'])): ?>
+                                    <div class="hero__actions">
+                                        <?php foreach ($slide['buttons'] as $button):
+                                            $button_style = in_array(($button['style'] ?? ''), ['primary', 'ghost', 'link'], true) ? $button['style'] : 'ghost';
+                                            $button_class = $button_style === 'link' ? 'myliba-button myliba-button--ghost myliba-button--link' : 'myliba-button myliba-button--' . $button_style;
+                                            ?>
+                                            <a class="<?php echo esc_attr($button_class); ?>" href="<?php echo esc_url((string) $button['url']); ?>"
+                                                <?php echo !empty($button['new_tab']) ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>
+                                                <?php echo !empty($button['aria_label']) ? 'aria-label="' . esc_attr((string) $button['aria_label']) . '"' : ''; ?>
+                                                <?php echo $index === 0 ? '' : 'tabindex="-1"'; ?>><?php echo esc_html((string) $button['label']); ?></a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
                                 <!--  <div class="hero__proof">
                                     <?php foreach ($hero_proof as $item): ?><span><?php echo esc_html($item); ?></span><?php endforeach; ?>
                                 </div> -->
@@ -56,6 +60,8 @@ foreach (myliba_home_sections($post_id) as $section) {
                                 <div class="hero-slide__visual">
                                     <?php if (!empty($image['url'])): ?>
                                         <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>"
+                                            <?php echo !empty($image['width']) ? 'width="' . esc_attr((string) $image['width']) . '"' : ''; ?>
+                                            <?php echo !empty($image['height']) ? 'height="' . esc_attr((string) $image['height']) . '"' : ''; ?>
                                             loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>" <?php echo $index === 0 ? 'fetchpriority="high"' : ''; ?> decoding="async">
                                     <?php else: ?>
                                         <div class="hero-slide__placeholder" aria-hidden="true"></div>
@@ -82,7 +88,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                             <?php foreach ($hero_slides as $index => $row): ?><button
                                     class="<?php echo $index === 0 ? 'is-active' : ''; ?>" type="button" role="tab"
                                     aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>"
-                                    aria-controls="hero-slide-<?php echo esc_attr((string) $index); ?>" data-hero-dot
+                                    aria-controls="hero-slide-<?php echo esc_attr((string) ($row['id'] ?? $index)); ?>" data-hero-dot
                                     data-slide-label="<?php echo esc_attr(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?>"></button><?php endforeach; ?>
                         </div>
                         <button class="hero-slider__arrow" type="button" data-hero-next

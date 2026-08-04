@@ -11,9 +11,56 @@ if (!defined('ABSPATH')) {
 function boot(): void
 {
     add_action('admin_menu', __NAMESPACE__ . '\\register_menu');
+    add_action('admin_menu', __NAMESPACE__ . '\\simplify_admin_menu', 999);
+    add_action('wp_dashboard_setup', __NAMESPACE__ . '\\simplify_dashboard', 999);
+    add_action('admin_bar_menu', __NAMESPACE__ . '\\simplify_admin_bar', 999);
     add_action('admin_notices', __NAMESPACE__ . '\\admin_notices');
     add_action('dashboard_glance_items', __NAMESPACE__ . '\\dashboard_counts');
     add_filter('use_block_editor_for_post_type', __NAMESPACE__ . '\\use_classic_editor_for_myliba_content', 10, 2);
+}
+
+function simplify_admin_menu(): void
+{
+    remove_menu_page('edit-comments.php');
+
+    global $submenu;
+    if (empty($submenu['myliba-settings']) || !is_array($submenu['myliba-settings'])) {
+        return;
+    }
+
+    $preferred_order = [
+        'myliba-settings',
+        'myliba-content',
+        'edit.php?post_type=myliba_product',
+        'edit.php?post_type=myliba_solution',
+        'edit.php?post_type=myliba_academy',
+        'edit.php?post_type=myliba_landing',
+        'edit.php?post_type=myliba_event',
+        'edit.php?post_type=myliba_ebook',
+        'edit.php?post_type=myliba_report',
+        'edit.php?post_type=myliba_faq',
+        'edit.php?post_type=myliba_client_logo',
+        'edit.php?post_type=myliba_testimonial',
+        'edit.php?post_type=myliba_submission',
+    ];
+    $positions = array_flip($preferred_order);
+    usort($submenu['myliba-settings'], static function (array $left, array $right) use ($positions): int {
+        return ($positions[$left[2]] ?? 999) <=> ($positions[$right[2]] ?? 999);
+    });
+}
+
+function simplify_dashboard(): void
+{
+    remove_action('welcome_panel', 'wp_welcome_panel');
+    remove_meta_box('dashboard_welcome', 'dashboard', 'normal');
+    remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
+    remove_meta_box('dashboard_primary', 'dashboard', 'side');
+    remove_meta_box('dashboard_activity', 'dashboard', 'normal');
+}
+
+function simplify_admin_bar(\WP_Admin_Bar $admin_bar): void
+{
+    $admin_bar->remove_node('comments');
 }
 
 function use_classic_editor_for_myliba_content(bool $use_block_editor, string $post_type): bool
@@ -51,6 +98,15 @@ function register_menu(): void
         __NAMESPACE__ . '\\render_settings',
         'dashicons-admin-site-alt3',
         58
+    );
+
+    add_submenu_page(
+        'myliba-settings',
+        __('Myliba Site Settings', 'myliba'),
+        __('General Settings', 'myliba'),
+        'manage_options',
+        'myliba-settings',
+        __NAMESPACE__ . '\\render_settings'
     );
 }
 
@@ -239,7 +295,6 @@ function dashboard_counts(): void
         'myliba_event' => __('Events', 'myliba'),
         'myliba_ebook' => 'e-Kitaplar',
         'myliba_report' => 'Raporlar ve Trendler',
-        'myliba_team' => __('Team Members', 'myliba'),
         'myliba_submission' => __('Form Submissions', 'myliba'),
     ];
 

@@ -8796,7 +8796,22 @@ h4 {
 }
 
 .hero-slider .hero__actions {
+  flex-wrap: wrap;
   margin-top: 30px;
+}
+
+.hero-slider .myliba-button--link {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  padding-inline: 8px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.hero-slider .myliba-button--link:hover {
+  background: transparent;
+  border-color: transparent;
 }
 
 .hero-slider .myliba-button--primary {

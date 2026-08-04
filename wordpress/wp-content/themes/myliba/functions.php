@@ -229,6 +229,35 @@ function myliba_home_media_images(string $group, int $post_id = 0): array
         return [];
     }
 
+    if ($group === 'hero' && metadata_exists('post', $post_id, '_myliba_home_hero_slides_v2')) {
+        $saved_slides = get_post_meta($post_id, '_myliba_home_hero_slides_v2', true);
+        $saved_slides = is_array($saved_slides) ? $saved_slides : [];
+        $images = [];
+        foreach ($saved_slides as $slide) {
+            if (!is_array($slide) || empty($slide['enabled'])) {
+                continue;
+            }
+
+            $attachment_id = absint($slide['image_id'] ?? 0);
+            $source = $attachment_id ? wp_get_attachment_image_src($attachment_id, 'full') : false;
+            if (!$source) {
+                continue;
+            }
+
+            $custom_alt = trim((string) ($slide['image_alt'] ?? ''));
+            $media_alt = trim((string) get_post_meta($attachment_id, '_wp_attachment_image_alt', true));
+            $images[] = [
+                'url' => (string) $source[0],
+                'alt' => $custom_alt !== '' ? $custom_alt : $media_alt,
+                'width' => (int) $source[1],
+                'height' => (int) $source[2],
+                'attachment_id' => $attachment_id,
+            ];
+        }
+
+        return $images;
+    }
+
     $images = [];
     for ($index = 1; $index <= 3; $index++) {
         $attachment_id = absint(get_post_meta($post_id, '_myliba_home_' . $group . '_image_' . $index, true));
@@ -287,9 +316,9 @@ function myliba_lcp_hero_image(): array
         return [];
     }
 
-    $images = myliba_hero_banner_images();
+    $slides = myliba_home_hero_slides((int) get_queried_object_id());
 
-    return $images[0] ?? [];
+    return $slides[0]['image'] ?? [];
 }
 
 function myliba_preload_lcp_hero_image(): void
@@ -1444,38 +1473,126 @@ function myliba_brand_link(string $modifier = ''): void
     echo '</a>';
 }
 
-function myliba_home_value(string $key, mixed $fallback = ''): mixed
+function myliba_home_value(string $key, mixed $fallback = '', int $post_id = 0): mixed
 {
     if (is_string($fallback)) {
         $fallback = myliba_translate_text($fallback);
     }
 
-    $value = myliba_meta('_myliba_home_' . $key, get_queried_object_id(), $fallback);
+    $value = myliba_meta('_myliba_home_' . $key, $post_id ?: get_queried_object_id(), $fallback);
 
     return is_string($value) ? myliba_translate_text($value) : $value;
 }
 
-function myliba_home_lines(string $key, array $fallback = []): array
+function myliba_home_lines(string $key, array $fallback = [], int $post_id = 0): array
 {
     $fallback = array_map(static fn ($line) => is_string($line) ? myliba_translate_text($line) : $line, $fallback);
-    $value = (string) myliba_home_value($key, implode("\n", $fallback));
+    $value = (string) myliba_home_value($key, implode("\n", $fallback), $post_id);
 
     return array_map('myliba_translate_text', myliba_lines($value));
 }
 
-function myliba_home_rows(string $key, array $fallback = []): array
+function myliba_home_rows(string $key, array $fallback = [], int $post_id = 0): array
 {
     $rows = [];
     $fallback = array_map(static function (array $row): array {
         return array_map(static fn ($cell) => is_string($cell) ? myliba_translate_text($cell) : $cell, $row);
     }, $fallback);
-    $raw_rows = myliba_home_lines($key, array_map(static fn ($row) => implode('|', $row), $fallback));
+    $raw_rows = myliba_home_lines($key, array_map(static fn ($row) => implode('|', $row), $fallback), $post_id);
 
     foreach ($raw_rows as $row) {
         $rows[] = array_map(static fn ($cell) => myliba_translate_text(trim($cell)), explode('|', $row));
     }
 
     return $rows;
+}
+
+function myliba_home_hero_slides(int $post_id = 0): array
+{
+    $post_id = $post_id ?: (int) get_queried_object_id();
+    $slides = [];
+
+    if ($post_id && metadata_exists('post', $post_id, '_myliba_home_hero_slides_v2')) {
+        $saved = get_post_meta($post_id, '_myliba_home_hero_slides_v2', true);
+        $saved = is_array($saved) ? $saved : [];
+
+        foreach ($saved as $slide) {
+            if (!is_array($slide) || empty($slide['enabled'])) {
+                continue;
+            }
+
+            $buttons = [];
+            foreach (($slide['buttons'] ?? []) as $button) {
+                if (!is_array($button)) {
+                    continue;
+                }
+
+                $label = myliba_translate_text((string) ($button['label'] ?? ''));
+                $url = (string) ($button['url'] ?? '');
+                if ($label === '' || $url === '') {
+                    continue;
+                }
+
+                $style = sanitize_key((string) ($button['style'] ?? 'ghost'));
+                $buttons[] = [
+                    'label' => $label,
+                    'url' => $url,
+                    'style' => in_array($style, ['primary', 'ghost', 'link'], true) ? $style : 'ghost',
+                    'new_tab' => !empty($button['new_tab']),
+                    'aria_label' => myliba_translate_text((string) ($button['aria_label'] ?? '')),
+                ];
+            }
+
+            $image = [];
+            $attachment_id = absint($slide['image_id'] ?? 0);
+            $source = $attachment_id ? wp_get_attachment_image_src($attachment_id, 'full') : false;
+            if ($source) {
+                $custom_alt = trim((string) ($slide['image_alt'] ?? ''));
+                $media_alt = trim((string) get_post_meta($attachment_id, '_wp_attachment_image_alt', true));
+                $image = [
+                    'url' => (string) $source[0],
+                    'alt' => myliba_translate_text($custom_alt !== '' ? $custom_alt : $media_alt),
+                    'width' => (int) $source[1],
+                    'height' => (int) $source[2],
+                    'attachment_id' => $attachment_id,
+                ];
+            }
+
+            $slides[] = [
+                'id' => sanitize_html_class((string) ($slide['id'] ?? 'hero-' . count($slides))),
+                'eyebrow' => myliba_translate_text((string) ($slide['eyebrow'] ?? '')),
+                'title' => myliba_translate_text((string) ($slide['title'] ?? '')),
+                'text' => myliba_translate_text((string) ($slide['text'] ?? '')),
+                'image' => $image,
+                'buttons' => $buttons,
+            ];
+        }
+
+        return $slides;
+    }
+
+    $images = myliba_hero_banner_images();
+    foreach (myliba_home_rows('hero_slides', [], $post_id) as $index => $row) {
+        [$eyebrow, $title, $text, $primary_label, $primary_url, $secondary_label, $secondary_url] = array_pad($row, 7, '');
+        $buttons = [];
+        if ($primary_label !== '') {
+            $buttons[] = ['label' => $primary_label, 'url' => $primary_url ?: myliba_demo_url(), 'style' => 'primary', 'new_tab' => false, 'aria_label' => ''];
+        }
+        if ($secondary_label !== '') {
+            $buttons[] = ['label' => $secondary_label, 'url' => $secondary_url ?: myliba_page_url('products'), 'style' => 'ghost', 'new_tab' => false, 'aria_label' => ''];
+        }
+
+        $slides[] = [
+            'id' => 'legacy-' . ($index + 1),
+            'eyebrow' => $eyebrow,
+            'title' => $title,
+            'text' => $text,
+            'image' => $images ? $images[$index % count($images)] : [],
+            'buttons' => $buttons,
+        ];
+    }
+
+    return $slides;
 }
 
 function myliba_home_section_definitions(): array
