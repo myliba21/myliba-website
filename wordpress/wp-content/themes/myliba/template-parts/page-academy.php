@@ -328,7 +328,7 @@ get_header();
         <section class="section academy-v2-stats"
             aria-label="<?php echo esc_attr($meta('_myliba_academy_approach_title')); ?>">
             <div class="academy-v2-stats__heading">
-                <span><?php esc_html_e('Programı bir bakışta', 'myliba'); ?></span>
+                <span><?php echo esc_html(myliba_text('Programı bir bakışta')); ?></span>
                 <i aria-hidden="true"></i>
             </div>
             <div class="academy-v2-stats__grid">
@@ -369,9 +369,9 @@ get_header();
                 <h2><?php echo esc_html($meta('_myliba_academy_testimonials_title')); ?></h2>
                 <div class="academy-v2-slider-controls">
                     <button type="button" data-slider-previous
-                        aria-label="<?php esc_attr_e('Previous testimonial', 'myliba'); ?>">←</button>
+                        aria-label="<?php echo esc_attr(myliba_text('Previous testimonial')); ?>">←</button>
                     <button type="button" data-slider-next
-                        aria-label="<?php esc_attr_e('Next testimonial', 'myliba'); ?>">→</button>
+                        aria-label="<?php echo esc_attr(myliba_text('Next testimonial')); ?>">→</button>
                 </div>
             </div>
             <div class="academy-v2-testimonials__track" data-slider-track>
@@ -430,7 +430,7 @@ get_header();
 <?php if ($meta('_myliba_academy_contact_title') !== ''): ?>
     <dialog class="academy-v2-dialog" data-academy-dialog aria-labelledby="academy-dialog-title">
         <button class="academy-v2-dialog__close" type="button" data-academy-form-close
-            aria-label="<?php esc_attr_e('Close', 'myliba'); ?>">×</button>
+            aria-label="<?php echo esc_attr(myliba_text('Close')); ?>">×</button>
         <div class="academy-v2-dialog__intro">
             <p class="eyebrow">
                 <?php echo esc_html($meta('_myliba_eyebrow')); ?>

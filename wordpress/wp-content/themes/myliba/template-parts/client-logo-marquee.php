@@ -25,7 +25,7 @@ if (!$logo_posts && !$fallback_items) {
 
 $section_classes = trim('section band trust-section client-logo-marquee ' . sanitize_html_class((string) $component['class']));
 $heading_id = sanitize_html_class((string) $component['heading_id']);
-$aria_label = (string) ($component['title'] ?: __('Client logos', 'myliba'));
+$aria_label = (string) ($component['title'] ?: myliba_text('Client logos'));
 ?>
 <section class="<?php echo esc_attr($section_classes); ?>" <?php echo $heading_id !== '' ? 'aria-labelledby="' . esc_attr($heading_id) . '"' : 'aria-label="' . esc_attr($aria_label) . '"'; ?>>
     <?php if ($component['label'] !== '' || $component['title'] !== '' || $component['text'] !== '') : ?>
@@ -51,7 +51,7 @@ $aria_label = (string) ($component['title'] ?: __('Client logos', 'myliba'));
     <?php endif; ?>
 
     <?php if ($logo_posts) : ?>
-        <div class="trust-marquee" aria-label="<?php echo esc_attr(__('Client logos', 'myliba')); ?>">
+        <div class="trust-marquee" aria-label="<?php echo esc_attr(myliba_text('Client logos')); ?>">
             <div class="trust-marquee__track">
                 <?php for ($repeat = 0; $repeat < 2; $repeat++) : ?>
                     <?php foreach ($logo_posts as $logo_post) : ?>

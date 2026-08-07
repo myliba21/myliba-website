@@ -3,7 +3,7 @@ get_header();
 ?>
 
 <section class="archive-hero">
-    <p class="eyebrow"><?php esc_html_e('Myliba', 'myliba'); ?></p>
+    <p class="eyebrow"><?php echo esc_html(myliba_text('Myliba')); ?></p>
     <h1><?php echo esc_html(get_the_archive_title() ?: get_bloginfo('name')); ?></h1>
 </section>
 
@@ -19,7 +19,7 @@ get_header();
             <?php endwhile; ?>
             <?php the_posts_pagination(); ?>
         <?php else : ?>
-            <p><?php esc_html_e('No content found.', 'myliba'); ?></p>
+            <p><?php echo esc_html(myliba_text('No content found.')); ?></p>
         <?php endif; ?>
     </div>
 </section>

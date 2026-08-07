@@ -12,13 +12,13 @@ $faqs = myliba_faq_pairs((string) myliba_meta('_myliba_faq_items', $post_id));
 <section class="section">
     <div class="section--split">
         <div>
-            <p class="eyebrow"><?php echo esc_html(myliba_meta('_myliba_label', $post_id, __('Myliba', 'myliba'))); ?></p>
-            <h2><?php esc_html_e('Problem', 'myliba'); ?></h2>
+            <p class="eyebrow"><?php echo esc_html(myliba_meta('_myliba_label', $post_id, myliba_text('Myliba'))); ?></p>
+            <h2><?php echo esc_html(myliba_text('Problem')); ?></h2>
             <p><?php echo esc_html(myliba_meta('_myliba_problem', $post_id, myliba_excerpt($post_id, 32))); ?></p>
         </div>
         <div class="split-panel__item">
-            <h2><?php esc_html_e('Myliba solution', 'myliba'); ?></h2>
-            <p><?php echo esc_html(myliba_meta('_myliba_solution', $post_id, __('Myliba connects goals, routines and measurable actions in one operating flow.', 'myliba'))); ?></p>
+            <h2><?php echo esc_html(myliba_text('Myliba solution')); ?></h2>
+            <p><?php echo esc_html(myliba_meta('_myliba_solution', $post_id, myliba_text('Myliba connects goals, routines and measurable actions in one operating flow.'))); ?></p>
         </div>
     </div>
 </section>
@@ -26,14 +26,14 @@ $faqs = myliba_faq_pairs((string) myliba_meta('_myliba_faq_items', $post_id));
 <?php if ($benefits) : ?>
     <section class="section band">
         <div class="section__heading">
-            <p class="eyebrow"><?php esc_html_e('Benefits', 'myliba'); ?></p>
-            <h2><?php esc_html_e('What changes with Myliba?', 'myliba'); ?></h2>
+            <p class="eyebrow"><?php echo esc_html(myliba_text('Benefits')); ?></p>
+            <h2><?php echo esc_html(myliba_text('What changes with Myliba?')); ?></h2>
         </div>
         <div class="card-grid card-grid--three">
             <?php foreach ($benefits as $benefit) : ?>
                 <article class="feature-card">
                     <h3><?php echo esc_html($benefit); ?></h3>
-                    <p><?php esc_html_e('Designed to make the behavior visible, repeatable and measurable.', 'myliba'); ?></p>
+                    <p><?php echo esc_html(myliba_text('Designed to make the behavior visible, repeatable and measurable.')); ?></p>
                 </article>
             <?php endforeach; ?>
         </div>
@@ -43,8 +43,8 @@ $faqs = myliba_faq_pairs((string) myliba_meta('_myliba_faq_items', $post_id));
 <?php if ($modules) : ?>
     <section class="section">
         <div class="section__heading">
-            <p class="eyebrow"><?php esc_html_e('Related modules', 'myliba'); ?></p>
-            <h2><?php esc_html_e('Connected product capabilities', 'myliba'); ?></h2>
+            <p class="eyebrow"><?php echo esc_html(myliba_text('Related modules')); ?></p>
+            <h2><?php echo esc_html(myliba_text('Connected product capabilities')); ?></h2>
         </div>
         <div class="module-pill-list">
             <?php foreach ($modules as $module) : ?>
@@ -63,8 +63,8 @@ $faqs = myliba_faq_pairs((string) myliba_meta('_myliba_faq_items', $post_id));
 <?php if ($faqs) : ?>
     <section class="section band">
         <div class="section__heading">
-            <p class="eyebrow"><?php esc_html_e('FAQ', 'myliba'); ?></p>
-            <h2><?php esc_html_e('Questions teams ask before implementation.', 'myliba'); ?></h2>
+            <p class="eyebrow"><?php echo esc_html(myliba_text('FAQ')); ?></p>
+            <h2><?php echo esc_html(myliba_text('Questions teams ask before implementation.')); ?></h2>
         </div>
         <div class="card-grid card-grid--two">
             <?php foreach ($faqs as $faq) : ?>
@@ -79,10 +79,10 @@ $faqs = myliba_faq_pairs((string) myliba_meta('_myliba_faq_items', $post_id));
 
 <section class="section">
     <div class="cta-panel">
-        <h2><?php esc_html_e('See this flow in a real demo.', 'myliba'); ?></h2>
-        <p><?php esc_html_e('We will map your current performance routines and show the product modules that fit.', 'myliba'); ?></p>
+        <h2><?php echo esc_html(myliba_text('See this flow in a real demo.')); ?></h2>
+        <p><?php echo esc_html(myliba_text('We will map your current performance routines and show the product modules that fit.')); ?></p>
         <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_meta('_myliba_cta_url', $post_id, myliba_demo_url())); ?>">
-            <?php echo esc_html(myliba_meta('_myliba_cta_label', $post_id, myliba_option('demo_cta_label', __('Request a demo', 'myliba')))); ?>
+            <?php echo esc_html(myliba_meta('_myliba_cta_label', $post_id, myliba_option('demo_cta_label', myliba_text('Request a demo')))); ?>
         </a>
     </div>
 </section>

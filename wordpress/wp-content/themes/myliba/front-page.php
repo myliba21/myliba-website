@@ -27,7 +27,7 @@ foreach (myliba_home_sections($post_id) as $section) {
         case 'hero':
             ?>
             <section class="hero-slider" data-hero-slider aria-roledescription="carousel"
-                aria-label="<?php esc_attr_e('Myliba highlights', 'myliba'); ?>">
+                aria-label="<?php echo esc_attr(myliba_text('Myliba highlights')); ?>">
                 <div class="hero-slider__viewport" aria-live="off">
                     <?php foreach ($hero_slides as $index => $slide):
                         $image = $slide['image'] ?? [];
@@ -83,8 +83,8 @@ foreach (myliba_home_sections($post_id) as $section) {
                 <?php if (count($hero_slides) > 1): ?>
                     <div class="hero-slider__controls">
                         <button class="hero-slider__arrow" type="button" data-hero-prev
-                            aria-label="<?php esc_attr_e('Previous slide', 'myliba'); ?>">&#8592;</button>
-                        <div class="hero-slider__dots" role="tablist" aria-label="<?php esc_attr_e('Choose slide', 'myliba'); ?>">
+                            aria-label="<?php echo esc_attr(myliba_text('Previous slide')); ?>">&#8592;</button>
+                        <div class="hero-slider__dots" role="tablist" aria-label="<?php echo esc_attr(myliba_text('Choose slide')); ?>">
                             <?php foreach ($hero_slides as $index => $row): ?><button
                                     class="<?php echo $index === 0 ? 'is-active' : ''; ?>" type="button" role="tab"
                                     aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>"
@@ -92,7 +92,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                                     data-slide-label="<?php echo esc_attr(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?>"></button><?php endforeach; ?>
                         </div>
                         <button class="hero-slider__arrow" type="button" data-hero-next
-                            aria-label="<?php esc_attr_e('Next slide', 'myliba'); ?>">&#8594;</button>
+                            aria-label="<?php echo esc_attr(myliba_text('Next slide')); ?>">&#8594;</button>
                     </div>
                 <?php endif; ?>
             </section>
@@ -103,7 +103,7 @@ foreach (myliba_home_sections($post_id) as $section) {
             get_template_part('template-parts/client-logo-marquee', null, [
                 'label' => myliba_home_value('trust_logo_label'),
                 'title' => myliba_home_value('trust_title'),
-                'text' => __('', 'myliba'),
+                'text' => myliba_text(''),
                 'fallback_items' => $trust_items,
             ]);
             break;
@@ -111,7 +111,7 @@ foreach (myliba_home_sections($post_id) as $section) {
         case 'social_proof':
             ?>
             <section class="section social-proof-section">
-                <div class="proof-grid" aria-label="<?php esc_attr_e('Myliba in numbers', 'myliba'); ?>">
+                <div class="proof-grid" aria-label="<?php echo esc_attr(myliba_text('Myliba in numbers')); ?>">
                     <?php foreach ($social_proof_items as $index => $item):
                         [$value, $label] = array_pad($item, 2, '');
                         ?>
@@ -300,7 +300,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                     <p><?php echo esc_html(myliba_home_value('role_gains_text')); ?></p>
                 </div>
                 <div class="role-gains" data-role-gains>
-                    <div class="role-gains__tabs" role="tablist" aria-label="<?php esc_attr_e('Role gains', 'myliba'); ?>">
+                    <div class="role-gains__tabs" role="tablist" aria-label="<?php echo esc_attr(myliba_text('Role gains')); ?>">
                         <?php foreach ($role_gain_rows as $index => $row):
                             [$label] = array_pad($row, 1, '');
                             $tab_id = 'role-gain-tab-' . $index;
@@ -380,7 +380,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                     </div>
                     <div class="performance-tabs" data-home-tabs>
                         <div class="performance-tabs__nav" role="tablist"
-                            aria-label="<?php esc_attr_e('Performance management capabilities', 'myliba'); ?>">
+                            aria-label="<?php echo esc_attr(myliba_text('Performance management capabilities')); ?>">
                             <?php foreach ($performance_tabs as $index => $row):
                                 [$label] = array_pad($row, 1, '');
                                 ?>
@@ -463,7 +463,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                         $posts->the_post(); ?>
                         <a class="resource-card" href="<?php the_permalink(); ?>">
                             <span><?php echo esc_html(get_the_date()); ?> &middot; <?php echo esc_html(myliba_reading_time()); ?>
-                                <?php esc_html_e('min read', 'myliba'); ?></span>
+                                <?php echo esc_html(myliba_text('min read')); ?></span>
                             <h3><?php the_title(); ?></h3>
                             <p><?php echo esc_html(myliba_excerpt(get_the_ID(), 18)); ?></p>
                         </a>

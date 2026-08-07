@@ -14,7 +14,7 @@ $headings = $matches[1] ?? [];
                 <p class="article-meta">
                     <?php echo esc_html(get_the_date()); ?> &middot;
                     <?php echo esc_html(get_the_modified_date()); ?> &middot;
-                    <?php echo esc_html(myliba_reading_time()); ?> <?php esc_html_e('min read', 'myliba'); ?>
+                    <?php echo esc_html(myliba_reading_time()); ?> <?php echo esc_html(myliba_text('min read')); ?>
                 </p>
                 <?php echo $content; ?>
             <?php endwhile; ?>
@@ -22,7 +22,7 @@ $headings = $matches[1] ?? [];
         <aside>
             <?php if ($headings) : ?>
                 <div class="toc-card">
-                    <h2><?php esc_html_e('In this article', 'myliba'); ?></h2>
+                    <h2><?php echo esc_html(myliba_text('In this article')); ?></h2>
                     <ol>
                         <?php foreach ($headings as $heading) : ?>
                             <li><?php echo esc_html(wp_strip_all_tags($heading)); ?></li>
@@ -31,13 +31,13 @@ $headings = $matches[1] ?? [];
                 </div>
             <?php endif; ?>
             <div class="author-card">
-                <h2><?php esc_html_e('Myliba Team', 'myliba'); ?></h2>
-                <p><?php esc_html_e('Insights on OKR, KPI, CFR, performance culture, feedback and leadership routines.', 'myliba'); ?></p>
+                <h2><?php echo esc_html(myliba_text('Myliba Team')); ?></h2>
+                <p><?php echo esc_html(myliba_text('Insights on OKR, KPI, CFR, performance culture, feedback and leadership routines.')); ?></p>
             </div>
             <div class="cta-panel">
-                <h2><?php esc_html_e('Turn this into practice.', 'myliba'); ?></h2>
-                <p><?php esc_html_e('Request a demo and see how Myliba connects strategy, actions and performance routines.', 'myliba'); ?></p>
-                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_demo_url()); ?>"><?php echo esc_html(myliba_option('demo_cta_label', __('Request a demo', 'myliba'))); ?></a>
+                <h2><?php echo esc_html(myliba_text('Turn this into practice.')); ?></h2>
+                <p><?php echo esc_html(myliba_text('Request a demo and see how Myliba connects strategy, actions and performance routines.')); ?></p>
+                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_demo_url()); ?>"><?php echo esc_html(myliba_option('demo_cta_label', myliba_text('Request a demo'))); ?></a>
             </div>
         </aside>
     </div>
@@ -45,8 +45,8 @@ $headings = $matches[1] ?? [];
 
 <section class="section band">
     <div class="section__heading">
-        <p class="eyebrow"><?php esc_html_e('Related reading', 'myliba'); ?></p>
-        <h2><?php esc_html_e('Continue exploring performance culture.', 'myliba'); ?></h2>
+        <p class="eyebrow"><?php echo esc_html(myliba_text('Related reading')); ?></p>
+        <h2><?php echo esc_html(myliba_text('Continue exploring performance culture.')); ?></h2>
     </div>
     <div class="card-grid card-grid--three">
         <?php
@@ -61,7 +61,7 @@ $headings = $matches[1] ?? [];
             $related->the_post();
             ?>
             <a class="post-row" href="<?php the_permalink(); ?>">
-                <span><?php echo esc_html(get_the_date()); ?> &middot; <?php echo esc_html(myliba_reading_time()); ?> <?php esc_html_e('min read', 'myliba'); ?></span>
+                <span><?php echo esc_html(get_the_date()); ?> &middot; <?php echo esc_html(myliba_reading_time()); ?> <?php echo esc_html(myliba_text('min read')); ?></span>
                 <strong><?php the_title(); ?></strong>
                 <p><?php echo esc_html(myliba_excerpt(get_the_ID(), 18)); ?></p>
             </a>

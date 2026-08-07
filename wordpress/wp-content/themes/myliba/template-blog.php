@@ -20,13 +20,13 @@ $posts = new WP_Query([
 <section class="section">
     <form class="resource-filters" method="get" action="<?php echo esc_url(get_permalink()); ?>">
         <label>
-            <span><?php esc_html_e('Search resources', 'myliba'); ?></span>
-            <input type="search" name="s" value="<?php echo esc_attr(get_search_query()); ?>" placeholder="<?php esc_attr_e('OKR, KPI, feedback...', 'myliba'); ?>">
+            <span><?php echo esc_html(myliba_text('Search resources')); ?></span>
+            <input type="search" name="s" value="<?php echo esc_attr(get_search_query()); ?>" placeholder="<?php echo esc_attr(myliba_text('OKR, KPI, feedback...')); ?>">
         </label>
         <label>
-            <span><?php esc_html_e('Category', 'myliba'); ?></span>
+            <span><?php echo esc_html(myliba_text('Category')); ?></span>
             <select name="category">
-                <option value="0"><?php esc_html_e('All categories', 'myliba'); ?></option>
+                <option value="0"><?php echo esc_html(myliba_text('All categories')); ?></option>
                 <?php foreach (get_categories(['hide_empty' => false]) as $category) : ?>
                     <option value="<?php echo esc_attr($category->term_id); ?>" <?php selected(isset($_GET['category']) ? intval($_GET['category']) : 0, $category->term_id); ?>>
                         <?php echo esc_html($category->name); ?>
@@ -34,7 +34,7 @@ $posts = new WP_Query([
                 <?php endforeach; ?>
             </select>
         </label>
-        <button class="myliba-button myliba-button--primary" type="submit"><?php esc_html_e('Filter', 'myliba'); ?></button>
+        <button class="myliba-button myliba-button--primary" type="submit"><?php echo esc_html(myliba_text('Filter')); ?></button>
     </form>
     <div class="post-list">
         <?php if ($posts->have_posts()) : ?>
@@ -47,7 +47,7 @@ $posts = new WP_Query([
             <?php endwhile; ?>
             <?php wp_reset_postdata(); ?>
         <?php else : ?>
-            <p><?php esc_html_e('No articles found.', 'myliba'); ?></p>
+            <p><?php echo esc_html(myliba_text('No articles found.')); ?></p>
         <?php endif; ?>
     </div>
 </section>

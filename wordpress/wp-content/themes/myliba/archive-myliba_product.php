@@ -2,8 +2,8 @@
 get_header();
 ?>
 <section class="archive-hero">
-    <p class="eyebrow"><?php esc_html_e('Products', 'myliba'); ?></p>
-    <h1><?php esc_html_e('Product modules for performance culture.', 'myliba'); ?></h1>
+    <p class="eyebrow"><?php echo esc_html(myliba_text('Products')); ?></p>
+    <h1><?php echo esc_html(myliba_text('Product modules for performance culture.')); ?></h1>
 </section>
 <section class="section">
     <div class="card-grid card-grid--three">

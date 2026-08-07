@@ -15,23 +15,23 @@ $footer_phone_url = (string) myliba_option('phone_url', '');
 $footer_languages = myliba_language_links();
 
 $footer_page_links = [
-    ['label' => __('Products', 'myliba'), 'url' => myliba_page_url('products')],
-    ['label' => __('Academy', 'myliba'), 'url' => myliba_page_url('academy')],
-    ['label' => __('Culture Analysis', 'myliba'), 'url' => myliba_page_url('culture')],
-    ['label' => __('Ethics Counsel', 'myliba'), 'url' => myliba_page_url('ethics')],
-    ['label' => __('Our Story', 'myliba'), 'url' => myliba_page_url('story')],
-    ['label' => __('FAQ', 'myliba'), 'url' => myliba_page_url('faq')],
-    ['label' => __('Security', 'myliba'), 'url' => myliba_page_url('security')],
-    ['label' => __('Privacy', 'myliba'), 'url' => myliba_page_url('privacy')],
-    ['label' => __('Contact', 'myliba'), 'url' => myliba_page_url('contact')],
+    ['label' => myliba_text('Products'), 'url' => myliba_page_url('products')],
+    ['label' => myliba_text('Academy'), 'url' => myliba_page_url('academy')],
+    ['label' => myliba_text('Culture Analysis'), 'url' => myliba_page_url('culture')],
+    ['label' => myliba_text('Ethics Counsel'), 'url' => myliba_page_url('ethics')],
+    ['label' => myliba_text('Our Story'), 'url' => myliba_page_url('story')],
+    ['label' => myliba_text('FAQ'), 'url' => myliba_page_url('faq')],
+    ['label' => myliba_text('Security'), 'url' => myliba_page_url('security')],
+    ['label' => myliba_text('Privacy'), 'url' => myliba_page_url('privacy')],
+    ['label' => myliba_text('Contact'), 'url' => myliba_page_url('contact')],
 ];
 
 $footer_company_fallback = [
-    ['label' => __('Blog', 'myliba'), 'url' => myliba_page_url('blog')],
-    ['label' => __('Our Story', 'myliba'), 'url' => myliba_page_url('story')],
-    ['label' => __('FAQ', 'myliba'), 'url' => myliba_page_url('faq')],
-    ['label' => __('Security', 'myliba'), 'url' => myliba_page_url('security')],
-    ['label' => __('Privacy', 'myliba'), 'url' => myliba_page_url('privacy')],
+    ['label' => myliba_text('Blog'), 'url' => myliba_page_url('blog')],
+    ['label' => myliba_text('Our Story'), 'url' => myliba_page_url('story')],
+    ['label' => myliba_text('FAQ'), 'url' => myliba_page_url('faq')],
+    ['label' => myliba_text('Security'), 'url' => myliba_page_url('security')],
+    ['label' => myliba_text('Privacy'), 'url' => myliba_page_url('privacy')],
 ];
 
 $footer_product_links = [];
@@ -49,12 +49,12 @@ if ($footer_products_query->have_posts()) {
 
 if (!$footer_product_links) {
     $footer_product_links = [
-        ['label' => __('Goals', 'myliba'), 'url' => myliba_page_url('products')],
-        ['label' => __('Conversations', 'myliba'), 'url' => myliba_page_url('products')],
-        ['label' => __('1:1s', 'myliba'), 'url' => myliba_page_url('products')],
-        ['label' => __('Feedback and Feedforward', 'myliba'), 'url' => myliba_page_url('products')],
-        ['label' => __('Manager Effectiveness', 'myliba'), 'url' => myliba_page_url('products')],
-        ['label' => __('Calibration', 'myliba'), 'url' => myliba_page_url('products')],
+        ['label' => myliba_text('Goals'), 'url' => myliba_page_url('products')],
+        ['label' => myliba_text('Conversations'), 'url' => myliba_page_url('products')],
+        ['label' => myliba_text('1:1s'), 'url' => myliba_page_url('products')],
+        ['label' => myliba_text('Feedback and Feedforward'), 'url' => myliba_page_url('products')],
+        ['label' => myliba_text('Manager Effectiveness'), 'url' => myliba_page_url('products')],
+        ['label' => myliba_text('Calibration'), 'url' => myliba_page_url('products')],
     ];
 }
 
@@ -80,32 +80,32 @@ if ($footer_posts_query->have_posts()) {
 
 if (!$footer_blog_fallback) {
     $footer_blog_fallback = [
-        ['label' => __('Blog', 'myliba'), 'url' => myliba_page_url('blog')],
-        ['label' => __('Events', 'myliba'), 'url' => myliba_page_url('events')],
-        ['label' => __('OKR Culture Academy', 'myliba'), 'url' => myliba_page_url('academy')],
-        ['label' => __('FAQ', 'myliba'), 'url' => myliba_page_url('faq')],
+        ['label' => myliba_text('Blog'), 'url' => myliba_page_url('blog')],
+        ['label' => myliba_text('Events'), 'url' => myliba_page_url('events')],
+        ['label' => myliba_text('OKR Culture Academy'), 'url' => myliba_page_url('academy')],
+        ['label' => myliba_text('FAQ'), 'url' => myliba_page_url('faq')],
     ];
 }
 
 $footer_social_links = [
-    ['label' => __('LinkedIn', 'myliba'), 'url' => (string) myliba_option('linkedin_url', ''), 'short' => 'in'],
-    ['label' => __('Instagram', 'myliba'), 'url' => (string) myliba_option('instagram_url', ''), 'short' => 'ig'],
+    ['label' => myliba_text('LinkedIn'), 'url' => (string) myliba_option('linkedin_url', ''), 'short' => 'in'],
+    ['label' => myliba_text('Instagram'), 'url' => (string) myliba_option('instagram_url', ''), 'short' => 'ig'],
 ];
 ?>
 </main>
 <footer class="site-footer">
-    <section class="site-footer__cta-wrap" aria-label="<?php esc_attr_e('Footer call to action', 'myliba'); ?>">
+    <section class="site-footer__cta-wrap" aria-label="<?php echo esc_attr(myliba_text('Footer call to action')); ?>">
         <div class="site-footer__cta">
             <div>
-                <span><?php esc_html_e('Culture, goals and performance', 'myliba'); ?></span>
-                <h2><?php echo esc_html(myliba_option('footer_cta_title', __('Ready to make culture measurable?', 'myliba'))); ?></h2>
+                <span><?php echo esc_html(myliba_text('Culture, goals and performance')); ?></span>
+                <h2><?php echo esc_html(myliba_option('footer_cta_title', myliba_text('Ready to make culture measurable?'))); ?></h2>
             </div>
             <div class="site-footer__cta-actions">
                 <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($footer_cta_url); ?>">
-                    <?php echo esc_html(myliba_option('primary_cta_label', __('Contact us', 'myliba'))); ?>
+                    <?php echo esc_html(myliba_option('primary_cta_label', myliba_text('Contact us'))); ?>
                 </a>
                 <a class="myliba-button myliba-button--secondary" href="<?php echo esc_url($footer_demo_url); ?>">
-                    <?php echo esc_html(myliba_option('demo_cta_label', __('Request a demo', 'myliba'))); ?>
+                    <?php echo esc_html(myliba_option('demo_cta_label', myliba_text('Request a demo'))); ?>
                 </a>
             </div>
         </div>
@@ -125,7 +125,7 @@ $footer_social_links = [
                 <?php endif; ?>
             </div>
 
-            <div class="site-footer__socials" role="navigation" aria-label="<?php esc_attr_e('Social links', 'myliba'); ?>">
+            <div class="site-footer__socials" role="navigation" aria-label="<?php echo esc_attr(myliba_text('Social links')); ?>">
                 <?php foreach ($footer_social_links as $social_link) : ?>
                     <?php if ($social_link['url'] !== '') : ?>
                         <a href="<?php echo esc_url($social_link['url']); ?>" aria-label="<?php echo esc_attr($social_link['label']); ?>" target="_blank" rel="noopener noreferrer">
@@ -136,8 +136,8 @@ $footer_social_links = [
             </div>
         </div>
 
-        <nav class="site-footer__column" aria-label="<?php esc_attr_e('Footer product links', 'myliba'); ?>">
-            <h3><?php esc_html_e('Products', 'myliba'); ?></h3>
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Footer product links')); ?>">
+            <h3><?php echo esc_html(myliba_text('Products')); ?></h3>
             <ul class="site-footer__link-list">
                 <?php foreach ($footer_product_links as $footer_link) : ?>
                     <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
@@ -145,8 +145,8 @@ $footer_social_links = [
             </ul>
         </nav>
 
-        <nav class="site-footer__column" aria-label="<?php esc_attr_e('Footer page links', 'myliba'); ?>">
-            <h3><?php esc_html_e('Pages', 'myliba'); ?></h3>
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Footer page links')); ?>">
+            <h3><?php echo esc_html(myliba_text('Pages')); ?></h3>
             <ul class="site-footer__link-list">
                 <?php foreach ($footer_page_links as $footer_link) : ?>
                     <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
@@ -154,8 +154,8 @@ $footer_social_links = [
             </ul>
         </nav>
 
-        <nav class="site-footer__column" aria-label="<?php esc_attr_e('Footer blog links', 'myliba'); ?>">
-            <h3><?php esc_html_e('Blog & resources', 'myliba'); ?></h3>
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Footer blog links')); ?>">
+            <h3><?php echo esc_html(myliba_text('Blog & resources')); ?></h3>
             <?php if (has_nav_menu('footer_blog') && myliba_current_language() === 'en') : ?>
                 <?php
                 wp_nav_menu([
@@ -175,8 +175,8 @@ $footer_social_links = [
             <?php endif; ?>
         </nav>
 
-        <nav class="site-footer__column" aria-label="<?php esc_attr_e('Footer company links', 'myliba'); ?>">
-            <h3><?php esc_html_e('Company', 'myliba'); ?></h3>
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Footer company links')); ?>">
+            <h3><?php echo esc_html(myliba_text('Company')); ?></h3>
             <?php if (has_nav_menu('footer') && myliba_current_language() === 'en') : ?>
                 <?php
                 wp_nav_menu([
@@ -198,24 +198,24 @@ $footer_social_links = [
     </div>
 
     <div class="site-footer__bottom">
-        <p><?php echo esc_html(sprintf(__('Copyright %1$s %2$s. All rights reserved.', 'myliba'), date_i18n('Y'), myliba_option('organization_name', 'Myliba'))); ?></p>
+        <p><?php echo esc_html(sprintf(myliba_text('Copyright %1$s %2$s. All rights reserved.'), date_i18n('Y'), myliba_option('organization_name', 'Myliba'))); ?></p>
         <div class="site-footer__bottom-links">
             <?php foreach ($footer_languages as $language_link) : ?>
                 <a href="<?php echo esc_url($language_link['url']); ?>" data-myliba-locale="<?php echo esc_attr(strtolower((string) $language_link['label'])); ?>" <?php echo !empty($language_link['active']) ? 'aria-current="true"' : ''; ?>>
                     <?php echo esc_html($language_link['label']); ?>
                 </a>
             <?php endforeach; ?>
-            <a href="<?php echo esc_url(myliba_page_url('security')); ?>"><?php esc_html_e('Security', 'myliba'); ?></a>
-            <a href="<?php echo esc_url(myliba_page_url('privacy')); ?>"><?php esc_html_e('Privacy', 'myliba'); ?></a>
+            <a href="<?php echo esc_url(myliba_page_url('security')); ?>"><?php echo esc_html(myliba_text('Security')); ?></a>
+            <a href="<?php echo esc_url(myliba_page_url('privacy')); ?>"><?php echo esc_html(myliba_text('Privacy')); ?></a>
         </div>
     </div>
 </footer>
-<div class="mobile-sticky-cta" aria-label="<?php esc_attr_e('Mobile conversion actions', 'myliba'); ?>">
+<div class="mobile-sticky-cta" aria-label="<?php echo esc_attr(myliba_text('Mobile conversion actions')); ?>">
     <a class="mobile-sticky-cta__demo" href="<?php echo esc_url(myliba_demo_url()); ?>">
-        <?php echo esc_html(myliba_option('demo_cta_label', __('Request a demo', 'myliba'))); ?>
+        <?php echo esc_html(myliba_option('demo_cta_label', myliba_text('Request a demo'))); ?>
     </a>
     <a class="mobile-sticky-cta__portal" href="<?php echo esc_url(myliba_portal_url()); ?>">
-        <?php esc_html_e('Portal login', 'myliba'); ?>
+        <?php echo esc_html(myliba_text('Portal login')); ?>
     </a>
 </div>
 <?php wp_footer(); ?>

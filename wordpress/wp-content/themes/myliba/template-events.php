@@ -30,12 +30,12 @@ $events = new WP_Query([
                     <span><?php echo esc_html(myliba_meta('_myliba_event_date', get_the_ID(), get_the_date())); ?></span>
                     <h2><?php the_title(); ?></h2>
                     <p><?php echo esc_html(myliba_excerpt(get_the_ID(), 24)); ?></p>
-                    <strong><?php echo esc_html(myliba_meta('_myliba_event_location', get_the_ID(), __('Online', 'myliba'))); ?></strong>
+                    <strong><?php echo esc_html(myliba_meta('_myliba_event_location', get_the_ID(), myliba_text('Online'))); ?></strong>
                 </a>
             <?php endwhile; ?>
             <?php wp_reset_postdata(); ?>
         <?php else : ?>
-            <p><?php esc_html_e('No upcoming events at this time.', 'myliba'); ?></p>
+            <p><?php echo esc_html(myliba_text('No upcoming events at this time.')); ?></p>
         <?php endif; ?>
     </div>
 </section>

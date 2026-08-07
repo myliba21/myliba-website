@@ -2,8 +2,8 @@
 get_header();
 ?>
 <section class="archive-hero">
-    <p class="eyebrow"><?php esc_html_e('Academy', 'myliba'); ?></p>
-    <h1><?php esc_html_e('Programs that make OKR and performance routines sustainable.', 'myliba'); ?></h1>
+    <p class="eyebrow"><?php echo esc_html(myliba_text('Academy')); ?></p>
+    <h1><?php echo esc_html(myliba_text('Programs that make OKR and performance routines sustainable.')); ?></h1>
 </section>
 <section class="section">
     <div class="card-grid card-grid--three">

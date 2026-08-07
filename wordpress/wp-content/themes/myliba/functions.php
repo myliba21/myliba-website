@@ -528,7 +528,7 @@ function myliba_redirect_root_to_preferred_locale(): void
             window.location.replace(<?php echo wp_json_encode($home_base); ?> + locale + "/");
         })();
         </script>
-        <p><a href="<?php echo esc_url(home_url('/' . $browser_fallback . '/')); ?>"><?php esc_html_e('Continue', 'myliba'); ?></a></p>
+        <p><a href="<?php echo esc_url(home_url('/' . $browser_fallback . '/')); ?>"><?php echo esc_html(myliba_text('Continue')); ?></a></p>
     </body>
     </html>
     <?php
@@ -671,6 +671,30 @@ add_filter('language_attributes', 'myliba_filter_language_attributes');
 function myliba_translation_defaults(): array
 {
     return [
+        'Your message has been received.' => 'Mesajınız alındı.',
+        'Request demo' => 'Demo Talebi Et',
+        'Send' => 'Gönder',
+        'I consent to being contacted about this request and accept the privacy notice.' => 'Bu taleple ilgili tarafımla iletişime geçilmesine izin veriyor ve gizlilik bildirimini kabul ediyorum.',
+        'Website' => 'Web sitesi',
+        'The form could not be sent. Please try again.' => 'Form gönderilemedi. Lütfen tekrar deneyin.',
+        'First name' => 'Ad',
+        'Name' => 'Adınız',
+        'Last name' => 'Soyad',
+        'Business email' => 'İş e-postası',
+        'Phone' => 'Telefon',
+        'Title' => 'Unvan',
+        'Employee count' => 'Çalışan sayısı',
+        '1-50' => '1-50',
+        '51-250' => '51-250',
+        '251-1000' => '251-1000',
+        '1000+' => '1000+',
+        'Program you are interested in' => 'İlgilendiğiniz program',
+        'Select a program' => 'Bir program seçin',
+        'Participation type' => 'Katılım türü',
+        'Individual' => 'Bireysel',
+        'Corporate' => 'Kurumsal',
+        'Subject' => 'Konu',
+        'Message' => 'Mesaj',
         '1:1 notes' => '1:1 notları',
         '1:1s' => '1:1 görüşmeler',
         'Academy' => 'Akademi',

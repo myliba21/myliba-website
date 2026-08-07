@@ -694,7 +694,7 @@ img {
   font-weight: 900;
 }
 
-.myliba-form input,
+.myliba-form input:not([type="checkbox"]):not([type="radio"]),
 .myliba-form select,
 .myliba-form textarea {
   background: var(--surface);
@@ -732,17 +732,61 @@ img {
   color: #b43d1f;
 }
 
-.myliba-form__consent {
-  align-items: start;
-  display: grid;
+.myliba-form label.myliba-form__consent {
+  align-items: flex-start;
+  cursor: pointer;
+  display: flex;
   font-weight: 700;
   gap: 10px;
-  grid-template-columns: 18px 1fr;
 }
 
-.myliba-form__consent input {
-  margin-top: 5px;
-  width: auto;
+.myliba-form__consent span {
+  font-size: var(--fs-body-sm);
+  line-height: 1.4;
+}
+
+.myliba-form__consent input[type="checkbox"] {
+  accent-color: #14738c;
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 18px;
+  margin-top: 2px;
+  min-height: 18px;
+  padding: 0;
+  width: 18px;
+}
+
+.myliba-form__choice {
+  border: 0;
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0;
+}
+
+.myliba-form__choice legend {
+  color: var(--foreground);
+  font-size: var(--fs-body-sm);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.myliba-form__choice label {
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  margin-right: 20px;
+}
+
+.myliba-form__choice input[type="radio"] {
+  accent-color: #14738c;
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 18px;
+  margin: 0;
+  min-height: 18px;
+  padding: 0;
+  width: 18px;
 }
 
 .mobile-sticky-cta {
@@ -3892,15 +3936,23 @@ textarea:focus-visible {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 50%;
+  color: var(--foreground);
   cursor: pointer;
   display: flex;
-  font-size: var(--fs-h4);
-  height: 42px;
+  font-size: 20px;
+  height: 38px;
   justify-content: center;
+  line-height: 1;
   position: absolute;
-  right: 18px;
-  top: 18px;
-  width: 42px;
+  right: 20px;
+  top: 20px;
+  transition: all 0.2s ease;
+  width: 38px;
+}
+
+.academy-v2-dialog__close:hover {
+  background: var(--border);
+  transform: scale(1.05);
 }
 
 .academy-v2-dialog__intro {
@@ -3914,28 +3966,6 @@ textarea:focus-visible {
 
 .academy-v2-dialog .myliba-form {
   margin-top: 28px;
-}
-
-.academy-v2-dialog .myliba-form__choice {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.academy-v2-dialog .myliba-form__choice legend {
-  color: var(--foreground);
-  font-size: var(--fs-body-sm);
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-
-.academy-v2-dialog .myliba-form__choice label {
-  display: inline-flex;
-  margin-right: 16px;
-}
-
-.academy-v2-dialog .myliba-form__choice input {
-  width: auto;
 }
 
 @media (max-width: 960px) {
@@ -7031,7 +7061,7 @@ a.post-row:hover::after {
   padding: clamp(22px, 3vw, 34px);
 }
 
-.myliba-form input,
+.myliba-form input:not([type="checkbox"]):not([type="radio"]),
 .myliba-form select,
 .myliba-form textarea,
 .resource-filters input,
@@ -7039,7 +7069,7 @@ a.post-row:hover::after {
   min-height: 48px;
 }
 
-.myliba-form input:focus,
+.myliba-form input:not([type="checkbox"]):not([type="radio"]):focus,
 .myliba-form select:focus,
 .myliba-form textarea:focus,
 .resource-filters input:focus,

@@ -12,7 +12,7 @@ function boot(): void
 {
     add_action('admin_menu', __NAMESPACE__ . '\\register_menu', 20);
     add_action('admin_post_myliba_save_content_overrides', __NAMESPACE__ . '\\save_overrides');
-    add_action('init', __NAMESPACE__ . '\\ensure_catalog', 1);
+    add_action('admin_init', __NAMESPACE__ . '\\ensure_catalog', 1);
 }
 
 function register_menu(): void
@@ -27,10 +27,15 @@ function register_menu(): void
     );
 }
 
-function all_overrides(): array
+function all_overrides(bool $force_reload = false): array
 {
+    static $cache = null;
+    if ($cache !== null && !$force_reload) {
+        return $cache;
+    }
     $overrides = get_option(OPTION_NAME, []);
-    return is_array($overrides) ? $overrides : [];
+    $cache = is_array($overrides) ? $overrides : [];
+    return $cache;
 }
 
 function override(string $source, string $locale): ?string
@@ -41,36 +46,28 @@ function override(string $source, string $locale): ?string
     }
 
     $value = $overrides[$source][$locale];
-    return is_string($value) ? $value : null;
+    return is_string($value) && trim($value) !== '' ? $value : null;
 }
 
 function materialize(string $source, string $locale): string
 {
     $stored = all_overrides();
-    if (!isset($stored[$source]) || !is_array($stored[$source])) {
-        $stored[$source] = [];
+
+    // Return stored value if available and not empty
+    if (isset($stored[$source][$locale]) && is_string($stored[$source][$locale]) && trim($stored[$source][$locale]) !== '') {
+        return $stored[$source][$locale];
     }
 
-    $changed = false;
-    $translations = function_exists('myliba_translation_defaults') ? \myliba_translation_defaults() : [];
-    if (!array_key_exists('en', $stored[$source])) {
-        $stored[$source]['en'] = $source;
-        $changed = true;
-    }
-    if (!array_key_exists('tr', $stored[$source])) {
-        $stored[$source]['tr'] = isset($translations[$source]) && is_string($translations[$source])
-            ? $translations[$source]
-            : $source;
-        $changed = true;
+    // Fallback for Turkish: check hardcoded defaults
+    if ($locale === 'tr') {
+        $translations = function_exists('myliba_translation_defaults') ? \myliba_translation_defaults() : [];
+        if (isset($translations[$source]) && is_string($translations[$source]) && trim($translations[$source]) !== '') {
+            return $translations[$source];
+        }
     }
 
-    if ($changed) {
-        update_option(OPTION_NAME, $stored, false);
-    }
-
-    return isset($stored[$source][$locale]) && is_string($stored[$source][$locale])
-        ? $stored[$source][$locale]
-        : '';
+    // Fallback: return the source English string
+    return $source;
 }
 
 /**
@@ -79,7 +76,7 @@ function materialize(string $source, string $locale): string
  */
 function ensure_catalog(): void
 {
-    $stored = all_overrides();
+    $stored = all_overrides(true);
     $catalog = array_values(array_unique(array_merge(frontend_catalog(), array_keys($stored))));
     natcasesort($catalog);
     $changed = false;
@@ -90,12 +87,12 @@ function ensure_catalog(): void
             $stored[$source] = [];
         }
 
-        if (!array_key_exists('en', $stored[$source])) {
+        if (!array_key_exists('en', $stored[$source]) || trim((string) $stored[$source]['en']) === '') {
             $stored[$source]['en'] = $source;
             $changed = true;
         }
 
-        if (!array_key_exists('tr', $stored[$source])) {
+        if (!array_key_exists('tr', $stored[$source]) || trim((string) $stored[$source]['tr']) === '') {
             $stored[$source]['tr'] = isset($translations[$source]) && is_string($translations[$source])
                 ? $translations[$source]
                 : $source;
@@ -105,6 +102,7 @@ function ensure_catalog(): void
 
     if ($changed) {
         update_option(OPTION_NAME, $stored, false);
+        all_overrides(true);
     }
 }
 
@@ -134,17 +132,23 @@ function save_overrides(): void
     }
 
     update_option(OPTION_NAME, $saved, false);
+    all_overrides(true);
     wp_safe_redirect(add_query_arg(['page' => 'myliba-content', 'updated' => '1'], admin_url('admin.php')));
     exit;
 }
 
 function frontend_catalog(): array
 {
-    $paths = array_merge(
-        glob(get_template_directory() . '/*.php') ?: [],
-        glob(get_template_directory() . '/template-parts/*.php') ?: [],
-        [MYLIBA_CORE_DIR . 'includes/forms.php']
-    );
+    $paths = [];
+    $theme_dir = get_template_directory();
+    $scan_dirs = [$theme_dir, $theme_dir . '/template-parts'];
+    foreach ($scan_dirs as $dir) {
+        $found = glob($dir . '/*.php');
+        if ($found) {
+            $paths = array_merge($paths, $found);
+        }
+    }
+    $paths[] = MYLIBA_CORE_DIR . 'includes/forms.php';
     $strings = [];
     $pattern = '~(?:(?:__|_e|esc_html_e|esc_attr_e|esc_html__|esc_attr__)\\(\\s*(["\'])((?:\\\\.|(?!\\1).)*)\\1\\s*,\\s*["\']myliba["\']|myliba_text\\(\\s*(["\'])((?:\\\\.|(?!\\3).)*)\\3\\s*\\))~s';
 
@@ -175,9 +179,11 @@ function render_page(): void
         return;
     }
 
-    $overrides = all_overrides();
+    ensure_catalog();
+    $overrides = all_overrides(true);
     $catalog = array_values(array_unique(array_merge(frontend_catalog(), array_keys($overrides))));
     natcasesort($catalog);
+    $translations = function_exists('myliba_translation_defaults') ? \myliba_translation_defaults() : [];
     ?>
     <div class="wrap">
         <h1><?php esc_html_e('Site Texts — Turkish / English', 'myliba'); ?></h1>
@@ -195,11 +201,14 @@ function render_page(): void
                 <tbody>
                 <?php foreach ($catalog as $index => $source) :
                     $key = 's' . $index;
+                    $en_val = $overrides[$source]['en'] ?? '';
+                    $tr_val = $overrides[$source]['tr'] ?? '';
+                    $tr_default = isset($translations[$source]) && is_string($translations[$source]) ? $translations[$source] : $source;
                     ?>
                     <tr>
                         <td><code style="white-space:normal"><?php echo esc_html($source); ?></code><input type="hidden" name="sources[<?php echo esc_attr($key); ?>]" value="<?php echo esc_attr($source); ?>"></td>
-                        <td><textarea class="widefat" rows="2" name="overrides[<?php echo esc_attr($key); ?>][en]"><?php echo esc_textarea($overrides[$source]['en'] ?? ''); ?></textarea></td>
-                        <td><textarea class="widefat" rows="2" name="overrides[<?php echo esc_attr($key); ?>][tr]"><?php echo esc_textarea($overrides[$source]['tr'] ?? ''); ?></textarea></td>
+                        <td><textarea class="widefat" rows="2" name="overrides[<?php echo esc_attr($key); ?>][en]" placeholder="<?php echo esc_attr($source); ?>"><?php echo esc_textarea($en_val); ?></textarea></td>
+                        <td><textarea class="widefat" rows="2" name="overrides[<?php echo esc_attr($key); ?>][tr]" placeholder="<?php echo esc_attr($tr_default); ?>"><?php echo esc_textarea($tr_val); ?></textarea></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

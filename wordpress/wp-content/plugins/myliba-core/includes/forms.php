@@ -40,13 +40,13 @@ function render_form(string $context): string
     $page_id = get_queried_object_id();
     $success_message = $is_academy && metadata_exists('post', $page_id, '_myliba_academy_form_success')
         ? (string) get_post_meta($page_id, '_myliba_academy_form_success', true)
-        : __('Your message has been received.', 'myliba');
+        : myliba_text('Your message has been received.');
     $button_label = $is_academy && metadata_exists('post', $page_id, '_myliba_academy_form_button')
         ? (string) get_post_meta($page_id, '_myliba_academy_form_button', true)
-        : ($is_demo ? __('Request demo', 'myliba') : __('Send', 'myliba'));
+        : ($is_demo ? myliba_text('Request demo') : myliba_text('Send'));
     $kvkk_text = $is_academy && metadata_exists('post', $page_id, '_myliba_academy_kvkk_text')
         ? (string) get_post_meta($page_id, '_myliba_academy_kvkk_text', true)
-        : __('I consent to being contacted about this request and accept the privacy notice.', 'myliba');
+        : myliba_text('I consent to being contacted about this request and accept the privacy notice.');
     $programs = [];
 
     if ($is_academy) {
@@ -75,82 +75,82 @@ function render_form(string $context): string
         <input type="hidden" name="form_context" value="<?php echo esc_attr($context); ?>">
         <?php wp_nonce_field('myliba_contact_form', 'myliba_contact_nonce'); ?>
         <div class="myliba-hp-field" aria-hidden="true">
-            <label for="myliba-website"><?php esc_html_e('Website', 'myliba'); ?></label>
+            <label for="myliba-website"><?php echo esc_html(myliba_text('Website')); ?></label>
             <input id="myliba-website" name="website" tabindex="-1" autocomplete="off">
         </div>
 
         <?php if ($status === 'success') : ?>
             <p class="myliba-form__status myliba-form__status--success" role="status"><?php echo esc_html($success_message); ?></p>
         <?php elseif ($status === 'error') : ?>
-            <p class="myliba-form__status myliba-form__status--error"><?php esc_html_e('The form could not be sent. Please try again.', 'myliba'); ?></p>
+            <p class="myliba-form__status myliba-form__status--error"><?php echo esc_html(myliba_text('The form could not be sent. Please try again.')); ?></p>
         <?php endif; ?>
 
         <div class="myliba-form__grid">
             <label>
-                <span><?php echo esc_html($is_demo ? __('First name', 'myliba') : __('Name', 'myliba')); ?></span>
+                <span><?php echo esc_html($is_demo ? myliba_text('First name') : myliba_text('Name')); ?></span>
                 <input name="name" required>
             </label>
             <?php if ($is_demo) : ?>
                 <label>
-                    <span><?php esc_html_e('Last name', 'myliba'); ?></span>
+                    <span><?php echo esc_html(myliba_text('Last name')); ?></span>
                     <input name="last_name" required>
                 </label>
             <?php endif; ?>
             <label>
-                <span><?php esc_html_e('Business email', 'myliba'); ?></span>
+                <span><?php echo esc_html(myliba_text('Business email')); ?></span>
                 <input type="email" name="email" required>
             </label>
             <label>
-                <span><?php esc_html_e('Phone', 'myliba'); ?></span>
+                <span><?php echo esc_html(myliba_text('Phone')); ?></span>
                 <input name="phone" inputmode="tel" <?php echo ($is_demo || $is_academy) ? 'required' : ''; ?>>
             </label>
             <label>
-                <span><?php esc_html_e('Company', 'myliba'); ?></span>
+                <span><?php echo esc_html(myliba_text('Company')); ?></span>
                 <input name="company" <?php echo ($is_demo || $is_academy) ? 'required' : ''; ?>>
             </label>
             <?php if ($is_demo || $is_academy) : ?>
                 <label>
-                    <span><?php esc_html_e('Title', 'myliba'); ?></span>
+                    <span><?php echo esc_html(myliba_text('Title')); ?></span>
                     <input name="job_title" <?php echo $is_academy ? 'required' : ''; ?>>
                 </label>
             <?php endif; ?>
             <?php if ($is_demo) : ?>
                 <label>
-                    <span><?php esc_html_e('Employee count', 'myliba'); ?></span>
+                    <span><?php echo esc_html(myliba_text('Employee count')); ?></span>
                     <select name="employee_count">
-                        <option value="1-50"><?php esc_html_e('1-50', 'myliba'); ?></option>
-                        <option value="51-250"><?php esc_html_e('51-250', 'myliba'); ?></option>
-                        <option value="251-1000"><?php esc_html_e('251-1000', 'myliba'); ?></option>
-                        <option value="1000+"><?php esc_html_e('1000+', 'myliba'); ?></option>
+                        <option value="1-50"><?php echo esc_html(myliba_text('1-50')); ?></option>
+                        <option value="51-250"><?php echo esc_html(myliba_text('51-250')); ?></option>
+                        <option value="251-1000"><?php echo esc_html(myliba_text('251-1000')); ?></option>
+                        <option value="1000+"><?php echo esc_html(myliba_text('1000+')); ?></option>
                     </select>
                 </label>
             <?php endif; ?>
             <?php if ($is_academy) : ?>
                 <label>
-                    <span><?php esc_html_e('Program you are interested in', 'myliba'); ?></span>
+                    <span><?php echo esc_html(myliba_text('Program you are interested in')); ?></span>
                     <select name="program" required data-academy-program-select>
-                        <option value=""><?php esc_html_e('Select a program', 'myliba'); ?></option>
+                        <option value=""><?php echo esc_html(myliba_text('Select a program')); ?></option>
                         <?php foreach ($programs as $program) : ?>
                             <option value="<?php echo esc_attr($program); ?>"><?php echo esc_html($program); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </label>
                 <fieldset class="myliba-form__choice">
-                    <legend><?php esc_html_e('Participation type', 'myliba'); ?></legend>
-                    <label><input type="radio" name="participation_type" value="individual" required> <span><?php esc_html_e('Individual', 'myliba'); ?></span></label>
-                    <label><input type="radio" name="participation_type" value="corporate" required> <span><?php esc_html_e('Corporate', 'myliba'); ?></span></label>
+                    <legend><?php echo esc_html(myliba_text('Participation type')); ?></legend>
+                    <label><input type="radio" name="participation_type" value="individual" required> <span><?php echo esc_html(myliba_text('Individual')); ?></span></label>
+                    <label><input type="radio" name="participation_type" value="corporate" required> <span><?php echo esc_html(myliba_text('Corporate')); ?></span></label>
                 </fieldset>
             <?php endif; ?>
         </div>
         <?php if (!$is_demo && !$is_academy) : ?>
             <label>
-                <span><?php esc_html_e('Subject', 'myliba'); ?></span>
+                <span><?php echo esc_html(myliba_text('Subject')); ?></span>
                 <input name="subject" required>
             </label>
         <?php endif; ?>
         <input type="hidden" name="type" value="<?php echo esc_attr($is_demo ? 'demo' : ($is_academy ? 'academy' : 'contact')); ?>">
         <label>
-            <span><?php esc_html_e('Message', 'myliba'); ?></span>
+            <span><?php echo esc_html(myliba_text('Message')); ?></span>
             <textarea name="message" rows="6" <?php echo $is_demo ? '' : 'required'; ?>></textarea>
         </label>
         <label class="myliba-form__consent">

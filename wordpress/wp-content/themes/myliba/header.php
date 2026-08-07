@@ -36,7 +36,7 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
             </div>
         <?php endif; ?>
         <?php if ($promo_dismissible) : ?>
-            <button class="site-promo__dismiss" type="button" aria-label="<?php esc_attr_e('Dismiss promotion', 'myliba'); ?>">&times;</button>
+            <button class="site-promo__dismiss" type="button" aria-label="<?php echo esc_attr(myliba_text('Dismiss promotion')); ?>">&times;</button>
         <?php endif; ?>
     </div>
 <?php endif; ?>
@@ -48,10 +48,10 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
             <span></span>
             <span></span>
             <span></span>
-            <span class="screen-reader-text"><?php esc_html_e('Menu', 'myliba'); ?></span>
+            <span class="screen-reader-text"><?php echo esc_html(myliba_text('Menu')); ?></span>
         </button>
 
-        <nav id="site-navigation" class="site-nav" aria-label="<?php esc_attr_e('Primary navigation', 'myliba'); ?>">
+        <nav id="site-navigation" class="site-nav" aria-label="<?php echo esc_attr(myliba_text('Primary navigation')); ?>">
             <ul class="site-nav__menu">
                 <?php foreach (myliba_header_menu() as $item) : ?>
                     <?php
@@ -67,7 +67,7 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                                 <?php echo esc_html($item['label']); ?>
                             </a>
                             <?php if ($item['key'] === 'solutions') : ?>
-                                <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu" aria-label="<?php esc_attr_e('Solutions menu', 'myliba'); ?>">
+                                <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu" aria-label="<?php echo esc_attr(myliba_text('Solutions menu')); ?>">
                                     <div class="mega-menu__intro">
                                         <span><?php echo esc_html(myliba_text('Çözümlerimiz')); ?></span>
                                         <strong><?php echo esc_html(myliba_text('İhtiyacınıza uygun çözümü bulun.')); ?></strong>
@@ -137,10 +137,10 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                 <?php endforeach; ?>
             </ul>
             <a class="site-nav__mobile-cta site-nav__mobile-cta--portal" href="<?php echo esc_url(myliba_portal_url()); ?>">
-                <?php esc_html_e('Portal login', 'myliba'); ?>
+                <?php echo esc_html(myliba_text('Portal login')); ?>
             </a>
             <a class="site-nav__mobile-cta site-nav__mobile-cta--primary" href="<?php echo esc_url(myliba_demo_url()); ?>">
-                <?php echo esc_html(myliba_option('demo_cta_label', __('Request a demo', 'myliba'))); ?>
+                <?php echo esc_html(myliba_option('demo_cta_label', myliba_text('Request a demo'))); ?>
             </a>
         </nav>
 
@@ -155,7 +155,7 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                 }
             }
             ?>
-            <div class="language-switcher language-switcher--dropdown" aria-label="<?php esc_attr_e('Language switcher', 'myliba'); ?>">
+            <div class="language-switcher language-switcher--dropdown" aria-label="<?php echo esc_attr(myliba_text('Language switcher')); ?>">
                 <button class="language-switcher__trigger" type="button" aria-haspopup="true">
                     <span class="language-switcher__flag"><?php echo esc_html(myliba_language_flag((string) $active_language['label'])); ?></span>
                     <span><?php echo esc_html($active_language['label']); ?></span>
@@ -170,10 +170,10 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                 </div>
             </div>
             <a class="myliba-button myliba-button--portal" href="<?php echo esc_url(myliba_portal_url()); ?>">
-                <?php esc_html_e('Portal login', 'myliba'); ?>
+                <?php echo esc_html(myliba_text('Portal login')); ?>
             </a>
             <a class="myliba-button myliba-button--small" href="<?php echo esc_url(myliba_demo_url()); ?>">
-                <?php echo esc_html(myliba_option('demo_cta_label', __('Request a demo', 'myliba'))); ?>
+                <?php echo esc_html(myliba_option('demo_cta_label', myliba_text('Request a demo'))); ?>
             </a>
         </div>
     </div>
