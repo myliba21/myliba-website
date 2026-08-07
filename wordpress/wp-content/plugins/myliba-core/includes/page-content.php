@@ -274,7 +274,7 @@ function software_defaults(): array
             'faq_title' => 'Myliba Yazılım Hakkında Sıkça Sorulan Sorular',
             'faq_text' => 'Yeni nesil performans yönetimine geçerken bilmek isteyeceğiniz temel noktalar.',
             'final_eyebrow' => 'Dönüşüm için ilk adım',
-            'final_title' => 'Performansı yılda bir kez değil, her gün geliştirin.',
+            'final_title' => 'Şirketinizin “Görünmez İşletim Sistemini” Güncelleme Vakti Geldi.',
             'final_text' => 'Her organizasyonun performans yolculuğu farklıdır. İhtiyaçlarınıza özel kişiselleştirilmiş bir demo ile Myliba’nın şirketinizde nasıl değer yaratacağını birlikte keşfedelim.',
             'final_button_label' => 'Kişiselleştirilmiş Demo Talep Edin',
         ],
@@ -354,15 +354,15 @@ function solutions_defaults(): array
 {
     return ['fields' => [
         'hero_eyebrow' => 'Myliba Çözümlerimiz',
-        'hero_title_start' => 'Birbiri ile entegre,',
+        'hero_title_start' => 'Birbiriyle entegre,',
         'hero_title_end' => 'bütünleşik çözümler',
-        'hero_text' => 'Myliba’nın özel geliştirdiği modeli ile yazılımı, akademiyi ve organizasyonel dönüşümü tek çatı altında buluşturarak yüksek performans kültürü inşa edin.',
+        'hero_text' => 'Myliba’nın özel geliştirdiği model ile yazılımı, akademiyi ve organizasyonel dönüşümü tek çatı altında buluşturarak “Yüksek Performans Kültürü” inşa edin.',
         'index_eyebrow' => 'İhtiyacınıza uygun çözümü seçin',
-        'index_title' => 'İster tek tek kullanın, ister bütünleştirin.',
-        'index_text' => 'Neye ihtiyacınız varsa Myliba çözümleri ile kültürünüzü geliştirin.',
+        'index_title' => 'İster tek tek kullanın, ister bütünleştirin ve kültürünüzü dönüştürün.',
+        'index_text' => 'Neye ihtiyacınız varsa Myliba çözümleriyle kültürünüzü geliştirin. “Hedef Mars Simülasyonu” ile liderlerinizin yetkinliklerini laboratuvar ortamında görün ya da “Başarı Sahnesi Simülasyonu” ile şirketi geleceğe taşıyacak hedefleri yönetecek ekipleri kurun ve geliştirin.',
         'card_link_label' => 'Çözümü inceleyin',
         'cta_eyebrow' => 'Birlikte belirleyelim',
-        'cta_title' => 'Hangi çözüm size uygun?',
+        'cta_title' => 'Hangi Çözüm Size Uygun, Birlikte Belirleyelim.',
         'cta_text' => 'İhtiyacınıza en uygun programı veya danışmanlık modelini bulmak için Myliba ile tanışın.',
         'cta_button_label' => 'Uzmanlarımızla görüşün',
     ], 'collections' => []];
@@ -428,9 +428,9 @@ function development_defaults(): array
 {
     return ['fields' => [
         'hero_eyebrow' => 'Sürekli gelişim ve dönüşüm merkezi',
-        'hero_title' => 'Gelişim Merkezi',
-        'hero_text' => 'Güncel içerikler, araştırmalar ve etkinliklerle gelişim yolculuğunuzu besleyin.',
-        'section_eyebrow' => 'Gelişim kaynakları',
+        'hero_title' => 'Gelişim zihniyetini geliştirin!',
+        'hero_text' => 'Gelişim zihniyeti sürekli yeni bilgi ve tecrübe ile beslenmeyi gerektirir. Myliba, “Yüksek Performans Kültürü” inşa ederken performans geliştirme zihniyetine geçiş için sürekli içerikler üretir.',
+        'section_eyebrow' => 'Alt Sayfalar',
         'section_title' => 'Gelişim zihniyetini sürekli yeni bilgi ve tecrübeyle besleyin.',
         'section_text' => 'e-Kitaplar, raporlar, blog yazıları ve etkinliklerle gelişim yolculuğunuzu sürdürün.',
         'card_cta' => 'İçerikleri inceleyin',
@@ -438,11 +438,11 @@ function development_defaults(): array
         'card_ebooks_label' => 'e-Kitaplar',
         'card_ebooks_text' => 'Yüksek performans kültürü ve yönetim pratikleri üzerine indirilebilir kaynaklar.',
         'card_reports_label' => 'Raporlar ve Trendler',
-        'card_reports_text' => 'İş dünyasını ve performans kültürünü şekillendiren güncel araştırmalar.',
+        'card_reports_text' => 'İçerik planlanıyor.',
         'card_blog_label' => 'Blog',
-        'card_blog_text' => 'Myliba yazıları, rehberleri ve uygulama notları.',
+        'card_blog_text' => 'Eski yazılar buraya taşınacak.',
         'card_events_label' => 'Etkinlikler',
-        'card_events_text' => 'Webinar, workshop ve topluluk buluşmaları.',
+        'card_events_text' => 'Webinar ve workshop duyuruları.',
         'archive_back_label' => 'Gelişim Merkezi',
         'archive_discover_label' => 'Kaynakları keşfedin',
         'archive_all_content_label' => 'Tüm gelişim içerikleri',
@@ -509,7 +509,7 @@ function solution_defaults(int $post_id): array
     $catalog = [
         'kurumsal-gelisim-programlari' => [
             'kicker' => 'İşbaşı gelişim programları',
-            'summary' => 'Hedefleri değerlerle yönetmek için kurumunuza özel, uygulamalı gelişim yolculukları tasarlayın.',
+            'summary' => '“Hedefleri değerlerle yönetmek” işbaşı gelişim programlarıyla kurumunuza özel, uygulamalı gelişim yolculukları tasarlayın.',
             'intro' => 'Stratejik hedefleri kurum kültürü ve liderlik davranışlarıyla buluşturan programlarla öğrenmeyi günlük iş akışının parçası haline getirin.',
             'benefits' => ['Kurum hedefleri ve değerleriyle bağlantılı gelişim tasarımı', 'Canlı öğrenme, işbaşı uygulama ve ölçülebilir takip', 'Liderler ve ekipler için sürdürülebilir gelişim ritmi'],
             'audiences' => ['İnsan ve kültür ekipleri', 'Liderlik ekipleri', 'Dönüşüm ve gelişim ekipleri'],
@@ -534,11 +534,11 @@ function solution_defaults(int $post_id): array
         'kultur-analizi' => [
             'kicker' => 'Veriye dayalı kültür dönüşümü',
             'summary' => 'Kurum kültürünüzü derinlemesine analiz edin, potansiyel engelleri belirleyin ve çalışan bağlılığını güçlendirin.',
-            'intro' => 'Myliba Kültür Analizi, çalışanların gerçekten çalışmaktan keyif aldığı bir ortam oluşturmak için kültürü ölçülebilir içgörülere dönüştürür.',
+            'intro' => 'Şirketinizin mevcut kültürünü derinlemesine analiz ederek potansiyel engelleri belirlemenize ve çalışanlarınızın gerçekten “çalışmaktan keyif aldığı” bir ortam yaratmanıza yardımcı oluyoruz.',
             'benefits' => ['Mevcut kültürün güçlü ve zayıf yönlerinin keşfedilmesi', 'Çalışan bağlılığı ve iş performansının artması', 'Kurum içi sinerji ve iletişimin güçlenmesi', 'Stratejik dönüşüm için veriye dayalı içgörüler edinilmesi'],
             'audiences' => ['İnsan ve kültür liderleri', 'Üst yönetim ekipleri', 'Değişim ve dönüşüm ekipleri'],
-            'metrics' => [['Employee NPS', 'Çalışan tavsiye skoru'], ['Culture Fit', 'Departmanlar arası kültürel uyum'], ['Willingness', 'Çalışanın işe olan isteği'], ['Engagement', 'Kuruma, işe ve lidere bağlılık']],
-            'steps' => [['Anket Aşaması', 'Kültür analizi, bağlılık analizi ve isteklilik analizi uygulanır.'], ['Saha Araştırması', 'Odak grup, yönetici görüşmeleri, doküman analizi ve gözlem yapılır.'], ['Gelişim Planı', 'Detaylı rapor, öncelikli alanlar, OKR/KPI hedefleri ve uygulama takvimi oluşturulur.']],
+            'metrics' => [['Employee NPS', 'Çalışan tavsiye skoru'], ['Culture Fit', 'Departmanlar arası kültürel uyum'], ['Willingness', 'Çalışanların işe olan isteği'], ['Engagement', 'Kuruma, işe ve lidere bağlılık']],
+            'steps' => [['Anket Aşaması', 'Kültür analizi, bağlılık analizi ve isteklilik analizi uygulanır.'], ['Saha Araştırması', 'Odak grup görüşmeleri, yönetici birebir görüşmeleri, doküman analizi ve opsiyonel gözlem yapılır.'], ['Gelişim Planı', 'Detaylı Kültür Analizi Raporu hazırlanır; öncelikli gelişim alanları belirlenir; OKR ve KPI uyumlu hedef setleri, uygulama adımları ve zaman çizelgesi oluşturulur; eğitim, iletişim ve liderlik gelişim önerileri sunulur; ölçüm bir yıl sonra tekrarlanır.']],
         ],
     ];
     $item = $catalog[$slug] ?? [];
@@ -622,7 +622,7 @@ function materialize(int $post_id): bool
         return false;
     }
 
-    return update_post_meta($post_id, META_KEY, $encoded) !== false;
+    return update_post_meta($post_id, META_KEY, wp_slash($encoded)) !== false;
 }
 
 function render_page_box(\WP_Post $post): void
@@ -772,5 +772,5 @@ function save(int $post_id, \WP_Post $post, bool $update): void
     }
 
     $document = ['schema' => $schema, 'version' => SCHEMA_VERSION, 'fields' => $fields, 'collections' => $collections];
-    update_post_meta($post_id, META_KEY, wp_json_encode($document, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    update_post_meta($post_id, META_KEY, wp_slash(wp_json_encode($document, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)));
 }

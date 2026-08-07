@@ -84,19 +84,19 @@ class Commands
             ['Kultur Analizi', 'kultur-analizi', $tr, 'tr', 'Kultur Analizi', 'Riskleri, darbogazlari ve ekip kaliplarini erken gorun.'],
             ['Etik Danismanlik', 'etik-danismanlik', $tr, 'tr', 'Etik Danismanlik', 'Liderler ve ekipler icin uygulanabilir etik rutinleri kurun.'],
             ['Yazilar', 'yazilar', $tr, 'tr', 'Yazilar', 'Myliba yazilari, rehberleri ve operasyon notlari.', 'template-blog.php'],
-            ['Cozumler', 'cozumler', $tr, 'tr', 'Performans kulturu sahipleri icin cozumler.', 'Ust yonetim, IK, strateji ekipleri, liderler ve calisanlar icin persona bazli akislar.'],
-            ['Gelişim Merkezi', 'gelisim-merkezi', $tr, 'tr', 'Gelişim zihniyetini geliştirin!', 'Gelişim zihniyeti sürekli yeni bilgi ve tecrübe ile beslenmeyi gerektirir. Myliba yüksek performans kültürü inşa ederken performans geliştirme zihniyetine geçiş için sürekli içerikler üretir.'],
+            ['Çözümlerimiz', 'cozumler', $tr, 'tr', 'Birbiriyle entegre, bütünleşik çözümler', 'Myliba’nın özel geliştirdiği model ile yazılımı, akademiyi ve organizasyonel dönüşümü tek çatı altında buluşturarak “Yüksek Performans Kültürü” inşa edin.'],
+            ['Gelişim Merkezi', 'gelisim-merkezi', $tr, 'tr', 'Gelişim zihniyetini geliştirin!', 'Gelişim zihniyeti sürekli yeni bilgi ve tecrübe ile beslenmeyi gerektirir. Myliba, “Yüksek Performans Kültürü” inşa ederken performans geliştirme zihniyetine geçiş için sürekli içerikler üretir.'],
             ['Etkinlikler', 'etkinlikler', $tr, 'tr', 'Etkinlikler', 'Webinar, atolye ve topluluk bulusmalari.', 'template-events.php'],
             ['Demo', 'demo', $tr, 'tr', 'Myliba demosu isteyin', 'OKR, KPI, CFR, 1:1, geri bildirim, aksiyon ve akademi akislarini tek platformda gorun.', 'template-demo.php'],
             ['Iletisim', 'iletisim', $tr, 'tr', 'Myliba ile iletisime gecin', 'Ihtiyacinizi anlatin, talebinizi dogru ekibe yonlendirelim.', 'template-contact.php'],
-            ['Hikayemiz', 'hikayemiz', $tr, 'tr', 'Hikayemiz', 'Myliba neden var ve nasil calisir.'],
+            ['Biz Kimiz', 'hikayemiz', $tr, 'tr', 'Geleceğin Organizasyonlarını İnsan ve Teknolojiyi Birleştirerek İnşa Ediyoruz.', 'Myliba; hantal hiyerarşileri esneten, organizasyonları geleceğin esnek çalışma dünyasına hazırlayan ve yapay zekâ destekli altyapıyı ICF onaylı kültürel yönetim modeliyle birleştiren dünyanın ilk ve tek bütünleşik platformudur.'],
             ['SSS', 'sss', $tr, 'tr', 'SSS', 'Myliba hizmetleri hakkinda sik sorulan sorular.'],
             ['Guvenlik', 'guvenlik', $tr, 'tr', 'Guvenlik', 'Guven, veri ve operasyonel guvenlik yaklasimimiz.'],
             ['Gizlilik Politikasi', 'gizlilik-politikasi', $tr, 'tr', 'Gizlilik Politikasi', 'Ziyaretci ve iletisim verilerine dair gizlilik pratikleri.'],
             ['KVKK', 'kvkk', $tr, 'tr', 'KVKK ve GDPR yaklasimi', 'Kisisel veri koruma, onay ve kurumsal gizlilik yaklasimi.'],
             ['Cerez Politikasi', 'cerez-politikasi', $tr, 'tr', 'Cerez Politikasi', 'Cerez kullanimi ve takip tercihleri.'],
             ['Kullanim Sartlari', 'kullanim-sartlari', $tr, 'tr', 'Kullanim Sartlari', 'Web sitesi ve servis kullanim sartlari.'],
-            ['Myliba Yazilim', 'yazilim', $tr, 'tr', 'Myliba Yazilim', 'OKR, KPI, kultur ve yapay zeka icgoruleriyle canli ve objektif performans yonetimi.'],
+            ['Myliba Yazılım', 'yazilim', $tr, 'tr', 'Formları Tarihe Gömün: %100 Objektif Verilerle Anlık Performans Yönetimi', 'Performans değerlendirmeyi yılda bir kez yapılan öznel bir notlama süreci olmaktan çıkarın. Myliba Yazılım ile hedef ve performans yönetimini canlı analitik verilerle takip edin.'],
         ];
 
         foreach ($pages as $page) {
@@ -119,11 +119,11 @@ class Commands
                     '_myliba_development_ebook_label' => 'e-Kitaplar',
                     '_myliba_development_ebook_text' => 'Yüksek performans kültürü ve yönetim pratikleri üzerine indirilebilir kaynaklar.',
                     '_myliba_development_report_label' => 'Raporlar ve Trendler',
-                    '_myliba_development_report_text' => 'İş dünyasını ve performans kültürünü şekillendiren güncel araştırmalar.',
+                    '_myliba_development_report_text' => 'İçerik planlanıyor.',
                     '_myliba_development_blog_label' => 'Blog',
-                    '_myliba_development_blog_text' => 'Myliba yazıları, rehberleri ve uygulama notları.',
+                    '_myliba_development_blog_text' => 'Eski yazılar buraya taşınacak.',
                     '_myliba_development_events_label' => 'Etkinlikler',
-                    '_myliba_development_events_text' => 'Webinar, workshop ve topluluk buluşmaları.',
+                    '_myliba_development_events_text' => 'Webinar ve workshop duyuruları.',
                     '_myliba_development_card_cta' => 'İçerikleri inceleyin',
                 ];
             }
@@ -146,8 +146,21 @@ class Commands
                 ];
             }
 
-            $content = in_array($slug, ['gelisim-merkezi', 'development-center'], true) ? '' : $this->starter_content('generic');
-            $this->upsert_page($title, $slug, $content, $meta, $parent, $template);
+            if ($slug === 'hikayemiz') {
+                $meta += [
+                    '_myliba_eyebrow' => 'Biz Kimiz? / Myliba | Felsefemiz',
+                ];
+            }
+
+            $content = match ($slug) {
+                'gelisim-merkezi', 'development-center' => '',
+                'hikayemiz' => $this->starter_content('story_tr'),
+                default => $this->starter_content('generic'),
+            };
+            $page_id = $this->upsert_page($title, $slug, $content, $meta, $parent, $template);
+            if (in_array($slug, ['yazilim', 'cozumler', 'gelisim-merkezi'], true)) {
+                \Myliba\Core\PageContent\materialize($page_id);
+            }
         }
 
         $this->seed_navigation();
@@ -164,12 +177,12 @@ class Commands
         $this->upsert_event('Myliba Kultur Oturumu', 'myliba-kultur-oturumu', 'tr', '+45 days', 'Online');
         $this->upsert_post_type(
             'myliba_ebook',
-            'Yüksek Performans Kültürü Yaratmak',
+            'Yüksek Performans Kültürü Yaratmak — Nasrettin Hoca Yönetim Danışmanı Olursa!',
             'yuksek-performans-kulturu-yaratmak',
             '<p>Nasrettin Hoca yönetim danışmanı olursa yüksek performans kültürünü nasıl ele alırdı? e-Kitabın açıklamasını ve indirme bağlantısını WordPress yönetiminden güncelleyin.</p>',
             [
                 '_myliba_language' => 'tr',
-                '_myliba_hero_title' => 'Yüksek Performans Kültürü Yaratmak',
+                '_myliba_hero_title' => 'Yüksek Performans Kültürü Yaratmak — Nasrettin Hoca Yönetim Danışmanı Olursa!',
                 '_myliba_hero_subtitle' => 'Nasrettin Hoca yönetim danışmanı olursa yüksek performans kültürüne nasıl yaklaşırdı?',
                 '_myliba_label' => 'e-Kitap',
                 '_myliba_cta_label' => 'e-Kitabı İndirin',
@@ -1017,7 +1030,7 @@ class Commands
             [
                 'Kurumsal Gelişim Programları',
                 'kurumsal-gelisim-programlari',
-                'Hedefleri değerlerle yönetmek için kurumunuza özel, uygulamalı gelişim yolculukları tasarlayın.',
+                '“Hedefleri değerlerle yönetmek” işbaşı gelişim programlarıyla kurumunuza özel, uygulamalı gelişim yolculukları tasarlayın.',
                 'Gelişim programları günlük iş hedeflerinden koptuğunda öğrenme kalıcı davranışa dönüşmez.',
                 'Myliba, kurum hedeflerini canlı öğrenme, işbaşı uygulama ve ölçülebilir gelişim takibiyle birleştirir.',
                 10,
@@ -1074,7 +1087,7 @@ class Commands
                 '40 CCE akredite yapısıyla OKR, KPI, CFR ve koçluğu bir arada sunan, Türkiye’de ve dünyada ilk ve tek program. Myliba yazılımı üzerinde gerçek uygulamalı deneyim yaşayın, tüm oturumları canlı olarak tamamlayın.',
                 'Öne Çıkan Program',
                 'featured',
-                "Uluslararası geçerliliğe sahip sertifika, dijital rozet ve 40 saat ICF CCE kredisi\nOKR, KPI, CFR ve kültürü tek çatı altında buluşturan Myliba modeli\nKurumlarda kişilere bağımlı olmayan sürdürülebilir OKR ve performans sistemleri kurma yetkinliği\nCanlı oturumlar, işbaşı gerçek hedefler ve Myliba platformu üzerinde uygulamalı öğrenme\nSüpervizyon ve ustalaşma süreci\nMezun liderler için sürekli gelişim, güncel içerikler ve networking ağı",
+                "Uluslararası geçerliliğe sahip sertifika, dijital rozet ve 40 saat ICF CCE kredisi\nOKR, KPI, CFR ve kültürü tek çatı altında buluşturan Myliba modeli\nKurumlarda kişilere bağımlı olmayan, sürdürülebilir OKR ve performans sistemleri kurma yetkinliği\nCanlı oturumlar, işbaşı gerçek hedefler ve Myliba platformu üzerinde uygulamalı öğrenme deneyimi\nSüpervizyon ve ustalaşma süreci\nMezun liderler için süresiz sürekli gelişim, güncel içerikler ve networking ağı",
                 "40 CCE\nCanlı Oturumlar\nUygulamalı Eğitim\nICF Onaylı\nDijital Sertifika\nSüpervizyon",
                 "Bilgi ve Farkındalık Modülü | 12 saat eğitim; 4 saat uygulama\nBeceri Geliştirme Modülü | 4 saat eğitim; 12 saat uygulama\nUstalaşma Modülü | 3 saat işbaşı uygulama; 3 saat süpervizyon; Tamamlama sınavı",
                 'Eylül 2026 Dönemi Kayıtları',
@@ -1089,7 +1102,7 @@ class Commands
                 'Liderleriniz ve ekiplerinizle yüksek performans kültürü oluşturun. İlham veren hedefleri ortaya çıkarırken kültürel dönüşüm için gerekli becerileri edinin.',
                 'İşbaşı Gelişim Programı',
                 'leadership',
-                "Liderler teorik senaryolarla değil, şirketin gerçek hedefleriyle çalışır.\nYıl sonu stresini azaltan, günlük iş akışına yayılan anlık takdir ve geri-ileri bildirim kültürü kazandırır.\nKültürü ve performansı ölçen göstergelerle daha adil kararlar alma ve yönetme deneyimi sunar.",
+                "Liderleriniz eğitim sürecinde teorik senaryolarla değil, şirketin gerçek hedefleriyle çalışır.\nYıl sonu stresini bitiren, günlük iş akışında anlık takdir ve geri-ileri bildirim kültürü kazandırır.\nKültürü ve performansı ölçen göstergelerle adil kararlar alma ve yönetme tecrübesi sunar.",
                 "Gerçek Kurum Hedefleri\nCanlı Öğrenme\nÖlçülebilir Gelişim",
                 "Bilgi ve Farkındalık Modülü | Canlı eğitim; Kurum hedefleriyle çalışma\nBeceri Geliştirme Modülü | İşbaşı uygulama; Geri-ileri bildirim pratikleri",
                 'Kurumunuza Özel Teklif Alın',
@@ -1101,7 +1114,7 @@ class Commands
             [
                 'Hedef ve Kültürel Dönüşüm Danışmanlığı',
                 'hedef-kulturel-donusum-danismanligi',
-                'İlham veren hedeflerle kültürünüzü dönüştürün. Uçtan uca insan odaklı, yeni nesil yüksek performans kültürü oluşturun; farklı sektör ve şirketlerde dönüşüm yolculuklarını yönetmiş deneyimli uzmanlarla ilerleyin.',
+                'İlham veren hedeflerle kültürünüzü dönüştürün. Uçtan uca insan odaklı, yeni nesil yüksek performans kültürü oluşturun; farklı sektör ve şirketlerde hedef ve kültürel dönüşüm yolculuklarını yönetmiş deneyim ve donanıma sahip uzmanlarla ilerleyin.',
                 'Kurumsal Danışmanlık',
                 'consulting',
                 "Strateji ve hedef yönetimi\nLiderlik ve kültür dönüşümü\nPerformans ve geri bildirim sistemleri",
@@ -1256,7 +1269,49 @@ class Commands
         if ($language === 'tr') {
             return [
                 '_myliba_home_builder' => $this->home_builder_defaults(),
-                '_myliba_home_hero_slides' => "Performans ve Kultur Platformu | Yuksek performansin arkasindaki calisma sistemini kurun. | Myliba strateji, hedef, aksiyon ve kulturu olculebilir tek bir akista birlestirir. | Iletisime gecin | /tr/iletisim/ | Myliba'yi kesfedin | /tr/urunler/\nMyliba Yazilim | Performans yilda bir kez puanlanmaz, her gun insa edilir. | Stratejik oncelikleri surekli geri bildirim, aksiyon ve olculebilir ilerlemeyle canli tutun. | Demo talep edin | /tr/demo/ | Yazilimi kesfedin | /tr/urunler/\nMyliba Akademi | Dunyanin ilk ICF onayli OKR ve Kultur Koclugu programi. | Kalici kurumsal degisime liderlik edecek liderleri 40 saatlik akredite yolculukla gelistirin. | Programa basvurun | /tr/okr-kultur-akademisi/ | Akademiyi kesfedin | /tr/okr-kultur-akademisi/",
+                '_myliba_home_hero_slides_v2' => [
+                    [
+                        'id' => 'general',
+                        'enabled' => true,
+                        'eyebrow' => 'Myliba | Performansı ve Kültürü Geliştiren Platform',
+                        'title' => 'Performansı ve Kültürü Geliştiren Platform',
+                        'text' => 'Şirketlerin en büyük yanılgısı, sadece yeni bir yazılım alarak dönüşeceklerini sanmalarıdır. Oysa asıl dönüşüm, şirketin “görünmez işletim sistemi” olan kültürde başlar. Myliba, sizi sadece bir yazılımla baş başa bırakmaz. Dünyada bir ilk olarak, ICF akreditasyonlu yönetim modelini yapay zekâ destekli bir platformda birleştirir. Hiyerarşiyi esnetir, mikro yönetimi bitirir ve son teknolojiyi kültürel bir kaldıraca dönüştürür. Çünkü biz biliyoruz ki teknoloji yönetir, kültür ise zirveye taşır.',
+                        'image_id' => 0,
+                        'image_alt' => '',
+                        'buttons' => [
+                            ['label' => 'Bize Ulaşın', 'url' => '/tr/iletisim/', 'style' => 'primary', 'new_tab' => false, 'aria_label' => ''],
+                            ['label' => 'Myliba’yı Keşfedin', 'url' => '/tr/yazilim/', 'style' => 'ghost', 'new_tab' => false, 'aria_label' => ''],
+                        ],
+                    ],
+                    [
+                        'id' => 'software',
+                        'enabled' => true,
+                        'eyebrow' => 'Myliba Yazılım',
+                        'title' => 'Performans Yılda Bir Ölçülen Değil, Her Gün Geliştirilen Bir Deneyimdir',
+                        'text' => 'Performansı sadece geçmişi puanlayan bir skor olmaktan çıkarıyor, her an yaşayan, dinamik ve gelişime odaklı bir kültüre dönüştürüyoruz. 25+ yıllık deneyimimizle tasarladığımız yazılım sayesinde stratejik odaklarınızı ekiplerinizle birlikte her gün canlı tutun ve birlikte büyüyün.',
+                        'image_id' => 0,
+                        'image_alt' => '',
+                        'buttons' => [
+                            ['label' => 'Demo Talep Edin', 'url' => '/tr/demo/', 'style' => 'primary', 'new_tab' => false, 'aria_label' => ''],
+                            ['label' => 'Yazılımı Keşfedin', 'url' => '/tr/yazilim/', 'style' => 'ghost', 'new_tab' => false, 'aria_label' => ''],
+                        ],
+                    ],
+                    [
+                        'id' => 'academy',
+                        'enabled' => true,
+                        'eyebrow' => 'Myliba Akademi',
+                        'title' => 'Dünyanın İlk ve Tek ICF Onaylı OKR & Kültür Koçluğu Sertifika Programı',
+                        'text' => 'Şirketlerin %70’i OKR yazılımlarını kültürel hazırbulunuşluk olmadığı için terk ediyor. Yüksek performans kültürü, güçlü bir platform ve onu hayata geçirecek liderlerle inşa edilir. Myliba Akademi’nin 40 saatlik ICF onaylı sertifika programıyla organizasyonel dönüşümünüzü destekleyen liderlerinizi yetiştirin. İşbaşı gelişim programları ile gerçek hedeflerinizi hayata geçirin.',
+                        'image_id' => 0,
+                        'image_alt' => '',
+                        'buttons' => [
+                            ['label' => 'Sertifika Programına Başvurun', 'url' => '/tr/okr-kultur-akademisi/', 'style' => 'primary', 'new_tab' => false, 'aria_label' => ''],
+                            ['label' => 'İşbaşı Liderlik Gelişim Programına Başvurun', 'url' => '/tr/okr-kultur-akademisi/', 'style' => 'ghost', 'new_tab' => false, 'aria_label' => ''],
+                            ['label' => 'Akademiyi Keşfedin', 'url' => '/tr/okr-kultur-akademisi/', 'style' => 'link', 'new_tab' => false, 'aria_label' => ''],
+                        ],
+                    ],
+                ],
+                '_myliba_home_hero_slides' => "Myliba - Performansı ve Kültürü Geliştiren Platform | Performansı ve Kültürü Geliştiren Platform | Şirketlerin en büyük yanılgısı, sadece yeni bir yazılım alarak dönüşeceklerini sanmalarıdır. Oysa asıl dönüşüm, şirketin görünmez işletim sistemi olan kültürde başlar. Myliba, sizi sadece bir yazılımla baş başa bırakmaz; ICF akreditasyonlu yönetim modelini yapay zekâ destekli bir platformda birleştirir. | Bize Ulaşın | /tr/iletisim/ | Myliba’yı Keşfedin | /tr/yazilim/\nMyliba Yazılım | Performans Yılda Bir Ölçülen Değil, Her Gün Geliştirilen Bir Deneyimdir | Performansı sadece geçmişi puanlayan bir skor olmaktan çıkarıyor, her an yaşayan, dinamik ve gelişime odaklı bir kültüre dönüştürüyoruz. 25+ yıllık deneyimimizle tasarladığımız yazılım sayesinde stratejik odaklarınızı ekiplerinizle birlikte her gün canlı tutun ve birlikte büyüyün. | Demo Talep Edin | /tr/demo/ | Yazılımı Keşfedin | /tr/yazilim/\nMyliba Akademi | Dünyanın İlk ve Tek ICF Onaylı OKR ve Kültür Koçluğu Sertifika Programı | Şirketlerin %70’i OKR yazılımlarını kültürel hazırbulunuşluk olmadığı için terk ediyor. Yüksek performans kültürü, güçlü bir platform ve onu hayata geçirecek liderlerle inşa edilir. Myliba Akademi’nin 40 saatlik ICF onaylı sertifika programıyla organizasyonel dönüşümünüzü destekleyen liderlerinizi yetiştirin. İşbaşı gelişim programları ile gerçek hedeflerinizi hayata geçirin. | Sertifika Programına Başvurun | /tr/okr-kultur-akademisi/ | Akademiyi Keşfedin | /tr/okr-kultur-akademisi/",
                 '_myliba_home_hero_metrics' => "44 | Sirket\n500+ | Lider\n67% | Daha guclu hedefler",
                 '_myliba_home_hero_rotating_titles' => "Hedefleri net, kulturu guclu ekipler kurun\nStratejiyi eyleme indiren performans platformu\nOKR ve kultur rutinlerini tek ritimde yonetin",
                 '_myliba_home_hero_proof' => "Stratejiden aksiyona\nSurekli performans\nAkademi + yazilim",
@@ -1279,11 +1334,11 @@ class Commands
                 '_myliba_home_trust_title' => 'Performans kulturunu ciddiyetle yoneten ekipler icin.',
                 '_myliba_home_trust_logo_label' => 'Referanslar ve is ortaklari',
                 '_myliba_home_trust_items' => "OKR\nKPI\nCFR\n1:1",
-                '_myliba_home_social_proof_items' => "25+ | Yillik IK ve organizasyonel gelisim deneyimi\n44 | Sirket\n16 | Sektor\n500+ | Lider\n40 CCE | ICF akreditasyonlu egitim\n100% | Yasayan ve surdurulebilir kultur taahhudu",
+                '_myliba_home_social_proof_items' => "25+ Yıl | İnsan Kaynakları ve Organizasyonel Gelişim Deneyimi\n44 | Şirket\n16 | Sektör\n500+ | Lider\n40 Saat CCE | ICF İlk Akreditasyonu\n100% | Yaşayan ve Sürdürülebilir Kurum Kültürü Vaadi",
                 '_myliba_home_why_eyebrow' => 'Neden Myliba?',
-                '_myliba_home_why_title' => 'Degisim yalnizca yazilimla veya egitimle gerceklesmez.',
-                '_myliba_home_why_text' => 'Kulturel donusum formulümüz insan, teknoloji ve akademiyi birlestirir. Donusum liderlerini gelistirir, yeni calisma ritmini gunluk isin parcasi haline getiririz.',
-                '_myliba_home_offering_rows' => "Myliba Yazilim | Kulturu dijital ve olculebilir yonetin. | %85 maliyet avantaji | Performans gelisimini tek platformda toplayin. | 40+ gun kazanc | IK ekiplerine stratejik isler icin zaman kazandirin. | 2 kat guclu performans | Adil ve kanita dayali bir performans ritmi kurun. | %67 daha guclu hedefler | Stratejik uyumu ve hedef kalitesini guclendirin. | Yazilimi kesfedin | /tr/urunler/\nMyliba Akademi | Donusumunuza liderlik edecek kisileri gelistirin. | Dunyada bir ilk | ICF 40 CCE akreditasyonlu OKR ve Kultur Koclugu programina katilin. | Topluluk | Surekli ogrenme topluluguna ve guncelleme oturumlarina erisin. | Platform | Kultur, liderlik ve oz disiplini simulasyonlarla deneyimleyin. | Is yerinde donusum | Kocluk ve stratejik liderligi gunluk pratige donusturun. | Akademiyi kesfedin | /tr/okr-kultur-akademisi/",
+                '_myliba_home_why_title' => 'Çünkü Değişim Sadece Yazılımla veya Sadece Eğitimle Olmaz.',
+                '_myliba_home_why_text' => 'Kültürel dönüşümün formülü İnsan + Teknoloji + Akademi’dir. Myliba Akademi ile dönüşümün liderlerini yetiştiriyor, Myliba Yazılım ile bu dönüşümü günlük iş akışınızın kalıcı bir parçası haline getiriyoruz. Myliba olarak bu iki dünyayı birleştiriyoruz.',
+                '_myliba_home_offering_rows' => "Myliba Yazılım | Kültürü Yönetmek Artık Dijital ve Ölçülebilir | %85 Maliyet Avantajı | Kültür ve performans geliştirme süreçlerini tek platformda birleştirerek farklı sistemlere olan ihtiyacı azaltın. | 40+ Gün Zaman Kazancı | İK ekiplerinin ve yöneticilerin operasyonel yükünü azaltarak stratejik çalışmalara daha fazla zaman ayırmasını sağlayın. | 2 Kat Daha Güçlü Performans | Anlık geri bildirim, gelişim odaklı performans yaklaşımı ve sosyal taahhüt mekanizmalarıyla ekip performansını artırın. | %67 Daha Güçlü Hedefler | Stratejik hizalanmayı artırarak ekiplerin daha iddialı ve etkili hedefler belirlemesini destekleyin. | Yazılım Özelliklerini Keşfedin | /tr/yazilim/\nMyliba Akademi | Organizasyonel dönüşümünüzü yönetecek liderler yetiştirin. | Dünyada Bir İlk | Yüksek performans geliştirme odağında tasarlanan, ICF 40 CCE akreditasyonuna sahip dünyanın ilk ve tek OKR & Kültür Koçluğu Sertifika Programına katılın. | Topluluk | Myliba topluluk fırsatlarından süresiz yararlanma ve güncelleme eğitimlerine ücretsiz katılım hakkı kazanın. | Platform | Stratejiden eyleme, ortak aklı ve uyumu yönetmeyi deneyimleyin. Kültürü, liderliği ve öz disiplini ölçen benzersiz göstergelerle veriye dayalı adil kararlar vermeyi öğrenin. | İş Başında Dönüşüm | Liderlerinizin gerçek organizasyon hedefleri üzerinde çalışarak koçluk yaklaşımını, güçlü soru sormayı ve stratejik liderliği günlük iş yapış biçimine dönüştürmesini sağlayın. | Akademiyi Keşfedin | /tr/okr-kultur-akademisi/",
                 '_myliba_home_problem_eyebrow' => 'Problem',
                 '_myliba_home_problem_title' => 'Hedefler hiyerarsisinde kayboluyor, geri bildirim donemsel kaliyor.',
                 '_myliba_home_problem_text' => 'Performans yonetimi ancak hedefler, gorusmeler ve aksiyonlar ayni akista ilerlediginde olculebilir hale gelir.',
@@ -1292,11 +1347,11 @@ class Commands
                 '_myliba_home_strategy_flow_title' => 'Strateji, hedef, aksiyon ve kultur tek akista.',
                 '_myliba_home_strategy_flow_text' => 'Oncelik, sahiplik, aksiyon ve ogrenme rutinlerini birbirine baglayan tek bir calisma ritmi kurun.',
                 '_myliba_home_strategy_flow_steps' => "Strateji | Oncelikleri kurum genelinde gorunur ve ortak hale getirin. | S\nHedef | OKR ve KPI sahipligini sirketten takimlara baglayin. | H\nAksiyon | Her onceligi sorumlu, tarih ve takip adimina donusturun. | A\nKultur | 1:1, CFR ve ogrenme rutinlerini isin etrafina yerlestirin. | K",
-                '_myliba_home_performance_eyebrow' => 'Performans yonetimi yaklasimi',
-                '_myliba_home_performance_title' => 'Performans yonetimini stratejik avantaja donusturun.',
-                '_myliba_home_performance_text' => 'Yillik ve stresli puanlama dongusunun otesine gecerek surekli gelisimi destekleyen adil ve kanita dayali bir yaklasim kurun.',
-                '_myliba_home_performance_tabs' => "Hedef yonetimi | Calismayi is sonuclariyla hizalayin. | Baglantili OKR, KPI ve aksiyon yonetimiyle stratejiyi organizasyonun her seviyesine tasiyin.\nPerformans gelisimi | Gelisimi surekli hale getirin. | Surekli geri bildirim ve gelisim odakli performans gorusmeleriyle potansiyeli aciga cikarin.\nYapay zeka destekli icgoru | Organizasyonunuzun DNA'sini okuyun. | Baglilik, aidiyet ve kultur sinyallerini yapay zeka destekli analizle erken fark edin.\nKarar raporlari | Kanitla adil kararlar alin. | Terfi, odul ve gelisim kararlarini hedef, aksiyon ve 360 derece icgorulerle destekleyin.",
-                '_myliba_home_performance_button' => 'Myliba urunlerini kesfedin',
+                '_myliba_home_performance_eyebrow' => 'Performans Yönetimi Yaklaşımı',
+                '_myliba_home_performance_title' => 'Performans Yönetiminde Oyunu Değiştiren Yeni Nesil Yaklaşım',
+                '_myliba_home_performance_text' => 'Performans değerlendirmeyi yılda bir yapılan stresli ve notlayan bir süreç olmaktan çıkarın; Myliba’nın bütünsel çözümleri ile çalışanlarınızın gelişimini destekleyen, adil ve veriye dayalı bir yönetim yaklaşımına dönüştürün.',
+                '_myliba_home_performance_tabs' => "Hedef Yönetimi | Çalışmayı iş sonuçlarıyla hizalayın. | OKR, KPI ve aksiyon yönetimiyle stratejinizi organizasyonun her seviyesine taşıyın.\nPerformans Geliştirme | Gelişimi sürekli hale getirin. | Sürekli geri bildirim, ileri bildirim ve gelişim odaklı performans yaklaşımıyla yeteneklerinizin potansiyelini ortaya çıkarın. Yüksek performans kültürü geliştirin.\nYapay Zekâ Destekli İçgörüler | Organizasyonunuzun DNA’sını okuyun. | Yapay zekâ destekli analizlerle işe karşı istekliliği, bağlılığı ve kültürünüzü anlık izleyin. Dedikodu ve mobbing gibi performansı düşüren “kültürel virüsleri” erkenden tespit edin.\nAdil Kararlar İçin Özel Raporlar | Kanıtla adil kararlar alın. | Terfi, ücret ve prim kararlarını öznellikten kurtarın. OKR, KPI, aksiyonlar ve Lider Kararı, Meydan Okuma, 360° Yetkinlik, 360° Değerler ve 360° Nitelik/Beceri analizleriyle %100 objektif veriye dayalı kararlar alın.",
+                '_myliba_home_performance_button' => 'Myliba Ürünlerini Keşfedin',
                 '_myliba_home_solution_eyebrow' => 'Myliba cozumu',
                 '_myliba_home_solution_title' => 'Hedefler, performans gorusmeleri, aksiyonlar ve kultur gelisimi icin tek platform.',
                 '_myliba_home_products_button' => 'Urunleri incele',
@@ -1328,10 +1383,10 @@ class Commands
                 '_myliba_home_faq_text' => 'Olculebilir performans ritmine baslamadan once ekiplerin sordugu temel sorular.',
                 '_myliba_home_faq_items' => "Myliba hangi ihtiyac icin uygundur? | Hedef, performans ve kultur rutinlerini tek sistemde yonetmek isteyen kurumlar icin uygundur.\nOKR yonetimi nasil yapilir? | Sirket oncelikleri, takim hedefleri, aksiyonlar ve ilerleme sinyalleri tek akista takip edilir.\nMyliba sadece yazilim mi sunar? | Hayir. Yazilim akademi, workshop ve kocluk rutinleriyle desteklenir.\nDemo sureci nasil ilerler? | Ihtiyac ve ekip yapisi anlasilir, ardindan kurumunuza uygun akis gosterilir.",
                 '_myliba_home_final_cta_eyebrow' => 'Aksiyona donusturun',
-                '_myliba_home_final_cta_title' => 'Stratejinizi bugun aksiyona donusturun.',
+                '_myliba_home_final_cta_title' => 'Yüksek Performans Yolculuğunuza Bugün Başlayın.',
                 '_myliba_home_final_cta_text' => 'OKR, performans, geri bildirim ve kultur gelisimini tek platformda birlestirin.',
-                '_myliba_home_final_cta_primary_label' => 'Demo iste',
-                '_myliba_home_final_cta_secondary_label' => 'Iletisime gec',
+                '_myliba_home_final_cta_primary_label' => 'Myliba Uzmanlarıyla Görüşün',
+                '_myliba_home_final_cta_secondary_label' => 'İletişime Geçin',
             ];
         }
 
@@ -1762,6 +1817,46 @@ class Commands
         $content = [
             'home_en' => '<p>This WordPress migration keeps Myliba editable from the admin panel while preserving a structured content model for SEO, multilingual publishing, events, forms, and team content.</p>',
             'home_tr' => '<p>Bu WordPress migrasyonu Myliba sitesini admin panelden yonetilebilir hale getirirken SEO, cok dilli yayin, etkinlik, form ve ekip icerigi icin duzenli bir model sunar.</p>',
+            'story_tr' => <<<'HTML'
+<h2>Yaklaşımımız</h2>
+<h3>Rakamların Arkasındaki Yönetim Anlayışı</h3>
+<p><strong>Performans = Potansiyel − Müdahale</strong></p>
+<p>Myliba, teknolojiyi insan odaklı bir yüksek performans kültürü inşa etmek için bir kaldıraç olarak kullanır. Tüm ürünleri ve metodolojisi bu düşünce üzerine kuruludur.</p>
+<h2>Hikayemiz</h2>
+<h3>Neden Yola Çıktık?</h3>
+<ul>
+<li>Belirsiz hedefler</li>
+<li>Sürekli müdahale</li>
+<li>Güvensizlik kültürü</li>
+<li>Geri bildirimsizlik</li>
+</ul>
+<p>Bu unsurlar en başarılı ekiplerin bile potansiyelini sınırlar. Bu yüzden performansı insanları zorlayarak değil, sistemleri iyileştirerek geliştiriyoruz.</p>
+<h3>Ne Yapıyoruz?</h3>
+<p>Myliba; Yazılım, Akademi, Danışmanlık ve Simülasyon dikeylerini tek bir çatıda birleştirir.</p>
+<h4>Myliba Yazılım</h4>
+<p>Anlık performans verileri, kültür analizi, yapay zekâ içgörüleri, OKR/KPI yönetimi, sürekli diyalog döngüsü ve adil karar mekanizmalarıyla performansı yaşayan bir sürece dönüştürür.</p>
+<h4>Myliba Akademi</h4>
+<p>Dünyanın ilk ve tek ICF onaylı OKR &amp; Kültür Koçluğu sertifikasyonu ve diğer işbaşı liderlik programlarıyla dönüşümü yaratacak liderleri yetiştirir.</p>
+<h4>Simülasyonlar</h4>
+<p>“Hedef Mars Simülasyonu” gibi deneyimsel öğrenme araçlarıyla belirsizlik ve kriz anlarında liderlik becerilerini geliştirmeyi destekler. Radikal Samimiyet Simülasyonu ile geri ve ileri bildirim isteyen ekipler yaratır.</p>
+<h2>Sosyal Kanıt</h2>
+<ul>
+<li><strong>25+ Yıl:</strong> Yazılım, insan kaynakları ve organizasyonel gelişim tecrübesi.</li>
+<li><strong>44+ Şirket &amp; 16 Sektör:</strong> Kurumsal dönüşüm ve kültür yapılandırma tecrübesi.</li>
+<li><strong>500+ Lider:</strong> Yetkinleştirilmiş, koçluk yaklaşımı kazandırılmış yönetici ve lider ağı.</li>
+<li><strong>40 Saat CCE / ICF Akreditasyonu:</strong> Yüksek performans geliştirme odağında tasarlanmış dünyadaki ilk ve tek sertifika programı.</li>
+<li><strong>%100 Canlı Kültür:</strong> Süreçleri formlarda bırakan değil, günlük iş akışında yaşayan sürdürülebilir kurum kültürü vaadi.</li>
+</ul>
+<h2>Değerlerimiz ve İlkelerimiz</h2>
+<ul>
+<li><strong>Veriyle Konuşan Adil Yönetim:</strong> Kararları kişisel algılarla değil; şeffaf, objektif ve güven veren verilere dayandırmak.</li>
+<li><strong>Not Veren Değil, Geliştiren Yaklaşım:</strong> Yılda bir kez yargılayan geleneksel performans görüşmeleri yerine anlık geri ve ileri bildirim kültürünü yerleştirmek.</li>
+<li><strong>Otonomi ve Güven:</strong> Çalışanları kendi performansının sorumluluğunu alan kurum içi girişimcilere, liderleri ise birer hedef koçuna dönüştürmek.</li>
+</ul>
+<h2>Şirketinizin “Görünmez İşletim Sistemini” Yeniden Kodlayın.</h2>
+<p>Organizasyonunuzu geleceğin çalışma dünyasına hazırlamak ve canlı verilerle yönetmek için Myliba ile tanışın.</p>
+<p><a href="/tr/iletisim/">Uzmanlarımızla Görüşün</a> · <a href="/tr/demo/">Myliba Demosu Planlayın</a></p>
+HTML,
             'generic' => '<p>Replace this starter content from the WordPress editor. Use the Myliba Hero and Myliba SEO boxes for page-level presentation and metadata.</p>',
         ];
 
