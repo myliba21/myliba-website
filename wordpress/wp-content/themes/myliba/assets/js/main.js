@@ -6,7 +6,7 @@
   const languageTrigger = document.querySelector(".language-switcher__trigger");
   const megaItems = Array.from(document.querySelectorAll(".site-nav__item--mega"));
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const isMobileNav = () => window.matchMedia("(max-width: 960px)").matches;
+  const isMobileNav = () => window.matchMedia("(max-width: 1080px)").matches;
   const supportedLocales = ["tr", "en"];
   const setLocaleCookie = (locale) => {
     document.cookie = `myliba_locale=${locale}; path=/; max-age=31536000; samesite=lax`;
