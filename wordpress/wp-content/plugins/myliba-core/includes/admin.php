@@ -167,84 +167,24 @@ function render_settings(): void
                     <td><input class="regular-text" type="url" id="myliba-organization-url" name="myliba_options[organization_url]" value="<?php echo esc_attr($options['organization_url']); ?>"></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="myliba-primary-cta-label"><?php esc_html_e('Primary CTA', 'myliba'); ?></label></th>
+                    <th scope="row"><?php esc_html_e('Site texts', 'myliba'); ?></th>
                     <td>
-                        <input id="myliba-primary-cta-label" name="myliba_options[primary_cta_label]" value="<?php echo esc_attr($options['primary_cta_label']); ?>" placeholder="Label">
-                        <input class="regular-text" name="myliba_options[primary_cta_url]" value="<?php echo esc_attr($options['primary_cta_url']); ?>" placeholder="/contact/">
+                        <a class="button" href="<?php echo esc_url(admin_url('admin.php?page=myliba-content')); ?>"><?php esc_html_e('Edit Turkish / English site texts', 'myliba'); ?></a>
+                        <p class="description"><?php esc_html_e('Global CTA, footer and promo content is managed in one typed, language-specific screen.', 'myliba'); ?></p>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Demo CTA', 'myliba'); ?></th>
-                    <td>
-                        <input name="myliba_options[demo_cta_label]" value="<?php echo esc_attr($options['demo_cta_label']); ?>" placeholder="Request a demo">
-                        <input class="regular-text" name="myliba_options[demo_url]" value="<?php echo esc_attr($options['demo_url']); ?>" placeholder="/tr/demo/">
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"><?php esc_html_e('Promo banner', 'myliba'); ?></th>
+                    <th scope="row"><?php esc_html_e('Promo behavior', 'myliba'); ?></th>
                     <td>
                         <label>
                             <input type="checkbox" name="myliba_options[promo_enabled]" value="1" <?php checked($options['promo_enabled'], '1'); ?>>
                             <?php esc_html_e('Show the 50px global announcement bar above the header', 'myliba'); ?>
                         </label>
-                        <p>
-                            <input name="myliba_options[promo_left_text]" value="<?php echo esc_attr($options['promo_left_text']); ?>" placeholder="Backed by Plug and Play">
-                            <input class="regular-text" name="myliba_options[promo_message]" value="<?php echo esc_attr($options['promo_message']); ?>" placeholder="Campaign message">
-                            <input name="myliba_options[promo_right_text]" value="<?php echo esc_attr($options['promo_right_text']); ?>" placeholder="Endeavor">
-                        </p>
-                        <p>
-                            <input class="regular-text" type="url" name="myliba_options[promo_url]" value="<?php echo esc_attr($options['promo_url']); ?>" placeholder="https://...">
-                        </p>
-                        <p class="description"><?php esc_html_e('Add the workshop, event, or campaign URL to make the full announcement clickable.', 'myliba'); ?></p>
+                        <br><br>
                         <label>
                             <input type="checkbox" name="myliba_options[promo_dismissible]" value="1" <?php checked($options['promo_dismissible'], '1'); ?>>
                             <?php esc_html_e('Allow visitors to dismiss it for the current browser session', 'myliba'); ?>
                         </label>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="myliba-footer-note"><?php esc_html_e('Footer note', 'myliba'); ?></label></th>
-                    <td><textarea class="regular-text" id="myliba-footer-note" name="myliba_options[footer_note]" rows="3"><?php echo esc_textarea($options['footer_note']); ?></textarea></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="myliba-footer-cta-title"><?php esc_html_e('Footer CTA title', 'myliba'); ?></label></th>
-                    <td><input class="regular-text" id="myliba-footer-cta-title" name="myliba_options[footer_cta_title]" value="<?php echo esc_attr($options['footer_cta_title']); ?>"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><?php esc_html_e('TR / EN global content', 'myliba'); ?></th>
-                    <td>
-                        <p class="description"><?php esc_html_e('Optional language-specific values. When left blank, the existing value and built-in translation remain active.', 'myliba'); ?></p>
-                        <div style="display:grid;gap:16px;margin-top:12px;max-width:980px">
-                            <?php
-                            $localized_labels = [
-                                'demo_cta_label' => __('Demo button label', 'myliba'),
-                                'demo_url' => __('Demo URL', 'myliba'),
-                                'footer_cta_title' => __('Footer CTA title', 'myliba'),
-                                'footer_note' => __('Footer note', 'myliba'),
-                                'primary_cta_label' => __('Primary CTA label', 'myliba'),
-                                'primary_cta_url' => __('Primary CTA URL', 'myliba'),
-                                'promo_left_text' => __('Promo left text', 'myliba'),
-                                'promo_message' => __('Promo message', 'myliba'),
-                                'promo_right_text' => __('Promo right text', 'myliba'),
-                                'promo_url' => __('Promo URL', 'myliba'),
-                            ];
-                            foreach ($localized_labels as $localized_key => $localized_label) :
-                                ?>
-                                <div>
-                                    <strong style="display:block;margin-bottom:6px"><?php echo esc_html($localized_label); ?></strong>
-                                    <div style="display:grid;grid-template-columns:repeat(2,minmax(240px,1fr));gap:10px">
-                                        <?php foreach (['en' => 'English', 'tr' => 'Türkçe'] as $locale => $locale_label) :
-                                            $option_key = $localized_key . '_' . $locale;
-                                            ?>
-                                            <label>
-                                                <span class="screen-reader-text"><?php echo esc_html($localized_label . ' — ' . $locale_label); ?></span>
-                                                <input class="widefat" name="myliba_options[<?php echo esc_attr($option_key); ?>]" value="<?php echo esc_attr($options[$option_key] ?? ''); ?>" placeholder="<?php echo esc_attr($locale_label); ?>">
-                                            </label>
-                                        <?php endforeach; ?>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
                     </td>
                 </tr>
                 <tr>

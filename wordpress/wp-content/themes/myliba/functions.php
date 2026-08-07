@@ -200,8 +200,8 @@ function myliba_hero_banner_images(): array
         ];
 
     $alts = [
-        myliba_env('MYLIBA_HERO_BANNER_ALT_1', __('Myliba weekly focus dashboard preview', 'myliba')),
-        myliba_env('MYLIBA_HERO_BANNER_ALT_2', __('Myliba goal map dashboard preview', 'myliba')),
+        myliba_env('MYLIBA_HERO_BANNER_ALT_1', myliba_text('Myliba weekly focus dashboard preview')),
+        myliba_env('MYLIBA_HERO_BANNER_ALT_2', myliba_text('Myliba goal map dashboard preview')),
     ];
 
     $images = [];
@@ -214,7 +214,7 @@ function myliba_hero_banner_images(): array
 
         $images[] = [
             'url' => $url,
-            'alt' => $alts[$index] ?? sprintf(__('Myliba product dashboard preview %d', 'myliba'), $index + 1),
+            'alt' => $alts[$index] ?? sprintf(myliba_text('Myliba product dashboard preview %d'), $index + 1),
             ...myliba_image_dimensions_for_source((string) $source, $url),
         ];
     }
@@ -358,6 +358,13 @@ function myliba_current_language(): string
 {
     if (function_exists('pll_current_language')) {
         return (string) pll_current_language('slug');
+    }
+
+    if (defined('ICL_SITEPRESS_VERSION')) {
+        $wpml_language = apply_filters('wpml_current_language', null);
+        if (is_string($wpml_language) && $wpml_language !== '') {
+            return sanitize_key($wpml_language);
+        }
     }
 
     $path_locale = myliba_locale_from_path(myliba_request_path());
@@ -922,13 +929,36 @@ function myliba_text(string $source): string
     return myliba_translate_text($source);
 }
 
+/**
+ * Keep the route-based fallback working before a multilingual plugin is
+ * installed. Once Polylang or WPML is active, never replace its gettext result.
+ */
 function myliba_translate_gettext(string $translation, string $text, string $domain): string
 {
     if ($domain !== 'myliba' || is_admin()) {
         return $translation;
     }
 
-    return myliba_translate_text($text);
+    if (function_exists('pll_current_language') || defined('ICL_SITEPRESS_VERSION')) {
+        return $translation;
+    }
+
+    $locale = myliba_current_language();
+    if (function_exists('Myliba\\Core\\Content\\legacy_override')) {
+        $override = \Myliba\Core\Content\legacy_override($text, $locale);
+        if ($override !== null) {
+            return $override;
+        }
+    }
+
+    if ($locale === 'tr') {
+        $defaults = myliba_translation_defaults();
+        if (isset($defaults[$text]) && is_string($defaults[$text])) {
+            return $defaults[$text];
+        }
+    }
+
+    return $locale === 'en' ? $text : $translation;
 }
 add_filter('gettext', 'myliba_translate_gettext', 10, 3);
 

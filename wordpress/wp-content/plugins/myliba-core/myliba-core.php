@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Myliba Core
  * Description: Site-specific content model, SEO controls, multilingual hooks, and contact submissions for Myliba.
- * Version: 0.1.0
+ * Version: 0.3.0
  * Author: Myliba
  */
 
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-const VERSION = '0.1.0';
+const VERSION = '0.3.0';
 
 define('MYLIBA_CORE_FILE', __FILE__);
 define('MYLIBA_CORE_DIR', plugin_dir_path(__FILE__));

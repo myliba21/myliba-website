@@ -77,6 +77,12 @@ For production SEO and multilingual management, keep the custom Myliba data mode
 - **Cookie consent**: CookieYes, Complianz, or similar for KVKK/GDPR banner requirements.
 - **Redirects**: Redirection plugin for 301 redirect management.
 
+## Site-wide translated text
+
+Reusable CTA, footer, promo, and form content is managed under **Myliba → Site Texts — TR / EN**. The same screen detects explicit frontend component strings from `myliba_text()` calls and exposes their English and Turkish values in a searchable Interface Texts section. Page and post copy stays on its translated WordPress entry; WordPress admin/internal labels remain in the gettext language-pack workflow.
+
+The version 0.3 migration keeps non-autoloaded backups of the former generated catalog, removes materialized or untranslated defaults, and migrates genuine active component overrides to the new interface-text store.
+
 ## Staging index policy
 
 Indexing is disabled by default in `Myliba > Site Settings`. While the site is on a staging subdomain, keep it disabled and add Basic Auth or IP restriction at hosting level. When the final domain goes live, enable indexing, refresh permalinks, and submit the sitemap in Search Console.
