@@ -32,6 +32,18 @@
 
   if (pathLocale) {
     setLocalePreference(pathLocale);
+  } else {
+    try {
+      const stored = window.localStorage.getItem("myliba_locale") || "";
+      if (!supportedLocales.includes(stored)) {
+        const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
+          ? navigator.languages
+          : [navigator.language || ""];
+        const isTurkish = browserLanguages.some((lang) => String(lang).toLowerCase().startsWith("tr"));
+        const initialLocale = isTurkish ? "tr" : "en";
+        setLocalePreference(initialLocale);
+      }
+    } catch (error) {}
   }
 
   document.querySelectorAll("[data-myliba-locale]").forEach((link) => {
@@ -111,19 +123,41 @@
   }
 
   if (languageSwitcher && languageTrigger) {
+    let langCloseTimer;
+
+    const openLanguageSwitcher = () => {
+      window.clearTimeout(langCloseTimer);
+      languageSwitcher.classList.add("is-open");
+    };
+
+    const queueCloseLanguageSwitcher = () => {
+      window.clearTimeout(langCloseTimer);
+      langCloseTimer = window.setTimeout(() => {
+        languageSwitcher.classList.remove("is-open");
+      }, 220);
+    };
+
+    languageSwitcher.addEventListener("mouseenter", openLanguageSwitcher);
+    languageSwitcher.addEventListener("mouseleave", queueCloseLanguageSwitcher);
+    languageSwitcher.addEventListener("focusin", openLanguageSwitcher);
+    languageSwitcher.addEventListener("focusout", queueCloseLanguageSwitcher);
+
     languageTrigger.addEventListener("click", (event) => {
       event.preventDefault();
+      window.clearTimeout(langCloseTimer);
       languageSwitcher.classList.toggle("is-open");
     });
 
     document.addEventListener("click", (event) => {
       if (!languageSwitcher.contains(event.target)) {
+        window.clearTimeout(langCloseTimer);
         languageSwitcher.classList.remove("is-open");
       }
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
+        window.clearTimeout(langCloseTimer);
         languageSwitcher.classList.remove("is-open");
       }
     });

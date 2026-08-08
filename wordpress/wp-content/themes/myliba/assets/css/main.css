@@ -2529,6 +2529,16 @@ textarea:focus-visible {
   z-index: 50;
 }
 
+.site-nav__sub-menu::before,
+.site-nav__item .sub-menu::before {
+  content: "";
+  height: 16px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: -14px;
+}
+
 .site-nav__item.menu-item-has-children:hover > .sub-menu,
 .site-nav__item.menu-item-has-children:focus-within > .sub-menu,
 .site-nav__item--dropdown:hover > .site-nav__sub-menu,
@@ -2764,6 +2774,15 @@ textarea:focus-visible {
   transform: translateY(6px);
   transition: opacity 160ms ease, transform 160ms ease;
   z-index: 60;
+}
+
+.language-switcher__menu::before {
+  content: "";
+  height: 16px;
+  left: -8px;
+  position: absolute;
+  right: -8px;
+  top: -14px;
 }
 
 .language-switcher--dropdown:hover .language-switcher__menu,

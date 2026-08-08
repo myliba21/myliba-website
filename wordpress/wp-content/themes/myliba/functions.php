@@ -468,22 +468,23 @@ function myliba_locale_from_path(string $path): string
 
 function myliba_locale_from_accept_language(string $header): string
 {
-    foreach (explode(',', strtolower($header)) as $language) {
-        $locale = str_replace('_', '-', trim(explode(';', $language, 2)[0] ?? ''));
+    $languages = explode(',', strtolower($header));
+    if (empty($languages) || trim($languages[0]) === '') {
+        return 'en';
+    }
 
-        foreach (myliba_available_locales() as $available_locale) {
-            if ($locale === $available_locale || str_starts_with($locale, $available_locale . '-')) {
-                return $available_locale;
-            }
+    foreach ($languages as $language) {
+        $locale = str_replace('_', '-', trim(explode(';', $language, 2)[0] ?? ''));
+        if ($locale === 'tr' || str_starts_with($locale, 'tr-')) {
+            return 'tr';
         }
     }
 
-    return '';
+    return 'en';
 }
 
 function myliba_preferred_locale(): string
 {
-    $default_locale = (string) myliba_option('default_locale', 'en');
     $cookie_name = myliba_locale_cookie_name();
     $cookie_locale = isset($_COOKIE[$cookie_name]) ? sanitize_key(wp_unslash($_COOKIE[$cookie_name])) : '';
 
@@ -492,9 +493,11 @@ function myliba_preferred_locale(): string
     }
 
     $accept_language = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_ACCEPT_LANGUAGE'])) : '';
-    $accepted_locale = myliba_locale_from_accept_language($accept_language);
+    if ($accept_language !== '') {
+        return myliba_locale_from_accept_language($accept_language);
+    }
 
-    return $accepted_locale !== '' ? $accepted_locale : $default_locale;
+    return 'en';
 }
 
 function myliba_set_locale_cookie(string $locale): void
@@ -557,16 +560,21 @@ function myliba_redirect_root_to_preferred_locale(): void
             try {
                 stored = window.localStorage.getItem("myliba_locale") || "";
             } catch (error) {}
-            const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
-                ? navigator.languages
-                : [navigator.language || ""];
-            const browserLocale = browserLanguages.some((language) => String(language).toLowerCase().startsWith("tr"))
-                ? "tr"
-                : "en";
-            const locale = supported.includes(stored) ? stored : browserLocale;
-            try {
-                window.localStorage.setItem("myliba_locale", locale);
-            } catch (error) {}
+
+            let locale = "";
+            if (supported.includes(stored)) {
+                locale = stored;
+            } else {
+                const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
+                    ? navigator.languages
+                    : [navigator.language || ""];
+                const isTurkish = browserLanguages.some((lang) => String(lang).toLowerCase().startsWith("tr"));
+                locale = isTurkish ? "tr" : "en";
+                try {
+                    window.localStorage.setItem("myliba_locale", locale);
+                } catch (error) {}
+            }
+
             document.cookie = `myliba_locale=${locale}; path=/; max-age=31536000; samesite=lax`;
             window.location.replace(<?php echo wp_json_encode($home_base); ?> + locale + "/");
         })();
