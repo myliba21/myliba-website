@@ -8638,6 +8638,188 @@ h4 {
   color: var(--text-secondary);
 }
 
+/* Elegant announcement bar — richer, attention-grabbing, fully responsive. */
+.site-promo {
+  background:
+    radial-gradient(circle at 12% -40%, rgba(66, 153, 255, 0.35), transparent 42%),
+    radial-gradient(circle at 88% -30%, rgba(255, 107, 104, 0.22), transparent 40%),
+    linear-gradient(180deg, #16243c 0%, #1d3557 45%, #143048 100%);
+  border-bottom: 0;
+  box-shadow: 0 12px 30px rgba(13, 28, 52, 0.18);
+  color: #ffffff;
+  height: auto;
+  margin: 0;
+  max-width: none;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.site-promo::before {
+  background: linear-gradient(90deg, var(--brand-green) 0 25%, var(--brand-yellow) 25% 50%, var(--brand-red) 50% 75%, var(--brand-blue) 75% 100%);
+  box-shadow: 0 0 18px rgba(40, 127, 159, 0.45);
+  content: "";
+  height: 4px;
+  inset: 0 0 auto;
+  opacity: 1;
+  position: absolute;
+  z-index: 1;
+}
+
+.site-promo::after {
+  animation: promo-shine 6s ease-in-out infinite;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.14) 50%, transparent 60%);
+  content: "";
+  height: 200%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translateX(-120%);
+  width: 100%;
+  z-index: 2;
+}
+
+@keyframes promo-shine {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+  85%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.site-promo__content {
+  align-items: center;
+  display: grid;
+  gap: 0 18px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  height: auto;
+  min-height: 0;
+  padding: 10px 58px 10px 20px;
+  text-align: center;
+}
+
+.site-promo__content strong {
+  color: #ffffff;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  justify-self: center;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.site-promo__side {
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: #e8f0ff;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 600;
+  justify-self: start;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 9px 16px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.site-promo__side--right {
+  background: linear-gradient(135deg, #ff8a5c 0%, #f0435d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 20px rgba(240, 67, 93, 0.35);
+  color: #ffffff;
+  display: inline-flex;
+  font-size: var(--fs-body-sm);
+  font-weight: 800;
+  justify-self: end;
+  letter-spacing: 0.02em;
+  padding: 10px 20px;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+a.site-promo__content,
+a.site-promo__content:hover,
+a.site-promo__content:hover .site-promo__side {
+  color: #ffffff;
+}
+
+a.site-promo__content:hover .site-promo__side {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.24), 0 12px 26px rgba(240, 67, 93, 0.45);
+}
+
+.site-promo__dismiss {
+  color: rgba(226, 238, 255, 0.8);
+}
+
+.site-promo__dismiss:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 960px) {
+  .site-promo__side {
+    max-width: 170px;
+  }
+}
+
+@media (max-width: 720px) {
+  .site-promo {
+    min-height: 44px;
+  }
+
+  .site-promo__content {
+    gap: 10px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding: 8px 48px 8px 12px;
+    text-align: left;
+  }
+
+  .site-promo__side {
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    max-width: 130px;
+    padding: 7px 10px;
+  }
+
+  .site-promo__side--right {
+    font-size: 12px;
+    padding: 9px 12px;
+  }
+
+  .site-promo__content strong {
+    font-size: var(--fs-body-sm);
+    text-align: left;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-promo__side {
+    display: none;
+  }
+
+  .site-promo__content {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .site-promo__side--right {
+    padding: 8px 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-promo::after {
+    animation: none;
+  }
+}
+
 .site-header,
 .site-header.is-scrolled {
   background: rgba(255, 255, 255, 0.96);
