@@ -6,24 +6,60 @@ while (have_posts()) :
     $post_id = get_the_ID();
     $content_copy = static fn (string $key): string => \Myliba\Core\PageContent\text($post_id, 'solution', $key);
     $content_rows = static fn (string $key): array => \Myliba\Core\PageContent\collection($post_id, 'solution', $key);
+
+    $title = $content_copy('hero_title');
+    if ($title === '') {
+        $title = (string) (get_post_meta($post_id, '_myliba_hero_title', true) ?: get_the_title());
+    }
+
+    $kicker = $content_copy('kicker');
+    if ($kicker === '') {
+        $kicker = (string) (get_post_meta($post_id, '_myliba_eyebrow', true) ?: get_post_meta($post_id, '_myliba_label', true) ?: myliba_text('Myliba Çözümü'));
+    }
+
+    $summary = $content_copy('hero_summary');
+    if ($summary === '') {
+        $summary = (string) (get_post_meta($post_id, '_myliba_hero_subtitle', true) ?: get_the_excerpt());
+    }
+
+    $intro = $content_copy('intro');
+    if ($intro === '') {
+        $intro = (string) (get_post_meta($post_id, '_myliba_solution', true) ?: get_post_meta($post_id, '_myliba_problem', true) ?: '');
+    }
+
+    $items = array_column($content_rows('benefits'), 'text');
+    if (empty($items)) {
+        $meta_benefits = function_exists('myliba_lines') ? \myliba_lines((string) get_post_meta($post_id, '_myliba_benefits', true)) : [];
+        if (!empty($meta_benefits)) {
+            $items = $meta_benefits;
+        }
+    }
+
+    $audiences = array_column($content_rows('audiences'), 'text');
+    if (empty($audiences)) {
+        $meta_audiences = function_exists('myliba_lines') ? \myliba_lines((string) get_post_meta($post_id, '_myliba_audiences', true)) : [];
+        if (!empty($meta_audiences)) {
+            $audiences = $meta_audiences;
+        } else {
+            $audiences = [
+                myliba_text('İnsan ve kültür ekipleri'),
+                myliba_text('Liderlik ekipleri'),
+                myliba_text('Dönüşüm ekipleri'),
+            ];
+        }
+    }
+
     $solution = [
-        'title' => $content_copy('hero_title'),
-        'kicker' => $content_copy('kicker'),
-        'summary' => $content_copy('hero_summary'),
-        'intro' => $content_copy('intro'),
-        'items' => array_column($content_rows('benefits'), 'text'),
-        'audiences' => array_column($content_rows('audiences'), 'text'),
+        'title' => $title,
+        'kicker' => $kicker,
+        'summary' => $summary,
+        'intro' => $intro,
+        'items' => $items,
+        'audiences' => $audiences,
         'metrics' => $content_rows('metrics'),
         'steps' => $content_rows('steps'),
     ];
-    $title = $solution['title'];
-    $summary = $solution['summary'];
     $editor_content = trim(wp_strip_all_tags((string) get_the_content()));
-    $audiences = !empty($solution['audiences']) ? $solution['audiences'] : [
-        myliba_text('İnsan ve kültür ekipleri'),
-        myliba_text('Liderlik ekipleri'),
-        myliba_text('Dönüşüm ekipleri'),
-    ];
     ?>
     <article class="solution-detail">
         <section class="solution-detail__hero">

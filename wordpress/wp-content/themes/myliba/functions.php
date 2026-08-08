@@ -1494,30 +1494,111 @@ function myliba_solution_catalog(): array
 
     $catalog = myliba_content_values($catalog);
 
-    if (function_exists('Myliba\\Core\\PageContent\\document')) {
-        $solution_posts = get_posts([
-            'post_type' => 'myliba_solution',
-            'post_status' => 'publish',
-            'posts_per_page' => -1,
-            'orderby' => ['menu_order' => 'ASC', 'title' => 'ASC'],
-            'meta_key' => '_myliba_language',
-            'meta_value' => myliba_current_language(),
-            'suppress_filters' => false,
-        ]);
+    // Query published solutions dynamically from the database
+    $args = [
+        'post_type' => 'myliba_solution',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'orderby' => ['menu_order' => 'ASC', 'title' => 'ASC'],
+        'suppress_filters' => false,
+    ];
 
-        foreach ($solution_posts as $solution_post) {
-            $slug = $solution_post->post_name;
-            $catalog[$slug] = [
-                'title' => \Myliba\Core\PageContent\text($solution_post->ID, 'solution', 'hero_title'),
-                'kicker' => \Myliba\Core\PageContent\text($solution_post->ID, 'solution', 'kicker'),
-                'summary' => \Myliba\Core\PageContent\text($solution_post->ID, 'solution', 'hero_summary'),
-                'intro' => \Myliba\Core\PageContent\text($solution_post->ID, 'solution', 'intro'),
-                'items' => array_column(\Myliba\Core\PageContent\collection($solution_post->ID, 'solution', 'benefits'), 'text'),
-                'audiences' => array_column(\Myliba\Core\PageContent\collection($solution_post->ID, 'solution', 'audiences'), 'text'),
-                'metrics' => \Myliba\Core\PageContent\collection($solution_post->ID, 'solution', 'metrics'),
-                'steps' => \Myliba\Core\PageContent\collection($solution_post->ID, 'solution', 'steps'),
-            ];
+    $language = myliba_current_language();
+    $lang_posts = get_posts(array_merge($args, [
+        'meta_query' => [
+            'relation' => 'OR',
+            [
+                'key' => '_myliba_language',
+                'value' => $language,
+                'compare' => '=',
+            ],
+            [
+                'key' => '_myliba_language',
+                'compare' => 'NOT EXISTS',
+            ],
+            [
+                'key' => '_myliba_language',
+                'value' => '',
+                'compare' => '=',
+            ],
+        ],
+    ]));
+
+    $solution_posts = !empty($lang_posts) ? $lang_posts : get_posts($args);
+
+    foreach ($solution_posts as $solution_post) {
+        $slug = $solution_post->post_name;
+        $id = $solution_post->ID;
+        $fallback_item = $catalog[$slug] ?? [];
+
+        $title = function_exists('Myliba\\Core\\PageContent\\text')
+            ? \Myliba\Core\PageContent\text($id, 'solution', 'hero_title')
+            : '';
+        if ($title === '') {
+            $title = (string) (get_post_meta($id, '_myliba_hero_title', true) ?: get_the_title($id));
         }
+
+        $kicker = function_exists('Myliba\\Core\\PageContent\\text')
+            ? \Myliba\Core\PageContent\text($id, 'solution', 'kicker')
+            : '';
+        if ($kicker === '') {
+            $kicker = (string) (get_post_meta($id, '_myliba_eyebrow', true) ?: get_post_meta($id, '_myliba_label', true) ?: ($fallback_item['kicker'] ?? 'Myliba Çözümü'));
+        }
+
+        $summary = function_exists('Myliba\\Core\\PageContent\\text')
+            ? \Myliba\Core\PageContent\text($id, 'solution', 'hero_summary')
+            : '';
+        if ($summary === '') {
+            $summary = (string) (get_post_meta($id, '_myliba_hero_subtitle', true) ?: get_post_field('post_excerpt', $id) ?: ($fallback_item['summary'] ?? ''));
+        }
+
+        $intro = function_exists('Myliba\\Core\\PageContent\\text')
+            ? \Myliba\Core\PageContent\text($id, 'solution', 'intro')
+            : '';
+        if ($intro === '') {
+            $intro = (string) (get_post_meta($id, '_myliba_solution', true) ?: get_post_meta($id, '_myliba_problem', true) ?: ($fallback_item['intro'] ?? ''));
+        }
+
+        $benefits = function_exists('Myliba\\Core\\PageContent\\collection')
+            ? array_column(\Myliba\Core\PageContent\collection($id, 'solution', 'benefits'), 'text')
+            : [];
+        if (empty($benefits)) {
+            $meta_benefits = myliba_lines((string) get_post_meta($id, '_myliba_benefits', true));
+            $benefits = !empty($meta_benefits) ? $meta_benefits : ($fallback_item['items'] ?? []);
+        }
+
+        $audiences = function_exists('Myliba\\Core\\PageContent\\collection')
+            ? array_column(\Myliba\Core\PageContent\collection($id, 'solution', 'audiences'), 'text')
+            : [];
+        if (empty($audiences)) {
+            $meta_audiences = myliba_lines((string) get_post_meta($id, '_myliba_audiences', true));
+            $audiences = !empty($meta_audiences) ? $meta_audiences : ($fallback_item['audiences'] ?? ['İnsan ve kültür ekipleri', 'Liderlik ekipleri', 'Dönüşüm ve gelişim ekipleri']);
+        }
+
+        $metrics = function_exists('Myliba\\Core\\PageContent\\collection')
+            ? \Myliba\Core\PageContent\collection($id, 'solution', 'metrics')
+            : [];
+        if (empty($metrics)) {
+            $metrics = $fallback_item['metrics'] ?? [];
+        }
+
+        $steps = function_exists('Myliba\\Core\\PageContent\\collection')
+            ? \Myliba\Core\PageContent\collection($id, 'solution', 'steps')
+            : [];
+        if (empty($steps)) {
+            $steps = $fallback_item['steps'] ?? [];
+        }
+
+        $catalog[$slug] = [
+            'title' => $title,
+            'kicker' => $kicker,
+            'summary' => $summary,
+            'intro' => $intro,
+            'items' => $benefits,
+            'audiences' => $audiences,
+            'metrics' => $metrics,
+            'steps' => $steps,
+        ];
     }
 
     return $catalog;
@@ -1560,10 +1641,27 @@ function myliba_solution_url(string $slug): string
 
 function myliba_development_center_page_id(): int
 {
-    $path = myliba_current_language() === 'en' ? 'en/development-center' : 'tr/gelisim-merkezi';
-    $page = get_page_by_path($path);
+    $lang = myliba_current_language();
+    $paths = $lang === 'en'
+        ? ['en/development-center', 'development-center', 'en/reports', 'reports']
+        : ['tr/gelisim-merkezi', 'gelisim-merkezi', 'tr/gelisim-merkezi/raporlar-ve-trendler', 'raporlar-ve-trendler'];
 
-    return $page ? (int) $page->ID : 0;
+    foreach ($paths as $path) {
+        $page = get_page_by_path($path);
+        if ($page instanceof \WP_Post) {
+            return (int) $page->ID;
+        }
+    }
+
+    $posts = get_posts([
+        'post_type' => 'page',
+        'name' => $lang === 'en' ? 'development-center' : 'gelisim-merkezi',
+        'post_status' => 'publish',
+        'posts_per_page' => 1,
+        'fields' => 'ids',
+    ]);
+
+    return !empty($posts) ? (int) $posts[0] : 0;
 }
 
 function myliba_development_center_context(): array
