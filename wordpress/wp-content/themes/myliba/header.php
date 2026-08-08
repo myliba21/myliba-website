@@ -13,12 +13,20 @@ if (!defined('ABSPATH')) {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <?php
-$promo_enabled = myliba_option('promo_enabled', '0') === '1';
-$promo_left = trim((string) myliba_option('promo_left_text', ''));
-$promo_message = trim((string) myliba_option('promo_message', ''));
-$promo_right = trim((string) myliba_option('promo_right_text', ''));
+$promo_enabled = myliba_option('promo_enabled', '1') === '1' || myliba_option('promo_enabled', '1') === 1 || myliba_option('promo_enabled', '1') === true;
+$promo_left = trim((string) myliba_option('promo_left_text', myliba_text('Upcoming workshop')));
+$promo_message = trim((string) myliba_option('promo_message', myliba_text('Reserve your place in our next workshop.')));
+$promo_right = trim((string) myliba_option('promo_right_text', myliba_text('Details')));
 $promo_url = trim((string) myliba_option('promo_url', ''));
-$promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
+$promo_dismissible = myliba_option('promo_dismissible', '1') === '1' || myliba_option('promo_dismissible', '1') === 1 || myliba_option('promo_dismissible', '1') === true;
+
+$show_lang_switcher = myliba_option('header_lang_switcher_enabled', '1') !== '0';
+$portal_enabled = myliba_option('header_portal_enabled', '1') !== '0';
+$portal_label = (string) myliba_option('portal_cta_label', myliba_text('Portal login'));
+$portal_url = (string) myliba_option('portal_url', myliba_portal_url());
+$demo_enabled = myliba_option('header_demo_cta_enabled', '1') !== '0';
+$demo_label = (string) myliba_option('demo_cta_label', myliba_text('Request a demo'));
+$demo_url = (string) myliba_option('demo_url', myliba_demo_url());
 ?>
 <?php if ($promo_enabled && ($promo_left !== '' || $promo_message !== '' || $promo_right !== '')) : ?>
     <div class="site-promo" data-site-promo="<?php echo esc_attr(md5($promo_left . $promo_message . $promo_right . $promo_url)); ?>">
@@ -53,20 +61,56 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
 
         <nav id="site-navigation" class="site-nav" aria-label="<?php echo esc_attr(myliba_text('Primary navigation')); ?>">
             <ul class="site-nav__menu">
-                <?php foreach (myliba_header_menu() as $item) : ?>
+                <?php foreach (myliba_get_primary_nav_items() as $item) : ?>
                     <?php
                     $is_active = myliba_header_menu_item_is_active((string) $item['key'], (string) $item['url']);
-                    $item_classes = trim('site-nav__item ' . ($is_active ? 'is-active' : ''));
-                    $link_classes = trim('site-nav__link ' . ($is_active ? 'is-active' : ''));
+                    $has_custom_children = !empty($item['children']);
+                    $is_mega_solutions = $item['key'] === 'solutions' && empty($item['children']);
+                    $is_mega_development = $item['key'] === 'development' && empty($item['children']);
+                    $is_dropdown = $has_custom_children || $is_mega_solutions || $is_mega_development;
+
+                    $item_classes = 'site-nav__item';
+                    if ($is_active) {
+                        $item_classes .= ' is-active';
+                    }
+                    if ($is_mega_solutions || $is_mega_development) {
+                        $item_classes .= ' site-nav__item--mega';
+                    } elseif ($has_custom_children) {
+                        $item_classes .= ' site-nav__item--dropdown menu-item-has-children';
+                    }
+                    if (!empty($item['classes'])) {
+                        $item_classes .= ' ' . trim($item['classes']);
+                    }
+
+                    $link_classes = 'site-nav__link' . ($is_active ? ' is-active' : '');
                     $aria_current = $is_active ? ' aria-current="page"' : '';
+                    $mega_menu_id = $item['key'] . '-mega-menu';
                     ?>
-                    <?php if (in_array($item['key'], ['solutions', 'development'], true)) : ?>
-                        <li class="<?php echo esc_attr(trim($item_classes . ' site-nav__item--mega')); ?>">
-                            <?php $mega_menu_id = $item['key'] . '-mega-menu'; ?>
-                            <a class="<?php echo esc_attr($link_classes); ?>" href="<?php echo esc_url($item['url']); ?>" aria-haspopup="true" aria-expanded="false" aria-controls="<?php echo esc_attr($mega_menu_id); ?>"<?php echo $aria_current; ?>>
+                    <?php if ($is_dropdown) : ?>
+                        <li class="<?php echo esc_attr(trim($item_classes)); ?>">
+                            <a class="<?php echo esc_attr(trim($link_classes)); ?>"
+                               href="<?php echo esc_url($item['url']); ?>"
+                               <?php if (!empty($item['target'])) : ?>target="<?php echo esc_attr($item['target']); ?>"<?php endif; ?>
+                               aria-haspopup="true" aria-expanded="false" aria-controls="<?php echo esc_attr($mega_menu_id); ?>"<?php echo $aria_current; ?>>
                                 <?php echo esc_html($item['label']); ?>
                             </a>
-                            <?php if ($item['key'] === 'solutions') : ?>
+                            <?php if ($has_custom_children) : ?>
+                                <ul id="<?php echo esc_attr($mega_menu_id); ?>" class="site-nav__sub-menu sub-menu" aria-label="<?php echo esc_attr($item['label']); ?>">
+                                    <?php foreach ($item['children'] as $child) : ?>
+                                        <?php
+                                        $req_uri = isset($_SERVER['REQUEST_URI']) ? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) : '/';
+                                        $is_child_active = myliba_url_path(home_url($req_uri)) === myliba_url_path($child->url);
+                                        ?>
+                                        <li class="site-nav__sub-item<?php echo $is_child_active ? ' is-active' : ''; ?>">
+                                            <a class="site-nav__sub-link<?php echo $is_child_active ? ' is-active' : ''; ?>"
+                                               href="<?php echo esc_url($child->url); ?>"
+                                               <?php if (!empty($child->target)) : ?>target="<?php echo esc_attr($child->target); ?>"<?php endif; ?>>
+                                                <?php echo esc_html($child->title); ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php elseif ($is_mega_solutions) : ?>
                                 <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu" aria-label="<?php echo esc_attr(myliba_text('Solutions menu')); ?>">
                                     <div class="mega-menu__intro">
                                         <span><?php echo esc_html(myliba_text('Çözümlerimiz')); ?></span>
@@ -95,9 +139,8 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
-                            <?php else :
-                                $development_items = myliba_development_center_items();
-                                ?>
+                            <?php elseif ($is_mega_development) : ?>
+                                <?php $development_items = myliba_development_center_items(); ?>
                                 <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu mega-menu--development" aria-label="<?php echo esc_attr(myliba_text('Gelişim Merkezi menüsü')); ?>">
                                     <div class="mega-menu__intro">
                                         <span><?php echo esc_html(myliba_text('Gelişim Merkezi')); ?></span>
@@ -132,49 +175,66 @@ $promo_dismissible = myliba_option('promo_dismissible', '1') === '1';
                             <?php endif; ?>
                         </li>
                     <?php else : ?>
-                        <li class="<?php echo esc_attr($item_classes); ?>"><a class="<?php echo esc_attr($link_classes); ?>" href="<?php echo esc_url($item['url']); ?>"<?php echo $aria_current; ?>><?php echo esc_html($item['label']); ?></a></li>
+                        <li class="<?php echo esc_attr(trim($item_classes)); ?>">
+                            <a class="<?php echo esc_attr(trim($link_classes)); ?>"
+                               href="<?php echo esc_url($item['url']); ?>"
+                               <?php if (!empty($item['target'])) : ?>target="<?php echo esc_attr($item['target']); ?>"<?php endif; ?>
+                               <?php echo $aria_current; ?>>
+                                <?php echo esc_html($item['label']); ?>
+                            </a>
+                        </li>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </ul>
-            <a class="site-nav__mobile-cta site-nav__mobile-cta--portal" href="<?php echo esc_url(myliba_portal_url()); ?>">
-                <?php echo esc_html(myliba_text('Portal login')); ?>
-            </a>
-            <a class="site-nav__mobile-cta site-nav__mobile-cta--primary" href="<?php echo esc_url(myliba_demo_url()); ?>">
-                <?php echo esc_html(myliba_option('demo_cta_label', myliba_text('Request a demo'))); ?>
-            </a>
+            <?php if ($portal_enabled && $portal_url !== '') : ?>
+                <a class="site-nav__mobile-cta site-nav__mobile-cta--portal" href="<?php echo esc_url($portal_url); ?>">
+                    <?php echo esc_html($portal_label); ?>
+                </a>
+            <?php endif; ?>
+            <?php if ($demo_enabled && $demo_url !== '') : ?>
+                <a class="site-nav__mobile-cta site-nav__mobile-cta--primary" href="<?php echo esc_url($demo_url); ?>">
+                    <?php echo esc_html($demo_label); ?>
+                </a>
+            <?php endif; ?>
         </nav>
 
         <div class="site-actions">
-            <?php
-            $language_links = myliba_language_links();
-            $active_language = $language_links[0] ?? ['label' => 'TR', 'url' => home_url('/tr/'), 'active' => true];
-            foreach ($language_links as $language) {
-                if (!empty($language['active'])) {
-                    $active_language = $language;
-                    break;
+            <?php if ($show_lang_switcher) : ?>
+                <?php
+                $language_links = myliba_language_links();
+                $active_language = $language_links[0] ?? ['label' => 'TR', 'url' => home_url('/tr/'), 'active' => true];
+                foreach ($language_links as $language) {
+                    if (!empty($language['active'])) {
+                        $active_language = $language;
+                        break;
+                    }
                 }
-            }
-            ?>
-            <div class="language-switcher language-switcher--dropdown" aria-label="<?php echo esc_attr(myliba_text('Language switcher')); ?>">
-                <button class="language-switcher__trigger" type="button" aria-haspopup="true">
-                    <span class="language-switcher__flag"><?php echo esc_html(myliba_language_flag((string) $active_language['label'])); ?></span>
-                    <span><?php echo esc_html($active_language['label']); ?></span>
-                </button>
-                <div class="language-switcher__menu">
-                    <?php foreach ($language_links as $language) : ?>
-                        <a class="<?php echo $language['active'] ? 'is-active' : ''; ?>" href="<?php echo esc_url($language['url']); ?>" data-myliba-locale="<?php echo esc_attr(strtolower((string) $language['label'])); ?>">
-                            <span class="language-switcher__flag"><?php echo esc_html(myliba_language_flag((string) $language['label'])); ?></span>
-                            <span><?php echo esc_html($language['label']); ?></span>
-                        </a>
-                    <?php endforeach; ?>
+                ?>
+                <div class="language-switcher language-switcher--dropdown" aria-label="<?php echo esc_attr(myliba_text('Language switcher')); ?>">
+                    <button class="language-switcher__trigger" type="button" aria-haspopup="true">
+                        <span class="language-switcher__flag"><?php echo esc_html(myliba_language_flag((string) $active_language['label'])); ?></span>
+                        <span><?php echo esc_html($active_language['label']); ?></span>
+                    </button>
+                    <div class="language-switcher__menu">
+                        <?php foreach ($language_links as $language) : ?>
+                            <a class="<?php echo $language['active'] ? 'is-active' : ''; ?>" href="<?php echo esc_url($language['url']); ?>" data-myliba-locale="<?php echo esc_attr(strtolower((string) $language['label'])); ?>">
+                                <span class="language-switcher__flag"><?php echo esc_html(myliba_language_flag((string) $language['label'])); ?></span>
+                                <span><?php echo esc_html($language['label']); ?></span>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
-            <a class="myliba-button myliba-button--portal" href="<?php echo esc_url(myliba_portal_url()); ?>">
-                <?php echo esc_html(myliba_text('Portal login')); ?>
-            </a>
-            <a class="myliba-button myliba-button--small" href="<?php echo esc_url(myliba_demo_url()); ?>">
-                <?php echo esc_html(myliba_option('demo_cta_label', myliba_text('Request a demo'))); ?>
-            </a>
+            <?php endif; ?>
+            <?php if ($portal_enabled && $portal_url !== '') : ?>
+                <a class="myliba-button myliba-button--portal" href="<?php echo esc_url($portal_url); ?>">
+                    <?php echo esc_html($portal_label); ?>
+                </a>
+            <?php endif; ?>
+            <?php if ($demo_enabled && $demo_url !== '') : ?>
+                <a class="myliba-button myliba-button--small" href="<?php echo esc_url($demo_url); ?>">
+                    <?php echo esc_html($demo_label); ?>
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 </header>

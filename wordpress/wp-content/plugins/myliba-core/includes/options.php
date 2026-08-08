@@ -24,6 +24,18 @@ function localized_schema(): array
             'type' => 'url',
             'defaults' => ['en' => '/en/contact/', 'tr' => '/tr/iletisim/'],
         ],
+        'portal_cta_label' => [
+            'label' => __('Portal button label', 'myliba'),
+            'group' => 'actions',
+            'type' => 'text',
+            'defaults' => ['en' => 'Portal login', 'tr' => 'Portal girişi'],
+        ],
+        'portal_url' => [
+            'label' => __('Portal URL', 'myliba'),
+            'group' => 'actions',
+            'type' => 'url',
+            'defaults' => ['en' => 'https://portal.myliba.com/', 'tr' => 'https://portal.myliba.com/'],
+        ],
         'demo_cta_label' => [
             'label' => __('Demo button label', 'myliba'),
             'group' => 'actions',
@@ -36,6 +48,15 @@ function localized_schema(): array
             'type' => 'url',
             'defaults' => ['en' => '/en/demo/', 'tr' => '/tr/demo/'],
         ],
+        'footer_cta_eyebrow' => [
+            'label' => __('Footer CTA eyebrow', 'myliba'),
+            'group' => 'footer',
+            'type' => 'text',
+            'defaults' => [
+                'en' => 'Culture, goals and performance',
+                'tr' => 'Kültür, hedefler ve performans',
+            ],
+        ],
         'footer_cta_title' => [
             'label' => __('Footer CTA title', 'myliba'),
             'group' => 'footer',
@@ -44,6 +65,30 @@ function localized_schema(): array
                 'en' => 'Ready to make culture measurable?',
                 'tr' => 'Kültürü ölçülebilir hale getirmeye hazır mısınız?',
             ],
+        ],
+        'footer_col1_title' => [
+            'label' => __('Footer column 1 title', 'myliba'),
+            'group' => 'footer',
+            'type' => 'text',
+            'defaults' => ['en' => 'Our Solutions', 'tr' => 'Çözümlerimiz'],
+        ],
+        'footer_col2_title' => [
+            'label' => __('Footer column 2 title', 'myliba'),
+            'group' => 'footer',
+            'type' => 'text',
+            'defaults' => ['en' => 'Development Center', 'tr' => 'Gelişim Merkezi'],
+        ],
+        'footer_col3_title' => [
+            'label' => __('Footer column 3 title', 'myliba'),
+            'group' => 'footer',
+            'type' => 'text',
+            'defaults' => ['en' => 'Company', 'tr' => 'Şirket'],
+        ],
+        'footer_col4_title' => [
+            'label' => __('Footer column 4 title', 'myliba'),
+            'group' => 'footer',
+            'type' => 'text',
+            'defaults' => ['en' => 'Security & Legal', 'tr' => 'Güvenlik ve Yasal'],
         ],
         'footer_note' => [
             'label' => __('Footer note', 'myliba'),
@@ -259,9 +304,16 @@ function localized_keys(): array
     return [
         'primary_cta_label',
         'primary_cta_url',
+        'portal_cta_label',
+        'portal_url',
         'demo_cta_label',
         'demo_url',
+        'footer_cta_eyebrow',
         'footer_cta_title',
+        'footer_col1_title',
+        'footer_col2_title',
+        'footer_col3_title',
+        'footer_col4_title',
         'footer_note',
         'promo_left_text',
         'promo_message',

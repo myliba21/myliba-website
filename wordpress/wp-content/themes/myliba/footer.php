@@ -3,19 +3,34 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+$footer_cta_enabled = myliba_option('footer_cta_enabled', '1') !== '0';
+$footer_cta_eyebrow = (string) myliba_option('footer_cta_eyebrow', myliba_text('Culture, goals and performance'));
+$footer_cta_title = (string) myliba_option('footer_cta_title', myliba_text('Ready to make culture measurable?'));
 $footer_cta_url_option = (string) myliba_option('primary_cta_url', myliba_page_url('contact'));
 $footer_cta_url = $footer_cta_url_option !== '' ? $footer_cta_url_option : myliba_page_url('contact');
 if (str_contains($footer_cta_url, '/en/contact')) {
     $footer_cta_url = myliba_page_url('contact');
 }
-$footer_demo_url = myliba_demo_url();
+$footer_primary_cta_label = (string) myliba_option('primary_cta_label', myliba_text('Contact us'));
+$footer_demo_label = (string) myliba_option('demo_cta_label', myliba_text('Request a demo'));
+$footer_demo_url = (string) myliba_option('demo_url', myliba_demo_url());
+
+$footer_note = (string) myliba_option('footer_note', myliba_text('OKR, culture, ethics, and security consulting.'));
 $footer_contact_email = (string) myliba_option('contact_email', get_option('admin_email'));
-$footer_phone_label = (string) myliba_option('phone_label', '');
-$footer_phone_url = (string) myliba_option('phone_url', '');
+$footer_phone_label = (string) myliba_option('phone_label', '+90 553 986 86 99');
+$footer_phone_url = (string) myliba_option('phone_url', 'tel:+905539868699');
+$footer_organization_name = (string) myliba_option('organization_name', 'Myliba');
+
 $footer_languages = myliba_language_links();
 $footer_lang = myliba_current_language();
 
-// 1. Column: Solutions (Çözümlerimiz & Yazılım)
+// Column titles (Customizer override -> Menu name -> Default fallback)
+$col1_title = (string) myliba_option('footer_col1_title', myliba_nav_menu_title('footer_solutions', myliba_text('Çözümlerimiz')));
+$col2_title = (string) myliba_option('footer_col2_title', myliba_nav_menu_title('footer_development', myliba_text('Gelişim Merkezi')));
+$col3_title = (string) myliba_option('footer_col3_title', myliba_nav_menu_title('footer_company', myliba_text('Şirket')));
+$col4_title = (string) myliba_option('footer_col4_title', myliba_nav_menu_title('footer_legal', myliba_text('Güvenlik ve Yasal')));
+
+// 1. Column Fallback: Solutions (Çözümlerimiz & Yazılım)
 $footer_solution_links = [
     [
         'label' => myliba_text('Yazılım'),
@@ -29,7 +44,7 @@ foreach (myliba_solution_catalog() as $solution_slug => $solution) {
     ];
 }
 
-// 2. Column: Development Center & Academy (Gelişim Merkezi & Akademi)
+// 2. Column Fallback: Development Center & Academy (Gelişim Merkezi & Akademi)
 $development_items = myliba_development_center_items();
 $footer_development_links = [
     [
@@ -54,7 +69,7 @@ $footer_development_links = [
     ],
 ];
 
-// 3. Column: Company (Şirket & Kurumsal)
+// 3. Column Fallback: Company (Şirket & Kurumsal)
 $footer_company_links = [
     [
         'label' => myliba_text('Biz Kimiz'),
@@ -65,7 +80,7 @@ $footer_company_links = [
         'url' => myliba_page_url('contact'),
     ],
     [
-        'label' => (string) myliba_option('demo_cta_label', myliba_text('Request a demo')),
+        'label' => $footer_demo_label,
         'url' => $footer_demo_url,
     ],
     [
@@ -74,7 +89,7 @@ $footer_company_links = [
     ],
 ];
 
-// 4. Column: Security & Legal (Güvenlik ve Yasal)
+// 4. Column Fallback: Security & Legal (Güvenlik ve Yasal)
 $footer_legal_links = [
     [
         'label' => myliba_text('Güvenlik'),
@@ -98,34 +113,56 @@ $footer_legal_links = [
     ],
 ];
 
-$footer_social_links = [
-    ['label' => myliba_text('LinkedIn'), 'url' => (string) myliba_option('linkedin_url', ''), 'short' => 'in'],
-    ['label' => myliba_text('Instagram'), 'url' => (string) myliba_option('instagram_url', ''), 'short' => 'ig'],
-];
+// Social links from Customizer
+$footer_social_links = [];
+$linkedin_url = (string) myliba_option('linkedin_url', '');
+if ($linkedin_url !== '') {
+    $footer_social_links[] = ['label' => myliba_text('LinkedIn'), 'url' => $linkedin_url, 'short' => 'in'];
+}
+$instagram_url = (string) myliba_option('instagram_url', '');
+if ($instagram_url !== '') {
+    $footer_social_links[] = ['label' => myliba_text('Instagram'), 'url' => $instagram_url, 'short' => 'ig'];
+}
+$twitter_url = (string) myliba_option('twitter_url', '');
+if ($twitter_url !== '') {
+    $footer_social_links[] = ['label' => myliba_text('X / Twitter'), 'url' => $twitter_url, 'short' => 'x'];
+}
+$youtube_url = (string) myliba_option('youtube_url', '');
+if ($youtube_url !== '') {
+    $footer_social_links[] = ['label' => myliba_text('YouTube'), 'url' => $youtube_url, 'short' => 'yt'];
+}
 ?>
 </main>
 <footer class="site-footer">
-    <section class="site-footer__cta-wrap" aria-label="<?php echo esc_attr(myliba_text('Footer call to action')); ?>">
-        <div class="site-footer__cta">
-            <div>
-                <span><?php echo esc_html(myliba_text('Culture, goals and performance')); ?></span>
-                <h2><?php echo esc_html(myliba_option('footer_cta_title', myliba_text('Ready to make culture measurable?'))); ?></h2>
+    <?php if ($footer_cta_enabled && ($footer_cta_title !== '' || $footer_primary_cta_label !== '')) : ?>
+        <section class="site-footer__cta-wrap" aria-label="<?php echo esc_attr(myliba_text('Footer call to action')); ?>">
+            <div class="site-footer__cta">
+                <div>
+                    <span><?php echo esc_html($footer_cta_eyebrow); ?></span>
+                    <h2><?php echo esc_html($footer_cta_title); ?></h2>
+                </div>
+                <div class="site-footer__cta-actions">
+                    <?php if ($footer_cta_url !== '' && $footer_primary_cta_label !== '') : ?>
+                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($footer_cta_url); ?>">
+                            <?php echo esc_html($footer_primary_cta_label); ?>
+                        </a>
+                    <?php endif; ?>
+                    <?php if ($footer_demo_url !== '' && $footer_demo_label !== '') : ?>
+                        <a class="myliba-button myliba-button--secondary" href="<?php echo esc_url($footer_demo_url); ?>">
+                            <?php echo esc_html($footer_demo_label); ?>
+                        </a>
+                    <?php endif; ?>
+                </div>
             </div>
-            <div class="site-footer__cta-actions">
-                <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($footer_cta_url); ?>">
-                    <?php echo esc_html(myliba_option('primary_cta_label', myliba_text('Contact us'))); ?>
-                </a>
-                <a class="myliba-button myliba-button--secondary" href="<?php echo esc_url($footer_demo_url); ?>">
-                    <?php echo esc_html(myliba_option('demo_cta_label', myliba_text('Request a demo'))); ?>
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
+    <?php endif; ?>
 
     <div class="site-footer__main">
         <div class="site-footer__brand-panel">
             <?php myliba_brand_link('site-brand--footer'); ?>
-            <p><?php echo esc_html(myliba_option('footer_note')); ?></p>
+            <?php if ($footer_note !== '') : ?>
+                <p><?php echo esc_html($footer_note); ?></p>
+            <?php endif; ?>
 
             <div class="site-footer__contact-list">
                 <?php if ($footer_contact_email !== '') : ?>
@@ -136,23 +173,31 @@ $footer_social_links = [
                 <?php endif; ?>
             </div>
 
-            <div class="site-footer__socials" role="navigation" aria-label="<?php echo esc_attr(myliba_text('Social links')); ?>">
-                <?php foreach ($footer_social_links as $social_link) : ?>
-                    <?php if ($social_link['url'] !== '') : ?>
+            <?php if (!empty($footer_social_links)) : ?>
+                <div class="site-footer__socials" role="navigation" aria-label="<?php echo esc_attr(myliba_text('Social links')); ?>">
+                    <?php foreach ($footer_social_links as $social_link) : ?>
                         <a href="<?php echo esc_url($social_link['url']); ?>" aria-label="<?php echo esc_attr($social_link['label']); ?>" target="_blank" rel="noopener noreferrer">
                             <?php echo esc_html($social_link['short']); ?>
                         </a>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </div>
 
-        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Çözümlerimiz')); ?>">
-            <h3><?php echo esc_html(myliba_text('Çözümlerimiz')); ?></h3>
-            <?php if (has_nav_menu('footer_solutions')) : ?>
+        <?php
+        $solutions_loc = myliba_resolve_nav_menu_location('footer_solutions');
+        $development_loc = myliba_resolve_nav_menu_location('footer_development');
+        $company_loc = myliba_resolve_nav_menu_location('footer_company');
+        $legal_loc = myliba_resolve_nav_menu_location('footer_legal');
+        $bottom_loc = myliba_resolve_nav_menu_location('footer_bottom');
+        ?>
+
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr($col1_title); ?>">
+            <h3><?php echo esc_html($col1_title); ?></h3>
+            <?php if ($solutions_loc !== '') : ?>
                 <?php
                 wp_nav_menu([
-                    'theme_location' => 'footer_solutions',
+                    'theme_location' => $solutions_loc,
                     'container' => false,
                     'menu_class' => 'site-footer__link-list',
                     'depth' => 1,
@@ -168,12 +213,12 @@ $footer_social_links = [
             <?php endif; ?>
         </nav>
 
-        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Gelişim Merkezi')); ?>">
-            <h3><?php echo esc_html(myliba_text('Gelişim Merkezi')); ?></h3>
-            <?php if (has_nav_menu('footer_development')) : ?>
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr($col2_title); ?>">
+            <h3><?php echo esc_html($col2_title); ?></h3>
+            <?php if ($development_loc !== '') : ?>
                 <?php
                 wp_nav_menu([
-                    'theme_location' => 'footer_development',
+                    'theme_location' => $development_loc,
                     'container' => false,
                     'menu_class' => 'site-footer__link-list',
                     'depth' => 1,
@@ -189,12 +234,12 @@ $footer_social_links = [
             <?php endif; ?>
         </nav>
 
-        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Company')); ?>">
-            <h3><?php echo esc_html(myliba_text('Company')); ?></h3>
-            <?php if (has_nav_menu('footer_company')) : ?>
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr($col3_title); ?>">
+            <h3><?php echo esc_html($col3_title); ?></h3>
+            <?php if ($company_loc !== '') : ?>
                 <?php
                 wp_nav_menu([
-                    'theme_location' => 'footer_company',
+                    'theme_location' => $company_loc,
                     'container' => false,
                     'menu_class' => 'site-footer__link-list',
                     'depth' => 1,
@@ -210,12 +255,12 @@ $footer_social_links = [
             <?php endif; ?>
         </nav>
 
-        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Güvenlik ve Yasal')); ?>">
-            <h3><?php echo esc_html(myliba_text('Güvenlik ve Yasal')); ?></h3>
-            <?php if (has_nav_menu('footer_legal')) : ?>
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr($col4_title); ?>">
+            <h3><?php echo esc_html($col4_title); ?></h3>
+            <?php if ($legal_loc !== '') : ?>
                 <?php
                 wp_nav_menu([
-                    'theme_location' => 'footer_legal',
+                    'theme_location' => $legal_loc,
                     'container' => false,
                     'menu_class' => 'site-footer__link-list',
                     'depth' => 1,
@@ -233,24 +278,36 @@ $footer_social_links = [
     </div>
 
     <div class="site-footer__bottom">
-        <p><?php echo esc_html(sprintf(myliba_text('Copyright %1$s %2$s. All rights reserved.'), date_i18n('Y'), myliba_option('organization_name', 'Myliba'))); ?></p>
+        <p><?php echo esc_html(sprintf(myliba_text('Copyright %1$s %2$s. All rights reserved.'), date_i18n('Y'), $footer_organization_name)); ?></p>
         <div class="site-footer__bottom-links">
-            <?php foreach ($footer_languages as $language_link) : ?>
-                <a href="<?php echo esc_url($language_link['url']); ?>" data-myliba-locale="<?php echo esc_attr(strtolower((string) $language_link['label'])); ?>" <?php echo !empty($language_link['active']) ? 'aria-current="true"' : ''; ?>>
-                    <?php echo esc_html($language_link['label']); ?>
-                </a>
-            <?php endforeach; ?>
-            <a href="<?php echo esc_url(myliba_page_url('security')); ?>"><?php echo esc_html(myliba_text('Security')); ?></a>
-            <a href="<?php echo esc_url(myliba_page_url('privacy')); ?>"><?php echo esc_html(myliba_text('Privacy')); ?></a>
+            <?php if ($bottom_loc !== '') : ?>
+                <?php
+                wp_nav_menu([
+                    'theme_location' => $bottom_loc,
+                    'container' => false,
+                    'menu_class' => 'site-footer__bottom-menu',
+                    'depth' => 1,
+                    'fallback_cb' => false,
+                ]);
+                ?>
+            <?php else : ?>
+                <?php foreach ($footer_languages as $language_link) : ?>
+                    <a href="<?php echo esc_url($language_link['url']); ?>" data-myliba-locale="<?php echo esc_attr(strtolower((string) $language_link['label'])); ?>" <?php echo !empty($language_link['active']) ? 'aria-current="true"' : ''; ?>>
+                        <?php echo esc_html($language_link['label']); ?>
+                    </a>
+                <?php endforeach; ?>
+                <a href="<?php echo esc_url(myliba_page_url('security')); ?>"><?php echo esc_html(myliba_text('Security')); ?></a>
+                <a href="<?php echo esc_url(myliba_page_url('privacy')); ?>"><?php echo esc_html(myliba_text('Privacy')); ?></a>
+            <?php endif; ?>
         </div>
     </div>
 </footer>
 <div class="mobile-sticky-cta" aria-label="<?php echo esc_attr(myliba_text('Mobile conversion actions')); ?>">
-    <a class="mobile-sticky-cta__demo" href="<?php echo esc_url(myliba_demo_url()); ?>">
-        <?php echo esc_html(myliba_option('demo_cta_label', myliba_text('Request a demo'))); ?>
+    <a class="mobile-sticky-cta__demo" href="<?php echo esc_url($footer_demo_url); ?>">
+        <?php echo esc_html($footer_demo_label); ?>
     </a>
     <a class="mobile-sticky-cta__portal" href="<?php echo esc_url(myliba_portal_url()); ?>">
-        <?php echo esc_html(myliba_text('Portal login')); ?>
+        <?php echo esc_html(myliba_option('portal_cta_label', myliba_text('Portal login'))); ?>
     </a>
 </div>
 <?php wp_footer(); ?>
