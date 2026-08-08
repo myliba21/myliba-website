@@ -27,3 +27,10 @@ wordpress/wp-content/themes/twentytwenty*/
 *.sql.gz
 *.sqlite
 *.db
+*.wpress
+wordpress/wp-content/ai1wm-backups/*
+!wordpress/wp-content/ai1wm-backups/.htaccess
+!wordpress/wp-content/ai1wm-backups/index.html
+!wordpress/wp-content/ai1wm-backups/index.php
+!wordpress/wp-content/ai1wm-backups/robots.txt
+!wordpress/wp-content/ai1wm-backups/web.config

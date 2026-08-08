@@ -13632,7 +13632,6 @@ body:has(.software-page) .site-footer__cta-wrap {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  min-height: 230px;
   padding: 26px;
 }
 

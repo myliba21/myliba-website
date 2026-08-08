@@ -21,6 +21,10 @@ function myliba_theme_setup(): void
         'primary' => __('Primary Navigation', 'myliba'),
         'footer' => __('Footer Navigation', 'myliba'),
         'footer_blog' => __('Footer Blog Links', 'myliba'),
+        'footer_solutions' => __('Footer Solutions Navigation', 'myliba'),
+        'footer_development' => __('Footer Development Navigation', 'myliba'),
+        'footer_company' => __('Footer Company Navigation', 'myliba'),
+        'footer_legal' => __('Footer Legal Navigation', 'myliba'),
     ]);
 }
 add_action('after_setup_theme', 'myliba_theme_setup');
@@ -922,6 +926,19 @@ function myliba_translation_defaults(): array
         'Oncelikleri aksiyonlara, sahipliklere ve olculebilir sonuclara donusturun.' => 'Öncelikleri aksiyonlara, sahipliklere ve ölçülebilir sonuçlara dönüştürün.',
         'OKR, performans ve kultur konulari icin SEO hazir icerik.' => 'OKR, performans ve kültür konuları için SEO hazır içerik.',
         'Demo talep etmeden once sik sorulan sorular.' => 'Demo talep etmeden önce sık sorulan sorular.',
+        'Security & Legal' => 'Güvenlik ve Yasal',
+        'Legal' => 'Yasal',
+        'Privacy Policy' => 'Gizlilik Politikası',
+        'KVKK and GDPR' => 'KVKK ve GDPR',
+        'Cookie Policy' => 'Çerez Politikası',
+        'Terms of Use' => 'Kullanım Şartları',
+        'Our Solutions' => 'Çözümlerimiz',
+        'Development Center' => 'Gelişim Merkezi',
+        'About Us' => 'Biz Kimiz',
+        'Software' => 'Yazılım',
+        'Corporate Development Programs' => 'Kurumsal Gelişim Programları',
+        'Simulations and Team Coaching' => 'Simülasyonlar ve Takım Koçluğu',
+        'Consulting' => 'Danışmanlık',
     ];
 
 }

@@ -13,76 +13,90 @@ $footer_contact_email = (string) myliba_option('contact_email', get_option('admi
 $footer_phone_label = (string) myliba_option('phone_label', '');
 $footer_phone_url = (string) myliba_option('phone_url', '');
 $footer_languages = myliba_language_links();
+$footer_lang = myliba_current_language();
 
-$footer_page_links = myliba_header_menu();
-$footer_contact_link = array_pop($footer_page_links);
-$footer_page_links[] = ['label' => myliba_text('FAQ'), 'url' => myliba_page_url('faq')];
-$footer_page_links[] = ['label' => myliba_text('Security'), 'url' => myliba_page_url('security')];
-$footer_page_links[] = ['label' => myliba_text('Privacy'), 'url' => myliba_page_url('privacy')];
-if (is_array($footer_contact_link)) {
-    $footer_page_links[] = $footer_contact_link;
+// 1. Column: Solutions (Çözümlerimiz & Yazılım)
+$footer_solution_links = [
+    [
+        'label' => myliba_text('Yazılım'),
+        'url' => myliba_page_url('products'),
+    ],
+];
+foreach (myliba_solution_catalog() as $solution_slug => $solution) {
+    $footer_solution_links[] = [
+        'label' => myliba_text($solution['title']),
+        'url' => myliba_solution_url($solution_slug),
+    ];
 }
 
-$footer_company_fallback = [
-    ['label' => myliba_text('Blog'), 'url' => myliba_page_url('blog')],
-    ['label' => myliba_text('Our Story'), 'url' => myliba_page_url('story')],
-    ['label' => myliba_text('FAQ'), 'url' => myliba_page_url('faq')],
-    ['label' => myliba_text('Security'), 'url' => myliba_page_url('security')],
-    ['label' => myliba_text('Privacy'), 'url' => myliba_page_url('privacy')],
+// 2. Column: Development Center & Academy (Gelişim Merkezi & Akademi)
+$development_items = myliba_development_center_items();
+$footer_development_links = [
+    [
+        'label' => myliba_text('Akademi'),
+        'url' => myliba_page_url('academy'),
+    ],
+    [
+        'label' => myliba_text($development_items['ebooks']['label']),
+        'url' => $development_items['ebooks']['url'],
+    ],
+    [
+        'label' => myliba_text($development_items['reports']['label']),
+        'url' => $development_items['reports']['url'],
+    ],
+    [
+        'label' => myliba_text($development_items['blog']['label']),
+        'url' => $development_items['blog']['url'],
+    ],
+    [
+        'label' => myliba_text($development_items['events']['label']),
+        'url' => $development_items['events']['url'],
+    ],
 ];
 
-$footer_product_links = [];
-$footer_products_query = myliba_get_entries('myliba_product', 8);
-if ($footer_products_query->have_posts()) {
-    while ($footer_products_query->have_posts()) {
-        $footer_products_query->the_post();
-        $footer_product_links[] = [
-            'label' => get_the_title(),
-            'url' => get_permalink(),
-        ];
-    }
-    wp_reset_postdata();
-}
+// 3. Column: Company (Şirket & Kurumsal)
+$footer_company_links = [
+    [
+        'label' => myliba_text('Biz Kimiz'),
+        'url' => myliba_page_url('story'),
+    ],
+    [
+        'label' => myliba_text('İletişim'),
+        'url' => myliba_page_url('contact'),
+    ],
+    [
+        'label' => (string) myliba_option('demo_cta_label', myliba_text('Request a demo')),
+        'url' => $footer_demo_url,
+    ],
+    [
+        'label' => myliba_text('SSS'),
+        'url' => myliba_page_url('faq'),
+    ],
+];
 
-if (!$footer_product_links) {
-    $footer_product_links = [
-        ['label' => myliba_text('Goals'), 'url' => myliba_page_url('products')],
-        ['label' => myliba_text('Conversations'), 'url' => myliba_page_url('products')],
-        ['label' => myliba_text('1:1s'), 'url' => myliba_page_url('products')],
-        ['label' => myliba_text('Feedback and Feedforward'), 'url' => myliba_page_url('products')],
-        ['label' => myliba_text('Manager Effectiveness'), 'url' => myliba_page_url('products')],
-        ['label' => myliba_text('Calibration'), 'url' => myliba_page_url('products')],
-    ];
-}
-
-$footer_blog_fallback = [];
-$footer_posts_query = new WP_Query([
-    'post_type' => 'post',
-    'posts_per_page' => 5,
-    'post_status' => 'publish',
-    'ignore_sticky_posts' => true,
-    'meta_key' => '_myliba_language',
-    'meta_value' => myliba_current_language(),
-]);
-if ($footer_posts_query->have_posts()) {
-    while ($footer_posts_query->have_posts()) {
-        $footer_posts_query->the_post();
-        $footer_blog_fallback[] = [
-            'label' => get_the_title(),
-            'url' => get_permalink(),
-        ];
-    }
-    wp_reset_postdata();
-}
-
-if (!$footer_blog_fallback) {
-    $footer_blog_fallback = [
-        ['label' => myliba_text('Blog'), 'url' => myliba_page_url('blog')],
-        ['label' => myliba_text('Events'), 'url' => myliba_page_url('events')],
-        ['label' => myliba_text('OKR Culture Academy'), 'url' => myliba_page_url('academy')],
-        ['label' => myliba_text('FAQ'), 'url' => myliba_page_url('faq')],
-    ];
-}
+// 4. Column: Security & Legal (Güvenlik ve Yasal)
+$footer_legal_links = [
+    [
+        'label' => myliba_text('Güvenlik'),
+        'url' => myliba_page_url('security'),
+    ],
+    [
+        'label' => myliba_text('KVKK Aydınlatma Metni'),
+        'url' => myliba_page_url('privacy'),
+    ],
+    [
+        'label' => myliba_text('KVKK ve GDPR'),
+        'url' => home_url($footer_lang === 'en' ? '/en/kvkk/' : '/tr/kvkk/'),
+    ],
+    [
+        'label' => myliba_text('Çerez Politikası'),
+        'url' => home_url($footer_lang === 'en' ? '/en/cookie-policy/' : '/tr/cerez-politikasi/'),
+    ],
+    [
+        'label' => myliba_text('Kullanım Şartları'),
+        'url' => home_url($footer_lang === 'en' ? '/en/terms-of-use/' : '/tr/kullanim-sartlari/'),
+    ],
+];
 
 $footer_social_links = [
     ['label' => myliba_text('LinkedIn'), 'url' => (string) myliba_option('linkedin_url', ''), 'short' => 'in'],
@@ -133,30 +147,12 @@ $footer_social_links = [
             </div>
         </div>
 
-        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Footer product links')); ?>">
-            <h3><?php echo esc_html(myliba_text('Products')); ?></h3>
-            <ul class="site-footer__link-list">
-                <?php foreach ($footer_product_links as $footer_link) : ?>
-                    <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
-
-        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Footer page links')); ?>">
-            <h3><?php echo esc_html(myliba_text('Pages')); ?></h3>
-            <ul class="site-footer__link-list">
-                <?php foreach ($footer_page_links as $footer_link) : ?>
-                    <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
-
-        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Footer blog links')); ?>">
-            <h3><?php echo esc_html(myliba_text('Blog & resources')); ?></h3>
-            <?php if (has_nav_menu('footer_blog') && myliba_current_language() === 'en') : ?>
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Çözümlerimiz')); ?>">
+            <h3><?php echo esc_html(myliba_text('Çözümlerimiz')); ?></h3>
+            <?php if (has_nav_menu('footer_solutions')) : ?>
                 <?php
                 wp_nav_menu([
-                    'theme_location' => 'footer_blog',
+                    'theme_location' => 'footer_solutions',
                     'container' => false,
                     'menu_class' => 'site-footer__link-list',
                     'depth' => 1,
@@ -165,19 +161,19 @@ $footer_social_links = [
                 ?>
             <?php else : ?>
                 <ul class="site-footer__link-list">
-                    <?php foreach ($footer_blog_fallback as $footer_link) : ?>
+                    <?php foreach ($footer_solution_links as $footer_link) : ?>
                         <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
         </nav>
 
-        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Footer company links')); ?>">
-            <h3><?php echo esc_html(myliba_text('Company')); ?></h3>
-            <?php if (has_nav_menu('footer') && myliba_current_language() === 'en') : ?>
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Gelişim Merkezi')); ?>">
+            <h3><?php echo esc_html(myliba_text('Gelişim Merkezi')); ?></h3>
+            <?php if (has_nav_menu('footer_development')) : ?>
                 <?php
                 wp_nav_menu([
-                    'theme_location' => 'footer',
+                    'theme_location' => 'footer_development',
                     'container' => false,
                     'menu_class' => 'site-footer__link-list',
                     'depth' => 1,
@@ -186,7 +182,49 @@ $footer_social_links = [
                 ?>
             <?php else : ?>
                 <ul class="site-footer__link-list">
-                    <?php foreach ($footer_company_fallback as $footer_link) : ?>
+                    <?php foreach ($footer_development_links as $footer_link) : ?>
+                        <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </nav>
+
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Company')); ?>">
+            <h3><?php echo esc_html(myliba_text('Company')); ?></h3>
+            <?php if (has_nav_menu('footer_company')) : ?>
+                <?php
+                wp_nav_menu([
+                    'theme_location' => 'footer_company',
+                    'container' => false,
+                    'menu_class' => 'site-footer__link-list',
+                    'depth' => 1,
+                    'fallback_cb' => false,
+                ]);
+                ?>
+            <?php else : ?>
+                <ul class="site-footer__link-list">
+                    <?php foreach ($footer_company_links as $footer_link) : ?>
+                        <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </nav>
+
+        <nav class="site-footer__column" aria-label="<?php echo esc_attr(myliba_text('Güvenlik ve Yasal')); ?>">
+            <h3><?php echo esc_html(myliba_text('Güvenlik ve Yasal')); ?></h3>
+            <?php if (has_nav_menu('footer_legal')) : ?>
+                <?php
+                wp_nav_menu([
+                    'theme_location' => 'footer_legal',
+                    'container' => false,
+                    'menu_class' => 'site-footer__link-list',
+                    'depth' => 1,
+                    'fallback_cb' => false,
+                ]);
+                ?>
+            <?php else : ?>
+                <ul class="site-footer__link-list">
+                    <?php foreach ($footer_legal_links as $footer_link) : ?>
                         <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
                     <?php endforeach; ?>
                 </ul>
@@ -218,3 +256,4 @@ $footer_social_links = [
 <?php wp_footer(); ?>
 </body>
 </html>
+
