@@ -14,8 +14,7 @@ function boot(): void
     add_action('init', __NAMESPACE__ . '\\register_meta');
     add_action('add_meta_boxes_page', __NAMESPACE__ . '\\register_page_box');
     add_action('add_meta_boxes_myliba_solution', __NAMESPACE__ . '\\register_page_box');
-    add_action('save_post_page', __NAMESPACE__ . '\\save', 10, 3);
-    add_action('save_post_myliba_solution', __NAMESPACE__ . '\\save', 10, 3);
+    add_action('save_post', __NAMESPACE__ . '\\save', 10, 3);
 }
 
 function register_meta(): void
@@ -47,11 +46,15 @@ function schema_for_post(\WP_Post|int $post): ?string
         return null;
     }
 
+    $slug = (string) $post->post_name;
+    $uri = (string) get_page_uri($post);
+
     return match (true) {
-        in_array($post->post_name, ['yazilim', 'urunler'], true) => 'software',
-        in_array($post->post_name, ['cozumler', 'solutions'], true) => 'solutions',
-        in_array($post->post_name, ['gelisim-merkezi', 'development-center'], true) => 'development',
-        in_array($post->post_name, ['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz'], true) => 'story',
+        in_array($slug, ['yazilim', 'urunler'], true) || str_contains($uri, 'yazilim') => 'software',
+        in_array($slug, ['cozumler', 'solutions'], true) || str_contains($uri, 'cozumler') => 'solutions',
+        in_array($slug, ['gelisim-merkezi', 'development-center'], true) || str_contains($uri, 'gelisim-merkezi') => 'development',
+        in_array($slug, ['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz'], true) || str_contains($uri, 'hikayemiz') => 'story',
+        in_array($slug, ['etik-hat', 'etik-danismanlik', 'ethics-counsel', 'etik', 'ethics', 'whistleblowing'], true) || str_contains($slug, 'etik') || str_contains($slug, 'ethics') || str_contains($uri, 'etik') || str_contains($uri, 'ethics') => 'ethics',
         default => null,
     };
 }
@@ -839,6 +842,120 @@ function story_defaults(): array
     ];
 }
 
+function ethics_definition(): array
+{
+    return [
+        'label' => 'Etik Hat Sayfası İçeriği',
+        'groups' => [
+            'hero' => [
+                'label' => 'Hero (Giriş Başlığı)',
+                'fields' => [
+                    'hero_title' => ['textarea', 'Hero Başlığı'],
+                    'hero_lead' => ['textarea', 'Hero Açıklaması'],
+                    'hero_primary_label' => ['text', 'Ana Buton Etiketi'],
+                    'hero_secondary_label' => ['text', 'İkincil Buton Etiketi'],
+                ],
+            ],
+            'intro' => [
+                'label' => 'Etik Hat ve Etik İhlal Bildirimi (Tanıtım)',
+                'fields' => [
+                    'intro_eyebrow' => ['text', 'Üst Etiket (Opsiyonel)'],
+                    'intro_title' => ['text', 'Bölüm Başlığı'],
+                    'intro_lead' => ['textarea', 'Açıklama Metni'],
+                    'intro_highlight' => ['text', 'Vurgulu Metin'],
+                ],
+            ],
+            'why' => [
+                'label' => 'Neden Myliba’nın Etik Hat Hizmeti?',
+                'fields' => [
+                    'why_eyebrow' => ['text', 'Üst Etiket (Opsiyonel)'],
+                    'why_title' => ['textarea', 'Bölüm Başlığı'],
+                ],
+                'collections' => [
+                    'why_items' => ['label' => 'Özellik Maddeleri', 'fields' => [
+                        'title' => ['text', 'Madde Başlığı (Örn: Gizlilik ve Anonimlik)'],
+                        'desc' => ['textarea', 'Açıklama (Örn: Çalışanlar bildirimlerini güvenle yapabilir.)'],
+                    ]],
+                ],
+            ],
+            'scope' => [
+                'label' => 'Hizmet Kapsamı ve Özellikleri',
+                'fields' => [
+                    'scope_eyebrow' => ['text', 'Üst Etiket (Opsiyonel)'],
+                    'scope_title' => ['text', 'Bölüm Başlığı (Hizmet Kapsamı)'],
+                    'scope_subtitle' => ['text', 'Alt Başlık (Etik Hattı Özellikleri)'],
+                ],
+                'collections' => [
+                    'scope_items' => ['label' => 'Kapsam Maddeleri', 'fields' => [
+                        'text' => ['text', 'Özellik Metni (Örn: 7/24 erişilebilir bildirim hattı)'],
+                    ]],
+                ],
+            ],
+            'cta' => [
+                'label' => 'İletişim ve Aksiyon Çağrısı (CTA)',
+                'fields' => [
+                    'cta_title' => ['textarea', 'CTA Başlığı'],
+                    'cta_text' => ['textarea', 'CTA Açıklaması'],
+                    'cta_button_label' => ['text', 'Buton Etiketi'],
+                ],
+            ],
+        ],
+    ];
+}
+
+function ethics_defaults(): array
+{
+    return [
+        'fields' => [
+            'hero_title' => 'Etik Hat',
+            'hero_lead' => 'Etik Hat ve Etik İhlal Bildirimi, şirketinizin sürdürülebilir başarısı ve çalışan bağlılığı için hayati bir unsurdur. Myliba, bağımsız ve tarafsız araştırmacılarla bu süreci sizin için yönetir.',
+            'hero_primary_label' => 'İletişime Geçin',
+            'hero_secondary_label' => 'Hizmet Kapsamını İnceleyin',
+
+            'intro_eyebrow' => 'Güvenli ve Tarafsız',
+            'intro_title' => 'Etik Hat ve Etik İhlal Bildirimi',
+            'intro_lead' => 'Etik Hat ve Etik İhlal Bildirimi, şirketinizin sürdürülebilir başarısı ve çalışan bağlılığı için hayati bir unsurdur.',
+            'intro_highlight' => 'Myliba, bağımsız ve tarafsız araştırmacılarla bu süreci sizin için yönetir.',
+
+            'why_eyebrow' => 'Avantajlar',
+            'why_title' => 'Neden Myliba’nın Etik Hat Hizmeti?',
+
+            'scope_eyebrow' => 'Süreç ve İletişim',
+            'scope_title' => 'Hizmet Kapsamı',
+            'scope_subtitle' => 'Etik Hattı Özellikleri',
+
+            'cta_title' => 'İhtiyacınıza uygun çözümü birlikte değerlendirelim.',
+            'cta_text' => 'Şirketinizin etik bildirim ve uyum süreçlerini güvenle yapılandırmak için bizimle iletişime geçin.',
+            'cta_button_label' => 'İletişime Geçin',
+        ],
+        'collections' => [
+            'why_items' => [
+                [
+                    'title' => 'Gizlilik ve Anonimlik',
+                    'desc' => 'Çalışanlar bildirimlerini güvenle yapabilir.',
+                ],
+                [
+                    'title' => 'Bağımsızlık',
+                    'desc' => 'ICF ACC ve PCC seviyesindeki uzmanlarla tarafsız inceleme.',
+                ],
+                [
+                    'title' => 'Yasal Uyum',
+                    'desc' => 'Etik ihlaller zamanında tespit edilerek riskler azaltılır.',
+                ],
+                [
+                    'title' => 'Çalışan Güveni',
+                    'desc' => 'Güçlü etik kültürle çalışan bağlılığı artar.',
+                ],
+            ],
+            'scope_items' => [
+                ['text' => '7/24 erişilebilir bildirim hattı (Telefon, WhatsApp, E-posta)'],
+                ['text' => 'Türkçe ve İngilizce dil desteği'],
+                ['text' => 'Düzenli aylık raporlar'],
+            ],
+        ],
+    ];
+}
+
 function definition(string $schema): array
 {
     return match ($schema) {
@@ -847,6 +964,7 @@ function definition(string $schema): array
         'development' => development_definition(),
         'solution' => solution_definition(),
         'story' => story_definition(),
+        'ethics' => ethics_definition(),
         default => [],
     };
 }
@@ -859,6 +977,7 @@ function defaults(string $schema, int $post_id = 0): array
         'development' => development_defaults(),
         'solution' => solution_defaults($post_id),
         'story' => story_defaults(),
+        'ethics' => ethics_defaults(),
         default => ['fields' => [], 'collections' => []],
     };
 }
@@ -867,17 +986,32 @@ function document(int $post_id, string $schema): array
 {
     $definition = definition($schema);
     $defaults = defaults($schema, $post_id);
-    $raw = get_post_meta($post_id, META_KEY, true);
+    
+    $target_id = $post_id;
+    if (is_preview() || !empty($_GET['preview'])) {
+        $autosave = wp_get_post_autosave($post_id);
+        if ($autosave instanceof \WP_Post) {
+            $raw_preview = get_post_meta($autosave->ID, META_KEY, true);
+            if (is_string($raw_preview) && $raw_preview !== '') {
+                $target_id = $autosave->ID;
+            }
+        }
+    }
+
+    $raw = get_post_meta($target_id, META_KEY, true);
+    if ((!is_string($raw) || $raw === '') && $target_id !== $post_id) {
+        $raw = get_post_meta($post_id, META_KEY, true);
+    }
     $saved = is_string($raw) && $raw !== '' ? json_decode($raw, true) : [];
 
     if (!is_array($saved) || ($saved['schema'] ?? $schema) !== $schema) {
         $saved = [];
     }
 
-    $default_sections = [];
+    $sections = [];
     $order_step = 10;
     foreach ($definition['groups'] ?? [] as $g_key => $g_def) {
-        $default_sections[$g_key] = [
+        $sections[$g_key] = [
             'key' => $g_key,
             'label' => $g_def['label'] ?? $g_key,
             'enabled' => true,
@@ -886,22 +1020,18 @@ function document(int $post_id, string $schema): array
         $order_step += 10;
     }
 
-    $saved_sections = [];
     if (isset($saved['sections']) && is_array($saved['sections'])) {
         foreach ($saved['sections'] as $sec) {
-            if (is_array($sec) && !empty($sec['key']) && isset($default_sections[$sec['key']])) {
+            if (is_array($sec) && !empty($sec['key']) && isset($sections[$sec['key']])) {
                 $k = $sec['key'];
-                $saved_sections[$k] = [
-                    'key' => $k,
-                    'label' => $default_sections[$k]['label'],
-                    'enabled' => !empty($sec['enabled']),
-                    'order' => isset($sec['order']) ? (int) $sec['order'] : ($default_sections[$k]['order'] ?? 999),
-                ];
+                $sections[$k]['enabled'] = !empty($sec['enabled']);
+                if (isset($sec['order']) && is_numeric($sec['order'])) {
+                    $sections[$k]['order'] = (int) $sec['order'];
+                }
             }
         }
     }
 
-    $sections = array_replace($default_sections, $saved_sections);
     uasort($sections, static fn ($a, $b) => ((int) ($a['order'] ?? 0)) <=> ((int) ($b['order'] ?? 0)));
 
     return [
@@ -1227,13 +1357,30 @@ function render_admin_assets(): void
     <?php
 }
 
-function save(int $post_id, \WP_Post $post, bool $update): void
+function save(int $post_id, ?\WP_Post $post = null, ?bool $update = null): void
 {
     unset($update);
-    if (!isset($_POST['myliba_page_content_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['myliba_page_content_nonce'])), 'myliba_page_content_' . $post_id)) {
+    
+    $real_post_id = $post_id;
+    if ($parent_id = wp_is_post_revision($post_id)) {
+        $real_post_id = (int) $parent_id;
+    }
+    if ($parent_id = wp_is_post_autosave($post_id)) {
+        $real_post_id = (int) $parent_id;
+    }
+
+    $nonce = isset($_POST['myliba_page_content_nonce']) ? sanitize_text_field(wp_unslash($_POST['myliba_page_content_nonce'])) : '';
+    $valid_nonce = wp_verify_nonce($nonce, 'myliba_page_content_' . $post_id) || wp_verify_nonce($nonce, 'myliba_page_content_' . $real_post_id);
+    if (!$valid_nonce) {
         return;
     }
-    if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || !current_user_can('edit_post', $post_id)) {
+
+    if (!current_user_can('edit_post', $real_post_id)) {
+        return;
+    }
+
+    $post = $post instanceof \WP_Post ? $post : get_post($real_post_id);
+    if (!$post instanceof \WP_Post) {
         return;
     }
 
@@ -1297,6 +1444,10 @@ function save(int $post_id, \WP_Post $post, bool $update): void
         'collections' => $collections,
         'sections' => $sections,
     ];
-    update_post_meta($post_id, META_KEY, wp_slash(wp_json_encode($document, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)));
+    $json = wp_slash(wp_json_encode($document, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    update_post_meta($real_post_id, META_KEY, $json);
+    if ($post_id !== $real_post_id) {
+        update_post_meta($post_id, META_KEY, $json);
+    }
 }
 
