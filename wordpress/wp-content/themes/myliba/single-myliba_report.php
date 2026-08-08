@@ -86,6 +86,31 @@ while (have_posts()) :
         $cta_button_url = (string) (get_post_meta($post_id, '_myliba_cta_url', true) ?: myliba_page_url('contact'));
     }
 
+    $journey_eyebrow = $content_copy('journey_eyebrow');
+    if ($journey_eyebrow === '') {
+        $journey_eyebrow = (string) (get_post_meta($post_id, '_myliba_journey_eyebrow', true) ?: myliba_text('Myliba Trend Radarı'));
+    }
+
+    $journey_title = $content_copy('journey_title');
+    if ($journey_title === '') {
+        $journey_title = (string) (get_post_meta($post_id, '_myliba_journey_title', true) ?: myliba_text("Veriye dayalı.\nStratejik.\nUygulanabilir."));
+    }
+
+    $principle_1 = $content_copy('principle_1');
+    if ($principle_1 === '') {
+        $principle_1 = (string) (get_post_meta($post_id, '_myliba_principle_1', true) ?: myliba_text('Güncel Saha Verisi'));
+    }
+
+    $principle_2 = $content_copy('principle_2');
+    if ($principle_2 === '') {
+        $principle_2 = (string) (get_post_meta($post_id, '_myliba_principle_2', true) ?: myliba_text('Stratejik İçgörüler'));
+    }
+
+    $principle_3 = $content_copy('principle_3');
+    if ($principle_3 === '') {
+        $principle_3 = (string) (get_post_meta($post_id, '_myliba_principle_3', true) ?: myliba_text('Uygulanabilir Çıkarımlar'));
+    }
+
     $reports_archive_url = home_url(myliba_current_language() === 'en' ? '/en/development-center/reports/' : '/tr/gelisim-merkezi/raporlar-ve-trendler/');
     $editor_content = trim(wp_strip_all_tags((string) get_the_content()));
     ?>
@@ -108,10 +133,10 @@ while (have_posts()) :
 
                     <div class="solution-journey" aria-hidden="true">
                         <div class="solution-journey__topline">
-                            <span><?php echo esc_html(myliba_text('Myliba Trend Radarı')); ?></span>
+                            <span><?php echo esc_html($journey_eyebrow); ?></span>
                             <i></i>
                         </div>
-                        <strong><?php echo wp_kses_post(nl2br(esc_html(myliba_text("Veriye dayalı.\nStratejik.\nUygulanabilir.")))); ?></strong>
+                        <strong><?php echo wp_kses_post(nl2br(esc_html($journey_title))); ?></strong>
                         <?php if (has_post_thumbnail()) : ?>
                             <div class="report-featured-preview" style="margin-top:16px;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
                                 <?php the_post_thumbnail('medium_large'); ?>
@@ -121,9 +146,9 @@ while (have_posts()) :
                 </div>
 
                 <div class="solution-detail__principles" aria-label="<?php echo esc_attr(myliba_text('Rapor özellikleri')); ?>">
-                    <span><b>01</b> <?php echo esc_html(myliba_text('Güncel Saha Verisi')); ?></span>
-                    <span><b>02</b> <?php echo esc_html(myliba_text('Stratejik İçgörüler')); ?></span>
-                    <span><b>03</b> <?php echo esc_html(myliba_text('Uygulanabilir Çıkarımlar')); ?></span>
+                    <span><b>01</b> <?php echo esc_html($principle_1); ?></span>
+                    <span><b>02</b> <?php echo esc_html($principle_2); ?></span>
+                    <span><b>03</b> <?php echo esc_html($principle_3); ?></span>
                 </div>
             </div>
         </section>

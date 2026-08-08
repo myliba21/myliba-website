@@ -52,6 +52,31 @@ while (have_posts()) :
     $cta_text = $content_copy('cta_text') ?: myliba_text('Uygulama ve dönüşüm yolculuğunuzu uzmanlarımızla birlikte planlayın.');
     $cta_button_label = $content_copy('cta_button_label') ?: myliba_text('Uzmanlarımızla Görüşün');
 
+    $journey_eyebrow = $content_copy('journey_eyebrow');
+    if ($journey_eyebrow === '') {
+        $journey_eyebrow = (string) (get_post_meta($post_id, '_myliba_journey_eyebrow', true) ?: myliba_text('Myliba e-Kitap'));
+    }
+
+    $journey_title = $content_copy('journey_title');
+    if ($journey_title === '') {
+        $journey_title = (string) (get_post_meta($post_id, '_myliba_journey_title', true) ?: myliba_text("Keşfet.\nİndir.\nUygula."));
+    }
+
+    $principle_1 = $content_copy('principle_1');
+    if ($principle_1 === '') {
+        $principle_1 = (string) (get_post_meta($post_id, '_myliba_principle_1', true) ?: myliba_text('Pratik Rehberler'));
+    }
+
+    $principle_2 = $content_copy('principle_2');
+    if ($principle_2 === '') {
+        $principle_2 = (string) (get_post_meta($post_id, '_myliba_principle_2', true) ?: myliba_text('Kullanıma Hazır Araçlar'));
+    }
+
+    $principle_3 = $content_copy('principle_3');
+    if ($principle_3 === '') {
+        $principle_3 = (string) (get_post_meta($post_id, '_myliba_principle_3', true) ?: myliba_text('Ekip Uygulamaları'));
+    }
+
     $ebooks_archive_url = home_url(myliba_current_language() === 'en' ? '/en/development-center/ebooks/' : '/tr/gelisim-merkezi/e-kitaplar/');
     $editor_content = trim(wp_strip_all_tags((string) get_the_content()));
     ?>
@@ -72,10 +97,10 @@ while (have_posts()) :
 
                     <div class="solution-journey" aria-hidden="true">
                         <div class="solution-journey__topline">
-                            <span><?php echo esc_html(myliba_text('Myliba e-Kitap')); ?></span>
+                            <span><?php echo esc_html($journey_eyebrow); ?></span>
                             <i></i>
                         </div>
-                        <strong><?php echo wp_kses_post(nl2br(esc_html(myliba_text("Keşfet.\nİndir.\nUygula.")))); ?></strong>
+                        <strong><?php echo wp_kses_post(nl2br(esc_html($journey_title))); ?></strong>
                         <?php if (has_post_thumbnail()) : ?>
                             <div class="ebook-featured-preview" style="margin-top:16px;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
                                 <?php the_post_thumbnail('medium_large'); ?>
@@ -85,9 +110,9 @@ while (have_posts()) :
                 </div>
 
                 <div class="solution-detail__principles" aria-label="<?php echo esc_attr(myliba_text('e-Kitap özellikleri')); ?>">
-                    <span><b>01</b> <?php echo esc_html(myliba_text('Pratik Rehberler')); ?></span>
-                    <span><b>02</b> <?php echo esc_html(myliba_text('Kullanıma Hazır Araçlar')); ?></span>
-                    <span><b>03</b> <?php echo esc_html(myliba_text('Ekip Uygulamaları')); ?></span>
+                    <span><b>01</b> <?php echo esc_html($principle_1); ?></span>
+                    <span><b>02</b> <?php echo esc_html($principle_2); ?></span>
+                    <span><b>03</b> <?php echo esc_html($principle_3); ?></span>
                 </div>
             </div>
         </section>
