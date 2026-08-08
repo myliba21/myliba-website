@@ -503,18 +503,55 @@ function solution_definition(): array
 {
     return ['label' => 'Çözüm Detay İçeriği', 'groups' => [
         'hero' => ['label' => 'Hero ve Tanıtım', 'fields' => [
-            'kicker' => ['text', 'Üst etiket'],
+            'kicker' => ['text', 'Üst etiket (Pill)'],
             'hero_title' => ['textarea', 'Hero başlığı'],
             'hero_summary' => ['textarea', 'Hero açıklaması'],
-            'intro' => ['textarea', 'Yaklaşım açıklaması'],
+            'hero_primary_label' => ['text', 'Ana buton etiketi (Örn: Programı birlikte tasarlayalım)'],
+            'hero_secondary_label' => ['text', 'İkincil buton etiketi (Örn: Çalışma modelini inceleyin)'],
+            'journey_eyebrow' => ['text', 'Yolculuk kutusu üst etiketi (Örn: Myliba gelişim yolculuğu)'],
+            'journey_title' => ['textarea', 'Yolculuk kutusu sloganı (Örn: Kuruma özel.\nİşin içinde.\nÖlçülebilir.)'],
+            'principle_1' => ['text', 'Prensip 1 (Örn: Kuruma özel tasarım)'],
+            'principle_2' => ['text', 'Prensip 2 (Örn: İşbaşı uygulama)'],
+            'principle_3' => ['text', 'Prensip 3 (Örn: Ölçülebilir takip)'],
         ]],
-        'benefits' => ['label' => 'Kazanımlar ve Hedef Kitle', 'collections' => [
-            'benefits' => ['label' => 'Beklenen kazanımlar', 'fields' => ['text' => ['textarea', 'Kazanım']]],
-            'audiences' => ['label' => 'Kimler için?', 'fields' => ['text' => ['text', 'Hedef kitle']]],
+        'intro' => ['label' => 'Myliba Yaklaşımı', 'fields' => [
+            'intro_eyebrow' => ['text', 'Üst etiket (Örn: Myliba yaklaşımı)'],
+            'intro_title' => ['textarea', 'Bölüm başlığı (Örn: Kültürü, hedefleri ve iş sonuçlarını birlikte geliştirin.)'],
+            'intro' => ['textarea', 'Yaklaşım açıklaması'],
+            'intro_link_label' => ['text', 'Bağlantı metni (Örn: İhtiyacınızı birlikte değerlendirelim)'],
+        ]],
+        'audiences' => ['label' => 'Kimler İçin?', 'fields' => [
+            'audiences_eyebrow' => ['text', 'Üst etiket (Örn: Kimler için?)'],
+            'audiences_title' => ['textarea', 'Bölüm başlığı (Örn: Değişimi birlikte yöneten ekipler için.)'],
+        ], 'collections' => [
+            'audiences' => ['label' => 'Hedef kitle kartları', 'fields' => ['text' => ['text', 'Hedef kitle']]],
+        ]],
+        'benefits' => ['label' => 'Beklenen Kazanımlar (Ne Değişir?)', 'fields' => [
+            'outcomes_eyebrow' => ['text', 'Üst etiket (Örn: Beklenen kazanımlar)'],
+            'outcomes_title' => ['textarea', 'Bölüm başlığı (Örn: Programla birlikte ne değişir?)'],
+            'outcomes_lead' => ['textarea', 'Açıklama (Örn: Gelişimi tek seferlik bir müdahaleden çıkarıp, kurumun çalışma biçimine yerleştirin.)'],
+        ], 'collections' => [
+            'benefits' => ['label' => 'Kazanım maddeleri', 'fields' => ['text' => ['textarea', 'Kazanım']]],
+        ]],
+        'metrics_section' => ['label' => 'Ölçüm Alanları', 'fields' => [
+            'metrics_eyebrow' => ['text', 'Üst etiket (Örn: Ölçüm alanları)'],
+            'metrics_title' => ['textarea', 'Bölüm başlığı (Örn: Kültürü dört kritik göstergeyle görünür kılın.)'],
+        ], 'collections' => [
             'metrics' => ['label' => 'Ölçüm alanları', 'fields' => ['title' => ['text', 'Başlık'], 'text' => ['textarea', 'Açıklama']]],
         ]],
-        'process' => ['label' => 'Çalışma Modeli', 'collections' => [
+        'process' => ['label' => 'Çalışma Modeli & Süreç', 'fields' => [
+            'process_eyebrow' => ['text', 'Üst etiket (Örn: Çalışma modeli)'],
+            'process_title' => ['textarea', 'Bölüm başlığı (Örn: Süreç adımları)'],
+            'process_lead' => ['textarea', 'Açıklama (Örn: Her aşama bir sonraki adımı besler; tasarım, uygulama ve takip aynı gelişim ritminin parçasıdır.)'],
+        ], 'collections' => [
             'steps' => ['label' => 'Süreç adımları', 'fields' => ['title' => ['text', 'Başlık'], 'text' => ['textarea', 'Açıklama']]],
+        ]],
+        'cta' => ['label' => 'Final Aksiyon Çağrısı (CTA)', 'fields' => [
+            'cta_eyebrow' => ['text', 'Üst etiket (Örn: 30 dakikalık keşif görüşmesi)'],
+            'cta_title' => ['textarea', 'Başlık (Örn: İhtiyacınıza uygun yolculuğu birlikte tasarlayalım.)'],
+            'cta_text' => ['textarea', 'Açıklama (Örn: Kurumunuzun hedeflerini dinleyelim; doğru programı, kapsamı ve çalışma modelini birlikte netleştirelim.)'],
+            'cta_button_label' => ['text', 'Ana buton etiketi (Örn: Görüşme planlayın)'],
+            'cta_secondary_label' => ['text', 'İkincil buton etiketi (Örn: Tüm çözümleri görün)'],
         ]],
     ]];
 }
@@ -577,7 +614,32 @@ function solution_defaults(int $post_id): array
         'kicker' => $kicker,
         'hero_title' => $title,
         'hero_summary' => $summary,
+        'hero_primary_label' => (string) (get_post_meta($post_id, '_myliba_cta_label', true) ?: 'Programı birlikte tasarlayalım'),
+        'hero_secondary_label' => 'Çalışma modelini inceleyin',
+        'journey_eyebrow' => (string) (get_post_meta($post_id, '_myliba_journey_eyebrow', true) ?: 'Myliba gelişim yolculuğu'),
+        'journey_title' => (string) (get_post_meta($post_id, '_myliba_journey_title', true) ?: "Kuruma özel.\nİşin içinde.\nÖlçülebilir."),
+        'principle_1' => (string) (get_post_meta($post_id, '_myliba_principle_1', true) ?: 'Kuruma özel tasarım'),
+        'principle_2' => (string) (get_post_meta($post_id, '_myliba_principle_2', true) ?: 'İşbaşı uygulama'),
+        'principle_3' => (string) (get_post_meta($post_id, '_myliba_principle_3', true) ?: 'Ölçülebilir takip'),
+        'intro_eyebrow' => (string) (get_post_meta($post_id, '_myliba_intro_eyebrow', true) ?: 'Myliba yaklaşımı'),
+        'intro_title' => (string) (get_post_meta($post_id, '_myliba_intro_title', true) ?: 'Kültürü, hedefleri ve iş sonuçlarını birlikte geliştirin.'),
         'intro' => $intro,
+        'intro_link_label' => 'İhtiyacınızı birlikte değerlendirelim',
+        'audiences_eyebrow' => (string) (get_post_meta($post_id, '_myliba_audiences_eyebrow', true) ?: 'Kimler için?'),
+        'audiences_title' => (string) (get_post_meta($post_id, '_myliba_audiences_title', true) ?: 'Değişimi birlikte yöneten ekipler için.'),
+        'outcomes_eyebrow' => (string) (get_post_meta($post_id, '_myliba_outcomes_eyebrow', true) ?: 'Beklenen kazanımlar'),
+        'outcomes_title' => (string) (get_post_meta($post_id, '_myliba_outcomes_title', true) ?: 'Programla birlikte ne değişir?'),
+        'outcomes_lead' => (string) (get_post_meta($post_id, '_myliba_outcomes_lead', true) ?: 'Gelişimi tek seferlik bir müdahaleden çıkarıp, kurumun çalışma biçimine yerleştirin.'),
+        'metrics_eyebrow' => (string) (get_post_meta($post_id, '_myliba_metrics_eyebrow', true) ?: 'Ölçüm alanları'),
+        'metrics_title' => (string) (get_post_meta($post_id, '_myliba_metrics_title', true) ?: 'Kültürü dört kritik göstergeyle görünür kılın.'),
+        'process_eyebrow' => (string) (get_post_meta($post_id, '_myliba_process_eyebrow', true) ?: 'Çalışma modeli'),
+        'process_title' => (string) (get_post_meta($post_id, '_myliba_process_title', true) ?: ($title !== '' ? $title . ' süreci' : 'Çalışma Süreci')),
+        'process_lead' => (string) (get_post_meta($post_id, '_myliba_process_lead', true) ?: 'Her aşama bir sonraki adımı besler; tasarım, uygulama ve takip aynı gelişim ritminin parçasıdır.'),
+        'cta_eyebrow' => (string) (get_post_meta($post_id, '_myliba_cta_eyebrow', true) ?: '30 dakikalık keşif görüşmesi'),
+        'cta_title' => (string) (get_post_meta($post_id, '_myliba_cta_title', true) ?: 'İhtiyacınıza uygun yolculuğu birlikte tasarlayalım.'),
+        'cta_text' => (string) (get_post_meta($post_id, '_myliba_cta_text', true) ?: 'Kurumunuzun hedeflerini dinleyelim; doğru programı, kapsamı ve çalışma modelini birlikte netleştirelim.'),
+        'cta_button_label' => (string) (get_post_meta($post_id, '_myliba_cta_button_label', true) ?: 'Görüşme planlayın'),
+        'cta_secondary_label' => 'Tüm çözümleri görün',
     ], 'collections' => [
         'benefits' => array_map(static fn (string $text): array => ['text' => $text], $benefits_raw),
         'audiences' => array_map(static fn (string $text): array => ['text' => $text], $audiences_raw),
