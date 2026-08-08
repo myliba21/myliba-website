@@ -1636,6 +1636,7 @@ function myliba_header_menu_item_is_active(string $key, string $url): bool
         'development' => is_page(['development-center', 'gelisim-merkezi', 'blog', 'yazilar', 'events', 'etkinlikler']) || is_home() || is_singular('post') || is_category() || is_tag() || is_post_type_archive(['myliba_event', 'myliba_ebook', 'myliba_report']) || is_singular(['myliba_event', 'myliba_ebook', 'myliba_report']),
         'products' => is_page(['yazilim', 'urunler']) || is_singular('myliba_product') || is_post_type_archive('myliba_product'),
         'solutions' => is_page(['solutions', 'cozumler']) || is_singular('myliba_solution') || is_post_type_archive('myliba_solution'),
+        'story' => is_page(['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz']),
         default => false,
     };
 }

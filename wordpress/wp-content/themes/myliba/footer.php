@@ -99,18 +99,18 @@ $footer_legal_links = [
         'label' => myliba_text('KVKK Aydınlatma Metni'),
         'url' => myliba_page_url('privacy'),
     ],
-    [
-        'label' => myliba_text('KVKK ve GDPR'),
-        'url' => home_url($footer_lang === 'en' ? '/en/kvkk/' : '/tr/kvkk/'),
-    ],
+    /*     [
+            'label' => myliba_text('KVKK ve GDPR'),
+            'url' => home_url($footer_lang === 'en' ? '/en/kvkk/' : '/tr/kvkk/'),
+        ], */
     [
         'label' => myliba_text('Çerez Politikası'),
         'url' => home_url($footer_lang === 'en' ? '/en/cookie-policy/' : '/tr/cerez-politikasi/'),
     ],
-    [
-        'label' => myliba_text('Kullanım Şartları'),
-        'url' => home_url($footer_lang === 'en' ? '/en/terms-of-use/' : '/tr/kullanim-sartlari/'),
-    ],
+    /*     [
+            'label' => myliba_text('Kullanım Şartları'),
+            'url' => home_url($footer_lang === 'en' ? '/en/terms-of-use/' : '/tr/kullanim-sartlari/'),
+        ], */
 ];
 
 // Social links from Customizer
@@ -134,7 +134,7 @@ if ($youtube_url !== '') {
 ?>
 </main>
 <footer class="site-footer">
-    <?php if ($footer_cta_enabled && ($footer_cta_title !== '' || $footer_primary_cta_label !== '')) : ?>
+    <?php if ($footer_cta_enabled && ($footer_cta_title !== '' || $footer_primary_cta_label !== '')): ?>
         <section class="site-footer__cta-wrap" aria-label="<?php echo esc_attr(myliba_text('Footer call to action')); ?>">
             <div class="site-footer__cta">
                 <div>
@@ -142,12 +142,12 @@ if ($youtube_url !== '') {
                     <h2><?php echo esc_html($footer_cta_title); ?></h2>
                 </div>
                 <div class="site-footer__cta-actions">
-                    <?php if ($footer_cta_url !== '' && $footer_primary_cta_label !== '') : ?>
+                    <?php if ($footer_cta_url !== '' && $footer_primary_cta_label !== ''): ?>
                         <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($footer_cta_url); ?>">
                             <?php echo esc_html($footer_primary_cta_label); ?>
                         </a>
                     <?php endif; ?>
-                    <?php if ($footer_demo_url !== '' && $footer_demo_label !== '') : ?>
+                    <?php if ($footer_demo_url !== '' && $footer_demo_label !== ''): ?>
                         <a class="myliba-button myliba-button--secondary" href="<?php echo esc_url($footer_demo_url); ?>">
                             <?php echo esc_html($footer_demo_label); ?>
                         </a>
@@ -160,23 +160,27 @@ if ($youtube_url !== '') {
     <div class="site-footer__main">
         <div class="site-footer__brand-panel">
             <?php myliba_brand_link('site-brand--footer'); ?>
-            <?php if ($footer_note !== '') : ?>
+            <?php if ($footer_note !== ''): ?>
                 <p><?php echo esc_html($footer_note); ?></p>
             <?php endif; ?>
 
             <div class="site-footer__contact-list">
-                <?php if ($footer_contact_email !== '') : ?>
-                    <a href="<?php echo esc_url('mailto:' . $footer_contact_email); ?>"><?php echo esc_html($footer_contact_email); ?></a>
+                <?php if ($footer_contact_email !== ''): ?>
+                    <a
+                        href="<?php echo esc_url('mailto:' . $footer_contact_email); ?>"><?php echo esc_html($footer_contact_email); ?></a>
                 <?php endif; ?>
-                <?php if ($footer_phone_label !== '' && $footer_phone_url !== '') : ?>
+                <?php if ($footer_phone_label !== '' && $footer_phone_url !== ''): ?>
                     <a href="<?php echo esc_url($footer_phone_url); ?>"><?php echo esc_html($footer_phone_label); ?></a>
                 <?php endif; ?>
             </div>
 
-            <?php if (!empty($footer_social_links)) : ?>
-                <div class="site-footer__socials" role="navigation" aria-label="<?php echo esc_attr(myliba_text('Social links')); ?>">
-                    <?php foreach ($footer_social_links as $social_link) : ?>
-                        <a href="<?php echo esc_url($social_link['url']); ?>" aria-label="<?php echo esc_attr($social_link['label']); ?>" target="_blank" rel="noopener noreferrer">
+            <?php if (!empty($footer_social_links)): ?>
+                <div class="site-footer__socials" role="navigation"
+                    aria-label="<?php echo esc_attr(myliba_text('Social links')); ?>">
+                    <?php foreach ($footer_social_links as $social_link): ?>
+                        <a href="<?php echo esc_url($social_link['url']); ?>"
+                            aria-label="<?php echo esc_attr($social_link['label']); ?>" target="_blank"
+                            rel="noopener noreferrer">
                             <?php echo esc_html($social_link['short']); ?>
                         </a>
                     <?php endforeach; ?>
@@ -194,7 +198,7 @@ if ($youtube_url !== '') {
 
         <nav class="site-footer__column" aria-label="<?php echo esc_attr($col1_title); ?>">
             <h3><?php echo esc_html($col1_title); ?></h3>
-            <?php if ($solutions_loc !== '') : ?>
+            <?php if ($solutions_loc !== ''): ?>
                 <?php
                 wp_nav_menu([
                     'theme_location' => $solutions_loc,
@@ -204,10 +208,12 @@ if ($youtube_url !== '') {
                     'fallback_cb' => false,
                 ]);
                 ?>
-            <?php else : ?>
+            <?php else: ?>
                 <ul class="site-footer__link-list">
-                    <?php foreach ($footer_solution_links as $footer_link) : ?>
-                        <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
+                    <?php foreach ($footer_solution_links as $footer_link): ?>
+                        <li><a
+                                href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
@@ -215,7 +221,7 @@ if ($youtube_url !== '') {
 
         <nav class="site-footer__column" aria-label="<?php echo esc_attr($col2_title); ?>">
             <h3><?php echo esc_html($col2_title); ?></h3>
-            <?php if ($development_loc !== '') : ?>
+            <?php if ($development_loc !== ''): ?>
                 <?php
                 wp_nav_menu([
                     'theme_location' => $development_loc,
@@ -225,10 +231,12 @@ if ($youtube_url !== '') {
                     'fallback_cb' => false,
                 ]);
                 ?>
-            <?php else : ?>
+            <?php else: ?>
                 <ul class="site-footer__link-list">
-                    <?php foreach ($footer_development_links as $footer_link) : ?>
-                        <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
+                    <?php foreach ($footer_development_links as $footer_link): ?>
+                        <li><a
+                                href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
@@ -236,7 +244,7 @@ if ($youtube_url !== '') {
 
         <nav class="site-footer__column" aria-label="<?php echo esc_attr($col3_title); ?>">
             <h3><?php echo esc_html($col3_title); ?></h3>
-            <?php if ($company_loc !== '') : ?>
+            <?php if ($company_loc !== ''): ?>
                 <?php
                 wp_nav_menu([
                     'theme_location' => $company_loc,
@@ -246,10 +254,12 @@ if ($youtube_url !== '') {
                     'fallback_cb' => false,
                 ]);
                 ?>
-            <?php else : ?>
+            <?php else: ?>
                 <ul class="site-footer__link-list">
-                    <?php foreach ($footer_company_links as $footer_link) : ?>
-                        <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
+                    <?php foreach ($footer_company_links as $footer_link): ?>
+                        <li><a
+                                href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
@@ -257,7 +267,7 @@ if ($youtube_url !== '') {
 
         <nav class="site-footer__column" aria-label="<?php echo esc_attr($col4_title); ?>">
             <h3><?php echo esc_html($col4_title); ?></h3>
-            <?php if ($legal_loc !== '') : ?>
+            <?php if ($legal_loc !== ''): ?>
                 <?php
                 wp_nav_menu([
                     'theme_location' => $legal_loc,
@@ -267,10 +277,12 @@ if ($youtube_url !== '') {
                     'fallback_cb' => false,
                 ]);
                 ?>
-            <?php else : ?>
+            <?php else: ?>
                 <ul class="site-footer__link-list">
-                    <?php foreach ($footer_legal_links as $footer_link) : ?>
-                        <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
+                    <?php foreach ($footer_legal_links as $footer_link): ?>
+                        <li><a
+                                href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
@@ -278,9 +290,10 @@ if ($youtube_url !== '') {
     </div>
 
     <div class="site-footer__bottom">
-        <p><?php echo esc_html(sprintf(myliba_text('Copyright %1$s %2$s. All rights reserved.'), date_i18n('Y'), $footer_organization_name)); ?></p>
+        <p><?php echo esc_html(sprintf(myliba_text('Copyright %1$s %2$s. All rights reserved.'), date_i18n('Y'), $footer_organization_name)); ?>
+        </p>
         <div class="site-footer__bottom-links">
-            <?php if ($bottom_loc !== '') : ?>
+            <?php if ($bottom_loc !== ''): ?>
                 <?php
                 wp_nav_menu([
                     'theme_location' => $bottom_loc,
@@ -290,14 +303,17 @@ if ($youtube_url !== '') {
                     'fallback_cb' => false,
                 ]);
                 ?>
-            <?php else : ?>
-                <?php foreach ($footer_languages as $language_link) : ?>
-                    <a href="<?php echo esc_url($language_link['url']); ?>" data-myliba-locale="<?php echo esc_attr(strtolower((string) $language_link['label'])); ?>" <?php echo !empty($language_link['active']) ? 'aria-current="true"' : ''; ?>>
+            <?php else: ?>
+                <?php foreach ($footer_languages as $language_link): ?>
+                    <a href="<?php echo esc_url($language_link['url']); ?>"
+                        data-myliba-locale="<?php echo esc_attr(strtolower((string) $language_link['label'])); ?>" <?php echo !empty($language_link['active']) ? 'aria-current="true"' : ''; ?>>
                         <?php echo esc_html($language_link['label']); ?>
                     </a>
                 <?php endforeach; ?>
-                <a href="<?php echo esc_url(myliba_page_url('security')); ?>"><?php echo esc_html(myliba_text('Security')); ?></a>
-                <a href="<?php echo esc_url(myliba_page_url('privacy')); ?>"><?php echo esc_html(myliba_text('Privacy')); ?></a>
+                <a
+                    href="<?php echo esc_url(myliba_page_url('security')); ?>"><?php echo esc_html(myliba_text('Security')); ?></a>
+                <a
+                    href="<?php echo esc_url(myliba_page_url('privacy')); ?>"><?php echo esc_html(myliba_text('Privacy')); ?></a>
             <?php endif; ?>
         </div>
     </div>
@@ -312,5 +328,5 @@ if ($youtube_url !== '') {
 </div>
 <?php wp_footer(); ?>
 </body>
-</html>
 
+</html>

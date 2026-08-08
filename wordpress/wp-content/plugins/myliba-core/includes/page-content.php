@@ -51,6 +51,7 @@ function schema_for_post(\WP_Post|int $post): ?string
         in_array($post->post_name, ['yazilim', 'urunler'], true) => 'software',
         in_array($post->post_name, ['cozumler', 'solutions'], true) => 'solutions',
         in_array($post->post_name, ['gelisim-merkezi', 'development-center'], true) => 'development',
+        in_array($post->post_name, ['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz'], true) => 'story',
         default => null,
     };
 }
@@ -557,6 +558,287 @@ function solution_defaults(int $post_id): array
     ]];
 }
 
+function story_definition(): array
+{
+    return [
+        'label' => 'Biz Kimiz / Hikayemiz Sayfası İçeriği',
+        'groups' => [
+            'hero' => [
+                'label' => 'Hero & Manifesto',
+                'fields' => [
+                    'hero_eyebrow' => ['text', 'Üst etiket (Pill)'],
+                    'hero_title' => ['textarea', 'Hero başlığı'],
+                    'hero_lead' => ['textarea', 'Hero açıklaması'],
+                    'hero_primary_label' => ['text', 'Ana buton etiketi'],
+                    'hero_secondary_label' => ['text', 'İkincil buton etiketi'],
+                ],
+                'collections' => [
+                    'hero_badges' => ['label' => 'Hero rozetleri', 'fields' => ['label' => ['text', 'Rozet metni']]],
+                ],
+            ],
+            'formula' => [
+                'label' => 'Yönetim Formülü (Performans = Potansiyel − Müdahale)',
+                'fields' => [
+                    'formula_eyebrow' => ['text', 'Üst etiket'],
+                    'formula_title' => ['textarea', 'Bölüm başlığı'],
+                    'formula_lead' => ['textarea', 'Bölüm açıklaması'],
+                    'formula_badge' => ['text', 'Formül kartı rozeti'],
+                    'formula_meta' => ['text', 'Formül kaynak/meta bilgisi'],
+                    'formula_result_tag' => ['text', 'Performans kutusu etiketi'],
+                    'formula_result_title' => ['text', 'Performans kutusu başlığı'],
+                    'formula_result_desc' => ['textarea', 'Performans kutusu açıklaması'],
+                    'formula_potential_tag' => ['text', 'Potansiyel kutusu etiketi'],
+                    'formula_potential_title' => ['text', 'Potansiyel kutusu başlığı'],
+                    'formula_potential_desc' => ['textarea', 'Potansiyel kutusu açıklaması'],
+                    'formula_interference_tag' => ['text', 'Müdahale kutusu etiketi'],
+                    'formula_interference_title' => ['text', 'Müdahale kutusu başlığı'],
+                    'formula_interference_desc' => ['textarea', 'Müdahale kutusu açıklaması'],
+                    'formula_leverage_title' => ['text', 'Kaldıraç başlığı'],
+                    'formula_leverage_text' => ['textarea', 'Kaldıraç açıklaması'],
+                ],
+            ],
+            'why' => [
+                'label' => 'Neden Yola Çıktık (Problem vs. Çözüm)',
+                'fields' => [
+                    'why_eyebrow' => ['text', 'Üst etiket'],
+                    'why_title' => ['textarea', 'Bölüm başlığı'],
+                    'why_lead' => ['textarea', 'Bölüm açıklaması'],
+                    'why_manifesto_text' => ['textarea', 'Vurgulu manifesto notu'],
+                ],
+                'collections' => [
+                    'comparisons' => ['label' => 'Karşılaştırma kartları', 'fields' => [
+                        'problem_label' => ['text', 'Problem üst etiketi'],
+                        'problem_title' => ['text', 'Problem başlığı'],
+                        'problem_desc' => ['textarea', 'Problem açıklaması'],
+                        'solution_label' => ['text', 'Çözüm üst etiketi'],
+                        'solution_title' => ['text', 'Çözüm başlığı'],
+                        'solution_desc' => ['textarea', 'Çözüm açıklaması'],
+                    ]],
+                ],
+            ],
+            'pillars' => [
+                'label' => 'Bütünleşik Ekosistem (4 Dikey)',
+                'fields' => [
+                    'pillars_eyebrow' => ['text', 'Üst etiket'],
+                    'pillars_title' => ['textarea', 'Bölüm başlığı'],
+                    'pillars_lead' => ['textarea', 'Bölüm açıklaması'],
+                ],
+                'collections' => [
+                    'pillars' => ['label' => 'Dikey kartları', 'fields' => [
+                        'number' => ['text', 'Numara (01, 02...)'],
+                        'badge' => ['text', 'Rozet etiketi'],
+                        'icon' => ['text', 'Simge / Emoji'],
+                        'title' => ['text', 'Dikey başlığı'],
+                        'desc' => ['textarea', 'Dikey açıklaması'],
+                        'tags' => ['textarea', 'Etiketler (her satıra bir etiket)'],
+                        'link_label' => ['text', 'Bağlantı metni'],
+                        'link_target' => ['text', 'Hedef sayfa anahtarı (products, academy, development, solutions)'],
+                    ]],
+                ],
+            ],
+            'proof' => [
+                'label' => 'Sosyal Kanıt ve Sayaçlar',
+                'fields' => [
+                    'proof_eyebrow' => ['text', 'Üst etiket'],
+                    'proof_title' => ['textarea', 'Bölüm başlığı'],
+                    'proof_lead' => ['textarea', 'Bölüm açıklaması'],
+                ],
+                'collections' => [
+                    'stats' => ['label' => 'Sayaç kartları', 'fields' => [
+                        'value' => ['text', 'Sayı / Değer (25+, 44+...)'],
+                        'unit' => ['text', 'Birim (Yıl, Şirket...)'],
+                        'label' => ['textarea', 'Açıklama'],
+                        'is_highlight' => ['text', 'Vurgulu mu? (1 veya 0)'],
+                    ]],
+                ],
+            ],
+            'values' => [
+                'label' => 'Değerlerimiz ve İlkelerimiz',
+                'fields' => [
+                    'values_eyebrow' => ['text', 'Üst etiket'],
+                    'values_title' => ['textarea', 'Bölüm başlığı'],
+                    'values_lead' => ['textarea', 'Bölüm açıklaması'],
+                ],
+                'collections' => [
+                    'values' => ['label' => 'Değer kartları', 'fields' => [
+                        'icon' => ['text', 'Simge / Emoji'],
+                        'tag' => ['text', 'Üst etiket'],
+                        'title' => ['text', 'Başlık'],
+                        'desc' => ['textarea', 'Açıklama'],
+                    ]],
+                ],
+            ],
+            'final' => [
+                'label' => 'Final Manifesto ve CTA',
+                'fields' => [
+                    'final_pill' => ['text', 'Üst rozet'],
+                    'final_title' => ['textarea', 'Başlık'],
+                    'final_text' => ['textarea', 'Açıklama'],
+                    'final_primary_label' => ['text', 'Ana buton etiketi'],
+                    'final_secondary_label' => ['text', 'İkincil buton etiketi'],
+                ],
+            ],
+        ],
+    ];
+}
+
+function story_defaults(): array
+{
+    return [
+        'fields' => [
+            'hero_eyebrow' => 'BİZ KİMİZ? · BÜTÜNLEŞİK KÜLTÜR & PERFORMANS',
+            'hero_title' => 'Geleceğin Organizasyonlarını İnsan ve Teknolojiyi Birleştirerek İnşa Ediyoruz.',
+            'hero_lead' => 'Myliba; hantal hiyerarşileri esneten, organizasyonları geleceğin esnek çalışma dünyasına hazırlayan ve yapay zekâ destekli altyapıyı ICF onaylı kültürel yönetim modeliyle birleştiren dünyanın ilk ve tek bütünleşik platformudur.',
+            'hero_primary_label' => 'Myliba Demosu Planlayın',
+            'hero_secondary_label' => 'Yönetim Formülümüzü Keşfedin ↓',
+            'formula_eyebrow' => 'YAKLAŞIMIMIZ · İMZA FORMÜLÜMÜZ',
+            'formula_title' => 'Rakamların Arkasındaki Yönetim Anlayışı',
+            'formula_lead' => 'Performans, insanları daha çok zorlamakla değil; aradaki sistemsel parazit ve engelleri kaldırmakla artar.',
+            'formula_badge' => 'Temel Yönetim Denklemi',
+            'formula_meta' => 'Tim Gallwey / Inner Game Model × Myliba Systems',
+            'formula_result_tag' => 'ÇIKTI',
+            'formula_result_title' => 'Performans',
+            'formula_result_desc' => 'Ekiplerin ve kurumun ulaştığı gerçek, ölçülebilir ve sürdürülebilir başarı.',
+            'formula_potential_tag' => 'İÇSEL GÜÇ',
+            'formula_potential_title' => 'Potansiyel',
+            'formula_potential_desc' => 'Çalışanların doğal yeteneği, inovasyon gücü, motivasyonu ve kolektif zekâsı.',
+            'formula_interference_tag' => 'ENGEL & PARAZİT',
+            'formula_interference_title' => 'Müdahale',
+            'formula_interference_desc' => 'Belirsiz hedefler, mikro-yönetim, güvensizlik, bürokrasi ve geri bildirimsizlik.',
+            'formula_leverage_title' => 'Myliba Kaldıracı:',
+            'formula_leverage_text' => 'Myliba, teknolojiyi insan odaklı bir yüksek performans kültürü inşa etmek için bir kaldıraç olarak kullanır. Tüm ürünleri ve metodolojisi bu düşünce üzerine kuruludur.',
+            'why_eyebrow' => 'HİKAYEMİZ · DÖNÜŞÜM İHTİYACI',
+            'why_title' => 'Neden Yola Çıktık?',
+            'why_lead' => 'Geleneksel hiyerarşiler ve bürokratik engeller en başarılı ekiplerin bile potansiyelini sınırlar. Bu yüzden performansı insanları zorlayarak değil, sistemleri iyileştirerek geliştiriyoruz.',
+            'why_manifesto_text' => 'Performansı insanları zorlayarak değil, sistemleri iyileştirerek geliştiriyoruz. Bu unsurlar en başarılı ekiplerin bile potansiyelini sınırlar; Myliba bu engelleri kaldırarak kurumların kendi yüksek performans işletim sistemini kurmasını sağlar.',
+            'pillars_eyebrow' => 'BÜTÜNLEŞİK ÇÖZÜM MİMARİSİ',
+            'pillars_title' => 'Ne Yapıyoruz?',
+            'pillars_lead' => 'Myliba; Yazılım, Akademi, Danışmanlık ve Simülasyon dikeylerini tek bir çatı altında birleştirir.',
+            'proof_eyebrow' => 'SOMUT VERİLER & GÜVEN',
+            'proof_title' => 'Rakamlarla Sosyal Kanıt',
+            'proof_lead' => 'Yıllara dayanan saha deneyimi ve onlarca sektörde kanıtlanmış kurumsal dönüşüm gücü.',
+            'values_eyebrow' => 'DEĞERLERİMİZ VE İLKELERİMİZ',
+            'values_title' => 'Bizi Yönlendiren Temel İlkeler',
+            'values_lead' => 'Geleceğin organizasyonlarını inşa ederken taviz vermediğimiz 3 temel sütun.',
+            'final_pill' => 'GELECEĞİN ÇALIŞMA DÜNYASI',
+            'final_title' => 'Şirketinizin “Görünmez İşletim Sistemini” Yeniden Kodlayın.',
+            'final_text' => 'Organizasyonunuzu geleceğin çalışma dünyasına hazırlamak, ekiplerinizi otonom kılmak ve canlı verilerle yönetmek için Myliba ile tanışın.',
+            'final_primary_label' => 'Uzmanlarımızla Görüşün',
+            'final_secondary_label' => 'Myliba Demosu Planlayın',
+        ],
+        'collections' => [
+            'hero_badges' => [
+                ['label' => 'Dünyanın İlk & Tek Bütünleşik Modeli'],
+                ['label' => 'ICF Onaylı Kültür & OKR Koçluğu'],
+                ['label' => 'Yapay Zekâ & 9-Box Destekli Canlı Altyapı'],
+            ],
+            'comparisons' => [
+                [
+                    'problem_label' => 'Geleneksel Problem',
+                    'problem_title' => 'Belirsiz Hedefler',
+                    'problem_desc' => 'Kimin neye koştuğunun net olmadığı, stratejiden kopuk ve silolara hapsolmuş hedefler.',
+                    'solution_label' => 'Myliba Çözümü',
+                    'solution_title' => 'Net & Canlı OKR / KPI Hizalanması',
+                    'solution_desc' => 'Şirket stratejisini tüm çalışanlarla şeffaf ve anlık senkronize eden yaşayan hedef ritmi.',
+                ],
+                [
+                    'problem_label' => 'Geleneksel Problem',
+                    'problem_title' => 'Sürekli Müdahale',
+                    'problem_desc' => 'Her adımda onay bekleyen, inisiyatif almayı engelleyen ve güveni yıpratan hantal kontrol.',
+                    'solution_label' => 'Myliba Çözümü',
+                    'solution_title' => 'Otonomi ve Güven Mimarisi',
+                    'solution_desc' => 'Kendi performansının sorumluluğunu alan kurum içi girişimciler ve hedef koçluğu modeli.',
+                ],
+                [
+                    'problem_label' => 'Geleneksel Problem',
+                    'problem_title' => 'Güvensizlik Kültürü',
+                    'problem_desc' => 'Hata yapmaktan çekinilen, fikirlerin saklandığı ve süreçlerin formlara hapsolduğu yapılar.',
+                    'solution_label' => 'Myliba Çözümü',
+                    'solution_title' => 'Sürekli Diyalog & Psikolojik Güvenlik',
+                    'solution_desc' => 'Haftalık 1:1 görüşmeler, şeffaf kültür analitiği ve psikolojik güven ortamı.',
+                ],
+                [
+                    'problem_label' => 'Geleneksel Problem',
+                    'problem_title' => 'Geri Bildirimsizlik',
+                    'problem_desc' => 'Yılda bir kez geçmişi yargılayan, not veren ve çalışan motivasyonunu düşüren seanslar.',
+                    'solution_label' => 'Myliba Çözümü',
+                    'solution_title' => 'Anlık İleri Bildirim (Feedforward)',
+                    'solution_desc' => 'Geçmişe değil geleceğe odaklanan, anlık takdir ve gelişim koçluğunu besleyen ritim.',
+                ],
+            ],
+            'pillars' => [
+                [
+                    'number' => '01',
+                    'badge' => 'Canlı SaaS Platformu',
+                    'icon' => '💻',
+                    'title' => 'Myliba Yazılım',
+                    'desc' => 'Anlık performans verileri, 9-Box kültür ve yetenek analizi, yapay zekâ içgörüleri, OKR/KPI yönetimi, sürekli diyalog döngüsü ve adil karar mekanizmalarıyla performansı yaşayan bir sürece dönüştürür.',
+                    'tags' => "Anlık Performans\n9-Box Matrisi\nYapay Zekâ İçgörüleri\nCanlı OKR & KPI",
+                    'link_label' => 'Yazılımı İnceleyin',
+                    'link_target' => 'products',
+                ],
+                [
+                    'number' => '02',
+                    'badge' => 'Dünyada İlk & Tek ICF Onaylı',
+                    'icon' => '🎓',
+                    'title' => 'Myliba Akademi',
+                    'desc' => 'Dünyanın ilk ve tek ICF onaylı (40 Saat CCE) OKR & Kültür Koçluğu sertifikasyonu ve diğer işbaşı liderlik programlarıyla dönüşümü yönetecek liderleri yetiştirir.',
+                    'tags' => "40 Saat CCE / ICF\nOKR & Kültür Koçluğu\nLiderlik Gelişimi",
+                    'link_label' => 'Akademi Programlarını Keşfedin',
+                    'link_target' => 'academy',
+                ],
+                [
+                    'number' => '03',
+                    'badge' => 'Deneyimsel Öğrenme',
+                    'icon' => '🚀',
+                    'title' => 'Simülasyonlar',
+                    'desc' => '“Hedef Mars Simülasyonu” gibi deneyimsel öğrenme araçlarıyla belirsizlik ve kriz anlarında liderlik becerilerini geliştirir. “Radikal Samimiyet Simülasyonu” ile açık geri ve ileri bildirim isteyen güçlü ekipler yaratır.',
+                    'tags' => "Hedef Mars Simülasyonu\nRadikal Samimiyet\nKriz ve Liderlik",
+                    'link_label' => 'Gelişim Merkezini Görün',
+                    'link_target' => 'development',
+                ],
+                [
+                    'number' => '04',
+                    'badge' => 'Strateji & Dönüşüm',
+                    'icon' => '🤝',
+                    'title' => 'Danışmanlık & Kültür Tasarımı',
+                    'desc' => 'Hantal organizasyonel yapıları geleceğin çevik çalışma modellerine uyarlayan, stratejiyle kurum kültürünü hizalayan ve sürdürülebilir yüksek performans ritmi inşa eden uzman saha danışmanlığı.',
+                    'tags' => "Çevik Organizasyonel Tasarım\nKültür Yapılandırma\nStratejik Hizalanma",
+                    'link_label' => 'Çözümlerimizi İnceleyin',
+                    'link_target' => 'solutions',
+                ],
+            ],
+            'stats' => [
+                ['value' => '25+', 'unit' => 'Yıl', 'label' => 'Yazılım, insan kaynakları ve organizasyonel gelişim tecrübesi.', 'is_highlight' => '0'],
+                ['value' => '44+', 'unit' => 'Şirket', 'label' => '16 farklı sektörde kurumsal dönüşüm ve kültür yapılandırma tecrübesi.', 'is_highlight' => '0'],
+                ['value' => '500+', 'unit' => 'Lider', 'label' => 'Yetkinleştirilmiş, koçluk yaklaşımı kazandırılmış yönetici ve lider ağı.', 'is_highlight' => '0'],
+                ['value' => '40', 'unit' => 'Saat', 'label' => 'CCE / ICF Akreditasyonu: Dünyadaki ilk ve tek sertifika programı.', 'is_highlight' => '0'],
+                ['value' => '%100', 'unit' => 'Canlı Kültür', 'label' => 'Süreçleri formlarda bırakmayan, yaşayan sürdürülebilir iş akışı.', 'is_highlight' => '1'],
+            ],
+            'values' => [
+                [
+                    'icon' => '📊',
+                    'tag' => 'Şeffaflık & Objektiflik',
+                    'title' => 'Veriyle Konuşan Adil Yönetim',
+                    'desc' => 'Kararları kişisel algılar veya sübjektif kanaatlerle değil; şeffaf, objektif ve herkes için güven veren canlı verilere dayandırmak.',
+                ],
+                [
+                    'icon' => '🌱',
+                    'tag' => 'Gelişim Odaklılık',
+                    'title' => 'Not Veren Değil, Geliştiren Yaklaşım',
+                    'desc' => 'Yılda bir kez geçmişi yargılayan geleneksel performans görüşmeleri yerine, anlık geri ve ileri bildirim (feedforward) kültürüyle sürekli büyütmek.',
+                ],
+                [
+                    'icon' => '🛡️',
+                    'tag' => 'Yetkilendirme',
+                    'title' => 'Otonomi ve Güven',
+                    'desc' => 'Çalışanları kendi performansının sorumluluğunu alan kurum içi girişimcilere, liderleri ise ekibinin önünü açan birer hedef koçuna dönüştürmek.',
+                ],
+            ],
+        ],
+    ];
+}
+
 function definition(string $schema): array
 {
     return match ($schema) {
@@ -564,6 +846,7 @@ function definition(string $schema): array
         'solutions' => solutions_definition(),
         'development' => development_definition(),
         'solution' => solution_definition(),
+        'story' => story_definition(),
         default => [],
     };
 }
@@ -575,12 +858,14 @@ function defaults(string $schema, int $post_id = 0): array
         'solutions' => solutions_defaults(),
         'development' => development_defaults(),
         'solution' => solution_defaults($post_id),
+        'story' => story_defaults(),
         default => ['fields' => [], 'collections' => []],
     };
 }
 
 function document(int $post_id, string $schema): array
 {
+    $definition = definition($schema);
     $defaults = defaults($schema, $post_id);
     $raw = get_post_meta($post_id, META_KEY, true);
     $saved = is_string($raw) && $raw !== '' ? json_decode($raw, true) : [];
@@ -589,11 +874,42 @@ function document(int $post_id, string $schema): array
         $saved = [];
     }
 
+    $default_sections = [];
+    $order_step = 10;
+    foreach ($definition['groups'] ?? [] as $g_key => $g_def) {
+        $default_sections[$g_key] = [
+            'key' => $g_key,
+            'label' => $g_def['label'] ?? $g_key,
+            'enabled' => true,
+            'order' => $order_step,
+        ];
+        $order_step += 10;
+    }
+
+    $saved_sections = [];
+    if (isset($saved['sections']) && is_array($saved['sections'])) {
+        foreach ($saved['sections'] as $sec) {
+            if (is_array($sec) && !empty($sec['key']) && isset($default_sections[$sec['key']])) {
+                $k = $sec['key'];
+                $saved_sections[$k] = [
+                    'key' => $k,
+                    'label' => $default_sections[$k]['label'],
+                    'enabled' => !empty($sec['enabled']),
+                    'order' => isset($sec['order']) ? (int) $sec['order'] : ($default_sections[$k]['order'] ?? 999),
+                ];
+            }
+        }
+    }
+
+    $sections = array_replace($default_sections, $saved_sections);
+    uasort($sections, static fn ($a, $b) => ((int) ($a['order'] ?? 0)) <=> ((int) ($b['order'] ?? 0)));
+
     return [
         'schema' => $schema,
         'version' => SCHEMA_VERSION,
         'fields' => array_replace($defaults['fields'], is_array($saved['fields'] ?? null) ? $saved['fields'] : []),
         'collections' => array_replace($defaults['collections'], is_array($saved['collections'] ?? null) ? $saved['collections'] : []),
+        'sections' => array_values($sections),
     ];
 }
 
@@ -607,6 +923,12 @@ function collection(int $post_id, string $schema, string $key): array
 {
     $doc = document($post_id, $schema);
     return is_array($doc['collections'][$key] ?? null) ? $doc['collections'][$key] : [];
+}
+
+function sections(int $post_id, string $schema): array
+{
+    $doc = document($post_id, $schema);
+    return $doc['sections'] ?? [];
 }
 
 function materialize(int $post_id): bool
@@ -634,22 +956,69 @@ function render_page_box(\WP_Post $post): void
 
     $definition = definition($schema);
     $doc = document($post->ID, $schema);
+    $sections = $doc['sections'] ?? [];
     wp_nonce_field('myliba_page_content_' . $post->ID, 'myliba_page_content_nonce');
 
-    echo '<p class="description">Bu alanlar yalnızca bu sayfanın içeriğini yönetir. Değişiklikler tasarım yapısını etkilemez.</p>';
+    echo '<p class="description">Bileşenleri sürükleyip bırakarak (veya ▲ ▼ oklarıyla) sıralayabilir, onay kutularıyla dilediğiniz bölümü gizleyebilir ya da gösterebilirsiniz.</p>';
     echo '<input type="hidden" name="myliba_page_content_schema" value="' . esc_attr($schema) . '">';
-    echo '<div class="myliba-page-content">';
+    echo '<div class="myliba-page-builder" id="myliba-page-builder-list">';
 
-    foreach ($definition['groups'] as $group_key => $group) {
-        echo '<details class="myliba-page-content__group"' . ($group_key === 'hero' ? ' open' : '') . '><summary>' . esc_html($group['label']) . '</summary><div class="myliba-page-content__body">';
+    foreach ($sections as $section) {
+        $group_key = $section['key'];
+        $group = $definition['groups'][$group_key] ?? null;
+        if (!$group) {
+            continue;
+        }
+
+        $enabled = !empty($section['enabled']);
+        $order = (int) ($section['order'] ?? 10);
+        $panel_id = 'myliba-page-group-' . sanitize_html_class($group_key);
+        $field_count = count($group['fields'] ?? []) + count($group['collections'] ?? []);
+
+        echo '<div class="myliba-builder-card' . ($enabled ? '' : ' is-disabled') . '" data-group-key="' . esc_attr($group_key) . '" draggable="true">';
+        
+        // Card Head
+        echo '<div class="myliba-builder-card__head">';
+        echo '<span class="myliba-builder-card__handle" title="Sıralamak için sürükleyin" aria-hidden="true">⋮⋮</span>';
+        echo '<div class="myliba-builder-card__main">';
+        echo '<div class="myliba-builder-card__title-row">';
+        printf(
+            '<label class="myliba-builder-card__enabled"><input type="checkbox" name="myliba_page_content[sections][%1$s][enabled]" value="1" %2$s> <span class="myliba-builder-card__title-text">%3$s</span></label>',
+            esc_attr($group_key),
+            checked($enabled, true, false),
+            esc_html($group['label'])
+        );
+        echo '</div>';
+        echo '<span class="myliba-builder-card__summary">' . esc_html(sprintf('%d alan/ayar', $field_count)) . '</span>';
+        echo '</div>';
+
+        // Sort buttons and Order
+        echo '<div class="myliba-builder-card__controls">';
+        echo '<button type="button" class="button button-small myliba-btn-move-up" title="Yukarı taşı">▲</button>';
+        echo '<button type="button" class="button button-small myliba-btn-move-down" title="Aşağı taşı">▼</button>';
+        printf(
+            '<input class="myliba-builder-card__order" type="number" name="myliba_page_content[sections][%1$s][order]" value="%2$d" aria-label="Bileşen sırası">',
+            esc_attr($group_key),
+            $order
+        );
+        echo '<input type="hidden" name="myliba_page_content[sections][' . esc_attr($group_key) . '][key]" value="' . esc_attr($group_key) . '">';
+        echo '<button type="button" class="myliba-builder-card__toggle" aria-expanded="false" aria-controls="' . esc_attr($panel_id) . '" title="İçeriği Genişlet/Daralt">▼</button>';
+        echo '</div>';
+        echo '</div>'; // end head
+
+        // Card Body
+        echo '<div class="myliba-builder-card__body" id="' . esc_attr($panel_id) . '" hidden>';
         foreach ($group['fields'] ?? [] as $key => [$type, $label]) {
             render_field($key, $type, $label, $doc['fields'][$key] ?? '');
         }
         foreach ($group['collections'] ?? [] as $key => $config) {
             render_collection($key, $config, $doc['collections'][$key] ?? []);
         }
-        echo '</div></details>';
+        echo '</div>'; // end body
+
+        echo '</div>'; // end card
     }
+
     echo '</div>';
     render_admin_assets();
 }
@@ -693,35 +1062,167 @@ function render_admin_assets(): void
 {
     ?>
     <style>
-        .myliba-page-content{display:grid;gap:10px;margin-top:16px}.myliba-page-content__group{background:#fff;border:1px solid #dcdcde;border-radius:7px}.myliba-page-content__group>summary{cursor:pointer;font-size:14px;font-weight:700;padding:14px}.myliba-page-content__body{border-top:1px solid #dcdcde;padding:4px 14px 16px}.myliba-page-content__field{margin:14px 0}.myliba-repeater{background:#f6f7f7;border:1px solid #dcdcde;border-radius:6px;margin:18px 0;padding:12px}.myliba-repeater h4{margin:0 0 10px}.myliba-repeater__rows{display:grid;gap:10px;margin-bottom:10px}.myliba-repeater__row{background:#fff;border:1px solid #dcdcde;border-radius:5px;padding:10px}.myliba-repeater__row-head{align-items:center;display:flex;justify-content:space-between}.myliba-repeater__row .myliba-page-content__field{margin:10px 0}
+        .myliba-page-builder{display:grid;gap:12px;margin-top:16px}
+        .myliba-builder-card{background:#fff;border:1px solid #c3c4c7;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.04);transition:opacity .15s ease,border-color .15s ease,box-shadow .15s ease}
+        .myliba-builder-card.is-disabled{background:#f9fafb;opacity:.65}
+        .myliba-builder-card.is-dragging{opacity:.4;border:2px dashed #2271b1}
+        .myliba-builder-card.drag-over{border-top:3px solid #2271b1}
+        .myliba-builder-card__head{align-items:center;display:grid;gap:12px;grid-template-columns:auto 1fr auto;padding:12px 16px;user-select:none}
+        .myliba-builder-card__handle{cursor:grab;color:#8c8f94;font-size:18px;font-weight:700;letter-spacing:1px;padding:4px}
+        .myliba-builder-card__handle:active{cursor:grabbing}
+        .myliba-builder-card__main{align-items:center;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+        .myliba-builder-card__title-row{align-items:center;display:flex;gap:8px}
+        .myliba-builder-card__title-text{font-size:14px;font-weight:700;color:#1d2327;cursor:pointer}
+        .myliba-builder-card__summary{color:#646970;font-size:12px}
+        .myliba-builder-card__controls{align-items:center;display:flex;gap:6px}
+        .myliba-builder-card__order{width:56px;text-align:center}
+        .myliba-builder-card__toggle{background:none;border:none;color:#50575e;cursor:pointer;font-size:12px;padding:6px;transition:transform .18s ease}
+        .myliba-builder-card__toggle.is-open{transform:rotate(180deg)}
+        .myliba-builder-card__body{border-top:1px solid #dcdcde;padding:14px 18px 20px;background:#fcfcfc}
+        .myliba-page-content__field{margin:12px 0}
+        .myliba-repeater{background:#f0f0f1;border:1px solid #dcdcde;border-radius:6px;margin:16px 0;padding:14px}
+        .myliba-repeater h4{margin:0 0 10px;font-size:13px;font-weight:700}
+        .myliba-repeater__rows{display:grid;gap:10px;margin-bottom:10px}
+        .myliba-repeater__row{background:#fff;border:1px solid #dcdcde;border-radius:6px;padding:12px}
+        .myliba-repeater__row-head{align-items:center;display:flex;justify-content:space-between;border-bottom:1px solid #f0f0f1;padding-bottom:6px;margin-bottom:8px}
     </style>
     <script>
-        document.addEventListener('click', function (event) {
-            var add = event.target.closest('.myliba-repeater__add');
-            if (add) {
-                var repeater = add.closest('.myliba-repeater');
-                var rows = repeater.querySelector('.myliba-repeater__rows');
-                var index = rows.children.length;
-                var html = repeater.querySelector('template').innerHTML.replaceAll('__INDEX__', String(index));
-                rows.insertAdjacentHTML('beforeend', html);
-                renumber(rows);
-                return;
-            }
-            var remove = event.target.closest('.myliba-repeater__remove');
-            if (remove) {
-                var currentRows = remove.closest('.myliba-repeater__rows');
-                remove.closest('.myliba-repeater__row').remove();
-                renumber(currentRows);
-            }
-        });
-        function renumber(rows) {
-            rows.querySelectorAll('.myliba-repeater__row').forEach(function (row, index) {
-                row.querySelector('.myliba-repeater__number').textContent = String(index + 1);
-                row.querySelectorAll('[name]').forEach(function (field) {
-                    field.name = field.name.replace(/\[collections\]\[([^\]]+)\]\[\d+\]/, '[collections][$1][' + index + ']');
-                });
+        (function(){
+            var builder = document.getElementById('myliba-page-builder-list');
+            if(!builder) return;
+
+            // Toggle Expand / Collapse
+            builder.addEventListener('click', function(e){
+                var toggle = e.target.closest('.myliba-builder-card__toggle');
+                if(toggle){
+                    var card = toggle.closest('.myliba-builder-card');
+                    var body = card.querySelector('.myliba-builder-card__body');
+                    var isOpen = !body.hidden;
+                    body.hidden = isOpen;
+                    toggle.classList.toggle('is-open', !isOpen);
+                    toggle.setAttribute('aria-expanded', String(!isOpen));
+                    return;
+                }
+
+                // Checkbox toggle class
+                var check = e.target.closest('.myliba-builder-card__enabled input[type="checkbox"]');
+                if(check){
+                    var card = check.closest('.myliba-builder-card');
+                    card.classList.toggle('is-disabled', !check.checked);
+                    return;
+                }
+
+                // Move Up button
+                var moveUp = e.target.closest('.myliba-btn-move-up');
+                if(moveUp){
+                    var card = moveUp.closest('.myliba-builder-card');
+                    var prev = card.previousElementSibling;
+                    if(prev && prev.classList.contains('myliba-builder-card')){
+                        builder.insertBefore(card, prev);
+                        renumberSections();
+                    }
+                    return;
+                }
+
+                // Move Down button
+                var moveDown = e.target.closest('.myliba-btn-move-down');
+                if(moveDown){
+                    var card = moveDown.closest('.myliba-builder-card');
+                    var next = card.nextElementSibling;
+                    if(next && next.classList.contains('myliba-builder-card')){
+                        builder.insertBefore(next, card);
+                        renumberSections();
+                    }
+                    return;
+                }
+
+                // Repeater add
+                var add = e.target.closest('.myliba-repeater__add');
+                if(add){
+                    var repeater = add.closest('.myliba-repeater');
+                    var rows = repeater.querySelector('.myliba-repeater__rows');
+                    var index = rows.children.length;
+                    var html = repeater.querySelector('template').innerHTML.replaceAll('__INDEX__', String(index));
+                    rows.insertAdjacentHTML('beforeend', html);
+                    renumberRepeater(rows);
+                    return;
+                }
+
+                // Repeater remove
+                var remove = e.target.closest('.myliba-repeater__remove');
+                if(remove){
+                    var currentRows = remove.closest('.myliba-repeater__rows');
+                    remove.closest('.myliba-repeater__row').remove();
+                    renumberRepeater(currentRows);
+                    return;
+                }
             });
-        }
+
+            // Drag and Drop
+            var draggedCard = null;
+            builder.addEventListener('dragstart', function(e){
+                var card = e.target.closest('.myliba-builder-card');
+                if(!card) return;
+                draggedCard = card;
+                card.classList.add('is-dragging');
+                e.dataTransfer.effectAllowed = 'move';
+            });
+
+            builder.addEventListener('dragover', function(e){
+                e.preventDefault();
+                var card = e.target.closest('.myliba-builder-card');
+                if(!card || card === draggedCard) return;
+                builder.querySelectorAll('.myliba-builder-card').forEach(function(c){ c.classList.remove('drag-over'); });
+                card.classList.add('drag-over');
+            });
+
+            builder.addEventListener('drop', function(e){
+                e.preventDefault();
+                var targetCard = e.target.closest('.myliba-builder-card');
+                builder.querySelectorAll('.myliba-builder-card').forEach(function(c){
+                    c.classList.remove('drag-over');
+                    c.classList.remove('is-dragging');
+                });
+                if(targetCard && draggedCard && targetCard !== draggedCard){
+                    var all = Array.from(builder.children);
+                    var draggedIdx = all.indexOf(draggedCard);
+                    var targetIdx = all.indexOf(targetCard);
+                    if(draggedIdx < targetIdx){
+                        targetCard.after(draggedCard);
+                    } else {
+                        targetCard.before(draggedCard);
+                    }
+                    renumberSections();
+                }
+                draggedCard = null;
+            });
+
+            builder.addEventListener('dragend', function(){
+                builder.querySelectorAll('.myliba-builder-card').forEach(function(c){
+                    c.classList.remove('drag-over');
+                    c.classList.remove('is-dragging');
+                });
+                draggedCard = null;
+            });
+
+            function renumberSections(){
+                builder.querySelectorAll('.myliba-builder-card').forEach(function(card, idx){
+                    var orderInput = card.querySelector('.myliba-builder-card__order');
+                    if(orderInput){
+                        orderInput.value = String((idx + 1) * 10);
+                    }
+                });
+            }
+
+            function renumberRepeater(rows){
+                rows.querySelectorAll('.myliba-repeater__row').forEach(function(row, index){
+                    row.querySelector('.myliba-repeater__number').textContent = String(index + 1);
+                    row.querySelectorAll('[name]').forEach(function(field){
+                        field.name = field.name.replace(/\[collections\]\[([^\]]+)\]\[\d+\]/, '[collections][$1][' + index + ']');
+                    });
+                });
+            }
+        })();
     </script>
     <?php
 }
@@ -747,6 +1248,7 @@ function save(int $post_id, \WP_Post $post, bool $update): void
     $fields = [];
     $collections = [];
 
+    // Fields & collections
     foreach ($definition['groups'] as $group) {
         foreach ($group['fields'] ?? [] as $key => [$type]) {
             $value = is_string($raw['fields'][$key] ?? null) ? $raw['fields'][$key] : '';
@@ -771,6 +1273,30 @@ function save(int $post_id, \WP_Post $post, bool $update): void
         }
     }
 
-    $document = ['schema' => $schema, 'version' => SCHEMA_VERSION, 'fields' => $fields, 'collections' => $collections];
+    // Sections order & enabled toggle
+    $posted_sections = is_array($raw['sections'] ?? null) ? $raw['sections'] : [];
+    $sections = [];
+    $default_order = 10;
+    foreach ($definition['groups'] as $group_key => $group) {
+        $sec_entry = $posted_sections[$group_key] ?? [];
+        $enabled = !empty($sec_entry['enabled']);
+        $order = isset($sec_entry['order']) && is_numeric($sec_entry['order']) ? (int) $sec_entry['order'] : $default_order;
+        $sections[] = [
+            'key' => $group_key,
+            'enabled' => $enabled,
+            'order' => $order,
+        ];
+        $default_order += 10;
+    }
+    usort($sections, static fn ($a, $b) => ((int) ($a['order'] ?? 0)) <=> ((int) ($b['order'] ?? 0)));
+
+    $document = [
+        'schema' => $schema,
+        'version' => SCHEMA_VERSION,
+        'fields' => $fields,
+        'collections' => $collections,
+        'sections' => $sections,
+    ];
     update_post_meta($post_id, META_KEY, wp_slash(wp_json_encode($document, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)));
 }
+

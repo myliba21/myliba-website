@@ -24,6 +24,11 @@ if (is_page(['development-center', 'gelisim-merkezi'])) {
     return;
 }
 
+if (is_page(['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz'])) {
+    require get_template_directory() . '/template-parts/page-story.php';
+    return;
+}
+
 get_header();
 get_template_part('template-parts/hero');
 ?>
