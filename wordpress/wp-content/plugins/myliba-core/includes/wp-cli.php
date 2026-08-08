@@ -88,11 +88,11 @@ class Commands
             ['Gelişim Merkezi', 'gelisim-merkezi', $tr, 'tr', 'Gelişim zihniyetini geliştirin!', 'Gelişim zihniyeti sürekli yeni bilgi ve tecrübe ile beslenmeyi gerektirir. Myliba, “Yüksek Performans Kültürü” inşa ederken performans geliştirme zihniyetine geçiş için sürekli içerikler üretir.'],
             ['Etkinlikler', 'etkinlikler', $tr, 'tr', 'Etkinlikler', 'Webinar, atolye ve topluluk bulusmalari.', 'template-events.php'],
             ['Demo', 'demo', $tr, 'tr', 'Myliba demosu isteyin', 'OKR, KPI, CFR, 1:1, geri bildirim, aksiyon ve akademi akislarini tek platformda gorun.', 'template-demo.php'],
-            ['Iletisim', 'iletisim', $tr, 'tr', 'Myliba ile iletisime gecin', 'Ihtiyacinizi anlatin, talebinizi dogru ekibe yonlendirelim.', 'template-contact.php'],
+            ['İletişim', 'iletisim', $tr, 'tr', 'Myliba ile iletişime geçin', 'İhtiyacınızı anlatın; sizi doğru ekiple buluşturalım.', 'template-contact.php'],
             ['Biz Kimiz', 'hikayemiz', $tr, 'tr', 'Geleceğin Organizasyonlarını İnsan ve Teknolojiyi Birleştirerek İnşa Ediyoruz.', 'Myliba; hantal hiyerarşileri esneten, organizasyonları geleceğin esnek çalışma dünyasına hazırlayan ve yapay zekâ destekli altyapıyı ICF onaylı kültürel yönetim modeliyle birleştiren dünyanın ilk ve tek bütünleşik platformudur.'],
             ['SSS', 'sss', $tr, 'tr', 'SSS', 'Myliba hizmetleri hakkinda sik sorulan sorular.'],
-            ['Guvenlik', 'guvenlik', $tr, 'tr', 'Guvenlik', 'Guven, veri ve operasyonel guvenlik yaklasimimiz.'],
-            ['Gizlilik Politikasi', 'gizlilik-politikasi', $tr, 'tr', 'Gizlilik Politikasi', 'Ziyaretci ve iletisim verilerine dair gizlilik pratikleri.'],
+            ['Güvenlik', 'guvenlik', $tr, 'tr', 'Güvenlik', 'Güvenliğinizi ve mahremiyetinizi en az sizin kadar önemsiyoruz.'],
+            ['KVKK Aydınlatma Metni', 'gizlilik-politikasi', $tr, 'tr', 'KVKK Aydınlatma Metni', 'Kişisel verilerinizin hangi amaçlarla ve hangi hukuki sebeplerle işlendiğini inceleyin.'],
             ['KVKK', 'kvkk', $tr, 'tr', 'KVKK ve GDPR yaklasimi', 'Kisisel veri koruma, onay ve kurumsal gizlilik yaklasimi.'],
             ['Cerez Politikasi', 'cerez-politikasi', $tr, 'tr', 'Cerez Politikasi', 'Cerez kullanimi ve takip tercihleri.'],
             ['Kullanim Sartlari', 'kullanim-sartlari', $tr, 'tr', 'Kullanim Sartlari', 'Web sitesi ve servis kullanim sartlari.'],
@@ -152,9 +152,21 @@ class Commands
                 ];
             }
 
+            $source_urls = [
+                'guvenlik' => 'https://myliba.com/tr/guvenlik/',
+                'gizlilik-politikasi' => 'https://myliba.com/tr/kvkk-aydinlatma/',
+                'iletisim' => 'https://myliba.com/contact/',
+            ];
+            if (isset($source_urls[$slug])) {
+                $meta['_myliba_source_url'] = $source_urls[$slug];
+            }
+
             $content = match ($slug) {
                 'gelisim-merkezi', 'development-center' => '',
                 'hikayemiz' => $this->starter_content('story_tr'),
+                'guvenlik' => $this->starter_content('security_tr'),
+                'gizlilik-politikasi' => $this->starter_content('privacy_tr'),
+                'iletisim' => $this->starter_content('contact_tr'),
                 default => $this->starter_content('generic'),
             };
             $page_id = $this->upsert_page($title, $slug, $content, $meta, $parent, $template);
@@ -199,6 +211,81 @@ class Commands
             'Myliba WordPress structure seeded in TR-first bilingual mode. %d unfinished English items were moved to Trash. Indexing is disabled for staging.',
             $trashed
         ));
+    }
+
+    /**
+     * Refresh the Turkish security, privacy and contact pages from the approved copy.
+     *
+     * @subcommand refresh-site-pages
+     */
+    public function refresh_site_pages(array $args, array $assoc_args): void
+    {
+        $tr_parent = get_page_by_path('tr');
+        if (!$tr_parent instanceof \WP_Post) {
+            \WP_CLI::error('The Turkish locale page could not be found.');
+        }
+
+        $pages = [
+            [
+                'title' => 'Güvenlik',
+                'slug' => 'guvenlik',
+                'hero_title' => 'Güvenlik',
+                'hero_subtitle' => 'Güvenliğinizi ve mahremiyetinizi en az sizin kadar önemsiyoruz.',
+                'content_key' => 'security_tr',
+                'source_url' => 'https://myliba.com/tr/guvenlik/',
+                'template' => '',
+            ],
+            [
+                'title' => 'KVKK Aydınlatma Metni',
+                'slug' => 'gizlilik-politikasi',
+                'hero_title' => 'KVKK Aydınlatma Metni',
+                'hero_subtitle' => 'Kişisel verilerinizin hangi amaçlarla ve hangi hukuki sebeplerle işlendiğini inceleyin.',
+                'content_key' => 'privacy_tr',
+                'source_url' => 'https://myliba.com/tr/kvkk-aydinlatma/',
+                'template' => '',
+            ],
+            [
+                'title' => 'İletişim',
+                'slug' => 'iletisim',
+                'hero_title' => 'Myliba ile iletişime geçin',
+                'hero_subtitle' => 'İhtiyacınızı anlatın; sizi doğru ekiple buluşturalım.',
+                'content_key' => 'contact_tr',
+                'source_url' => 'https://myliba.com/contact/',
+                'template' => 'template-contact.php',
+            ],
+        ];
+
+        foreach ($pages as $page) {
+            $this->upsert_page(
+                $page['title'],
+                $page['slug'],
+                $this->starter_content($page['content_key']),
+                [
+                    '_myliba_language' => 'tr',
+                    '_myliba_translation_key' => $page['slug'],
+                    '_myliba_hero_title' => $page['hero_title'],
+                    '_myliba_hero_subtitle' => $page['hero_subtitle'],
+                    '_myliba_source_url' => $page['source_url'],
+                    '_myliba_seo_title' => $page['title'] . ' | Myliba',
+                    '_myliba_seo_description' => $page['hero_subtitle'],
+                ],
+                (int) $tr_parent->ID,
+                $page['template']
+            );
+            \WP_CLI::log('Updated page: ' . $page['title']);
+        }
+
+        $options = get_option('myliba_options', []);
+        $options = is_array($options) ? $options : [];
+        $admin_email = (string) get_option('admin_email');
+        if (empty($options['contact_email']) || $options['contact_email'] === $admin_email) {
+            $options['contact_email'] = 'hello@myliba.com';
+        }
+        $options['phone_label'] = '+90 553 986 86 99';
+        $options['phone_url'] = 'tel:+905539868699';
+        update_option('myliba_options', $options);
+
+        \WP_CLI::success('Turkish security, privacy and contact pages were refreshed.');
     }
 
     /**
@@ -1856,6 +1943,80 @@ class Commands
 <h2>Şirketinizin “Görünmez İşletim Sistemini” Yeniden Kodlayın.</h2>
 <p>Organizasyonunuzu geleceğin çalışma dünyasına hazırlamak ve canlı verilerle yönetmek için Myliba ile tanışın.</p>
 <p><a href="/tr/iletisim/">Uzmanlarımızla Görüşün</a> · <a href="/tr/demo/">Myliba Demosu Planlayın</a></p>
+HTML,
+            'security_tr' => <<<'HTML'
+<h2>Güvenliğinizi ve mahremiyetinizi en az sizin kadar önemsiyoruz.</h2>
+<p>Kişisel bilgilerinizin, kullanıcı bilgilerinizin, işlem kayıtlarınızın ve Myliba'da saklanan verilerin yetkisiz erişime, değiştirilmeye, ifşa edilmeye veya imha edilmeye karşı korunması için uygun veri toplama, depolama ve işleme uygulamalarıyla güvenlik önlemleri kullanıyoruz.</p>
+<p>Hiçbir güvenlik veya şifreleme yöntemi tüm siber saldırı ve insan hatası olasılıklarına karşı mutlak garanti sağlayamaz. Buna rağmen verilerinizin gizliliğini korumak için sistemlerimizi ve süreçlerimizi sürekli geliştiriyoruz.</p>
+<h2>Verilerinizi korumak için mümkün olan her şeyi yapıyoruz.</h2>
+<p>Ekibimiz güvenli kurumsal çözümler geliştirme ve işletme konusunda yaklaşık 20 yıllık deneyime sahiptir. Güvenlik yaklaşımımız; HTTPS ve SSH gibi şifreli iletişim yöntemlerini, iletişim filtrelerini ve güvenlik duvarlarını kapsar. Sunucularımız yüksek güvenlik standartlarına sahip bir veri merkezinde barındırılır.</p>
+<p>Site ile aranızdaki hassas ve özel veri alışverişi SSL ile korunan güvenli iletişim kanalı üzerinden gerçekleşir. Tüm kullanıcılarımız için güvenli bir ortam oluşturmak ve bu ortamı sürdürmek üzere teknik ve organizasyonel önlemler uygularız.</p>
+<p>Güvenlik veya gizlilik hakkında bir sorunuz varsa <a href="/tr/iletisim/">bizimle iletişime geçebilirsiniz</a>.</p>
+HTML,
+            'privacy_tr' => <<<'HTML'
+<p>Bu aydınlatma metni, Myliba LTD. ("Myliba") tarafından web sitesini ziyaretiniz ve kullanımınız sırasında işlenen kişisel verileriniz hakkında 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında sizi bilgilendirmek amacıyla hazırlanmıştır.</p>
+
+<h2>Kişisel verilerinizin elde edilmesi</h2>
+<p>Kişisel verileriniz; myliba.com web sitesi, üyelik ve iletişim formları üzerinden otomatik veya kısmen otomatik yöntemlerle, fiziki olarak ilettiğiniz belgeler üzerinden ise otomatik olmayan yöntemlerle elde edilebilir.</p>
+
+<h2>İşlenen kişisel veriler, amaçlar ve hukuki sebepler</h2>
+<h3>Web sitesi ziyareti</h3>
+<p>IP adresi ve bağlantı zamanı gibi trafik bilgileriniz; faaliyetlerin mevzuata uygun yürütülmesi, ziyaretçi kayıtlarının oluşturulması ve takibi, bilgi güvenliği ile saklama ve arşiv süreçlerinin yürütülmesi amacıyla işlenir.</p>
+<h3>Bireysel üyelik ve kullanım</h3>
+<p>Üyelik ve kullanım sırasında ilettiğiniz veya sistem tarafından üretilen kimlik, iletişim, müşteri işlemi ve işlem güvenliği bilgileriniz; hizmetin sunulması, bilgi güvenliği, satış, operasyon ve saklama süreçlerinin yürütülmesi amacıyla sözleşmenin kurulması ve ifası hukuki sebebine dayanılarak işlenir.</p>
+<h3>Kurumsal üyelik ve kullanım</h3>
+<p>Kurumsal üye temsilcisinin kimlik, iletişim, hukuki işlem ve temsil ettiği kuruma ilişkin bilgileri; bilgi güvenliği, hizmet satışı, muhasebe, finans, operasyon ve saklama süreçleri için işlenir. Kurum tarafından hesap açılan çalışan ve diğer kullanıcıların verileri bakımından Myliba veri işleyen, ilgili kurum ise veri sorumlusudur.</p>
+<h3>Eğitim ve sertifika programları</h3>
+<p>Eğitim ve sertifika programlarına başvuran katılımcıların kimlik, iletişim, mesleki deneyim, eğitim ve işlem güvenliği bilgileri; hizmet satışı, muhasebe, finans, operasyon ve saklama süreçlerinin yürütülmesi amacıyla işlenir.</p>
+<h3>Talep, şikâyet ve iletişim</h3>
+<p>İletişim formu, e-posta veya diğer kanallarla bize ilettiğiniz talep ve şikâyetler ile kimlik ve iletişim bilgileriniz; destek hizmetlerinin yürütülmesi, taleplerin takibi, hakların tesisi veya korunması ve meşru menfaatlerimiz kapsamında saklama ve arşiv faaliyetleri için işlenir.</p>
+<h3>Pazarlama süreçleri</h3>
+<p>Ticari elektronik ileti, kampanya veya promosyonlar hakkında bilgi almak istemeniz hâlinde kimlik, e-posta, telefon, iletişim kanalı ve izin bilgileriniz açık rızanıza dayanılarak işlenir. Verdiğiniz iletişim iznini her zaman geri alabilirsiniz.</p>
+
+<h2>Kişisel verilerinizin aktarılması</h2>
+<p>Kişisel verileriniz, kanunen yetkili kamu kurumlarına mevzuatta öngörülen durum ve sınırlar içinde aktarılabilir. Bunun dışında verilerinizin güvenli biçimde barındırılması ve yedeklenmesi amacıyla hizmet aldığımız veri saklama tedarikçileriyle gerekli güvenlik önlemleri alınarak paylaşım yapılabilir.</p>
+<p>Barındırma hizmeti sunucularının yurt dışında bulunması hâlinde kişisel veriler, KVKK'nın yurt dışına aktarım hükümlerine uygun olarak aktarılır. Myliba kullanımı sırasında kendi tercihinizle diğer kullanıcılarla paylaştığınız kişisel verilerden siz sorumlusunuz.</p>
+
+<h2>Kişisel verilerinizle ilgili haklarınız</h2>
+<p>KVKK'nın 11. maddesi kapsamında veri sorumlusuna başvurarak aşağıdaki haklarınızı kullanabilirsiniz:</p>
+<ul>
+<li>Kişisel verilerinizin işlenip işlenmediğini öğrenme ve işlenmişse bilgi talep etme,</li>
+<li>İşlenme amacını ve verilerin amaca uygun kullanılıp kullanılmadığını öğrenme,</li>
+<li>Yurt içinde veya yurt dışında verilerin aktarıldığı üçüncü kişileri bilme,</li>
+<li>Eksik veya yanlış işlenen verilerin düzeltilmesini isteme,</li>
+<li>İşlenme sebepleri ortadan kalktığında verilerin silinmesini veya yok edilmesini isteme,</li>
+<li>Düzeltme, silme veya yok etme işlemlerinin verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,</li>
+<li>Yalnızca otomatik sistemlerle yapılan analiz sonucunda aleyhinize bir sonuç doğmasına itiraz etme,</li>
+<li>Kanuna aykırı veri işleme nedeniyle zarara uğramanız hâlinde zararın giderilmesini talep etme.</li>
+</ul>
+
+<h2>Veri sorumlusuna başvuru</h2>
+<p>Başvurunuzu Maslak Mah. AOS 55. Sk. 42 Maslak B Blok Sitesi No: 4 İç Kapı No: 542 Sarıyer/İstanbul adresine yazılı olarak veya sistemlerimizde kayıtlı e-posta adresinizi kullanarak <a href="mailto:privacy@myliba.com">privacy@myliba.com</a> adresine iletebilirsiniz.</p>
+<p>Başvuru sırasında uyulması gereken usul ve esaslar hakkında ayrıntılı bilgiye Kişisel Verileri Koruma Kurumu'nun Veri Sorumlusuna Başvuru Usul ve Esasları Hakkında Tebliği üzerinden ulaşabilirsiniz.</p>
+
+<h2>İletişim bilgileri</h2>
+<p><strong>Myliba LTD.</strong><br>Suite E2631, 82a James Carter Road,<br>Mildenhall, Suffolk, IP28 7DE<br>United Kingdom<br><a href="mailto:privacy@myliba.com">privacy@myliba.com</a></p>
+HTML,
+            'contact_tr' => <<<'HTML'
+<p>Sorularınız, demo talepleriniz ve iş birliği fırsatları için formu doldurabilir veya aşağıdaki iletişim kanallarından bize ulaşabilirsiniz.</p>
+<div class="contact-details">
+<section class="contact-details__card">
+<h2>Genel Merkez</h2>
+<address>Suite E2631, 82a James Carter Road<br>Mildenhall, Suffolk, IP28 7DE<br>United Kingdom</address>
+</section>
+<section class="contact-details__card">
+<h2>İstanbul Ofisi</h2>
+<address>Maslak Mah. AOS 55. Sk. 42 Maslak B Blok Sitesi<br>No: 4 İç Kapı No: 542<br>Sarıyer / İstanbul</address>
+</section>
+<section class="contact-details__card">
+<h2>Manisa Teknokent</h2>
+<address>Muradiye Mahallesi CBÜ Kampüsü<br>Küme Evleri Teknokent No: 22<br>Yunusemre / Manisa</address>
+</section>
+<section class="contact-details__card">
+<h2>Bize Ulaşın</h2>
+<p><a href="tel:+905539868699">+90 553 986 86 99</a><br><a href="mailto:hello@myliba.com">hello@myliba.com</a></p>
+</section>
+</div>
 HTML,
             'generic' => '<p>Replace this starter content from the WordPress editor. Use the Myliba Hero and Myliba SEO boxes for page-level presentation and metadata.</p>',
         ];

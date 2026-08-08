@@ -14,17 +14,14 @@ $footer_phone_label = (string) myliba_option('phone_label', '');
 $footer_phone_url = (string) myliba_option('phone_url', '');
 $footer_languages = myliba_language_links();
 
-$footer_page_links = [
-    ['label' => myliba_text('Products'), 'url' => myliba_page_url('products')],
-    ['label' => myliba_text('Academy'), 'url' => myliba_page_url('academy')],
-    ['label' => myliba_text('Culture Analysis'), 'url' => myliba_page_url('culture')],
-    ['label' => myliba_text('Ethics Counsel'), 'url' => myliba_page_url('ethics')],
-    ['label' => myliba_text('Our Story'), 'url' => myliba_page_url('story')],
-    ['label' => myliba_text('FAQ'), 'url' => myliba_page_url('faq')],
-    ['label' => myliba_text('Security'), 'url' => myliba_page_url('security')],
-    ['label' => myliba_text('Privacy'), 'url' => myliba_page_url('privacy')],
-    ['label' => myliba_text('Contact'), 'url' => myliba_page_url('contact')],
-];
+$footer_page_links = myliba_header_menu();
+$footer_contact_link = array_pop($footer_page_links);
+$footer_page_links[] = ['label' => myliba_text('FAQ'), 'url' => myliba_page_url('faq')];
+$footer_page_links[] = ['label' => myliba_text('Security'), 'url' => myliba_page_url('security')];
+$footer_page_links[] = ['label' => myliba_text('Privacy'), 'url' => myliba_page_url('privacy')];
+if (is_array($footer_contact_link)) {
+    $footer_page_links[] = $footer_contact_link;
+}
 
 $footer_company_fallback = [
     ['label' => myliba_text('Blog'), 'url' => myliba_page_url('blog')],

@@ -7187,6 +7187,38 @@ a.post-row:hover::after {
   padding: clamp(22px, 3vw, 34px);
 }
 
+.contact-details {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.contact-details__card {
+  background: #fff;
+  border: 1px solid rgba(21, 23, 34, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.contact-details__card h2 {
+  font-size: var(--fs-lead);
+  margin: 0 0 8px;
+}
+
+.contact-details__card address,
+.contact-details__card p {
+  color: var(--text-secondary);
+  font-size: var(--fs-body-sm);
+  font-style: normal;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.contact-details__card a {
+  color: var(--primary-dark);
+  font-weight: 800;
+}
+
 .myliba-form input:not([type="checkbox"]):not([type="radio"]),
 .myliba-form select,
 .myliba-form textarea {
