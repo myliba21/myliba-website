@@ -102,12 +102,12 @@ $footer_legal_links = [
     /*     [
             'label' => myliba_text('KVKK ve GDPR'),
             'url' => home_url($footer_lang === 'en' ? '/en/kvkk/' : '/tr/kvkk/'),
-        ], */
-    [
-        'label' => myliba_text('Çerez Politikası'),
-        'url' => home_url($footer_lang === 'en' ? '/en/cookie-policy/' : '/tr/cerez-politikasi/'),
-    ],
-    /*     [
+        ],
+        [
+            'label' => myliba_text('Çerez Politikası'),
+            'url' => home_url($footer_lang === 'en' ? '/en/cookie-policy/' : '/tr/cerez-politikasi/'),
+        ],
+        [
             'label' => myliba_text('Kullanım Şartları'),
             'url' => home_url($footer_lang === 'en' ? '/en/terms-of-use/' : '/tr/kullanim-sartlari/'),
         ], */
