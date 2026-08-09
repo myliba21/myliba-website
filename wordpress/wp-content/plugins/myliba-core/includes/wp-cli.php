@@ -170,7 +170,7 @@ class Commands
                 default => $this->starter_content('generic'),
             };
             $page_id = $this->upsert_page($title, $slug, $content, $meta, $parent, $template);
-            if (in_array($slug, ['yazilim', 'cozumler', 'gelisim-merkezi', 'hikayemiz', 'our-story'], true)) {
+            if (in_array($slug, ['yazilim', 'cozumler', 'gelisim-merkezi', 'hikayemiz', 'our-story', 'etik-danismanlik', 'ethics-counsel', 'sss', 'faq'], true)) {
                 \Myliba\Core\PageContent\materialize($page_id);
             }
         }

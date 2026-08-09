@@ -544,4 +544,124 @@
     previous?.addEventListener("click", () => move(-1));
     next?.addEventListener("click", () => move(1));
   });
+
+  // FAQ Live Search & Category Filtering
+  const faqApp = document.querySelector("[data-faq-app]");
+  if (faqApp) {
+    const searchInput = faqApp.querySelector("#faq-live-search");
+    const clearBtn = faqApp.querySelector("#faq-search-clear");
+    const searchStatus = faqApp.querySelector("#faq-search-status");
+    const categoryBtns = Array.from(faqApp.querySelectorAll("[data-filter-category]"));
+    const faqItems = Array.from(faqApp.querySelectorAll(".faq-item"));
+    const noResults = faqApp.querySelector("#faq-no-results");
+    const resetBtn = faqApp.querySelector("#faq-reset-search-btn");
+
+    let currentCategory = "all";
+    let currentQuery = "";
+
+    const normalize = (text) =>
+      (text || "")
+        .toString()
+        .toLowerCase()
+        .replace(/ğ/g, "g")
+        .replace(/ü/g, "u")
+        .replace(/ş/g, "s")
+        .replace(/ı/g, "i")
+    const isEnglish = (document.documentElement.lang || "").toLowerCase().startsWith("en");
+
+    const updateFaqView = (isClearing = false) => {
+      const q = normalize(currentQuery);
+      let visibleCount = 0;
+
+      faqItems.forEach((item) => {
+        const itemCat = item.getAttribute("data-category") || "";
+        const itemSearchText = normalize(item.getAttribute("data-search-text") || "");
+
+        const matchesCat = currentCategory === "all" || itemCat === currentCategory;
+        const matchesQuery = q === "" || itemSearchText.includes(q);
+
+        if (matchesCat && matchesQuery) {
+          item.classList.remove("is-hidden");
+          visibleCount++;
+          if (q !== "") {
+            item.setAttribute("open", "");
+          } else if (isClearing) {
+            item.removeAttribute("open");
+          }
+        } else {
+          item.classList.add("is-hidden");
+          if (q !== "") {
+            item.removeAttribute("open");
+          }
+        }
+      });
+
+      if (noResults) {
+        noResults.hidden = visibleCount > 0;
+      }
+
+      if (clearBtn) {
+        clearBtn.hidden = currentQuery === "";
+      }
+
+      if (searchStatus) {
+        if (currentQuery !== "") {
+          searchStatus.hidden = false;
+          searchStatus.textContent = isEnglish
+            ? `${visibleCount} ${visibleCount === 1 ? "question" : "questions"} found`
+            : `${visibleCount} soru bulundu`;
+        } else {
+          searchStatus.hidden = true;
+          searchStatus.textContent = "";
+        }
+      }
+    };
+
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        currentQuery = e.target.value;
+        updateFaqView(currentQuery === "");
+      });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        if (searchInput) {
+          searchInput.value = "";
+          searchInput.focus();
+        }
+        currentQuery = "";
+        updateFaqView(true);
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        currentCategory = "all";
+        currentQuery = "";
+        if (searchInput) searchInput.value = "";
+        categoryBtns.forEach((btn) => {
+          const isAll = btn.getAttribute("data-filter-category") === "all";
+          btn.classList.toggle("is-active", isAll);
+          btn.setAttribute("aria-selected", isAll ? "true" : "false");
+        });
+        updateFaqView(true);
+      });
+    }
+
+    categoryBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetCat = btn.getAttribute("data-filter-category") || "all";
+        currentCategory = targetCat;
+
+        categoryBtns.forEach((b) => {
+          const isActive = b === btn;
+          b.classList.toggle("is-active", isActive);
+          b.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        updateFaqView();
+      });
+    });
+  }
 })();

@@ -71,6 +71,7 @@ function schema_for_post(\WP_Post|int $post): ?string
             || str_contains($uri, 'ebooks') => 'development',
         in_array($slug, ['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz'], true) || str_contains($uri, 'hikayemiz') || str_contains($uri, 'our-story') => 'story',
         in_array($slug, ['etik-hat', 'etik-danismanlik', 'ethics-counsel', 'etik', 'ethics', 'whistleblowing'], true) || str_contains($slug, 'etik') || str_contains($slug, 'ethics') || str_contains($uri, 'etik') || str_contains($uri, 'ethics') => 'ethics',
+        in_array($slug, ['sss', 'faq', 'faqs', 'sikca-sorulan-sorular'], true) || str_contains($slug, 'sss') || str_contains($slug, 'faq') || str_contains($uri, 'sss') || str_contains($uri, 'faq') => 'faq',
         default => null,
     };
 }
@@ -1237,6 +1238,296 @@ function ethics_defaults(): array
     ];
 }
 
+function faq_definition(): array
+{
+    return [
+        'label' => 'Sıkça Sorulan Sorular',
+        'groups' => [
+            'hero' => [
+                'label' => 'Hero Bölümü',
+                'fields' => [
+                    'hero_eyebrow' => ['text', 'Üst etiket (Örn: Sıkça Sorulan Sorular)'],
+                    'hero_title' => ['textarea', 'Ana Başlık (Örn: Myliba Hakkında Merak Ettiğiniz Her Şey)'],
+                    'hero_lead' => ['textarea', 'Açıklama'],
+                    'hero_search_placeholder' => ['text', 'Arama kutusu yer tutucu metni (Örn: Soru veya konu arayın...)'],
+                ],
+            ],
+            'categories' => [
+                'label' => 'Kategori Filtreleri',
+                'fields' => [
+                    'category_all' => ['text', 'Tümü Sekmesi Etiketi (Örn: Tümü)'],
+                    'category_1' => ['text', '1. Kategori (Örn: Genel & Platform)'],
+                    'category_2' => ['text', '2. Kategori (Örn: Yazılım & OKR)'],
+                    'category_3' => ['text', '3. Kategori (Örn: Akademi & Eğitim)'],
+                    'category_4' => ['text', '4. Kategori (Örn: Danışmanlık & Çözümler)'],
+                    'category_5' => ['text', '5. Kategori (Örn: Güvenlik & Entegrasyon)'],
+                ],
+            ],
+            'faqs' => [
+                'label' => 'Sorular ve Yanıtlar',
+                'collections' => [
+                    'faqs' => ['label' => 'Soru & Yanıt Listesi', 'fields' => [
+                        'category' => ['text', 'Kategori (Örn: Genel & Platform, Yazılım & OKR, Akademi & Eğitim, Danışmanlık & Çözümler, Güvenlik & Entegrasyon)'],
+                        'question' => ['text', 'Soru'],
+                        'answer' => ['textarea', 'Yanıt (HTML / Paragraf destekler)'],
+                        'tag' => ['text', 'Opsiyonel Etiket / Rozet (Örn: Popüler, ICF Akredite, Güvenlik)'],
+                    ]],
+                ],
+            ],
+            'cta' => [
+                'label' => 'İletişim & Destek Kartı',
+                'fields' => [
+                    'cta_eyebrow' => ['text', 'Üst etiket (Örn: Başka Bir Sorunuz mu Var?)'],
+                    'cta_title' => ['textarea', 'Başlık (Örn: Uzman Ekibimiz Size Yardımcı Olmaya Hazır)'],
+                    'cta_lead' => ['textarea', 'Açıklama'],
+                    'cta_primary_label' => ['text', 'Ana buton etiketi (Örn: Demo Talep Edin)'],
+                    'cta_primary_url' => ['text', 'Ana buton URL (Boş bırakılırsa demo sayfasına gider)'],
+                    'cta_secondary_label' => ['text', 'İkincil buton etiketi (Örn: Bize Ulaşın)'],
+                    'cta_secondary_url' => ['text', 'İkincil buton URL (Boş bırakılırsa iletişim sayfasına gider)'],
+                    'cta_contact_title' => ['text', 'İletişim kutusu başlığı (Örn: Doğrudan İletişim)'],
+                    'cta_contact_text' => ['textarea', 'İletişim açıklaması'],
+                ],
+            ],
+        ],
+    ];
+}
+
+function faq_defaults(int $post_id = 0): array
+{
+    $lang = '';
+    if ($post_id > 0) {
+        $lang = (string) get_post_meta($post_id, '_myliba_language', true);
+        if ($lang === '') {
+            $post = get_post($post_id);
+            if ($post instanceof \WP_Post) {
+                if (str_contains((string) $post->post_name, 'faq') || str_contains(get_page_uri($post), 'en/')) {
+                    $lang = 'en';
+                }
+            }
+        }
+    }
+    if ($lang === '' && function_exists('myliba_current_language')) {
+        $lang = \myliba_current_language();
+    }
+    if ($lang === '') {
+        $lang = 'tr';
+    }
+
+    if ($lang === 'en') {
+        return [
+            'fields' => [
+                'hero_eyebrow' => 'Frequently Asked Questions',
+                'hero_title' => 'Everything You Need to Know About Myliba',
+                'hero_lead' => 'Explore comprehensive answers about Myliba OKR & Performance software, Academy programs, culture & strategy solutions, and enterprise security.',
+                'hero_search_placeholder' => 'Search for questions, topics, or features...',
+                'category_all' => 'All',
+                'category_1' => 'General & Platform',
+                'category_2' => 'Software & OKRs',
+                'category_3' => 'Academy & Learning',
+                'category_4' => 'Consulting & Solutions',
+                'category_5' => 'Security & Integration',
+                'cta_eyebrow' => 'Still Have Questions?',
+                'cta_title' => 'Our Expert Team is Here to Help',
+                'cta_lead' => "Didn't find the answer you were looking for? Schedule a meeting with our specialists or request an interactive demo.",
+                'cta_primary_label' => 'Request a Demo',
+                'cta_primary_url' => '',
+                'cta_secondary_label' => 'Contact Us',
+                'cta_secondary_url' => '',
+                'cta_contact_title' => 'Direct Support',
+                'cta_contact_text' => 'We typically respond to inquiries within 24 hours on business days.',
+            ],
+            'collections' => [
+                'faqs' => [
+                    [
+                        'category' => 'General & Platform',
+                        'question' => 'What is Myliba and what core problems does it solve?',
+                        'answer' => 'Myliba is an integrated performance, OKR management, and organizational culture ecosystem. It bridges the gap between high-level company strategy and day-to-day execution by combining modern goal tracking (OKRs), continuous feedback, 9-box talent matrix, and ICF-accredited coaching programs.',
+                        'tag' => 'Popular',
+                    ],
+                    [
+                        'category' => 'General & Platform',
+                        'question' => 'What size organizations is Myliba designed for?',
+                        'answer' => 'Myliba scales seamlessly from fast-growing scale-ups (50+ employees) to large enterprise organizations with thousands of employees across multiple subsidiaries and regions.',
+                        'tag' => '',
+                    ],
+                    [
+                        'category' => 'General & Platform',
+                        'question' => 'How does the trial or demo onboarding process work?',
+                        'answer' => 'When you request a demo, our solution consultants conduct a discovery call to understand your organizational structure and goals. We then provide a customized interactive platform demonstration tailored to your workflows.',
+                        'tag' => '',
+                    ],
+                    [
+                        'category' => 'Software & OKRs',
+                        'question' => 'How does Myliba combine OKRs with Performance Management?',
+                        'answer' => 'Unlike rigid legacy HR tools, Myliba unifies ambitious goal setting (OKRs) with continuous performance reviews, 1-on-1 check-ins, and 360-degree feedback in one intuitive dashboard, ensuring alignment without burdensome bureaucracy.',
+                        'tag' => 'Core Feature',
+                    ],
+                    [
+                        'category' => 'Software & OKRs',
+                        'question' => 'How does the 9-Box Talent Matrix work in Myliba?',
+                        'answer' => 'The 9-Box Matrix visually maps employee performance against growth potential. It helps leadership identify top talent, recognize flight risks, and design targeted development paths with actionable objective data.',
+                        'tag' => '',
+                    ],
+                    [
+                        'category' => 'Software & OKRs',
+                        'question' => 'Can Myliba integrate with our existing HRIS, ERP, and SSO systems?',
+                        'answer' => 'Yes. Myliba offers REST APIs, webhook triggers, and turnkey integrations with major enterprise platforms including SAP, Workday, Microsoft Teams, Slack, Azure AD, and Google Workspace for automated user provisioning and Single Sign-On (SSO).',
+                        'tag' => 'Enterprise',
+                    ],
+                    [
+                        'category' => 'Academy & Learning',
+                        'question' => 'Who is the Myliba OKR & Culture Coaching Program for?',
+                        'answer' => 'The program is designed for C-level executives, HR and People & Culture leaders, Agile coaches, transformation leads, and managers who want to master goal-setting leadership and organizational culture design.',
+                        'tag' => 'ICF Accredited',
+                    ],
+                    [
+                        'category' => 'Academy & Learning',
+                        'question' => 'What value does the ICF 40 CCE accreditation provide?',
+                        'answer' => 'Our program provides 40 Continuing Coach Education (CCE) units accredited by the International Coaching Federation (ICF), accelerating your path toward ACC, PCC, or MCC credentials while validating your organizational coaching competence.',
+                        'tag' => '',
+                    ],
+                    [
+                        'category' => 'Academy & Learning',
+                        'question' => 'Can programs and business simulations be customized for our company?',
+                        'answer' => 'Absolutely. We design bespoke corporate cohorts incorporating real company business cases alongside experiential simulation labs like Target Mars and Radical Candor.',
+                        'tag' => '',
+                    ],
+                    [
+                        'category' => 'Consulting & Solutions',
+                        'question' => 'How does the Culture Analysis & Diagnostic study work?',
+                        'answer' => 'Our scientific diagnostic framework evaluates psychological safety, feedback openness, alignment, and core values through surveys, focus groups, and leadership interviews, delivering concrete roadmap reports.',
+                        'tag' => '',
+                    ],
+                    [
+                        'category' => 'Consulting & Solutions',
+                        'question' => 'How does the independent Whistleblowing & Ethics Line work?',
+                        'answer' => 'Myliba provides a secure, anonymous, and encrypted reporting platform compliant with international standards, allowing employees to report misconduct, harassment, or irregularities without fear of retaliation.',
+                        'tag' => 'Compliance',
+                    ],
+                    [
+                        'category' => 'Security & Integration',
+                        'question' => 'How are data security, KVKK, and GDPR compliances handled?',
+                        'answer' => 'Myliba adheres to ISO/IEC 27001 standards, end-to-end TLS 1.3 / AES-256 encryption, role-based access control (RBAC), and localized sovereign cloud hosting ensuring strict KVKK and GDPR compliance.',
+                        'tag' => 'Security',
+                    ],
+                    [
+                        'category' => 'Security & Integration',
+                        'question' => 'What is the implementation and rollout timeline?',
+                        'answer' => 'Standard cloud deployments take 1 to 3 weeks, including data onboarding, SSO setup, admin configuration, and initial champion user training.',
+                        'tag' => '',
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    return [
+        'fields' => [
+            'hero_eyebrow' => 'Sıkça Sorulan Sorular',
+            'hero_title' => 'Myliba Hakkında Merak Ettiğiniz Her Şey',
+            'hero_lead' => 'Myliba OKR & Performans Yazılımı, Akademi programları, kültür ve strateji çözümleri, veri güvenliği ve entegrasyon süreçlerine dair en çok merak edilen sorular ve yanıtları.',
+            'hero_search_placeholder' => 'Soru, konu veya özellik arayın...',
+            'category_all' => 'Tümü',
+            'category_1' => 'Genel & Platform',
+            'category_2' => 'Yazılım & OKR',
+            'category_3' => 'Akademi & Eğitim',
+            'category_4' => 'Danışmanlık & Çözümler',
+            'category_5' => 'Güvenlik & Entegrasyon',
+            'cta_eyebrow' => 'Başka Bir Sorunuz mu Var?',
+            'cta_title' => 'Uzman Ekibimiz Size Yardımcı Olmaya Hazır',
+            'cta_lead' => 'Aradığınız cevabı bulamadıysanız veya kurumunuza özel ihtiyaçları değerlendirmek isterseniz uzmanlarımızla hemen iletişime geçin.',
+            'cta_primary_label' => 'Demo Talep Edin',
+            'cta_primary_url' => '',
+            'cta_secondary_label' => 'Bize Ulaşın',
+            'cta_secondary_url' => '',
+            'cta_contact_title' => 'Doğrudan İletişim',
+            'cta_contact_text' => 'Mesai saatleri içindeki tüm sorularınıza en geç 24 saat içinde dönüş yapıyoruz.',
+        ],
+        'collections' => [
+            'faqs' => [
+                [
+                    'category' => 'Genel & Platform',
+                    'question' => 'Myliba nedir ve kurumlara ne kazandırır?',
+                    'answer' => 'Myliba; strateji, OKR (Hedef ve Temel Sonuçlar), sürekli performans yönetimi, yetenek matrisi ve kurum kültürünü tek bir ekosistemde buluşturan bütünleşik bir platformdur. Hedeflerin sadece panolarda kalmasını engeller; günlük iş ritmine, geri bildirim kültürüne ve ölçülebilir çıktılara dönüştürür.',
+                    'tag' => 'Popüler',
+                ],
+                [
+                    'category' => 'Genel & Platform',
+                    'question' => 'Myliba hangi büyüklükteki şirketler için uygundur?',
+                    'answer' => 'Myliba, 50 kişilik hızlı büyüyen teknoloji ve ölçeklenme şirketlerinden (scale-up), binlerce çalışanı olan çok lokasyonlu holding ve kurumsal şirketlere kadar her ölçekte esnek ve güvenli biçimde çalışacak mimariye sahiptir.',
+                    'tag' => '',
+                ],
+                [
+                    'category' => 'Genel & Platform',
+                    'question' => 'Demo talebinde bulunduğumda süreç nasıl işliyor?',
+                    'answer' => 'Demo formunu doldurduğunuzda danışman ekibimiz 24 saat içinde sizinle iletişime geçer. Kurumunuzun mevcut yapısını ve önceliklerini dinleyerek ihtiyaçlarınıza özel canlı bir platform demosu ve yol haritası sunar.',
+                    'tag' => '',
+                ],
+                [
+                    'category' => 'Yazılım & OKR',
+                    'question' => 'Myliba OKR ve Performans Yönetimini nasıl entegre eder?',
+                    'answer' => 'Geleneksel, yılda bir kez yapılan hantal performans değerlendirmeleri yerine; çeyreklik dinamik OKR hedefleri, sürekli 1:1 görüşmeler, anlık takdir/geri bildirim ve 360 derece yetkinlik değerlendirmelerini tek bir akışta birleştirir.',
+                    'tag' => 'Temel Özellik',
+                ],
+                [
+                    'category' => 'Yazılım & OKR',
+                    'question' => '9-Kutu (9-Box) Yetenek Matrisi ve Değerlendirme Modülü nasıl çalışır?',
+                    'answer' => 'Çalışanların performans çıktıları ile gelişim potansiyellerini çapraz eksende görselleştirir. Liderlerin kritik yetenekleri tespit etmesini, yedekleme planı yapmasını ve terfi/eğitim kararlarını objektif verilere dayandırmasını sağlar.',
+                    'tag' => '',
+                ],
+                [
+                    'category' => 'Yazılım & OKR',
+                    'question' => 'Mevcut İK (HRIS), ERP ve SSO sistemlerimizle entegrasyon yapılabiliyor mu?',
+                    'answer' => 'Evet. Myliba; REST API, webhook ve hazır entegrasyon katmanları sayesinde SAP, Workday, Microsoft Teams, Slack, Azure Active Directory ve Google Workspace gibi kurumsal sistemlerle tam uyumlu çalışır; kullanıcı senkronizasyonu ve Tek Noktadan Giriş (SSO) sağlar.',
+                    'tag' => 'Entegrasyon',
+                ],
+                [
+                    'category' => 'Akademi & Eğitim',
+                    'question' => 'Myliba OKR & Kültür Koçluğu Programı kimler için uygundur?',
+                    'answer' => 'C-level yöneticiler, İnsan ve Kültür liderleri, Agile koçlar, dönüşüm ofisi liderleri, strateji yöneticileri ve kurumunda hedef odaklı ortak çalışma ritmi kurmak isteyen tüm profesyoneller için uygundur.',
+                    'tag' => 'ICF Akredite',
+                ],
+                [
+                    'category' => 'Akademi & Eğitim',
+                    'question' => 'ICF 40 CCE sertifikası bana ve kurumuma ne kazandırır?',
+                    'answer' => 'Program, Uluslararası Koçluk Federasyonu (ICF) tarafından akredite edilmiş 40 CCE kredisi sağlar. Bu kredi hem profesyonel koçluk unvanlama (ACC/PCC/MCC) sürecinizde geçerlidir hem de kurum içi koçluk yetkinliğinizi uluslararası standartta belgeler.',
+                    'tag' => '',
+                ],
+                [
+                    'category' => 'Akademi & Eğitim',
+                    'question' => 'Kurumumuz için özel sınıf ve simülasyon atölyesi tasarlanabilir mi?',
+                    'answer' => 'Evet. Şirketinizin gerçek hedefleri ve dinamikleri doğrultusunda kurum içi özel kohortlar, “Hedef Mars” ve “Radikal Samimiyet” gibi deneyimsel simülasyonlarla zenginleştirilmiş atölyeler tasarlıyoruz.',
+                    'tag' => '',
+                ],
+                [
+                    'category' => 'Danışmanlık & Çözümler',
+                    'question' => 'Kültür Analizi ve Teşhis çalışması nasıl yürütülür?',
+                    'answer' => 'Bilimsel temelli anketler, odak grup görüşmeleri ve liderlik mülakatları ile kurumun psikolojik güvenlik, geri bildirim açıklığı, hedef uyumu ve değer yaşatma dinamikleri ölçümlenir; somut aksiyon raporuna dönüştürülür.',
+                    'tag' => '',
+                ],
+                [
+                    'category' => 'Danışmanlık & Çözümler',
+                    'question' => 'Bağımsız Etik Bildirim Hattı (Whistleblowing) nasıl çalışır?',
+                    'answer' => 'Çalışanların ve paydaşların usulsüzlük, mobbing, ayrımcılık veya suiistimal durumlarını %100 gizli ve güvenli biçimde bildirebilecekleri, bağımsız ve tarafsız bir etik hat çözümüdür. Misilleme riskini ortadan kaldırarak yasal uyumluluk sağlar.',
+                    'tag' => 'Uyum & Etik',
+                ],
+                [
+                    'category' => 'Güvenlik & Entegrasyon',
+                    'question' => 'Veri güvenliği, KVKK ve GDPR standartlarınız nelerdir?',
+                    'answer' => 'Tüm veriler TLS 1.3 ve AES-256 şifreleme standartlarıyla korunur. ISO/IEC 27001 uyumlu altyapımız, yerel veri merkezlerinde barındırma seçeneği ve rol bazlı erişim denetimi (RBAC) ile KVKK ve GDPR mevzuatlarına %100 uyumludur.',
+                    'tag' => 'Güvenlik',
+                ],
+                [
+                    'category' => 'Güvenlik & Entegrasyon',
+                    'question' => 'Kurulum ve canlıya geçiş ne kadar sürer?',
+                    'answer' => 'Bulut (SaaS) kurulumlarımız; veri yükleme, SSO entegrasyonu ve lider/kullanıcı eğitimleri dahil genellikle 1 ila 3 hafta içerisinde başarıyla tamamlanır.',
+                    'tag' => '',
+                ],
+            ],
+        ],
+    ];
+}
+
 function definition(string $schema): array
 {
     return match ($schema) {
@@ -1248,6 +1539,7 @@ function definition(string $schema): array
         'ebook' => ebook_definition(),
         'story' => story_definition(),
         'ethics' => ethics_definition(),
+        'faq' => faq_definition(),
         default => [],
     };
 }
@@ -1263,6 +1555,7 @@ function defaults(string $schema, int $post_id = 0): array
         'ebook' => ebook_defaults($post_id),
         'story' => story_defaults(),
         'ethics' => ethics_defaults(),
+        'faq' => faq_defaults($post_id),
         default => ['fields' => [], 'collections' => []],
     };
 }

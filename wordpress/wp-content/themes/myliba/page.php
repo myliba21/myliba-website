@@ -34,6 +34,11 @@ if (is_page(['etik-hat', 'etik-danismanlik', 'ethics-counsel', 'etik', 'ethics',
     return;
 }
 
+if (is_page(['sss', 'faq', 'faqs', 'sikca-sorulan-sorular'])) {
+    require get_template_directory() . '/template-parts/page-faq.php';
+    return;
+}
+
 get_header();
 get_template_part('template-parts/hero');
 ?>
