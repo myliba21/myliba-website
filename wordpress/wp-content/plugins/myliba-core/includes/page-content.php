@@ -60,13 +60,16 @@ function schema_for_post(\WP_Post|int $post): ?string
     $uri = (string) get_page_uri($post);
 
     return match (true) {
-        in_array($slug, ['yazilim', 'urunler'], true) || str_contains($uri, 'yazilim') => 'software',
-        in_array($slug, ['cozumler', 'solutions'], true) || str_contains($uri, 'cozumler') => 'solutions',
+        in_array($slug, ['yazilim', 'urunler', 'software', 'our-products'], true) || str_contains($uri, 'yazilim') || str_contains($uri, 'software') || str_contains($uri, 'our-products') => 'software',
+        in_array($slug, ['cozumler', 'solutions'], true) || str_contains($uri, 'cozumler') || str_contains($uri, 'solutions') => 'solutions',
         in_array($slug, ['gelisim-merkezi', 'development-center', 'raporlar-ve-trendler', 'reports', 'e-kitaplar', 'ebooks'], true)
             || str_contains($uri, 'gelisim-merkezi')
+            || str_contains($uri, 'development-center')
             || str_contains($uri, 'raporlar-ve-trendler')
-            || str_contains($uri, 'e-kitaplar') => 'development',
-        in_array($slug, ['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz'], true) || str_contains($uri, 'hikayemiz') => 'story',
+            || str_contains($uri, 'reports')
+            || str_contains($uri, 'e-kitaplar')
+            || str_contains($uri, 'ebooks') => 'development',
+        in_array($slug, ['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz'], true) || str_contains($uri, 'hikayemiz') || str_contains($uri, 'our-story') => 'story',
         in_array($slug, ['etik-hat', 'etik-danismanlik', 'ethics-counsel', 'etik', 'ethics', 'whistleblowing'], true) || str_contains($slug, 'etik') || str_contains($slug, 'ethics') || str_contains($uri, 'etik') || str_contains($uri, 'ethics') => 'ethics',
         default => null,
     };
@@ -882,6 +885,354 @@ function ebook_defaults(int $post_id): array
                 ['number' => '03', 'title' => 'Adil Karar Mekanizması', 'text' => '%100 objektif verilerle çalışanları geliştirme.'],
             ],
             'key_takeaways' => $takeaways,
+        ],
+    ];
+}
+
+function story_definition(): array
+{
+    return [
+        'label' => 'Biz Kimiz / Hikayemiz Sayfası İçeriği',
+        'groups' => [
+            'hero' => [
+                'label' => 'Hero & Manifesto',
+                'fields' => [
+                    'hero_eyebrow' => ['text', 'Üst etiket'],
+                    'hero_title' => ['textarea', 'Başlık'],
+                    'hero_lead' => ['textarea', 'Açıklama'],
+                    'hero_primary_label' => ['text', 'Ana buton etiketi'],
+                    'hero_secondary_label' => ['text', 'İkincil buton etiketi'],
+                ],
+                'collections' => [
+                    'hero_badges' => ['label' => 'Rozetler', 'fields' => ['label' => ['text', 'Rozet etiketi']]],
+                ],
+            ],
+            'formula' => [
+                'label' => 'Yönetim Formülü',
+                'fields' => [
+                    'formula_eyebrow' => ['text', 'Üst etiket'],
+                    'formula_title' => ['textarea', 'Başlık'],
+                    'formula_lead' => ['textarea', 'Açıklama'],
+                    'formula_badge' => ['text', 'Formül rozeti'],
+                    'formula_meta' => ['text', 'Formül kaynak/meta'],
+                    'formula_result_tag' => ['text', 'Sonuç etiketi'],
+                    'formula_result_title' => ['text', 'Sonuç başlığı'],
+                    'formula_result_desc' => ['textarea', 'Sonuç açıklaması'],
+                    'formula_potential_tag' => ['text', 'Potansiyel etiketi'],
+                    'formula_potential_title' => ['text', 'Potansiyel başlığı'],
+                    'formula_potential_desc' => ['textarea', 'Potansiyel açıklaması'],
+                    'formula_interference_tag' => ['text', 'Müdahale etiketi'],
+                    'formula_interference_title' => ['text', 'Müdahale başlığı'],
+                    'formula_interference_desc' => ['textarea', 'Müdahale açıklaması'],
+                    'formula_leverage_title' => ['text', 'Kaldıraç başlığı'],
+                    'formula_leverage_text' => ['textarea', 'Kaldıraç açıklaması'],
+                ],
+            ],
+            'why' => [
+                'label' => 'Karşılaştırma (Neden Myliba)',
+                'fields' => [
+                    'why_eyebrow' => ['text', 'Üst etiket'],
+                    'why_title' => ['textarea', 'Başlık'],
+                    'why_lead' => ['textarea', 'Açıklama'],
+                    'why_manifesto_text' => ['textarea', 'Manifesto metni'],
+                ],
+                'collections' => [
+                    'comparisons' => ['label' => 'Karşılaştırma kartları', 'fields' => [
+                        'problem_label' => ['text', 'Problem etiketi'],
+                        'problem_title' => ['text', 'Problem başlığı'],
+                        'problem_desc' => ['textarea', 'Problem açıklaması'],
+                        'solution_label' => ['text', 'Çözüm etiketi'],
+                        'solution_title' => ['text', 'Çözüm başlığı'],
+                        'solution_desc' => ['textarea', 'Çözüm açıklaması'],
+                    ]],
+                ],
+            ],
+            'pillars' => [
+                'label' => '4 Temel Sütun (Neler Yapıyoruz)',
+                'fields' => [
+                    'pillars_eyebrow' => ['text', 'Üst etiket'],
+                    'pillars_title' => ['textarea', 'Başlık'],
+                    'pillars_lead' => ['textarea', 'Açıklama'],
+                ],
+                'collections' => [
+                    'pillars' => ['label' => 'Sütun kartları', 'fields' => [
+                        'badge' => ['text', 'Rozet'],
+                        'number' => ['text', 'Numara'],
+                        'icon' => ['text', 'İkon'],
+                        'title' => ['text', 'Başlık'],
+                        'desc' => ['textarea', 'Açıklama'],
+                        'tags' => ['textarea', 'Etiketler (her satıra bir etiket)'],
+                        'link_label' => ['text', 'Link etiketi'],
+                        'link_target' => ['text', 'Link hedefi (products, academy, development, solutions)'],
+                    ]],
+                ],
+            ],
+            'stats' => [
+                'label' => 'Etki ve İstatistikler',
+                'fields' => [
+                    'stats_eyebrow' => ['text', 'Üst etiket'],
+                    'stats_title' => ['textarea', 'Başlık'],
+                    'stats_lead' => ['textarea', 'Açıklama'],
+                ],
+                'collections' => [
+                    'stats' => ['label' => 'İstatistikler', 'fields' => [
+                        'value' => ['text', 'Değer'],
+                        'label' => ['text', 'Etiket'],
+                        'desc' => ['textarea', 'Açıklama'],
+                    ]],
+                ],
+            ],
+            'values' => [
+                'label' => 'Değerlerimiz',
+                'fields' => [
+                    'values_eyebrow' => ['text', 'Üst etiket'],
+                    'values_title' => ['textarea', 'Başlık'],
+                    'values_lead' => ['textarea', 'Açıklama'],
+                ],
+                'collections' => [
+                    'values' => ['label' => 'Değer kartları', 'fields' => [
+                        'badge' => ['text', 'Rozet'],
+                        'title' => ['text', 'Başlık'],
+                        'desc' => ['textarea', 'Açıklama'],
+                    ]],
+                ],
+            ],
+            'cta' => [
+                'label' => 'Dönüşüm Alanı (CTA)',
+                'fields' => [
+                    'cta_eyebrow' => ['text', 'Üst etiket'],
+                    'cta_title' => ['textarea', 'Başlık'],
+                    'cta_lead' => ['textarea', 'Açıklama'],
+                    'cta_primary_label' => ['text', 'Ana buton etiketi'],
+                    'cta_secondary_label' => ['text', 'İkincil buton etiketi'],
+                ],
+            ],
+        ],
+    ];
+}
+
+function story_defaults(): array
+{
+    return [
+        'fields' => [
+            'hero_eyebrow' => 'Biz Kimiz? / Myliba Felsefesi',
+            'hero_title' => "Geleceğin Organizasyonlarını\nİnsan ve Teknolojiyi Birleştirerek İnşa Ediyoruz.",
+            'hero_lead' => 'Myliba; hantal hiyerarşileri esneten, organizasyonları geleceğin esnek çalışma dünyasına hazırlayan ve yapay zekâ destekli altyapıyı ICF onaylı kültürel yönetim modeliyle birleştiren dünyanın ilk ve tek bütünleşik platformudur.',
+            'hero_primary_label' => 'Demo Talep Edin',
+            'hero_secondary_label' => 'Felsefemizi İnceleyin',
+            'formula_eyebrow' => 'Yönetim Yaklaşımımız',
+            'formula_title' => 'Performansı Artırmak İçin Baskıyı Değil, Engelleri Azaltıyoruz',
+            'formula_lead' => 'Geleneksel yönetim modelleri performansı artırmak için çalışan üzerindeki baskıyı ve kontrolü artırır. Biz ise performansı ortaya çıkaran formüle inanıyoruz.',
+            'formula_badge' => 'Performans Formülü',
+            'formula_meta' => 'Timothy Gallwey & Modern Yönetim Bilimi',
+            'formula_result_tag' => 'Çıktı',
+            'formula_result_title' => 'Performans',
+            'formula_result_desc' => 'Ekiplerin gerçek iş çıktısı ve değer üretme kapasitesi.',
+            'formula_potential_tag' => 'Girdi',
+            'formula_potential_title' => 'Potansiyel',
+            'formula_potential_desc' => 'Çalışanın ve ekibin sahip olduğu bilgi, beceri ve içsel motivasyon.',
+            'formula_interference_tag' => 'Filtre',
+            'formula_interference_title' => 'Müdahale',
+            'formula_interference_desc' => 'Bürokrasi, belirsizlik, mikroyönetim, dedikodu ve korku kültürü.',
+            'formula_leverage_title' => 'Temel Kaldıracımız:',
+            'formula_leverage_text' => 'Potansiyeli artırmak yetmez; performansı patlatmak için müdahaleyi sıfıra indirmek gerekir. Myliba Yazılım ve Çözümleri tam olarak bu engelleri kaldırmak için tasarlandı.',
+            'why_eyebrow' => 'Neden Myliba?',
+            'why_title' => 'Geleneksel Yönetim vs. Myliba Yaklaşımı',
+            'why_lead' => 'Eski nesil İK süreçleri ile yeni nesil yüksek performans kültürü arasındaki farklar.',
+            'why_manifesto_text' => "Biz şuna inanıyoruz: Doğru hedefler (OKR), sürekli diyalog (CFR) ve şeffaf bir kültür olduğunda; çalışanlar yönetilmeye ihtiyaç duymaz, liderlik eder.",
+            'pillars_eyebrow' => 'Bütünleşik Ekosistem',
+            'pillars_title' => 'Neler Yapıyoruz? 4 Temel Sütun Üzerinde Dönüşüm',
+            'pillars_lead' => 'Yazılım, akademi, analiz ve danışmanlığı tek bir çatı altında birleştirerek kurumunuzun görünmez işletim sistemini kuruyoruz.',
+            'stats_eyebrow' => 'Kanıtlanmış Etki',
+            'stats_title' => 'Rakamlarla Myliba Dönüşümü',
+            'stats_lead' => 'Birlikte çalıştığımız organizasyonlarda elde ettiğimiz somut iş sonuçları.',
+            'values_eyebrow' => 'Değerlerimiz',
+            'values_title' => 'Bizi Biz Yapan İlkeler',
+            'values_lead' => 'Her gün kararlarımızı ve ürünlerimizi şekillendiren temel inançlarımız.',
+            'cta_eyebrow' => 'Dönüşüm Zamanı',
+            'cta_title' => 'Şirketinizin Geleceğini Birlikte İnşa Edelim',
+            'cta_lead' => 'Gelin, kurumunuzun performans ve kültür yolculuğunu birlikte başlatalım.',
+            'cta_primary_label' => 'Hemen İletişime Geçin',
+            'cta_secondary_label' => 'Demo Talep Edin',
+        ],
+        'collections' => [
+            'hero_badges' => [
+                ['label' => 'Yapay Zekâ Destekli Platform'],
+                ['label' => 'ICF Onaylı Kültür Modeli'],
+                ['label' => 'Bütünleşik Ekosistem'],
+            ],
+            'comparisons' => [
+                [
+                    'problem_label' => 'Geleneksel Sistem',
+                    'problem_title' => 'Yılda Bir Kez Notlama',
+                    'problem_desc' => 'Yıl sonu doldurulan sübjektif formlar ve geçmişe dönük yargılayıcı puanlar.',
+                    'solution_label' => 'Myliba Modeli',
+                    'solution_title' => 'Canlı & Sürekli Gelişim',
+                    'solution_desc' => '%100 objektif veriler, anlık geri bildirimler ve haftalık aksiyon takibi.',
+                ],
+                [
+                    'problem_label' => 'Geleneksel Sistem',
+                    'problem_title' => 'Kopuk Araçlar ve Silolar',
+                    'problem_desc' => 'Farklı yazılımlarda kaybolan hedefler, anketler ve eğitim süreçleri.',
+                    'solution_label' => 'Myliba Modeli',
+                    'solution_title' => 'Tek Çatı Altında Entegrasyon',
+                    'solution_desc' => 'OKR, KPI, 1:1 görüşmeler, kültür analizi ve akademi tek platformda.',
+                ],
+            ],
+            'pillars' => [
+                [
+                    'badge' => 'Teknoloji',
+                    'number' => '01',
+                    'icon' => '⚡',
+                    'title' => 'Myliba Yazılım',
+                    'desc' => 'Formsuz, canlı verilerle hedef, performans ve adil karar yönetimi sunan yeni nesil platform.',
+                    'tags' => "Native OKR\nKPI & Aksiyonlar\nNineBox Analitiği\n1:1 & Geri Bildirim",
+                    'link_label' => 'Yazılımı İnceleyin',
+                    'link_target' => 'products',
+                ],
+                [
+                    'badge' => 'Gelişim',
+                    'number' => '02',
+                    'icon' => '🎓',
+                    'title' => 'OKR & Kültür Akademisi',
+                    'desc' => 'Dünyanın ilk ve tek ICF onaylı OKR ve kültür koçluğu sertifika programı ve liderlik yolculukları.',
+                    'tags' => "ICF Akreditasyonu\nİşbaşı Liderlik\nTakım Koçluğu",
+                    'link_label' => 'Akademiye Katılın',
+                    'link_target' => 'academy',
+                ],
+                [
+                    'badge' => 'İçgörü',
+                    'number' => '03',
+                    'icon' => '📊',
+                    'title' => 'Kültür & Bağlılık Analizi',
+                    'desc' => 'Dedikodu, mobbing ve adaletsizlik gibi kültürel virüsleri erken tespit eden ölçümleme sistemi.',
+                    'tags' => "eNPS & İsteklilik\nKültürel Uyum\n360° Değerlendirme",
+                    'link_label' => 'Analizi Keşfedin',
+                    'link_target' => 'solutions',
+                ],
+                [
+                    'badge' => 'Dönüşüm',
+                    'number' => '04',
+                    'icon' => '🤝',
+                    'title' => 'Stratejik Dönüşüm Danışmanlığı',
+                    'desc' => 'Stratejik hedef haritası oluşturma ve yüksek performans kültürünü kuruma özel tasarlama.',
+                    'tags' => "Hedef Haritası\nOtonom Ekipler\nYönetim Ritmi",
+                    'link_label' => 'Danışmanlık Alın',
+                    'link_target' => 'development',
+                ],
+            ],
+            'stats' => [
+                ['value' => '%85', 'label' => 'Maliyet Tasarrufu', 'desc' => 'Farklı araçları tek sistemde birleştirerek İK bütçelerinde sağlanan tasarruf.'],
+                ['value' => '+40', 'label' => 'Gün / Yıl', 'desc' => 'Bürokratik formları kaldırarak ekiplere kazandırılan stratejik çalışma süresi.'],
+                ['value' => '2×', 'label' => 'Performans Artışı', 'desc' => 'Sosyal taahhüt ve anlık geri bildirim döngüleriyle sağlanan verimlilik.'],
+            ],
+            'values' => [
+                ['badge' => 'Şeffaflık', 'title' => 'Radikal Dürüstlük ve Netlik', 'desc' => 'Hedeflerin ve geri bildirimlerin açık olduğu yerde siyaset biter, başarı başlar.'],
+                ['badge' => 'İnsan Odaklılık', 'title' => 'Psikolojik Güvenlik', 'desc' => 'Hata yapmaktan korkmayan, fikirlerini özgürce söyleyen ekipler dönüşümü yönetir.'],
+                ['badge' => 'Süreklilik', 'title' => 'Günlük Çalışma Ritmi', 'desc' => 'Gelişim yılda bir kez yaşanan bir olay değil; her gün tekrarlanan bir alışkanlıktır.'],
+            ],
+        ],
+    ];
+}
+
+function ethics_definition(): array
+{
+    return [
+        'label' => 'Etik Hat Sayfası İçeriği',
+        'groups' => [
+            'hero' => [
+                'label' => 'Hero',
+                'fields' => [
+                    'hero_title' => ['textarea', 'Başlık'],
+                    'hero_lead' => ['textarea', 'Açıklama'],
+                    'hero_primary_label' => ['text', 'Ana buton etiketi'],
+                    'hero_secondary_label' => ['text', 'İkincil buton etiketi'],
+                ],
+            ],
+            'intro' => [
+                'label' => 'Giriş',
+                'fields' => [
+                    'intro_eyebrow' => ['text', 'Üst etiket'],
+                    'intro_title' => ['textarea', 'Başlık'],
+                    'intro_lead' => ['textarea', 'Açıklama'],
+                ],
+            ],
+            'why' => [
+                'label' => 'Neden Etik Hat?',
+                'fields' => [
+                    'why_eyebrow' => ['text', 'Üst etiket'],
+                    'why_title' => ['textarea', 'Başlık'],
+                    'why_lead' => ['textarea', 'Açıklama'],
+                ],
+                'collections' => [
+                    'why_items' => ['label' => 'Nedenler', 'fields' => [
+                        'number' => ['text', 'Numara'],
+                        'title' => ['text', 'Başlık'],
+                        'text' => ['textarea', 'Açıklama'],
+                    ]],
+                ],
+            ],
+            'scope' => [
+                'label' => 'Kapsam',
+                'fields' => [
+                    'scope_eyebrow' => ['text', 'Üst etiket'],
+                    'scope_title' => ['textarea', 'Başlık'],
+                    'scope_lead' => ['textarea', 'Açıklama'],
+                ],
+                'collections' => [
+                    'scope_items' => ['label' => 'Kapsam maddeleri', 'fields' => [
+                        'icon' => ['text', 'İkon'],
+                        'title' => ['text', 'Başlık'],
+                        'text' => ['textarea', 'Açıklama'],
+                    ]],
+                ],
+            ],
+            'cta' => [
+                'label' => 'Dönüşüm (CTA)',
+                'fields' => [
+                    'cta_eyebrow' => ['text', 'Üst etiket'],
+                    'cta_title' => ['textarea', 'Başlık'],
+                    'cta_lead' => ['textarea', 'Açıklama'],
+                    'cta_primary_label' => ['text', 'Buton etiketi'],
+                ],
+            ],
+        ],
+    ];
+}
+
+function ethics_defaults(): array
+{
+    return [
+        'fields' => [
+            'hero_title' => 'Kurumunuz İçin Güvenli, Bağımsız ve Gizli Etik Bildirim Hattı',
+            'hero_lead' => 'Çalışanlarınızın ve paydaşlarınızın etik ihlalleri, mobbing, usulsüzlük ve suiistimalleri güvenle bildirebileceği tarafsız çözüm.',
+            'hero_primary_label' => 'Etik Danışmanlarımızla Görüşün',
+            'hero_secondary_label' => 'Kapsamı İnceleyin',
+            'intro_eyebrow' => 'Güvenilir Yönetişim',
+            'intro_title' => 'Kurumsal İtibarı Korumanın En Etkili Yolu',
+            'intro_lead' => 'Etik hat, şirket içinde şeffaflığı ve adaleti tesis ederken olası riskleri kriz haline gelmeden önce tespit etmenizi sağlar.',
+            'why_eyebrow' => 'Neden Etik Hat?',
+            'why_title' => 'Kurumunuza Sağladığı Temel Faydalar',
+            'why_lead' => 'Bağımsız etik hattı kurarak çalışan bağlılığını ve kurumsal güveni artırın.',
+            'scope_eyebrow' => 'Bildirim Kapsamı',
+            'scope_title' => 'Hangi Konularda Bildirim Alınabilir?',
+            'scope_lead' => 'Uluslararası standartlarda etik ve uyum yönetimi.',
+            'cta_eyebrow' => 'İletişime Geçin',
+            'cta_title' => 'Kurumunuza Özel Etik Hat Sürecini Birlikte Kuralım',
+            'cta_lead' => 'Uzmanlarımızla görüşerek gizlilik, mevzuat ve devreye alma adımlarını planlayın.',
+            'cta_primary_label' => 'Bize Ulaşın',
+        ],
+        'collections' => [
+            'why_items' => [
+                ['number' => '01', 'title' => 'Tam Gizlilik ve Güvenlik', 'text' => 'Bildirim sahiplerinin kimliği korunur, misilleme riski ortadan kalkar.'],
+                ['number' => '02', 'title' => 'Erken Uyarı Sistemi', 'text' => 'Hukuki ve finansal riskler büyümeden tespit edilip çözüme kavuşturulur.'],
+                ['number' => '03', 'title' => 'Kurumsal Şeffaflık', 'text' => 'Adil ve hesap verebilir bir yönetim kültürü inşa edilir.'],
+            ],
+            'scope_items' => [
+                ['icon' => '⚖️', 'title' => 'Mobbing ve Ayrımcılık', 'text' => 'İşyerinde psikolojik taciz, ayrımcılık ve haksız uygulamalar.'],
+                ['icon' => '🔒', 'title' => 'Mali ve Hukuki Usulsüzlükler', 'text' => 'Yolsuzluk, rüşvet, zimmet ve çıkar çatışması durumları.'],
+                ['icon' => '🛡️', 'title' => 'Bilgi Güvenliği İhlalleri', 'text' => 'Gizli şirket bilgilerinin ve kişisel verilerin sızdırılması.'],
+            ],
         ],
     ];
 }

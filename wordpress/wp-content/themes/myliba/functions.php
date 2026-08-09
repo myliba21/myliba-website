@@ -1504,12 +1504,19 @@ function myliba_solution_catalog(): array
     ];
 
     $language = myliba_current_language();
-    $lang_posts = get_posts(array_merge($args, [
-        'meta_query' => [
+    $meta_query = $language === 'en'
+        ? [
+            [
+                'key' => '_myliba_language',
+                'value' => 'en',
+                'compare' => '=',
+            ],
+        ]
+        : [
             'relation' => 'OR',
             [
                 'key' => '_myliba_language',
-                'value' => $language,
+                'value' => 'tr',
                 'compare' => '=',
             ],
             [
@@ -1521,12 +1528,15 @@ function myliba_solution_catalog(): array
                 'value' => '',
                 'compare' => '=',
             ],
-        ],
+        ];
+
+    $solution_posts = get_posts(array_merge($args, [
+        'meta_query' => $meta_query,
     ]));
 
-    $solution_posts = !empty($lang_posts) ? $lang_posts : get_posts($args);
-
-    foreach ($solution_posts as $solution_post) {
+    if (!empty($solution_posts)) {
+        $dynamic_catalog = [];
+        foreach ($solution_posts as $solution_post) {
         $slug = $solution_post->post_name;
         $id = $solution_post->ID;
         $fallback_item = $catalog[$slug] ?? [];
@@ -1589,7 +1599,7 @@ function myliba_solution_catalog(): array
             $steps = $fallback_item['steps'] ?? [];
         }
 
-        $catalog[$slug] = [
+        $dynamic_catalog[$slug] = [
             'title' => $title,
             'kicker' => $kicker,
             'summary' => $summary,
@@ -1601,7 +1611,10 @@ function myliba_solution_catalog(): array
         ];
     }
 
-    return $catalog;
+    return $dynamic_catalog;
+}
+
+return $language === 'tr' ? $catalog : [];
 }
 
 function myliba_solution_url(string $slug): string
@@ -1692,17 +1705,46 @@ function myliba_development_center_items(): array
     $ebook_type = get_post_type_object('myliba_ebook');
     $report_type = get_post_type_object('myliba_report');
 
+    if ($language === 'en') {
+        return [
+            'ebooks' => [
+                'label' => $page_id ? (string) myliba_meta('_myliba_development_ebook_label', $page_id, 'e-Books') : 'e-Books',
+                'description' => $page_id ? (string) myliba_meta('_myliba_development_ebook_text', $page_id, 'Guides and practical resources.') : 'Guides and practical resources.',
+                'url' => home_url('/en/development-center/ebooks/'),
+                'post_type' => 'myliba_ebook',
+            ],
+            'reports' => [
+                'label' => $page_id ? (string) myliba_meta('_myliba_development_report_label', $page_id, 'Reports & Trends') : 'Reports & Trends',
+                'description' => $page_id ? (string) myliba_meta('_myliba_development_report_text', $page_id, 'Current research and insights.') : 'Current research and insights.',
+                'url' => home_url('/en/development-center/reports/'),
+                'post_type' => 'myliba_report',
+            ],
+            'blog' => [
+                'label' => $page_id ? (string) myliba_meta('_myliba_development_blog_label', $page_id, 'Blog') : 'Blog',
+                'description' => $page_id ? (string) myliba_meta('_myliba_development_blog_text', $page_id, 'Expert articles and operating notes.') : 'Expert articles and operating notes.',
+                'url' => $blog_page_url,
+                'post_type' => 'post',
+            ],
+            'events' => [
+                'label' => $page_id ? (string) myliba_meta('_myliba_development_events_label', $page_id, 'Events & Workshops') : 'Events & Workshops',
+                'description' => $page_id ? (string) myliba_meta('_myliba_development_events_text', $page_id, 'Webinars, workshops, and community sessions.') : 'Webinars, workshops, and community sessions.',
+                'url' => $events_page_url,
+                'post_type' => 'myliba_event',
+            ],
+        ];
+    }
+
     return [
         'ebooks' => [
             'label' => $page_id ? (string) myliba_meta('_myliba_development_ebook_label', $page_id, $ebook_type?->labels->name ?: myliba_text('e-Kitaplar')) : ($ebook_type?->labels->name ?: myliba_text('e-Kitaplar')),
             'description' => $page_id ? (string) myliba_meta('_myliba_development_ebook_text', $page_id, '') : '',
-            'url' => home_url($language === 'en' ? '/en/development-center/ebooks/' : '/tr/gelisim-merkezi/e-kitaplar/'),
+            'url' => home_url('/tr/gelisim-merkezi/e-kitaplar/'),
             'post_type' => 'myliba_ebook',
         ],
         'reports' => [
             'label' => $page_id ? (string) myliba_meta('_myliba_development_report_label', $page_id, $report_type?->labels->name ?: myliba_text('Raporlar ve Trendler')) : ($report_type?->labels->name ?: myliba_text('Raporlar ve Trendler')),
             'description' => $page_id ? (string) myliba_meta('_myliba_development_report_text', $page_id, '') : '',
-            'url' => home_url($language === 'en' ? '/en/development-center/reports/' : '/tr/gelisim-merkezi/raporlar-ve-trendler/'),
+            'url' => home_url('/tr/gelisim-merkezi/raporlar-ve-trendler/'),
             'post_type' => 'myliba_report',
         ],
         'blog' => [
@@ -1750,21 +1792,21 @@ function myliba_header_menu_item_is_active(string $key, string $url): bool
 function myliba_language_context_url(string $language): string
 {
     $language = in_array($language, ['tr', 'en'], true) ? $language : 'en';
-    $solution_index = $language === 'tr' ? '/tr/cozumler/' : '/en/solutions/';
+    $current_id = get_queried_object_id();
 
-    if (is_page(['cozumler', 'solutions'])) {
-        return home_url($solution_index);
-    }
+    if ($current_id > 0 && is_singular()) {
+        $post_type = get_post_type($current_id);
+        $post_lang = (string) get_post_meta($current_id, '_myliba_language', true);
 
-    if (is_singular('myliba_solution')) {
-        if (myliba_current_language() === $language) {
-            return get_permalink(get_queried_object_id());
+        if ($post_lang === $language) {
+            return get_permalink($current_id);
         }
 
-        $translation_key = trim((string) get_post_meta(get_queried_object_id(), '_myliba_translation_key', true));
+        // 1. Direct translation key lookup
+        $translation_key = trim((string) get_post_meta($current_id, '_myliba_translation_key', true));
         if ($translation_key !== '') {
             $translations = get_posts([
-                'post_type' => 'myliba_solution',
+                'post_type' => $post_type,
                 'post_status' => 'publish',
                 'posts_per_page' => 1,
                 'fields' => 'ids',
@@ -1781,12 +1823,59 @@ function myliba_language_context_url(string $language): string
                 'suppress_filters' => false,
             ]);
 
-            if ($translations) {
+            if (!empty($translations)) {
                 return get_permalink((int) $translations[0]);
             }
         }
 
-        return home_url($solution_index);
+        // 2. Standard page slug mapping
+        if ($post_type === 'page') {
+            $current_slug = get_post_field('post_name', $current_id);
+            $page_map_tr_to_en = [
+                'cozumler' => 'solutions',
+                'yazilim' => 'software',
+                'urunler' => 'software',
+                'gelisim-merkezi' => 'development-center',
+                'hikayemiz' => 'our-story',
+                'biz-kimiz' => 'our-story',
+                'okr-kultur-akademisi' => 'okr-culture-academy',
+                'kultur-analizi' => 'culture-analysis',
+                'etik-danismanlik' => 'ethics-counsel',
+                'etik-hat' => 'ethics-counsel',
+                'iletisim' => 'contact',
+                'demo' => 'demo',
+                'etkinlikler' => 'events',
+                'yazilar' => 'blog',
+                'sss' => 'faq',
+                'guvenlik' => 'security',
+                'gizlilik-politikasi' => 'privacy-policy',
+                'kvkk' => 'kvkk',
+                'kullanim-sartlari' => 'terms-of-use',
+            ];
+            $page_map_en_to_tr = array_flip($page_map_tr_to_en);
+
+            $target_slug = $language === 'en'
+                ? ($page_map_tr_to_en[$current_slug] ?? $current_slug)
+                : ($page_map_en_to_tr[$current_slug] ?? $current_slug);
+
+            $target_page = get_page_by_path($language . '/' . $target_slug);
+            if ($target_page instanceof \WP_Post) {
+                return get_permalink($target_page);
+            }
+        }
+    }
+
+    // Archives or index fallbacks
+    if (is_page(['cozumler', 'solutions']) || is_post_type_archive('myliba_solution')) {
+        return home_url($language === 'tr' ? '/tr/cozumler/' : '/en/solutions/');
+    }
+
+    if (is_page(['gelisim-merkezi', 'development-center'])) {
+        return home_url($language === 'tr' ? '/tr/gelisim-merkezi/' : '/en/development-center/');
+    }
+
+    if (is_page(['yazilar', 'blog']) || is_home()) {
+        return home_url($language === 'tr' ? '/tr/yazilar/' : '/en/blog/');
     }
 
     return home_url('/' . $language . '/');

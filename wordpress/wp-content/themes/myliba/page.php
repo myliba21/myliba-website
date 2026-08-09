@@ -9,7 +9,7 @@ if (myliba_is_academy_landing_page()) {
     return;
 }
 
-if (is_page(['yazilim', 'urunler'])) {
+if (is_page(['yazilim', 'urunler', 'software', 'our-products'])) {
     require get_template_directory() . '/template-parts/page-software.php';
     return;
 }

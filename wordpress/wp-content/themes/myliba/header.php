@@ -111,50 +111,59 @@ $demo_url = (string) myliba_option('demo_url', myliba_demo_url());
                                     <?php endforeach; ?>
                                 </ul>
                             <?php elseif ($is_mega_solutions) : ?>
+                                <?php $header_lang = myliba_current_language(); ?>
                                 <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu" aria-label="<?php echo esc_attr(myliba_text('Solutions menu')); ?>">
                                     <div class="mega-menu__intro">
-                                        <span><?php echo esc_html(myliba_text('Çözümlerimiz')); ?></span>
-                                        <strong><?php echo esc_html(myliba_text('İhtiyacınıza uygun çözümü bulun.')); ?></strong>
-                                        <p><?php echo esc_html(myliba_text('Dört uzmanlık alanını tek noktadan keşfedin.')); ?></p>
-                                        <a href="<?php echo esc_url($item['url']); ?>"><?php echo esc_html(myliba_text('Tüm çözümler')); ?></a>
+                                        <span><?php echo esc_html($header_lang === 'en' ? 'Our Solutions' : myliba_text('Çözümlerimiz')); ?></span>
+                                        <strong><?php echo esc_html($header_lang === 'en' ? 'Find the right solution for your needs.' : myliba_text('İhtiyacınıza uygun çözümü bulun.')); ?></strong>
+                                        <p><?php echo esc_html($header_lang === 'en' ? 'Discover four areas of expertise in one place.' : myliba_text('Dört uzmanlık alanını tek noktadan keşfedin.')); ?></p>
+                                        <a href="<?php echo esc_url($item['url']); ?>"><?php echo esc_html($header_lang === 'en' ? 'All solutions' : myliba_text('Tüm çözümler')); ?></a>
                                     </div>
                                     <div class="mega-menu__grid">
                                         <?php
                                         $solution_menu_descriptions = [
-                                            'kurumsal-gelisim-programlari' => myliba_text('Kuruma özel gelişim yolculukları.'),
-                                            'simulasyonlar-ve-takim-koclugu' => myliba_text('Simülasyon ve koçluk deneyimleri.'),
-                                            'danismanlik' => myliba_text('Stratejiden uygulamaya destek.'),
-                                            'kultur-analizi' => myliba_text('Veriye dayalı kültür içgörüleri.'),
+                                            'kurumsal-gelisim-programlari' => 'Kuruma özel gelişim yolculukları.',
+                                            'simulasyonlar-ve-takim-koclugu' => 'Simülasyon ve koçluk deneyimleri.',
+                                            'danismanlik' => 'Stratejiden uygulamaya destek.',
+                                            'kultur-analizi' => 'Veriye dayalı kültür içgörüleri.',
+                                            'corporate-development-programs' => 'Tailored development journeys.',
+                                            'simulations-and-team-coaching' => 'Simulation and coaching experiences.',
+                                            'advisory-and-consulting' => 'Support from strategy to implementation.',
+                                            'culture-analysis-solution' => 'Data-driven culture insights.',
                                         ];
                                         ?>
                                         <?php foreach (myliba_solution_catalog() as $solution_slug => $solution) : ?>
                                             <?php
                                             $is_card_active = is_singular('myliba_solution') && get_post_field('post_name', get_queried_object_id()) === $solution_slug;
+                                            $card_desc = $solution_menu_descriptions[$solution_slug] ?? ($solution['summary'] ?? '');
                                             ?>
                                             <a class="<?php echo esc_attr(trim('mega-menu__card ' . ($is_card_active ? 'is-active' : ''))); ?>" href="<?php echo esc_url(myliba_solution_url($solution_slug)); ?>"<?php echo $is_card_active ? ' aria-current="page"' : ''; ?>>
-                                                <span><?php echo esc_html(substr($solution['title'], 0, 1)); ?></span>
+                                                <span><?php echo esc_html(mb_substr($solution['title'], 0, 1)); ?></span>
                                                 <strong><?php echo esc_html($solution['title']); ?></strong>
-                                                <small><?php echo esc_html($solution_menu_descriptions[$solution_slug] ?? ''); ?></small>
+                                                <small><?php echo esc_html($card_desc); ?></small>
                                             </a>
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
                             <?php elseif ($is_mega_development) : ?>
-                                <?php $development_items = myliba_development_center_items(); ?>
+                                <?php
+                                $development_items = myliba_development_center_items();
+                                $header_lang = myliba_current_language();
+                                ?>
                                 <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu mega-menu--development" aria-label="<?php echo esc_attr(myliba_text('Gelişim Merkezi menüsü')); ?>">
                                     <div class="mega-menu__intro">
-                                        <span><?php echo esc_html(myliba_text('Gelişim Merkezi')); ?></span>
-                                        <strong><?php echo esc_html(myliba_text('Güncel kaynakları keşfedin.')); ?></strong>
-                                        <p><?php echo esc_html(myliba_text('İçerikler, araştırmalar ve etkinlikler.')); ?></p>
-                                        <a href="<?php echo esc_url($item['url']); ?>"><?php echo esc_html(myliba_text('Tüm içerikler')); ?></a>
+                                        <span><?php echo esc_html($header_lang === 'en' ? 'Development Center' : myliba_text('Gelişim Merkezi')); ?></span>
+                                        <strong><?php echo esc_html($header_lang === 'en' ? 'Discover the latest resources.' : myliba_text('Güncel kaynakları keşfedin.')); ?></strong>
+                                        <p><?php echo esc_html($header_lang === 'en' ? 'Content, research, and events.' : myliba_text('İçerikler, araştırmalar ve etkinlikler.')); ?></p>
+                                        <a href="<?php echo esc_url($item['url']); ?>"><?php echo esc_html($header_lang === 'en' ? 'All content' : myliba_text('Tüm içerikler')); ?></a>
                                     </div>
                                     <div class="mega-menu__grid">
                                         <?php
                                         $development_menu_descriptions = [
-                                            'ebooks' => myliba_text('Rehberler ve uygulama kaynakları.'),
-                                            'reports' => myliba_text('Güncel araştırmalar ve içgörüler.'),
-                                            'blog' => myliba_text('Uzman yazıları ve pratik öneriler.'),
-                                            'events' => myliba_text('Webinar, atölye ve buluşmalar.'),
+                                            'ebooks' => $header_lang === 'en' ? 'Guides and practical resources.' : myliba_text('Rehberler ve uygulama kaynakları.'),
+                                            'reports' => $header_lang === 'en' ? 'Current research and insights.' : myliba_text('Güncel araştırmalar ve içgörüler.'),
+                                            'blog' => $header_lang === 'en' ? 'Expert articles and practical recommendations.' : myliba_text('Uzman yazıları ve pratik öneriler.'),
+                                            'events' => $header_lang === 'en' ? 'Webinars, workshops, and community sessions.' : myliba_text('Webinar, atölye ve buluşmalar.'),
                                         ];
                                         ?>
                                         <?php foreach ($development_items as $development_key => $development_item) : ?>
@@ -165,9 +174,9 @@ $demo_url = (string) myliba_option('demo_url', myliba_demo_url());
                                                 || is_singular($development_item['post_type']);
                                             ?>
                                             <a class="<?php echo esc_attr(trim('mega-menu__card ' . ($is_card_active ? 'is-active' : ''))); ?>" href="<?php echo esc_url($development_item['url']); ?>"<?php echo $is_card_active ? ' aria-current="page"' : ''; ?>>
-                                                <span><?php echo esc_html(substr($development_item['label'], 0, 1)); ?></span>
+                                                <span><?php echo esc_html(mb_substr($development_item['label'], 0, 1)); ?></span>
                                                 <strong><?php echo esc_html($development_item['label']); ?></strong>
-                                                <small><?php echo esc_html($development_menu_descriptions[$development_key] ?? ''); ?></small>
+                                                <small><?php echo esc_html($development_menu_descriptions[$development_key] ?? ($development_item['description'] ?? '')); ?></small>
                                             </a>
                                         <?php endforeach; ?>
                                     </div>
