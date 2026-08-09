@@ -4052,7 +4052,6 @@ textarea:focus-visible {
 .academy-v2-faq {
   max-width: 940px;
   padding-bottom: clamp(36px, 4.4vw, 48px);
-  padding-top: clamp(32px, 3.9vw, 44px);
 }
 
 .academy-v2-faq > h2 {
@@ -16875,7 +16874,6 @@ body:has(.solutions-cta) .site-footer {
 /* ── Category Filter Bar ── */
 .faq-categories-bar {
   background: #ffffff;
-  border-bottom: 1px solid #f1f5f9;
   padding: 24px 0 16px;
   position: sticky;
   top: 72px;
@@ -16935,9 +16933,6 @@ body:has(.solutions-cta) .site-footer {
 }
 
 /* ── FAQ List Section ── */
-.faq-list-section {
-  padding: clamp(36px, 5vw, 64px) 0;
-}
 
 .faq-main-container {
   margin: 0 auto;
@@ -16979,18 +16974,6 @@ body:has(.solutions-cta) .site-footer {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-}
-
-.faq-item__tag {
-  background: #f0fdfa;
-  border: 1px solid #ccfbf1;
-  border-radius: 6px;
-  color: #0d9488;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  padding: 3px 8px;
-  text-transform: uppercase;
 }
 
 .faq-item__question {
