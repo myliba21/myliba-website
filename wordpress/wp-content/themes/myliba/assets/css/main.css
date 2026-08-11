@@ -1473,7 +1473,6 @@ img {
 }
 
 .performance-method {
-  border-top: 1px solid rgba(21, 23, 34, 0.08);
   margin-top: 40px;
   padding-top: 40px;
 }
@@ -13011,31 +13010,6 @@ body:has(.final-cta-section) .site-footer {
   font-size: var(--fs-caption);
   line-height: 1.65;
   margin: 0;
-}
-
-.software-assurance__rail {
-  align-items: center;
-  background: var(--software-deep);
-  border-radius: 18px;
-  color: rgba(255, 255, 255, .78);
-  display: flex;
-  gap: 18px;
-  justify-content: center;
-  margin-top: 14px;
-  min-height: 74px;
-  padding: 16px 24px;
-}
-
-.software-assurance__rail span {
-  font-size: var(--fs-small);
-  font-weight: 800;
-}
-
-.software-assurance__rail i {
-  background: linear-gradient(90deg, var(--brand-blue), var(--brand-green));
-  border-radius: 50%;
-  height: 6px;
-  width: 6px;
 }
 
 .software-faq {
