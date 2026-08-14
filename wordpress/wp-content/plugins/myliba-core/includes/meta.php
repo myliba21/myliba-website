@@ -56,7 +56,7 @@ function register_meta_boxes(string $post_type): void
     }
 
     if ($post_type === 'myliba_academy') {
-        add_meta_box('myliba_academy_program', __('Academy Program Details', 'myliba'), __NAMESPACE__ . '\\render_academy_program_box', $post_type, 'normal', 'high');
+        add_meta_box('myliba_academy_program', 'Akademi Program Detayları', __NAMESPACE__ . '\\render_academy_program_box', $post_type, 'normal', 'high');
     }
 
     if ($post_type === 'myliba_event') {
@@ -225,23 +225,23 @@ function render_academy_program_box(\WP_Post $post): void
 {
     nonce();
 
-    field_select('_myliba_academy_layout', __('Program presentation', 'myliba'), get_post_meta($post->ID, '_myliba_academy_layout', true) ?: 'standard', [
-        'featured' => __('Featured certificate program', 'myliba'),
-        'leadership' => __('Leadership program', 'myliba'),
-        'consulting' => __('Consulting program', 'myliba'),
-        'standard' => __('Standard', 'myliba'),
+    field_select('_myliba_academy_layout', 'Program Sunum Tipi', get_post_meta($post->ID, '_myliba_academy_layout', true) ?: 'standard', [
+        'featured' => 'Öne Çıkan Sertifika Programı (Kart 1)',
+        'leadership' => 'İşbaşı Liderlik Programı (Kart 2)',
+        'consulting' => 'Kurumsal Danışmanlık (Kart 3)',
+        'standard' => 'Standart',
     ]);
-    field_text('_myliba_academy_program_eyebrow', __('Program eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_academy_program_eyebrow', true));
-    field_textarea('_myliba_academy_program_benefits', __('Program benefits', 'myliba'), get_post_meta($post->ID, '_myliba_academy_program_benefits', true), __('One benefit per line.', 'myliba'));
-    field_textarea('_myliba_academy_program_badges', __('Information badges', 'myliba'), get_post_meta($post->ID, '_myliba_academy_program_badges', true), __('One badge per line.', 'myliba'));
-    field_textarea('_myliba_academy_program_modules', __('Program modules', 'myliba'), get_post_meta($post->ID, '_myliba_academy_program_modules', true), __('One row per line as Module title | Detail 1; Detail 2; Detail 3.', 'myliba'));
-    field_text('_myliba_academy_program_primary_label', __('Primary CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_program_primary_label', true));
-    field_url('_myliba_academy_program_primary_url', __('Primary CTA URL (optional)', 'myliba'), get_post_meta($post->ID, '_myliba_academy_program_primary_url', true));
-    field_text('_myliba_academy_program_secondary_label', __('Secondary CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_program_secondary_label', true));
-    field_url('_myliba_academy_program_secondary_url', __('Secondary CTA URL (optional)', 'myliba'), get_post_meta($post->ID, '_myliba_academy_program_secondary_url', true));
-    field_text('_myliba_academy_start_period', __('Starting period', 'myliba'), get_post_meta($post->ID, '_myliba_academy_start_period', true));
-    field_textarea('_myliba_academy_certificate_info', __('Certificate information', 'myliba'), get_post_meta($post->ID, '_myliba_academy_certificate_info', true));
-    field_number('_myliba_order', __('Sort order', 'myliba'), get_post_meta($post->ID, '_myliba_order', true));
+    field_text('_myliba_academy_program_eyebrow', 'Program Üst Başlığı (Eyebrow)', get_post_meta($post->ID, '_myliba_academy_program_eyebrow', true), 'Örn: Öne Çıkan Program, İşbaşı Gelişim Programı');
+    field_textarea('_myliba_academy_program_benefits', 'Program Kazanımları (Neden Bu Program?)', get_post_meta($post->ID, '_myliba_academy_program_benefits', true), 'Her satıra bir kazanım maddesi yazın.');
+    field_textarea('_myliba_academy_program_badges', 'Bilgi / Özellik Rozetleri (Badges)', get_post_meta($post->ID, '_myliba_academy_program_badges', true), 'Her satıra bir rozet yazın (Örn: 40 CCE, Canlı Oturumlar, Uygulamalı Eğitim).');
+    field_textarea('_myliba_academy_program_modules', 'Program Modülleri', get_post_meta($post->ID, '_myliba_academy_program_modules', true), 'Her satıra bir modül yazın. Format: Modül Başlığı | Detay 1; Detay 2; Detay 3');
+    field_text('_myliba_academy_program_primary_label', 'Birincil Buton Metni', get_post_meta($post->ID, '_myliba_academy_program_primary_label', true), 'Örn: Eylül 2026 Dönemi Kayıtları');
+    field_url('_myliba_academy_program_primary_url', 'Birincil Buton URL (Opsiyonel)', get_post_meta($post->ID, '_myliba_academy_program_primary_url', true), 'Boş bırakılırsa tıklandığında başvuru/kayıt modal formunu açar.');
+    field_text('_myliba_academy_program_secondary_label', 'İkincil Buton Metni', get_post_meta($post->ID, '_myliba_academy_program_secondary_label', true), 'Örn: Program Detaylarını İndir');
+    field_url('_myliba_academy_program_secondary_url', 'İkincil Buton URL (Opsiyonel)', get_post_meta($post->ID, '_myliba_academy_program_secondary_url', true), 'Boş bırakılırsa tıklandığında başvuru formunu açar.');
+    field_text('_myliba_academy_start_period', 'Başlangıç Dönemi', get_post_meta($post->ID, '_myliba_academy_start_period', true), 'Örn: Eylül 2026');
+    field_textarea('_myliba_academy_certificate_info', 'Sertifika / Akreditasyon Bilgisi', get_post_meta($post->ID, '_myliba_academy_certificate_info', true), 'Örn: 40 saat ICF CCE, dijital sertifika ve Myliba dijital rozeti');
+    field_number('_myliba_order', 'Sıralama Sırası', get_post_meta($post->ID, '_myliba_order', true), 'Küçük sayılar önce listelenir (10, 20, 30...)');
 }
 
 function render_homepage_box(\WP_Post $post): void

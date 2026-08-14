@@ -180,8 +180,10 @@ function register(): void
 
     register_post_type('myliba_academy', [
         'labels' => [
-            'name' => __('Academy Programs', 'myliba'),
-            'singular_name' => __('Academy Program', 'myliba'),
+            'name' => 'Akademi Programları',
+            'singular_name' => 'Akademi Programı',
+            'add_new_item' => 'Yeni Akademi Programı Ekle',
+            'edit_item' => 'Akademi Programını Düzenle',
         ],
         'public' => true,
         'has_archive' => false,
