@@ -5,16 +5,13 @@ if (!defined('ABSPATH')) {
 
 $page_id = get_queried_object_id();
 $meta = static fn(string $key): string => trim((string) get_post_meta($page_id, $key, true));
-$rows = static function (string $value, int $parts = 2): array {
-    $items = [];
-    foreach (myliba_lines($value) as $line) {
-        $item = array_pad(array_map('trim', explode('|', $line, $parts)), $parts, '');
-        if ($item[0] !== '') {
-            $items[] = $item;
-        }
-    }
-    return $items;
-};
+$copy = static fn(string $key): string => function_exists('Myliba\\Core\\PageContent\\text')
+    ? \Myliba\Core\PageContent\text($page_id, 'academy', $key)
+    : trim((string) get_post_meta($page_id, '_myliba_' . $key, true));
+$rows = static fn(string $key): array => function_exists('Myliba\\Core\\PageContent\\collection')
+    ? \Myliba\Core\PageContent\collection($page_id, 'academy', $key)
+    : [];
+
 $image = static function (string $key, string $class = '', bool $eager = false) use ($page_id): string {
     $attachment_id = absint(get_post_meta($page_id, $key, true));
     if (!$attachment_id) {
@@ -28,9 +25,116 @@ $image = static function (string $key, string $class = '', bool $eager = false) 
     ]);
 };
 
-$programs = myliba_get_entries('myliba_academy', -1);
+$parse_modules = static function (string $value): array {
+    $items = [];
+    foreach (myliba_lines($value) as $line) {
+        $item = array_pad(array_map('trim', explode('|', $line, 2)), 2, '');
+        if ($item[0] !== '') {
+            $items[] = $item;
+        }
+    }
+    return $items;
+};
+
+// 1. Programs
+$programs_collection = $rows('programs');
+$program_cards = [];
+$featured_program = [];
+$prepared_programs = [];
+
+if (!empty($programs_collection)) {
+    foreach ($programs_collection as $index => $item) {
+        $layout = (string) ($item['layout'] ?? 'standard') ?: 'standard';
+        $badges = myliba_lines((string) ($item['badges'] ?? ''));
+        $benefits = myliba_lines((string) ($item['benefits'] ?? ''));
+        $modules = $parse_modules((string) ($item['modules'] ?? ''));
+
+        $program_data = [
+            'number' => str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT),
+            'title' => (string) ($item['title'] ?? ''),
+            'eyebrow' => (string) ($item['eyebrow'] ?? ''),
+            'layout' => $layout,
+            'lead' => (string) ($item['lead'] ?? ''),
+            'detailed_content' => (string) ($item['detailed_content'] ?? ''),
+            'period' => (string) ($item['start_period'] ?? ''),
+            'certificate' => (string) ($item['certificate_info'] ?? ''),
+            'badges' => $badges,
+            'benefits' => $benefits,
+            'modules' => $modules,
+            'primary_label' => (string) ($item['primary_label'] ?? ''),
+            'primary_url' => (string) ($item['primary_url'] ?? ''),
+            'secondary_label' => (string) ($item['secondary_label'] ?? ''),
+            'secondary_url' => (string) ($item['secondary_url'] ?? ''),
+            'thumbnail' => '',
+        ];
+
+        $prepared_programs[] = $program_data;
+        $card = [
+            'number' => $program_data['number'],
+            'title' => $program_data['title'],
+            'eyebrow' => $program_data['eyebrow'],
+            'layout' => $layout,
+            'period' => $program_data['period'],
+            'certificate' => $program_data['certificate'],
+            'badges' => $badges,
+        ];
+        $program_cards[] = $card;
+        if ($layout === 'featured' && empty($featured_program)) {
+            $featured_program = $card;
+        }
+    }
+} else {
+    // Fallback to myliba_academy custom post types
+    $cpt_programs = myliba_get_entries('myliba_academy', -1);
+    foreach ($cpt_programs->posts as $program_index => $program_post) {
+        $p_id = $program_post->ID;
+        $layout = (string) get_post_meta($p_id, '_myliba_academy_layout', true) ?: 'standard';
+        $badges = myliba_lines((string) get_post_meta($p_id, '_myliba_academy_program_badges', true));
+        $benefits = myliba_lines((string) get_post_meta($p_id, '_myliba_academy_program_benefits', true));
+        $modules = $parse_modules((string) get_post_meta($p_id, '_myliba_academy_program_modules', true));
+
+        $program_data = [
+            'number' => str_pad((string) ($program_index + 1), 2, '0', STR_PAD_LEFT),
+            'title' => get_the_title($program_post),
+            'eyebrow' => (string) get_post_meta($p_id, '_myliba_academy_program_eyebrow', true),
+            'layout' => $layout,
+            'lead' => trim((string) get_the_excerpt($program_post)),
+            'detailed_content' => trim((string) get_post_field('post_content', $p_id)),
+            'period' => (string) get_post_meta($p_id, '_myliba_academy_start_period', true),
+            'certificate' => (string) get_post_meta($p_id, '_myliba_academy_certificate_info', true),
+            'badges' => $badges,
+            'benefits' => $benefits,
+            'modules' => $modules,
+            'primary_label' => (string) get_post_meta($p_id, '_myliba_academy_program_primary_label', true),
+            'primary_url' => (string) get_post_meta($p_id, '_myliba_academy_program_primary_url', true),
+            'secondary_label' => (string) get_post_meta($p_id, '_myliba_academy_program_secondary_label', true),
+            'secondary_url' => (string) get_post_meta($p_id, '_myliba_academy_program_secondary_url', true),
+            'thumbnail' => has_post_thumbnail($p_id) ? get_the_post_thumbnail($p_id, 'large', ['loading' => 'lazy']) : '',
+        ];
+
+        $prepared_programs[] = $program_data;
+        $card = [
+            'number' => $program_data['number'],
+            'title' => $program_data['title'],
+            'eyebrow' => $program_data['eyebrow'],
+            'layout' => $layout,
+            'period' => $program_data['period'],
+            'certificate' => $program_data['certificate'],
+            'badges' => $badges,
+        ];
+        $program_cards[] = $card;
+        if ($layout === 'featured' && empty($featured_program)) {
+            $featured_program = $card;
+        }
+    }
+}
+
+// 2. Testimonials
 $testimonials = myliba_get_entries('myliba_testimonial', 12);
-$faq_group = $meta('_myliba_academy_faq_group');
+
+// 3. FAQs
+$faq_group = $copy('faq_group') ?: $meta('_myliba_academy_faq_group');
+$faq_items = [];
 $faq_args = [];
 if ($faq_group !== '') {
     $faq_args['meta_query'] = [
@@ -45,91 +149,105 @@ if ($faq_group !== '') {
         ],
     ];
 }
-$faqs = myliba_get_entries('myliba_faq', -1, $faq_args);
-$faq_items = [];
-while ($faqs->have_posts()) {
-    $faqs->the_post();
-    $faq_items[] = [
-        'question' => get_the_title(),
-        'answer' => (string) get_the_content(),
-    ];
+$faqs_query = myliba_get_entries('myliba_faq', -1, $faq_args);
+if ($faqs_query->have_posts()) {
+    while ($faqs_query->have_posts()) {
+        $faqs_query->the_post();
+        $faq_items[] = [
+            'question' => get_the_title(),
+            'answer' => (string) get_the_content(),
+        ];
+    }
+    wp_reset_postdata();
 }
-wp_reset_postdata();
+if (empty($faq_items)) {
+    $custom_faqs = $rows('faqs');
+    foreach ($custom_faqs as $cf) {
+        if (!empty($cf['question'])) {
+            $faq_items[] = [
+                'question' => (string) $cf['question'],
+                'answer' => (string) ($cf['answer'] ?? ''),
+            ];
+        }
+    }
+}
 
-$hero_badges = $rows($meta('_myliba_academy_hero_badges'));
-$nav_items = $rows($meta('_myliba_academy_nav_items'));
-$approach_steps = $rows($meta('_myliba_academy_approach_steps'));
-$stats = $rows($meta('_myliba_academy_stats'));
+// 4. Hero & Other elements
+$hero_badges = $rows('hero_badges');
+$approach_steps = $rows('approach_steps');
+$stats = $rows('stats');
+
 $hero_visuals = array_filter([
     $image('_myliba_academy_certificate_image', 'academy-v2-hero__certificate', true),
     $image('_myliba_academy_icf_image', 'academy-v2-hero__icf', true),
     $image('_myliba_academy_digital_badge_image', 'academy-v2-hero__badge', true),
     $image('_myliba_academy_platform_image', 'academy-v2-hero__platform', true),
 ]);
-$program_cards = [];
-$featured_program = [];
-foreach ($programs->posts as $program_index => $program_post) {
-    $layout = (string) get_post_meta($program_post->ID, '_myliba_academy_layout', true);
-    $card = [
-        'number' => str_pad((string) ($program_index + 1), 2, '0', STR_PAD_LEFT),
-        'title' => get_the_title($program_post),
-        'eyebrow' => (string) get_post_meta($program_post->ID, '_myliba_academy_program_eyebrow', true),
-        'layout' => $layout ?: 'standard',
-        'period' => (string) get_post_meta($program_post->ID, '_myliba_academy_start_period', true),
-        'certificate' => (string) get_post_meta($program_post->ID, '_myliba_academy_certificate_info', true),
-        'badges' => myliba_lines((string) get_post_meta($program_post->ID, '_myliba_academy_program_badges', true)),
-    ];
-    $program_cards[] = $card;
-    if ($layout === 'featured') {
-        $featured_program = $card;
-    }
-}
-$available_anchors = array_filter([
-    'programlar' => $programs->found_posts > 0,
-    'yaklasim' => $approach_steps && $meta('_myliba_academy_approach_title') !== '',
-    'yorumlar' => $testimonials->found_posts > 0 && $meta('_myliba_academy_testimonials_title') !== '',
-    'sss' => $faq_items && $meta('_myliba_academy_faq_title') !== '',
-    'iletisim' => $meta('_myliba_academy_final_title') !== '',
-]);
-$nav_items = array_values(array_filter($nav_items, static fn(array $item): bool => isset($available_anchors[sanitize_title($item[1] ?? '')])));
+
+$hero_eyebrow = $copy('hero_eyebrow') ?: $meta('_myliba_eyebrow');
+$hero_title = $copy('hero_title') ?: $meta('_myliba_hero_title');
+$hero_lead = $copy('hero_lead') ?: $meta('_myliba_hero_subtitle');
+$hero_primary_label = $copy('hero_primary_label') ?: $meta('_myliba_cta_label');
+$hero_primary_url = $copy('hero_primary_url') ?: $meta('_myliba_cta_url');
+$hero_secondary_label = $copy('hero_secondary_label') ?: $meta('_myliba_academy_hero_secondary_label');
+$hero_secondary_url = $copy('hero_secondary_url') ?: $meta('_myliba_academy_hero_secondary_url');
+$hero_tertiary_label = $copy('hero_tertiary_label') ?: $meta('_myliba_academy_hero_tertiary_label');
+$hero_tertiary_url = $copy('hero_tertiary_url') ?: $meta('_myliba_academy_hero_tertiary_url');
+
+$trust_label = $copy('trust_label') ?: $meta('_myliba_academy_trust_label');
+$trust_title = $copy('trust_title') ?: $meta('_myliba_academy_trust_title');
+$trust_text = $copy('trust_text') ?: $meta('_myliba_academy_trust_text');
+
+$programs_eyebrow = $copy('programs_eyebrow') ?: $meta('_myliba_academy_programs_eyebrow');
+$programs_title = $copy('programs_title') ?: $meta('_myliba_academy_programs_title');
+$programs_text = $copy('programs_text') ?: $meta('_myliba_academy_programs_text');
+$benefits_title = $copy('benefits_title') ?: $meta('_myliba_academy_benefits_title');
+$modules_title = $copy('modules_title') ?: $meta('_myliba_academy_modules_title');
+
+$approach_title = $copy('approach_title') ?: $meta('_myliba_academy_approach_title');
+$testimonials_title = $copy('testimonials_title') ?: $meta('_myliba_academy_testimonials_title');
+$faq_title = $copy('faq_title') ?: $meta('_myliba_academy_faq_title');
+
+$contact_title = $copy('contact_title') ?: $meta('_myliba_academy_contact_title');
+$contact_text = $copy('contact_text') ?: $meta('_myliba_academy_contact_text');
 
 get_header();
 ?>
 
 <div class="academy-page academy-v2">
-    <?php if ($meta('_myliba_hero_title') !== ''): ?>
+    <?php if ($hero_title !== ''): ?>
         <section class="academy-v2-hero">
             <div class="academy-v2-hero__content">
-                <?php if ($meta('_myliba_eyebrow') !== ''): ?>
-                    <p class="eyebrow"><?php echo esc_html($meta('_myliba_eyebrow')); ?></p>
+                <?php if ($hero_eyebrow !== ''): ?>
+                    <p class="eyebrow"><?php echo esc_html($hero_eyebrow); ?></p>
                 <?php endif; ?>
-                <h1><?php echo esc_html($meta('_myliba_hero_title')); ?></h1>
-                <?php if ($meta('_myliba_hero_subtitle') !== ''): ?>
-                    <p class="academy-v2-hero__lead"><?php echo esc_html($meta('_myliba_hero_subtitle')); ?></p>
+                <h1><?php echo esc_html($hero_title); ?></h1>
+                <?php if ($hero_lead !== ''): ?>
+                    <p class="academy-v2-hero__lead"><?php echo esc_html($hero_lead); ?></p>
                 <?php endif; ?>
                 <div class="academy-v2-hero__actions">
-                    <?php if ($meta('_myliba_cta_label') !== ''): ?>
-                        <?php if ($meta('_myliba_cta_url') !== ''): ?><a class="myliba-button myliba-button--primary"
-                                href="<?php echo esc_url($meta('_myliba_cta_url')); ?>"><?php echo esc_html($meta('_myliba_cta_label')); ?></a>
+                    <?php if ($hero_primary_label !== ''): ?>
+                        <?php if ($hero_primary_url !== ''): ?><a class="myliba-button myliba-button--primary"
+                                href="<?php echo esc_url($hero_primary_url); ?>"><?php echo esc_html($hero_primary_label); ?></a>
                         <?php else: ?><button class="myliba-button myliba-button--primary" type="button"
-                                data-academy-form-open><?php echo esc_html($meta('_myliba_cta_label')); ?></button><?php endif; ?>
+                                data-academy-form-open><?php echo esc_html($hero_primary_label); ?></button><?php endif; ?>
                     <?php endif; ?>
-                    <?php if ($meta('_myliba_academy_hero_secondary_label') !== ''): ?>
-                        <?php if ($meta('_myliba_academy_hero_secondary_url') !== ''): ?><a
+                    <?php if ($hero_secondary_label !== ''): ?>
+                        <?php if ($hero_secondary_url !== ''): ?><a
                                 class="myliba-button myliba-button--ghost"
-                                href="<?php echo esc_url($meta('_myliba_academy_hero_secondary_url')); ?>"><?php echo esc_html($meta('_myliba_academy_hero_secondary_label')); ?></a>
+                                href="<?php echo esc_url($hero_secondary_url); ?>"><?php echo esc_html($hero_secondary_label); ?></a>
                         <?php else: ?><button class="myliba-button myliba-button--ghost" type="button" data-academy-form-open
-                                data-participation="corporate"><?php echo esc_html($meta('_myliba_academy_hero_secondary_label')); ?></button><?php endif; ?>
+                                data-participation="corporate"><?php echo esc_html($hero_secondary_label); ?></button><?php endif; ?>
                     <?php endif; ?>
-                    <?php if ($meta('_myliba_academy_hero_tertiary_label') !== '' && $meta('_myliba_academy_hero_tertiary_url') !== ''): ?>
+                    <?php if ($hero_tertiary_label !== '' && $hero_tertiary_url !== ''): ?>
                         <a class="academy-v2-link"
-                            href="<?php echo esc_url($meta('_myliba_academy_hero_tertiary_url')); ?>"><?php echo esc_html($meta('_myliba_academy_hero_tertiary_label')); ?></a>
+                            href="<?php echo esc_url($hero_tertiary_url); ?>"><?php echo esc_html($hero_tertiary_label); ?></a>
                     <?php endif; ?>
                 </div>
-                <?php if ($hero_badges): ?>
-                    <div class="academy-v2-hero__proof" aria-label="<?php echo esc_attr($meta('_myliba_eyebrow')); ?>">
-                        <?php foreach ($hero_badges as [$value, $label]): ?>
-                            <span><strong><?php echo esc_html($value); ?></strong><?php echo esc_html($label); ?></span>
+                <?php if (!empty($hero_badges)): ?>
+                    <div class="academy-v2-hero__proof" aria-label="<?php echo esc_attr($hero_eyebrow); ?>">
+                        <?php foreach ($hero_badges as $hb): ?>
+                            <span><strong><?php echo esc_html($hb['value'] ?? ''); ?></strong><?php echo esc_html($hb['label'] ?? ''); ?></span>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
@@ -143,17 +261,17 @@ get_header();
                     <?php else: ?>
                         <div class="academy-v2-hero-card">
                             <div class="academy-v2-hero-card__top">
-                                <span><?php echo esc_html($featured_program['eyebrow']); ?></span>
-                                <?php if ($featured_program['number']): ?><strong><?php echo esc_html($featured_program['number']); ?></strong><?php endif; ?>
+                                <span><?php echo esc_html($featured_program['eyebrow'] ?? ''); ?></span>
+                                <?php if (!empty($featured_program['number'])): ?><strong><?php echo esc_html($featured_program['number']); ?></strong><?php endif; ?>
                             </div>
-                            <h2><?php echo esc_html($featured_program['title']); ?></h2>
-                            <?php if ($featured_program['period'] || $featured_program['certificate']): ?>
+                            <h2><?php echo esc_html($featured_program['title'] ?? ''); ?></h2>
+                            <?php if (!empty($featured_program['period']) || !empty($featured_program['certificate'])): ?>
                                 <div class="academy-v2-hero-card__credential">
-                                    <?php if ($featured_program['period']): ?><strong><?php echo esc_html($featured_program['period']); ?></strong><?php endif; ?>
-                                    <?php if ($featured_program['certificate']): ?><span><?php echo esc_html($featured_program['certificate']); ?></span><?php endif; ?>
+                                    <?php if (!empty($featured_program['period'])): ?><strong><?php echo esc_html($featured_program['period']); ?></strong><?php endif; ?>
+                                    <?php if (!empty($featured_program['certificate'])): ?><span><?php echo esc_html($featured_program['certificate']); ?></span><?php endif; ?>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($featured_program['badges']): ?>
+                            <?php if (!empty($featured_program['badges'])): ?>
                                 <div class="academy-v2-hero-card__badges">
                                     <?php foreach (array_slice($featured_program['badges'], 0, 4) as $badge): ?><span><?php echo esc_html($badge); ?></span><?php endforeach; ?>
                                 </div>
@@ -166,27 +284,27 @@ get_header();
         </section>
     <?php endif; ?>
 
-    <?php if ($meta('_myliba_academy_trust_title') !== ''): ?>
+    <?php if ($trust_title !== ''): ?>
         <?php get_template_part('template-parts/client-logo-marquee', null, [
-            'label' => $meta('_myliba_academy_trust_label'),
-            'title' => $meta('_myliba_academy_trust_title'),
-            'text' => $meta('_myliba_academy_trust_text'),
+            'label' => $trust_label,
+            'title' => $trust_title,
+            'text' => $trust_text,
             'class' => 'academy-v2-trust-section',
             'heading_id' => 'academy-trust-title',
             'limit' => 30,
         ]); ?>
     <?php endif; ?>
 
-    <?php if ($meta('_myliba_academy_programs_title') !== ''): ?>
+    <?php if ($programs_title !== ''): ?>
         <section id="programlar" class="section academy-v2-intro">
             <div class="academy-v2-intro__copy">
                 <div>
-                    <?php if ($meta('_myliba_academy_programs_eyebrow') !== ''): ?>
-                        <p class="eyebrow"><?php echo esc_html($meta('_myliba_academy_programs_eyebrow')); ?></p><?php endif; ?>
-                    <h2><?php echo esc_html($meta('_myliba_academy_programs_title')); ?></h2>
+                    <?php if ($programs_eyebrow !== ''): ?>
+                        <p class="eyebrow"><?php echo esc_html($programs_eyebrow); ?></p><?php endif; ?>
+                    <h2><?php echo esc_html($programs_title); ?></h2>
                 </div>
-                <?php if ($meta('_myliba_academy_programs_text') !== ''): ?>
-                    <p><?php echo esc_html($meta('_myliba_academy_programs_text')); ?></p><?php endif; ?>
+                <?php if ($programs_text !== ''): ?>
+                    <p><?php echo esc_html($programs_text); ?></p><?php endif; ?>
             </div>
             <?php if ($program_cards): ?>
                 <div class="academy-v2-program-index">
@@ -205,41 +323,38 @@ get_header();
         </section>
     <?php endif; ?>
 
-    <?php if ($programs->have_posts()): ?>
+    <?php if (!empty($prepared_programs)): ?>
         <div class="academy-v2-programs">
-            <?php $program_index = 0; ?>
-            <?php while ($programs->have_posts()):
-                $programs->the_post(); ?>
+            <?php foreach ($prepared_programs as $program_index => $program): ?>
                 <?php
-                $program_index++;
-                $program_id = get_the_ID();
-                $layout = get_post_meta($program_id, '_myliba_academy_layout', true) ?: 'standard';
-                $benefits = myliba_lines((string) get_post_meta($program_id, '_myliba_academy_program_benefits', true));
-                $badges = myliba_lines((string) get_post_meta($program_id, '_myliba_academy_program_badges', true));
-                $modules = $rows((string) get_post_meta($program_id, '_myliba_academy_program_modules', true));
-                $primary_label = trim((string) get_post_meta($program_id, '_myliba_academy_program_primary_label', true));
-                $primary_url = trim((string) get_post_meta($program_id, '_myliba_academy_program_primary_url', true));
-                $secondary_label = trim((string) get_post_meta($program_id, '_myliba_academy_program_secondary_label', true));
-                $secondary_url = trim((string) get_post_meta($program_id, '_myliba_academy_program_secondary_url', true));
-                $eyebrow = trim((string) get_post_meta($program_id, '_myliba_academy_program_eyebrow', true));
-                $start_period = trim((string) get_post_meta($program_id, '_myliba_academy_start_period', true));
-                $certificate = trim((string) get_post_meta($program_id, '_myliba_academy_certificate_info', true));
-                $content = trim((string) get_post_field('post_content', $program_id));
-                $excerpt = trim((string) get_the_excerpt());
-                $show_detailed_content = $content !== '' && trim(wp_strip_all_tags($content)) !== trim(wp_strip_all_tags($excerpt));
+                $p_index = $program_index + 1;
+                $layout = $program['layout'];
+                $benefits = $program['benefits'];
+                $badges = $program['badges'];
+                $modules = $program['modules'];
+                $primary_label = trim($program['primary_label']);
+                $primary_url = trim($program['primary_url']);
+                $secondary_label = trim($program['secondary_label']);
+                $secondary_url = trim($program['secondary_url']);
+                $eyebrow = trim($program['eyebrow']);
+                $start_period = trim($program['period']);
+                $certificate = trim($program['certificate']);
+                $excerpt = trim($program['lead']);
+                $detailed_content = trim($program['detailed_content']);
+                $show_detailed_content = $detailed_content !== '' && trim(wp_strip_all_tags($detailed_content)) !== trim(wp_strip_all_tags($excerpt));
                 ?>
-                <section id="<?php echo esc_attr('program-' . $program_index); ?>"
+                <section id="<?php echo esc_attr('program-' . $p_index); ?>"
                     class="academy-v2-program academy-v2-program--<?php echo esc_attr(sanitize_html_class($layout)); ?>">
                     <div class="section academy-v2-program__inner">
                         <div class="academy-v2-program__content">
                             <?php if ($eyebrow !== ''): ?>
                                 <p class="eyebrow"><?php echo esc_html($eyebrow); ?></p><?php endif; ?>
-                            <h2><?php the_title(); ?></h2>
+                            <h2><?php echo esc_html($program['title']); ?></h2>
                             <?php if ($excerpt !== ''): ?>
                                 <p class="academy-v2-program__lead"><?php echo esc_html($excerpt); ?></p><?php endif; ?>
                             <?php if ($show_detailed_content): ?>
                                 <div class="academy-v2-program__description">
-                                    <?php echo wp_kses_post(apply_filters('the_content', $content)); ?>
+                                    <?php echo wp_kses_post(apply_filters('the_content', $detailed_content)); ?>
                                 </div><?php endif; ?>
                             <?php if ($start_period !== '' || $certificate !== ''): ?>
                                 <div class="academy-v2-program__meta">
@@ -258,39 +373,39 @@ get_header();
                                             href="<?php echo esc_url($secondary_url); ?>"><?php echo esc_html($secondary_label); ?></a>
                                     <?php else: ?><button class="myliba-button myliba-button--ghost" type="button"
                                             data-academy-form-open
-                                            data-program="<?php echo esc_attr(get_the_title()); ?>"><?php echo esc_html($secondary_label); ?></button><?php endif; ?>
+                                            data-program="<?php echo esc_attr($program['title']); ?>"><?php echo esc_html($secondary_label); ?></button><?php endif; ?>
                                 <?php endif; ?>
                                 <?php if ($primary_label !== ''): ?>
                                     <?php if ($primary_url !== ''): ?><a class="myliba-button myliba-button--primary"
                                             href="<?php echo esc_url($primary_url); ?>"><?php echo esc_html($primary_label); ?></a>
                                     <?php else: ?><button class="myliba-button myliba-button--primary" type="button"
                                             data-academy-form-open
-                                            data-program="<?php echo esc_attr(get_the_title()); ?>"><?php echo esc_html($primary_label); ?></button><?php endif; ?>
+                                            data-program="<?php echo esc_attr($program['title']); ?>"><?php echo esc_html($primary_label); ?></button><?php endif; ?>
                                 <?php endif; ?>
                             </div>
                         </div>
                         <div class="academy-v2-program__details">
                             <?php if ($benefits): ?>
-                                <?php if ($meta('_myliba_academy_benefits_title') !== ''): ?>
-                                    <h3><?php echo esc_html($meta('_myliba_academy_benefits_title')); ?></h3><?php endif; ?>
+                                <?php if ($benefits_title !== ''): ?>
+                                    <h3><?php echo esc_html($benefits_title); ?></h3><?php endif; ?>
                                 <ul class="academy-v2-benefits">
                                     <?php foreach ($benefits as $benefit): ?>
                                         <li><?php echo esc_html($benefit); ?></li><?php endforeach; ?>
                                 </ul>
-                            <?php elseif (has_post_thumbnail()): ?>
-                                <?php echo get_the_post_thumbnail($program_id, 'large', ['loading' => 'lazy']); ?>
+                            <?php elseif (!empty($program['thumbnail'])): ?>
+                                <?php echo $program['thumbnail']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                             <?php endif; ?>
                         </div>
                     </div>
                     <?php if ($modules): ?>
                         <div class="section academy-v2-modules">
-                            <?php if ($meta('_myliba_academy_modules_title') !== ''): ?>
-                                <h3><?php echo esc_html($meta('_myliba_academy_modules_title')); ?></h3><?php endif; ?>
+                            <?php if ($modules_title !== ''): ?>
+                                <h3><?php echo esc_html($modules_title); ?></h3><?php endif; ?>
                             <div class="academy-v2-modules__grid">
-                                <?php foreach ($modules as $module_index => [$module_title, $module_details]): ?>
+                                <?php foreach ($modules as $module_index => [$module_title_item, $module_details]): ?>
                                     <article>
                                         <span><?php echo esc_html(str_pad((string) ($module_index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-                                        <h4><?php echo esc_html($module_title); ?></h4>
+                                        <h4><?php echo esc_html($module_title_item); ?></h4>
                                         <?php if ($module_details !== ''): ?>
                                             <ul>
                                                 <?php foreach (array_filter(array_map('trim', explode(';', $module_details))) as $detail): ?>
@@ -303,20 +418,19 @@ get_header();
                         </div>
                     <?php endif; ?>
                 </section>
-            <?php endwhile;
-            wp_reset_postdata(); ?>
+            <?php endforeach; ?>
         </div>
     <?php endif; ?>
 
-    <?php if ($approach_steps && $meta('_myliba_academy_approach_title') !== ''): ?>
+    <?php if ($approach_steps && $approach_title !== ''): ?>
         <section id="yaklasim" class="academy-v2-approach">
             <div class="section">
-                <h2><?php echo esc_html($meta('_myliba_academy_approach_title')); ?></h2>
+                <h2><?php echo esc_html($approach_title); ?></h2>
                 <div class="academy-v2-process">
-                    <?php foreach ($approach_steps as $index => [$title, $description]): ?>
+                    <?php foreach ($approach_steps as $index => $step): ?>
                         <article><span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-                            <h3><?php echo esc_html($title); ?></h3>
-                            <p><?php echo esc_html($description); ?></p>
+                            <h3><?php echo esc_html($step['title'] ?? ''); ?></h3>
+                            <p><?php echo esc_html($step['description'] ?? ''); ?></p>
                         </article>
                     <?php endforeach; ?>
                 </div>
@@ -326,13 +440,13 @@ get_header();
 
     <?php if ($stats): ?>
         <section class="section academy-v2-stats"
-            aria-label="<?php echo esc_attr($meta('_myliba_academy_approach_title')); ?>">
+            aria-label="<?php echo esc_attr($approach_title); ?>">
             <div class="academy-v2-stats__heading">
                 <span><?php echo esc_html(myliba_text('Programı bir bakışta')); ?></span>
                 <i aria-hidden="true"></i>
             </div>
             <div class="academy-v2-stats__grid">
-                <?php foreach ($stats as $stat_index => [$value, $label]): ?>
+                <?php foreach ($stats as $stat_index => $stat): ?>
                     <article>
                         <span class="academy-v2-stats__icon" aria-hidden="true">
                             <svg viewBox="0 0 24 24">
@@ -354,8 +468,8 @@ get_header();
                             </svg>
                         </span>
                         <div>
-                            <strong><?php echo esc_html($value); ?></strong>
-                            <span class="academy-v2-stats__label"><?php echo esc_html($label); ?></span>
+                            <strong><?php echo esc_html($stat['value'] ?? ''); ?></strong>
+                            <span class="academy-v2-stats__label"><?php echo esc_html($stat['label'] ?? ''); ?></span>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -363,10 +477,10 @@ get_header();
         </section>
     <?php endif; ?>
 
-    <?php if ($testimonials->have_posts() && $meta('_myliba_academy_testimonials_title') !== ''): ?>
+    <?php if ($testimonials->have_posts() && $testimonials_title !== ''): ?>
         <section id="yorumlar" class="section academy-v2-testimonials" data-academy-slider>
             <div class="academy-v2-section-head">
-                <h2><?php echo esc_html($meta('_myliba_academy_testimonials_title')); ?></h2>
+                <h2><?php echo esc_html($testimonials_title); ?></h2>
                 <div class="academy-v2-slider-controls">
                     <button type="button" data-slider-previous
                         aria-label="<?php echo esc_attr(myliba_text('Previous testimonial')); ?>">←</button>
@@ -403,44 +517,26 @@ get_header();
     <?php
     get_template_part('template-parts/expand', null, [
         'id' => 'sss',
-        'title' => $meta('_myliba_academy_faq_title'),
+        'title' => $faq_title,
         'items' => $faq_items,
     ]);
     ?>
-
-    <!--     <?php if ($meta('_myliba_academy_final_title') !== ''): ?>
-        <section id="iletisim" class="section academy-v2-final">
-            <div>
-                <h2><?php echo esc_html($meta('_myliba_academy_final_title')); ?></h2>
-                <?php if ($meta('_myliba_academy_final_text') !== ''): ?>
-                    <p><?php echo esc_html($meta('_myliba_academy_final_text')); ?></p><?php endif; ?>
-            </div>
-            <div class="academy-v2-final__actions">
-                <?php if ($meta('_myliba_academy_final_primary_label') !== ''): ?><button
-                        class="myliba-button myliba-button--primary" type="button"
-                        data-academy-form-open><?php echo esc_html($meta('_myliba_academy_final_primary_label')); ?></button><?php endif; ?>
-                <?php if ($meta('_myliba_academy_final_secondary_label') !== ''): ?><a
-                        class="myliba-button myliba-button--ghost"
-                        href="#programlar"><?php echo esc_html($meta('_myliba_academy_final_secondary_label')); ?></a><?php endif; ?>
-            </div>
-        </section>
-    <?php endif; ?> -->
 </div>
 
-<?php if ($meta('_myliba_academy_contact_title') !== ''): ?>
+<?php if ($contact_title !== ''): ?>
     <dialog class="academy-v2-dialog" data-academy-dialog aria-labelledby="academy-dialog-title">
         <button class="academy-v2-dialog__close" type="button" data-academy-form-close
             aria-label="<?php echo esc_attr(myliba_text('Close')); ?>">×</button>
         <div class="academy-v2-dialog__intro">
             <p class="eyebrow">
-                <?php echo esc_html($meta('_myliba_eyebrow')); ?>
+                <?php echo esc_html($hero_eyebrow); ?>
             </p>
             <h2 id="academy-dialog-title">
-                <?php echo esc_html($meta('_myliba_academy_contact_title')); ?>
+                <?php echo esc_html($contact_title); ?>
             </h2>
-            <?php if ($meta('_myliba_academy_contact_text') !== ''): ?>
+            <?php if ($contact_text !== ''): ?>
                 <p>
-                    <?php echo esc_html($meta('_myliba_academy_contact_text')); ?>
+                    <?php echo esc_html($contact_text); ?>
                 </p>
             <?php endif; ?>
         </div>
@@ -449,3 +545,4 @@ get_header();
 <?php endif; ?>
 
 <?php get_footer(); ?>
+
