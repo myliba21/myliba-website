@@ -32,6 +32,12 @@ while (have_posts()):
         $hero_secondary_label = myliba_text('Çalışma modelini inceleyin');
     }
 
+    $hero_image_id = absint($content_copy('hero_image') ?: get_post_meta($post_id, '_myliba_hero_image', true));
+    $hero_image_alt = $content_copy('hero_image_alt');
+    if ($hero_image_alt === '') {
+        $hero_image_alt = (string) (get_post_meta($post_id, '_myliba_hero_image_alt', true) ?: '');
+    }
+
     $journey_eyebrow = $content_copy('journey_eyebrow');
     if ($journey_eyebrow === '') {
         $journey_eyebrow = (string) (get_post_meta($post_id, '_myliba_journey_eyebrow', true) ?: myliba_text('Myliba gelişim yolculuğu'));
@@ -206,20 +212,36 @@ while (have_posts()):
                         </div>
                     </div>
 
-                    <div class="solution-journey" aria-hidden="true">
-                        <div class="solution-journey__topline">
-                            <span><?php echo esc_html($journey_eyebrow); ?></span>
-                            <i></i>
-                        </div>
-                        <strong><?php echo wp_kses_post(nl2br(esc_html($journey_title))); ?></strong>
-                        <?php if (!empty($steps)): ?>
-                            <div class="solution-journey__steps">
-                                <?php foreach (array_slice($steps, 0, 3) as $index => $step): ?>
-                                    <span><b><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></b><?php echo esc_html($step['title']); ?></span>
-                                <?php endforeach; ?>
+                    <?php
+                    $show_hero_image = $hero_image_id > 0;
+                    if ($show_hero_image): ?>
+                        <div class="solution-detail__hero-visual-wrap">
+                            <div class="solution-detail__hero-visual">
+                                <?php echo wp_get_attachment_image($hero_image_id, 'full', false, [
+                                    'alt' => $hero_image_alt ?: get_post_meta($hero_image_id, '_wp_attachment_image_alt', true) ?: $title,
+                                    'class' => 'solution-detail__hero-image',
+                                    'loading' => 'eager',
+                                    'fetchpriority' => 'high',
+                                    'decoding' => 'async',
+                                ]); ?>
                             </div>
-                        <?php endif; ?>
-                    </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="solution-journey" aria-hidden="true">
+                            <div class="solution-journey__topline">
+                                <span><?php echo esc_html($journey_eyebrow); ?></span>
+                                <i></i>
+                            </div>
+                            <strong><?php echo wp_kses_post(nl2br(esc_html($journey_title))); ?></strong>
+                            <?php if (!empty($steps)): ?>
+                                <div class="solution-journey__steps">
+                                    <?php foreach (array_slice($steps, 0, 3) as $index => $step): ?>
+                                        <span><b><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></b><?php echo esc_html($step['title']); ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
             </div>

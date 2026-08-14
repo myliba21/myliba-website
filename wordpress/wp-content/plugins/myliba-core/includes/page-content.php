@@ -493,6 +493,8 @@ function solution_definition(): array
             'hero_summary' => ['textarea', 'Hero açıklaması'],
             'hero_primary_label' => ['text', 'Ana buton etiketi (Örn: Programı birlikte tasarlayalım)'],
             'hero_secondary_label' => ['text', 'İkincil buton etiketi (Örn: Çalışma modelini inceleyin)'],
+            'hero_image' => ['media', 'Hero Sağ Görseli (Görsel seçildiğinde sağ tarafta bu görsel görünür; boş bırakılırsa yolculuk kutusu görünür)'],
+            'hero_image_alt' => ['text', 'Hero Sağ Görseli Alt Metni (Opsiyonel)'],
             'journey_eyebrow' => ['text', 'Yolculuk kutusu üst etiketi (Örn: Myliba gelişim yolculuğu)'],
             'journey_title' => ['textarea', 'Yolculuk kutusu sloganı (Örn: Kuruma özel.\nİşin içinde.\nÖlçülebilir.)'],
         ], 'collections' => [
@@ -611,6 +613,8 @@ function solution_defaults(int $post_id): array
         'hero_summary' => $summary,
         'hero_primary_label' => (string) (get_post_meta($post_id, '_myliba_cta_label', true) ?: 'Programı birlikte tasarlayalım'),
         'hero_secondary_label' => 'Çalışma modelini inceleyin',
+        'hero_image' => (string) (get_post_meta($post_id, '_myliba_hero_image', true) ?: ''),
+        'hero_image_alt' => (string) (get_post_meta($post_id, '_myliba_hero_image_alt', true) ?: ''),
         'journey_eyebrow' => (string) (get_post_meta($post_id, '_myliba_journey_eyebrow', true) ?: 'Myliba gelişim yolculuğu'),
         'journey_title' => (string) (get_post_meta($post_id, '_myliba_journey_title', true) ?: "Kuruma özel.\nİşin içinde.\nÖlçülebilir."),
         'intro_eyebrow' => (string) (get_post_meta($post_id, '_myliba_intro_eyebrow', true) ?: 'Myliba yaklaşımı'),
@@ -1738,8 +1742,11 @@ function render_page_box(\WP_Post $post): void
 
         // Card Body
         echo '<div class="myliba-builder-card__body" id="' . esc_attr($panel_id) . '" hidden>';
-        foreach ($group['fields'] ?? [] as $key => [$type, $label]) {
-            render_field($key, $type, $label, $doc['fields'][$key] ?? '');
+        foreach ($group['fields'] ?? [] as $key => $field_def) {
+            $type = $field_def[0] ?? 'text';
+            $label = $field_def[1] ?? '';
+            $options = $field_def[2] ?? [];
+            render_field($key, $type, $label, $doc['fields'][$key] ?? '', 'myliba_page_content[fields]', $options);
         }
         foreach ($group['collections'] ?? [] as $key => $config) {
             render_collection($key, $config, $doc['collections'][$key] ?? []);
@@ -1753,15 +1760,27 @@ function render_page_box(\WP_Post $post): void
     render_admin_assets();
 }
 
-function render_field(string $key, string $type, string $label, mixed $value, string $name_prefix = 'myliba_page_content[fields]'): void
+function render_field(string $key, string|array $type, string $label, mixed $value, string $name_prefix = 'myliba_page_content[fields]', array $options = []): void
 {
     $name = $name_prefix . '[' . $key . ']';
-    if ($type === 'media' || $type === 'image') {
+    $type_str = is_array($type) ? ($type[0] ?? 'text') : $type;
+    $field_options = is_array($type) ? ($type[1] ?? $options) : $options;
+
+    if ($type_str === 'media' || $type_str === 'image') {
         \Myliba\Core\Meta\field_media($name, $label, $value);
         return;
     }
+    if ($type_str === 'select') {
+        echo '<p class="myliba-page-content__field"><label><strong>' . esc_html($label) . '</strong></label><br>';
+        echo '<select class="widefat" name="' . esc_attr($name) . '">';
+        foreach ($field_options as $opt_val => $opt_label) {
+            echo '<option value="' . esc_attr((string) $opt_val) . '" ' . selected((string) $value, (string) $opt_val, false) . '>' . esc_html($opt_label) . '</option>';
+        }
+        echo '</select></p>';
+        return;
+    }
     echo '<p class="myliba-page-content__field"><label><strong>' . esc_html($label) . '</strong></label><br>';
-    if ($type === 'textarea') {
+    if ($type_str === 'textarea') {
         echo '<textarea class="widefat" rows="4" name="' . esc_attr($name) . '">' . esc_textarea((string) $value) . '</textarea>';
     } else {
         echo '<input class="widefat" type="text" name="' . esc_attr($name) . '" value="' . esc_attr((string) $value) . '">';
@@ -1786,8 +1805,11 @@ function render_collection(string $key, array $config, mixed $rows): void
 function render_collection_row(string $collection_key, int|string $index, array $fields, array $row): void
 {
     echo '<div class="myliba-repeater__row"><div class="myliba-repeater__row-head"><strong>Satır <span class="myliba-repeater__number">' . esc_html(is_int($index) ? (string) ($index + 1) : '') . '</span></strong><button type="button" class="button-link-delete myliba-repeater__remove">Sil</button></div>';
-    foreach ($fields as $key => [$type, $label]) {
-        render_field($key, $type, $label, $row[$key] ?? '', 'myliba_page_content[collections][' . $collection_key . '][' . $index . ']');
+    foreach ($fields as $key => $field_def) {
+        $type = $field_def[0] ?? 'text';
+        $label = $field_def[1] ?? '';
+        $options = $field_def[2] ?? [];
+        render_field($key, $type, $label, $row[$key] ?? '', 'myliba_page_content[collections][' . $collection_key . '][' . $index . ']', $options);
     }
     echo '</div>';
 }

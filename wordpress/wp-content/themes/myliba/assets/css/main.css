@@ -13476,6 +13476,54 @@ body:has(.software-page) .site-footer__cta-wrap {
   transform: translateX(4px);
 }
 
+.solution-detail__hero-visual-wrap {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+}
+
+.solution-detail__hero-visual {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 28px;
+  box-shadow:
+    0 32px 80px rgba(31, 55, 64, 0.16),
+    0 0 0 8px rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  min-height: 380px;
+  overflow: hidden;
+  padding: 24px;
+  position: relative;
+  transition: box-shadow 260ms ease, transform 260ms ease;
+  width: 100%;
+}
+
+.solution-detail__hero-visual:hover {
+  box-shadow:
+    0 42px 96px rgba(31, 55, 64, 0.22),
+    0 0 0 8px rgba(255, 255, 255, 0.08);
+  transform: translateY(-3px);
+}
+
+.solution-detail__hero-visual img,
+.solution-detail__hero-image {
+  border-radius: 16px;
+  display: block;
+  height: auto;
+  max-height: 440px;
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
+}
+
 .solution-journey {
   background:
     radial-gradient(circle at 82% 10%, rgba(40, 127, 159, .34), transparent 30%),
@@ -14181,7 +14229,8 @@ body.single-myliba_solution .site-footer__cta-wrap {
     padding-bottom: 0;
   }
 
-  .solution-journey {
+  .solution-journey,
+  .solution-detail__hero-visual {
     border-radius: 24px 24px 0 0;
     min-height: 420px;
   }
@@ -14273,10 +14322,11 @@ body.single-myliba_solution .site-footer__cta-wrap {
     flex-direction: column;
   }
 
-  .solution-journey {
+  .solution-journey,
+  .solution-detail__hero-visual {
     margin-left: -20px;
     margin-right: -20px;
-    min-height: 390px;
+    min-height: 340px;
   }
 
   .solution-detail__principles {
