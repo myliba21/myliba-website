@@ -142,7 +142,8 @@ function software_definition(): array
                 ],
                 'collections' => [
                     'modules' => ['label' => 'Modül kartları', 'fields' => [
-                        'number' => ['text', 'Numara'],
+                        'image' => ['media', 'Görsel'],
+                        'image_alt' => ['text', 'Görsel Alt Metni (Opsiyonel)'],
                         'title' => ['text', 'Başlık'],
                         'text' => ['textarea', 'Açıklama'],
                         'items' => ['textarea', 'Özellikler (her satıra bir özellik)'],
@@ -180,24 +181,6 @@ function software_definition(): array
                         'label' => ['text', 'Etiket'],
                         'text' => ['textarea', 'Açıklama'],
                     ]],
-                ],
-            ],
-            'assurance' => [
-                'label' => 'Kurulum ve Entegrasyon',
-                'fields' => [
-                    'assurance_eyebrow' => ['text', 'Üst etiket'],
-                    'assurance_title' => ['textarea', 'Başlık'],
-                    'assurance_text' => ['textarea', 'Açıklama'],
-                    'assurance_rail_aria' => ['text', 'Entegrasyon listesi erişilebilirlik açıklaması'],
-                ],
-                'collections' => [
-                    'assurance_cards' => ['label' => 'Kurulum kartları', 'fields' => [
-                        'number' => ['text', 'Numara'],
-                        'icon' => ['text', 'Simge'],
-                        'title' => ['text', 'Başlık'],
-                        'text' => ['textarea', 'Açıklama'],
-                    ]],
-                    'assurance_rail' => ['label' => 'Entegrasyon alanları', 'fields' => ['label' => ['text', 'Etiket']]],
                 ],
             ],
             'faq' => [
@@ -258,10 +241,6 @@ function software_defaults(): array
             'why_formula_first' => 'Potansiyel',
             'why_formula_second' => 'Müdahale',
             'why_text' => 'İnsanlara daha fazla güven, net bir odak ve gelişim alanı sunduğunuzda performans doğal bir ritimle ortaya çıkar. Myliba Yazılım bu anlayışı canlı verilere dönüştürür.',
-            'assurance_eyebrow' => 'Kurumsal ölçekte güvenli geçiş',
-            'assurance_title' => 'Sistemlerinize uyum sağlayan kontrollü bir kurulum.',
-            'assurance_text' => 'Organizasyon yapısı, hedef döngüsü, veri aktarımı ve entegrasyon kapsamı ihtiyaç analiziyle belirlenir; devreye alma süreci ekiplerinizle birlikte planlanır.',
-            'assurance_rail_aria' => 'Entegrasyon kapsamları',
             'faq_eyebrow' => 'Merak Edilenler',
             'faq_title' => 'Myliba Yazılım Hakkında Sıkça Sorulan Sorular',
             'faq_text' => 'Yeni nesil performans yönetimine geçerken bilmek isteyeceğiniz temel noktalar.',
@@ -279,10 +258,10 @@ function software_defaults(): array
                 ['label' => 'Destek Gerekli', 'count' => '2'], ['label' => 'Uzman Katkı', 'count' => '6'], ['label' => 'Kritik Yetenek', 'count' => '3'],
             ],
             'modules' => [
-                ['number' => '01', 'title' => 'Strateji ve Hedef Yönetimi', 'text' => 'Çalışanlarınızı organizasyonunuzun strateji ve hedeflerine hizalayın. Siloları yıkın, herkes Kutup Yıldızı’na odaklansın.', 'items' => "Native OKR\nHedef Haritası\nAnlık İlerleme Takibi\nHedef Zorluk Analizi\nStratejik Aksiyonların İzlenmesi"],
-                ['number' => '02', 'title' => 'Performans Yönetimi', 'text' => 'Gerçek zamanlı performans yönetimi artık mümkün! AI destekli aksiyon ve KPI kartlarıyla prim hakedişlerini gerçek zamanlı takip ederek süreçlerinizi şeffaflaştırın.', 'items' => "AI Destekli Görev ve Aksiyon Yönetimi\nKPI Kartları ve Veri Entegrasyonu"],
-                ['number' => '03', 'title' => 'Sürekli Diyalog ve Kültür Yönetimi', 'text' => 'Yılda bir kez yapılan notlamaları unutun. 1:1 görüşmeler, anlık geri bildirim, ileri bildirim ve takdir kültürüyle gelişimi günlük işin bir parçası haline getirin.', 'items' => "Diyalog (1:1 Görüşmeler)\nGeri Bildirim & İleri Bildirim\nTakdir ve Oyunlaştırma"],
-                ['number' => '04', 'title' => 'Adil Kararlar', 'text' => 'İnsan yönetiminde tahmin devrini kapatın. Hedef, performans, kültürel uyum ve liderlik verilerini tek noktada birleştirerek %100 veriye dayalı kararlar alın.', 'items' => "360°, 45° ve 90° Değer ve Yetkinlik Analizleri\nKültür, Bağlılık ve İsteklilik Analizi\nLider Kararı & Keeper Test\nAI Destekli İçgörüler"],
+                ['image' => '', 'image_alt' => '', 'title' => 'Strateji ve Hedef Yönetimi', 'text' => 'Çalışanlarınızı organizasyonunuzun strateji ve hedeflerine hizalayın. Siloları yıkın, herkes Kutup Yıldızı’na odaklansın.', 'items' => "Native OKR\nHedef Haritası\nAnlık İlerleme Takibi\nHedef Zorluk Analizi\nStratejik Aksiyonların İzlenmesi"],
+                ['image' => '', 'image_alt' => '', 'title' => 'Performans Yönetimi', 'text' => 'Gerçek zamanlı performans yönetimi artık mümkün! AI destekli aksiyon ve KPI kartlarıyla prim hakedişlerini gerçek zamanlı takip ederek süreçlerinizi şeffaflaştırın.', 'items' => "AI Destekli Görev ve Aksiyon Yönetimi\nKPI Kartları ve Veri Entegrasyonu"],
+                ['image' => '', 'image_alt' => '', 'title' => 'Sürekli Diyalog ve Kültür Yönetimi', 'text' => 'Yılda bir kez yapılan notlamaları unutun. 1:1 görüşmeler, anlık geri bildirim, ileri bildirim ve takdir kültürüyle gelişimi günlük işin bir parçası haline getirin.', 'items' => "Diyalog (1:1 Görüşmeler)\nGeri Bildirim & İleri Bildirim\nTakdir ve Oyunlaştırma"],
+                ['image' => '', 'image_alt' => '', 'title' => 'Adil Kararlar', 'text' => 'İnsan yönetiminde tahmin devrini kapatın. Hedef, performans, kültürel uyum ve liderlik verilerini tek noktada birleştirerek %100 veriye dayalı kararlar alın.', 'items' => "360°, 45° ve 90° Değer ve Yetkinlik Analizleri\nKültür, Bağlılık ve İsteklilik Analizi\nLider Kararı & Keeper Test\nAI Destekli İçgörüler"],
             ],
             'workflow_steps' => [
                 ['title' => 'Hedefleri belirle', 'text' => 'Stratejiyi OKR, KPI ve sorumluluklarla görünür hale getirin.'],
@@ -296,12 +275,6 @@ function software_defaults(): array
                 ['value' => '2×', 'label' => 'Performans', 'text' => 'Sosyal taahhüt yönetimi ve anlık geri bildirim döngüleri ile ekiplerinizde 2x performans artışı.'],
                 ['value' => '%67', 'label' => 'Daha Güçlü Hedefler', 'text' => 'Geleneksel yöntemlere kıyasla %67 daha güçlü ve dönüşüme öncülük eden hedefler.'],
             ],
-            'assurance_cards' => [
-                ['number' => '01', 'icon' => '↔', 'title' => 'API ve veri bağlantıları', 'text' => 'KPI ve organizasyon verilerini mevcut İK, iş zekâsı ve operasyon araçlarınızla ilişkilendirin.'],
-                ['number' => '02', 'icon' => '◎', 'title' => 'Kurumunuza özel yapı', 'text' => 'Ekip, hedef, değerlendirme ve yetkilendirme modelini organizasyonunuzun çalışma biçimine göre kurgulayın.'],
-                ['number' => '03', 'icon' => '✓', 'title' => 'Kontrollü devreye alma', 'text' => 'İhtiyaç analizinden veri aktarımına kadar kurulum adımlarını kademeli ve izlenebilir biçimde ilerletin.'],
-            ],
-            'assurance_rail' => [['label' => 'İK sistemleri'], ['label' => 'İş zekâsı'], ['label' => 'Operasyon verileri'], ['label' => 'API bağlantıları']],
             'faqs' => [
                 ['question' => 'Myliba hangi şirketler için uygundur?', 'answer' => 'Myliba; hedeflerini, performansını ve kültürünü tek bir sistemde yönetmek isteyen büyüme aşamasındaki şirketlerden çok lokasyonlu büyük organizasyonlara kadar ölçeklenebilir. Yapı, sektör ve ekip büyüklüğüne göre özelleştirilebilir.'],
                 ['question' => 'Myliba Yazılım, geleneksel performans sistemlerinden nasıl ayrılır?', 'answer' => 'Geleneksel sistemler çoğunlukla yılda bir kez doldurulan formlara ve geriye dönük yorumlara dayanır. Myliba ise hedef, KPI, aksiyon, diyalog ve kültür verilerini canlı olarak birleştirir; liderlere güncel ve karşılaştırılabilir karar verisi sunar.'],
