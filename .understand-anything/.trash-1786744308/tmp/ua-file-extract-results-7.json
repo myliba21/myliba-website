@@ -1,0 +1,262 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 20,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "wordpress/wp-content/themes/myliba/single-myliba_solution.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 369,
+      "nonEmptyLines": 324,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/single.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 72,
+      "nonEmptyLines": 68,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/style.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "metrics": {}
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-blog.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 112,
+      "nonEmptyLines": 101,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-contact.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 21,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-demo.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 21,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-events.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 39,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-landing.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 11,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 112,
+      "nonEmptyLines": 108,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 81,
+      "nonEmptyLines": 76,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 81,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 33,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 30,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 454,
+      "nonEmptyLines": 439,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 87,
+      "nonEmptyLines": 82,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-ethics.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 179,
+      "nonEmptyLines": 164,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-faq.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 239,
+      "nonEmptyLines": 218,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 188,
+      "nonEmptyLines": 177,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 56,
+      "nonEmptyLines": 53,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "wordpress/wp-content/themes/myliba/template-parts/page-story.php",
+      "language": "php",
+      "fileCategory": "code",
+      "totalLines": 381,
+      "nonEmptyLines": 349,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

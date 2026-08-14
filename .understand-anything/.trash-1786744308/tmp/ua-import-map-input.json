@@ -1,783 +1,545 @@
 {
-  "name": "myliba-website",
-  "description": "Açıklama mevcut değil. Not: Bu projede 100'den fazla kaynak dosyası bulunuyor; daha hızlı sonuçlar için analizi bir alt dizinle sınırlandırmayı değerlendirin.",
-  "languages": [
-    "conf",
-    "config",
-    "css",
-    "javascript",
-    "json",
-    "makefile",
-    "markdown",
-    "php",
-    "unknown",
-    "yaml"
-  ],
-  "frameworks": [
-    "Docker Compose",
-    "WordPress"
-  ],
+  "projectRoot": "/Users/okantoper/Documents/Myliba Projects/myliba-website",
   "files": [
     {
       "path": ".DS_Store",
       "language": "unknown",
-      "sizeLines": 0,
       "fileCategory": "code"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/assemble-review.json",
       "language": "json",
-      "sizeLines": 14,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/assembled-graph.json",
       "language": "json",
-      "sizeLines": 7663,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/batch-1.json",
       "language": "json",
-      "sizeLines": 87,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/batch-2-part-1.json",
       "language": "json",
-      "sizeLines": 531,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/batch-2-part-2.json",
       "language": "json",
-      "sizeLines": 4232,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/batch-2-part-3.json",
       "language": "json",
-      "sizeLines": 103,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/batch-3-part-1.json",
       "language": "json",
-      "sizeLines": 2274,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/batch-3-part-2.json",
       "language": "json",
-      "sizeLines": 166,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/batch-4.json",
       "language": "json",
-      "sizeLines": 45,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/batches.json",
       "language": "json",
-      "sizeLines": 682,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/fingerprint-input.json",
       "language": "json",
-      "sizeLines": 64,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/layers.json",
       "language": "json",
-      "sizeLines": 95,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/review.json",
       "language": "json",
-      "sizeLines": 59,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
       "language": "javascript",
-      "sizeLines": 209,
       "fileCategory": "code"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-input.json",
       "language": "json",
-      "sizeLines": 942,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-layers.js",
       "language": "javascript",
-      "sizeLines": 63,
       "fileCategory": "code"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-prepare.js",
       "language": "javascript",
-      "sizeLines": 24,
       "fileCategory": "code"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-results.json",
       "language": "json",
-      "sizeLines": 505,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-1.json",
       "language": "json",
-      "sizeLines": 15,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-2.json",
       "language": "json",
-      "sizeLines": 57,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-3.json",
       "language": "json",
-      "sizeLines": 57,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-4.json",
       "language": "json",
-      "sizeLines": 35,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-1.json",
       "language": "json",
-      "sizeLines": 250,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-2.json",
       "language": "json",
-      "sizeLines": 11046,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-3.json",
       "language": "json",
-      "sizeLines": 3841,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-4.json",
       "language": "json",
-      "sizeLines": 58,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-import-map-input.json",
       "language": "json",
-      "sizeLines": 353,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-import-map-output.json",
       "language": "json",
-      "sizeLines": 67,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-inline-validate.cjs",
       "language": "javascript",
-      "sizeLines": 63,
       "fileCategory": "code"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-scan-files.json",
       "language": "json",
-      "sizeLines": 376,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-tour-analyze.js",
       "language": "javascript",
-      "sizeLines": 155,
       "fileCategory": "code"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-tour-input.json",
       "language": "json",
-      "sizeLines": 7478,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-tour-prepare.js",
       "language": "javascript",
-      "sizeLines": 17,
       "fileCategory": "code"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tmp/ua-tour-results.json",
       "language": "json",
-      "sizeLines": 1702,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.trash-20260802-audit/tour.json",
       "language": "json",
-      "sizeLines": 94,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/.understandignore",
       "language": "unknown",
-      "sizeLines": 67,
       "fileCategory": "code"
     },
     {
       "path": ".understand-anything/config.json",
       "language": "json",
-      "sizeLines": 3,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/fingerprints.json",
       "language": "json",
-      "sizeLines": 2800,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/intermediate/scan-result.json",
       "language": "json",
-      "sizeLines": 432,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/knowledge-graph.json",
       "language": "json",
-      "sizeLines": 7663,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/meta.json",
       "language": "json",
-      "sizeLines": 6,
       "fileCategory": "config"
     },
     {
       "path": "nginx/default.conf",
       "language": "conf",
-      "sizeLines": 138,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/.env.example",
       "language": "config",
-      "sizeLines": 33,
       "fileCategory": "config"
     },
     {
       "path": "wordpress/docker-compose.yml",
       "language": "yaml",
-      "sizeLines": 104,
       "fileCategory": "infra"
     },
     {
       "path": "wordpress/Makefile",
       "language": "makefile",
-      "sizeLines": 35,
       "fileCategory": "infra"
     },
     {
       "path": "wordpress/migration/content-map.md",
       "language": "markdown",
-      "sizeLines": 28,
       "fileCategory": "docs"
     },
     {
       "path": "wordpress/migration/review-report.md",
       "language": "markdown",
-      "sizeLines": 102,
       "fileCategory": "docs"
     },
     {
       "path": "wordpress/README.md",
       "language": "markdown",
-      "sizeLines": 104,
       "fileCategory": "docs"
     },
     {
       "path": "wordpress/uploads.ini",
       "language": "config",
-      "sizeLines": 5,
       "fileCategory": "config"
     },
     {
       "path": "wordpress/wp-content/index.php",
       "language": "php",
-      "sizeLines": 2,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/mu-plugins/automation-by-installatron.php",
       "language": "php",
-      "sizeLines": 25,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/mu-plugins/myliba-smtp.php",
       "language": "php",
-      "sizeLines": 57,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/index.php",
       "language": "php",
-      "sizeLines": 2,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/includes/admin.php",
       "language": "php",
-      "sizeLines": 248,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/includes/content.php",
       "language": "php",
-      "sizeLines": 594,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
       "language": "php",
-      "sizeLines": 299,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/includes/images.php",
       "language": "php",
-      "sizeLines": 213,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/includes/meta.php",
       "language": "php",
-      "sizeLines": 1686,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
       "language": "php",
-      "sizeLines": 506,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/includes/page-content.php",
       "language": "php",
-      "sizeLines": 2078,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
       "language": "php",
-      "sizeLines": 416,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
       "language": "php",
-      "sizeLines": 513,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
       "language": "php",
-      "sizeLines": 2026,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/plugins/myliba-core/myliba-core.php",
       "language": "php",
-      "sizeLines": 68,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/index.php",
       "language": "php",
-      "sizeLines": 2,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/404.php",
       "language": "php",
-      "sizeLines": 16,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/archive-myliba_academy.php",
       "language": "php",
-      "sizeLines": 19,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/archive-myliba_ebook.php",
       "language": "php",
-      "sizeLines": 4,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/archive-myliba_event.php",
       "language": "php",
-      "sizeLines": 28,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/archive-myliba_product.php",
       "language": "php",
-      "sizeLines": 20,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/archive-myliba_report.php",
       "language": "php",
-      "sizeLines": 4,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/archive-myliba_solution.php",
       "language": "php",
-      "sizeLines": 2,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/assets/css/main.css",
       "language": "css",
-      "sizeLines": 17283,
       "fileCategory": "markup"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/assets/js/main.js",
       "language": "javascript",
-      "sizeLines": 667,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/footer.php",
       "language": "php",
-      "sizeLines": 334,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/front-page.php",
       "language": "php",
-      "sizeLines": 544,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/functions.php",
       "language": "php",
-      "sizeLines": 2550,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/header.php",
       "language": "php",
-      "sizeLines": 253,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/inc/customizer.php",
       "language": "php",
-      "sizeLines": 485,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/index.php",
       "language": "php",
-      "sizeLines": 28,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/page.php",
       "language": "php",
-      "sizeLines": 62,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/single-myliba_academy.php",
       "language": "php",
-      "sizeLines": 9,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/single-myliba_ebook.php",
       "language": "php",
-      "sizeLines": 188,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/single-myliba_event.php",
       "language": "php",
-      "sizeLines": 26,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/single-myliba_landing.php",
       "language": "php",
-      "sizeLines": 9,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/single-myliba_product.php",
       "language": "php",
-      "sizeLines": 9,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/single-myliba_report.php",
       "language": "php",
-      "sizeLines": 275,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/single-myliba_solution.php",
       "language": "php",
-      "sizeLines": 369,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/single.php",
       "language": "php",
-      "sizeLines": 72,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/style.css",
       "language": "css",
-      "sizeLines": 9,
       "fileCategory": "markup"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-blog.php",
       "language": "php",
-      "sizeLines": 112,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-contact.php",
       "language": "php",
-      "sizeLines": 25,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-demo.php",
       "language": "php",
-      "sizeLines": 24,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-events.php",
       "language": "php",
-      "sizeLines": 44,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-landing.php",
       "language": "php",
-      "sizeLines": 13,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
       "language": "php",
-      "sizeLines": 112,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
       "language": "php",
-      "sizeLines": 81,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
       "language": "php",
-      "sizeLines": 89,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/expand.php",
       "language": "php",
-      "sizeLines": 35,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/hero.php",
       "language": "php",
-      "sizeLines": 31,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
       "language": "php",
-      "sizeLines": 454,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
       "language": "php",
-      "sizeLines": 87,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/page-ethics.php",
       "language": "php",
-      "sizeLines": 179,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/page-faq.php",
       "language": "php",
-      "sizeLines": 238,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/page-software.php",
       "language": "php",
-      "sizeLines": 187,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
       "language": "php",
-      "sizeLines": 55,
       "fileCategory": "code"
     },
     {
       "path": "wordpress/wp-content/themes/myliba/template-parts/page-story.php",
       "language": "php",
-      "sizeLines": 381,
       "fileCategory": "code"
     }
-  ],
-  "totalFiles": 108,
-  "filteredByIgnore": 262,
-  "estimatedComplexity": "moderate",
-  "importMap": {
-    ".DS_Store": [],
-    ".understand-anything/.trash-20260802-audit/assemble-review.json": [],
-    ".understand-anything/.trash-20260802-audit/assembled-graph.json": [],
-    ".understand-anything/.trash-20260802-audit/batch-1.json": [],
-    ".understand-anything/.trash-20260802-audit/batch-2-part-1.json": [],
-    ".understand-anything/.trash-20260802-audit/batch-2-part-2.json": [],
-    ".understand-anything/.trash-20260802-audit/batch-2-part-3.json": [],
-    ".understand-anything/.trash-20260802-audit/batch-3-part-1.json": [],
-    ".understand-anything/.trash-20260802-audit/batch-3-part-2.json": [],
-    ".understand-anything/.trash-20260802-audit/batch-4.json": [],
-    ".understand-anything/.trash-20260802-audit/batches.json": [],
-    ".understand-anything/.trash-20260802-audit/fingerprint-input.json": [],
-    ".understand-anything/.trash-20260802-audit/layers.json": [],
-    ".understand-anything/.trash-20260802-audit/review.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-arch-input.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-arch-layers.js": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-arch-prepare.js": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-arch-results.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-1.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-2.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-3.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-4.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-1.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-2.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-3.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-4.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-import-map-input.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-import-map-output.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-inline-validate.cjs": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-scan-files.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-tour-analyze.js": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-tour-input.json": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-tour-prepare.js": [],
-    ".understand-anything/.trash-20260802-audit/tmp/ua-tour-results.json": [],
-    ".understand-anything/.trash-20260802-audit/tour.json": [],
-    ".understand-anything/.understandignore": [],
-    ".understand-anything/config.json": [],
-    ".understand-anything/fingerprints.json": [],
-    ".understand-anything/intermediate/scan-result.json": [],
-    ".understand-anything/knowledge-graph.json": [],
-    ".understand-anything/meta.json": [],
-    "nginx/default.conf": [],
-    "wordpress/.env.example": [],
-    "wordpress/docker-compose.yml": [],
-    "wordpress/Makefile": [],
-    "wordpress/migration/content-map.md": [],
-    "wordpress/migration/review-report.md": [],
-    "wordpress/README.md": [],
-    "wordpress/uploads.ini": [],
-    "wordpress/wp-content/index.php": [],
-    "wordpress/wp-content/mu-plugins/automation-by-installatron.php": [],
-    "wordpress/wp-content/mu-plugins/myliba-smtp.php": [],
-    "wordpress/wp-content/plugins/index.php": [],
-    "wordpress/wp-content/plugins/myliba-core/includes/admin.php": [],
-    "wordpress/wp-content/plugins/myliba-core/includes/content.php": [],
-    "wordpress/wp-content/plugins/myliba-core/includes/forms.php": [],
-    "wordpress/wp-content/plugins/myliba-core/includes/images.php": [],
-    "wordpress/wp-content/plugins/myliba-core/includes/meta.php": [],
-    "wordpress/wp-content/plugins/myliba-core/includes/options.php": [],
-    "wordpress/wp-content/plugins/myliba-core/includes/page-content.php": [],
-    "wordpress/wp-content/plugins/myliba-core/includes/post-types.php": [],
-    "wordpress/wp-content/plugins/myliba-core/includes/seo.php": [],
-    "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php": [],
-    "wordpress/wp-content/plugins/myliba-core/myliba-core.php": [],
-    "wordpress/wp-content/themes/index.php": [],
-    "wordpress/wp-content/themes/myliba/404.php": [],
-    "wordpress/wp-content/themes/myliba/archive-myliba_academy.php": [],
-    "wordpress/wp-content/themes/myliba/archive-myliba_ebook.php": [],
-    "wordpress/wp-content/themes/myliba/archive-myliba_event.php": [],
-    "wordpress/wp-content/themes/myliba/archive-myliba_product.php": [],
-    "wordpress/wp-content/themes/myliba/archive-myliba_report.php": [],
-    "wordpress/wp-content/themes/myliba/archive-myliba_solution.php": [],
-    "wordpress/wp-content/themes/myliba/assets/css/main.css": [],
-    "wordpress/wp-content/themes/myliba/assets/js/main.js": [],
-    "wordpress/wp-content/themes/myliba/footer.php": [],
-    "wordpress/wp-content/themes/myliba/front-page.php": [],
-    "wordpress/wp-content/themes/myliba/functions.php": [],
-    "wordpress/wp-content/themes/myliba/header.php": [],
-    "wordpress/wp-content/themes/myliba/inc/customizer.php": [],
-    "wordpress/wp-content/themes/myliba/index.php": [],
-    "wordpress/wp-content/themes/myliba/page.php": [],
-    "wordpress/wp-content/themes/myliba/single-myliba_academy.php": [],
-    "wordpress/wp-content/themes/myliba/single-myliba_ebook.php": [],
-    "wordpress/wp-content/themes/myliba/single-myliba_event.php": [],
-    "wordpress/wp-content/themes/myliba/single-myliba_landing.php": [],
-    "wordpress/wp-content/themes/myliba/single-myliba_product.php": [],
-    "wordpress/wp-content/themes/myliba/single-myliba_report.php": [],
-    "wordpress/wp-content/themes/myliba/single-myliba_solution.php": [],
-    "wordpress/wp-content/themes/myliba/single.php": [],
-    "wordpress/wp-content/themes/myliba/style.css": [],
-    "wordpress/wp-content/themes/myliba/template-blog.php": [],
-    "wordpress/wp-content/themes/myliba/template-contact.php": [],
-    "wordpress/wp-content/themes/myliba/template-demo.php": [],
-    "wordpress/wp-content/themes/myliba/template-events.php": [],
-    "wordpress/wp-content/themes/myliba/template-landing.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/expand.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/hero.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/page-academy.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/page-development-center.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/page-ethics.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/page-faq.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/page-software.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/page-solutions.php": [],
-    "wordpress/wp-content/themes/myliba/template-parts/page-story.php": []
-  }
+  ]
 }

@@ -1,0 +1,16 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 0,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "13 fiziksel batch dosyasındaki 7 mantıksal batch toplam 410 düğüm ve 562 kenar üretti; birleştirme sonrasında 409 düğüm ve 562 kenar kaldı.",
+    "Kaldırılan tek yinelenen düğüm, iki batch'te birebir aynı üretilmiş file:wordpress/wp-content/themes/myliba/functions.php düğümüydü; son kaydı tutma işlemi veri kaybına yol açmadı.",
+    "Düğüm kimliği düzeltmelerinde yüzde 30'u aşan sistematik bir örüntü veya bilinmeyen karmaşıklık değeri görülmedi; upstream kalite sorunu işareti yok.",
+    "Birleştirilmiş grafikte eksik kimlikli düğüm, yinelenen düğüm kimliği, bilinmeyen karmaşıklık, yinelenen kenar veya var olmayan düğüme bağlı kenar bulunmadı.",
+    "Import haritasındaki 108 girdinin tamamı boş bağımlılık listesine sahip olduğundan doğrulanmış bir import ilişkisi ve eklenecek çapraz-batch import kenarı yoktu.",
+    "Merge raporunda elle müdahale gerektiren başka bir 'could not fix' uyarısı bulunmuyordu."
+  ]
+}

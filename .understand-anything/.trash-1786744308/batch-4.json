@@ -1,0 +1,112 @@
+{
+  "nodes": [
+    {
+      "id": "config:wordpress/.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": "wordpress/.env.example",
+      "summary": "Yerel WordPress, MariaDB, yönetici hesabı, hero görselleri ve SMTP için örnek ortam değişkenlerini tanımlar; hassas değerlerin dağıtımdan önce değiştirilmesini zorunlu kılar.",
+      "tags": [
+        "yapılandırma",
+        "ortam-değişkenleri",
+        "güvenlik",
+        "wordpress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:wordpress/Makefile",
+      "type": "service",
+      "name": "Makefile",
+      "filePath": "wordpress/Makefile",
+      "summary": "Docker Compose tabanlı WordPress ortamını başlatma, kurma, örnek içerikle doldurma, durdurma ve SMTP testi görevlerini tek komutlarda toplar.",
+      "tags": [
+        "altyapı",
+        "build-system",
+        "wordpress",
+        "otomasyon"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:wordpress/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "wordpress/README.md",
+      "summary": "Myliba WordPress kurulumunu, iki dilli URL yapısını, içerik içe aktarımını, eklenti tercihlerini ve üretime geçiş kontrol listesini açıklar.",
+      "tags": [
+        "dokümantasyon",
+        "wordpress",
+        "kurulum",
+        "dağıtım"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:wordpress/docker-compose.yml",
+      "type": "service",
+      "name": "docker-compose.yml",
+      "filePath": "wordpress/docker-compose.yml",
+      "summary": "MariaDB, Mailpit, Apache tabanlı WordPress ve WP-CLI servislerinden oluşan yerel geliştirme yığınını kalıcı hacimler ve sağlık kontrolleriyle orkestre eder.",
+      "tags": [
+        "altyapı",
+        "orkestrasyon",
+        "containerization",
+        "wordpress"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Compose dosyası servis sağlık koşulları, profiles ile isteğe bağlı WP-CLI ve kalıcı Docker hacimleri kullanır."
+    },
+    {
+      "id": "config:wordpress/uploads.ini",
+      "type": "config",
+      "name": "uploads.ini",
+      "filePath": "wordpress/uploads.ini",
+      "summary": "WordPress/PHP yükleme boyutu, bellek ve çalışma süresi sınırlarını yerel geliştirme için yükseltir.",
+      "tags": [
+        "yapılandırma",
+        "php",
+        "dosya-yükleme",
+        "performans"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:wordpress/.env.example",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:wordpress/uploads.ini",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:wordpress/Makefile",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "service:wordpress/Makefile",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

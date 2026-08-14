@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    {"id":"config:.understand-anything/config.json","type":"config","name":"config.json","filePath":".understand-anything/config.json","summary":"Understand Anything analiz çıktılarının dil tercihini belirleyen minimal proje yapılandırmasıdır.","tags":["yapılandırma","analiz-ayarları","yerelleştirme"],"complexity":"simple"},
+    {"id":"config:.understand-anything/fingerprints.json","type":"config","name":"fingerprints.json","filePath":".understand-anything/fingerprints.json","summary":"Analiz kapsamındaki dosyaların parmak izlerini, üretim zamanını ve ilişkili Git commit kimliğini saklayarak değişiklik takibini destekler.","tags":["yapılandırma","parmak-izi","değişiklik-takibi","dosya-envanteri"],"complexity":"complex"},
+    {"id":"config:.understand-anything/knowledge-graph.json","type":"config","name":"knowledge-graph.json","filePath":".understand-anything/knowledge-graph.json","summary":"Projenin dosya ve sembol düğümlerini, aralarındaki ilişkileri, mimari katmanları ve rehber turunu bir araya getiren kalıcı bilgi grafiğidir.","tags":["yapılandırma","bilgi-grafiği","mimari-analiz","analiz-çıktısı"],"complexity":"complex","languageNotes":"Büyük JSON belgesi düğüm, kenar, katman ve tur koleksiyonlarını tek sürümlü çıktı altında toplar."},
+    {"id":"config:.understand-anything/meta.json","type":"config","name":"meta.json","filePath":".understand-anything/meta.json","summary":"Son analiz zamanını, Git commit kimliğini, şema sürümünü ve analiz edilen dosya sayısını kaydeden kısa metaveri dosyasıdır.","tags":["yapılandırma","metaveri","analiz-durumu"],"complexity":"simple"}
+  ],
+  "edges": []
+}

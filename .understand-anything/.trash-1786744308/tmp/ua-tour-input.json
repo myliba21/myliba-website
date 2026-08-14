@@ -1,27 +1,4 @@
 {
-  "version": "1.0.0",
-  "project": {
-    "name": "myliba-website",
-    "languages": [
-      "conf",
-      "config",
-      "css",
-      "javascript",
-      "json",
-      "makefile",
-      "markdown",
-      "php",
-      "unknown",
-      "yaml"
-    ],
-    "frameworks": [
-      "Docker Compose",
-      "WordPress"
-    ],
-    "description": "Açıklama mevcut değil. Not: Bu projede 100'den fazla kaynak dosyası bulunuyor; daha hızlı sonuçlar için analizi bir alt dizinle sınırlandırmayı değerlendirin.",
-    "analyzedAt": "2026-08-14T21:51:01Z",
-    "gitCommitHash": "7b134a626048e098767d06a15e0cb2103554dd20"
-  },
   "nodes": [
     {
       "id": "config:.understand-anything/.trash-20260802-audit/assemble-review.json",
@@ -10561,291 +10538,42 @@
     {
       "id": "layer:analysis-knowledge-graph",
       "name": "Analiz ve Bilgi Grafiği",
-      "description": "Understand Anything tarama, denetim, parmak izi, bilgi grafiği ve geçici analiz artefaktlarını bir arada tutar.",
-      "nodeIds": [
-        "config:.understand-anything/.trash-20260802-audit/assemble-review.json",
-        "config:.understand-anything/.trash-20260802-audit/assembled-graph.json",
-        "config:.understand-anything/.trash-20260802-audit/batch-1.json",
-        "config:.understand-anything/.trash-20260802-audit/batch-2-part-1.json",
-        "config:.understand-anything/.trash-20260802-audit/batch-2-part-2.json",
-        "config:.understand-anything/.trash-20260802-audit/batch-2-part-3.json",
-        "config:.understand-anything/.trash-20260802-audit/batch-3-part-1.json",
-        "config:.understand-anything/.trash-20260802-audit/batch-3-part-2.json",
-        "config:.understand-anything/.trash-20260802-audit/batch-4.json",
-        "config:.understand-anything/.trash-20260802-audit/batches.json",
-        "config:.understand-anything/.trash-20260802-audit/fingerprint-input.json",
-        "config:.understand-anything/.trash-20260802-audit/layers.json",
-        "config:.understand-anything/.trash-20260802-audit/review.json",
-        "config:.understand-anything/.trash-20260802-audit/tour.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-arch-input.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-arch-results.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-1.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-2.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-3.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-4.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-1.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-2.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-3.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-4.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-import-map-input.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-import-map-output.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-scan-files.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-tour-input.json",
-        "config:.understand-anything/.trash-20260802-audit/tmp/ua-tour-results.json",
-        "config:.understand-anything/config.json",
-        "config:.understand-anything/fingerprints.json",
-        "config:.understand-anything/knowledge-graph.json",
-        "config:.understand-anything/meta.json",
-        "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
-        "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-layers.js",
-        "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-prepare.js",
-        "file:.understand-anything/.trash-20260802-audit/tmp/ua-inline-validate.cjs",
-        "file:.understand-anything/.trash-20260802-audit/tmp/ua-tour-analyze.js",
-        "file:.understand-anything/.trash-20260802-audit/tmp/ua-tour-prepare.js",
-        "file:.understand-anything/.understandignore",
-        "config:.understand-anything/intermediate/scan-result.json"
-      ]
+      "description": "Understand Anything tarama, denetim, parmak izi, bilgi grafiği ve geçici analiz artefaktlarını bir arada tutar."
     },
     {
       "id": "layer:infrastructure-config",
       "name": "Altyapı ve Yapılandırma",
-      "description": "Docker Compose geliştirme yığını, WP-CLI otomasyonu, PHP yükleme ayarları, ortam örneği ve Nginx ters vekil kurallarını kapsar.",
-      "nodeIds": [
-        "config:wordpress/.env.example",
-        "service:wordpress/Makefile",
-        "service:wordpress/docker-compose.yml",
-        "config:wordpress/uploads.ini",
-        "file:.DS_Store",
-        "file:nginx/default.conf"
-      ]
+      "description": "Docker Compose geliştirme yığını, WP-CLI otomasyonu, PHP yükleme ayarları, ortam örneği ve Nginx ters vekil kurallarını kapsar."
     },
     {
       "id": "layer:documentation",
       "name": "Proje Dokümantasyonu",
-      "description": "WordPress kurulumu, içerik taşıma eşlemesi ve geçiş inceleme yol haritasını açıklayan proje belgelerini içerir.",
-      "nodeIds": [
-        "document:wordpress/README.md",
-        "document:wordpress/migration/content-map.md",
-        "document:wordpress/migration/review-report.md"
-      ]
+      "description": "WordPress kurulumu, içerik taşıma eşlemesi ve geçiş inceleme yol haritasını açıklayan proje belgelerini içerir."
     },
     {
       "id": "layer:wordpress-platform",
       "name": "WordPress Platform Entegrasyonu",
-      "description": "Dizin koruma girişleri ile otomatik güncelleme ve SMTP davranışını belirleyen zorunlu WordPress eklentilerini barındırır.",
-      "nodeIds": [
-        "file:wordpress/wp-content/index.php",
-        "file:wordpress/wp-content/mu-plugins/automation-by-installatron.php",
-        "file:wordpress/wp-content/mu-plugins/myliba-smtp.php",
-        "file:wordpress/wp-content/plugins/index.php",
-        "file:wordpress/wp-content/themes/index.php"
-      ]
+      "description": "Dizin koruma girişleri ile otomatik güncelleme ve SMTP davranışını belirleyen zorunlu WordPress eklentilerini barındırır."
     },
     {
       "id": "layer:admin-content-model",
       "name": "Yönetim ve İçerik Modeli",
-      "description": "Yönetim menüleri, çok dilli ayarlar, meta kutuları, yapılandırılmış sayfa içerikleri ve içerik taşıma araçlarıyla editoryal modeli yönetir.",
-      "nodeIds": [
-        "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/content.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/page-content.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php"
-      ]
+      "description": "Yönetim menüleri, çok dilli ayarlar, meta kutuları, yapılandırılmış sayfa içerikleri ve içerik taşıma araçlarıyla editoryal modeli yönetir."
     },
     {
       "id": "layer:core-services",
       "name": "Çekirdek Uygulama Hizmetleri",
-      "description": "Myliba Core başlangıcını, özel yazı türlerini, formları, SEO üretimini ve güvenli görsel işleme davranışını sağlar.",
-      "nodeIds": [
-        "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
-        "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php"
-      ]
+      "description": "Myliba Core başlangıcını, özel yazı türlerini, formları, SEO üretimini ve güvenli görsel işleme davranışını sağlar."
     },
     {
       "id": "layer:theme-foundation",
       "name": "Tema Temeli ve Ön Yüz Varlıkları",
-      "description": "Tema kurulumu ve yardımcıları, Customizer ayarları, tema metadatası ile ortak CSS ve JavaScript davranışlarını tanımlar.",
-      "nodeIds": [
-        "file:wordpress/wp-content/themes/myliba/functions.php",
-        "file:wordpress/wp-content/themes/myliba/assets/css/main.css",
-        "file:wordpress/wp-content/themes/myliba/assets/js/main.js",
-        "file:wordpress/wp-content/themes/myliba/inc/customizer.php",
-        "file:wordpress/wp-content/themes/myliba/style.css"
-      ]
+      "description": "Tema kurulumu ve yardımcıları, Customizer ayarları, tema metadatası ile ortak CSS ve JavaScript davranışlarını tanımlar."
     },
     {
       "id": "layer:presentation-templates",
       "name": "Sunum ve Sayfa Şablonları",
-      "description": "Yönetilebilir içeriği ziyaretçiye gösteren ana sayfa, arşiv, tekil içerik, özel sayfa ve yeniden kullanılabilir tema şablonlarını içerir.",
-      "nodeIds": [
-        "file:wordpress/wp-content/themes/myliba/404.php",
-        "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php",
-        "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php",
-        "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php",
-        "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php",
-        "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php",
-        "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php",
-        "file:wordpress/wp-content/themes/myliba/footer.php",
-        "file:wordpress/wp-content/themes/myliba/front-page.php",
-        "file:wordpress/wp-content/themes/myliba/header.php",
-        "file:wordpress/wp-content/themes/myliba/index.php",
-        "file:wordpress/wp-content/themes/myliba/page.php",
-        "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php",
-        "file:wordpress/wp-content/themes/myliba/single-myliba_ebook.php",
-        "file:wordpress/wp-content/themes/myliba/single-myliba_event.php",
-        "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php",
-        "file:wordpress/wp-content/themes/myliba/single-myliba_product.php",
-        "file:wordpress/wp-content/themes/myliba/single-myliba_report.php",
-        "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php",
-        "file:wordpress/wp-content/themes/myliba/single.php",
-        "file:wordpress/wp-content/themes/myliba/template-blog.php",
-        "file:wordpress/wp-content/themes/myliba/template-contact.php",
-        "file:wordpress/wp-content/themes/myliba/template-demo.php",
-        "file:wordpress/wp-content/themes/myliba/template-events.php",
-        "file:wordpress/wp-content/themes/myliba/template-landing.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/expand.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/hero.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/page-ethics.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/page-faq.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/page-story.php"
-      ]
-    }
-  ],
-  "tour": [
-    {
-      "order": 1,
-      "title": "Projenin Büyük Resmi",
-      "description": "Tura, Myliba'nın WordPress kurulumunu, iki dilli URL düzenini ve üretime geçiş beklentilerini açıklayan README ile başlayın. Bu belge, ilerleyen adımlarda göreceğiniz Altyapı ve Yapılandırma, Çekirdek Uygulama Hizmetleri ve Sunum ve Sayfa Şablonları katmanlarının neden birlikte bulunduğunu anlamak için ortak bağlam sağlar.",
-      "nodeIds": [
-        "document:wordpress/README.md"
-      ]
-    },
-    {
-      "order": 2,
-      "title": "Çekirdek Eklenti Başlangıcı",
-      "description": "Myliba Core başlangıç dosyası, eklentinin bağımlılıklarını yükleyip modülleri WordPress yaşam döngüsüne bağlar. README'deki işlevsel kapsam burada somutlaşır; Yönetim ve İçerik Modeli ile Çekirdek Uygulama Hizmetleri katmanlarına açılan ana kapı budur.",
-      "nodeIds": [
-        "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php"
-      ],
-      "languageLesson": "WordPress eklentileri davranışlarını action ve filter kancalarıyla sisteme ekler; başlangıç dosyasının küçük tutulup uzmanlaşmış modülleri yüklemesi bağımlılıkları daha anlaşılır kılar."
-    },
-    {
-      "order": 3,
-      "title": "Yönetim Kontrol Katmanı",
-      "description": "Başlangıç dosyasının yüklediği admin ve options modülleri, Myliba yönetim menülerini, panel sadeleştirmesini ve yerelleştirilmiş genel ayarları kurar. Bu ikili, editörün değiştirebildiği site çapındaki değerlerle WordPress'in bunları nasıl doğrulayıp sakladığı arasındaki sınırı oluşturur.",
-      "nodeIds": [
-        "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/options.php"
-      ],
-      "languageLesson": "WordPress Settings API; ayar kaydı, yetki denetimi ve temizleme callback'lerini tek akışta birleştirir. Yönetim formundan gelen değerler kaydedilmeden önce sanitize edilmelidir."
-    },
-    {
-      "order": 4,
-      "title": "Yapılandırılmış İçerik Şemaları",
-      "description": "Meta ve page-content modülleri; hero, SEO, ana sayfa ve özel sayfa bölümleri gibi yönetim alanlarını tanımlar, gösterir ve güvenli biçimde kaydeder. Önceki adımdaki genel ayarlardan farklı olarak bu değerler belirli bir gönderiye veya sayfaya bağlıdır ve ziyaretçi arayüzüne ulaşacak içerik sözleşmesini kurar.",
-      "nodeIds": [
-        "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/page-content.php"
-      ],
-      "languageLesson": "WordPress post meta modeli anahtar-değer tabanlıdır; tekrar eden karmaşık bölümler çoğunlukla dizi olarak modellenir. Nonce, yetki kontrolü ve alan türüne uygun temizleme birlikte uygulanmalıdır."
-    },
-    {
-      "order": 5,
-      "title": "Dil ve İçerik Türleri",
-      "description": "Content modülü TR/EN arayüz metinlerini ve editör geçersiz kılmalarını yönetirken post-types modülü özel içerik türlerini ve yerelleştirilmiş rotaları kaydeder. Böylece 4. adımdaki yönetilebilir alanlar yalnızca saklanmakla kalmaz, doğru dil ve doğru içerik bağlamında çözümlenir.",
-      "nodeIds": [
-        "file:wordpress/wp-content/plugins/myliba-core/includes/content.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php"
-      ]
-    },
-    {
-      "order": 6,
-      "title": "Formlar ve SEO",
-      "description": "Forms modülü iletişim, demo ve akademi başvurularını üretip doğrularken SEO modülü canonical, hreflang, sosyal meta ve JSON-LD çıktısını güvenceye alır. Bu hizmetler, içerik modelini kullanıcı etkileşimi ve arama motoru görünürlüğüyle tamamlayan Çekirdek Uygulama Hizmetleri katmanıdır.",
-      "nodeIds": [
-        "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
-        "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php"
-      ],
-      "languageLesson": "WordPress form akışında nonce istek kaynağını doğrulamaya yardım eder; nonce tek başına yetkilendirme değildir. Alan doğrulama, bot tuzağı, hız sınırlama ve çıktı kaçışlama ayrı savunma katmanlarıdır."
-    },
-    {
-      "order": 7,
-      "title": "Tema Yardımcı Omurgası",
-      "description": "Tema functions.php dosyası; kurulum, varlık yükleme, dil seçimi, URL yönlendirme ve meta erişimini tek bir merkezi yardımcı katmanda toplar. Fan-out sıralamasındaki açık ara en geniş dosya olduğu için, çekirdek eklentide saklanan verilerin sunum katmanına nasıl taşındığını anlamanın en önemli durağıdır.",
-      "nodeIds": [
-        "file:wordpress/wp-content/themes/myliba/functions.php"
-      ],
-      "languageLesson": "WordPress temasındaki functions.php bir şablon değil, tema etkinleştiğinde yüklenen işlev ve kanca kayıt katmanıdır. Şablonlar ortak veriye doğrudan ham meta okumak yerine burada tanımlanan yardımcılarla eriştiğinde geri dönüşler ve yerelleştirme tutarlı kalır."
-    },
-    {
-      "order": 8,
-      "title": "Küresel Tema Alanları",
-      "description": "Customizer ayarları header ve footer şablonlarına promosyon, iletişim, sosyal bağlantı ve CTA verilerini sağlar. Bu durak, 3. adımdaki site çapındaki yönetim değerlerinin sayfa içeriğinden bağımsız biçimde tüm ziyaretçi deneyimine nasıl yayıldığını gösterir.",
-      "nodeIds": [
-        "file:wordpress/wp-content/themes/myliba/inc/customizer.php",
-        "file:wordpress/wp-content/themes/myliba/header.php",
-        "file:wordpress/wp-content/themes/myliba/footer.php"
-      ]
-    },
-    {
-      "order": 9,
-      "title": "Sayfa Sunum Akışı",
-      "description": "Front-page ve page şablonları, 4. adımda tanımlanan yönetim metalarını ziyaretçinin gördüğü bölümlere dönüştürür; conversion-detail ise ürün ve landing içerikleri için ortak bir detay düzeni sağlar. Yönetimde bulunan bir alanın gerçekten UI'da gösterilip gösterilmediğini araştırırken şema anahtarları ile bu şablonlardaki okuma ve render noktaları arasındaki iz sürme burada yapılır.",
-      "nodeIds": [
-        "file:wordpress/wp-content/themes/myliba/front-page.php",
-        "file:wordpress/wp-content/themes/myliba/page.php",
-        "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php"
-      ],
-      "languageLesson": "WordPress şablon hiyerarşisi isteğe en özel uygun şablonu seçer ve sonunda genel page.php ya da index.php dosyasına geri döner. Template part kullanımı ortak görünüm parçalarını tekrar etmeden farklı içerik türlerine taşır."
-    },
-    {
-      "order": 10,
-      "title": "Tarayıcı Etkileşimleri",
-      "description": "Ana JavaScript dosyası, PHP şablonlarının ürettiği mobil menü, dil seçici, carousel ve SSS bileşenlerine etkileşim kazandırır. Böylece sunucu tarafında oluşturulan 9. adımdaki içerik, tarayıcıda erişilebilir ve durum değiştiren bir arayüze dönüşür.",
-      "nodeIds": [
-        "file:wordpress/wp-content/themes/myliba/assets/js/main.js"
-      ],
-      "languageLesson": "Sunucu taraflı WordPress temalarında JavaScript çoğunlukla mevcut HTML'yi progressive enhancement yaklaşımıyla geliştirir. Kod çalışmasa bile temel içerik ve navigasyonun kullanılabilir kalması dayanıklılığı ve erişilebilirliği artırır."
-    },
-    {
-      "order": 11,
-      "title": "İçerik Taşıma Haritası",
-      "description": "İçerik haritası, eski sitedeki veri türlerini WordPress sayfalarına, özel yazı türlerine ve Myliba ayar ekranlarına eşler. Kod akışını öğrendikten sonra bu belge, hangi bilginin hangi yönetim yüzeyinde tutulmasının amaçlandığını ve UI karşılığının nerede aranacağını açıklayan işlevsel sözleşme görevi görür.",
-      "nodeIds": [
-        "document:wordpress/migration/content-map.md"
-      ]
-    },
-    {
-      "order": 12,
-      "title": "Yerel Çalışma Ortamı",
-      "description": "Docker Compose; MariaDB, Mailpit, WordPress ve WP-CLI servislerini kalıcı hacimler ve sağlık kontrolleriyle birlikte çalıştırır, Makefile ise kurulum ve örnek veri işlerini kısa komutlarda toplar. Bu Altyapı ve Yapılandırma durağı, önceki adımlarda incelenen yönetimden ön yüze veri akışının tekrarlanabilir bir ortamda denenmesini sağlar.",
-      "nodeIds": [
-        "service:wordpress/docker-compose.yml",
-        "service:wordpress/Makefile"
-      ],
-      "languageLesson": "Docker Compose named volume'larla veriyi konteyner ömründen ayırır; healthcheck bağımlı servislerin yalnızca süreç başladıktan değil gerçekten hazır olduktan sonra ilerlemesine yardım eder. Makefile hedefleri de çok adımlı geliştirme komutlarını belgelenebilir bir arayüze dönüştürür."
-    },
-    {
-      "order": 13,
-      "title": "Üretim Sınırı ve Denetim",
-      "description": "Nginx yapılandırması trafiği yönlendirip güvenlik, sıkıştırma, önbellek ve form hız sınırlama politikalarını uygular; geçiş inceleme raporu ise UI, UX, SEO ve teknik eksikleri üretim yol haritasına dönüştürür. Turun sonunda bu iki dosya, uygulamanın yalnızca nasıl çalıştığını değil hangi kalite ve güvenlik ölçütleriyle yayına alınacağını da gösterir.",
-      "nodeIds": [
-        "file:nginx/default.conf",
-        "document:wordpress/migration/review-report.md"
-      ],
-      "languageLesson": "Nginx'te statik varlık önbelleği ve dinamik istek hız sınırlaması farklı konum kurallarıyla uygulanır. Güvenlik başlıkları ters vekil katmanında merkezi biçimde tanımlandığında uygulama yanıtlarında tutarlı olur."
+      "description": "Yönetilebilir içeriği ziyaretçiye gösteren ana sayfa, arşiv, tekil içerik, özel sayfa ve yeniden kullanılabilir tema şablonlarını içerir."
     }
   ]
 }

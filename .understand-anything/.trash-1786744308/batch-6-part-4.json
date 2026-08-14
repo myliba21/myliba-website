@@ -1,0 +1,98 @@
+{
+  "nodes": [
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/page.php",
+      "type": "file",
+      "name": "page.php",
+      "filePath": "wordpress/wp-content/themes/myliba/page.php",
+      "summary": "Sayfa türüne göre özel bölüm şablonlarını seçen, aksi durumda standart içerik ve hero görünümünü kullanan genel sayfa şablonudur.",
+      "tags": [
+        "wordpress-şablonu",
+        "frontend",
+        "tema"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "type": "file",
+      "name": "single-myliba_academy.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "summary": "Tekil akademi içeriğini ortak dönüşüm detayı bileşenine bağlayan şablondur.",
+      "tags": [
+        "wordpress-şablonu",
+        "tekil-içerik",
+        "meta-alanı"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_ebook.php",
+      "type": "file",
+      "name": "single-myliba_ebook.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_ebook.php",
+      "summary": "E-kitap yönetim metalarını hero, problem, faydalar, içerik yolculuğu ve indirme CTA bölümlerine dönüştüren tekil içerik şablonudur.",
+      "tags": [
+        "wordpress-şablonu",
+        "tekil-içerik",
+        "meta-alanı"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "WordPress şablon etiketleri ile PHP veri hazırlığını aynı dosyada birleştirir; dinamik alanlar çıktı bağlamına göre escape edilir."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "type": "file",
+      "name": "single-myliba_event.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "summary": "Etkinliğin tarih, konum ve kayıt URL’si metalarını içerikle birlikte gösteren tekil etkinlik şablonudur.",
+      "tags": [
+        "wordpress-şablonu",
+        "tekil-içerik",
+        "meta-alanı"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php",
+      "type": "file",
+      "name": "single-myliba_landing.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_landing.php",
+      "summary": "Tekil SEO açılış içeriğini ortak dönüşüm detayı bileşenine bağlayan şablondur.",
+      "tags": [
+        "wordpress-şablonu",
+        "tekil-içerik",
+        "meta-alanı"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_product.php",
+      "type": "file",
+      "name": "single-myliba_product.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_product.php",
+      "summary": "Tekil ürün içeriğini ortak dönüşüm detayı bileşeniyle sunan şablondur.",
+      "tags": [
+        "wordpress-şablonu",
+        "tekil-içerik",
+        "meta-alanı"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_report.php",
+      "type": "file",
+      "name": "single-myliba_report.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_report.php",
+      "summary": "Rapor yönetim metalarını araştırma özeti, problem/çözüm, faydalar, FAQ ve CTA bölümleri halinde sunan tekil rapor şablonudur.",
+      "tags": [
+        "wordpress-şablonu",
+        "tekil-içerik",
+        "meta-alanı"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WordPress şablon etiketleri ile PHP veri hazırlığını aynı dosyada birleştirir; dinamik alanlar çıktı bağlamına göre escape edilir."
+    }
+  ],
+  "edges": []
+}

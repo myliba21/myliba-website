@@ -1,0 +1,273 @@
+{
+  "nodes": [
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php",
+      "type": "file",
+      "name": "single-myliba_solution.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_solution.php",
+      "summary": "Çözüm yönetim metalarını hero, yaklaşım, hedef kitle, kazanımlar, ölçüm alanları, süreç ve CTA bölümlerine dönüştüren ayrıntılı tekil çözüm şablonudur.",
+      "tags": [
+        "wordpress-şablonu",
+        "tekil-içerik",
+        "meta-alanı"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WordPress şablon etiketleri ile PHP veri hazırlığını aynı dosyada birleştirir; dinamik alanlar çıktı bağlamına göre escape edilir."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single.php",
+      "type": "file",
+      "name": "single.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single.php",
+      "summary": "Blog yazısını okuma süresi, içerik başlıkları, yazar bölümü ve ilişkili çağrılarla gösteren genel tekil yazı şablonudur.",
+      "tags": [
+        "wordpress-şablonu",
+        "tekil-içerik",
+        "meta-alanı"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/style.css",
+      "type": "file",
+      "name": "style.css",
+      "filePath": "wordpress/wp-content/themes/myliba/style.css",
+      "summary": "WordPress’in Myliba temasını tanıması için tema adı, sürüm ve diğer üstbilgi metadatasını taşır.",
+      "tags": [
+        "tema-metadata",
+        "wordpress",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-blog.php",
+      "type": "file",
+      "name": "template-blog.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-blog.php",
+      "summary": "Dil filtresine uygun blog yazılarını sorgulayan, hero ve sayfalama ile kart listesi oluşturan özel sayfa şablonudur.",
+      "tags": [
+        "wordpress-şablonu",
+        "listeleme",
+        "frontend"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "WordPress şablon etiketleri ile PHP veri hazırlığını aynı dosyada birleştirir; dinamik alanlar çıktı bağlamına göre escape edilir."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-contact.php",
+      "type": "file",
+      "name": "template-contact.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-contact.php",
+      "summary": "İletişim sayfasında ortak hero ile yönetilebilir sayfa içeriğini gösteren özel şablondur.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-demo.php",
+      "type": "file",
+      "name": "template-demo.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-demo.php",
+      "summary": "Demo talebi sayfasında ortak hero ile form veya yönetilebilir içeriği sunan özel şablondur.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-events.php",
+      "type": "file",
+      "name": "template-events.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-events.php",
+      "summary": "Etkinlik içeriklerini tarih ve konum metalarıyla sorgulayıp listeleyen özel sayfa şablonudur.",
+      "tags": [
+        "wordpress-şablonu",
+        "listeleme",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-landing.php",
+      "type": "file",
+      "name": "template-landing.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-landing.php",
+      "summary": "SEO açılış sayfasını ortak hero ve dönüşüm detayı bileşenleriyle birleştiren özel şablondur.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "type": "file",
+      "name": "archive-development-resource.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "summary": "E-kitap ve rapor gibi gelişim kaynaklarını tür, özet ve bağlantı bilgileriyle kart arşivinde sunan ortak bileşendir.",
+      "tags": [
+        "wordpress-şablonu",
+        "listeleme",
+        "frontend"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "WordPress şablon etiketleri ile PHP veri hazırlığını aynı dosyada birleştirir; dinamik alanlar çıktı bağlamına göre escape edilir."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "type": "file",
+      "name": "client-logo-marquee.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "summary": "İstemci logo gönderilerini veya sağlanan bileşen verisini erişilebilir, kayan bir logo şeridi olarak gösterir.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "type": "file",
+      "name": "conversion-detail.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "summary": "Ürün, akademi ve landing içeriklerinin problem, çözüm, fayda, modül, FAQ ve CTA meta alanlarını ortak detay düzeninde gösterir.",
+      "tags": [
+        "wordpress-şablonu",
+        "tekil-içerik",
+        "meta-alanı"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "type": "file",
+      "name": "expand.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "summary": "Başlık ve içerik parametrelerini açılıp kapanabilir bir ayrıntı bileşeninde sunar.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "type": "file",
+      "name": "hero.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "summary": "Sayfa veya içerik metalarından kaş, başlık, alt başlık ve CTA değerlerini okuyup ortak hero alanını üretir.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "type": "file",
+      "name": "page-academy.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "summary": "Akademi sayfası ve program gönderilerindeki kapsamlı yönetim metalarını program kartları, modüller, eğitmenler, kazanımlar ve CTA bölümlerine dönüştürür.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WordPress şablon etiketleri ile PHP veri hazırlığını aynı dosyada birleştirir; dinamik alanlar çıktı bağlamına göre escape edilir."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "type": "file",
+      "name": "page-development-center.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "summary": "Gelişim Merkezi açılışını yerelleştirilmiş metinler ve kaynak türlerine yönlendiren kartlarla oluşturur.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-ethics.php",
+      "type": "file",
+      "name": "page-ethics.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-ethics.php",
+      "summary": "Etik ve uyum sayfasının hero, ilkeler, süreç ve çağrı bölümlerini yönetilebilir sayfa verisiyle sunar.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "WordPress şablon etiketleri ile PHP veri hazırlığını aynı dosyada birleştirir; dinamik alanlar çıktı bağlamına göre escape edilir."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-faq.php",
+      "type": "file",
+      "name": "page-faq.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-faq.php",
+      "summary": "Kategori filtreli, aranabilir FAQ arayüzünü sayfa verileri ve iletişim seçenekleriyle oluşturur.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WordPress şablon etiketleri ile PHP veri hazırlığını aynı dosyada birleştirir; dinamik alanlar çıktı bağlamına göre escape edilir."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "type": "file",
+      "name": "page-software.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "summary": "Yazılım ürün sayfasının hero, performans sekmeleri, modüller, medya ve CTA alanlarını yönetim verilerinden üretir.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "WordPress şablon etiketleri ile PHP veri hazırlığını aynı dosyada birleştirir; dinamik alanlar çıktı bağlamına göre escape edilir."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
+      "type": "file",
+      "name": "page-solutions.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
+      "summary": "Çözümler sayfasında çözüm kataloğunu başlıklar, açıklamalar ve hedef bağlantılarla sıralı bölümler halinde gösterir.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/template-parts/page-story.php",
+      "type": "file",
+      "name": "page-story.php",
+      "filePath": "wordpress/wp-content/themes/myliba/template-parts/page-story.php",
+      "summary": "Myliba hikâyesi sayfasını marka anlatısı, kilometre taşları, ekip ve değer bölümleriyle oluşturan uzun biçimli şablondur.",
+      "tags": [
+        "wordpress-şablonu",
+        "sayfa-bileşeni",
+        "frontend"
+      ],
+      "complexity": "complex",
+      "languageNotes": "WordPress şablon etiketleri ile PHP veri hazırlığını aynı dosyada birleştirir; dinamik alanlar çıktı bağlamına göre escape edilir."
+    }
+  ],
+  "edges": []
+}
