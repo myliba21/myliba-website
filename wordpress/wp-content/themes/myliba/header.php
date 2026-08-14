@@ -134,10 +134,14 @@ $demo_url = (string) myliba_option('demo_url', myliba_demo_url());
                                         ?>
                                         <?php foreach (myliba_solution_catalog() as $solution_slug => $solution) : ?>
                                             <?php
-                                            $is_card_active = is_singular('myliba_solution') && get_post_field('post_name', get_queried_object_id()) === $solution_slug;
+                                            $card_url = myliba_solution_url($solution_slug);
+                                            $req_uri = isset($_SERVER['REQUEST_URI']) ? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) : '/';
+                                            $current_page_url = home_url($req_uri);
+                                            $is_card_active = (is_singular('myliba_solution') && get_post_field('post_name', get_queried_object_id()) === $solution_slug)
+                                                || (function_exists('myliba_url_path') && myliba_url_path($current_page_url) === myliba_url_path($card_url));
                                             $card_desc = $solution_menu_descriptions[$solution_slug] ?? ($solution['summary'] ?? '');
                                             ?>
-                                            <a class="<?php echo esc_attr(trim('mega-menu__card ' . ($is_card_active ? 'is-active' : ''))); ?>" href="<?php echo esc_url(myliba_solution_url($solution_slug)); ?>"<?php echo $is_card_active ? ' aria-current="page"' : ''; ?>>
+                                            <a class="<?php echo esc_attr(trim('mega-menu__card ' . ($is_card_active ? 'is-active' : ''))); ?>" href="<?php echo esc_url($card_url); ?>"<?php echo $is_card_active ? ' aria-current="page"' : ''; ?>>
                                                 <span><?php echo esc_html(mb_substr($solution['title'], 0, 1)); ?></span>
                                                 <strong><?php echo esc_html($solution['title']); ?></strong>
                                                 <small><?php echo esc_html($card_desc); ?></small>

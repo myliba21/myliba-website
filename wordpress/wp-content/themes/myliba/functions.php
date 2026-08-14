@@ -1853,8 +1853,30 @@ function myliba_solution_url(string $slug): string
         'meta_value' => $language,
     ]);
 
-    if ($posts) {
-        $urls[$cache_key] = get_permalink((int) $posts[0]);
+    if (!empty($posts)) {
+        $post_id = (int) $posts[0];
+        $redirect_url = function_exists('Myliba\\Core\\PageContent\\text')
+            ? \Myliba\Core\PageContent\text($post_id, 'solution', 'redirect_url')
+            : '';
+        if ($redirect_url === '') {
+            $redirect_url = (string) get_post_meta($post_id, '_myliba_redirect_url', true);
+        }
+
+        if ($redirect_url !== '') {
+            $urls[$cache_key] = filter_var($redirect_url, FILTER_VALIDATE_URL) ? $redirect_url : home_url($redirect_url);
+            return $urls[$cache_key];
+        }
+
+        $urls[$cache_key] = get_permalink($post_id);
+        return $urls[$cache_key];
+    }
+
+    if ($slug === 'kurumsal-gelisim-programlari') {
+        $urls[$cache_key] = home_url('/tr/okr-kultur-akademisi/');
+        return $urls[$cache_key];
+    }
+    if ($slug === 'corporate-development-programs') {
+        $urls[$cache_key] = home_url('/en/okr-culture-academy/');
         return $urls[$cache_key];
     }
 

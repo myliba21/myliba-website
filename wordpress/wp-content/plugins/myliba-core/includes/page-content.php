@@ -484,6 +484,9 @@ function development_defaults(): array
 function solution_definition(): array
 {
     return ['label' => 'Çözüm Detay İçeriği', 'groups' => [
+        'redirect' => ['label' => 'Yönlendirme / Hedef Sayfa', 'fields' => [
+            'redirect_url' => ['text', 'Özel Yönlendirme / Hedef URL (Boş bırakılırsa standart çözüm sayfası kullanılır. Örn: /tr/okr-kultur-akademisi/)'],
+        ]],
         'hero' => ['label' => 'Hero ve Tanıtım', 'fields' => [
             'kicker' => ['text', 'Üst etiket (Pill)'],
             'hero_title' => ['textarea', 'Hero başlığı'],
@@ -592,7 +595,17 @@ function solution_defaults(int $post_id): array
     $metrics_raw = $item['metrics'] ?? [];
     $steps_raw = $item['steps'] ?? [];
 
+    $redirect_url = (string) (get_post_meta($post_id, '_myliba_redirect_url', true) ?: '');
+    if ($redirect_url === '') {
+        if ($slug === 'kurumsal-gelisim-programlari') {
+            $redirect_url = '/tr/okr-kultur-akademisi/';
+        } elseif ($slug === 'corporate-development-programs') {
+            $redirect_url = '/en/okr-culture-academy/';
+        }
+    }
+
     return ['fields' => [
+        'redirect_url' => $redirect_url,
         'kicker' => $kicker,
         'hero_title' => $title,
         'hero_summary' => $summary,
@@ -2039,5 +2052,12 @@ function save(int $post_id, ?\WP_Post $post = null, ?bool $update = null): void
     update_post_meta($real_post_id, META_KEY, $json);
     if ($post_id !== $real_post_id) {
         update_post_meta($post_id, META_KEY, $json);
+    }
+
+    if (isset($fields['redirect_url'])) {
+        update_post_meta($real_post_id, '_myliba_redirect_url', $fields['redirect_url']);
+        if ($post_id !== $real_post_id) {
+            update_post_meta($post_id, '_myliba_redirect_url', $fields['redirect_url']);
+        }
     }
 }

@@ -14,6 +14,7 @@ function boot(): void
     add_filter('query_vars', __NAMESPACE__ . '\\localized_query_vars');
     add_action('pre_get_posts', __NAMESPACE__ . '\\enforce_route_locale');
     add_action('template_redirect', __NAMESPACE__ . '\\redirect_missing_localized_solution', 1);
+    add_action('template_redirect', __NAMESPACE__ . '\\redirect_solution_custom_url', 5);
     add_filter('pll_get_post_types', __NAMESPACE__ . '\\polylang_post_types', 10, 2);
     add_filter('pll_get_taxonomies', __NAMESPACE__ . '\\polylang_taxonomies', 10, 2);
 }
@@ -133,8 +134,62 @@ function redirect_missing_localized_solution(): void
     exit;
 }
 
+function redirect_solution_custom_url(): void
+{
+    if (!is_singular('myliba_solution') || is_admin()) {
+        return;
+    }
+
+    $post_id = (int) get_queried_object_id();
+    if (!$post_id) {
+        return;
+    }
+
+    $redirect_url = function_exists('Myliba\\Core\\PageContent\\text')
+        ? \Myliba\Core\PageContent\text($post_id, 'solution', 'redirect_url')
+        : '';
+    if ($redirect_url === '') {
+        $redirect_url = (string) get_post_meta($post_id, '_myliba_redirect_url', true);
+    }
+
+    if ($redirect_url === '') {
+        $post = get_post($post_id);
+        $slug = $post instanceof \WP_Post ? $post->post_name : '';
+        if ($slug === 'kurumsal-gelisim-programlari') {
+            $redirect_url = '/tr/okr-kultur-akademisi/';
+        } elseif ($slug === 'corporate-development-programs') {
+            $redirect_url = '/en/okr-culture-academy/';
+        }
+    }
+
+    if ($redirect_url !== '') {
+        $target = filter_var($redirect_url, FILTER_VALIDATE_URL) ? $redirect_url : home_url($redirect_url);
+        wp_safe_redirect($target, 301);
+        exit;
+    }
+}
+
 function localized_post_type_link(string $permalink, \WP_Post $post): string
 {
+    if ($post->post_type === 'myliba_solution') {
+        $redirect_url = function_exists('Myliba\\Core\\PageContent\\text')
+            ? \Myliba\Core\PageContent\text($post->ID, 'solution', 'redirect_url')
+            : '';
+        if ($redirect_url === '') {
+            $redirect_url = (string) get_post_meta($post->ID, '_myliba_redirect_url', true);
+        }
+        if ($redirect_url === '') {
+            if ($post->post_name === 'kurumsal-gelisim-programlari') {
+                $redirect_url = '/tr/okr-kultur-akademisi/';
+            } elseif ($post->post_name === 'corporate-development-programs') {
+                $redirect_url = '/en/okr-culture-academy/';
+            }
+        }
+        if ($redirect_url !== '') {
+            return filter_var($redirect_url, FILTER_VALIDATE_URL) ? $redirect_url : home_url($redirect_url);
+        }
+    }
+
     $bases = localized_bases();
     if (!isset($bases[$post->post_type])) {
         return $permalink;
