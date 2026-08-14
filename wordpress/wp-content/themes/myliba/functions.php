@@ -2503,3 +2503,37 @@ function myliba_home_sections(int $post_id = 0): array
 
     return array_values($sections);
 }
+
+function myliba_parse_bullet_items(string $text): array
+{
+    $text = trim($text);
+    if ($text === '') {
+        return [];
+    }
+
+    // Convert various HTML break tags to newlines
+    $normalized = preg_replace('/<\s*\/?\s*br\s*\/?\s*>/i', "\n", $text);
+    $normalized = preg_replace('/&lt;\s*\/?\s*br\s*\/?\s*&gt;/i', "\n", (string) $normalized);
+
+    // If string contains bullet characters, insert newline before inline bullets
+    $normalized = preg_replace('/(?<!^)\s*[•·▪▫●○◆◇⁃]\s*/u', "\n", (string) $normalized);
+
+    // Split by newlines
+    $lines = preg_split('/\r\n|\r|\n/', (string) $normalized);
+    $items = [];
+
+    foreach ($lines as $line) {
+        // Strip leading bullets, dashes, asterisks, numbered list markers
+        $clean = preg_replace('/^\s*([•·▪▫●○◆◇⁃\-\*]|\d+[\.\)])\s*/u', '', (string) $line);
+        // Strip any residual trailing break tags
+        $clean = preg_replace('/<\s*\/?\s*br\s*\/?\s*>/i', '', (string) $clean);
+        $clean = preg_replace('/&lt;\s*\/?\s*br\s*\/?\s*&gt;/i', '', (string) $clean);
+        $clean = trim((string) $clean);
+        if ($clean !== '') {
+            $items[] = $clean;
+        }
+    }
+
+    return $items;
+}
+

@@ -140,9 +140,22 @@ while (have_posts()) :
                 <div class="solution-process__grid">
                     <?php foreach ($chapters as $index => $chapter) : ?>
                         <article>
-                            <span><?php echo esc_html($chapter['number'] ?? str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-                            <h3><?php echo esc_html($chapter['title'] ?? ''); ?></h3>
-                            <p><?php echo esc_html($chapter['text'] ?? ''); ?></p>
+                            <div class="solution-process__card-header">
+                                <span><?php echo esc_html($chapter['number'] ?? str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                                <h3><?php echo esc_html($chapter['title'] ?? ''); ?></h3>
+                            </div>
+                            <?php
+                            $chapter_items = function_exists('myliba_parse_bullet_items')
+                                ? myliba_parse_bullet_items($chapter['text'] ?? '')
+                                : array_filter(array_map('trim', explode("\n", (string) ($chapter['text'] ?? ''))));
+                            if (!empty($chapter_items)):
+                            ?>
+                                <ul class="solution-process__list">
+                                    <?php foreach ($chapter_items as $item): ?>
+                                        <li><?php echo esc_html($item); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
                         </article>
                     <?php endforeach; ?>
                 </div>

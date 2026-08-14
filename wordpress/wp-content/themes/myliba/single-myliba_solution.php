@@ -1,11 +1,11 @@
 <?php
 get_header();
 
-while (have_posts()) :
+while (have_posts()):
     the_post();
     $post_id = get_the_ID();
-    $content_copy = static fn (string $key): string => \Myliba\Core\PageContent\text($post_id, 'solution', $key);
-    $content_rows = static fn (string $key): array => \Myliba\Core\PageContent\collection($post_id, 'solution', $key);
+    $content_copy = static fn(string $key): string => \Myliba\Core\PageContent\text($post_id, 'solution', $key);
+    $content_rows = static fn(string $key): array => \Myliba\Core\PageContent\collection($post_id, 'solution', $key);
 
     $title = $content_copy('hero_title');
     if ($title === '') {
@@ -190,14 +190,18 @@ while (have_posts()) :
             <div class="solutions-shell">
                 <div class="solution-detail__hero-grid">
                     <div class="solution-detail__hero-copy">
-                        <a class="solution-detail__back" href="<?php echo esc_url(myliba_page_url('solutions')); ?>">← <?php echo esc_html(myliba_text('Tüm çözümler')); ?></a>
+                        <a class="solution-detail__back" href="<?php echo esc_url(myliba_page_url('solutions')); ?>">←
+                            <?php echo esc_html(myliba_text('Tüm çözümler')); ?></a>
                         <p class="eyebrow"><?php echo esc_html($kicker); ?></p>
                         <h1><?php echo esc_html($title); ?></h1>
                         <p class="solution-detail__lead"><?php echo esc_html($summary); ?></p>
                         <div class="solution-detail__actions">
-                            <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html($hero_primary_label); ?></a>
-                            <?php if (!empty($steps)) : ?>
-                                <a class="solution-detail__text-link" href="#calisma-modeli"><?php echo esc_html($hero_secondary_label); ?> <span aria-hidden="true">↓</span></a>
+                            <a class="myliba-button myliba-button--primary"
+                                href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html($hero_primary_label); ?></a>
+                            <?php if (!empty($steps)): ?>
+                                <a class="solution-detail__text-link"
+                                    href="#calisma-modeli"><?php echo esc_html($hero_secondary_label); ?> <span
+                                        aria-hidden="true">↓</span></a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -208,9 +212,9 @@ while (have_posts()) :
                             <i></i>
                         </div>
                         <strong><?php echo wp_kses_post(nl2br(esc_html($journey_title))); ?></strong>
-                        <?php if (!empty($steps)) : ?>
+                        <?php if (!empty($steps)): ?>
                             <div class="solution-journey__steps">
-                                <?php foreach (array_slice($steps, 0, 3) as $index => $step) : ?>
+                                <?php foreach (array_slice($steps, 0, 3) as $index => $step): ?>
                                     <span><b><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></b><?php echo esc_html($step['title']); ?></span>
                                 <?php endforeach; ?>
                             </div>
@@ -228,26 +232,12 @@ while (have_posts()) :
             </div>
             <div class="solution-detail__intro-copy">
                 <p><?php echo esc_html($intro); ?></p>
-                <a href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html($intro_link_label); ?> <span aria-hidden="true">→</span></a>
+                <a href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html($intro_link_label); ?>
+                    <span aria-hidden="true">→</span></a>
             </div>
         </section>
 
-        <section class="solution-audiences solutions-shell" aria-labelledby="solution-audiences-title">
-            <div class="solution-audiences__heading">
-                <p class="eyebrow"><?php echo esc_html($audiences_eyebrow); ?></p>
-                <h2 id="solution-audiences-title"><?php echo esc_html($audiences_title); ?></h2>
-            </div>
-            <div class="solution-audiences__grid">
-                <?php foreach ($audiences as $index => $audience) : ?>
-                    <article>
-                        <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-                        <h3><?php echo esc_html($audience); ?></h3>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </section>
-
-        <?php if (!empty($items)) : ?>
+        <?php if (!empty($items)): ?>
             <section class="solution-outcomes">
                 <div class="solutions-shell">
                     <header class="solution-outcomes__heading">
@@ -256,9 +246,10 @@ while (have_posts()) :
                         <p><?php echo esc_html($outcomes_lead); ?></p>
                     </header>
                     <div class="solution-outcomes__grid">
-                        <?php foreach ($items as $index => $item) : ?>
+                        <?php foreach ($items as $index => $item): ?>
                             <article>
-                                <span aria-hidden="true"><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                                <span
+                                    aria-hidden="true"><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
                                 <p><?php echo esc_html($item); ?></p>
                             </article>
                         <?php endforeach; ?>
@@ -267,14 +258,18 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <?php if (!empty($metrics)) : ?>
+        <?php if (!empty($metrics)): ?>
             <section class="solution-metrics">
                 <div class="solutions-shell">
                     <p class="eyebrow"><?php echo esc_html($metrics_eyebrow); ?></p>
                     <h2><?php echo esc_html($metrics_title); ?></h2>
                     <div class="solution-metrics__grid">
-                        <?php foreach ($metrics as $metric) : ?>
+                        <?php foreach ($metrics as $index => $metric): ?>
                             <article>
+                                <div class="solution-metrics__card-top">
+                                    <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                                    <i aria-hidden="true"><b></b><b></b><b></b></i>
+                                </div>
                                 <h3><?php echo esc_html($metric['title']); ?></h3>
                                 <p><?php echo esc_html($metric['text']); ?></p>
                             </article>
@@ -284,7 +279,7 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <?php if (!empty($steps)) : ?>
+        <?php if (!empty($steps)): ?>
             <section id="calisma-modeli" class="solution-process solutions-shell">
                 <header>
                     <p class="eyebrow"><?php echo esc_html($process_eyebrow); ?></p>
@@ -292,11 +287,24 @@ while (have_posts()) :
                     <p><?php echo esc_html($process_lead); ?></p>
                 </header>
                 <div class="solution-process__grid">
-                    <?php foreach ($steps as $index => $step) : ?>
+                    <?php foreach ($steps as $index => $step): ?>
                         <article>
-                            <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-                            <h3><?php echo esc_html($step['title']); ?></h3>
-                            <p><?php echo esc_html($step['text']); ?></p>
+                            <div class="solution-process__card-header">
+                                <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                                <h3><?php echo esc_html($step['title']); ?></h3>
+                            </div>
+                            <?php
+                            $step_items = function_exists('myliba_parse_bullet_items')
+                                ? myliba_parse_bullet_items($step['text'] ?? '')
+                                : array_filter(array_map('trim', explode("\n", (string) ($step['text'] ?? ''))));
+                            if (!empty($step_items)):
+                            ?>
+                                <ul class="solution-process__list">
+                                    <?php foreach ($step_items as $item): ?>
+                                        <li><?php echo esc_html($item); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
                         </article>
                     <?php endforeach; ?>
                 </div>
@@ -311,7 +319,7 @@ while (have_posts()) :
             'heading_id' => 'solution-trust-title',
         ]); ?>
 
-        <?php if ($editor_content !== '' && $editor_content !== trim(wp_strip_all_tags($summary))) : ?>
+        <?php if ($editor_content !== '' && $editor_content !== trim(wp_strip_all_tags($summary))): ?>
             <section class="solution-detail__editor solutions-shell">
                 <?php the_content(); ?>
             </section>
@@ -325,8 +333,10 @@ while (have_posts()) :
                     <p><?php echo esc_html($cta_text); ?></p>
                 </div>
                 <div class="solutions-cta__actions">
-                    <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($cta_button_url); ?>"><?php echo esc_html($cta_button_label); ?></a>
-                    <a class="solutions-cta__secondary" href="<?php echo esc_url($cta_secondary_url); ?>"><?php echo esc_html($cta_secondary_label); ?></a>
+                    <a class="myliba-button myliba-button--primary"
+                        href="<?php echo esc_url($cta_button_url); ?>"><?php echo esc_html($cta_button_label); ?></a>
+                    <a class="solutions-cta__secondary"
+                        href="<?php echo esc_url($cta_secondary_url); ?>"><?php echo esc_html($cta_secondary_label); ?></a>
                 </div>
             </div>
         </section>
