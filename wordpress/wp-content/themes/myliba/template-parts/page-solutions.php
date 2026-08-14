@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 
 get_header();
 $page_id = get_queried_object_id();
-$copy = static fn (string $key): string => \Myliba\Core\PageContent\text($page_id, 'solutions', $key);
+$copy = static fn(string $key): string => \Myliba\Core\PageContent\text($page_id, 'solutions', $key);
 $solutions = myliba_solution_catalog();
 ?>
 <section class="solutions-hero">
@@ -23,9 +23,8 @@ $solutions = myliba_solution_catalog();
         <p><?php echo esc_html($copy('index_text')); ?></p>
     </header>
     <div class="solutions-index__grid">
-        <?php foreach ($solutions as $slug => $solution) : ?>
+        <?php foreach ($solutions as $slug => $solution): ?>
             <a class="solution-index-card" href="<?php echo esc_url(myliba_solution_url($slug)); ?>">
-                <span class="solution-index-card__number"><?php echo esc_html(str_pad((string) (array_search($slug, array_keys($solutions), true) + 1), 2, '0', STR_PAD_LEFT)); ?></span>
                 <p><?php echo esc_html($solution['kicker']); ?></p>
                 <h2><?php echo esc_html($solution['title']); ?></h2>
                 <span class="solution-index-card__summary"><?php echo esc_html($solution['summary']); ?></span>
@@ -42,7 +41,16 @@ $solutions = myliba_solution_catalog();
             <h2><?php echo esc_html($copy('cta_title')); ?></h2>
             <p><?php echo esc_html($copy('cta_text')); ?></p>
         </div>
-        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html($copy('cta_button_label')); ?></a>
+        <div class="solutions-cta__actions">
+            <?php if ($copy('cta_button_label') !== ''): ?>
+                <a class="myliba-button myliba-button--primary"
+                    href="<?php echo esc_url($copy('cta_button_url') ?: myliba_page_url('contact')); ?>"><?php echo esc_html($copy('cta_button_label')); ?></a>
+            <?php endif; ?>
+            <?php if ($copy('cta_secondary_label') !== ''): ?>
+                <a class="solutions-cta__secondary"
+                    href="<?php echo esc_url($copy('cta_secondary_url') ?: myliba_demo_url()); ?>"><?php echo esc_html($copy('cta_secondary_label')); ?></a>
+            <?php endif; ?>
+        </div>
     </div>
 </section>
 <?php get_footer(); ?>

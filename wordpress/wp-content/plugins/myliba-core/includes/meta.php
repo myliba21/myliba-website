@@ -55,6 +55,10 @@ function register_meta_boxes(string $post_type): void
         }
     }
 
+    if (in_array($post_type, ['page', 'post', 'myliba_product', 'myliba_solution', 'myliba_case_study', 'myliba_landing', 'myliba_event', 'myliba_ebook', 'myliba_report'], true)) {
+        add_meta_box('myliba_footer_cta', __('Footer Aksiyon Çağrısı (CTA)', 'myliba'), __NAMESPACE__ . '\\render_footer_cta_box', $post_type, 'normal');
+    }
+
     if ($post_type === 'myliba_academy') {
         add_meta_box('myliba_academy_program', 'Akademi Program Detayları', __NAMESPACE__ . '\\render_academy_program_box', $post_type, 'normal', 'high');
     }
@@ -184,6 +188,7 @@ function render_academy_page_box(\WP_Post $post): void
     field_text('_myliba_academy_hero_tertiary_label', __('Tertiary CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_tertiary_label', true));
     field_url('_myliba_academy_hero_tertiary_url', __('Tertiary CTA URL', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_tertiary_url', true));
     field_textarea('_myliba_academy_hero_badges', __('Hero badges', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_badges', true), __('One row per line as Value | Label.', 'myliba'));
+    field_media('_myliba_academy_hero_image', __('Hero image', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_image', true));
     field_media('_myliba_academy_icf_image', __('ICF approval badge', 'myliba'), get_post_meta($post->ID, '_myliba_academy_icf_image', true));
     field_media('_myliba_academy_certificate_image', __('Certificate mock-up', 'myliba'), get_post_meta($post->ID, '_myliba_academy_certificate_image', true));
     field_media('_myliba_academy_digital_badge_image', __('Digital badge', 'myliba'), get_post_meta($post->ID, '_myliba_academy_digital_badge_image', true));
@@ -210,15 +215,33 @@ function render_academy_page_box(\WP_Post $post): void
     field_text('_myliba_academy_faq_group', __('FAQ group', 'myliba'), get_post_meta($post->ID, '_myliba_academy_faq_group', true), __('Only FAQ records with this group are shown.', 'myliba'));
 
     echo '<h3>' . esc_html__('Final call to action and contact form', 'myliba') . '</h3>';
+    field_text('_myliba_academy_final_eyebrow', __('Final CTA eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_eyebrow', true), __('Örn: ICF Onaylı Sertifika Programı', 'myliba'));
     field_textarea('_myliba_academy_final_title', __('Final CTA title', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_title', true));
     field_textarea('_myliba_academy_final_text', __('Final CTA description', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_text', true));
     field_text('_myliba_academy_final_primary_label', __('Final primary CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_primary_label', true));
+    field_url('_myliba_academy_final_primary_url', __('Final primary CTA URL', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_primary_url', true), __('Boş bırakılırsa başvuru formunu açar.', 'myliba'));
     field_text('_myliba_academy_final_secondary_label', __('Final secondary CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_secondary_label', true));
+    field_url('_myliba_academy_final_secondary_url', __('Final secondary CTA URL', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_secondary_url', true), __('Örn: #programlar', 'myliba'));
+    field_checkbox('_myliba_footer_cta_hide', __('Bu sayfada Footer CTA bannerını gizle', 'myliba'), get_post_meta($post->ID, '_myliba_footer_cta_hide', true) === '1');
     field_text('_myliba_academy_contact_title', __('Form title', 'myliba'), get_post_meta($post->ID, '_myliba_academy_contact_title', true));
     field_textarea('_myliba_academy_contact_text', __('Form description', 'myliba'), get_post_meta($post->ID, '_myliba_academy_contact_text', true));
     field_text('_myliba_academy_form_button', __('Form button label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_form_button', true));
     field_textarea('_myliba_academy_form_success', __('Successful submission message', 'myliba'), get_post_meta($post->ID, '_myliba_academy_form_success', true));
     field_textarea('_myliba_academy_kvkk_text', __('KVKK consent label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_kvkk_text', true));
+}
+
+function render_footer_cta_box(\WP_Post $post): void
+{
+    nonce();
+
+    echo '<p class="description">' . esc_html__('Bu alanlar sayfanın en altında yer alan CTA bannerını özelleştirir. Boş bırakılan alanlar sitenin genel ayarlarını kullanır.', 'myliba') . '</p>';
+    field_checkbox('_myliba_footer_cta_hide', __('Bu sayfada Footer CTA bannerını gizle', 'myliba'), get_post_meta($post->ID, '_myliba_footer_cta_hide', true) === '1');
+    field_text('_myliba_footer_cta_eyebrow', __('Üst Etiket (Eyebrow)', 'myliba'), get_post_meta($post->ID, '_myliba_footer_cta_eyebrow', true), __('Örn: Kültür, hedefler ve performans', 'myliba'));
+    field_textarea('_myliba_footer_cta_title', __('Ana Başlık (Title)', 'myliba'), get_post_meta($post->ID, '_myliba_footer_cta_title', true), __('Örn: Kültürü ölçülebilir hale getirmeye hazır mısınız?', 'myliba'));
+    field_text('_myliba_footer_cta_primary_label', __('Birinci Buton Metni', 'myliba'), get_post_meta($post->ID, '_myliba_footer_cta_primary_label', true), __('Örn: İletişime geçin', 'myliba'));
+    field_url('_myliba_footer_cta_primary_url', __('Birinci Buton Linki (URL)', 'myliba'), get_post_meta($post->ID, '_myliba_footer_cta_primary_url', true), __('Örn: /tr/iletisim/', 'myliba'));
+    field_text('_myliba_footer_cta_secondary_label', __('İkinci Buton Metni', 'myliba'), get_post_meta($post->ID, '_myliba_footer_cta_secondary_label', true), __('Örn: Demo talep et', 'myliba'));
+    field_url('_myliba_footer_cta_secondary_url', __('İkinci Buton Linki (URL)', 'myliba'), get_post_meta($post->ID, '_myliba_footer_cta_secondary_url', true), __('Örn: /tr/demo/', 'myliba'));
 }
 
 function render_academy_program_box(\WP_Post $post): void
@@ -1418,6 +1441,7 @@ function field_definitions(string $post_type): array
         '_myliba_academy_hero_tertiary_label' => 'text',
         '_myliba_academy_hero_tertiary_url' => 'url',
         '_myliba_academy_hero_badges' => 'textarea',
+        '_myliba_academy_hero_image' => 'number',
         '_myliba_academy_icf_image' => 'number',
         '_myliba_academy_certificate_image' => 'number',
         '_myliba_academy_digital_badge_image' => 'number',
@@ -1438,10 +1462,20 @@ function field_definitions(string $post_type): array
         '_myliba_academy_testimonials_title' => 'text',
         '_myliba_academy_faq_title' => 'text',
         '_myliba_academy_faq_group' => 'text',
+        '_myliba_academy_final_eyebrow' => 'text',
         '_myliba_academy_final_title' => 'textarea',
         '_myliba_academy_final_text' => 'textarea',
         '_myliba_academy_final_primary_label' => 'text',
+        '_myliba_academy_final_primary_url' => 'url',
         '_myliba_academy_final_secondary_label' => 'text',
+        '_myliba_academy_final_secondary_url' => 'url',
+        '_myliba_footer_cta_hide' => 'checkbox',
+        '_myliba_footer_cta_eyebrow' => 'text',
+        '_myliba_footer_cta_title' => 'textarea',
+        '_myliba_footer_cta_primary_label' => 'text',
+        '_myliba_footer_cta_primary_url' => 'url',
+        '_myliba_footer_cta_secondary_label' => 'text',
+        '_myliba_footer_cta_secondary_url' => 'url',
         '_myliba_academy_contact_title' => 'text',
         '_myliba_academy_contact_text' => 'textarea',
         '_myliba_academy_form_button' => 'text',

@@ -203,7 +203,11 @@ function software_definition(): array
                     'final_eyebrow' => ['text', 'Üst etiket'],
                     'final_title' => ['textarea', 'Başlık'],
                     'final_text' => ['textarea', 'Açıklama'],
-                    'final_button_label' => ['text', 'Buton etiketi'],
+                    'final_button_label' => ['text', 'Ana buton etiketi'],
+                    'final_button_url' => ['text', 'Ana buton bağlantısı (Örn: /tr/demo/)'],
+                    'final_secondary_label' => ['text', 'İkincil buton etiketi'],
+                    'final_secondary_url' => ['text', 'İkincil buton bağlantısı (Örn: /tr/iletisim/)'],
+                    'final_cta_hide' => ['text', 'CTA Bannerı Gizle (1: gizle, 0: göster)'],
                 ],
             ],
         ],
@@ -248,6 +252,10 @@ function software_defaults(): array
             'final_title' => 'Şirketinizin “Görünmez İşletim Sistemini” Güncelleme Vakti Geldi.',
             'final_text' => 'Her organizasyonun performans yolculuğu farklıdır. İhtiyaçlarınıza özel kişiselleştirilmiş bir demo ile Myliba’nın şirketinizde nasıl değer yaratacağını birlikte keşfedelim.',
             'final_button_label' => 'Kişiselleştirilmiş Demo Talep Edin',
+            'final_button_url' => '/tr/demo/',
+            'final_secondary_label' => 'İletişime Geçin',
+            'final_secondary_url' => '/tr/iletisim/',
+            'final_cta_hide' => '0',
         ],
         'collections' => [
             'hero_proof' => [['label' => 'Canlı veri'], ['label' => 'Adil karar'], ['label' => 'İnsan odaklı gelişim']],
@@ -309,7 +317,11 @@ function solutions_definition(): array
                 'cta_eyebrow' => ['text', 'Üst etiket'],
                 'cta_title' => ['textarea', 'Başlık'],
                 'cta_text' => ['textarea', 'Açıklama'],
-                'cta_button_label' => ['text', 'Buton etiketi'],
+                'cta_button_label' => ['text', 'Ana buton etiketi'],
+                'cta_button_url' => ['text', 'Ana buton bağlantısı (Örn: /tr/iletisim/)'],
+                'cta_secondary_label' => ['text', 'İkincil buton etiketi'],
+                'cta_secondary_url' => ['text', 'İkincil buton bağlantısı (Örn: /tr/demo/)'],
+                'cta_hide' => ['text', 'CTA Bannerı Gizle (1: gizle, 0: göster)'],
             ]],
         ],
     ];
@@ -330,6 +342,10 @@ function solutions_defaults(): array
         'cta_title' => 'Hangi Çözüm Size Uygun, Birlikte Belirleyelim.',
         'cta_text' => 'İhtiyacınıza en uygun programı veya danışmanlık modelini bulmak için Myliba ile tanışın.',
         'cta_button_label' => 'Uzmanlarımızla görüşün',
+        'cta_button_url' => '/tr/iletisim/',
+        'cta_secondary_label' => 'Demo Talep Edin',
+        'cta_secondary_url' => '/tr/demo/',
+        'cta_hide' => '0',
     ], 'collections' => []];
 }
 
@@ -386,6 +402,16 @@ function development_definition(): array
         ]],
         'reports' => ['label' => 'Raporlar ve Trendler Arşivi', 'fields' => $archive_fields('reports'), 'collections' => $archive_collections('reports')],
         'ebooks' => ['label' => 'e-Kitaplar Arşivi', 'fields' => $archive_fields('ebooks'), 'collections' => $archive_collections('ebooks')],
+        'cta' => ['label' => 'Final CTA', 'fields' => [
+            'cta_eyebrow' => ['text', 'Üst etiket'],
+            'cta_title' => ['textarea', 'Başlık'],
+            'cta_text' => ['textarea', 'Açıklama'],
+            'cta_button_label' => ['text', 'Ana buton etiketi'],
+            'cta_button_url' => ['text', 'Ana buton bağlantısı (Örn: /tr/iletisim/)'],
+            'cta_secondary_label' => ['text', 'İkincil buton etiketi'],
+            'cta_secondary_url' => ['text', 'İkincil buton bağlantısı (Örn: /tr/demo/)'],
+            'cta_hide' => ['text', 'CTA Bannerı Gizle (1: gizle, 0: göster)'],
+        ]],
     ]];
 }
 
@@ -437,6 +463,14 @@ function development_defaults(): array
         'ebooks_list_text' => 'İhtiyacınıza uygun rehberi seçin, ekibinizle paylaşın ve uygulamaya başlayın.',
         'ebooks_empty_title' => 'İlk e‑kitaplar hazırlanıyor.',
         'ebooks_empty_text' => 'Yeni kaynaklar yayınlandığında bu alanda otomatik olarak yerini alacak. Bu sırada güncel yazılarımızı keşfedebilirsiniz.',
+        'cta_eyebrow' => 'Gelişim Yolculuğu',
+        'cta_title' => 'Kültürü ve Performansı Birlikte Geliştirelim',
+        'cta_text' => 'Kurumunuza özel gelişim programları ve kaynaklar için bizimle iletişime geçin.',
+        'cta_button_label' => 'İletişime Geçin',
+        'cta_button_url' => '/tr/iletisim/',
+        'cta_secondary_label' => 'Demo Talep Edin',
+        'cta_secondary_url' => '/tr/demo/',
+        'cta_hide' => '0',
     ], 'collections' => [
         'reports_journey' => [['label' => 'Araştır'], ['label' => 'Yorumla'], ['label' => 'Uygula']],
         'reports_principles' => [['label' => 'Güncel araştırmalar'], ['label' => 'Uygulanabilir içgörüler'], ['label' => 'Kurumsal perspektif']],
@@ -458,9 +492,8 @@ function solution_definition(): array
             'hero_secondary_label' => ['text', 'İkincil buton etiketi (Örn: Çalışma modelini inceleyin)'],
             'journey_eyebrow' => ['text', 'Yolculuk kutusu üst etiketi (Örn: Myliba gelişim yolculuğu)'],
             'journey_title' => ['textarea', 'Yolculuk kutusu sloganı (Örn: Kuruma özel.\nİşin içinde.\nÖlçülebilir.)'],
-            'principle_1' => ['text', 'Prensip 1 (Örn: Kuruma özel tasarım)'],
-            'principle_2' => ['text', 'Prensip 2 (Örn: İşbaşı uygulama)'],
-            'principle_3' => ['text', 'Prensip 3 (Örn: Ölçülebilir takip)'],
+        ], 'collections' => [
+            'steps' => ['label' => 'Yolculuk kutusu ve süreç adımları', 'fields' => ['title' => ['text', 'Başlık (Örn: Mevcut Durum)'], 'text' => ['textarea', 'Süreç bölümündeki açıklama']]],
         ]],
         'intro' => ['label' => 'Myliba Yaklaşımı', 'fields' => [
             'intro_eyebrow' => ['text', 'Üst etiket (Örn: Myliba yaklaşımı)'],
@@ -491,15 +524,16 @@ function solution_definition(): array
             'process_eyebrow' => ['text', 'Üst etiket (Örn: Çalışma modeli)'],
             'process_title' => ['textarea', 'Bölüm başlığı (Örn: Süreç adımları)'],
             'process_lead' => ['textarea', 'Açıklama (Örn: Her aşama bir sonraki adımı besler; tasarım, uygulama ve takip aynı gelişim ritminin parçasıdır.)'],
-        ], 'collections' => [
-            'steps' => ['label' => 'Süreç adımları', 'fields' => ['title' => ['text', 'Başlık'], 'text' => ['textarea', 'Açıklama']]],
         ]],
         'cta' => ['label' => 'Final Aksiyon Çağrısı (CTA)', 'fields' => [
             'cta_eyebrow' => ['text', 'Üst etiket (Örn: 30 dakikalık keşif görüşmesi)'],
             'cta_title' => ['textarea', 'Başlık (Örn: İhtiyacınıza uygun yolculuğu birlikte tasarlayalım.)'],
             'cta_text' => ['textarea', 'Açıklama (Örn: Kurumunuzun hedeflerini dinleyelim; doğru programı, kapsamı ve çalışma modelini birlikte netleştirelim.)'],
             'cta_button_label' => ['text', 'Ana buton etiketi (Örn: Görüşme planlayın)'],
+            'cta_button_url' => ['text', 'Ana buton bağlantısı (Örn: /tr/iletisim/)'],
             'cta_secondary_label' => ['text', 'İkincil buton etiketi (Örn: Tüm çözümleri görün)'],
+            'cta_secondary_url' => ['text', 'İkincil buton bağlantısı (Örn: /tr/cozumler/)'],
+            'cta_hide' => ['text', 'CTA Bannerı Gizle (1: gizle, 0: göster)'],
         ]],
     ]];
 }
@@ -566,9 +600,6 @@ function solution_defaults(int $post_id): array
         'hero_secondary_label' => 'Çalışma modelini inceleyin',
         'journey_eyebrow' => (string) (get_post_meta($post_id, '_myliba_journey_eyebrow', true) ?: 'Myliba gelişim yolculuğu'),
         'journey_title' => (string) (get_post_meta($post_id, '_myliba_journey_title', true) ?: "Kuruma özel.\nİşin içinde.\nÖlçülebilir."),
-        'principle_1' => (string) (get_post_meta($post_id, '_myliba_principle_1', true) ?: 'Kuruma özel tasarım'),
-        'principle_2' => (string) (get_post_meta($post_id, '_myliba_principle_2', true) ?: 'İşbaşı uygulama'),
-        'principle_3' => (string) (get_post_meta($post_id, '_myliba_principle_3', true) ?: 'Ölçülebilir takip'),
         'intro_eyebrow' => (string) (get_post_meta($post_id, '_myliba_intro_eyebrow', true) ?: 'Myliba yaklaşımı'),
         'intro_title' => (string) (get_post_meta($post_id, '_myliba_intro_title', true) ?: 'Kültürü, hedefleri ve iş sonuçlarını birlikte geliştirin.'),
         'intro' => $intro,
@@ -587,7 +618,10 @@ function solution_defaults(int $post_id): array
         'cta_title' => (string) (get_post_meta($post_id, '_myliba_cta_title', true) ?: 'İhtiyacınıza uygun yolculuğu birlikte tasarlayalım.'),
         'cta_text' => (string) (get_post_meta($post_id, '_myliba_cta_text', true) ?: 'Kurumunuzun hedeflerini dinleyelim; doğru programı, kapsamı ve çalışma modelini birlikte netleştirelim.'),
         'cta_button_label' => (string) (get_post_meta($post_id, '_myliba_cta_button_label', true) ?: 'Görüşme planlayın'),
+        'cta_button_url' => (string) (get_post_meta($post_id, '_myliba_cta_url', true) ?: '/tr/iletisim/'),
         'cta_secondary_label' => 'Tüm çözümleri görün',
+        'cta_secondary_url' => '/tr/cozumler/',
+        'cta_hide' => '0',
     ], 'collections' => [
         'benefits' => array_map(static fn (string $text): array => ['text' => $text], $benefits_raw),
         'audiences' => array_map(static fn (string $text): array => ['text' => $text], $audiences_raw),
@@ -668,8 +702,11 @@ function report_definition(): array
                     'cta_eyebrow' => ['text', 'Üst etiket'],
                     'cta_title' => ['textarea', 'Başlık'],
                     'cta_text' => ['textarea', 'Açıklama'],
-                    'cta_button_label' => ['text', 'Buton etiketi'],
-                    'cta_button_url' => ['text', 'Buton bağlantısı'],
+                    'cta_button_label' => ['text', 'Ana buton etiketi'],
+                    'cta_button_url' => ['text', 'Ana buton bağlantısı'],
+                    'cta_secondary_label' => ['text', 'İkincil buton etiketi'],
+                    'cta_secondary_url' => ['text', 'İkincil buton bağlantısı'],
+                    'cta_hide' => ['text', 'CTA Bannerı Gizle (1: gizle, 0: göster)'],
                 ],
             ],
         ],
@@ -733,6 +770,9 @@ function report_defaults(int $post_id): array
             'cta_text' => 'Kurumunuza özel yüksek performans kültürü modelini birlikte tasarlayalım.',
             'cta_button_label' => $cta_label,
             'cta_button_url' => $cta_url,
+            'cta_secondary_label' => 'Tüm Raporları Görün',
+            'cta_secondary_url' => '/tr/raporlar-ve-trendler/',
+            'cta_hide' => '0',
         ],
         'collections' => [
             'key_insights' => [
@@ -782,9 +822,14 @@ function ebook_definition(): array
             'cta' => [
                 'label' => 'Final CTA',
                 'fields' => [
+                    'cta_eyebrow' => ['text', 'Üst etiket'],
                     'cta_title' => ['textarea', 'Başlık'],
                     'cta_text' => ['textarea', 'Açıklama'],
-                    'cta_button_label' => ['text', 'Buton etiketi'],
+                    'cta_button_label' => ['text', 'Ana buton etiketi'],
+                    'cta_button_url' => ['text', 'Ana buton bağlantısı'],
+                    'cta_secondary_label' => ['text', 'İkincil buton etiketi'],
+                    'cta_secondary_url' => ['text', 'İkincil buton bağlantısı'],
+                    'cta_hide' => ['text', 'CTA Bannerı Gizle (1: gizle, 0: göster)'],
                 ],
             ],
         ],
@@ -819,9 +864,14 @@ function ebook_defaults(int $post_id): array
             'details_eyebrow' => 'İçerik Detayları',
             'details_title' => 'Bu Kitapta Neler Bulacaksınız?',
             'details_text' => $details_text,
+            'cta_eyebrow' => 'Dönüşüm Adımı',
             'cta_title' => 'Yüksek Performans Kültürünü Şirketinizde İnşa Edin',
             'cta_text' => 'Uygulama ve dönüşüm yolculuğunuzu uzmanlarımızla birlikte planlayın.',
             'cta_button_label' => 'Uzmanlarımızla Görüşün',
+            'cta_button_url' => '/tr/iletisim/',
+            'cta_secondary_label' => 'Tüm e-Kitapları Görün',
+            'cta_secondary_url' => '/tr/e-kitaplar/',
+            'cta_hide' => '0',
         ],
         'collections' => [
             'chapters' => [
@@ -949,7 +999,10 @@ function story_definition(): array
                     'cta_title' => ['textarea', 'Başlık'],
                     'cta_lead' => ['textarea', 'Açıklama'],
                     'cta_primary_label' => ['text', 'Ana buton etiketi'],
+                    'cta_primary_url' => ['text', 'Ana buton bağlantısı (Örn: /tr/iletisim/)'],
                     'cta_secondary_label' => ['text', 'İkincil buton etiketi'],
+                    'cta_secondary_url' => ['text', 'İkincil buton bağlantısı (Örn: /tr/demo/)'],
+                    'cta_hide' => ['text', 'CTA Bannerı Gizle (1: gizle, 0: göster)'],
                 ],
             ],
         ],
@@ -998,7 +1051,10 @@ function story_defaults(): array
             'cta_title' => 'Şirketinizin Geleceğini Birlikte İnşa Edelim',
             'cta_lead' => 'Gelin, kurumunuzun performans ve kültür yolculuğunu birlikte başlatalım.',
             'cta_primary_label' => 'Hemen İletişime Geçin',
+            'cta_primary_url' => '/tr/iletisim/',
             'cta_secondary_label' => 'Demo Talep Edin',
+            'cta_secondary_url' => '/tr/demo/',
+            'cta_hide' => '0',
         ],
         'collections' => [
             'hero_badges' => [
@@ -1138,7 +1194,11 @@ function ethics_definition(): array
                     'cta_eyebrow' => ['text', 'Üst etiket'],
                     'cta_title' => ['textarea', 'Başlık'],
                     'cta_lead' => ['textarea', 'Açıklama'],
-                    'cta_primary_label' => ['text', 'Buton etiketi'],
+                    'cta_primary_label' => ['text', 'Ana buton etiketi'],
+                    'cta_primary_url' => ['text', 'Ana buton bağlantısı (Örn: /tr/iletisim/)'],
+                    'cta_secondary_label' => ['text', 'İkincil buton etiketi'],
+                    'cta_secondary_url' => ['text', 'İkincil buton bağlantısı (Örn: /tr/demo/)'],
+                    'cta_hide' => ['text', 'CTA Bannerı Gizle (1: gizle, 0: göster)'],
                 ],
             ],
         ],
@@ -1166,6 +1226,10 @@ function ethics_defaults(): array
             'cta_title' => 'Kurumunuza Özel Etik Hat Sürecini Birlikte Kuralım',
             'cta_lead' => 'Uzmanlarımızla görüşerek gizlilik, mevzuat ve devreye alma adımlarını planlayın.',
             'cta_primary_label' => 'Bize Ulaşın',
+            'cta_primary_url' => '/tr/iletisim/',
+            'cta_secondary_label' => 'Demo Talep Edin',
+            'cta_secondary_url' => '/tr/demo/',
+            'cta_hide' => '0',
         ],
         'collections' => [
             'why_items' => [
@@ -1230,6 +1294,7 @@ function faq_definition(): array
                     'cta_secondary_url' => ['text', 'İkincil buton URL (Boş bırakılırsa iletişim sayfasına gider)'],
                     'cta_contact_title' => ['text', 'İletişim kutusu başlığı (Örn: Doğrudan İletişim)'],
                     'cta_contact_text' => ['textarea', 'İletişim açıklaması'],
+                    'cta_hide' => ['text', 'CTA Bannerı Gizle (1: gizle, 0: göster)'],
                 ],
             ],
         ],
@@ -1976,4 +2041,3 @@ function save(int $post_id, ?\WP_Post $post = null, ?bool $update = null): void
         update_post_meta($post_id, META_KEY, $json);
     }
 }
-

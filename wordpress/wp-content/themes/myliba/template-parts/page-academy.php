@@ -60,6 +60,7 @@ $hero_badges = $rows($meta('_myliba_academy_hero_badges'));
 $nav_items = $rows($meta('_myliba_academy_nav_items'));
 $approach_steps = $rows($meta('_myliba_academy_approach_steps'));
 $stats = $rows($meta('_myliba_academy_stats'));
+$hero_image = $image('_myliba_academy_hero_image', 'academy-v2-hero__main-image', true);
 $hero_visuals = array_filter([
     $image('_myliba_academy_certificate_image', 'academy-v2-hero__certificate', true),
     $image('_myliba_academy_icf_image', 'academy-v2-hero__icf', true),
@@ -134,11 +135,13 @@ get_header();
                     </div>
                 <?php endif; ?>
             </div>
-            <?php if ($hero_visuals || $featured_program): ?>
+            <?php if ($hero_image || $hero_visuals || $featured_program): ?>
                 <div class="academy-v2-hero__visual" aria-hidden="true">
                     <span class="academy-v2-orbit academy-v2-orbit--one"></span>
                     <span class="academy-v2-orbit academy-v2-orbit--two"></span>
-                    <?php if ($hero_visuals): ?>
+                    <?php if ($hero_image): ?>
+                        <?php echo $hero_image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php elseif ($hero_visuals): ?>
                         <?php echo implode('', $hero_visuals); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     <?php else: ?>
                         <div class="academy-v2-hero-card">

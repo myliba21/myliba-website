@@ -8,8 +8,8 @@ $copy = static fn (string $key): string => \Myliba\Core\PageContent\text($page_i
 $rows = static fn (string $key): array => \Myliba\Core\PageContent\collection($page_id, 'story', $key);
 $sections = \Myliba\Core\PageContent\sections($page_id, 'story');
 
-$demo_url = myliba_demo_url();
-$contact_url = myliba_page_url('contact');
+$demo_url = $copy('cta_secondary_url') ?: myliba_demo_url();
+$contact_url = $copy('cta_primary_url') ?: myliba_page_url('contact');
 
 $target_urls = [
     'products' => myliba_page_url('products'),

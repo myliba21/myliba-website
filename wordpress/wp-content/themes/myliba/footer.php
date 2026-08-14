@@ -134,22 +134,29 @@ if ($youtube_url !== '') {
 ?>
 </main>
 <footer class="site-footer">
-    <?php if ($footer_cta_enabled && ($footer_cta_title !== '' || $footer_primary_cta_label !== '')): ?>
+    <?php
+    $page_cta = myliba_get_page_footer_cta();
+    if ($page_cta['enabled'] && ($page_cta['title'] !== '' || $page_cta['primary_label'] !== '')):
+    ?>
         <section class="site-footer__cta-wrap" aria-label="<?php echo esc_attr(myliba_text('Footer call to action')); ?>">
             <div class="site-footer__cta">
                 <div>
-                    <span><?php echo esc_html($footer_cta_eyebrow); ?></span>
-                    <h2><?php echo esc_html($footer_cta_title); ?></h2>
+                    <?php if ($page_cta['eyebrow'] !== ''): ?>
+                        <span><?php echo esc_html($page_cta['eyebrow']); ?></span>
+                    <?php endif; ?>
+                    <?php if ($page_cta['title'] !== ''): ?>
+                        <h2><?php echo esc_html($page_cta['title']); ?></h2>
+                    <?php endif; ?>
                 </div>
                 <div class="site-footer__cta-actions">
-                    <?php if ($footer_cta_url !== '' && $footer_primary_cta_label !== ''): ?>
-                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($footer_cta_url); ?>">
-                            <?php echo esc_html($footer_primary_cta_label); ?>
+                    <?php if ($page_cta['primary_label'] !== ''): ?>
+                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($page_cta['primary_url'] ?: '#'); ?>"<?php echo !empty($page_cta['primary_data_attr']) ? ' ' . esc_attr($page_cta['primary_data_attr']) : ''; ?>>
+                            <?php echo esc_html($page_cta['primary_label']); ?>
                         </a>
                     <?php endif; ?>
-                    <?php if ($footer_demo_url !== '' && $footer_demo_label !== ''): ?>
-                        <a class="myliba-button myliba-button--secondary" href="<?php echo esc_url($footer_demo_url); ?>">
-                            <?php echo esc_html($footer_demo_label); ?>
+                    <?php if ($page_cta['secondary_label'] !== ''): ?>
+                        <a class="myliba-button myliba-button--secondary" href="<?php echo esc_url($page_cta['secondary_url'] ?: '#'); ?>"<?php echo !empty($page_cta['secondary_data_attr']) ? ' ' . esc_attr($page_cta['secondary_data_attr']) : ''; ?>>
+                            <?php echo esc_html($page_cta['secondary_label']); ?>
                         </a>
                     <?php endif; ?>
                 </div>

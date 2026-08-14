@@ -179,13 +179,13 @@ while (have_posts()) :
         <section class="solutions-cta">
             <div class="solutions-cta__inner solutions-shell">
                 <div class="solutions-cta__copy">
-                    <p class="eyebrow"><?php echo esc_html(myliba_text('Dönüşüm Adımı')); ?></p>
+                    <p class="eyebrow"><?php echo esc_html($content_copy('cta_eyebrow') ?: myliba_text('Dönüşüm Adımı')); ?></p>
                     <h2><?php echo esc_html($cta_title); ?></h2>
                     <p><?php echo esc_html($cta_text); ?></p>
                 </div>
                 <div class="solutions-cta__actions">
-                    <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html($cta_button_label); ?></a>
-                    <a class="solutions-cta__secondary" href="<?php echo esc_url($ebooks_archive_url); ?>"><?php echo esc_html(myliba_text('Tüm e-kitapları görün')); ?></a>
+                    <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($content_copy('cta_button_url') ?: myliba_page_url('contact')); ?>"><?php echo esc_html($cta_button_label); ?></a>
+                    <a class="solutions-cta__secondary" href="<?php echo esc_url($content_copy('cta_secondary_url') ?: $ebooks_archive_url); ?>"><?php echo esc_html($content_copy('cta_secondary_label') ?: myliba_text('Tüm e-kitapları görün')); ?></a>
                 </div>
             </div>
         </section>

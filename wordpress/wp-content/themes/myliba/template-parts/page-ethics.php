@@ -156,9 +156,14 @@ get_header();
                                     <p><?php echo esc_html($copy('cta_text')); ?></p>
                                 <?php endif; ?>
                                 <div class="ethics-cta-box__actions">
-                                    <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($contact_url); ?>">
-                                        <?php echo esc_html($copy('cta_button_label')); ?>
+                                    <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($copy('cta_primary_url') ?: $contact_url); ?>">
+                                        <?php echo esc_html($copy('cta_primary_label') ?: $copy('cta_button_label')); ?>
                                     </a>
+                                    <?php if ($copy('cta_secondary_label') !== ''): ?>
+                                        <a class="myliba-button myliba-button--secondary" href="<?php echo esc_url($copy('cta_secondary_url') ?: myliba_demo_url()); ?>">
+                                            <?php echo esc_html($copy('cta_secondary_label')); ?>
+                                        </a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

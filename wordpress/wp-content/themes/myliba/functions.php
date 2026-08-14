@@ -177,6 +177,151 @@ function myliba_option(string $key, mixed $fallback = ''): mixed
     return $value;
 }
 
+function myliba_get_page_footer_cta(int $post_id = 0): array
+{
+    if ($post_id === 0) {
+        $post_id = (int) get_queried_object_id();
+    }
+
+    $global_enabled = myliba_option('footer_cta_enabled', '1') !== '0';
+    $global_eyebrow = (string) myliba_option('footer_cta_eyebrow', myliba_text('Culture, goals and performance'));
+    $global_title = (string) myliba_option('footer_cta_title', myliba_text('Ready to make culture measurable?'));
+    $global_primary_label = (string) myliba_option('primary_cta_label', myliba_text('Contact us'));
+    $global_primary_url_opt = (string) myliba_option('primary_cta_url', myliba_page_url('contact'));
+    $global_primary_url = $global_primary_url_opt !== '' ? $global_primary_url_opt : myliba_page_url('contact');
+    if (str_contains($global_primary_url, '/en/contact')) {
+        $global_primary_url = myliba_page_url('contact');
+    }
+    $global_secondary_label = (string) myliba_option('demo_cta_label', myliba_text('Request a demo'));
+    $global_secondary_url = (string) myliba_option('demo_url', myliba_demo_url());
+
+    $data = [
+        'enabled' => $global_enabled,
+        'eyebrow' => $global_eyebrow,
+        'title' => $global_title,
+        'primary_label' => $global_primary_label,
+        'primary_url' => $global_primary_url,
+        'primary_data_attr' => '',
+        'secondary_label' => $global_secondary_label,
+        'secondary_url' => $global_secondary_url,
+        'secondary_data_attr' => '',
+    ];
+
+    if ($post_id <= 0) {
+        return $data;
+    }
+
+    // 1. Explicitly hidden on this page
+    $hidden = get_post_meta($post_id, '_myliba_footer_cta_hide', true);
+    if ($hidden === '1' || $hidden === 'yes' || $hidden === true) {
+        $data['enabled'] = false;
+        return $data;
+    }
+
+    $post = get_post($post_id);
+    $slug = $post instanceof \WP_Post ? $post->post_name : '';
+
+    // 2. Check Academy special page
+    if ($post instanceof \WP_Post && in_array($slug, ['okr-kultur-akademisi', 'okr-culture-academy'], true)) {
+        $academy_title = trim((string) get_post_meta($post_id, '_myliba_academy_final_title', true));
+        $academy_eyebrow = trim((string) get_post_meta($post_id, '_myliba_academy_final_eyebrow', true));
+        $academy_primary_label = trim((string) get_post_meta($post_id, '_myliba_academy_final_primary_label', true));
+        $academy_primary_url = trim((string) get_post_meta($post_id, '_myliba_academy_final_primary_url', true));
+        $academy_secondary_label = trim((string) get_post_meta($post_id, '_myliba_academy_final_secondary_label', true));
+        $academy_secondary_url = trim((string) get_post_meta($post_id, '_myliba_academy_final_secondary_url', true));
+
+        if ($academy_title !== '') {
+            $data['title'] = $academy_title;
+        }
+        if ($academy_eyebrow !== '') {
+            $data['eyebrow'] = $academy_eyebrow;
+        }
+        if ($academy_primary_label !== '') {
+            $data['primary_label'] = $academy_primary_label;
+            if ($academy_primary_url !== '') {
+                $data['primary_url'] = $academy_primary_url;
+            } else {
+                $data['primary_url'] = '#';
+                $data['primary_data_attr'] = 'data-academy-form-open';
+            }
+        }
+        if ($academy_secondary_label !== '') {
+            $data['secondary_label'] = $academy_secondary_label;
+            $data['secondary_url'] = $academy_secondary_url !== '' ? $academy_secondary_url : '#programlar';
+        }
+        return $data;
+    }
+
+    // 3. Check PageContent schema if available
+    if (function_exists('\\Myliba\\Core\\PageContent\\schema_for_post') && function_exists('\\Myliba\\Core\\PageContent\\document')) {
+        $schema = \Myliba\Core\PageContent\schema_for_post($post_id);
+        if ($schema !== null) {
+            $doc = \Myliba\Core\PageContent\document($post_id, $schema);
+            $fields = $doc['fields'] ?? [];
+
+            if (!empty($fields['cta_hide']) || !empty($fields['final_cta_hide'])) {
+                $data['enabled'] = false;
+                return $data;
+            }
+
+            $schema_eyebrow = $fields['cta_eyebrow'] ?? $fields['final_eyebrow'] ?? '';
+            $schema_title = $fields['cta_title'] ?? $fields['final_title'] ?? '';
+            $schema_primary_label = $fields['cta_button_label'] ?? $fields['cta_primary_label'] ?? $fields['final_button_label'] ?? '';
+            $schema_primary_url = $fields['cta_button_url'] ?? $fields['cta_primary_url'] ?? $fields['final_button_url'] ?? '';
+            $schema_secondary_label = $fields['cta_secondary_label'] ?? $fields['final_secondary_label'] ?? '';
+            $schema_secondary_url = $fields['cta_secondary_url'] ?? $fields['final_secondary_url'] ?? '';
+
+            if (trim((string) $schema_eyebrow) !== '') {
+                $data['eyebrow'] = (string) $schema_eyebrow;
+            }
+            if (trim((string) $schema_title) !== '') {
+                $data['title'] = (string) $schema_title;
+            }
+            if (trim((string) $schema_primary_label) !== '') {
+                $data['primary_label'] = (string) $schema_primary_label;
+            }
+            if (trim((string) $schema_primary_url) !== '') {
+                $data['primary_url'] = (string) $schema_primary_url;
+            }
+            if (trim((string) $schema_secondary_label) !== '') {
+                $data['secondary_label'] = (string) $schema_secondary_label;
+            }
+            if (trim((string) $schema_secondary_url) !== '') {
+                $data['secondary_url'] = (string) $schema_secondary_url;
+            }
+        }
+    }
+
+    // 4. Check explicit post meta overrides
+    $meta_eyebrow = trim((string) get_post_meta($post_id, '_myliba_footer_cta_eyebrow', true));
+    $meta_title = trim((string) get_post_meta($post_id, '_myliba_footer_cta_title', true));
+    $meta_primary_label = trim((string) get_post_meta($post_id, '_myliba_footer_cta_primary_label', true));
+    $meta_primary_url = trim((string) get_post_meta($post_id, '_myliba_footer_cta_primary_url', true));
+    $meta_secondary_label = trim((string) get_post_meta($post_id, '_myliba_footer_cta_secondary_label', true));
+    $meta_secondary_url = trim((string) get_post_meta($post_id, '_myliba_footer_cta_secondary_url', true));
+
+    if ($meta_eyebrow !== '') {
+        $data['eyebrow'] = $meta_eyebrow;
+    }
+    if ($meta_title !== '') {
+        $data['title'] = $meta_title;
+    }
+    if ($meta_primary_label !== '') {
+        $data['primary_label'] = $meta_primary_label;
+    }
+    if ($meta_primary_url !== '') {
+        $data['primary_url'] = $meta_primary_url;
+    }
+    if ($meta_secondary_label !== '') {
+        $data['secondary_label'] = $meta_secondary_label;
+    }
+    if ($meta_secondary_url !== '') {
+        $data['secondary_url'] = $meta_secondary_url;
+    }
+
+    return $data;
+}
+
 function myliba_env(string $key, string $fallback = ''): string
 {
     $value = getenv($key);

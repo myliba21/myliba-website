@@ -42,21 +42,6 @@ while (have_posts()) :
         $journey_title = (string) (get_post_meta($post_id, '_myliba_journey_title', true) ?: myliba_text("Kuruma özel.\nİşin içinde.\nÖlçülebilir."));
     }
 
-    $principle_1 = $content_copy('principle_1');
-    if ($principle_1 === '') {
-        $principle_1 = (string) (get_post_meta($post_id, '_myliba_principle_1', true) ?: myliba_text('Kuruma özel tasarım'));
-    }
-
-    $principle_2 = $content_copy('principle_2');
-    if ($principle_2 === '') {
-        $principle_2 = (string) (get_post_meta($post_id, '_myliba_principle_2', true) ?: myliba_text('İşbaşı uygulama'));
-    }
-
-    $principle_3 = $content_copy('principle_3');
-    if ($principle_3 === '') {
-        $principle_3 = (string) (get_post_meta($post_id, '_myliba_principle_3', true) ?: myliba_text('Ölçülebilir takip'));
-    }
-
     $intro_eyebrow = $content_copy('intro_eyebrow');
     if ($intro_eyebrow === '') {
         $intro_eyebrow = (string) (get_post_meta($post_id, '_myliba_intro_eyebrow', true) ?: myliba_text('Myliba yaklaşımı'));
@@ -173,9 +158,19 @@ while (have_posts()) :
         $cta_button_label = (string) (get_post_meta($post_id, '_myliba_cta_button_label', true) ?: myliba_text('Görüşme planlayın'));
     }
 
+    $cta_button_url = $content_copy('cta_button_url');
+    if ($cta_button_url === '') {
+        $cta_button_url = (string) (get_post_meta($post_id, '_myliba_cta_url', true) ?: myliba_page_url('contact'));
+    }
+
     $cta_secondary_label = $content_copy('cta_secondary_label');
     if ($cta_secondary_label === '') {
         $cta_secondary_label = myliba_text('Tüm çözümleri görün');
+    }
+
+    $cta_secondary_url = $content_copy('cta_secondary_url');
+    if ($cta_secondary_url === '') {
+        $cta_secondary_url = myliba_page_url('solutions');
     }
 
     $solution = [
@@ -223,11 +218,6 @@ while (have_posts()) :
                     </div>
                 </div>
 
-                <div class="solution-detail__principles" aria-label="<?php echo esc_attr(myliba_text('Programın temel özellikleri')); ?>">
-                    <span><b>01</b> <?php echo esc_html($principle_1); ?></span>
-                    <span><b>02</b> <?php echo esc_html($principle_2); ?></span>
-                    <span><b>03</b> <?php echo esc_html($principle_3); ?></span>
-                </div>
             </div>
         </section>
 
@@ -335,8 +325,8 @@ while (have_posts()) :
                     <p><?php echo esc_html($cta_text); ?></p>
                 </div>
                 <div class="solutions-cta__actions">
-                    <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html($cta_button_label); ?></a>
-                    <a class="solutions-cta__secondary" href="<?php echo esc_url(myliba_page_url('solutions')); ?>"><?php echo esc_html($cta_secondary_label); ?></a>
+                    <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($cta_button_url); ?>"><?php echo esc_html($cta_button_label); ?></a>
+                    <a class="solutions-cta__secondary" href="<?php echo esc_url($cta_secondary_url); ?>"><?php echo esc_html($cta_secondary_label); ?></a>
                 </div>
             </div>
         </section>

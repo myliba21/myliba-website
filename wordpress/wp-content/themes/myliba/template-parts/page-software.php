@@ -178,7 +178,7 @@ get_header();
             <h2><?php echo esc_html($copy('final_title')); ?></h2>
             <p><?php echo esc_html($copy('final_text')); ?></p>
             <a class="myliba-button myliba-button--primary"
-                href="<?php echo esc_url($demo_url); ?>"><?php echo esc_html($copy('final_button_label')); ?> <span
+                href="<?php echo esc_url($copy('final_button_url') ?: $demo_url); ?>"><?php echo esc_html($copy('final_button_label')); ?> <span
                     aria-hidden="true">→</span></a>
         </div>
         <div class="software-final__signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
