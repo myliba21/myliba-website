@@ -1,10 +1,14 @@
 <?php
 get_header();
+
+$eyebrow = (string) myliba_option('archive_event_eyebrow', myliba_text('Events'));
+$title = (string) myliba_option('archive_event_title', myliba_text('Workshops, webinars, and sessions'));
+$empty_message = (string) myliba_option('archive_event_empty', myliba_text('No upcoming events at this time.'));
 ?>
 
 <section class="archive-hero">
-    <p class="eyebrow"><?php echo esc_html(myliba_text('Events')); ?></p>
-    <h1><?php echo esc_html(myliba_text('Workshops, webinars, and sessions')); ?></h1>
+    <p class="eyebrow"><?php echo esc_html($eyebrow); ?></p>
+    <h1><?php echo esc_html($title); ?></h1>
 </section>
 
 <section class="section">
@@ -19,7 +23,7 @@ get_header();
                 </a>
             <?php endwhile; ?>
         <?php else : ?>
-            <p><?php echo esc_html(myliba_text('No upcoming events at this time.')); ?></p>
+            <p><?php echo esc_html($empty_message); ?></p>
         <?php endif; ?>
     </div>
 </section>

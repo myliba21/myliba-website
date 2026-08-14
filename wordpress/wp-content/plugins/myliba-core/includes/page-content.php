@@ -551,6 +551,11 @@ function solution_definition(): array
         ], 'collections' => [
             'steps' => ['label' => 'Süreç adımları', 'fields' => ['title' => ['text', 'Başlık'], 'text' => ['textarea', 'Açıklama']]],
         ]],
+        'trust' => ['label' => 'Güven / Müşteri Logoları Bölümü', 'fields' => [
+            'trust_label' => ['text', 'Üst etiket (Örn: Birlikte geliştiğimiz kurumlar)'],
+            'trust_title' => ['textarea', 'Başlık (Örn: Farklı sektörlerden ekiplerin dönüşüm yolculuğuna eşlik ediyoruz.)'],
+            'trust_text' => ['textarea', 'Açıklama (Örn: Kurumların hedef, kültür ve liderlik pratiklerini birlikte güçlendiren deneyimler tasarlıyoruz.)'],
+        ]],
         'cta' => ['label' => 'Final Aksiyon Çağrısı (CTA)', 'fields' => [
             'cta_eyebrow' => ['text', 'Üst etiket (Örn: 30 dakikalık keşif görüşmesi)'],
             'cta_title' => ['textarea', 'Başlık (Örn: İhtiyacınıza uygun yolculuğu birlikte tasarlayalım.)'],
@@ -640,6 +645,9 @@ function solution_defaults(int $post_id): array
         'process_eyebrow' => (string) (get_post_meta($post_id, '_myliba_process_eyebrow', true) ?: 'Çalışma modeli'),
         'process_title' => (string) (get_post_meta($post_id, '_myliba_process_title', true) ?: ($title !== '' ? $title . ' süreci' : 'Çalışma Süreci')),
         'process_lead' => (string) (get_post_meta($post_id, '_myliba_process_lead', true) ?: 'Her aşama bir sonraki adımı besler; tasarım, uygulama ve takip aynı gelişim ritminin parçasıdır.'),
+        'trust_label' => 'Birlikte geliştiğimiz kurumlar',
+        'trust_title' => 'Farklı sektörlerden ekiplerin dönüşüm yolculuğuna eşlik ediyoruz.',
+        'trust_text' => 'Kurumların hedef, kültür ve liderlik pratiklerini birlikte güçlendiren deneyimler tasarlıyoruz.',
         'cta_eyebrow' => (string) (get_post_meta($post_id, '_myliba_cta_eyebrow', true) ?: '30 dakikalık keşif görüşmesi'),
         'cta_title' => (string) (get_post_meta($post_id, '_myliba_cta_title', true) ?: 'İhtiyacınıza uygun yolculuğu birlikte tasarlayalım.'),
         'cta_text' => (string) (get_post_meta($post_id, '_myliba_cta_text', true) ?: 'Kurumunuzun hedeflerini dinleyelim; doğru programı, kapsamı ve çalışma modelini birlikte netleştirelim.'),

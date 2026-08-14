@@ -8,110 +8,44 @@ while (have_posts()) :
     $content_rows = static fn (string $key): array => \Myliba\Core\PageContent\collection($post_id, 'report', $key);
 
     $title = $content_copy('hero_title');
-    if ($title === '') {
-        $title = (string) (get_post_meta($post_id, '_myliba_hero_title', true) ?: get_the_title());
-    }
-
     $kicker = $content_copy('kicker');
-    if ($kicker === '') {
-        $kicker = (string) (get_post_meta($post_id, '_myliba_eyebrow', true) ?: get_post_meta($post_id, '_myliba_label', true) ?: myliba_text('Raporlar ve Trendler'));
-    }
-
     $summary = $content_copy('hero_summary');
-    if ($summary === '') {
-        $summary = (string) (get_post_meta($post_id, '_myliba_hero_subtitle', true) ?: get_the_excerpt());
-    }
-
     $read_time = $content_copy('read_time');
     if ($read_time === '') {
         $read_time = myliba_reading_time() . ' ' . myliba_text('min read');
     }
-
     $primary_cta_label = $content_copy('primary_cta_label');
-    if ($primary_cta_label === '') {
-        $primary_cta_label = (string) (get_post_meta($post_id, '_myliba_cta_label', true) ?: myliba_text('Raporu İnceleyin'));
-    }
-
     $primary_cta_url = $content_copy('primary_cta_url');
-    if ($primary_cta_url === '') {
-        $primary_cta_url = (string) (get_post_meta($post_id, '_myliba_cta_url', true) ?: '#arastirma-detayi');
-    }
 
-    $overview_eyebrow = $content_copy('overview_eyebrow') ?: myliba_text('Yönetici Özeti');
-    $overview_title = $content_copy('overview_title') ?: myliba_text('Araştırmanın Amacı ve Kapsamı');
+    $overview_eyebrow = $content_copy('overview_eyebrow');
+    $overview_title = $content_copy('overview_title');
     $overview_text = $content_copy('overview_text');
-    if ($overview_text === '') {
-        $overview_text = (string) (get_post_meta($post_id, '_myliba_problem', true) ?: '');
-    }
 
-    $findings_eyebrow = $content_copy('findings_eyebrow') ?: myliba_text('Veri ve Trendler');
-    $findings_title = $content_copy('findings_title') ?: myliba_text('Öne Çıkan Bulgular');
+    $findings_eyebrow = $content_copy('findings_eyebrow');
+    $findings_title = $content_copy('findings_title');
     $findings_lead = $content_copy('findings_lead');
-    if ($findings_lead === '') {
-        $findings_lead = (string) (get_post_meta($post_id, '_myliba_solution', true) ?: '');
-    }
-
     $key_insights = $content_rows('key_insights');
 
-    $takeaways_eyebrow = $content_copy('takeaways_eyebrow') ?: myliba_text('Uygulama Adımları');
-    $takeaways_title = $content_copy('takeaways_title') ?: myliba_text('Kurumlar İçin Stratejik Öneriler');
+    $takeaways_eyebrow = $content_copy('takeaways_eyebrow');
+    $takeaways_title = $content_copy('takeaways_title');
     $takeaways_lead = $content_copy('takeaways_lead');
     $takeaways_list = $content_rows('takeaways_list');
-    if (empty($takeaways_list)) {
-        $meta_benefits = function_exists('myliba_lines') ? \myliba_lines((string) get_post_meta($post_id, '_myliba_benefits', true)) : [];
-        if (!empty($meta_benefits)) {
-            foreach ($meta_benefits as $b) {
-                $takeaways_list[] = ['title' => $b, 'text' => ''];
-            }
-        }
-    }
 
     $faqs = $content_rows('faqs');
-    if (empty($faqs)) {
-        $meta_faqs = function_exists('myliba_faq_pairs') ? \myliba_faq_pairs((string) get_post_meta($post_id, '_myliba_faq_items', true)) : [];
-        if (!empty($meta_faqs)) {
-            $faqs = $meta_faqs;
-        }
-    }
 
-    $cta_eyebrow = $content_copy('cta_eyebrow') ?: myliba_text('Dönüşüm Yolculuğu');
-    $cta_title = $content_copy('cta_title') ?: myliba_text('Bu İçgörüleri Kurumunuzda Hayata Geçirin.');
-    $cta_text = $content_copy('cta_text') ?: myliba_text('Kurumunuza özel yüksek performans kültürü modelini birlikte tasarlayalım.');
+    $cta_eyebrow = $content_copy('cta_eyebrow');
+    $cta_title = $content_copy('cta_title');
+    $cta_text = $content_copy('cta_text');
     $cta_button_label = $content_copy('cta_button_label');
-    if ($cta_button_label === '') {
-        $cta_button_label = (string) (get_post_meta($post_id, '_myliba_cta_label', true) ?: myliba_text('İletişime Geçin'));
-    }
     $cta_button_url = $content_copy('cta_button_url');
-    if ($cta_button_url === '') {
-        $cta_button_url = (string) (get_post_meta($post_id, '_myliba_cta_url', true) ?: myliba_page_url('contact'));
-    }
 
     $journey_eyebrow = $content_copy('journey_eyebrow');
-    if ($journey_eyebrow === '') {
-        $journey_eyebrow = (string) (get_post_meta($post_id, '_myliba_journey_eyebrow', true) ?: myliba_text('Myliba Trend Radarı'));
-    }
-
     $journey_title = $content_copy('journey_title');
-    if ($journey_title === '') {
-        $journey_title = (string) (get_post_meta($post_id, '_myliba_journey_title', true) ?: myliba_text("Veriye dayalı.\nStratejik.\nUygulanabilir."));
-    }
-
     $principle_1 = $content_copy('principle_1');
-    if ($principle_1 === '') {
-        $principle_1 = (string) (get_post_meta($post_id, '_myliba_principle_1', true) ?: myliba_text('Güncel Saha Verisi'));
-    }
-
     $principle_2 = $content_copy('principle_2');
-    if ($principle_2 === '') {
-        $principle_2 = (string) (get_post_meta($post_id, '_myliba_principle_2', true) ?: myliba_text('Stratejik İçgörüler'));
-    }
-
     $principle_3 = $content_copy('principle_3');
-    if ($principle_3 === '') {
-        $principle_3 = (string) (get_post_meta($post_id, '_myliba_principle_3', true) ?: myliba_text('Uygulanabilir Çıkarımlar'));
-    }
 
-    $reports_archive_url = home_url(myliba_current_language() === 'en' ? '/en/development-center/reports/' : '/tr/gelisim-merkezi/raporlar-ve-trendler/');
+    $reports_archive_url = myliba_page_url('reports');
     $editor_content = trim(wp_strip_all_tags((string) get_the_content()));
     ?>
     <article class="report-detail solution-detail">
