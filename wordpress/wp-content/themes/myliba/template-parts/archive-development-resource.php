@@ -19,7 +19,6 @@ $archive_content = [
     'visual_label' => $archive_copy('visual_label'),
     'visual_title' => $archive_copy('visual_title'),
     'journey' => array_column($archive_rows('journey'), 'label'),
-    'principles' => array_column($archive_rows('principles'), 'label'),
     'list_kicker' => $archive_copy('list_kicker'),
     'list_title' => $archive_copy('list_title'),
     'list_text' => $archive_copy('list_text'),
@@ -27,7 +26,6 @@ $archive_content = [
     'empty_text' => $archive_copy('empty_text'),
     'topics' => array_column($archive_rows('topics'), 'label'),
 ];
-$resource_navigation = myliba_development_center_items();
 ?>
 <div class="development-resource-archive development-resource-archive--<?php echo esc_attr($archive_key); ?>">
 <section class="development-archive-hero">
@@ -60,23 +58,8 @@ $resource_navigation = myliba_development_center_items();
                 </div>
             </div>
         </div>
-
-        <div class="development-archive-hero__principles" aria-label="<?php echo esc_attr($shared_copy('principles_aria')); ?>">
-            <?php foreach ($archive_content['principles'] as $index => $principle) : ?>
-                <span><b><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></b><?php echo esc_html($principle); ?></span>
-            <?php endforeach; ?>
-        </div>
     </div>
 </section>
-
-<nav class="development-resource-nav development-shell" aria-label="<?php echo esc_attr($shared_copy('nav_aria')); ?>">
-    <?php foreach ($resource_navigation as $resource_key => $resource_item) : ?>
-        <a href="<?php echo esc_url($resource_item['url']); ?>" <?php echo $resource_key === $archive_key ? 'aria-current="page"' : ''; ?>>
-            <span><?php echo esc_html($resource_item['label']); ?></span>
-            <small><?php echo esc_html($resource_item['description']); ?></small>
-        </a>
-    <?php endforeach; ?>
-</nav>
 
 <section id="kaynaklar" class="development-resource-list development-shell">
     <header class="development-resource-list__heading">

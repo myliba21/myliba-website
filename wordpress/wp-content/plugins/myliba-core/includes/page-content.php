@@ -364,7 +364,6 @@ function development_definition(): array
     ];
     $archive_collections = static fn (string $prefix): array => [
         $prefix . '_journey' => ['label' => 'Görsel adımları', 'fields' => ['label' => ['text', 'Etiket']]],
-        $prefix . '_principles' => ['label' => 'Temel özellikler', 'fields' => ['label' => ['text', 'Etiket']]],
         $prefix . '_topics' => ['label' => 'Yaklaşan içerik konuları', 'fields' => ['label' => ['text', 'Konu']]],
     ];
 
@@ -391,8 +390,6 @@ function development_definition(): array
             'archive_back_label' => ['text', 'Geri bağlantısı etiketi'],
             'archive_discover_label' => ['text', 'Kaynakları keşfet butonu'],
             'archive_all_content_label' => ['text', 'Tüm içerikler bağlantısı'],
-            'archive_principles_aria' => ['text', 'Temel özellikler erişilebilirlik açıklaması'],
-            'archive_nav_aria' => ['text', 'İçerik türleri menüsü erişilebilirlik açıklaması'],
             'archive_report_item_label' => ['text', 'Rapor içerik türü etiketi'],
             'archive_ebook_item_label' => ['text', 'e-Kitap içerik türü etiketi'],
             'archive_item_link_label' => ['text', 'İçerik kartı bağlantı etiketi'],
@@ -437,8 +434,6 @@ function development_defaults(): array
         'archive_back_label' => 'Gelişim Merkezi',
         'archive_discover_label' => 'Kaynakları keşfedin',
         'archive_all_content_label' => 'Tüm gelişim içerikleri',
-        'archive_principles_aria' => 'Kaynakların temel özellikleri',
-        'archive_nav_aria' => 'Gelişim Merkezi içerik türleri',
         'archive_report_item_label' => 'Rapor ve trend',
         'archive_ebook_item_label' => 'e‑Kitap',
         'archive_item_link_label' => 'İçeriği inceleyin',
@@ -473,10 +468,8 @@ function development_defaults(): array
         'cta_hide' => '0',
     ], 'collections' => [
         'reports_journey' => [['label' => 'Araştır'], ['label' => 'Yorumla'], ['label' => 'Uygula']],
-        'reports_principles' => [['label' => 'Güncel araştırmalar'], ['label' => 'Uygulanabilir içgörüler'], ['label' => 'Kurumsal perspektif']],
         'reports_topics' => [['label' => 'Performans kültürü'], ['label' => 'Liderlik ve dönüşüm'], ['label' => 'İş dünyasının geleceği']],
         'ebooks_journey' => [['label' => 'Keşfet'], ['label' => 'İndir'], ['label' => 'Uygula']],
-        'ebooks_principles' => [['label' => 'Pratik rehberler'], ['label' => 'Kullanıma hazır araçlar'], ['label' => 'Ekip uygulamaları']],
         'ebooks_topics' => [['label' => 'OKR ve hedef yönetimi'], ['label' => 'Liderlik pratikleri'], ['label' => 'Kültür ve performans']],
     ]];
 }

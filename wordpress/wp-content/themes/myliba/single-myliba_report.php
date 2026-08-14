@@ -96,21 +96,6 @@ while (have_posts()) :
         $journey_title = (string) (get_post_meta($post_id, '_myliba_journey_title', true) ?: myliba_text("Veriye dayalı.\nStratejik.\nUygulanabilir."));
     }
 
-    $principle_1 = $content_copy('principle_1');
-    if ($principle_1 === '') {
-        $principle_1 = (string) (get_post_meta($post_id, '_myliba_principle_1', true) ?: myliba_text('Güncel Saha Verisi'));
-    }
-
-    $principle_2 = $content_copy('principle_2');
-    if ($principle_2 === '') {
-        $principle_2 = (string) (get_post_meta($post_id, '_myliba_principle_2', true) ?: myliba_text('Stratejik İçgörüler'));
-    }
-
-    $principle_3 = $content_copy('principle_3');
-    if ($principle_3 === '') {
-        $principle_3 = (string) (get_post_meta($post_id, '_myliba_principle_3', true) ?: myliba_text('Uygulanabilir Çıkarımlar'));
-    }
-
     $reports_archive_url = home_url(myliba_current_language() === 'en' ? '/en/development-center/reports/' : '/tr/gelisim-merkezi/raporlar-ve-trendler/');
     $editor_content = trim(wp_strip_all_tags((string) get_the_content()));
     ?>
@@ -143,12 +128,6 @@ while (have_posts()) :
                             </div>
                         <?php endif; ?>
                     </div>
-                </div>
-
-                <div class="solution-detail__principles" aria-label="<?php echo esc_attr(myliba_text('Rapor özellikleri')); ?>">
-                    <span><b>01</b> <?php echo esc_html($principle_1); ?></span>
-                    <span><b>02</b> <?php echo esc_html($principle_2); ?></span>
-                    <span><b>03</b> <?php echo esc_html($principle_3); ?></span>
                 </div>
             </div>
         </section>
