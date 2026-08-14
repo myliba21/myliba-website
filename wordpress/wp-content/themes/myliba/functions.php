@@ -844,6 +844,8 @@ function myliba_redirect_legacy_urls(): void
         '/academy' => 'academy',
         '/events' => 'events',
         '/e-kitaplar' => 'development',
+        '/tr/gelisim-merkezi/e-kitaplar' => 'development',
+        '/en/development-center/ebooks' => 'development',
         '/raporlar-ve-trendler' => 'development',
         '/landing-pages' => 'development',
     ];
@@ -1939,17 +1941,10 @@ function myliba_development_center_items(): array
     $blog_page_url = myliba_page_url('blog');
     $events_page_url = myliba_page_url('events');
     $events_page_id = url_to_postid($events_page_url);
-    $ebook_type = get_post_type_object('myliba_ebook');
     $report_type = get_post_type_object('myliba_report');
 
     if ($language === 'en') {
         return [
-            'ebooks' => [
-                'label' => $page_id ? (string) myliba_meta('_myliba_development_ebook_label', $page_id, 'e-Books') : 'e-Books',
-                'description' => $page_id ? (string) myliba_meta('_myliba_development_ebook_text', $page_id, 'Guides and practical resources.') : 'Guides and practical resources.',
-                'url' => home_url('/en/development-center/ebooks/'),
-                'post_type' => 'myliba_ebook',
-            ],
             'reports' => [
                 'label' => $page_id ? (string) myliba_meta('_myliba_development_report_label', $page_id, 'Reports & Trends') : 'Reports & Trends',
                 'description' => $page_id ? (string) myliba_meta('_myliba_development_report_text', $page_id, 'Current research and insights.') : 'Current research and insights.',
@@ -1972,12 +1967,6 @@ function myliba_development_center_items(): array
     }
 
     return [
-        'ebooks' => [
-            'label' => $page_id ? (string) myliba_meta('_myliba_development_ebook_label', $page_id, $ebook_type?->labels->name ?: myliba_text('e-Kitaplar')) : ($ebook_type?->labels->name ?: myliba_text('e-Kitaplar')),
-            'description' => $page_id ? (string) myliba_meta('_myliba_development_ebook_text', $page_id, '') : '',
-            'url' => home_url('/tr/gelisim-merkezi/e-kitaplar/'),
-            'post_type' => 'myliba_ebook',
-        ],
         'reports' => [
             'label' => $page_id ? (string) myliba_meta('_myliba_development_report_label', $page_id, $report_type?->labels->name ?: myliba_text('Raporlar ve Trendler')) : ($report_type?->labels->name ?: myliba_text('Raporlar ve Trendler')),
             'description' => $page_id ? (string) myliba_meta('_myliba_development_report_text', $page_id, '') : '',
@@ -2018,7 +2007,7 @@ function myliba_header_menu_item_is_active(string $key, string $url): bool
     }
 
     return match ($key) {
-        'development' => is_page(['development-center', 'gelisim-merkezi', 'blog', 'yazilar', 'events', 'etkinlikler']) || is_home() || is_singular('post') || is_category() || is_tag() || is_post_type_archive(['myliba_event', 'myliba_ebook', 'myliba_report']) || is_singular(['myliba_event', 'myliba_ebook', 'myliba_report']),
+        'development' => is_page(['development-center', 'gelisim-merkezi', 'blog', 'yazilar', 'events', 'etkinlikler']) || is_home() || is_singular('post') || is_category() || is_tag() || is_post_type_archive(['myliba_event', 'myliba_report']) || is_singular(['myliba_event', 'myliba_report']),
         'products' => is_page(['yazilim', 'urunler']) || is_singular('myliba_product') || is_post_type_archive('myliba_product'),
         'solutions' => is_page(['solutions', 'cozumler']) || is_singular('myliba_solution') || is_post_type_archive('myliba_solution'),
         'story' => is_page(['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz']),

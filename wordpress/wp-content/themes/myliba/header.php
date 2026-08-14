@@ -164,7 +164,6 @@ $demo_url = (string) myliba_option('demo_url', myliba_demo_url());
                                     <div class="mega-menu__grid">
                                         <?php
                                         $development_menu_descriptions = [
-                                            'ebooks' => $header_lang === 'en' ? 'Guides and practical resources.' : myliba_text('Rehberler ve uygulama kaynakları.'),
                                             'reports' => $header_lang === 'en' ? 'Current research and insights.' : myliba_text('Güncel araştırmalar ve içgörüler.'),
                                             'blog' => $header_lang === 'en' ? 'Expert articles and practical recommendations.' : myliba_text('Uzman yazıları ve pratik öneriler.'),
                                             'events' => $header_lang === 'en' ? 'Webinars, workshops, and community sessions.' : myliba_text('Webinar, atölye ve buluşmalar.'),

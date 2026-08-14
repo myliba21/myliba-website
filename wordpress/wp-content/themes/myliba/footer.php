@@ -52,20 +52,16 @@ $footer_development_links = [
         'url' => myliba_page_url('academy'),
     ],
     [
-        'label' => myliba_text($development_items['ebooks']['label']),
-        'url' => $development_items['ebooks']['url'],
+        'label' => myliba_text($development_items['reports']['label'] ?? 'Raporlar ve Trendler'),
+        'url' => $development_items['reports']['url'] ?? home_url('/tr/gelisim-merkezi/raporlar-ve-trendler/'),
     ],
     [
-        'label' => myliba_text($development_items['reports']['label']),
-        'url' => $development_items['reports']['url'],
+        'label' => myliba_text($development_items['blog']['label'] ?? 'Blog'),
+        'url' => $development_items['blog']['url'] ?? myliba_page_url('blog'),
     ],
     [
-        'label' => myliba_text($development_items['blog']['label']),
-        'url' => $development_items['blog']['url'],
-    ],
-    [
-        'label' => myliba_text($development_items['events']['label']),
-        'url' => $development_items['events']['url'],
+        'label' => myliba_text($development_items['events']['label'] ?? 'Etkinlikler'),
+        'url' => $development_items['events']['url'] ?? myliba_page_url('events'),
     ],
 ];
 
