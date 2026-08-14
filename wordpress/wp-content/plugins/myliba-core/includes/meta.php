@@ -298,6 +298,18 @@ function render_homepage_builder(\WP_Post $post): void
         .myliba-hero-button label{font-size:12px;font-weight:600}
         .myliba-hero-empty{color:#646970;font-style:italic;margin:0}
         .myliba-hero-editor-toolbar{align-items:center;display:flex;gap:10px;margin-top:12px}
+        .myliba-performance-editor{display:grid;gap:12px;margin:14px 0}
+        .myliba-performance-tab{background:#fff;border:1px solid #c3c4c7;border-radius:10px;overflow:hidden}
+        .myliba-performance-tab__head{align-items:center;background:#f6f7f7;display:grid;gap:10px;grid-template-columns:auto minmax(0,1fr) auto;padding:11px 12px}
+        .myliba-performance-tab__handle{color:#646970;cursor:grab;font-weight:700}
+        .myliba-performance-tab__title{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .myliba-performance-tab__actions{align-items:center;display:flex;gap:10px}
+        .myliba-performance-tab__body{display:grid;gap:14px;grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);padding:14px}
+        .myliba-performance-tab__content{display:grid;gap:12px}
+        .myliba-performance-tab__media{background:#f6f7f7;border:1px solid #e0e0e0;border-radius:8px;padding:12px}
+        .myliba-performance-tab__media .myliba-media-field{margin-bottom:10px!important}
+        .myliba-performance-tab__media .myliba-media-field__preview img{border-radius:6px;max-width:100%}
+        .myliba-performance-editor-toolbar{align-items:center;display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
         @media (max-width:782px){
             .myliba-builder-card__head{grid-template-columns:auto minmax(0,1fr) auto}
             .myliba-builder-card__order{grid-column:2 / 3;width:100%}
@@ -306,6 +318,9 @@ function render_homepage_builder(\WP_Post $post): void
             .myliba-hero-grid .myliba-hero-field--wide{grid-column:auto}
             .myliba-hero-button{align-items:stretch;grid-template-columns:auto 1fr}
             .myliba-hero-button .myliba-hero-field{grid-column:2}
+            .myliba-performance-tab__body{grid-template-columns:1fr}
+            .myliba-performance-tab__head{grid-template-columns:auto minmax(0,1fr)}
+            .myliba-performance-tab__actions{grid-column:2}
         }
     </style>';
 
@@ -627,6 +642,112 @@ function render_hero_slides_editor(int $post_id): void
     </script>';
 }
 
+function performance_tabs_v2(int $post_id): array
+{
+    if (metadata_exists('post', $post_id, '_myliba_home_performance_tabs_v2')) {
+        $saved = get_post_meta($post_id, '_myliba_home_performance_tabs_v2', true);
+        if (is_string($saved)) {
+            $decoded = json_decode($saved, true);
+            $saved = is_array($decoded) ? $decoded : [];
+        }
+
+        return is_array($saved) ? array_values($saved) : [];
+    }
+
+    $legacy = (string) get_post_meta($post_id, '_myliba_home_performance_tabs', true);
+    $tabs = [];
+    foreach (preg_split('/\r\n|\r|\n/', $legacy) ?: [] as $line) {
+        if (trim($line) === '') {
+            continue;
+        }
+
+        [$label, $title, $text] = array_pad(array_map('trim', explode('|', $line)), 3, '');
+        $position = count($tabs) + 1;
+        $tabs[] = [
+            'id' => 'legacy-' . $position,
+            'enabled' => true,
+            'label' => $label,
+            'title' => $title,
+            'text' => $text,
+            'image_id' => $position <= 3 ? absint(get_post_meta($post_id, '_myliba_home_performance_image_' . $position, true)) : 0,
+            'image_alt' => $position <= 3 ? (string) get_post_meta($post_id, '_myliba_home_performance_image_' . $position . '_alt', true) : '',
+        ];
+    }
+
+    return $tabs;
+}
+
+function render_performance_tab_editor(array $tab, string $tab_key): void
+{
+    $name = '_myliba_home_performance_tabs_v2[' . $tab_key . ']';
+    $heading = trim((string) ($tab['label'] ?? '')) ?: __('Untitled tab', 'myliba');
+
+    echo '<article class="myliba-performance-tab" data-tab-key="' . esc_attr($tab_key) . '">';
+    echo '<header class="myliba-performance-tab__head">';
+    echo '<span class="myliba-performance-tab__handle" aria-hidden="true">&#8942;&#8942;</span>';
+    echo '<span class="myliba-performance-tab__title">' . esc_html($heading) . '</span>';
+    echo '<div class="myliba-performance-tab__actions">';
+    echo '<label><input type="hidden" name="' . esc_attr($name . '[enabled]') . '" value="0"><input type="checkbox" name="' . esc_attr($name . '[enabled]') . '" value="1" ' . checked(!isset($tab['enabled']) || !empty($tab['enabled']), true, false) . '> ' . esc_html__('Active', 'myliba') . '</label>';
+    echo '<button type="button" class="button-link-delete myliba-performance-tab__remove">' . esc_html__('Remove', 'myliba') . '</button>';
+    echo '</div></header>';
+    echo '<div class="myliba-performance-tab__body">';
+    echo '<div class="myliba-performance-tab__content">';
+    echo '<input type="hidden" name="' . esc_attr($name . '[id]') . '" value="' . esc_attr((string) ($tab['id'] ?? $tab_key)) . '">';
+    echo '<div class="myliba-hero-field"><label>' . esc_html__('Tab label', 'myliba') . '</label><input class="widefat myliba-performance-tab__label-input" type="text" name="' . esc_attr($name . '[label]') . '" value="' . esc_attr((string) ($tab['label'] ?? '')) . '"></div>';
+    echo '<div class="myliba-hero-field"><label>' . esc_html__('Content title', 'myliba') . '</label><input class="widefat" type="text" name="' . esc_attr($name . '[title]') . '" value="' . esc_attr((string) ($tab['title'] ?? '')) . '"></div>';
+    echo '<div class="myliba-hero-field"><label>' . esc_html__('Description', 'myliba') . '</label><textarea class="widefat" rows="5" name="' . esc_attr($name . '[text]') . '">' . esc_textarea((string) ($tab['text'] ?? '')) . '</textarea></div>';
+    echo '</div><aside class="myliba-performance-tab__media">';
+    field_media($name . '[image_id]', __('Tab image (optional)', 'myliba'), $tab['image_id'] ?? 0);
+    echo '<div class="myliba-hero-field"><label>' . esc_html__('Image alternative text', 'myliba') . '</label><input class="widefat" type="text" name="' . esc_attr($name . '[image_alt]') . '" value="' . esc_attr((string) ($tab['image_alt'] ?? '')) . '"></div>';
+    echo '<p class="description">' . esc_html__('If no image is selected, the website uses a balanced branded visual instead of leaving an empty area.', 'myliba') . '</p>';
+    echo '</aside></div></article>';
+}
+
+function render_performance_tabs_editor(int $post_id): void
+{
+    $tabs = performance_tabs_v2($post_id);
+    echo '<input type="hidden" name="_myliba_home_performance_tabs_v2_present" value="1">';
+    echo '<p class="description">' . esc_html__('Manage each tab separately. Drag cards to reorder them; images are optional.', 'myliba') . '</p>';
+    echo '<div class="myliba-performance-editor">';
+    foreach ($tabs as $index => $tab) {
+        if (is_array($tab)) {
+            render_performance_tab_editor($tab, 'tab-' . ($index + 1));
+        }
+    }
+    echo '</div><div class="myliba-performance-editor-toolbar"><button type="button" class="button button-primary myliba-performance-tab__add">' . esc_html__('Add tab', 'myliba') . '</button><span class="description">' . esc_html__('Four concise tabs usually provide the best balance on desktop and mobile.', 'myliba') . '</span></div>';
+
+    print_media_field_script();
+    echo '<script type="text/html" id="myliba-performance-tab-template">';
+    render_performance_tab_editor(['enabled' => true], '__TAB__');
+    echo '</script><script>
+        jQuery(function($){
+            var $editor = $(".myliba-performance-editor");
+            var template = $("#myliba-performance-tab-template").html();
+            var sequence = Date.now();
+            function nextKey(){ sequence += 1; return "tab-" + sequence; }
+            function initSortable(){
+                if ($editor.sortable) {
+                    $editor.sortable({items:"> .myliba-performance-tab",handle:".myliba-performance-tab__handle"});
+                }
+            }
+            $(".myliba-performance-tab__add").on("click", function(){
+                var key = nextKey();
+                $editor.append(template.replaceAll("__TAB__", key));
+                initSortable();
+            });
+            $editor.on("input", ".myliba-performance-tab__label-input", function(){
+                $(this).closest(".myliba-performance-tab").find(".myliba-performance-tab__title").text($(this).val() || ' . wp_json_encode(__('Untitled tab', 'myliba')) . ');
+            });
+            $editor.on("click", ".myliba-performance-tab__remove", function(){
+                if (window.confirm(' . wp_json_encode(__('Remove this tab? It will be permanently removed after updating the page.', 'myliba')) . ')) {
+                    $(this).closest(".myliba-performance-tab").remove();
+                }
+            });
+            initSortable();
+        });
+    </script>';
+}
+
 function render_section_fields(\WP_Post $post, string $key): void
 {
     $id = $post->ID;
@@ -654,8 +775,8 @@ function render_section_fields(\WP_Post $post, string $key): void
 
         case 'why_myliba':
             field_text('_myliba_home_why_eyebrow', __('Why Myliba eyebrow', 'myliba'), get_post_meta($id, '_myliba_home_why_eyebrow', true));
-            field_textarea('_myliba_home_why_title', __('Why Myliba title', 'myliba'), get_post_meta($id, '_myliba_home_why_title', true));
-            field_textarea('_myliba_home_why_text', __('Why Myliba text', 'myliba'), get_post_meta($id, '_myliba_home_why_text', true));
+            field_textarea('_myliba_home_why_title', __('Why Myliba title', 'myliba'), get_post_meta($id, '_myliba_home_why_title', true), __('Kalın yapmak için <strong>...</strong> veya **metin** kullanabilirsiniz. Alt satıra geçmek için Enter tuşunu veya <br> kullanabilirsiniz.', 'myliba'));
+            field_textarea('_myliba_home_why_text', __('Why Myliba text', 'myliba'), get_post_meta($id, '_myliba_home_why_text', true), __('Kalın yapmak için <strong>...</strong> veya **metin** kullanabilirsiniz. Alt satıra geçmek için Enter tuşunu veya <br> kullanabilirsiniz.', 'myliba'));
             field_textarea('_myliba_home_offering_rows', __('Software and Academy cards', 'myliba'), get_post_meta($id, '_myliba_home_offering_rows', true), __('One row per line as Label | Intro | Benefit 1 title | Benefit 1 text | Benefit 2 title | Benefit 2 text | Benefit 3 title | Benefit 3 text | Benefit 4 title | Benefit 4 text | CTA label | CTA URL.', 'myliba'));
             break;
 
@@ -677,13 +798,9 @@ function render_section_fields(\WP_Post $post, string $key): void
             field_text('_myliba_home_performance_eyebrow', __('Performance approach eyebrow', 'myliba'), get_post_meta($id, '_myliba_home_performance_eyebrow', true));
             field_textarea('_myliba_home_performance_title', __('Performance approach title', 'myliba'), get_post_meta($id, '_myliba_home_performance_title', true));
             field_textarea('_myliba_home_performance_text', __('Performance approach text', 'myliba'), get_post_meta($id, '_myliba_home_performance_text', true));
-            field_textarea('_myliba_home_performance_tabs', __('Performance approach tabs', 'myliba'), get_post_meta($id, '_myliba_home_performance_tabs', true), __('One row per line as Tab label | Title | Text.', 'myliba'));
             field_text('_myliba_home_performance_button', __('Performance tab button label', 'myliba'), get_post_meta($id, '_myliba_home_performance_button', true));
-            echo '<h4>' . esc_html__('Performance tab images', 'myliba') . '</h4>';
-            for ($image_index = 1; $image_index <= 3; $image_index++) {
-                field_media('_myliba_home_performance_image_' . $image_index, sprintf(__('Performance tab %d image', 'myliba'), $image_index), get_post_meta($id, '_myliba_home_performance_image_' . $image_index, true));
-                field_text('_myliba_home_performance_image_' . $image_index . '_alt', sprintf(__('Performance tab %d alternative text', 'myliba'), $image_index), get_post_meta($id, '_myliba_home_performance_image_' . $image_index . '_alt', true));
-            }
+            echo '<h4>' . esc_html__('Performance tabs', 'myliba') . '</h4>';
+            render_performance_tabs_editor($id);
             break;
 
         case 'products':
@@ -1006,6 +1123,11 @@ function save(int $post_id, \WP_Post $post): void
             continue;
         }
 
+        if ($type === 'performance_tabs') {
+            save_performance_tabs($post_id);
+            continue;
+        }
+
         if (!array_key_exists($field, $_POST) && $type !== 'checkbox') {
             continue;
         }
@@ -1015,6 +1137,11 @@ function save(int $post_id, \WP_Post $post): void
 
         if ($type === 'checkbox') {
             update_post_meta($post_id, $field, !empty($_POST[$field]) ? '1' : '0');
+            continue;
+        }
+
+        if ($type === 'html' || $type === 'html_textarea' || $type === 'rich_textarea') {
+            update_post_meta($post_id, $field, wp_kses_post($value));
             continue;
         }
 
@@ -1105,6 +1232,50 @@ function sanitize_hero_slides(array $raw_slides): array
     return $slides;
 }
 
+function save_performance_tabs(int $post_id): void
+{
+    if (empty($_POST['_myliba_home_performance_tabs_v2_present'])) {
+        return;
+    }
+
+    $raw_tabs = isset($_POST['_myliba_home_performance_tabs_v2']) && is_array($_POST['_myliba_home_performance_tabs_v2'])
+        ? wp_unslash($_POST['_myliba_home_performance_tabs_v2'])
+        : [];
+    update_post_meta($post_id, '_myliba_home_performance_tabs_v2', sanitize_performance_tabs($raw_tabs));
+}
+
+function sanitize_performance_tabs(array $raw_tabs): array
+{
+    $tabs = [];
+
+    foreach (array_slice($raw_tabs, 0, 12, true) as $raw_tab) {
+        if (!is_array($raw_tab)) {
+            continue;
+        }
+
+        $label = sanitize_text_field((string) ($raw_tab['label'] ?? ''));
+        $title = sanitize_text_field((string) ($raw_tab['title'] ?? ''));
+        $text = sanitize_textarea_field((string) ($raw_tab['text'] ?? ''));
+        $image_id = absint($raw_tab['image_id'] ?? 0);
+        if ($label === '' && $title === '' && $text === '' && !$image_id) {
+            continue;
+        }
+
+        $id = sanitize_key((string) ($raw_tab['id'] ?? ''));
+        $tabs[] = [
+            'id' => $id !== '' ? $id : 'performance-' . wp_generate_uuid4(),
+            'enabled' => !empty($raw_tab['enabled']),
+            'label' => $label,
+            'title' => $title,
+            'text' => $text,
+            'image_id' => $image_id,
+            'image_alt' => sanitize_text_field((string) ($raw_tab['image_alt'] ?? '')),
+        ];
+    }
+
+    return $tabs;
+}
+
 function save_homepage_builder(int $post_id): void
 {
     if (!isset($_POST['_myliba_home_builder']) || !is_array($_POST['_myliba_home_builder'])) {
@@ -1189,8 +1360,8 @@ function field_definitions(string $post_type): array
         '_myliba_home_trust_items' => 'textarea',
         '_myliba_home_social_proof_items' => 'textarea',
         '_myliba_home_why_eyebrow' => 'text',
-        '_myliba_home_why_title' => 'textarea',
-        '_myliba_home_why_text' => 'textarea',
+        '_myliba_home_why_title' => 'html_textarea',
+        '_myliba_home_why_text' => 'html_textarea',
         '_myliba_home_offering_rows' => 'textarea',
         '_myliba_home_problem_eyebrow' => 'text',
         '_myliba_home_problem_title' => 'textarea',
@@ -1203,6 +1374,7 @@ function field_definitions(string $post_type): array
         '_myliba_home_performance_eyebrow' => 'text',
         '_myliba_home_performance_title' => 'textarea',
         '_myliba_home_performance_text' => 'textarea',
+        '_myliba_home_performance_tabs_v2' => 'performance_tabs',
         '_myliba_home_performance_tabs' => 'textarea',
         '_myliba_home_performance_button' => 'text',
         '_myliba_home_performance_image_1' => 'number',

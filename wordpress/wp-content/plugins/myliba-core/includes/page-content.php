@@ -117,30 +117,11 @@ function software_definition(): array
                     'hero_lead' => ['textarea', 'Hero açıklaması'],
                     'hero_primary_label' => ['text', 'Ana buton etiketi'],
                     'hero_secondary_label' => ['text', 'İkincil buton etiketi'],
+                    'hero_image' => ['media', 'Hero Görseli'],
+                    'hero_image_alt' => ['text', 'Hero Görseli Alt Metni (Opsiyonel)'],
                 ],
                 'collections' => [
                     'hero_proof' => ['label' => 'Hero kısa faydaları', 'fields' => ['label' => ['text', 'Fayda']]],
-                ],
-            ],
-            'dashboard' => [
-                'label' => 'Hero Analitik Görseli',
-                'fields' => [
-                    'dashboard_aria_label' => ['text', 'Erişilebilirlik açıklaması'],
-                    'dashboard_brand' => ['text', 'Marka'],
-                    'dashboard_product' => ['text', 'Ürün etiketi'],
-                    'dashboard_analysis_label' => ['text', 'Analiz etiketi'],
-                    'dashboard_title' => ['text', 'Analiz başlığı'],
-                    'dashboard_status' => ['text', 'Analiz durumu'],
-                    'dashboard_axis_x' => ['text', 'Yatay eksen'],
-                    'dashboard_axis_y' => ['text', 'Dikey eksen'],
-                    'dashboard_score_value' => ['text', 'Skor değeri'],
-                    'dashboard_score_label' => ['text', 'Skor etiketi'],
-                    'dashboard_ai_label' => ['text', 'AI etiketi'],
-                    'dashboard_ai_text' => ['text', 'AI içgörüsü'],
-                ],
-                'collections' => [
-                    'dashboard_nav' => ['label' => 'Görsel menüsü', 'fields' => ['label' => ['text', 'Menü etiketi']]],
-                    'dashboard_boxes' => ['label' => 'NineBox hücreleri', 'fields' => ['label' => ['text', 'Hücre etiketi'], 'count' => ['text', 'Kişi sayısı']]],
                 ],
             ],
             'trust' => [
@@ -258,18 +239,8 @@ function software_defaults(): array
             'hero_lead' => 'Performans değerlendirmeyi yılda bir kez yapılan öznel bir notlama süreci olmaktan çıkarın. Myliba Yazılım ile hedef ve performans yönetimini canlı analitik verilerle takip edin. Terfi, ücret ve gelişim gibi kritik lider kararlarını adil, şeffaf ve güven veren verilere dayandırın.',
             'hero_primary_label' => 'Demo Talep Edin',
             'hero_secondary_label' => 'Modülleri Keşfedin',
-            'dashboard_aria_label' => 'Çalışan sıralaması ve NineBox analiz ekranı',
-            'dashboard_brand' => 'Myliba',
-            'dashboard_product' => 'Analytics',
-            'dashboard_analysis_label' => 'Analiz',
-            'dashboard_title' => 'Çalışan Sıralaması',
-            'dashboard_status' => '2026 · Canlı',
-            'dashboard_axis_x' => 'Performans',
-            'dashboard_axis_y' => 'Potansiyel',
-            'dashboard_score_value' => '94',
-            'dashboard_score_label' => 'Adil Karar Skoru',
-            'dashboard_ai_label' => 'AI İçgörüsü',
-            'dashboard_ai_text' => '3 kritik yetenek yükselişte',
+            'hero_image' => '',
+            'hero_image_alt' => 'Myliba Yazılım',
             'trust_label' => 'Canlı performans kültürü kuran ekipler',
             'trust_title' => 'Veriyle daha adil kararlar alan kurumların yanında.',
             'trust_text' => 'Farklı sektörlerden ekipler hedef, performans ve gelişim ritimlerini Myliba ile tek noktada buluşturuyor.',
@@ -1734,6 +1705,10 @@ function render_page_box(\WP_Post $post): void
 function render_field(string $key, string $type, string $label, mixed $value, string $name_prefix = 'myliba_page_content[fields]'): void
 {
     $name = $name_prefix . '[' . $key . ']';
+    if ($type === 'media' || $type === 'image') {
+        \Myliba\Core\Meta\field_media($name, $label, $value);
+        return;
+    }
     echo '<p class="myliba-page-content__field"><label><strong>' . esc_html($label) . '</strong></label><br>';
     if ($type === 'textarea') {
         echo '<textarea class="widefat" rows="4" name="' . esc_attr($name) . '">' . esc_textarea((string) $value) . '</textarea>';

@@ -34,43 +34,23 @@ get_header();
             </div>
         </div>
 
-        <div class="software-hero__visual" aria-label="<?php echo esc_attr($copy('dashboard_aria_label')); ?>">
-            <div class="software-screen">
-                <div class="software-screen__top">
-                    <span class="software-screen__brand"><?php echo esc_html($copy('dashboard_brand')); ?> <small><?php echo esc_html($copy('dashboard_product')); ?></small></span>
-                    <div><i></i><i></i><i></i></div>
-                </div>
-                <div class="software-screen__body">
-                    <aside>
-                        <?php foreach ($rows('dashboard_nav') as $nav_index => $nav_item) : ?>
-                            <span class="<?php echo $nav_index === 0 ? 'is-active' : ''; ?>"><?php echo esc_html((string) ($nav_item['label'] ?? '')); ?></span>
-                        <?php endforeach; ?>
-                    </aside>
-                    <div class="software-ninebox">
-                        <div class="software-ninebox__head">
-                            <div><small><?php echo esc_html($copy('dashboard_analysis_label')); ?></small><strong><?php echo esc_html($copy('dashboard_title')); ?></strong></div>
-                            <span><?php echo esc_html($copy('dashboard_status')); ?></span>
-                        </div>
-                        <div class="software-ninebox__chart">
-                            <?php
-                            $tones = ['yellow', 'mint', 'green', 'sand', 'blue', 'teal', 'rose', 'violet', 'navy'];
-                            foreach ($rows('dashboard_boxes') as $box_index => $box):
-                                $tone = $tones[$box_index] ?? 'blue';
-                                ?>
-                                <div class="software-ninebox__cell software-ninebox__cell--<?php echo esc_attr($tone); ?>">
-                                    <span><?php echo esc_html((string) ($box['label'] ?? '')); ?></span>
-                                    <strong><?php echo esc_html((string) ($box['count'] ?? '')); ?></strong>
-                                    <div class="software-avatars"><i></i><i></i><i></i></div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                        <span class="software-ninebox__axis software-ninebox__axis--x"><?php echo esc_html($copy('dashboard_axis_x')); ?> →</span>
-                        <span class="software-ninebox__axis software-ninebox__axis--y"><?php echo esc_html($copy('dashboard_axis_y')); ?> →</span>
-                    </div>
-                </div>
+        <?php
+        $hero_image_id = absint($copy('hero_image'));
+        $hero_image_alt = $copy('hero_image_alt');
+        ?>
+        <div class="software-hero__visual-wrap">
+            <div class="software-hero__visual">
+                <?php if ($hero_image_id) : ?>
+                    <?php echo wp_get_attachment_image($hero_image_id, 'full', false, [
+                        'alt' => $hero_image_alt ?: get_post_meta($hero_image_id, '_wp_attachment_image_alt', true) ?: ($copy('hero_title_start') . ' ' . $copy('hero_title_emphasis')),
+                        'loading' => 'eager',
+                        'fetchpriority' => 'high',
+                        'decoding' => 'async',
+                    ]); ?>
+                <?php else : ?>
+                    <div class="software-hero__placeholder" aria-hidden="true"></div>
+                <?php endif; ?>
             </div>
-            <div class="software-floating-card software-floating-card--score"><strong><?php echo esc_html($copy('dashboard_score_value')); ?></strong><span><?php echo esc_html($copy('dashboard_score_label')); ?></span></div>
-            <div class="software-floating-card software-floating-card--ai"><span>✦ <?php echo esc_html($copy('dashboard_ai_label')); ?></span><strong><?php echo esc_html($copy('dashboard_ai_text')); ?></strong></div>
         </div>
     </section>
 

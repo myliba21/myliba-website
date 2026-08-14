@@ -2,8 +2,8 @@
 get_header();
 
 $post_id = get_queried_object_id();
+$demo_url = myliba_demo_url();
 $products = static fn() => myliba_get_entries('myliba_product', 9);
-$performance_images = myliba_home_media_images('performance', $post_id);
 $hero_metrics = myliba_home_rows('hero_metrics');
 $hero_proof = myliba_home_lines('hero_proof');
 $hero_slides = myliba_home_hero_slides($post_id);
@@ -12,7 +12,7 @@ $social_proof_items = myliba_home_rows('social_proof_items');
 $offering_rows = myliba_home_rows('offering_rows');
 $problem_cards = myliba_home_rows('problem_cards');
 $strategy_flow_steps = myliba_home_rows('strategy_flow_steps');
-$performance_tabs = myliba_home_rows('performance_tabs');
+$performance_tabs = myliba_home_performance_tabs($post_id);
 $academy_items = myliba_home_lines('academy_items');
 $outcomes_cards = myliba_home_rows('outcomes_cards');
 $role_gain_rows = myliba_home_rows('role_gains_rows');
@@ -167,8 +167,8 @@ foreach (myliba_home_sections($post_id) as $section) {
                 <div class="why-myliba">
                     <div class="why-myliba__intro">
                         <p class="eyebrow"><?php echo esc_html(myliba_home_value('why_eyebrow')); ?></p>
-                        <h2><?php echo esc_html(myliba_home_value('why_title')); ?></h2>
-                        <p><?php echo esc_html(myliba_home_value('why_text')); ?></p>
+                        <h2><?php echo myliba_format_text((string) myliba_home_value('why_title')); ?></h2>
+                        <p><?php echo myliba_format_text((string) myliba_home_value('why_text')); ?></p>
                     </div>
                     <div class="offering-cards">
                         <?php foreach ($offering_rows as $index => $row):
@@ -382,7 +382,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                         <div class="performance-tabs__nav" role="tablist"
                             aria-label="<?php echo esc_attr(myliba_text('Performance management capabilities')); ?>">
                             <?php foreach ($performance_tabs as $index => $row):
-                                [$label] = array_pad($row, 1, '');
+                                $label = (string) ($row['label'] ?? '');
                                 ?>
                                 <button id="performance-tab-<?php echo esc_attr((string) $index); ?>"
                                     class="<?php echo $index === 0 ? 'is-active' : ''; ?>" type="button" role="tab"
@@ -392,21 +392,32 @@ foreach (myliba_home_sections($post_id) as $section) {
                             <?php endforeach; ?>
                         </div>
                         <?php foreach ($performance_tabs as $index => $row):
-                            [$label, $title, $text] = array_pad($row, 3, '');
-                            $image_pool = $performance_images ?: $hero_banner_images;
-                            $image = $image_pool ? $image_pool[$index % count($image_pool)] : [];
+                            $label = (string) ($row['label'] ?? '');
+                            $title = (string) ($row['title'] ?? '');
+                            $text = (string) ($row['text'] ?? '');
+                            $image = is_array($row['image'] ?? null) ? $row['image'] : [];
+                            $has_image = !empty($image['url']);
                             ?>
                             <div id="performance-panel-<?php echo esc_attr((string) $index); ?>"
-                                class="performance-tabs__panel <?php echo $index === 0 ? 'is-active' : ''; ?>" role="tabpanel"
+                                class="performance-tabs__panel <?php echo $index === 0 ? 'is-active' : ''; ?> <?php echo $has_image ? 'performance-tabs__panel--with-image' : 'performance-tabs__panel--without-image'; ?>" role="tabpanel"
                                 aria-labelledby="performance-tab-<?php echo esc_attr((string) $index); ?>" data-home-panel <?php echo $index === 0 ? '' : 'hidden'; ?>>
-                                <div><span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                                <div class="performance-tabs__content"><span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
                                     <h3><?php echo esc_html($title); ?></h3>
                                     <p><?php echo esc_html($text); ?></p><a class="myliba-button myliba-button--primary"
                                         href="<?php echo esc_url(myliba_page_url('products')); ?>"><?php echo esc_html(myliba_home_value('performance_button')); ?></a>
                                 </div>
-                                <?php if (!empty($image['url'])): ?>
-                                    <figure><img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>"
-                                            loading="lazy" decoding="async"></figure><?php endif; ?>
+                                <?php if ($has_image): ?>
+                                    <figure><img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr((string) ($image['alt'] ?? '')); ?>"
+                                            <?php echo !empty($image['width']) ? 'width="' . esc_attr((string) $image['width']) . '"' : ''; ?>
+                                            <?php echo !empty($image['height']) ? 'height="' . esc_attr((string) $image['height']) . '"' : ''; ?>
+                                            loading="lazy" decoding="async"></figure>
+                                <?php else: ?>
+                                    <div class="performance-tabs__visual-placeholder" aria-hidden="true">
+                                        <span class="performance-tabs__visual-number"><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                                        <span class="performance-tabs__visual-mark"><i></i><i></i><i></i><i></i></span>
+                                        <strong><?php echo esc_html($label); ?></strong>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>

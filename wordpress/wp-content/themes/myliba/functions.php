@@ -320,6 +320,66 @@ function myliba_home_media_images(string $group, int $post_id = 0): array
     return $images;
 }
 
+function myliba_home_performance_tabs(int $post_id = 0): array
+{
+    $post_id = $post_id ?: (int) get_queried_object_id();
+
+    if ($post_id && metadata_exists('post', $post_id, '_myliba_home_performance_tabs_v2')) {
+        $saved = get_post_meta($post_id, '_myliba_home_performance_tabs_v2', true);
+        if (is_string($saved)) {
+            $decoded = json_decode($saved, true);
+            $saved = is_array($decoded) ? $decoded : [];
+        }
+
+        $tabs = [];
+        foreach (is_array($saved) ? $saved : [] as $tab) {
+            if (!is_array($tab) || empty($tab['enabled'])) {
+                continue;
+            }
+
+            $image = [];
+            $attachment_id = absint($tab['image_id'] ?? 0);
+            $source = $attachment_id ? wp_get_attachment_image_src($attachment_id, 'large') : false;
+            if ($source) {
+                $custom_alt = trim((string) ($tab['image_alt'] ?? ''));
+                $media_alt = trim((string) get_post_meta($attachment_id, '_wp_attachment_image_alt', true));
+                $image = [
+                    'url' => (string) $source[0],
+                    'alt' => myliba_translate_text($custom_alt !== '' ? $custom_alt : $media_alt),
+                    'width' => (int) $source[1],
+                    'height' => (int) $source[2],
+                    'attachment_id' => $attachment_id,
+                ];
+            }
+
+            $tabs[] = [
+                'id' => sanitize_html_class((string) ($tab['id'] ?? 'performance-' . count($tabs))),
+                'label' => myliba_translate_text((string) ($tab['label'] ?? '')),
+                'title' => myliba_translate_text((string) ($tab['title'] ?? '')),
+                'text' => myliba_translate_text((string) ($tab['text'] ?? '')),
+                'image' => $image,
+            ];
+        }
+
+        return $tabs;
+    }
+
+    $images = myliba_home_media_images('performance', $post_id);
+    $tabs = [];
+    foreach (myliba_home_rows('performance_tabs', [], $post_id) as $index => $row) {
+        [$label, $title, $text] = array_pad($row, 3, '');
+        $tabs[] = [
+            'id' => 'legacy-' . ($index + 1),
+            'label' => $label,
+            'title' => $title,
+            'text' => $text,
+            'image' => $images[$index] ?? [],
+        ];
+    }
+
+    return $tabs;
+}
+
 function myliba_image_dimensions_for_source(string $source, string $url): array
 {
     $path = '';
@@ -2083,6 +2143,22 @@ function myliba_home_value(string $key, mixed $fallback = '', int $post_id = 0):
     $value = myliba_meta('_myliba_home_' . $key, $post_id ?: get_queried_object_id(), $fallback);
 
     return is_string($value) ? myliba_translate_text($value) : $value;
+}
+
+function myliba_format_text(string $text): string
+{
+    if (trim($text) === '') {
+        return '';
+    }
+
+    // Support markdown bold **text** or __text__ -> <strong>text</strong>
+    $text = preg_replace('/\*\*(.*?)\*\*/s', '<strong>$1</strong>', $text);
+    $text = preg_replace('/__(.*?)__/s', '<strong>$1</strong>', $text);
+
+    // Convert newlines to <br> tags
+    $text = nl2br($text);
+
+    return wp_kses_post($text);
 }
 
 function myliba_home_lines(string $key, array $fallback = [], int $post_id = 0): array
