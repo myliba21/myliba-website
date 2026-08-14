@@ -170,7 +170,7 @@ class Commands
                 default => $this->starter_content('generic'),
             };
             $page_id = $this->upsert_page($title, $slug, $content, $meta, $parent, $template);
-            if (in_array($slug, ['yazilim', 'cozumler', 'gelisim-merkezi', 'hikayemiz', 'our-story', 'etik-danismanlik', 'ethics-counsel', 'sss', 'faq', 'okr-kultur-akademisi', 'okr-culture-academy'], true)) {
+            if (in_array($slug, ['yazilim', 'cozumler', 'gelisim-merkezi', 'hikayemiz', 'our-story', 'etik-danismanlik', 'ethics-counsel', 'sss', 'faq'], true)) {
                 \Myliba\Core\PageContent\materialize($page_id);
             }
         }
@@ -375,16 +375,6 @@ class Commands
         }
 
         $this->seed_academy();
-
-        $academy_page = get_page_by_path('tr/okr-kultur-akademisi');
-        if ($academy_page) {
-            \Myliba\Core\PageContent\materialize($academy_page->ID);
-        }
-        $academy_page_en = get_page_by_path('en/okr-culture-academy');
-        if ($academy_page_en) {
-            \Myliba\Core\PageContent\materialize($academy_page_en->ID);
-        }
-
         \WP_CLI::success('Myliba Academy page fields, program records and FAQ records were materialized into WordPress.');
     }
 
@@ -1285,7 +1275,6 @@ class Commands
                 '_myliba_seo_title' => 'Myliba Akademi | ICF Onaylı OKR ve Kültür Koçluğu Programı',
                 '_myliba_seo_description' => 'Myliba Akademi’nin ICF onaylı OKR ve Kültür Koçluğu Sertifika Programı, işbaşı liderlik gelişimi ve kurumsal dönüşüm çözümlerini keşfedin.',
             ]);
-            \Myliba\Core\PageContent\materialize($academy_page->ID);
         }
 
         $faqs = [

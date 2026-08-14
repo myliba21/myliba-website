@@ -8,29 +8,76 @@ while (have_posts()) :
     $content_rows = static fn (string $key): array => \Myliba\Core\PageContent\collection($post_id, 'ebook', $key);
 
     $title = $content_copy('hero_title');
-    $kicker = $content_copy('kicker');
-    $summary = $content_copy('hero_summary');
-    $download_cta_label = $content_copy('download_cta_label');
-    $download_file_url = $content_copy('download_file_url');
+    if ($title === '') {
+        $title = (string) (get_post_meta($post_id, '_myliba_hero_title', true) ?: get_the_title());
+    }
 
-    $details_eyebrow = $content_copy('details_eyebrow');
-    $details_title = $content_copy('details_title');
+    $kicker = $content_copy('kicker');
+    if ($kicker === '') {
+        $kicker = (string) (get_post_meta($post_id, '_myliba_eyebrow', true) ?: get_post_meta($post_id, '_myliba_label', true) ?: myliba_text('e-Kitap'));
+    }
+
+    $summary = $content_copy('hero_summary');
+    if ($summary === '') {
+        $summary = (string) (get_post_meta($post_id, '_myliba_hero_subtitle', true) ?: get_the_excerpt());
+    }
+
+    $download_cta_label = $content_copy('download_cta_label');
+    if ($download_cta_label === '') {
+        $download_cta_label = (string) (get_post_meta($post_id, '_myliba_cta_label', true) ?: myliba_text('e-Kitabı İndirin'));
+    }
+
+    $download_file_url = $content_copy('download_file_url');
+    if ($download_file_url === '') {
+        $download_file_url = (string) (get_post_meta($post_id, '_myliba_cta_url', true) ?: myliba_page_url('contact'));
+    }
+
+    $details_eyebrow = $content_copy('details_eyebrow') ?: myliba_text('İçerik Detayları');
+    $details_title = $content_copy('details_title') ?: myliba_text('Bu Kitapta Neler Bulacaksınız?');
     $details_text = $content_copy('details_text');
+    if ($details_text === '') {
+        $details_text = (string) (get_post_meta($post_id, '_myliba_problem', true) ?: '');
+    }
 
     $chapters = $content_rows('chapters');
     $key_takeaways = $content_rows('key_takeaways');
+    if (empty($key_takeaways)) {
+        $meta_benefits = function_exists('myliba_lines') ? \myliba_lines((string) get_post_meta($post_id, '_myliba_benefits', true)) : [];
+        if (!empty($meta_benefits)) {
+            $key_takeaways = array_map(static fn (string $b): array => ['text' => $b], $meta_benefits);
+        }
+    }
 
-    $cta_title = $content_copy('cta_title');
-    $cta_text = $content_copy('cta_text');
-    $cta_button_label = $content_copy('cta_button_label');
+    $cta_title = $content_copy('cta_title') ?: myliba_text('Yüksek Performans Kültürünü Şirketinizde İnşa Edin');
+    $cta_text = $content_copy('cta_text') ?: myliba_text('Uygulama ve dönüşüm yolculuğunuzu uzmanlarımızla birlikte planlayın.');
+    $cta_button_label = $content_copy('cta_button_label') ?: myliba_text('Uzmanlarımızla Görüşün');
 
     $journey_eyebrow = $content_copy('journey_eyebrow');
-    $journey_title = $content_copy('journey_title');
-    $principle_1 = $content_copy('principle_1');
-    $principle_2 = $content_copy('principle_2');
-    $principle_3 = $content_copy('principle_3');
+    if ($journey_eyebrow === '') {
+        $journey_eyebrow = (string) (get_post_meta($post_id, '_myliba_journey_eyebrow', true) ?: myliba_text('Myliba e-Kitap'));
+    }
 
-    $ebooks_archive_url = myliba_page_url('ebooks');
+    $journey_title = $content_copy('journey_title');
+    if ($journey_title === '') {
+        $journey_title = (string) (get_post_meta($post_id, '_myliba_journey_title', true) ?: myliba_text("Keşfet.\nİndir.\nUygula."));
+    }
+
+    $principle_1 = $content_copy('principle_1');
+    if ($principle_1 === '') {
+        $principle_1 = (string) (get_post_meta($post_id, '_myliba_principle_1', true) ?: myliba_text('Pratik Rehberler'));
+    }
+
+    $principle_2 = $content_copy('principle_2');
+    if ($principle_2 === '') {
+        $principle_2 = (string) (get_post_meta($post_id, '_myliba_principle_2', true) ?: myliba_text('Kullanıma Hazır Araçlar'));
+    }
+
+    $principle_3 = $content_copy('principle_3');
+    if ($principle_3 === '') {
+        $principle_3 = (string) (get_post_meta($post_id, '_myliba_principle_3', true) ?: myliba_text('Ekip Uygulamaları'));
+    }
+
+    $ebooks_archive_url = home_url(myliba_current_language() === 'en' ? '/en/development-center/ebooks/' : '/tr/gelisim-merkezi/e-kitaplar/');
     $editor_content = trim(wp_strip_all_tags((string) get_the_content()));
     ?>
     <article class="ebook-detail solution-detail">

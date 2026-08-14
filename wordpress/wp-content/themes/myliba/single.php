@@ -31,12 +31,12 @@ $headings = $matches[1] ?? [];
                 </div>
             <?php endif; ?>
             <div class="author-card">
-                <h2><?php echo esc_html(myliba_option('blog_author_title', myliba_text('Myliba Team'))); ?></h2>
-                <p><?php echo esc_html(myliba_option('blog_author_text', myliba_text('Insights on OKR, KPI, CFR, performance culture, feedback and leadership routines.'))); ?></p>
+                <h2><?php echo esc_html(myliba_text('Myliba Team')); ?></h2>
+                <p><?php echo esc_html(myliba_text('Insights on OKR, KPI, CFR, performance culture, feedback and leadership routines.')); ?></p>
             </div>
             <div class="cta-panel">
-                <h2><?php echo esc_html(myliba_option('blog_cta_title', myliba_text('Turn this into practice.'))); ?></h2>
-                <p><?php echo esc_html(myliba_option('blog_cta_text', myliba_text('Request a demo and see how Myliba connects strategy, actions and performance routines.'))); ?></p>
+                <h2><?php echo esc_html(myliba_text('Turn this into practice.')); ?></h2>
+                <p><?php echo esc_html(myliba_text('Request a demo and see how Myliba connects strategy, actions and performance routines.')); ?></p>
                 <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_demo_url()); ?>"><?php echo esc_html(myliba_option('demo_cta_label', myliba_text('Request a demo'))); ?></a>
             </div>
         </aside>
@@ -45,8 +45,8 @@ $headings = $matches[1] ?? [];
 
 <section class="section band">
     <div class="section__heading">
-        <p class="eyebrow"><?php echo esc_html(myliba_option('blog_related_eyebrow', myliba_text('Related reading'))); ?></p>
-        <h2><?php echo esc_html(myliba_option('blog_related_title', myliba_text('Continue exploring performance culture.'))); ?></h2>
+        <p class="eyebrow"><?php echo esc_html(myliba_text('Related reading')); ?></p>
+        <h2><?php echo esc_html(myliba_text('Continue exploring performance culture.')); ?></h2>
     </div>
     <div class="card-grid card-grid--three">
         <?php

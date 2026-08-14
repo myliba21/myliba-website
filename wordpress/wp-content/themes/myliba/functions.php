@@ -1070,8 +1070,6 @@ function myliba_page_url(string $key): string
         'faq' => ['en' => 'en/faq', 'tr' => 'tr/sss'],
         'security' => ['en' => 'en/security', 'tr' => 'tr/guvenlik'],
         'privacy' => ['en' => 'en/privacy-policy', 'tr' => 'tr/gizlilik-politikasi'],
-        'reports' => ['en' => 'en/development-center/reports', 'tr' => 'tr/gelisim-merkezi/raporlar-ve-trendler'],
-        'ebooks' => ['en' => 'en/development-center/ebooks', 'tr' => 'tr/gelisim-merkezi/e-kitaplar'],
     ];
 
     if (!empty($paths[$key][$lang])) {

@@ -35,7 +35,7 @@ $events = new WP_Query([
             <?php endwhile; ?>
             <?php wp_reset_postdata(); ?>
         <?php else : ?>
-            <p><?php echo esc_html(myliba_option('events_empty_message', myliba_text('No upcoming events at this time.'))); ?></p>
+            <p><?php echo esc_html(myliba_text('No upcoming events at this time.')); ?></p>
         <?php endif; ?>
     </div>
 </section>
