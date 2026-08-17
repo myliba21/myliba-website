@@ -196,11 +196,33 @@ function render_settings(): void
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Social links', 'myliba'); ?></th>
+                    <th scope="row"><?php esc_html_e('Social Media Links', 'myliba'); ?></th>
                     <td>
-                        <input class="regular-text" type="url" name="myliba_options[linkedin_url]" value="<?php echo esc_attr($options['linkedin_url']); ?>" placeholder="LinkedIn URL">
-                        <br><br>
-                        <input class="regular-text" type="url" name="myliba_options[instagram_url]" value="<?php echo esc_attr($options['instagram_url']); ?>" placeholder="Instagram URL">
+                        <p class="description" style="margin-bottom: 12px;">
+                            <?php esc_html_e('Enter your social media URLs. These links will appear under "Bize Ulaşın" on the Contact page and in the site footer.', 'myliba'); ?>
+                        </p>
+                        <table style="max-width: 600px; width: 100%;">
+                            <tr>
+                                <td style="padding: 4px 10px 4px 0; width: 120px;"><strong>LinkedIn:</strong></td>
+                                <td style="padding: 4px 0;"><input class="large-text" type="url" name="myliba_options[linkedin_url]" value="<?php echo esc_attr($options['linkedin_url'] ?? ''); ?>" placeholder="https://www.linkedin.com/company/myliba"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px 10px 4px 0;"><strong>Instagram:</strong></td>
+                                <td style="padding: 4px 0;"><input class="large-text" type="url" name="myliba_options[instagram_url]" value="<?php echo esc_attr($options['instagram_url'] ?? ''); ?>" placeholder="https://www.instagram.com/myliba"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px 10px 4px 0;"><strong>X (Twitter):</strong></td>
+                                <td style="padding: 4px 0;"><input class="large-text" type="url" name="myliba_options[twitter_url]" value="<?php echo esc_attr($options['twitter_url'] ?? ''); ?>" placeholder="https://x.com/myliba"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px 10px 4px 0;"><strong>YouTube:</strong></td>
+                                <td style="padding: 4px 0;"><input class="large-text" type="url" name="myliba_options[youtube_url]" value="<?php echo esc_attr($options['youtube_url'] ?? ''); ?>" placeholder="https://www.youtube.com/@myliba"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 4px 10px 4px 0;"><strong>Facebook:</strong></td>
+                                <td style="padding: 4px 0;"><input class="large-text" type="url" name="myliba_options[facebook_url]" value="<?php echo esc_attr($options['facebook_url'] ?? ''); ?>" placeholder="https://www.facebook.com/myliba"></td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>

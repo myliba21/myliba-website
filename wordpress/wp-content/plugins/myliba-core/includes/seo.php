@@ -225,6 +225,9 @@ function render_schema(): void
     $same_as  = array_filter([
         Options\get('linkedin_url'),
         Options\get('instagram_url'),
+        Options\get('twitter_url'),
+        Options\get('youtube_url'),
+        Options\get('facebook_url'),
     ]);
 
     $organization = [

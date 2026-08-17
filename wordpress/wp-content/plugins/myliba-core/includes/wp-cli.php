@@ -2015,6 +2015,29 @@ HTML,
 <section class="contact-details__card">
 <h2>Bize Ulaşın</h2>
 <p><a href="tel:+905539868699">+90 553 986 86 99</a><br><a href="mailto:hello@myliba.com">hello@myliba.com</a></p>
+[myliba_social_links]
+</section>
+</div>
+HTML,
+            'contact_en' => <<<'HTML'
+<p>For inquiries, demo requests, and partnership opportunities, fill out the form or reach us through the channels below.</p>
+<div class="contact-details">
+<section class="contact-details__card">
+<h2>Headquarters</h2>
+<address>Suite E2631, 82a James Carter Road<br>Mildenhall, Suffolk, IP28 7DE<br>United Kingdom</address>
+</section>
+<section class="contact-details__card">
+<h2>Istanbul Office</h2>
+<address>Maslak Mah. AOS 55. Sk. 42 Maslak B Blok Sitesi<br>No: 4 İç Kapı No: 542<br>Sarıyer / Istanbul</address>
+</section>
+<section class="contact-details__card">
+<h2>Manisa Technopark</h2>
+<address>Muradiye Mahallesi CBÜ Kampüsü<br>Küme Evleri Teknokent No: 22<br>Yunusemre / Manisa</address>
+</section>
+<section class="contact-details__card">
+<h2>Contact Us</h2>
+<p><a href="tel:+905539868699">+90 553 986 86 99</a><br><a href="mailto:hello@myliba.com">hello@myliba.com</a></p>
+[myliba_social_links]
 </section>
 </div>
 HTML,

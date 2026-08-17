@@ -109,24 +109,8 @@ $footer_legal_links = [
         ], */
 ];
 
-// Social links from Customizer
-$footer_social_links = [];
-$linkedin_url = (string) myliba_option('linkedin_url', '');
-if ($linkedin_url !== '') {
-    $footer_social_links[] = ['label' => myliba_text('LinkedIn'), 'url' => $linkedin_url, 'short' => 'in'];
-}
-$instagram_url = (string) myliba_option('instagram_url', '');
-if ($instagram_url !== '') {
-    $footer_social_links[] = ['label' => myliba_text('Instagram'), 'url' => $instagram_url, 'short' => 'ig'];
-}
-$twitter_url = (string) myliba_option('twitter_url', '');
-if ($twitter_url !== '') {
-    $footer_social_links[] = ['label' => myliba_text('X / Twitter'), 'url' => $twitter_url, 'short' => 'x'];
-}
-$youtube_url = (string) myliba_option('youtube_url', '');
-if ($youtube_url !== '') {
-    $footer_social_links[] = ['label' => myliba_text('YouTube'), 'url' => $youtube_url, 'short' => 'yt'];
-}
+// Social links from settings / customizer
+$footer_social_links = function_exists('myliba_social_links') ? myliba_social_links() : [];
 ?>
 </main>
 <footer class="site-footer">
@@ -182,9 +166,10 @@ if ($youtube_url !== '') {
                     aria-label="<?php echo esc_attr(myliba_text('Social links')); ?>">
                     <?php foreach ($footer_social_links as $social_link): ?>
                         <a href="<?php echo esc_url($social_link['url']); ?>"
-                            aria-label="<?php echo esc_attr($social_link['label']); ?>" target="_blank"
+                            class="site-footer__social-link site-footer__social-link--<?php echo esc_attr($social_link['key'] ?? ''); ?>"
+                            aria-label="<?php echo esc_attr($social_link['label']); ?>" title="<?php echo esc_attr($social_link['label']); ?>" target="_blank"
                             rel="noopener noreferrer">
-                            <?php echo esc_html($social_link['short']); ?>
+                            <?php echo !empty($social_link['svg']) ? $social_link['svg'] : esc_html($social_link['short']); ?>
                         </a>
                     <?php endforeach; ?>
                 </div>

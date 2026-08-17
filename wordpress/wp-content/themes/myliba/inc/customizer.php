@@ -481,5 +481,18 @@ function myliba_customize_register(\WP_Customize_Manager $wp_customize): void
         'section' => 'myliba_social_section',
         'type' => 'url',
     ]);
+
+    // Facebook URL
+    $wp_customize->add_setting('facebook_url', [
+        'default' => '',
+        'type' => 'theme_mod',
+        'capability' => 'edit_theme_options',
+        'sanitize_callback' => $sanitize_url,
+    ]);
+    $wp_customize->add_control('facebook_url', [
+        'label' => __('Facebook Page URL', 'myliba'),
+        'section' => 'myliba_social_section',
+        'type' => 'url',
+    ]);
 }
 add_action('customize_register', 'myliba_customize_register');
