@@ -1,0 +1,171 @@
+{
+  "nodes": [
+    {
+      "id": "file:.DS_Store",
+      "type": "file",
+      "name": ".DS_Store",
+      "filePath": ".DS_Store",
+      "summary": "macOS tarafından oluşturulan Finder görünüm meta verisini taşır; uygulama çalışma zamanında bir rol üstlenmez.",
+      "tags": [
+        "sistem-meta-verisi",
+        "yardımcı-dosya",
+        "macos"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
+      "type": "file",
+      "name": "ua-arch-analyze.js",
+      "filePath": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
+      "summary": "Bilgi grafiğindeki dosya düğümlerini dizin, tür ve bağımlılık sinyallerine göre inceleyerek mimari katman analizine girdi olacak istatistikleri üretir.",
+      "tags": [
+        "mimari-analiz",
+        "bilgi-grafiği",
+        "yardımcı-betik",
+        "istatistik"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js:commonDirectoryPrefix",
+      "type": "function",
+      "name": "commonDirectoryPrefix",
+      "filePath": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
+      "lineRange": [
+        9,
+        19
+      ],
+      "summary": "Dosya yollarının ortak dizin önekini segment bazında hesaplar.",
+      "tags": [
+        "yardımcı-betik",
+        "graf-analizi",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js:classifyGroup",
+      "type": "function",
+      "name": "classifyGroup",
+      "filePath": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
+      "lineRange": [
+        21,
+        39
+      ],
+      "summary": "Dizin grup adını bilinen mimari sorumluluk kalıplarından biriyle eşleştirir.",
+      "tags": [
+        "yardımcı-betik",
+        "graf-analizi",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js:classifyFile",
+      "type": "function",
+      "name": "classifyFile",
+      "filePath": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
+      "lineRange": [
+        41,
+        56
+      ],
+      "summary": "Dosya adını ve uzantısını kullanarak test, giriş noktası, altyapı, veri veya dokümantasyon rolünü sınıflandırır.",
+      "tags": [
+        "yardımcı-betik",
+        "graf-analizi",
+        "javascript"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-layers.js",
+      "type": "file",
+      "name": "ua-arch-layers.js",
+      "filePath": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-layers.js",
+      "summary": "Önceden hazırlanmış mimari analiz verilerinden katman tanımlarını ve düğüm atamalarını oluşturan denetim amaçlı yardımcı betiktir.",
+      "tags": [
+        "mimari-katman",
+        "bilgi-grafiği",
+        "yardımcı-betik"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-prepare.js",
+      "type": "file",
+      "name": "ua-arch-prepare.js",
+      "filePath": ".understand-anything/.trash-20260802-audit/tmp/ua-arch-prepare.js",
+      "summary": "Birleştirilmiş bilgi grafiğini mimari katman çözümlemesinin beklediği sade giriş biçimine dönüştürür.",
+      "tags": [
+        "veri-hazırlama",
+        "mimari-analiz",
+        "yardımcı-betik"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.trash-20260802-audit/tmp/ua-inline-validate.cjs",
+      "type": "file",
+      "name": "ua-inline-validate.cjs",
+      "filePath": ".understand-anything/.trash-20260802-audit/tmp/ua-inline-validate.cjs",
+      "summary": "Bilgi grafiğinin düğüm, kenar, katman ve tur bütünlüğünü deterministik kurallarla doğrular ve sorun raporu üretir.",
+      "tags": [
+        "doğrulama",
+        "bilgi-grafiği",
+        "kalite-kontrol"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.understand-anything/.trash-20260802-audit/tmp/ua-tour-analyze.js",
+      "type": "file",
+      "name": "ua-tour-analyze.js",
+      "filePath": ".understand-anything/.trash-20260802-audit/tmp/ua-tour-analyze.js",
+      "summary": "Bilgi grafiğindeki giriş noktalarını, bağlantı yoğunluklarını ve kümeleri hesaplayarak yönlendirilmiş kod turu hazırlanmasını destekler.",
+      "tags": [
+        "kod-turu",
+        "graf-analizi",
+        "yardımcı-betik",
+        "istatistik"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.understand-anything/.trash-20260802-audit/tmp/ua-tour-prepare.js",
+      "type": "file",
+      "name": "ua-tour-prepare.js",
+      "filePath": ".understand-anything/.trash-20260802-audit/tmp/ua-tour-prepare.js",
+      "summary": "Bilgi grafiği ile mimari katmanları tur analiz betiğine uygun tek bir giriş belgesinde birleştirir.",
+      "tags": [
+        "veri-hazırlama",
+        "kod-turu",
+        "yardımcı-betik"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
+      "target": "function:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js:commonDirectoryPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
+      "target": "function:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js:classifyGroup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
+      "target": "function:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js:classifyFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    }
+  ]
+}

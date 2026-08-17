@@ -1,0 +1,170 @@
+{
+  "nodes": [
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "Understand Anything taramasından medya, yedek, üçüncü taraf ve geçici dosyaları dışlamak için kullanılan proje kapsamı kurallarını tanımlar.",
+      "tags": [
+        "tarama-yapılandırması",
+        "hariç-tutma",
+        "bilgi-grafiği"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/scan-result.json",
+      "type": "config",
+      "name": "scan-result.json",
+      "filePath": ".understand-anything/intermediate/scan-result.json",
+      "summary": "Projenin dilleri, frameworkleri, dosya envanteri, kategorileri ve çözümlenmiş içe aktarma haritasını içeren ara tarama sonucudur.",
+      "tags": [
+        "yapılandırma",
+        "proje-envanteri",
+        "bilgi-grafiği",
+        "ara-çıktı"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:nginx/default.conf",
+      "type": "file",
+      "name": "default.conf",
+      "filePath": "nginx/default.conf",
+      "summary": "WordPress trafiğini ters vekil üzerinden yönlendirir; güvenlik başlıkları, statik önbellek, SVG izolasyonu, yükleme koruması ve form hız sınırlamasını uygular.",
+      "tags": [
+        "ters-vekil",
+        "güvenlik",
+        "önbellek",
+        "wordpress",
+        "nginx"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:wordpress/migration/content-map.md",
+      "type": "document",
+      "name": "content-map.md",
+      "filePath": "wordpress/migration/content-map.md",
+      "summary": "Eski site içerik türlerini WordPress sayfaları, yerel yazılar, özel yazı tipleri ve site ayarlarıyla eşleştirir; SEO geçiş kontrol listesini de kaydeder.",
+      "tags": [
+        "dokümantasyon",
+        "içerik-geçişi",
+        "wordpress",
+        "seo"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:wordpress/migration/review-report.md",
+      "type": "document",
+      "name": "review-report.md",
+      "filePath": "wordpress/migration/review-report.md",
+      "summary": "Myliba WordPress geçişini UI, UX, SEO, responsive tasarım, içerik modeli ve üretime hazırlık açısından değerlendirip uygulanabilir yol haritası sunar.",
+      "tags": [
+        "dokümantasyon",
+        "üretim-yol-haritası",
+        "wordpress",
+        "seo",
+        "ux"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/index.php",
+      "type": "file",
+      "name": "index.php",
+      "filePath": "wordpress/wp-content/index.php",
+      "summary": "WordPress içerik dizinine doğrudan erişildiğinde çıktı üretmeyen koruyucu giriş dosyasıdır.",
+      "tags": [
+        "erişim-koruması",
+        "wordpress",
+        "giriş-dosyası"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/mu-plugins/automation-by-installatron.php",
+      "type": "file",
+      "name": "automation-by-installatron.php",
+      "filePath": "wordpress/wp-content/mu-plugins/automation-by-installatron.php",
+      "summary": "Installatron otomasyonunun WordPress Site Health testlerine eklediği kontrolü filtreleyerek yönetilen kurulum uyumluluğunu sağlar.",
+      "tags": [
+        "mu-plugin",
+        "installatron",
+        "site-health",
+        "wordpress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:wordpress/wp-content/mu-plugins/automation-by-installatron.php:installatron_filter_site_status_tests",
+      "type": "function",
+      "name": "installatron_filter_site_status_tests",
+      "filePath": "wordpress/wp-content/mu-plugins/automation-by-installatron.php",
+      "lineRange": [
+        20,
+        23
+      ],
+      "summary": "Installatron tarafından eklenen istenmeyen Site Health testini test listesinden çıkarır.",
+      "tags": [
+        "wordpress-işlevi",
+        "iş-mantığı",
+        "wordpress-hook"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:wordpress/wp-content/mu-plugins/automation-by-installatron.php",
+      "target": "function:wordpress/wp-content/mu-plugins/automation-by-installatron.php:installatron_filter_site_status_tests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:wordpress/wp-content/mu-plugins/automation-by-installatron.php",
+      "target": "function:wordpress/wp-content/mu-plugins/automation-by-installatron.php:installatron_filter_site_status_tests",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "config:.understand-anything/intermediate/scan-result.json",
+      "target": "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-prepare.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:wordpress/migration/content-map.md",
+      "target": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:wordpress/migration/content-map.md",
+      "target": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:wordpress/migration/review-report.md",
+      "target": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:wordpress/migration/review-report.md",
+      "target": "file:wordpress/wp-content/plugins/myliba-core/includes/page-content.php",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

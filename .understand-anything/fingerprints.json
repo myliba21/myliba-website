@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "7b134a626048e098767d06a15e0cb2103554dd20",
-  "generatedAt": "2026-08-14T21:51:40.832Z",
+  "gitCommitHash": "36a25f9dc32101fe71d0712e3d0f21d3ad35197c",
+  "generatedAt": "2026-08-17T20:45:27.542Z",
   "files": {
     ".DS_Store": {
       "filePath": ".DS_Store",
@@ -418,12 +418,12 @@
     },
     ".understand-anything/fingerprints.json": {
       "filePath": ".understand-anything/fingerprints.json",
-      "contentHash": "45aa11606c28dca1e6c31641724432b70df74ece1c5c97448a21f777cc0b19fb",
+      "contentHash": "2c97e57f7a31b0d4c7abadec421a4dcf8ea045569cbd2f3ec4868d5196664ff3",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 2801,
+      "totalLines": 4153,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/intermediate/scan-result.json": {
@@ -438,17 +438,17 @@
     },
     ".understand-anything/knowledge-graph.json": {
       "filePath": ".understand-anything/knowledge-graph.json",
-      "contentHash": "de7ee3188853d6760461d6a62804697affe4081f117d9cb100ea1b46afc25dea",
+      "contentHash": "9181e9b78703ddf41d8fb285abaa96730afca745be6a3371b99c2e48d90a4859",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 10852,
+      "totalLines": 11236,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/meta.json": {
       "filePath": ".understand-anything/meta.json",
-      "contentHash": "671b7613577dcebdeb5db4217c76bb7144e76a827fa7b798c1fd67aa75f298d2",
+      "contentHash": "2ad48ba7f5e852ad1fd114671d5ab6521e90fb00832bfe671b1a91de9117e694",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -458,12 +458,12 @@
     },
     "nginx/default.conf": {
       "filePath": "nginx/default.conf",
-      "contentHash": "281e57cd629d8ac80307b13b3a08ac96501f1034ede37e2b48769ac17d2a6db3",
+      "contentHash": "9003956483f442ca2b1ede8d5b17e08bc79a6cf75062c34e78af06f701caa879",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 139,
+      "totalLines": 179,
       "hasStructuralAnalysis": false
     },
     "wordpress/.env.example": {
@@ -478,12 +478,12 @@
     },
     "wordpress/docker-compose.yml": {
       "filePath": "wordpress/docker-compose.yml",
-      "contentHash": "47317bc494c77805f3fbb62dfa74d1eda9fe2c90bb897b83a3d33673f71f085d",
+      "contentHash": "c7389fc3629608bad7fe2bb21c5e69f6bdf8346d9ee81c682e17f8f7f468d340",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 105,
+      "totalLines": 104,
       "hasStructuralAnalysis": true
     },
     "wordpress/Makefile": {
@@ -518,12 +518,12 @@
     },
     "wordpress/README.md": {
       "filePath": "wordpress/README.md",
-      "contentHash": "0a960b56421f4e44b9b9429fa5736bf1ed99aa86446ec0e7ec1a1fcee8de8f3b",
+      "contentHash": "ee066b5904a2f16e992c191dfbdcbf6acc71367557f29703ad4b57f153992ad4",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 105,
+      "totalLines": 108,
       "hasStructuralAnalysis": true
     },
     "wordpress/uploads.ini": {
@@ -589,7 +589,7 @@
     },
     "wordpress/wp-content/plugins/myliba-core/includes/admin.php": {
       "filePath": "wordpress/wp-content/plugins/myliba-core/includes/admin.php",
-      "contentHash": "4fc5dc06c6ae63d589c25d21cd3a4cb404bf12766284b62a2cb445b28bef4276",
+      "contentHash": "b3a3e917583658ed1f90a00987bf4f4fef4405045f197c18d1c9f3082e2bceed",
       "functions": [
         {
           "name": "boot",
@@ -643,7 +643,7 @@
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 100
+          "lineCount": 122
         },
         {
           "name": "admin_notices",
@@ -680,7 +680,7 @@
         "admin_notices",
         "dashboard_counts"
       ],
-      "totalLines": 249,
+      "totalLines": 271,
       "hasStructuralAnalysis": true
     },
     "wordpress/wp-content/plugins/myliba-core/includes/content.php": {
@@ -854,7 +854,7 @@
     },
     "wordpress/wp-content/plugins/myliba-core/includes/forms.php": {
       "filePath": "wordpress/wp-content/plugins/myliba-core/includes/forms.php",
-      "contentHash": "e0f0cf0530204194db0f334967c0b8eb45b831387677a6463daa8ab8a7a0ad41",
+      "contentHash": "a8d8bf9f1ac0f0f044b9de558680dd1ab9d39dea5a88d36fca2fe80f03db64bb",
       "functions": [
         {
           "name": "boot",
@@ -901,21 +901,30 @@
           ],
           "returnType": "string",
           "exported": true,
-          "lineCount": 131
+          "lineCount": 130
         },
         {
           "name": "handle",
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 73
+          "lineCount": 113
+        },
+        {
+          "name": "academy_program_exists",
+          "params": [
+            "$program"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 18
         },
         {
           "name": "rate_limited",
           "params": [],
           "returnType": "bool",
           "exported": true,
-          "lineCount": 25
+          "lineCount": 22
         },
         {
           "name": "send_notification",
@@ -944,15 +953,16 @@
         "site_text",
         "render_form",
         "handle",
+        "academy_program_exists",
         "rate_limited",
         "send_notification"
       ],
-      "totalLines": 300,
+      "totalLines": 355,
       "hasStructuralAnalysis": true
     },
     "wordpress/wp-content/plugins/myliba-core/includes/images.php": {
       "filePath": "wordpress/wp-content/plugins/myliba-core/includes/images.php",
-      "contentHash": "b468d9bae35c3afc12d4ac002702243c2be9b2a59622c022d55101f28f8c450c",
+      "contentHash": "e3579602715795e4c7cfb27accf9bb557467ecd38b508df36bf24b11721209db",
       "functions": [
         {
           "name": "boot",
@@ -968,7 +978,7 @@
           ],
           "returnType": "array",
           "exported": true,
-          "lineCount": 4
+          "lineCount": 14
         },
         {
           "name": "validate_upload",
@@ -977,7 +987,7 @@
           ],
           "returnType": "array",
           "exported": true,
-          "lineCount": 32
+          "lineCount": 42
         },
         {
           "name": "check_filetype_and_ext",
@@ -997,7 +1007,7 @@
             "$tmp_path"
           ],
           "exported": true,
-          "lineCount": 92
+          "lineCount": 117
         },
         {
           "name": "admin_upload_notice",
@@ -1017,7 +1027,7 @@
         "sanitize_svg_file",
         "admin_upload_notice"
       ],
-      "totalLines": 214,
+      "totalLines": 259,
       "hasStructuralAnalysis": true
     },
     "wordpress/wp-content/plugins/myliba-core/includes/meta.php": {
@@ -1533,7 +1543,7 @@
     },
     "wordpress/wp-content/plugins/myliba-core/includes/options.php": {
       "filePath": "wordpress/wp-content/plugins/myliba-core/includes/options.php",
-      "contentHash": "b11e1a77f5d5bda5d4c124da70ad45f03de50a9fbdc3b9b82e9ed6701c50312d",
+      "contentHash": "beb6e6dca8f8786c229499744b53793bab0869c0dcee036b24dd1bdee02bfbb0",
       "functions": [
         {
           "name": "localized_schema",
@@ -1557,7 +1567,7 @@
           "params": [],
           "returnType": "array",
           "exported": true,
-          "lineCount": 35
+          "lineCount": 38
         },
         {
           "name": "localized_keys",
@@ -1625,7 +1635,7 @@
           ],
           "returnType": "array",
           "exported": true,
-          "lineCount": 40
+          "lineCount": 43
         },
         {
           "name": "sanitize_localized_value",
@@ -1666,7 +1676,7 @@
         "sanitize_localized_value",
         "save_localized_values"
       ],
-      "totalLines": 507,
+      "totalLines": 513,
       "hasStructuralAnalysis": true
     },
     "wordpress/wp-content/plugins/myliba-core/includes/page-content.php": {
@@ -2018,7 +2028,7 @@
     },
     "wordpress/wp-content/plugins/myliba-core/includes/post-types.php": {
       "filePath": "wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
-      "contentHash": "11152257674814e173e612c840f233d88ea0f68d5c7df40d19ffa7d3f90772a1",
+      "contentHash": "da739fdb6de933649e7988fcf9e30bdc4b33a0009b197718f71d0d7dd9992cfc",
       "functions": [
         {
           "name": "boot",
@@ -2088,7 +2098,7 @@
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 187
+          "lineCount": 205
         },
         {
           "name": "polylang_post_types",
@@ -2126,12 +2136,12 @@
         "polylang_post_types",
         "polylang_taxonomies"
       ],
-      "totalLines": 417,
+      "totalLines": 435,
       "hasStructuralAnalysis": true
     },
     "wordpress/wp-content/plugins/myliba-core/includes/seo.php": {
       "filePath": "wordpress/wp-content/plugins/myliba-core/includes/seo.php",
-      "contentHash": "b9fcf0df290dd54cea14958a62b64c18210d587cee897e5201237fd49bddc3cd",
+      "contentHash": "0baf509e35b6b23eac4601378cf45274c5a8ae45314440195629f9f8842f6ce3",
       "functions": [
         {
           "name": "boot",
@@ -2252,7 +2262,7 @@
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 57
+          "lineCount": 60
         },
         {
           "name": "breadcrumb_schema",
@@ -2338,12 +2348,12 @@
         "academy_course_schemas",
         "current_url"
       ],
-      "totalLines": 514,
+      "totalLines": 517,
       "hasStructuralAnalysis": true
     },
     "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php": {
       "filePath": "wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
-      "contentHash": "2748c8cd652aa479feff0b553b381fef57434264353932d0a9d47a1f2540e8fc",
+      "contentHash": "644901eedf2abdb65d56c17951651bba862aa8dc0c7dd2676fa04f2e704c5b18",
       "functions": [
         {
           "name": "seed",
@@ -2851,7 +2861,7 @@
           ],
           "returnType": "string",
           "exported": false,
-          "lineCount": 124
+          "lineCount": 147
         }
       ],
       "classes": [
@@ -2913,7 +2923,7 @@
           ],
           "properties": [],
           "exported": true,
-          "lineCount": 2016
+          "lineCount": 2039
         }
       ],
       "imports": [
@@ -2927,7 +2937,7 @@
       "exports": [
         "Commands"
       ],
-      "totalLines": 2027,
+      "totalLines": 2050,
       "hasStructuralAnalysis": true
     },
     "wordpress/wp-content/plugins/myliba-core/myliba-core.php": {
@@ -3048,12 +3058,12 @@
     },
     "wordpress/wp-content/themes/myliba/assets/css/main.css": {
       "filePath": "wordpress/wp-content/themes/myliba/assets/css/main.css",
-      "contentHash": "4e369902324aecdacdc62437398074c1654c28d8457e6782b4d180c9775281b3",
+      "contentHash": "7004bf3177ab69b10dfe62c852720e997e0f1ac924ad7a15865b943a47c6b52a",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 17284,
+      "totalLines": 17405,
       "hasStructuralAnalysis": false
     },
     "wordpress/wp-content/themes/myliba/assets/js/main.js": {
@@ -3068,12 +3078,12 @@
     },
     "wordpress/wp-content/themes/myliba/footer.php": {
       "filePath": "wordpress/wp-content/themes/myliba/footer.php",
-      "contentHash": "29cc65f764fc68aba317a5e158eb0eba9fb6cf1df0a58cdcb2dc58f82b447f4d",
+      "contentHash": "452c0db3bc2cbe0d99fff1f94068f7df14dc2015eb6146af6af64cdd6c5787cc",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 335,
+      "totalLines": 320,
       "hasStructuralAnalysis": true
     },
     "wordpress/wp-content/themes/myliba/front-page.php": {
@@ -3088,7 +3098,7 @@
     },
     "wordpress/wp-content/themes/myliba/functions.php": {
       "filePath": "wordpress/wp-content/themes/myliba/functions.php",
-      "contentHash": "7588dee73d28b53132fc5aa8cc5a80d2268a6d5f75685e955e8fda0afd7d095e",
+      "contentHash": "beaf1a4ad3b895f65768bd7b6ab83134c5de2a19f89a6c7c88573e856d0415d3",
       "functions": [
         {
           "name": "myliba_theme_setup",
@@ -3750,6 +3760,38 @@
           "returnType": "array",
           "exported": true,
           "lineCount": 32
+        },
+        {
+          "name": "myliba_social_platforms",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 35
+        },
+        {
+          "name": "myliba_social_links",
+          "params": [],
+          "returnType": "array",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "myliba_render_social_icons",
+          "params": [
+            "$wrapper_class"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "myliba_inject_contact_social_links",
+          "params": [
+            "$content"
+          ],
+          "returnType": "string",
+          "exported": true,
+          "lineCount": 29
         }
       ],
       "classes": [],
@@ -3832,9 +3874,13 @@
         "myliba_home_section_definitions",
         "myliba_home_default_sections",
         "myliba_home_sections",
-        "myliba_parse_bullet_items"
+        "myliba_parse_bullet_items",
+        "myliba_social_platforms",
+        "myliba_social_links",
+        "myliba_render_social_icons",
+        "myliba_inject_contact_social_links"
       ],
-      "totalLines": 2551,
+      "totalLines": 2676,
       "hasStructuralAnalysis": true
     },
     "wordpress/wp-content/themes/myliba/header.php": {
@@ -3849,7 +3895,7 @@
     },
     "wordpress/wp-content/themes/myliba/inc/customizer.php": {
       "filePath": "wordpress/wp-content/themes/myliba/inc/customizer.php",
-      "contentHash": "b588b07bef0c87eec7db0fde9105bf95194fd8440f52988b2e29afa19a6589c2",
+      "contentHash": "97b60c6b9a5205151ee52ebb5bfef50deac4bb99f5b54c9a86c5359609386fbe",
       "functions": [
         {
           "name": "myliba_customize_register",
@@ -3858,7 +3904,7 @@
           ],
           "returnType": "void",
           "exported": true,
-          "lineCount": 475
+          "lineCount": 488
         }
       ],
       "classes": [],
@@ -3866,7 +3912,7 @@
       "exports": [
         "myliba_customize_register"
       ],
-      "totalLines": 486,
+      "totalLines": 499,
       "hasStructuralAnalysis": true
     },
     "wordpress/wp-content/themes/myliba/index.php": {

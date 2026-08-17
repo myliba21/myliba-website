@@ -1,0 +1,15 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 0,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "561 giriş düğümünden yinelenen 147 kayıt kaldırılmıştır (%26,2); bu oran %30 uyarı eşiğinin altındadır. Yinelenmelerin tamamı ikili olup ağırlıklı olarak 106 fonksiyon ve 35 dosya düğümünde görülmüştür; toplu analiz kapsamlarının örtüşmesiyle tutarlıdır.",
+    "797 giriş kenarından 209 yinelenen kayıt kaldırılmış ve 588 benzersiz kenar korunmuştur. Birleştirilmiş grafikte yinelenen düğüm kimliği, yinelenen kenar veya boşa düşen kenar bulunmamıştır.",
+    "Toplu dosyalarda kimliği eksik düğüm yoktur. Birleştirilmiş grafikte bilinmeyen düğüm türü, geçersiz karmaşıklık değeri veya tür ile uyuşmayan kimlik öneki saptanmamıştır.",
+    "Tarama sonucundaki importMap 108 kaynak dosya içeriyor ancak tüm bağımlılık listeleri boş; bu nedenle doğrulanabilecek ya da eklenebilecek çapraz-toplu import kenarı yoktur. Bu durum çapraz dosya bağımlılık kapsamını sınırlayan bir veri kalitesi notudur.",
+    "Import recovery sayısı 0 ve boşa düşen kenar raporu yoktur; assembled-graph.json üzerinde ek semantik düzeltme gerekmemiştir."
+  ]
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "order": 1,
+    "title": "Projenin Büyük Resmi",
+    "description": "Tura README ile başlayarak Myliba'nın WordPress tabanlı yapısını, TR/EN URL düzenini ve yerel geliştirme akışını kavrayın. Belge ayrıca yönetilebilir site metinleri, içerik aktarımı ve üretime çıkış kontrolleri için sonraki duraklara bir yol haritası sunar.",
+    "nodeIds": [
+      "document:wordpress/README.md"
+    ]
+  },
+  {
+    "order": 2,
+    "title": "Yerel Çalışma Ortamı",
+    "description": "README'deki kurulum tarifini somutlaştıran bu dosyalar MariaDB, Mailpit, WordPress ve WP-CLI servislerini birlikte ayağa kaldırır. Ortam değişkenleri güvenli başlangıç değerlerini, PHP ayarları medya sınırlarını, Makefile ise sık kullanılan kurulum ve test işlerini tek komutlu hedefler halinde tanımlar.",
+    "nodeIds": [
+      "service:wordpress/docker-compose.yml",
+      "config:wordpress/.env.example",
+      "config:wordpress/uploads.ini",
+      "service:wordpress/Makefile"
+    ],
+    "languageLesson": "Docker Compose'ta sağlık kontrolleri servislerin yalnızca süreç olarak değil, gerçekten hazır olduklarında kullanılmasını sağlar; kalıcı volume'lar ise konteynerler yenilense bile veritabanı ve yüklemeleri korur."
+  },
+  {
+    "order": 3,
+    "title": "Çekirdek Eklenti Başlangıcı",
+    "description": "Yerel ortam hazır olduğunda Myliba Core ana dosyası uygulamanın içerik ve yönetim katmanını başlatır. Özel yazı türleri, meta alanları, yönetim ekranları ve WP-CLI bileşenlerini yükleyen bu dosya, eklentinin etkinleştirme yaşam döngüsünü de merkezi olarak yönetir.",
+    "nodeIds": [
+      "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php"
+    ],
+    "languageLesson": "WordPress eklentileri davranışı doğrudan çalıştırmak yerine action ve filter kancalarına bağlar; böylece çekirdek, tema ve eklenti yaşam döngüleri gevşek bağlı kalır."
+  },
+  {
+    "order": 4,
+    "title": "İçerik Alan Modeli",
+    "description": "Eklenti başlangıcının ardından özel yazı türleri sitenin ürün, çözüm, akademi ve kaynak gibi temel içerik varlıklarını tanımlar. Meta kutuları bu varlıkların yapılandırılmış alanlarını ve ana sayfa oluşturucusunu sunarken çok dilli kalıcı bağlantı kuralları içerik modelini ziyaretçi URL'leriyle birleştirir.",
+    "nodeIds": [
+      "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php"
+    ],
+    "languageLesson": "WordPress meta alanlarında giriş doğrulama, sanitize işlemi ve yetki/nonce kontrolü birlikte uygulanmalıdır; yalnızca arayüzde alanı gizlemek güvenlik sınırı oluşturmaz."
+  },
+  {
+    "order": 5,
+    "title": "Yönetilebilir Metin Sistemi",
+    "description": "Alan modelinin üstünde yönetim menüleri, site ayarları ve sayfa şemaları editörlerin kod değiştirmeden içerik yönetmesini sağlar. Merkezi TR/EN metin kataloğu varsayılanları korur, paneldeki override değerlerini çözümler ve eski ayarları yeni modele taşır; bu katman statik metin denetiminin ana merkezidir.",
+    "nodeIds": [
+      "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/content.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/page-content.php"
+    ]
+  },
+  {
+    "order": 6,
+    "title": "İçerik Taşıma Akışı",
+    "description": "Yönetilebilir şema kurulduktan sonra WP-CLI komutları örnek içerik üretir, mevcut siteden veriyi taşır ve Türkçe öncelikli yayın düzenini uygular. İçerik eşleme belgesi eski varlıkların yeni sayfa, yazı tipi ve ayar hedeflerini açıklayarak otomasyonun neden bu dönüşümleri yaptığını görünür kılar.",
+    "nodeIds": [
+      "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "document:wordpress/migration/content-map.md"
+    ],
+    "languageLesson": "WP-CLI komutları tarayıcı isteğinden bağımsız, tekrarlanabilir yönetim işleri sağlar; veri taşıma komutlarında güvenli yeniden çalıştırma ve açık kuru çalışma seçenekleri operasyon riskini azaltır."
+  },
+  {
+    "order": 7,
+    "title": "Form ve E-posta Akışı",
+    "description": "Taşınan ve panelden yönetilen sayfalar ziyaretçi etkileşimini iletişim, demo ve akademi formlarıyla toplar. Form katmanı doğrulama, hız sınırlama, kayıt ve bildirim akışını yürütürken zorunlu SMTP eklentisi yerel Mailpit ile üretim Gmail OAuth yapılandırmasını ortam değişkenlerinden çözümler.",
+    "nodeIds": [
+      "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "file:wordpress/wp-content/mu-plugins/myliba-smtp.php"
+    ]
+  },
+  {
+    "order": 8,
+    "title": "SEO ve Medya Güvenliği",
+    "description": "İçerik yayınlanmadan önce SEO katmanı meta, hreflang, breadcrumb ve yapılandırılmış veri çıktısını üretir; staging ortamında indekslenmeyi de engeller. Görsel katmanı MIME ve dosya imzalarını doğrulayıp SVG içeriğini temizleyerek yönetim panelinden gelen medyanın güvenli kalmasını sağlar.",
+    "nodeIds": [
+      "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/images.php"
+    ]
+  },
+  {
+    "order": 9,
+    "title": "Tema Yardımcı Katmanı",
+    "description": "Çekirdek eklentinin ürettiği içerik, temanın merkezi functions.php katmanında yerelleştirme, rota, menü, sorgu ve ana sayfa verisine dönüştürülür. Customizer üstbilgi ve altbilgi gibi genel değerleri panele açarken CSS ve JavaScript sırasıyla görsel sistemi ve erişilebilir etkileşimleri uygular.",
+    "nodeIds": [
+      "file:wordpress/wp-content/themes/myliba/functions.php",
+      "file:wordpress/wp-content/themes/myliba/inc/customizer.php",
+      "file:wordpress/wp-content/themes/myliba/assets/css/main.css",
+      "file:wordpress/wp-content/themes/myliba/assets/js/main.js"
+    ]
+  },
+  {
+    "order": 10,
+    "title": "Ana Sunum İskeleti",
+    "description": "Tema yardımcılarının hazırladığı veriler header, ana sayfa ve footer şablonlarında ziyaretçiye sunulur. Ortak hero bileşeni başlık ve CTA değerlerini tutarlı biçimde işler; ana sayfa ise panelden sıralanabilen bölümleri bir araya getirerek yönetilebilir metin sisteminin uçtan uca sonucunu gösterir.",
+    "nodeIds": [
+      "file:wordpress/wp-content/themes/myliba/header.php",
+      "file:wordpress/wp-content/themes/myliba/front-page.php",
+      "file:wordpress/wp-content/themes/myliba/footer.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/hero.php"
+    ]
+  },
+  {
+    "order": 11,
+    "title": "Sayfa ve İçerik Şablonları",
+    "description": "Genel sayfa yönlendiricisi slug'a göre özel bileşen seçerken arşiv ve tekil şablonlar içerik modelini farklı ziyaretçi deneyimlerine dönüştürür. Yazılım sayfası gibi kapsamlı bileşenler ile ortak dönüşüm detayı, yönetim metalarını tekrar kullanılabilir hero, fayda, modül, SSS ve CTA bloklarına bağlar.",
+    "nodeIds": [
+      "file:wordpress/wp-content/themes/myliba/page.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php"
+    ]
+  },
+  {
+    "order": 12,
+    "title": "Üretime Hazırlık Kontrolü",
+    "description": "Turun sonunda geçiş inceleme raporu UI, UX, SEO, responsive tasarım ve içerik modelini birlikte değerlendirir. Önceki adımlarda görülen yönetim ve sunum katmanlarının üretime çıkmadan önce hangi açıklar ve iyileştirmeler açısından doğrulanacağını uygulanabilir bir yol haritasıyla bağlar.",
+    "nodeIds": [
+      "document:wordpress/migration/review-report.md"
+    ]
+  }
+]

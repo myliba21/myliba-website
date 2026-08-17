@@ -1,0 +1,111 @@
+{
+  "nodes": [
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/page.php",
+      "type": "file",
+      "name": "page.php",
+      "filePath": "wordpress/wp-content/themes/myliba/page.php",
+      "summary": "Sayfa slug’ına göre özel tema bileşenlerine yönlendiren, kalan içerikler için hero ve düzenleyici içeriği gösteren genel sayfa yönlendiricisidir.",
+      "tags": [
+        "sayfa-yönlendirme",
+        "şablon",
+        "wordpress",
+        "içerik-render"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "type": "file",
+      "name": "single-myliba_academy.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "summary": "Tekil akademi kaydını ortak hero ve dönüşüm odaklı detay bileşeniyle sunan şablondur.",
+      "tags": [
+        "tekil-şablon",
+        "wordpress",
+        "içerik-detayı",
+        "dönüşüm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_ebook.php",
+      "type": "file",
+      "name": "single-myliba_ebook.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_ebook.php",
+      "summary": "E-kitap içeriğini kapak, özet, kazanımlar, editör içeriği ve indirme çağrılarıyla sunan ayrıntılı kaynak şablonudur.",
+      "tags": [
+        "tekil-şablon",
+        "wordpress",
+        "içerik-detayı",
+        "dönüşüm"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "type": "file",
+      "name": "single-myliba_event.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "summary": "Etkinlik içeriğini tarih, konum ve kayıt bağlantısından oluşan yan panelle birlikte gösteren tekil kayıt şablonudur.",
+      "tags": [
+        "tekil-şablon",
+        "wordpress",
+        "içerik-detayı",
+        "dönüşüm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php",
+      "type": "file",
+      "name": "single-myliba_landing.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_landing.php",
+      "summary": "Tekil kampanya sayfasını ortak hero ve dönüşüm detayı bileşenleriyle oluşturan şablondur.",
+      "tags": [
+        "tekil-şablon",
+        "wordpress",
+        "içerik-detayı",
+        "dönüşüm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_product.php",
+      "type": "file",
+      "name": "single-myliba_product.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_product.php",
+      "summary": "Tekil ürün kaydını ortak hero ve dönüşüm detayı bileşenleriyle oluşturan şablondur.",
+      "tags": [
+        "tekil-şablon",
+        "wordpress",
+        "içerik-detayı",
+        "dönüşüm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_report.php",
+      "type": "file",
+      "name": "single-myliba_report.php",
+      "filePath": "wordpress/wp-content/themes/myliba/single-myliba_report.php",
+      "summary": "Araştırma raporunu metrikler, öne çıkan sonuçlar, editör içeriği ve indirme çağrılarıyla sunan ayrıntılı kaynak şablonudur.",
+      "tags": [
+        "tekil-şablon",
+        "wordpress",
+        "içerik-detayı",
+        "dönüşüm"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:wordpress/wp-content/themes/myliba/single-myliba_ebook.php",
+      "target": "file:wordpress/wp-content/themes/myliba/single-myliba_report.php",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

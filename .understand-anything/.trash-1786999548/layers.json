@@ -1,0 +1,166 @@
+[
+  {
+    "id": "layer:analysis-knowledge-graph",
+    "name": "Analiz ve Bilgi Grafiği",
+    "description": "Understand Anything tarama, denetim, parmak izi, bilgi grafiği ve geçici analiz artefaktlarını bir arada tutar.",
+    "nodeIds": [
+      "config:.understand-anything/.trash-20260802-audit/assemble-review.json",
+      "config:.understand-anything/.trash-20260802-audit/assembled-graph.json",
+      "config:.understand-anything/.trash-20260802-audit/batch-1.json",
+      "config:.understand-anything/.trash-20260802-audit/batch-2-part-1.json",
+      "config:.understand-anything/.trash-20260802-audit/batch-2-part-2.json",
+      "config:.understand-anything/.trash-20260802-audit/batch-2-part-3.json",
+      "config:.understand-anything/.trash-20260802-audit/batch-3-part-1.json",
+      "config:.understand-anything/.trash-20260802-audit/batch-3-part-2.json",
+      "config:.understand-anything/.trash-20260802-audit/batch-4.json",
+      "config:.understand-anything/.trash-20260802-audit/batches.json",
+      "config:.understand-anything/.trash-20260802-audit/fingerprint-input.json",
+      "config:.understand-anything/.trash-20260802-audit/layers.json",
+      "config:.understand-anything/.trash-20260802-audit/review.json",
+      "config:.understand-anything/.trash-20260802-audit/tour.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-arch-input.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-arch-results.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-1.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-2.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-3.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-4.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-1.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-2.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-3.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-4.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-import-map-input.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-import-map-output.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-scan-files.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-tour-input.json",
+      "config:.understand-anything/.trash-20260802-audit/tmp/ua-tour-results.json",
+      "config:.understand-anything/config.json",
+      "config:.understand-anything/fingerprints.json",
+      "config:.understand-anything/knowledge-graph.json",
+      "config:.understand-anything/meta.json",
+      "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
+      "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-layers.js",
+      "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-prepare.js",
+      "file:.understand-anything/.trash-20260802-audit/tmp/ua-inline-validate.cjs",
+      "file:.understand-anything/.trash-20260802-audit/tmp/ua-tour-analyze.js",
+      "file:.understand-anything/.trash-20260802-audit/tmp/ua-tour-prepare.js",
+      "file:.understand-anything/.understandignore",
+      "config:.understand-anything/intermediate/scan-result.json"
+    ]
+  },
+  {
+    "id": "layer:infrastructure-config",
+    "name": "Altyapı ve Yapılandırma",
+    "description": "Docker Compose geliştirme yığını, WP-CLI otomasyonu, PHP yükleme ayarları, ortam örneği ve Nginx ters vekil kurallarını kapsar.",
+    "nodeIds": [
+      "config:wordpress/.env.example",
+      "service:wordpress/Makefile",
+      "service:wordpress/docker-compose.yml",
+      "config:wordpress/uploads.ini",
+      "file:.DS_Store",
+      "file:nginx/default.conf"
+    ]
+  },
+  {
+    "id": "layer:documentation",
+    "name": "Proje Dokümantasyonu",
+    "description": "WordPress kurulumu, içerik taşıma eşlemesi ve geçiş inceleme yol haritasını açıklayan proje belgelerini içerir.",
+    "nodeIds": [
+      "document:wordpress/README.md",
+      "document:wordpress/migration/content-map.md",
+      "document:wordpress/migration/review-report.md"
+    ]
+  },
+  {
+    "id": "layer:wordpress-platform",
+    "name": "WordPress Platform Entegrasyonu",
+    "description": "Dizin koruma girişleri ile otomatik güncelleme ve SMTP davranışını belirleyen zorunlu WordPress eklentilerini barındırır.",
+    "nodeIds": [
+      "file:wordpress/wp-content/index.php",
+      "file:wordpress/wp-content/mu-plugins/automation-by-installatron.php",
+      "file:wordpress/wp-content/mu-plugins/myliba-smtp.php",
+      "file:wordpress/wp-content/plugins/index.php",
+      "file:wordpress/wp-content/themes/index.php"
+    ]
+  },
+  {
+    "id": "layer:admin-content-model",
+    "name": "Yönetim ve İçerik Modeli",
+    "description": "Yönetim menüleri, çok dilli ayarlar, meta kutuları, yapılandırılmış sayfa içerikleri ve içerik taşıma araçlarıyla editoryal modeli yönetir.",
+    "nodeIds": [
+      "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/content.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/page-content.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php"
+    ]
+  },
+  {
+    "id": "layer:core-services",
+    "name": "Çekirdek Uygulama Hizmetleri",
+    "description": "Myliba Core başlangıcını, özel yazı türlerini, formları, SEO üretimini ve güvenli görsel işleme davranışını sağlar.",
+    "nodeIds": [
+      "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php"
+    ]
+  },
+  {
+    "id": "layer:theme-foundation",
+    "name": "Tema Temeli ve Ön Yüz Varlıkları",
+    "description": "Tema kurulumu ve yardımcıları, Customizer ayarları, tema metadatası ile ortak CSS ve JavaScript davranışlarını tanımlar.",
+    "nodeIds": [
+      "file:wordpress/wp-content/themes/myliba/functions.php",
+      "file:wordpress/wp-content/themes/myliba/assets/css/main.css",
+      "file:wordpress/wp-content/themes/myliba/assets/js/main.js",
+      "file:wordpress/wp-content/themes/myliba/inc/customizer.php",
+      "file:wordpress/wp-content/themes/myliba/style.css"
+    ]
+  },
+  {
+    "id": "layer:presentation-templates",
+    "name": "Sunum ve Sayfa Şablonları",
+    "description": "Yönetilebilir içeriği ziyaretçiye gösteren ana sayfa, arşiv, tekil içerik, özel sayfa ve yeniden kullanılabilir tema şablonlarını içerir.",
+    "nodeIds": [
+      "file:wordpress/wp-content/themes/myliba/404.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php",
+      "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php",
+      "file:wordpress/wp-content/themes/myliba/footer.php",
+      "file:wordpress/wp-content/themes/myliba/front-page.php",
+      "file:wordpress/wp-content/themes/myliba/header.php",
+      "file:wordpress/wp-content/themes/myliba/index.php",
+      "file:wordpress/wp-content/themes/myliba/page.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_ebook.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_event.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_product.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_report.php",
+      "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php",
+      "file:wordpress/wp-content/themes/myliba/single.php",
+      "file:wordpress/wp-content/themes/myliba/template-blog.php",
+      "file:wordpress/wp-content/themes/myliba/template-contact.php",
+      "file:wordpress/wp-content/themes/myliba/template-demo.php",
+      "file:wordpress/wp-content/themes/myliba/template-events.php",
+      "file:wordpress/wp-content/themes/myliba/template-landing.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/expand.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/hero.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-ethics.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-faq.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php",
+      "file:wordpress/wp-content/themes/myliba/template-parts/page-story.php"
+    ]
+  }
+]

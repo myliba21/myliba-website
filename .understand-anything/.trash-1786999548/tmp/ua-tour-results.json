@@ -1,0 +1,1098 @@
+{
+  "scriptCompleted": true,
+  "entryPointCandidates": [
+    {
+      "id": "document:wordpress/README.md",
+      "score": 5,
+      "name": "README.md",
+      "summary": "Myliba WordPress sürümünün yerel kurulumunu, TR/EN URL yapısını, içerik aktarımını, yönetilebilir site metinlerini ve üretime çıkış kontrol listesini açıklar."
+    },
+    {
+      "id": "file:wordpress/wp-content/index.php",
+      "score": 4,
+      "name": "index.php",
+      "summary": "WordPress içerik dizinine doğrudan erişildiğinde çıktı üretmeyen koruyucu giriş dosyasıdır."
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/index.php",
+      "score": 4,
+      "name": "index.php",
+      "summary": "WordPress eklenti dizinine doğrudan erişildiğinde çıktı üretmeyen koruyucu giriş dosyasıdır."
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "score": 4,
+      "name": "myliba-core.php",
+      "summary": "Myliba Core eklentisini başlatır; içerik türleri, meta alanları, yönetim ekranları ve WP-CLI komutlarını yüklerken etkinleştirme yaşam döngüsünü yönetir."
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/index.php",
+      "score": 4,
+      "name": "index.php",
+      "summary": "WordPress tema dizinine doğrudan erişimi engelleyen boş güvenlik giriş dosyasıdır."
+    }
+  ],
+  "fanInRanking": [
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/functions.php",
+      "fanIn": 5,
+      "name": "functions.php"
+    },
+    {
+      "id": "service:wordpress/docker-compose.yml",
+      "fanIn": 4,
+      "name": "docker-compose.yml"
+    },
+    {
+      "id": "config:wordpress/.env.example",
+      "fanIn": 2,
+      "name": ".env.example"
+    },
+    {
+      "id": "config:wordpress/uploads.ini",
+      "fanIn": 1,
+      "name": "uploads.ini"
+    },
+    {
+      "id": "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-prepare.js",
+      "fanIn": 1,
+      "name": "ua-arch-prepare.js"
+    },
+    {
+      "id": "file:wordpress/wp-content/mu-plugins/myliba-smtp.php",
+      "fanIn": 1,
+      "name": "myliba-smtp.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "fanIn": 1,
+      "name": "meta.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/page-content.php",
+      "fanIn": 1,
+      "name": "page-content.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "fanIn": 1,
+      "name": "post-types.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "fanIn": 1,
+      "name": "seo.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php",
+      "fanIn": 1,
+      "name": "archive-myliba_report.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/assets/js/main.js",
+      "fanIn": 1,
+      "name": "main.js"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/single-myliba_report.php",
+      "fanIn": 1,
+      "name": "single-myliba_report.php"
+    },
+    {
+      "id": "service:wordpress/Makefile",
+      "fanIn": 1,
+      "name": "Makefile"
+    },
+    {
+      "id": "config:.understand-anything/.trash-20260802-audit/assemble-review.json",
+      "fanIn": 0,
+      "name": "assemble-review.json"
+    },
+    {
+      "id": "config:.understand-anything/.trash-20260802-audit/assembled-graph.json",
+      "fanIn": 0,
+      "name": "assembled-graph.json"
+    },
+    {
+      "id": "config:.understand-anything/.trash-20260802-audit/batch-1.json",
+      "fanIn": 0,
+      "name": "batch-1.json"
+    },
+    {
+      "id": "config:.understand-anything/.trash-20260802-audit/batch-2-part-1.json",
+      "fanIn": 0,
+      "name": "batch-2-part-1.json"
+    },
+    {
+      "id": "config:.understand-anything/.trash-20260802-audit/batch-2-part-2.json",
+      "fanIn": 0,
+      "name": "batch-2-part-2.json"
+    },
+    {
+      "id": "config:.understand-anything/.trash-20260802-audit/batch-2-part-3.json",
+      "fanIn": 0,
+      "name": "batch-2-part-3.json"
+    }
+  ],
+  "fanOutRanking": [
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/functions.php",
+      "fanOut": 164,
+      "name": "functions.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php",
+      "fanOut": 96,
+      "name": "meta.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/page-content.php",
+      "fanOut": 70,
+      "name": "page-content.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php",
+      "fanOut": 46,
+      "name": "seo.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php",
+      "fanOut": 45,
+      "name": "wp-cli.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/content.php",
+      "fanOut": 32,
+      "name": "content.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/options.php",
+      "fanOut": 28,
+      "name": "options.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php",
+      "fanOut": 22,
+      "name": "post-types.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php",
+      "fanOut": 21,
+      "name": "forms.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php",
+      "fanOut": 18,
+      "name": "admin.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/includes/images.php",
+      "fanOut": 12,
+      "name": "images.php"
+    },
+    {
+      "id": "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php",
+      "fanOut": 6,
+      "name": "myliba-core.php"
+    },
+    {
+      "id": "document:wordpress/README.md",
+      "fanOut": 3,
+      "name": "README.md"
+    },
+    {
+      "id": "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js",
+      "fanOut": 3,
+      "name": "ua-arch-analyze.js"
+    },
+    {
+      "id": "file:wordpress/wp-content/themes/myliba/inc/customizer.php",
+      "fanOut": 3,
+      "name": "customizer.php"
+    },
+    {
+      "id": "document:wordpress/migration/content-map.md",
+      "fanOut": 2,
+      "name": "content-map.md"
+    },
+    {
+      "id": "document:wordpress/migration/review-report.md",
+      "fanOut": 2,
+      "name": "review-report.md"
+    },
+    {
+      "id": "file:wordpress/wp-content/mu-plugins/automation-by-installatron.php",
+      "fanOut": 2,
+      "name": "automation-by-installatron.php"
+    },
+    {
+      "id": "service:wordpress/Makefile",
+      "fanOut": 2,
+      "name": "Makefile"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/scan-result.json",
+      "fanOut": 1,
+      "name": "scan-result.json"
+    }
+  ],
+  "bfsTraversal": {
+    "startNode": "file:wordpress/wp-content/index.php",
+    "order": [
+      "file:wordpress/wp-content/index.php"
+    ],
+    "depthMap": {
+      "file:wordpress/wp-content/index.php": 0
+    },
+    "byDepth": {
+      "0": [
+        "file:wordpress/wp-content/index.php"
+      ]
+    }
+  },
+  "nonCodeFiles": {
+    "documentation": [
+      {
+        "id": "document:wordpress/migration/content-map.md",
+        "name": "content-map.md",
+        "type": "document",
+        "summary": "Eski site içerik türlerini WordPress sayfaları, yerel yazılar, özel yazı tipleri ve site ayarlarıyla eşleştirir; SEO geçiş kontrol listesini de kaydeder."
+      },
+      {
+        "id": "document:wordpress/migration/review-report.md",
+        "name": "review-report.md",
+        "type": "document",
+        "summary": "Myliba WordPress geçişini UI, UX, SEO, responsive tasarım, içerik modeli ve üretime hazırlık açısından değerlendirip uygulanabilir yol haritası sunar."
+      },
+      {
+        "id": "document:wordpress/README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "Myliba WordPress sürümünün yerel kurulumunu, TR/EN URL yapısını, içerik aktarımını, yönetilebilir site metinlerini ve üretime çıkış kontrol listesini açıklar."
+      }
+    ],
+    "infrastructure": [
+      {
+        "id": "service:wordpress/Makefile",
+        "name": "Makefile",
+        "type": "service",
+        "summary": "Docker Compose tabanlı yerel WordPress ortamını başlatma, kurma, örnek içerikle doldurma, durdurma ve SMTP testi işlemlerini tek komutlu hedeflerle düzenler."
+      },
+      {
+        "id": "service:wordpress/docker-compose.yml",
+        "name": "docker-compose.yml",
+        "type": "service",
+        "summary": "MariaDB, Mailpit, Apache tabanlı WordPress ve WP-CLI servislerinden oluşan yerel geliştirme yığınını; kalıcı verileri, sağlık kontrollerini, SMTP ayarlarını ve wp-content bağlarını tanımlar."
+      }
+    ],
+    "data": [],
+    "config": [
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/assemble-review.json",
+        "name": "assemble-review.json",
+        "type": "config",
+        "summary": "Önceki bilgi grafiği birleştirmesinde düzeltilen bölümleri, kurtarılan düğüm ve kenar sayılarını ve yeniden eşlenen alanları kaydeden denetim sonucudur."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/assembled-graph.json",
+        "name": "assembled-graph.json",
+        "type": "config",
+        "summary": "Önceki analiz çalışmasının düğümlerini, kenarlarını, mimari katmanlarını ve rehber turunu içeren birleştirilmiş bilgi grafiği anlık görüntüsüdür."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/batch-1.json",
+        "name": "batch-1.json",
+        "type": "config",
+        "summary": "Önceki analizde birinci dosya grubundan üretilen düğüm ve kenar parçacığını saklayan arşivlenmiş grafik çıktısıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/batch-2-part-1.json",
+        "name": "batch-2-part-1.json",
+        "type": "config",
+        "summary": "Önceki ikinci analiz grubunun ilk bölümüne ait düğüm ve kenarları taşıyan arşivlenmiş grafik parçacığıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/batch-2-part-2.json",
+        "name": "batch-2-part-2.json",
+        "type": "config",
+        "summary": "Önceki ikinci analiz grubunun hacimli ikinci bölümündeki düğüm ve bağımlılık kenarlarını saklayan arşivlenmiş grafik parçacığıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/batch-2-part-3.json",
+        "name": "batch-2-part-3.json",
+        "type": "config",
+        "summary": "Önceki ikinci analiz grubunun son düğüm bölümünü taşıyan arşivlenmiş grafik parçacığıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/batch-3-part-1.json",
+        "name": "batch-3-part-1.json",
+        "type": "config",
+        "summary": "Önceki üçüncü analiz grubunun ilk bölümünden çıkarılmış düğüm ve kenarları içeren arşivlenmiş grafik parçacığıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/batch-3-part-2.json",
+        "name": "batch-3-part-2.json",
+        "type": "config",
+        "summary": "Önceki üçüncü analiz grubunun kalan düğümlerini taşıyan arşivlenmiş ikinci grafik parçacığıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/batch-4.json",
+        "name": "batch-4.json",
+        "type": "config",
+        "summary": "Önceki dördüncü analiz grubuna ait küçük düğüm kümesini ve boş ya da sınırlı kenar listesini saklayan arşivlenmiş çıktıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/batches.json",
+        "name": "batches.json",
+        "type": "config",
+        "summary": "Önceki taramada dosyaların analiz gruplarına dağılımını, dışa aktarılan sembolleri ve grup başına içe aktarma bağlamını tanımlar."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/fingerprint-input.json",
+        "name": "fingerprint-input.json",
+        "type": "config",
+        "summary": "Dosya parmak izi üretimine verilen proje kökünü, kaynak dosya yollarını ve Git commit kimliğini kaydeden giriş verisidir."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/layers.json",
+        "name": "layers.json",
+        "type": "config",
+        "summary": "Önceki bilgi grafiğinde belirlenen mimari katmanları ve bu katmanlara atanan bileşen kümelerini saklayan analiz çıktısıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/review.json",
+        "name": "review.json",
+        "type": "config",
+        "summary": "Önceki bilgi grafiği doğrulamasında bulunan sorunları, uyarıları ve toplu istatistikleri kaydeden inceleme raporudur."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tour.json",
+        "name": "tour.json",
+        "type": "config",
+        "summary": "Önceki proje analizinin önemli bileşenlerini ve önerilen gezinme sırasını sunan rehber tur verisidir."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-arch-input.json",
+        "name": "ua-arch-input.json",
+        "type": "config",
+        "summary": "Mimari çözümleyiciye verilen dosya düğümlerini, import kenarlarını ve tüm grafik ilişkilerini içeren geçici giriş anlık görüntüsüdür."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-arch-results.json",
+        "name": "ua-arch-results.json",
+        "type": "config",
+        "summary": "Dizin ve düğüm türü grupları, bağımlılık yoğunlukları, dağıtım topolojisi ve dosya fan-in/fan-out ölçümleri gibi mimari analiz sonuçlarını saklar."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-1.json",
+        "name": "ua-file-analyzer-input-1.json",
+        "type": "config",
+        "summary": "Birinci dosya çözümleme grubunun proje kökünü, dosya listesini ve önceden çözülmüş import verisini taşıyan geçici girdidir."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-2.json",
+        "name": "ua-file-analyzer-input-2.json",
+        "type": "config",
+        "summary": "İkinci dosya çözümleme grubuna ait dosya metaverisini ve proje içi import eşlemelerini taşıyan geçici girdidir."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-3.json",
+        "name": "ua-file-analyzer-input-3.json",
+        "type": "config",
+        "summary": "Üçüncü dosya çözümleme grubuna ait dosya metaverisini ve proje içi import eşlemelerini taşıyan geçici girdidir."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-4.json",
+        "name": "ua-file-analyzer-input-4.json",
+        "type": "config",
+        "summary": "Dördüncü dosya çözümleme grubunun proje kökü, dosyaları ve import bağlamını belirleyen küçük geçici girdidir."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-1.json",
+        "name": "ua-file-extract-results-1.json",
+        "type": "config",
+        "summary": "Birinci gruptaki dosyalardan çıkarılan yapısal sonuçları, tamamlanma durumunu ve atlanan dosyaları kaydeden geçici çıktıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-2.json",
+        "name": "ua-file-extract-results-2.json",
+        "type": "config",
+        "summary": "İkinci ve en hacimli dosya grubunun ayrıntılı yapısal çıkarım sonuçlarını taşıyan geçici analiz çıktısıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-3.json",
+        "name": "ua-file-extract-results-3.json",
+        "type": "config",
+        "summary": "Üçüncü dosya grubunun yapı, metrik ve sembol çıkarımlarını saklayan geçici analiz çıktısıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-4.json",
+        "name": "ua-file-extract-results-4.json",
+        "type": "config",
+        "summary": "Dördüncü dosya grubunun yapısal çıkarım durumunu ve sonuç listesini taşıyan küçük geçici çıktıdır."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-import-map-input.json",
+        "name": "ua-import-map-input.json",
+        "type": "config",
+        "summary": "Import çözümleyicisinin işleyeceği proje kökü ve taranmış dosya envanterini içeren geçici giriş verisidir."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-import-map-output.json",
+        "name": "ua-import-map-output.json",
+        "type": "config",
+        "summary": "Proje içi import çözümlemesinin durumunu, istatistiklerini ve dosyalar arası eşleme sonucunu kaydeder."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-scan-files.json",
+        "name": "ua-scan-files.json",
+        "type": "config",
+        "summary": "Taranmış dosya envanterini, ignore filtresi sonuçlarını, tahmini karmaşıklığı ve dil/kategori istatistiklerini saklar."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-tour-input.json",
+        "name": "ua-tour-input.json",
+        "type": "config",
+        "summary": "Proje turu üreticisine aktarılan düğümleri, kenarları ve mimari katmanları içeren kapsamlı geçici grafik girdisidir."
+      },
+      {
+        "id": "config:.understand-anything/.trash-20260802-audit/tmp/ua-tour-results.json",
+        "name": "ua-tour-results.json",
+        "type": "config",
+        "summary": "Giriş noktası adayları, fan-in/fan-out sıralamaları, dolaşım, kümeler ve düğüm özet indeksinden oluşan proje turu analizidir."
+      },
+      {
+        "id": "config:.understand-anything/config.json",
+        "name": "config.json",
+        "type": "config",
+        "summary": "Understand Anything analiz çıktılarının dil tercihini belirleyen minimal proje yapılandırmasıdır."
+      },
+      {
+        "id": "config:.understand-anything/fingerprints.json",
+        "name": "fingerprints.json",
+        "type": "config",
+        "summary": "Analiz kapsamındaki dosyaların parmak izlerini, üretim zamanını ve ilişkili Git commit kimliğini saklayarak değişiklik takibini destekler."
+      },
+      {
+        "id": "config:.understand-anything/knowledge-graph.json",
+        "name": "knowledge-graph.json",
+        "type": "config",
+        "summary": "Projenin dosya ve sembol düğümlerini, aralarındaki ilişkileri, mimari katmanları ve rehber turunu bir araya getiren kalıcı bilgi grafiğidir."
+      },
+      {
+        "id": "config:.understand-anything/meta.json",
+        "name": "meta.json",
+        "type": "config",
+        "summary": "Son analiz zamanını, Git commit kimliğini, şema sürümünü ve analiz edilen dosya sayısını kaydeden kısa metaveri dosyasıdır."
+      },
+      {
+        "id": "config:wordpress/.env.example",
+        "name": ".env.example",
+        "type": "config",
+        "summary": "Yerel WordPress kurulumu için port, veritabanı, yönetici hesabı, hero görselleri ve WP Mail SMTP değişkenlerinin güvenli başlangıç şablonunu tanımlar."
+      },
+      {
+        "id": "config:wordpress/uploads.ini",
+        "name": "uploads.ini",
+        "type": "config",
+        "summary": "WordPress konteynerlerindeki PHP yükleme boyutu, bellek ve istek yürütme sürelerini yüksek hacimli medya aktarımına uygun biçimde sınırlar."
+      },
+      {
+        "id": "config:.understand-anything/intermediate/scan-result.json",
+        "name": "scan-result.json",
+        "type": "config",
+        "summary": "Projenin dilleri, frameworkleri, dosya envanteri, kategorileri ve çözümlenmiş içe aktarma haritasını içeren ara tarama sonucudur."
+      }
+    ]
+  },
+  "clusters": [],
+  "layers": {
+    "count": 8,
+    "list": [
+      {
+        "id": "layer:analysis-knowledge-graph",
+        "name": "Analiz ve Bilgi Grafiği",
+        "description": "Understand Anything tarama, denetim, parmak izi, bilgi grafiği ve geçici analiz artefaktlarını bir arada tutar."
+      },
+      {
+        "id": "layer:infrastructure-config",
+        "name": "Altyapı ve Yapılandırma",
+        "description": "Docker Compose geliştirme yığını, WP-CLI otomasyonu, PHP yükleme ayarları, ortam örneği ve Nginx ters vekil kurallarını kapsar."
+      },
+      {
+        "id": "layer:documentation",
+        "name": "Proje Dokümantasyonu",
+        "description": "WordPress kurulumu, içerik taşıma eşlemesi ve geçiş inceleme yol haritasını açıklayan proje belgelerini içerir."
+      },
+      {
+        "id": "layer:wordpress-platform",
+        "name": "WordPress Platform Entegrasyonu",
+        "description": "Dizin koruma girişleri ile otomatik güncelleme ve SMTP davranışını belirleyen zorunlu WordPress eklentilerini barındırır."
+      },
+      {
+        "id": "layer:admin-content-model",
+        "name": "Yönetim ve İçerik Modeli",
+        "description": "Yönetim menüleri, çok dilli ayarlar, meta kutuları, yapılandırılmış sayfa içerikleri ve içerik taşıma araçlarıyla editoryal modeli yönetir."
+      },
+      {
+        "id": "layer:core-services",
+        "name": "Çekirdek Uygulama Hizmetleri",
+        "description": "Myliba Core başlangıcını, özel yazı türlerini, formları, SEO üretimini ve güvenli görsel işleme davranışını sağlar."
+      },
+      {
+        "id": "layer:theme-foundation",
+        "name": "Tema Temeli ve Ön Yüz Varlıkları",
+        "description": "Tema kurulumu ve yardımcıları, Customizer ayarları, tema metadatası ile ortak CSS ve JavaScript davranışlarını tanımlar."
+      },
+      {
+        "id": "layer:presentation-templates",
+        "name": "Sunum ve Sayfa Şablonları",
+        "description": "Yönetilebilir içeriği ziyaretçiye gösteren ana sayfa, arşiv, tekil içerik, özel sayfa ve yeniden kullanılabilir tema şablonlarını içerir."
+      }
+    ]
+  },
+  "nodeSummaryIndex": {
+    "config:.understand-anything/.trash-20260802-audit/assemble-review.json": {
+      "name": "assemble-review.json",
+      "type": "config",
+      "summary": "Önceki bilgi grafiği birleştirmesinde düzeltilen bölümleri, kurtarılan düğüm ve kenar sayılarını ve yeniden eşlenen alanları kaydeden denetim sonucudur."
+    },
+    "config:.understand-anything/.trash-20260802-audit/assembled-graph.json": {
+      "name": "assembled-graph.json",
+      "type": "config",
+      "summary": "Önceki analiz çalışmasının düğümlerini, kenarlarını, mimari katmanlarını ve rehber turunu içeren birleştirilmiş bilgi grafiği anlık görüntüsüdür."
+    },
+    "config:.understand-anything/.trash-20260802-audit/batch-1.json": {
+      "name": "batch-1.json",
+      "type": "config",
+      "summary": "Önceki analizde birinci dosya grubundan üretilen düğüm ve kenar parçacığını saklayan arşivlenmiş grafik çıktısıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/batch-2-part-1.json": {
+      "name": "batch-2-part-1.json",
+      "type": "config",
+      "summary": "Önceki ikinci analiz grubunun ilk bölümüne ait düğüm ve kenarları taşıyan arşivlenmiş grafik parçacığıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/batch-2-part-2.json": {
+      "name": "batch-2-part-2.json",
+      "type": "config",
+      "summary": "Önceki ikinci analiz grubunun hacimli ikinci bölümündeki düğüm ve bağımlılık kenarlarını saklayan arşivlenmiş grafik parçacığıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/batch-2-part-3.json": {
+      "name": "batch-2-part-3.json",
+      "type": "config",
+      "summary": "Önceki ikinci analiz grubunun son düğüm bölümünü taşıyan arşivlenmiş grafik parçacığıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/batch-3-part-1.json": {
+      "name": "batch-3-part-1.json",
+      "type": "config",
+      "summary": "Önceki üçüncü analiz grubunun ilk bölümünden çıkarılmış düğüm ve kenarları içeren arşivlenmiş grafik parçacığıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/batch-3-part-2.json": {
+      "name": "batch-3-part-2.json",
+      "type": "config",
+      "summary": "Önceki üçüncü analiz grubunun kalan düğümlerini taşıyan arşivlenmiş ikinci grafik parçacığıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/batch-4.json": {
+      "name": "batch-4.json",
+      "type": "config",
+      "summary": "Önceki dördüncü analiz grubuna ait küçük düğüm kümesini ve boş ya da sınırlı kenar listesini saklayan arşivlenmiş çıktıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/batches.json": {
+      "name": "batches.json",
+      "type": "config",
+      "summary": "Önceki taramada dosyaların analiz gruplarına dağılımını, dışa aktarılan sembolleri ve grup başına içe aktarma bağlamını tanımlar."
+    },
+    "config:.understand-anything/.trash-20260802-audit/fingerprint-input.json": {
+      "name": "fingerprint-input.json",
+      "type": "config",
+      "summary": "Dosya parmak izi üretimine verilen proje kökünü, kaynak dosya yollarını ve Git commit kimliğini kaydeden giriş verisidir."
+    },
+    "config:.understand-anything/.trash-20260802-audit/layers.json": {
+      "name": "layers.json",
+      "type": "config",
+      "summary": "Önceki bilgi grafiğinde belirlenen mimari katmanları ve bu katmanlara atanan bileşen kümelerini saklayan analiz çıktısıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/review.json": {
+      "name": "review.json",
+      "type": "config",
+      "summary": "Önceki bilgi grafiği doğrulamasında bulunan sorunları, uyarıları ve toplu istatistikleri kaydeden inceleme raporudur."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tour.json": {
+      "name": "tour.json",
+      "type": "config",
+      "summary": "Önceki proje analizinin önemli bileşenlerini ve önerilen gezinme sırasını sunan rehber tur verisidir."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-arch-input.json": {
+      "name": "ua-arch-input.json",
+      "type": "config",
+      "summary": "Mimari çözümleyiciye verilen dosya düğümlerini, import kenarlarını ve tüm grafik ilişkilerini içeren geçici giriş anlık görüntüsüdür."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-arch-results.json": {
+      "name": "ua-arch-results.json",
+      "type": "config",
+      "summary": "Dizin ve düğüm türü grupları, bağımlılık yoğunlukları, dağıtım topolojisi ve dosya fan-in/fan-out ölçümleri gibi mimari analiz sonuçlarını saklar."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-1.json": {
+      "name": "ua-file-analyzer-input-1.json",
+      "type": "config",
+      "summary": "Birinci dosya çözümleme grubunun proje kökünü, dosya listesini ve önceden çözülmüş import verisini taşıyan geçici girdidir."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-2.json": {
+      "name": "ua-file-analyzer-input-2.json",
+      "type": "config",
+      "summary": "İkinci dosya çözümleme grubuna ait dosya metaverisini ve proje içi import eşlemelerini taşıyan geçici girdidir."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-3.json": {
+      "name": "ua-file-analyzer-input-3.json",
+      "type": "config",
+      "summary": "Üçüncü dosya çözümleme grubuna ait dosya metaverisini ve proje içi import eşlemelerini taşıyan geçici girdidir."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-analyzer-input-4.json": {
+      "name": "ua-file-analyzer-input-4.json",
+      "type": "config",
+      "summary": "Dördüncü dosya çözümleme grubunun proje kökü, dosyaları ve import bağlamını belirleyen küçük geçici girdidir."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-1.json": {
+      "name": "ua-file-extract-results-1.json",
+      "type": "config",
+      "summary": "Birinci gruptaki dosyalardan çıkarılan yapısal sonuçları, tamamlanma durumunu ve atlanan dosyaları kaydeden geçici çıktıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-2.json": {
+      "name": "ua-file-extract-results-2.json",
+      "type": "config",
+      "summary": "İkinci ve en hacimli dosya grubunun ayrıntılı yapısal çıkarım sonuçlarını taşıyan geçici analiz çıktısıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-3.json": {
+      "name": "ua-file-extract-results-3.json",
+      "type": "config",
+      "summary": "Üçüncü dosya grubunun yapı, metrik ve sembol çıkarımlarını saklayan geçici analiz çıktısıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-file-extract-results-4.json": {
+      "name": "ua-file-extract-results-4.json",
+      "type": "config",
+      "summary": "Dördüncü dosya grubunun yapısal çıkarım durumunu ve sonuç listesini taşıyan küçük geçici çıktıdır."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-import-map-input.json": {
+      "name": "ua-import-map-input.json",
+      "type": "config",
+      "summary": "Import çözümleyicisinin işleyeceği proje kökü ve taranmış dosya envanterini içeren geçici giriş verisidir."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-import-map-output.json": {
+      "name": "ua-import-map-output.json",
+      "type": "config",
+      "summary": "Proje içi import çözümlemesinin durumunu, istatistiklerini ve dosyalar arası eşleme sonucunu kaydeder."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-scan-files.json": {
+      "name": "ua-scan-files.json",
+      "type": "config",
+      "summary": "Taranmış dosya envanterini, ignore filtresi sonuçlarını, tahmini karmaşıklığı ve dil/kategori istatistiklerini saklar."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-tour-input.json": {
+      "name": "ua-tour-input.json",
+      "type": "config",
+      "summary": "Proje turu üreticisine aktarılan düğümleri, kenarları ve mimari katmanları içeren kapsamlı geçici grafik girdisidir."
+    },
+    "config:.understand-anything/.trash-20260802-audit/tmp/ua-tour-results.json": {
+      "name": "ua-tour-results.json",
+      "type": "config",
+      "summary": "Giriş noktası adayları, fan-in/fan-out sıralamaları, dolaşım, kümeler ve düğüm özet indeksinden oluşan proje turu analizidir."
+    },
+    "config:.understand-anything/config.json": {
+      "name": "config.json",
+      "type": "config",
+      "summary": "Understand Anything analiz çıktılarının dil tercihini belirleyen minimal proje yapılandırmasıdır."
+    },
+    "config:.understand-anything/fingerprints.json": {
+      "name": "fingerprints.json",
+      "type": "config",
+      "summary": "Analiz kapsamındaki dosyaların parmak izlerini, üretim zamanını ve ilişkili Git commit kimliğini saklayarak değişiklik takibini destekler."
+    },
+    "config:.understand-anything/knowledge-graph.json": {
+      "name": "knowledge-graph.json",
+      "type": "config",
+      "summary": "Projenin dosya ve sembol düğümlerini, aralarındaki ilişkileri, mimari katmanları ve rehber turunu bir araya getiren kalıcı bilgi grafiğidir."
+    },
+    "config:.understand-anything/meta.json": {
+      "name": "meta.json",
+      "type": "config",
+      "summary": "Son analiz zamanını, Git commit kimliğini, şema sürümünü ve analiz edilen dosya sayısını kaydeden kısa metaveri dosyasıdır."
+    },
+    "config:wordpress/.env.example": {
+      "name": ".env.example",
+      "type": "config",
+      "summary": "Yerel WordPress kurulumu için port, veritabanı, yönetici hesabı, hero görselleri ve WP Mail SMTP değişkenlerinin güvenli başlangıç şablonunu tanımlar."
+    },
+    "service:wordpress/Makefile": {
+      "name": "Makefile",
+      "type": "service",
+      "summary": "Docker Compose tabanlı yerel WordPress ortamını başlatma, kurma, örnek içerikle doldurma, durdurma ve SMTP testi işlemlerini tek komutlu hedeflerle düzenler."
+    },
+    "config:wordpress/uploads.ini": {
+      "name": "uploads.ini",
+      "type": "config",
+      "summary": "WordPress konteynerlerindeki PHP yükleme boyutu, bellek ve istek yürütme sürelerini yüksek hacimli medya aktarımına uygun biçimde sınırlar."
+    },
+    "file:.DS_Store": {
+      "name": ".DS_Store",
+      "type": "file",
+      "summary": "macOS tarafından oluşturulan Finder görünüm meta verisini taşır; uygulama çalışma zamanında bir rol üstlenmez."
+    },
+    "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-analyze.js": {
+      "name": "ua-arch-analyze.js",
+      "type": "file",
+      "summary": "Bilgi grafiğindeki dosya düğümlerini dizin, tür ve bağımlılık sinyallerine göre inceleyerek mimari katman analizine girdi olacak istatistikleri üretir."
+    },
+    "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-layers.js": {
+      "name": "ua-arch-layers.js",
+      "type": "file",
+      "summary": "Önceden hazırlanmış mimari analiz verilerinden katman tanımlarını ve düğüm atamalarını oluşturan denetim amaçlı yardımcı betiktir."
+    },
+    "file:.understand-anything/.trash-20260802-audit/tmp/ua-arch-prepare.js": {
+      "name": "ua-arch-prepare.js",
+      "type": "file",
+      "summary": "Birleştirilmiş bilgi grafiğini mimari katman çözümlemesinin beklediği sade giriş biçimine dönüştürür."
+    },
+    "file:.understand-anything/.trash-20260802-audit/tmp/ua-inline-validate.cjs": {
+      "name": "ua-inline-validate.cjs",
+      "type": "file",
+      "summary": "Bilgi grafiğinin düğüm, kenar, katman ve tur bütünlüğünü deterministik kurallarla doğrular ve sorun raporu üretir."
+    },
+    "file:.understand-anything/.trash-20260802-audit/tmp/ua-tour-analyze.js": {
+      "name": "ua-tour-analyze.js",
+      "type": "file",
+      "summary": "Bilgi grafiğindeki giriş noktalarını, bağlantı yoğunluklarını ve kümeleri hesaplayarak yönlendirilmiş kod turu hazırlanmasını destekler."
+    },
+    "file:.understand-anything/.trash-20260802-audit/tmp/ua-tour-prepare.js": {
+      "name": "ua-tour-prepare.js",
+      "type": "file",
+      "summary": "Bilgi grafiği ile mimari katmanları tur analiz betiğine uygun tek bir giriş belgesinde birleştirir."
+    },
+    "file:.understand-anything/.understandignore": {
+      "name": ".understandignore",
+      "type": "file",
+      "summary": "Understand Anything taramasından medya, yedek, üçüncü taraf ve geçici dosyaları dışlamak için kullanılan proje kapsamı kurallarını tanımlar."
+    },
+    "config:.understand-anything/intermediate/scan-result.json": {
+      "name": "scan-result.json",
+      "type": "config",
+      "summary": "Projenin dilleri, frameworkleri, dosya envanteri, kategorileri ve çözümlenmiş içe aktarma haritasını içeren ara tarama sonucudur."
+    },
+    "document:wordpress/migration/content-map.md": {
+      "name": "content-map.md",
+      "type": "document",
+      "summary": "Eski site içerik türlerini WordPress sayfaları, yerel yazılar, özel yazı tipleri ve site ayarlarıyla eşleştirir; SEO geçiş kontrol listesini de kaydeder."
+    },
+    "document:wordpress/migration/review-report.md": {
+      "name": "review-report.md",
+      "type": "document",
+      "summary": "Myliba WordPress geçişini UI, UX, SEO, responsive tasarım, içerik modeli ve üretime hazırlık açısından değerlendirip uygulanabilir yol haritası sunar."
+    },
+    "file:wordpress/wp-content/index.php": {
+      "name": "index.php",
+      "type": "file",
+      "summary": "WordPress içerik dizinine doğrudan erişildiğinde çıktı üretmeyen koruyucu giriş dosyasıdır."
+    },
+    "file:wordpress/wp-content/mu-plugins/automation-by-installatron.php": {
+      "name": "automation-by-installatron.php",
+      "type": "file",
+      "summary": "Installatron otomasyonunun WordPress Site Health testlerine eklediği kontrolü filtreleyerek yönetilen kurulum uyumluluğunu sağlar."
+    },
+    "file:wordpress/wp-content/mu-plugins/myliba-smtp.php": {
+      "name": "myliba-smtp.php",
+      "type": "file",
+      "summary": "WP Mail SMTP sabitlerini yerel Mailpit ve üretim Gmail OAuth senaryoları için ortam değişkenleriyle yapılandırır."
+    },
+    "file:wordpress/wp-content/plugins/index.php": {
+      "name": "index.php",
+      "type": "file",
+      "summary": "WordPress eklenti dizinine doğrudan erişildiğinde çıktı üretmeyen koruyucu giriş dosyasıdır."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/content.php": {
+      "name": "content.php",
+      "type": "file",
+      "summary": "Türkçe ve İngilizce arayüz metinlerini merkezi bir katalogda toplar, yönetim panelinden override edilmesini ve eski ayarların yeni modele taşınmasını sağlar."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/meta.php": {
+      "name": "meta.php",
+      "type": "file",
+      "summary": "Myliba içerik türleri için yönetim meta kutularını ve ana sayfa oluşturucusunu sunar; alanların gösterimi, doğrulanması ve kalıcılaştırılmasını kapsar."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/page-content.php": {
+      "name": "page-content.php",
+      "type": "file",
+      "summary": "Farklı sayfa şablonlarının yapılandırılmış metin ve koleksiyon şemalarını, varsayılan içeriklerini, yönetim editörünü ve kayıt işlemlerini yönetir."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/myliba-core.php": {
+      "name": "myliba-core.php",
+      "type": "file",
+      "summary": "Myliba Core eklentisini başlatır; içerik türleri, meta alanları, yönetim ekranları ve WP-CLI komutlarını yüklerken etkinleştirme yaşam döngüsünü yönetir."
+    },
+    "file:wordpress/wp-content/themes/index.php": {
+      "name": "index.php",
+      "type": "file",
+      "summary": "WordPress tema dizinine doğrudan erişimi engelleyen boş güvenlik giriş dosyasıdır."
+    },
+    "file:wordpress/wp-content/themes/myliba/404.php": {
+      "name": "404.php",
+      "type": "file",
+      "summary": "Bulunamayan sayfalarda yerelleştirilmiş açıklama ile demo ve ana sayfa yönlendirmelerini gösteren 404 şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_academy.php": {
+      "name": "archive-myliba_academy.php",
+      "type": "file",
+      "summary": "Akademi programlarını açıklama kartları halinde listeleyen yerelleştirilmiş arşiv şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_ebook.php": {
+      "name": "archive-myliba_ebook.php",
+      "type": "file",
+      "summary": "E-kitap arşivini ortak gelişim kaynağı listeleme bileşenine yönlendiren ince şablondur."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_event.php": {
+      "name": "archive-myliba_event.php",
+      "type": "file",
+      "summary": "Etkinlikleri tarih, özet ve konum bilgileriyle listeleyen; boş durumda yerelleştirilmiş mesaj sunan arşiv şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_product.php": {
+      "name": "archive-myliba_product.php",
+      "type": "file",
+      "summary": "Myliba ürün modüllerini ikon, başlık ve kısa açıklama kartlarıyla sunan arşiv şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_report.php": {
+      "name": "archive-myliba_report.php",
+      "type": "file",
+      "summary": "Rapor arşivini ortak gelişim kaynağı listeleme bileşenine yönlendiren ince şablondur."
+    },
+    "file:wordpress/wp-content/themes/myliba/archive-myliba_solution.php": {
+      "name": "archive-myliba_solution.php",
+      "type": "file",
+      "summary": "Çözüm arşivi isteklerini ortak çözümler sayfası bileşenine devreden yönlendirme şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/assets/js/main.js": {
+      "name": "main.js",
+      "type": "file",
+      "summary": "Mobil navigasyon, mega menüler, dil tercihi, sekmeler, slider, promosyon ve erişilebilir klavye etkileşimlerini yöneten istemci tarafı davranış katmanıdır."
+    },
+    "file:wordpress/wp-content/themes/myliba/front-page.php": {
+      "name": "front-page.php",
+      "type": "file",
+      "summary": "Yönetim panelinden sıralanabilen hero, sosyal kanıt, ürün, akademi, performans, kaynak, SSS ve CTA bölümlerini oluşturan ana sayfa şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/header.php": {
+      "name": "header.php",
+      "type": "file",
+      "summary": "Duyuru alanı, marka, masaüstü ve mobil menüler, mega navigasyon, dil seçici ve erişilebilir kontrolleri oluşturan site üstbilgi şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/index.php": {
+      "name": "index.php",
+      "type": "file",
+      "summary": "Standart WordPress içerik akışını tarih, başlık, özet ve sayfalama ile gösteren genel arşiv geri dönüş şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/page.php": {
+      "name": "page.php",
+      "type": "file",
+      "summary": "Sayfa slug’ına göre özel tema bileşenlerine yönlendiren, kalan içerikler için hero ve düzenleyici içeriği gösteren genel sayfa yönlendiricisidir."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_academy.php": {
+      "name": "single-myliba_academy.php",
+      "type": "file",
+      "summary": "Tekil akademi kaydını ortak hero ve dönüşüm odaklı detay bileşeniyle sunan şablondur."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_ebook.php": {
+      "name": "single-myliba_ebook.php",
+      "type": "file",
+      "summary": "E-kitap içeriğini kapak, özet, kazanımlar, editör içeriği ve indirme çağrılarıyla sunan ayrıntılı kaynak şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_event.php": {
+      "name": "single-myliba_event.php",
+      "type": "file",
+      "summary": "Etkinlik içeriğini tarih, konum ve kayıt bağlantısından oluşan yan panelle birlikte gösteren tekil kayıt şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_landing.php": {
+      "name": "single-myliba_landing.php",
+      "type": "file",
+      "summary": "Tekil kampanya sayfasını ortak hero ve dönüşüm detayı bileşenleriyle oluşturan şablondur."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_product.php": {
+      "name": "single-myliba_product.php",
+      "type": "file",
+      "summary": "Tekil ürün kaydını ortak hero ve dönüşüm detayı bileşenleriyle oluşturan şablondur."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_report.php": {
+      "name": "single-myliba_report.php",
+      "type": "file",
+      "summary": "Araştırma raporunu metrikler, öne çıkan sonuçlar, editör içeriği ve indirme çağrılarıyla sunan ayrıntılı kaynak şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/single-myliba_solution.php": {
+      "name": "single-myliba_solution.php",
+      "type": "file",
+      "summary": "Çözüm yönetim metalarını hero, yaklaşım, hedef kitle, kazanımlar, ölçüm alanları, süreç ve CTA bölümlerine dönüştüren ayrıntılı tekil çözüm şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/single.php": {
+      "name": "single.php",
+      "type": "file",
+      "summary": "Blog yazısını okuma süresi, içerik başlıkları, yazar bölümü ve ilişkili çağrılarla gösteren genel tekil yazı şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/style.css": {
+      "name": "style.css",
+      "type": "file",
+      "summary": "WordPress’in Myliba temasını tanıması için tema adı, sürüm ve diğer üstbilgi metadatasını taşır."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-blog.php": {
+      "name": "template-blog.php",
+      "type": "file",
+      "summary": "Dil filtresine uygun blog yazılarını sorgulayan, hero ve sayfalama ile kart listesi oluşturan özel sayfa şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-contact.php": {
+      "name": "template-contact.php",
+      "type": "file",
+      "summary": "İletişim sayfasında ortak hero ile yönetilebilir sayfa içeriğini gösteren özel şablondur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-demo.php": {
+      "name": "template-demo.php",
+      "type": "file",
+      "summary": "Demo talebi sayfasında ortak hero ile form veya yönetilebilir içeriği sunan özel şablondur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-events.php": {
+      "name": "template-events.php",
+      "type": "file",
+      "summary": "Etkinlik içeriklerini tarih ve konum metalarıyla sorgulayıp listeleyen özel sayfa şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-landing.php": {
+      "name": "template-landing.php",
+      "type": "file",
+      "summary": "SEO açılış sayfasını ortak hero ve dönüşüm detayı bileşenleriyle birleştiren özel şablondur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/archive-development-resource.php": {
+      "name": "archive-development-resource.php",
+      "type": "file",
+      "summary": "E-kitap ve rapor gibi gelişim kaynaklarını tür, özet ve bağlantı bilgileriyle kart arşivinde sunan ortak bileşendir."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/client-logo-marquee.php": {
+      "name": "client-logo-marquee.php",
+      "type": "file",
+      "summary": "İstemci logo gönderilerini veya sağlanan bileşen verisini erişilebilir, kayan bir logo şeridi olarak gösterir."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/conversion-detail.php": {
+      "name": "conversion-detail.php",
+      "type": "file",
+      "summary": "Ürün, akademi ve landing içeriklerinin problem, çözüm, fayda, modül, FAQ ve CTA meta alanlarını ortak detay düzeninde gösterir."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/expand.php": {
+      "name": "expand.php",
+      "type": "file",
+      "summary": "Başlık ve içerik parametrelerini açılıp kapanabilir bir ayrıntı bileşeninde sunar."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/hero.php": {
+      "name": "hero.php",
+      "type": "file",
+      "summary": "Sayfa veya içerik metalarından kaş, başlık, alt başlık ve CTA değerlerini okuyup ortak hero alanını üretir."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-academy.php": {
+      "name": "page-academy.php",
+      "type": "file",
+      "summary": "Akademi sayfası ve program gönderilerindeki kapsamlı yönetim metalarını program kartları, modüller, eğitmenler, kazanımlar ve CTA bölümlerine dönüştürür."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-development-center.php": {
+      "name": "page-development-center.php",
+      "type": "file",
+      "summary": "Gelişim Merkezi açılışını yerelleştirilmiş metinler ve kaynak türlerine yönlendiren kartlarla oluşturur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-ethics.php": {
+      "name": "page-ethics.php",
+      "type": "file",
+      "summary": "Etik ve uyum sayfasının hero, ilkeler, süreç ve çağrı bölümlerini yönetilebilir sayfa verisiyle sunar."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-faq.php": {
+      "name": "page-faq.php",
+      "type": "file",
+      "summary": "Kategori filtreli, aranabilir FAQ arayüzünü sayfa verileri ve iletişim seçenekleriyle oluşturur."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-software.php": {
+      "name": "page-software.php",
+      "type": "file",
+      "summary": "Yazılım ürün sayfasının hero, performans sekmeleri, modüller, medya ve CTA alanlarını yönetim verilerinden üretir."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-solutions.php": {
+      "name": "page-solutions.php",
+      "type": "file",
+      "summary": "Çözümler sayfasında çözüm kataloğunu başlıklar, açıklamalar ve hedef bağlantılarla sıralı bölümler halinde gösterir."
+    },
+    "file:wordpress/wp-content/themes/myliba/template-parts/page-story.php": {
+      "name": "page-story.php",
+      "type": "file",
+      "summary": "Myliba hikâyesi sayfasını marka anlatısı, kilometre taşları, ekip ve değer bölümleriyle oluşturan uzun biçimli şablondur."
+    },
+    "document:wordpress/README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Myliba WordPress sürümünün yerel kurulumunu, TR/EN URL yapısını, içerik aktarımını, yönetilebilir site metinlerini ve üretime çıkış kontrol listesini açıklar."
+    },
+    "service:wordpress/docker-compose.yml": {
+      "name": "docker-compose.yml",
+      "type": "service",
+      "summary": "MariaDB, Mailpit, Apache tabanlı WordPress ve WP-CLI servislerinden oluşan yerel geliştirme yığınını; kalıcı verileri, sağlık kontrollerini, SMTP ayarlarını ve wp-content bağlarını tanımlar."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/options.php": {
+      "name": "options.php",
+      "type": "file",
+      "summary": "Site geneli ve yerelleştirilmiş ayarların şemasını, varsayılanlarını, okuma yardımcılarını ve güvenli kayıt sürecini tanımlar."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/post-types.php": {
+      "name": "post-types.php",
+      "type": "file",
+      "summary": "Myliba özel yazı tiplerini kaydeder; çok dilli kalıcı bağlantıları, rewrite kurallarını, locale yönlendirmelerini ve Polylang uyumluluğunu yönetir."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/seo.php": {
+      "name": "seo.php",
+      "type": "file",
+      "summary": "Staging noindex korumasını, meta ve hreflang çıktısını, breadcrumb/article/FAQ/course JSON-LD şemalarını ve SEO eklentisi fallback davranışını sağlar."
+    },
+    "file:nginx/default.conf": {
+      "name": "default.conf",
+      "type": "file",
+      "summary": "WordPress trafiğini ters vekil üzerinden yönlendirir; güvenlik başlıkları, statik önbellek, SVG izolasyonu, yükleme koruması ve form hız sınırlamasını uygular."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/admin.php": {
+      "name": "admin.php",
+      "type": "file",
+      "summary": "Myliba yönetim deneyimini sadeleştirir; özel menü ve ayar ekranını, klasik editör tercihlerini, bildirimleri ve pano sayaçlarını yönetir."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/forms.php": {
+      "name": "forms.php",
+      "type": "file",
+      "summary": "İletişim, demo ve akademi formlarını oluşturur; doğrulama, hız sınırlama, kayıt saklama ve e-posta bildirim akışını yürütür."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/images.php": {
+      "name": "images.php",
+      "type": "file",
+      "summary": "Yüklenen görsellerin MIME türlerini sınırlar, dosya imzalarını doğrular ve SVG içeriklerini güvenli bir alt kümeye temizler."
+    },
+    "file:wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php": {
+      "name": "wp-cli.php",
+      "type": "file",
+      "summary": "WordPress içeriğini tohumlayan, mevcut siteden veri aktaran ve Türkçe öncelikli yayın düzenini uygulayan kapsamlı WP-CLI komut sınıfını sağlar."
+    },
+    "file:wordpress/wp-content/themes/myliba/assets/css/main.css": {
+      "name": "main.css",
+      "type": "file",
+      "summary": "Temanın tipografi, navigasyon, ana sayfa, çözüm, akademi, kaynak ve kurumsal sayfa bileşenlerini tüm kırılımlarda biçimlendiren kapsamlı stil katmanıdır."
+    },
+    "file:wordpress/wp-content/themes/myliba/footer.php": {
+      "name": "footer.php",
+      "type": "file",
+      "summary": "Yönetilebilir CTA, menü sütunları, iletişim, sosyal bağlantılar ve yasal bilgileri varsayılanlarla birlikte oluşturan site altbilgi şablonudur."
+    },
+    "file:wordpress/wp-content/themes/myliba/functions.php": {
+      "name": "functions.php",
+      "type": "file",
+      "summary": "Tema kurulumu, varlık yükleme, yerelleştirme, yönlendirme, menüler, içerik sorguları ve yönetilebilir ana sayfa verileri için merkezi WordPress yardımcı katmanıdır."
+    },
+    "file:wordpress/wp-content/themes/myliba/inc/customizer.php": {
+      "name": "customizer.php",
+      "type": "file",
+      "summary": "Üstbilgi, iletişim ve altbilgi metinleri ile bağlantılarını güvenli sanitize callback’leri üzerinden WordPress Özelleştirici paneline açar."
+    }
+  },
+  "totalNodes": 108,
+  "totalEdges": 588
+}

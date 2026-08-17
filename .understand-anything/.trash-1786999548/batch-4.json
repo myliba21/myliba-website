@@ -1,0 +1,108 @@
+{
+  "nodes": [
+    {
+      "id": "config:wordpress/.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": "wordpress/.env.example",
+      "summary": "Yerel WordPress kurulumu için port, veritabanı, yönetici hesabı, hero görselleri ve WP Mail SMTP değişkenlerinin güvenli başlangıç şablonunu tanımlar.",
+      "tags": ["yapılandırma", "ortam-değişkenleri", "wordpress", "smtp", "güvenlik"],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:wordpress/Makefile",
+      "type": "service",
+      "name": "Makefile",
+      "filePath": "wordpress/Makefile",
+      "summary": "Docker Compose tabanlı yerel WordPress ortamını başlatma, kurma, örnek içerikle doldurma, durdurma ve SMTP testi işlemlerini tek komutlu hedeflerle düzenler.",
+      "tags": ["altyapı", "geliştirme-otomasyonu", "docker-compose", "wp-cli", "bootstrap"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:wordpress/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "wordpress/README.md",
+      "summary": "Myliba WordPress sürümünün yerel kurulumunu, TR/EN URL yapısını, içerik aktarımını, yönetilebilir site metinlerini ve üretime çıkış kontrol listesini açıklar.",
+      "tags": ["dokümantasyon", "yerel-kurulum", "çok-dilli", "site-metinleri", "üretim-kontrolü"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:wordpress/docker-compose.yml",
+      "type": "service",
+      "name": "docker-compose.yml",
+      "filePath": "wordpress/docker-compose.yml",
+      "summary": "MariaDB, Mailpit, Apache tabanlı WordPress ve WP-CLI servislerinden oluşan yerel geliştirme yığınını; kalıcı verileri, sağlık kontrollerini, SMTP ayarlarını ve wp-content bağlarını tanımlar.",
+      "tags": ["orkestrasyon", "yerel-geliştirme", "wordpress", "mariadb", "mailpit"],
+      "complexity": "moderate",
+      "languageNotes": "Compose profili, WP-CLI aracını yalnızca bakım ve kurulum komutlarında çalıştırırken WordPress servisini sürekli çalışma katmanında tutar."
+    },
+    {
+      "id": "config:wordpress/uploads.ini",
+      "type": "config",
+      "name": "uploads.ini",
+      "filePath": "wordpress/uploads.ini",
+      "summary": "WordPress konteynerlerindeki PHP yükleme boyutu, bellek ve istek yürütme sürelerini yüksek hacimli medya aktarımına uygun biçimde sınırlar.",
+      "tags": ["yapılandırma", "php", "dosya-yükleme", "kaynak-limitleri", "wordpress"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:wordpress/.env.example",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:wordpress/Makefile",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:wordpress/Makefile",
+      "target": "config:wordpress/.env.example",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "service:wordpress/Makefile",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:wordpress/README.md",
+      "target": "config:wordpress/.env.example",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "service:wordpress/docker-compose.yml",
+      "target": "config:wordpress/uploads.ini",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:wordpress/uploads.ini",
+      "target": "service:wordpress/docker-compose.yml",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

@@ -1,0 +1,304 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "wordpress/.env.example",
+      "language": "config",
+      "fileCategory": "config",
+      "totalLines": 33,
+      "nonEmptyLines": 29,
+      "definitions": [
+        {
+          "name": "WORDPRESS_PORT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 5,
+          "endLine": 5
+        },
+        {
+          "name": "WORDPRESS_DB_NAME",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 7,
+          "endLine": 7
+        },
+        {
+          "name": "WORDPRESS_DB_USER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 8,
+          "endLine": 8
+        },
+        {
+          "name": "WORDPRESS_DB_PASSWORD",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 9,
+          "endLine": 9
+        },
+        {
+          "name": "WORDPRESS_DB_ROOT_PASSWORD",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 10,
+          "endLine": 10
+        },
+        {
+          "name": "WORDPRESS_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 12,
+          "endLine": 12
+        },
+        {
+          "name": "WORDPRESS_TITLE",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 13,
+          "endLine": 13
+        },
+        {
+          "name": "WORDPRESS_ADMIN_USER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 14,
+          "endLine": 14
+        },
+        {
+          "name": "WORDPRESS_ADMIN_PASSWORD",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 15,
+          "endLine": 15
+        },
+        {
+          "name": "WORDPRESS_ADMIN_EMAIL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 16,
+          "endLine": 16
+        },
+        {
+          "name": "MYLIBA_HERO_BANNER_IMAGES",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 21,
+          "endLine": 21
+        },
+        {
+          "name": "MYLIBA_HERO_BANNER_IMAGE_1",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 22,
+          "endLine": 22
+        },
+        {
+          "name": "MYLIBA_HERO_BANNER_IMAGE_2",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 23,
+          "endLine": 23
+        },
+        {
+          "name": "MYLIBA_HERO_BANNER_ALT_1",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 24,
+          "endLine": 24
+        },
+        {
+          "name": "MYLIBA_HERO_BANNER_ALT_2",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 25,
+          "endLine": 25
+        },
+        {
+          "name": "WPMS_MAIL_FROM",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 28,
+          "endLine": 28
+        },
+        {
+          "name": "WPMS_MAIL_FROM_NAME",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 29,
+          "endLine": 29
+        },
+        {
+          "name": "WPMS_MAILER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 31,
+          "endLine": 31
+        },
+        {
+          "name": "WPMS_GMAIL_CLIENT_ID",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 32,
+          "endLine": 32
+        },
+        {
+          "name": "WPMS_GMAIL_CLIENT_SECRET",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 33,
+          "endLine": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 20
+      }
+    },
+    {
+      "path": "wordpress/Makefile",
+      "language": "makefile",
+      "fileCategory": "infra",
+      "totalLines": 35,
+      "nonEmptyLines": 26,
+      "steps": [
+        {
+          "name": "up",
+          "startLine": 12,
+          "endLine": 14
+        },
+        {
+          "name": "install",
+          "startLine": 15,
+          "endLine": 22
+        },
+        {
+          "name": "seed",
+          "startLine": 23,
+          "endLine": 25
+        },
+        {
+          "name": "bootstrap",
+          "startLine": 26,
+          "endLine": 27
+        },
+        {
+          "name": "down",
+          "startLine": 28,
+          "endLine": 30
+        },
+        {
+          "name": "logs",
+          "startLine": 31,
+          "endLine": 33
+        },
+        {
+          "name": "smtp-test",
+          "startLine": 34,
+          "endLine": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "stepCount": 7
+      }
+    },
+    {
+      "path": "wordpress/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 107,
+      "nonEmptyLines": 79,
+      "sections": [
+        {
+          "heading": "Myliba WordPress",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Local setup",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "URL and language structure",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "Import from myliba.com",
+          "level": 2,
+          "line": 63
+        },
+        {
+          "heading": "Production plugin choices",
+          "level": 2,
+          "line": 71
+        },
+        {
+          "heading": "Site-wide translated text",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "Staging index policy",
+          "level": 2,
+          "line": 89
+        },
+        {
+          "heading": "Production checklist",
+          "level": 2,
+          "line": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "wordpress/docker-compose.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 103,
+      "nonEmptyLines": 99,
+      "sections": [
+        {
+          "heading": "services",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "volumes",
+          "level": 1,
+          "line": 101
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "wordpress/uploads.ini",
+      "language": "config",
+      "fileCategory": "config",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "metrics": {}
+    }
+  ]
+}

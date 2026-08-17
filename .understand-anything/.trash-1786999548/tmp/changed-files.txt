@@ -1,0 +1,15 @@
+.gitignore
+nginx/default.conf
+wordpress/README.md
+wordpress/docker-compose.yml
+wordpress/wp-content/plugins/myliba-core/includes/admin.php
+wordpress/wp-content/plugins/myliba-core/includes/forms.php
+wordpress/wp-content/plugins/myliba-core/includes/images.php
+wordpress/wp-content/plugins/myliba-core/includes/options.php
+wordpress/wp-content/plugins/myliba-core/includes/post-types.php
+wordpress/wp-content/plugins/myliba-core/includes/seo.php
+wordpress/wp-content/plugins/myliba-core/includes/wp-cli.php
+wordpress/wp-content/themes/myliba/assets/css/main.css
+wordpress/wp-content/themes/myliba/footer.php
+wordpress/wp-content/themes/myliba/functions.php
+wordpress/wp-content/themes/myliba/inc/customizer.php
