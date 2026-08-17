@@ -4,6 +4,9 @@ This folder contains the WordPress version of the site. The content model is in 
 
 ## Local setup
 
+The Docker Compose stack is for local development only. Its published ports
+bind to `127.0.0.1` and must not be reused as the production deployment model.
+
 1. Copy `.env.example` to `.env` and **change all passwords** (use `openssl rand -base64 32` for each).
 2. Bootstrap WordPress from this `wordpress/` directory:
 

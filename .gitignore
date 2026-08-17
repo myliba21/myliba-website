@@ -28,6 +28,7 @@ wordpress/wp-content/themes/twentytwenty*/
 *.sqlite
 *.db
 *.wpress
+wordpress/wp-content.zip
 wordpress/wp-content/ai1wm-backups/*
 !wordpress/wp-content/ai1wm-backups/.htaccess
 !wordpress/wp-content/ai1wm-backups/index.html

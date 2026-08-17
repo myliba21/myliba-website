@@ -30,7 +30,17 @@ function boot(): void
  */
 function restrict_upload_mimes(array $mimes): array
 {
-    return ALLOWED_MIME_TYPES;
+    $allowed = [
+        'webp' => ALLOWED_MIME_TYPES['webp'],
+    ];
+
+    // SVG is an active document format. Limit it to administrators even
+    // though every accepted file is sanitized below.
+    if (current_user_can('manage_options')) {
+        $allowed['svg'] = ALLOWED_MIME_TYPES['svg'];
+    }
+
+    return $allowed;
 }
 
 /**
@@ -49,6 +59,16 @@ function validate_upload(array $file): array
             __('"%s" dosya türü desteklenmiyor. Yalnızca WebP ve SVG görselleri yükleyebilirsiniz.', 'myliba'),
             esc_html(strtoupper($ext))
         );
+        return $file;
+    }
+
+    if ($ext === 'svg' && !current_user_can('manage_options')) {
+        $file['error'] = __('SVG yükleme yetkisi yalnızca yöneticilere açıktır.', 'myliba');
+        return $file;
+    }
+
+    if ($ext === 'svg' && (int) ($file['size'] ?? 0) > 1024 * 1024) {
+        $file['error'] = __('SVG dosyası en fazla 1 MB olabilir.', 'myliba');
         return $file;
     }
 
@@ -85,7 +105,7 @@ function check_filetype_and_ext(array $checked, string $file, string $filename, 
 {
     $ext = strtolower((string) pathinfo($filename, PATHINFO_EXTENSION));
 
-    if ($ext === 'svg' && ($checked['type'] === false || $checked['ext'] === false)) {
+    if ($ext === 'svg' && current_user_can('manage_options') && ($checked['type'] === false || $checked['ext'] === false)) {
         $checked['ext']  = 'svg';
         $checked['type'] = 'image/svg+xml';
     }
@@ -143,7 +163,22 @@ function sanitize_svg_file(string $tmp_path)
     }
 
     // Remove dangerous elements.
-    $dangerous_elements = ['script', 'foreignobject', 'iframe', 'object', 'embed'];
+    $dangerous_elements = [
+        'script',
+        'style',
+        'foreignobject',
+        'iframe',
+        'object',
+        'embed',
+        'audio',
+        'video',
+        'animate',
+        'animatemotion',
+        'animatetransform',
+        'set',
+        'discard',
+        'feimage',
+    ];
     $elements_to_remove = [];
 
     // Remove dangerous attributes from all elements.
@@ -165,12 +200,20 @@ function sanitize_svg_file(string $tmp_path)
                 continue;
             }
             $attr_name = strtolower($attr->nodeName);
-            // Remove event handlers (on*) and javascript: hrefs.
+            $attr_value = strtolower(html_entity_decode((string) $attr->nodeValue, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+            $has_unsafe_url = str_contains($attr_value, 'url(')
+                && !preg_match('/^\s*url\(\s*["\']?#[a-z0-9_.:-]+["\']?\s*\)\s*$/i', $attr_value);
+
+            // Remove event handlers, links, inline CSS and external resource
+            // references. Fragment-only paint references such as url(#id)
+            // remain available for gradients and clip paths.
             if (
                 str_starts_with($attr_name, 'on') ||
-                in_array($attr_name, ['href', 'xlink:href', 'src', 'action'], true) ||
-                (in_array($attr_name, ['href', 'xlink:href', 'src', 'action'], true) &&
-                 str_contains(strtolower((string) $attr->nodeValue), 'javascript:'))
+                in_array($attr_name, ['href', 'xlink:href', 'src', 'action', 'style'], true) ||
+                preg_match('/(?:javascript|vbscript)\s*:|data\s*:\s*text\/html/i', $attr_value) ||
+                str_contains($attr_value, '@import') ||
+                str_contains($attr_value, 'expression(') ||
+                $has_unsafe_url
             ) {
                 $dangerous_attrs[] = [$element, $attr->nodeName];
             }
@@ -191,7 +234,9 @@ function sanitize_svg_file(string $tmp_path)
         return new \WP_Error('svg_save', __('SVG içeriği kaydedilemedi.', 'myliba'));
     }
 
-    file_put_contents($tmp_path, $sanitized);
+    if (file_put_contents($tmp_path, $sanitized, LOCK_EX) === false) {
+        return new \WP_Error('svg_write', __('Temizlenen SVG dosyası kaydedilemedi.', 'myliba'));
+    }
 
     return true;
 }
@@ -208,6 +253,6 @@ function admin_upload_notice(): void
     }
 
     echo '<div class="notice notice-info is-dismissible"><p>'
-        . esc_html__('Myliba: Yalnızca WebP ve SVG formatındaki görseller yüklenebilir. PNG, JPG ve diğer formatlar reddedilecektir.', 'myliba')
+        . esc_html__('Myliba: Yalnızca WebP görselleri yüklenebilir; SVG yükleme yalnızca yöneticilere açıktır. PNG, JPG ve diğer formatlar reddedilecektir.', 'myliba')
         . '</p></div>';
 }

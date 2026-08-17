@@ -386,7 +386,25 @@ function register(): void
         'show_in_menu' => 'myliba-settings',
         'menu_icon' => 'dashicons-email-alt2',
         'supports' => ['title'],
-        'capability_type' => 'post',
+        // Form submissions contain personal data. Keep every operation behind
+        // the administrator-only manage_options capability instead of sharing
+        // the normal post capabilities granted to editors and authors.
+        'capabilities' => [
+            'edit_post' => 'manage_options',
+            'read_post' => 'manage_options',
+            'delete_post' => 'manage_options',
+            'edit_posts' => 'manage_options',
+            'edit_others_posts' => 'manage_options',
+            'delete_posts' => 'manage_options',
+            'delete_private_posts' => 'manage_options',
+            'delete_published_posts' => 'manage_options',
+            'delete_others_posts' => 'manage_options',
+            'publish_posts' => 'manage_options',
+            'read_private_posts' => 'manage_options',
+            'edit_private_posts' => 'manage_options',
+            'edit_published_posts' => 'manage_options',
+            'create_posts' => 'do_not_allow',
+        ],
         'map_meta_cap' => true,
     ]);
 }

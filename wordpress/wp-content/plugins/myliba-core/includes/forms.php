@@ -94,30 +94,30 @@ function render_form(string $context): string
         <div class="myliba-form__grid">
             <label>
                 <span><?php echo esc_html($is_demo ? site_text('form_first_name', 'First name') : site_text('form_name', 'Name')); ?></span>
-                <input name="name" required>
+                <input name="name" maxlength="120" required>
             </label>
             <?php if ($is_demo) : ?>
                 <label>
                     <span><?php echo esc_html(site_text('form_last_name', 'Last name')); ?></span>
-                    <input name="last_name" required>
+                    <input name="last_name" maxlength="120" required>
                 </label>
             <?php endif; ?>
             <label>
                 <span><?php echo esc_html(site_text('form_business_email', 'Business email')); ?></span>
-                <input type="email" name="email" required>
+                <input type="email" name="email" maxlength="254" required>
             </label>
             <label>
                 <span><?php echo esc_html(site_text('form_phone', 'Phone')); ?></span>
-                <input name="phone" inputmode="tel" <?php echo ($is_demo || $is_academy) ? 'required' : ''; ?>>
+                <input name="phone" inputmode="tel" maxlength="40" <?php echo ($is_demo || $is_academy) ? 'required' : ''; ?>>
             </label>
             <label>
                 <span><?php echo esc_html(site_text('form_company', 'Company')); ?></span>
-                <input name="company" <?php echo ($is_demo || $is_academy) ? 'required' : ''; ?>>
+                <input name="company" maxlength="160" <?php echo ($is_demo || $is_academy) ? 'required' : ''; ?>>
             </label>
             <?php if ($is_demo || $is_academy) : ?>
                 <label>
                     <span><?php echo esc_html(site_text('form_title', 'Title')); ?></span>
-                    <input name="job_title" <?php echo $is_academy ? 'required' : ''; ?>>
+                    <input name="job_title" maxlength="120" <?php echo $is_academy ? 'required' : ''; ?>>
                 </label>
             <?php endif; ?>
             <?php if ($is_demo) : ?>
@@ -151,13 +151,12 @@ function render_form(string $context): string
         <?php if (!$is_demo && !$is_academy) : ?>
             <label>
                 <span><?php echo esc_html(site_text('form_subject', 'Subject')); ?></span>
-                <input name="subject" required>
+                <input name="subject" maxlength="200" required>
             </label>
         <?php endif; ?>
-        <input type="hidden" name="type" value="<?php echo esc_attr($is_demo ? 'demo' : ($is_academy ? 'academy' : 'contact')); ?>">
         <label>
             <span><?php echo esc_html(site_text('form_message', 'Message')); ?></span>
-            <textarea name="message" rows="6" <?php echo $is_demo ? '' : 'required'; ?>></textarea>
+            <textarea name="message" rows="6" maxlength="5000" <?php echo $is_demo ? '' : 'required'; ?>></textarea>
         </label>
         <label class="myliba-form__consent">
             <input type="checkbox" name="kvkk" value="1" required>
@@ -184,7 +183,8 @@ function handle(): void
         exit;
     }
 
-    if (rate_limited()) {
+    $form_context = sanitize_key(wp_unslash($_POST['form_context'] ?? ''));
+    if (!in_array($form_context, ['contact', 'demo', 'academy'], true)) {
         wp_safe_redirect(add_query_arg('myliba_form', 'error', $redirect));
         exit;
     }
@@ -200,13 +200,35 @@ function handle(): void
         'program' => sanitize_text_field(wp_unslash($_POST['program'] ?? '')),
         'participation_type' => sanitize_key(wp_unslash($_POST['participation_type'] ?? '')),
         'subject' => sanitize_text_field(wp_unslash($_POST['subject'] ?? '')),
-        'type' => sanitize_key(wp_unslash($_POST['type'] ?? 'contact')),
-        'form_context' => sanitize_key(wp_unslash($_POST['form_context'] ?? 'contact')),
+        // Never trust a client-provided request type; derive it from the
+        // server-side allowlisted form context instead.
+        'type' => $form_context,
+        'form_context' => $form_context,
         'message' => sanitize_textarea_field(wp_unslash($_POST['message'] ?? '')),
         'kvkk' => !empty($_POST['kvkk']) ? 'yes' : 'no',
     ];
 
-    if (!$data['name'] || !$data['email'] || $data['kvkk'] !== 'yes') {
+    $length_limits = [
+        'name' => 120,
+        'last_name' => 120,
+        'email' => 254,
+        'phone' => 40,
+        'company' => 160,
+        'job_title' => 120,
+        'employee_count' => 20,
+        'program' => 200,
+        'participation_type' => 20,
+        'subject' => 200,
+        'message' => 5000,
+    ];
+    foreach ($length_limits as $field => $limit) {
+        if (strlen($data[$field]) > $limit) {
+            wp_safe_redirect(add_query_arg('myliba_form', 'error', $redirect));
+            exit;
+        }
+    }
+
+    if (!$data['name'] || !is_email($data['email']) || $data['kvkk'] !== 'yes') {
         wp_safe_redirect(add_query_arg('myliba_form', 'error', $redirect));
         exit;
     }
@@ -216,12 +238,29 @@ function handle(): void
         exit;
     }
 
-    if ($data['form_context'] === 'demo' && (!$data['last_name'] || !$data['phone'] || !$data['company'])) {
+    if ($data['form_context'] === 'demo' && (
+        !$data['last_name'] ||
+        !$data['phone'] ||
+        !$data['company'] ||
+        !in_array($data['employee_count'], ['1-50', '51-250', '251-1000', '1000+'], true)
+    )) {
         wp_safe_redirect(add_query_arg('myliba_form', 'error', $redirect));
         exit;
     }
 
-    if ($data['form_context'] === 'academy' && (!$data['phone'] || !$data['company'] || !$data['job_title'] || !$data['program'] || !in_array($data['participation_type'], ['individual', 'corporate'], true))) {
+    if ($data['form_context'] === 'academy' && (
+        !$data['phone'] ||
+        !$data['company'] ||
+        !$data['job_title'] ||
+        !$data['program'] ||
+        !academy_program_exists($data['program']) ||
+        !in_array($data['participation_type'], ['individual', 'corporate'], true)
+    )) {
+        wp_safe_redirect(add_query_arg('myliba_form', 'error', $redirect));
+        exit;
+    }
+
+    if (rate_limited()) {
         wp_safe_redirect(add_query_arg('myliba_form', 'error', $redirect));
         exit;
     }
@@ -244,21 +283,37 @@ function handle(): void
     exit;
 }
 
-function rate_limited(): bool
+function academy_program_exists(string $program): bool
 {
-    // Prefer X-Real-IP set by a trusted nginx proxy; fall back to REMOTE_ADDR.
-    $ip = '';
-    if (!empty($_SERVER['HTTP_X_REAL_IP'])) {
-        $ip = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_REAL_IP']));
-    }
-    if ($ip === '' && !empty($_SERVER['REMOTE_ADDR'])) {
-        $ip = sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR']));
-    }
-    if ($ip === '') {
-        $ip = 'unknown';
+    $program_ids = get_posts([
+        'post_type' => 'myliba_academy',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'fields' => 'ids',
+        'no_found_rows' => true,
+    ]);
+
+    foreach ($program_ids as $program_id) {
+        if (hash_equals((string) get_the_title((int) $program_id), $program)) {
+            return true;
+        }
     }
 
-    $key   = 'myliba_contact_' . md5($ip);
+    return false;
+}
+
+function rate_limited(): bool
+{
+    // Client-supplied forwarding headers are intentionally ignored here.
+    // Hosts with a trusted reverse proxy may provide the resolved address via
+    // this filter after validating the proxy hop themselves.
+    $remote_addr = !empty($_SERVER['REMOTE_ADDR'])
+        ? sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR']))
+        : '';
+    $ip = (string) apply_filters('myliba_form_client_ip', $remote_addr);
+    $ip = filter_var($ip, FILTER_VALIDATE_IP) ? $ip : 'unknown';
+
+    $key   = 'myliba_contact_' . hash('sha256', $ip);
     $count = (int) get_transient($key);
 
     if ($count >= 5) {
