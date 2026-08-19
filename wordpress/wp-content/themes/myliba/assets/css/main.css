@@ -13368,7 +13368,6 @@ body:has(.software-page) .site-footer__cta-wrap {
 }
 
 .solutions-hero .solutions-shell {
-  max-width: 1080px;
   padding-bottom: clamp(36px, 4.3vw, 120px);
   padding-top: clamp(36px, 4.5vw, 120px);
   position: relative;
