@@ -1260,7 +1260,7 @@ class Commands
                 '_myliba_academy_approach_title' => 'Eğitim Değil, Gerçek İşinizde Bir Dönüşüm Deneyimi',
                 '_myliba_academy_approach_steps' => "İhtiyaç Analizi | Kurumun hedefleri, kültürü analiz edilerek birlikte roadmap oluşturulur.\nHedeflerin Belirlenmesi | Şirket stratejisi, tüm ilgili ekiplerin katılımıyla hedef haritasına dönüştürülür.\nHedeflerin Yaşatılması | Kültürel dönüşüm ve yüksek performans için ihtiyacınız olan davranışlar bizzat iş başında geliştirilir.\nSonuçları İzleme | Şirket, ekip ve kişi bazında yeni nesil adil kararlar için data ile karar verme alışkanlığı kazandırılır.",
                 '_myliba_academy_stats' => "40 Saat | ICF CCE onaylı program\n3 Aşama | Öğren · Uygula · Ustalaş\nCanlı Oturumlar | Gerçek hedeflerle uygulama\nMezun Ağı | Sürekli gelişim ve networking",
-                '_myliba_academy_testimonials_title' => 'Katılımcılarımızın ve Kurumların Deneyimleri',
+                '_myliba_academy_testimonials_title' => '',
                 '_myliba_academy_faq_title' => 'Myliba Akademi Hakkında Merak Edilenler',
                 '_myliba_academy_faq_group' => 'Myliba Akademi',
                 '_myliba_academy_final_title' => 'Dönüşümü Yönetecek Liderleri Myliba Akademi ile Yetiştirin',

@@ -265,8 +265,20 @@ function register(): void
 
     register_post_type('myliba_testimonial', [
         'labels' => [
-            'name' => __('Testimonials', 'myliba'),
-            'singular_name' => __('Testimonial', 'myliba'),
+            'name' => 'Katılımcı Yorumları',
+            'singular_name' => 'Katılımcı Yorumu',
+            'menu_name' => 'Katılımcı Yorumları',
+            'add_new' => 'Yeni Yorum Ekle',
+            'add_new_item' => 'Yeni Katılımcı Yorumu Ekle',
+            'edit_item' => 'Katılımcı Yorumunu Düzenle',
+            'new_item' => 'Yeni Katılımcı Yorumu',
+            'view_item' => 'Katılımcı Yorumunu Görüntüle',
+            'search_items' => 'Katılımcı Yorumlarında Ara',
+            'not_found' => 'Henüz katılımcı yorumu eklenmemiş.',
+            'featured_image' => 'Kişi Fotoğrafı',
+            'set_featured_image' => 'Kişi fotoğrafı seç',
+            'remove_featured_image' => 'Kişi fotoğrafını kaldır',
+            'use_featured_image' => 'Kişi fotoğrafı olarak kullan',
         ],
         'public' => false,
         'show_ui' => true,

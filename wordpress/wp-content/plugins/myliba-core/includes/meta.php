@@ -76,7 +76,7 @@ function register_meta_boxes(string $post_type): void
     }
 
     if ($post_type === 'myliba_testimonial') {
-        add_meta_box('myliba_testimonial_details', __('Testimonial Details', 'myliba'), __NAMESPACE__ . '\\render_testimonial_box', $post_type, 'side');
+        add_meta_box('myliba_testimonial_details', 'Kişi ve Program Bilgileri', __NAMESPACE__ . '\\render_testimonial_box', $post_type, 'side', 'high');
     }
 
     if ($post_type === 'myliba_faq') {
@@ -924,10 +924,12 @@ function render_testimonial_box(\WP_Post $post): void
 {
     nonce();
 
-    field_text('_myliba_person_role', __('Person role', 'myliba'), get_post_meta($post->ID, '_myliba_person_role', true));
-    field_text('_myliba_company', __('Company', 'myliba'), get_post_meta($post->ID, '_myliba_company', true));
-    field_text('_myliba_academy_testimonial_program', __('Program name', 'myliba'), get_post_meta($post->ID, '_myliba_academy_testimonial_program', true));
-    field_number('_myliba_order', __('Sort order', 'myliba'), get_post_meta($post->ID, '_myliba_order', true));
+    echo '<p class="description">Kişinin adını üstteki başlık alanına, yorumunu ana içerik alanına ve fotoğrafını “Kişi Fotoğrafı” alanına ekleyin.</p>';
+    field_text('_myliba_person_role', 'Unvan / Görev', get_post_meta($post->ID, '_myliba_person_role', true));
+    field_text('_myliba_company', 'Kurum', get_post_meta($post->ID, '_myliba_company', true));
+    field_text('_myliba_academy_testimonial_program', 'Katıldığı Program', get_post_meta($post->ID, '_myliba_academy_testimonial_program', true));
+    field_number('_myliba_order', 'Sıralama', get_post_meta($post->ID, '_myliba_order', true));
+    echo '<p class="description">Küçük sayılar önce gösterilir (10, 20, 30…).</p>';
 }
 
 function render_faq_box(\WP_Post $post): void

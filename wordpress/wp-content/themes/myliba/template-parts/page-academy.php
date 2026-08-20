@@ -367,33 +367,52 @@ get_header();
     <?php endif; ?>
 
     <?php if ($testimonials->have_posts() && $meta('_myliba_academy_testimonials_title') !== ''): ?>
-        <section id="yorumlar" class="section academy-v2-testimonials" data-academy-slider>
+        <section id="yorumlar" class="section academy-v2-testimonials" data-academy-slider
+            aria-labelledby="academy-testimonials-title">
             <div class="academy-v2-section-head">
-                <h2><?php echo esc_html($meta('_myliba_academy_testimonials_title')); ?></h2>
-                <div class="academy-v2-slider-controls">
+                <div>
+                    <p class="academy-v2-testimonials__eyebrow">
+                        <?php echo esc_html(myliba_current_language() === 'tr' ? 'Gerçek deneyimler' : 'Real experiences'); ?>
+                    </p>
+                    <h2 id="academy-testimonials-title"><?php echo esc_html($meta('_myliba_academy_testimonials_title')); ?></h2>
+                </div>
+                <div class="academy-v2-slider-controls" aria-label="<?php echo esc_attr(myliba_current_language() === 'tr' ? 'Yorum gezinme kontrolleri' : 'Testimonial navigation'); ?>">
                     <button type="button" data-slider-previous
-                        aria-label="<?php echo esc_attr(myliba_text('Previous testimonial')); ?>">←</button>
+                        aria-label="<?php echo esc_attr(myliba_text('Previous testimonial')); ?>"><span aria-hidden="true">←</span></button>
                     <button type="button" data-slider-next
-                        aria-label="<?php echo esc_attr(myliba_text('Next testimonial')); ?>">→</button>
+                        aria-label="<?php echo esc_attr(myliba_text('Next testimonial')); ?>"><span aria-hidden="true">→</span></button>
                 </div>
             </div>
-            <div class="academy-v2-testimonials__track" data-slider-track>
+            <div class="academy-v2-testimonials__track" data-slider-track tabindex="0"
+                aria-label="<?php echo esc_attr(myliba_current_language() === 'tr' ? 'Katılımcı yorumları' : 'Participant testimonials'); ?>">
                 <?php while ($testimonials->have_posts()):
-                    $testimonials->the_post(); ?>
-                    <article>
+                    $testimonials->the_post();
+                    $person_name = trim(get_the_title());
+                    $role = trim((string) get_post_meta(get_the_ID(), '_myliba_person_role', true));
+                    $company = trim((string) get_post_meta(get_the_ID(), '_myliba_company', true));
+                    $testimonial_program = trim((string) get_post_meta(get_the_ID(), '_myliba_academy_testimonial_program', true));
+                    $initial = function_exists('mb_substr') ? mb_substr($person_name, 0, 1) : substr($person_name, 0, 1);
+                    ?>
+                    <article class="academy-v2-testimonial" aria-label="<?php echo esc_attr($person_name); ?>">
+                        <span class="academy-v2-testimonial__quote" aria-hidden="true">“</span>
+                        <blockquote><?php echo wp_kses_post(get_the_content()); ?></blockquote>
                         <div class="academy-v2-testimonial__person">
                             <?php if (has_post_thumbnail()): ?>
-                                <?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail', ['loading' => 'lazy']); ?>
+                                <?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail', [
+                                    'loading' => 'lazy',
+                                    'decoding' => 'async',
+                                    'alt' => $person_name,
+                                ]); ?>
+                            <?php else: ?>
+                                <span class="academy-v2-testimonial__avatar" aria-hidden="true"><?php echo esc_html(strtoupper($initial)); ?></span>
                             <?php endif; ?>
                             <div>
-                                <h3><?php the_title(); ?></h3>
-                                <p><?php echo esc_html(get_post_meta(get_the_ID(), '_myliba_person_role', true)); ?> ·
-                                    <?php echo esc_html(get_post_meta(get_the_ID(), '_myliba_company', true)); ?>
-                                </p>
+                                <h3><?php echo esc_html($person_name); ?></h3>
+                                <?php if ($role !== '' || $company !== ''): ?>
+                                    <p><?php echo esc_html(implode(' · ', array_filter([$role, $company]))); ?></p>
+                                <?php endif; ?>
                             </div>
                         </div>
-                        <blockquote><?php echo wp_kses_post(get_the_content()); ?></blockquote>
-                        <?php $testimonial_program = get_post_meta(get_the_ID(), '_myliba_academy_testimonial_program', true); ?>
                         <?php if ($testimonial_program): ?><span
                                 class="academy-v2-testimonial__program"><?php echo esc_html($testimonial_program); ?></span><?php endif; ?>
                     </article>

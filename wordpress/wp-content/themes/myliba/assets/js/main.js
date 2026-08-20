@@ -541,8 +541,22 @@
       track.scrollBy({ left: distance * direction, behavior: reducedMotion.matches ? "auto" : "smooth" });
     };
 
+    const updateControls = () => {
+      const overflow = track.scrollWidth > track.clientWidth + 2;
+      slider.classList.toggle("has-overflow", overflow);
+      if (previous) previous.disabled = !overflow || track.scrollLeft <= 2;
+      if (next) next.disabled = !overflow || track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+
     previous?.addEventListener("click", () => move(-1));
     next?.addEventListener("click", () => move(1));
+    track.addEventListener("scroll", updateControls, { passive: true });
+    track.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") move(-1);
+      if (event.key === "ArrowRight") move(1);
+    });
+    window.addEventListener("resize", updateControls, { passive: true });
+    updateControls();
   });
 
   // FAQ Live Search & Category Filtering

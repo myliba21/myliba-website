@@ -17,6 +17,55 @@ function boot(): void
     add_action('admin_notices', __NAMESPACE__ . '\\admin_notices');
     add_action('dashboard_glance_items', __NAMESPACE__ . '\\dashboard_counts');
     add_filter('use_block_editor_for_post_type', __NAMESPACE__ . '\\use_classic_editor_for_myliba_content', 10, 2);
+    add_filter('enter_title_here', __NAMESPACE__ . '\\testimonial_title_placeholder', 10, 2);
+    add_filter('manage_myliba_testimonial_posts_columns', __NAMESPACE__ . '\\testimonial_columns');
+    add_action('manage_myliba_testimonial_posts_custom_column', __NAMESPACE__ . '\\render_testimonial_column', 10, 2);
+}
+
+function testimonial_title_placeholder(string $placeholder, \WP_Post $post): string
+{
+    return $post->post_type === 'myliba_testimonial' ? 'Kişinin adı ve soyadı' : $placeholder;
+}
+
+function testimonial_columns(array $columns): array
+{
+    return [
+        'cb' => $columns['cb'] ?? '<input type="checkbox" />',
+        'myliba_photo' => 'Fotoğraf',
+        'title' => 'Ad Soyad',
+        'myliba_role' => 'Unvan / Kurum',
+        'myliba_program' => 'Program',
+        'myliba_order' => 'Sıra',
+        'date' => $columns['date'] ?? 'Tarih',
+    ];
+}
+
+function render_testimonial_column(string $column, int $post_id): void
+{
+    if ($column === 'myliba_photo') {
+        echo get_the_post_thumbnail($post_id, [48, 48], [
+            'style' => 'width:48px;height:48px;border-radius:50%;object-fit:cover;',
+            'alt' => '',
+        ]) ?: '<span aria-hidden="true">—</span>';
+        return;
+    }
+
+    if ($column === 'myliba_role') {
+        $parts = array_filter([
+            get_post_meta($post_id, '_myliba_person_role', true),
+            get_post_meta($post_id, '_myliba_company', true),
+        ]);
+        echo esc_html(implode(' · ', $parts) ?: '—');
+        return;
+    }
+
+    $meta_keys = [
+        'myliba_program' => '_myliba_academy_testimonial_program',
+        'myliba_order' => '_myliba_order',
+    ];
+    if (isset($meta_keys[$column])) {
+        echo esc_html((string) (get_post_meta($post_id, $meta_keys[$column], true) ?: '—'));
+    }
 }
 
 function simplify_admin_menu(): void
