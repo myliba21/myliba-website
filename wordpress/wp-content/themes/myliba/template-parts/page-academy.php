@@ -465,9 +465,13 @@ get_header();
                 </div>
                 <div class="academy-v2-slider-controls" aria-label="<?php echo esc_attr(myliba_current_language() === 'tr' ? 'Yorum gezinme kontrolleri' : 'Testimonial navigation'); ?>">
                     <button type="button" data-slider-previous
-                        aria-label="<?php echo esc_attr(myliba_text('Previous testimonial')); ?>"><span aria-hidden="true">←</span></button>
+                        aria-label="<?php echo esc_attr(myliba_text('Previous testimonial')); ?>">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    </button>
                     <button type="button" data-slider-next
-                        aria-label="<?php echo esc_attr(myliba_text('Next testimonial')); ?>"><span aria-hidden="true">→</span></button>
+                        aria-label="<?php echo esc_attr(myliba_text('Next testimonial')); ?>">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
                 </div>
             </div>
             <div class="academy-v2-testimonials__track" data-slider-track tabindex="0"
@@ -481,8 +485,17 @@ get_header();
                     $initial = function_exists('mb_substr') ? mb_substr($person_name, 0, 1) : substr($person_name, 0, 1);
                     ?>
                     <article class="academy-v2-testimonial" aria-label="<?php echo esc_attr($person_name); ?>">
-                        <span class="academy-v2-testimonial__quote" aria-hidden="true">“</span>
-                        <blockquote><?php echo wp_kses_post(get_the_content()); ?></blockquote>
+                        <div class="academy-v2-testimonial__header">
+                            <div class="academy-v2-testimonial__quote-badge" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.18zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.18z"/>
+                                </svg>
+                            </div>
+                            <?php if ($testimonial_program): ?>
+                                <span class="academy-v2-testimonial__program"><?php echo esc_html($testimonial_program); ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <blockquote class="academy-v2-testimonial__body"><?php echo wp_kses_post(get_the_content()); ?></blockquote>
                         <div class="academy-v2-testimonial__person">
                             <?php if (has_post_thumbnail()): ?>
                                 <?php echo get_the_post_thumbnail(get_the_ID(), 'thumbnail', [
@@ -493,19 +506,18 @@ get_header();
                             <?php else: ?>
                                 <span class="academy-v2-testimonial__avatar" aria-hidden="true"><?php echo esc_html(strtoupper($initial)); ?></span>
                             <?php endif; ?>
-                            <div>
+                            <div class="academy-v2-testimonial__info">
                                 <h3><?php echo esc_html($person_name); ?></h3>
                                 <?php if ($role !== '' || $company !== ''): ?>
                                     <p><?php echo esc_html(implode(' · ', array_filter([$role, $company]))); ?></p>
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <?php if ($testimonial_program): ?><span
-                                class="academy-v2-testimonial__program"><?php echo esc_html($testimonial_program); ?></span><?php endif; ?>
                     </article>
                 <?php endwhile;
                 wp_reset_postdata(); ?>
             </div>
+            <div class="academy-v2-slider-pagination" data-slider-pagination aria-hidden="true"></div>
         </section>
         </div>
     <?php endif; ?>

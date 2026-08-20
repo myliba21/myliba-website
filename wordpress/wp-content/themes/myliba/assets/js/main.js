@@ -625,30 +625,131 @@
     const track = slider.querySelector("[data-slider-track]");
     const previous = slider.querySelector("[data-slider-previous]");
     const next = slider.querySelector("[data-slider-next]");
+    const pagination = slider.querySelector("[data-slider-pagination]");
     if (!track) return;
 
+    const cards = Array.from(track.querySelectorAll(".academy-v2-testimonial, article"));
+    let autoplayTimer = null;
+    const intervalTime = 4500;
+    let dots = [];
+
+    const getStepDistance = () => {
+      const card = cards[0];
+      if (!card) return track.clientWidth;
+      const gap = 20;
+      return card.offsetWidth + gap;
+    };
+
+    const getMaxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
+
     const move = (direction) => {
-      const card = track.querySelector("article");
-      const distance = card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.85;
-      track.scrollBy({ left: distance * direction, behavior: reducedMotion.matches ? "auto" : "smooth" });
+      const step = getStepDistance();
+      const maxScroll = getMaxScroll();
+      const currentScroll = track.scrollLeft;
+
+      if (direction > 0) {
+        if (currentScroll >= maxScroll - 10) {
+          track.scrollTo({ left: 0, behavior: reducedMotion.matches ? "auto" : "smooth" });
+        } else {
+          track.scrollBy({ left: step, behavior: reducedMotion.matches ? "auto" : "smooth" });
+        }
+      } else {
+        if (currentScroll <= 10) {
+          track.scrollTo({ left: maxScroll, behavior: reducedMotion.matches ? "auto" : "smooth" });
+        } else {
+          track.scrollBy({ left: -step, behavior: reducedMotion.matches ? "auto" : "smooth" });
+        }
+      }
     };
 
     const updateControls = () => {
-      const overflow = track.scrollWidth > track.clientWidth + 2;
+      const maxScroll = getMaxScroll();
+      const overflow = maxScroll > 4;
       slider.classList.toggle("has-overflow", overflow);
-      if (previous) previous.disabled = !overflow || track.scrollLeft <= 2;
-      if (next) next.disabled = !overflow || track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+
+      if (dots.length > 0) {
+        const step = Math.max(1, getStepDistance());
+        const activeIdx = Math.min(dots.length - 1, Math.round(track.scrollLeft / step));
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle("is-active", idx === activeIdx);
+          dot.setAttribute("aria-selected", String(idx === activeIdx));
+        });
+      }
     };
 
-    previous?.addEventListener("click", () => move(-1));
-    next?.addEventListener("click", () => move(1));
+    const stopAutoplay = () => {
+      if (autoplayTimer) {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    };
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      if (!reducedMotion.matches && cards.length > 1) {
+        autoplayTimer = window.setInterval(() => {
+          move(1);
+        }, intervalTime);
+      }
+    };
+
+    if (pagination && cards.length > 1) {
+      pagination.innerHTML = "";
+      dots = cards.map((_, index) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "academy-v2-slider-dot" + (index === 0 ? " is-active" : "");
+        dot.setAttribute("aria-label", `Slide ${index + 1}`);
+        dot.addEventListener("click", () => {
+          track.scrollTo({ left: index * getStepDistance(), behavior: reducedMotion.matches ? "auto" : "smooth" });
+          startAutoplay();
+        });
+        pagination.appendChild(dot);
+        return dot;
+      });
+    }
+
+    previous?.addEventListener("click", () => {
+      move(-1);
+      startAutoplay();
+    });
+
+    next?.addEventListener("click", () => {
+      move(1);
+      startAutoplay();
+    });
+
+    slider.addEventListener("mouseenter", stopAutoplay);
+    slider.addEventListener("mouseleave", startAutoplay);
+    slider.addEventListener("focusin", stopAutoplay);
+    slider.addEventListener("focusout", (event) => {
+      if (!slider.contains(event.relatedTarget)) {
+        startAutoplay();
+      }
+    });
+
+    slider.addEventListener("touchstart", stopAutoplay, { passive: true });
+    slider.addEventListener("touchend", () => {
+      window.setTimeout(startAutoplay, 1200);
+    }, { passive: true });
+
     track.addEventListener("scroll", updateControls, { passive: true });
     track.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowLeft") move(-1);
-      if (event.key === "ArrowRight") move(1);
+      if (event.key === "ArrowLeft") {
+        move(-1);
+        startAutoplay();
+      } else if (event.key === "ArrowRight") {
+        move(1);
+        startAutoplay();
+      }
     });
-    window.addEventListener("resize", updateControls, { passive: true });
+
+    window.addEventListener("resize", () => {
+      updateControls();
+    }, { passive: true });
+
     updateControls();
+    startAutoplay();
   });
 
   // FAQ Live Search & Category Filtering

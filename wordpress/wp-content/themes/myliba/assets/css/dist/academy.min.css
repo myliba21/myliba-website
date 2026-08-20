@@ -1250,6 +1250,7 @@ width: calc(100% - (2 * var(--academy-v2-gutter)));
 .academy-v2-approach {
 background: #edf5f4;
 padding-bottom: clamp(44px, 3.8vw, 48px);
+padding-top: var(--academy-v2-section-space);
 }
 .academy-v2-process {
 margin-top: clamp(48px, 5vw, 64px);
