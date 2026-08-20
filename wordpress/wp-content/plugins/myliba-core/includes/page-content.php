@@ -183,6 +183,14 @@ function software_definition(): array
                     ]],
                 ],
             ],
+            'testimonials' => [
+                'label' => 'Katılımcı Yorumları',
+                'fields' => [
+                    'testimonials_eyebrow' => ['text', 'Üst etiket'],
+                    'testimonials_title' => ['textarea', 'Başlık'],
+                    'testimonials_text' => ['textarea', 'Açıklama'],
+                ],
+            ],
             'faq' => [
                 'label' => 'Sıkça Sorulan Sorular',
                 'fields' => [
@@ -245,6 +253,9 @@ function software_defaults(): array
             'why_formula_first' => 'Potansiyel',
             'why_formula_second' => 'Müdahale',
             'why_text' => 'İnsanlara daha fazla güven, net bir odak ve gelişim alanı sunduğunuzda potansiyel performansa dönüşür. Myliba Yazılım bu anlayışı canlı verilere dönüştürür.',
+            'testimonials_eyebrow' => 'Gerçek deneyimler',
+            'testimonials_title' => 'Myliba ile Dönüşümü Yaşayanların Yorumları',
+            'testimonials_text' => 'Myliba Yazılım ile hedef, performans ve gelişim süreçlerini dönüştüren ekiplerin deneyimleri.',
             'faq_eyebrow' => 'Merak Edilenler',
             'faq_title' => 'Myliba Yazılım Hakkında Sıkça Sorulan Sorular',
             'faq_text' => 'Yeni nesil performans yönetimine geçerken bilmek isteyeceğiniz temel noktalar.',

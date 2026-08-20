@@ -81,7 +81,7 @@ function register_meta_boxes(string $post_type): void
     }
 
     if ($post_type === 'myliba_testimonial') {
-        add_meta_box('myliba_testimonial_details', 'Kişi ve Program Bilgileri', __NAMESPACE__ . '\\render_testimonial_box', $post_type, 'side', 'high');
+        add_meta_box('myliba_testimonial_details', 'Kişi ve Yorum Bilgileri', __NAMESPACE__ . '\\render_testimonial_box', $post_type, 'side', 'high');
     }
 
     if ($post_type === 'myliba_faq') {
@@ -1245,9 +1245,45 @@ function render_testimonial_box(\WP_Post $post): void
     echo '<p class="description">Kişinin adını üstteki başlık alanına, yorumunu ana içerik alanına ve fotoğrafını “Kişi Fotoğrafı” alanına ekleyin.</p>';
     field_text('_myliba_person_role', 'Unvan / Görev', get_post_meta($post->ID, '_myliba_person_role', true));
     field_text('_myliba_company', 'Kurum', get_post_meta($post->ID, '_myliba_company', true));
-    field_text('_myliba_academy_testimonial_program', 'Katıldığı Program', get_post_meta($post->ID, '_myliba_academy_testimonial_program', true));
+    field_text('_myliba_academy_testimonial_program', 'Program / Ürün Etiketi', get_post_meta($post->ID, '_myliba_academy_testimonial_program', true), 'Kartın üstünde gösterilir; kullanmak istemiyorsanız boş bırakın.');
+    field_testimonial_pages($post);
     field_number('_myliba_order', 'Sıralama', get_post_meta($post->ID, '_myliba_order', true));
     echo '<p class="description">Küçük sayılar önce gösterilir (10, 20, 30…).</p>';
+}
+
+function field_testimonial_pages(\WP_Post $post): void
+{
+    $selected_page_ids = array_values(array_filter(array_map(
+        'absint',
+        get_post_meta($post->ID, '_myliba_testimonial_page', false)
+    )));
+    $pages = get_posts([
+        'post_type' => 'page',
+        'post_status' => ['publish', 'draft', 'private'],
+        'posts_per_page' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'suppress_filters' => false,
+    ]);
+
+    echo '<input type="hidden" name="_myliba_testimonial_page_present" value="1">';
+    echo '<p><strong>Gösterileceği Sayfalar</strong></p>';
+    echo '<div style="background:#fff;border:1px solid #8c8f94;max-height:220px;overflow:auto;padding:8px">';
+    foreach ($pages as $page) {
+        $language = function_exists('pll_get_post_language') ? pll_get_post_language($page->ID, 'slug') : '';
+        $label = get_the_title($page->ID) ?: sprintf('Sayfa #%d', $page->ID);
+        if ($language !== '') {
+            $label .= ' (' . strtoupper($language) . ')';
+        }
+        printf(
+            '<label style="display:block;margin:0 0 6px"><input type="checkbox" name="_myliba_testimonial_page[]" value="%1$d" %2$s> %3$s</label>',
+            $page->ID,
+            checked(in_array($page->ID, $selected_page_ids, true), true, false),
+            esc_html($label)
+        );
+    }
+    echo '</div>';
+    echo '<p class="description">Birden fazla sayfa seçebilirsiniz. Seçim yapılmamış eski yorumlar, geriye dönük uyumluluk için yalnızca Akademi sayfasında gösterilir.</p>';
 }
 
 function render_faq_box(\WP_Post $post): void
@@ -1516,6 +1552,25 @@ function save(int $post_id, \WP_Post $post): void
                     if ($field === '_myliba_academy_hero_images') {
                         delete_post_meta($post_id, '_myliba_academy_hero_image');
                     }
+                }
+            }
+            continue;
+        }
+
+        if ($type === 'page_relationships') {
+            if (!isset($_POST[$field . '_present'])) {
+                continue;
+            }
+
+            $raw_page_ids = isset($_POST[$field]) && is_array($_POST[$field])
+                ? wp_unslash($_POST[$field])
+                : [];
+            $page_ids = array_values(array_unique(array_filter(array_map('absint', $raw_page_ids))));
+
+            delete_post_meta($post_id, $field);
+            foreach ($page_ids as $page_id) {
+                if (get_post_type($page_id) === 'page' && current_user_can('read_post', $page_id)) {
+                    add_post_meta($post_id, $field, (string) $page_id, false);
                 }
             }
             continue;
@@ -1921,6 +1976,7 @@ function field_definitions(string $post_type): array
             '_myliba_person_role' => 'text',
             '_myliba_company' => 'text',
             '_myliba_academy_testimonial_program' => 'text',
+            '_myliba_testimonial_page' => 'page_relationships',
             '_myliba_order' => 'number',
         ];
     }

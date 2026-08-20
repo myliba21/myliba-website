@@ -621,14 +621,14 @@
     }
   }
 
-  document.querySelectorAll("[data-academy-slider]").forEach((slider) => {
+  document.querySelectorAll("[data-academy-slider], [data-testimonial-slider]").forEach((slider) => {
     const track = slider.querySelector("[data-slider-track]");
     const previous = slider.querySelector("[data-slider-previous]");
     const next = slider.querySelector("[data-slider-next]");
     const pagination = slider.querySelector("[data-slider-pagination]");
     if (!track) return;
 
-    const cards = Array.from(track.querySelectorAll(".academy-v2-testimonial, article"));
+    const cards = Array.from(track.querySelectorAll(".testimonial-card, .academy-v2-testimonial, article"));
     let autoplayTimer = null;
     const intervalTime = 4500;
     let dots = [];
@@ -636,7 +636,8 @@
     const getStepDistance = () => {
       const card = cards[0];
       if (!card) return track.clientWidth;
-      const gap = 20;
+      const trackStyle = window.getComputedStyle(track);
+      const gap = parseFloat(trackStyle.gap || trackStyle.columnGap) || 20;
       return card.offsetWidth + gap;
     };
 
@@ -698,7 +699,7 @@
       dots = cards.map((_, index) => {
         const dot = document.createElement("button");
         dot.type = "button";
-        dot.className = "academy-v2-slider-dot" + (index === 0 ? " is-active" : "");
+        dot.className = "testimonial-slider__dot academy-v2-slider-dot" + (index === 0 ? " is-active" : "");
         dot.setAttribute("aria-label", `Slide ${index + 1}`);
         dot.addEventListener("click", () => {
           track.scrollTo({ left: index * getStepDistance(), behavior: reducedMotion.matches ? "auto" : "smooth" });

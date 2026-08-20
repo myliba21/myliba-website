@@ -34,7 +34,8 @@ function testimonial_columns(array $columns): array
         'myliba_photo' => 'Fotoğraf',
         'title' => 'Ad Soyad',
         'myliba_role' => 'Unvan / Kurum',
-        'myliba_program' => 'Program',
+        'myliba_program' => 'Program / Ürün',
+        'myliba_pages' => 'Gösterim',
         'myliba_order' => 'Sıra',
         'date' => $columns['date'] ?? 'Tarih',
     ];
@@ -56,6 +57,23 @@ function render_testimonial_column(string $column, int $post_id): void
             get_post_meta($post_id, '_myliba_company', true),
         ]);
         echo esc_html(implode(' · ', $parts) ?: '—');
+        return;
+    }
+
+    if ($column === 'myliba_pages') {
+        $page_ids = array_values(array_filter(array_map(
+            'absint',
+            get_post_meta($post_id, '_myliba_testimonial_page', false)
+        )));
+        if (!$page_ids) {
+            echo esc_html__('Akademi (eski kayıt)', 'myliba');
+            return;
+        }
+
+        $page_titles = array_map(static function (int $page_id): string {
+            return get_the_title($page_id) ?: sprintf(__('Sayfa #%d', 'myliba'), $page_id);
+        }, $page_ids);
+        echo esc_html(implode(', ', $page_titles));
         return;
     }
 

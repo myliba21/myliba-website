@@ -11,6 +11,7 @@ $modules = $rows('modules');
 $stats = $rows('stats');
 $faqs = $rows('faqs');
 $workflow_steps = $rows('workflow_steps');
+$testimonials = myliba_get_testimonials_for_page($page_id, 12);
 
 get_header();
 ?>
@@ -151,6 +152,17 @@ get_header();
             </div>
         </div>
     </section>
+
+    <?php if ($testimonials->have_posts() && $copy('testimonials_title') !== ''): ?>
+        <?php get_template_part('template-parts/testimonials', null, [
+            'query' => $testimonials,
+            'id' => 'yorumlar',
+            'eyebrow' => $copy('testimonials_eyebrow'),
+            'title' => $copy('testimonials_title'),
+            'text' => $copy('testimonials_text'),
+            'class' => 'software-testimonials',
+        ]); ?>
+    <?php endif; ?>
 
     <section class="software-section software-faq">
         <div class="software-faq__heading">

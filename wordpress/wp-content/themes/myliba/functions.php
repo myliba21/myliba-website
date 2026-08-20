@@ -2251,6 +2251,72 @@ function myliba_get_entries(string $post_type, int $limit = 6, array $args = [])
     return new WP_Query($query_args);
 }
 
+function myliba_get_testimonials_for_page(int $page_id, int $limit = 12, bool $include_unassigned = false): WP_Query
+{
+    $placement_query = [
+        'key' => '_myliba_testimonial_page',
+        'value' => (string) $page_id,
+        'compare' => '=',
+    ];
+
+    if ($include_unassigned) {
+        $placement_query = [
+            'relation' => 'OR',
+            $placement_query,
+            [
+                'key' => '_myliba_testimonial_page',
+                'compare' => 'NOT EXISTS',
+            ],
+        ];
+    }
+
+    $meta_query = [$placement_query];
+    if (!function_exists('pll_current_language')) {
+        $meta_query[] = [
+            'key' => '_myliba_language',
+            'value' => myliba_current_language(),
+            'compare' => '=',
+        ];
+    }
+    if (count($meta_query) > 1) {
+        $meta_query['relation'] = 'AND';
+    }
+
+    return myliba_get_entries('myliba_testimonial', $limit, [
+        'meta_query' => $meta_query,
+    ]);
+}
+
+function myliba_testimonials_shortcode(array $attributes = []): string
+{
+    $page_id = get_queried_object_id();
+    if (!$page_id || get_post_type($page_id) !== 'page') {
+        return '';
+    }
+
+    $attributes = shortcode_atts([
+        'eyebrow' => myliba_current_language() === 'tr' ? 'Gerçek deneyimler' : 'Real experiences',
+        'title' => myliba_current_language() === 'tr' ? 'Katılımcı Yorumları' : 'Participant Testimonials',
+        'text' => '',
+        'limit' => '12',
+    ], $attributes, 'myliba_testimonials');
+    $testimonials = myliba_get_testimonials_for_page($page_id, max(1, min(50, absint($attributes['limit']))));
+    if (!$testimonials->have_posts()) {
+        return '';
+    }
+
+    ob_start();
+    get_template_part('template-parts/testimonials', null, [
+        'query' => $testimonials,
+        'id' => 'yorumlar-' . $page_id,
+        'eyebrow' => sanitize_text_field((string) $attributes['eyebrow']),
+        'title' => sanitize_text_field((string) $attributes['title']),
+        'text' => sanitize_text_field((string) $attributes['text']),
+    ]);
+    return (string) ob_get_clean();
+}
+add_shortcode('myliba_testimonials', 'myliba_testimonials_shortcode');
+
 function myliba_client_logo_posts(int $limit = 24): array
 {
     $query = myliba_get_entries('myliba_client_logo', $limit, ['meta_query' => []]);
