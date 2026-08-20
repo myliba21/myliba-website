@@ -211,7 +211,14 @@ function render_academy_page_box(\WP_Post $post): void
     field_text('_myliba_academy_hero_tertiary_label', __('Tertiary CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_tertiary_label', true));
     field_url('_myliba_academy_hero_tertiary_url', __('Tertiary CTA URL', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_tertiary_url', true));
     field_textarea('_myliba_academy_hero_badges', __('Hero badges', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_badges', true), __('One row per line as Value | Label.', 'myliba'));
-    field_media('_myliba_academy_hero_image', __('Hero image', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_image', true));
+    $hero_images = get_post_meta($post->ID, '_myliba_academy_hero_images', true);
+    if (empty($hero_images)) {
+        $single_hero_image = get_post_meta($post->ID, '_myliba_academy_hero_image', true);
+        if ($single_hero_image) {
+            $hero_images = [absint($single_hero_image)];
+        }
+    }
+    field_gallery('_myliba_academy_hero_images', __('Hero Slider Görselleri (Birden fazla seçilebilir)', 'myliba'), $hero_images, __('Birden fazla resim seçildiğinde sağ alanda otomatik geçişli slider olarak gösterilir. Sıralamayı değiştirmek için sürükleyip bırakabilirsiniz.', 'myliba'));
     field_media('_myliba_academy_icf_image', __('ICF approval badge', 'myliba'), get_post_meta($post->ID, '_myliba_academy_icf_image', true));
     field_media('_myliba_academy_certificate_image', __('Certificate mock-up', 'myliba'), get_post_meta($post->ID, '_myliba_academy_certificate_image', true));
     field_media('_myliba_academy_digital_badge_image', __('Digital badge', 'myliba'), get_post_meta($post->ID, '_myliba_academy_digital_badge_image', true));
@@ -1176,6 +1183,28 @@ function save(int $post_id, \WP_Post $post): void
             continue;
         }
 
+        if ($type === 'gallery') {
+            $present_key = $field . '_present';
+            if (isset($_POST[$present_key])) {
+                $images = [];
+                if (!empty($_POST[$field]) && is_array($_POST[$field])) {
+                    $images = array_values(array_filter(array_map('absint', $_POST[$field])));
+                }
+                if (!empty($images)) {
+                    update_post_meta($post_id, $field, $images);
+                    if ($field === '_myliba_academy_hero_images') {
+                        update_post_meta($post_id, '_myliba_academy_hero_image', (string) $images[0]);
+                    }
+                } else {
+                    delete_post_meta($post_id, $field);
+                    if ($field === '_myliba_academy_hero_images') {
+                        delete_post_meta($post_id, '_myliba_academy_hero_image');
+                    }
+                }
+            }
+            continue;
+        }
+
         if (!array_key_exists($field, $_POST) && $type !== 'checkbox') {
             continue;
         }
@@ -1466,6 +1495,7 @@ function field_definitions(string $post_type): array
         '_myliba_academy_hero_tertiary_label' => 'text',
         '_myliba_academy_hero_tertiary_url' => 'url',
         '_myliba_academy_hero_badges' => 'textarea',
+        '_myliba_academy_hero_images' => 'gallery',
         '_myliba_academy_hero_image' => 'number',
         '_myliba_academy_icf_image' => 'number',
         '_myliba_academy_certificate_image' => 'number',
@@ -1631,6 +1661,103 @@ function print_media_field_script(): void
                 $field.find(".myliba-media-field__preview").empty();
                 $field.find(".myliba-media-field__choose").text(' . wp_json_encode(__('Choose image', 'myliba')) . ');
                 $(this).prop("hidden", true);
+            });
+        });
+    </script>';
+}
+
+function field_gallery(string $name, string $label, mixed $value, string $description = ''): void
+{
+    $image_ids = [];
+    if (is_array($value)) {
+        $image_ids = array_values(array_filter(array_map('absint', $value)));
+    } elseif (is_numeric($value) && (int) $value > 0) {
+        $image_ids = [(int) $value];
+    }
+
+    echo '<div class="myliba-gallery-field" style="margin:0 0 20px">';
+    echo '<label style="display:block;font-weight:600;margin-bottom:4px">' . esc_html($label) . '</label>';
+    if ($description !== '') {
+        echo '<p class="description" style="margin:2px 0 8px">' . esc_html($description) . '</p>';
+    }
+    echo '<div class="myliba-gallery-field__items" style="display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 12px;min-height:36px">';
+    foreach ($image_ids as $id) {
+        $thumb = wp_get_attachment_image_url($id, 'thumbnail');
+        if (!$thumb) {
+            continue;
+        }
+        echo '<div class="myliba-gallery-field__item" data-id="' . esc_attr((string) $id) . '" style="position:relative;border:1px solid #ccd0d4;border-radius:8px;padding:4px;background:#fff;cursor:grab;box-shadow:0 2px 5px rgba(0,0,0,0.05);">';
+        echo '<img src="' . esc_url($thumb) . '" style="display:block;width:100px;height:100px;object-fit:contain;background:#f9f9f9;border-radius:6px;" alt="">';
+        echo '<input type="hidden" name="' . esc_attr($name) . '[]" value="' . esc_attr((string) $id) . '">';
+        echo '<button type="button" class="button-link-delete myliba-gallery-field__remove" title="' . esc_attr__('Remove image', 'myliba') . '" style="position:absolute;top:-6px;right:-6px;background:#fff;border:1px solid #dcdcde;border-radius:50%;width:22px;height:22px;line-height:18px;text-align:center;padding:0;color:#d63638;font-size:16px;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,0.1)">&times;</button>';
+        echo '</div>';
+    }
+    echo '</div>';
+    echo '<input type="hidden" name="' . esc_attr($name . '_present') . '" value="1">';
+    echo '<button type="button" class="button button-primary myliba-gallery-field__add" data-name="' . esc_attr($name) . '">' . esc_html__('Resim Ekle / Seç (Çoklu Seçim)', 'myliba') . '</button>';
+    echo '</div>';
+
+    print_gallery_field_script();
+}
+
+function print_gallery_field_script(): void
+{
+    static $script_printed = false;
+    if ($script_printed) {
+        return;
+    }
+    $script_printed = true;
+    echo '<script>
+        jQuery(function($){
+            function initGallerySortable() {
+                $(".myliba-gallery-field__items").sortable({
+                    items: ".myliba-gallery-field__item",
+                    cursor: "grabbing",
+                    tolerance: "pointer",
+                    placeholder: "myliba-gallery-placeholder",
+                    forcePlaceholderSize: true
+                });
+            }
+            initGallerySortable();
+
+            $(document).on("click", ".myliba-gallery-field__add", function(e){
+                e.preventDefault();
+                var $container = $(this).closest(".myliba-gallery-field");
+                var $items = $container.find(".myliba-gallery-field__items");
+                var name = $(this).data("name");
+
+                var frame = wp.media({
+                    title: ' . wp_json_encode(__('Görselleri Seçin', 'myliba')) . ',
+                    button: { text: ' . wp_json_encode(__('Görselleri Ekle', 'myliba')) . ' },
+                    multiple: true,
+                    library: { type: "image" }
+                });
+
+                frame.on("select", function(){
+                    var selection = frame.state().get("selection");
+                    selection.each(function(attachment){
+                        var item = attachment.toJSON();
+                        var id = item.id;
+                        var thumb = item.sizes && item.sizes.thumbnail ? item.sizes.thumbnail.url : (item.sizes && item.sizes.medium ? item.sizes.medium.url : item.url);
+
+                        var html = "<div class=\"myliba-gallery-field__item\" data-id=\"" + id + "\" style=\"position:relative;border:1px solid #ccd0d4;border-radius:8px;padding:4px;background:#fff;cursor:grab;box-shadow:0 2px 5px rgba(0,0,0,0.05);\">" +
+                            "<img src=\"" + thumb + "\" style=\"display:block;width:100px;height:100px;object-fit:contain;background:#f9f9f9;border-radius:6px;\" alt=\"\">" +
+                            "<input type=\"hidden\" name=\"" + name + "[]\" value=\"" + id + "\">" +
+                            "<button type=\"button\" class=\"button-link-delete myliba-gallery-field__remove\" title=\"" + ' . wp_json_encode(__('Remove image', 'myliba')) . ' + "\" style=\"position:absolute;top:-6px;right:-6px;background:#fff;border:1px solid #dcdcde;border-radius:50%;width:22px;height:22px;line-height:18px;text-align:center;padding:0;color:#d63638;font-size:16px;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,0.1)\">&times;</button>" +
+                            "</div>";
+
+                        $items.append(html);
+                    });
+                    initGallerySortable();
+                });
+                frame.open();
+            });
+
+            $(document).on("click", ".myliba-gallery-field__remove", function(e){
+                e.preventDefault();
+                $(this).closest(".myliba-gallery-field__item").fadeOut(150, function(){
+                    $(this).remove();
+                });
             });
         });
     </script>';

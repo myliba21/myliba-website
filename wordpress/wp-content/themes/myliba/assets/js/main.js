@@ -404,6 +404,98 @@
     start();
   });
 
+  document.querySelectorAll("[data-academy-hero-slider]").forEach((slider) => {
+    const slides = Array.from(slider.querySelectorAll("[data-academy-hero-slide]"));
+    const dots = Array.from(slider.querySelectorAll("[data-academy-hero-dot]"));
+
+    if (slides.length < 2) {
+      return;
+    }
+
+    let activeIndex = Math.max(0, slides.findIndex((slide) => slide.classList.contains("is-active")));
+    let autoplayTimer;
+    const intervalTime = 4500;
+
+    const showSlide = (nextIndex) => {
+      activeIndex = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, index) => {
+        const isActive = index === activeIndex;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", String(!isActive));
+      });
+      dots.forEach((dot, index) => {
+        const isActive = index === activeIndex;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-selected", String(isActive));
+        dot.tabIndex = isActive ? 0 : -1;
+      });
+    };
+
+    const stopAutoplay = () => {
+      if (autoplayTimer) {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    };
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      if (!reducedMotion.matches) {
+        autoplayTimer = window.setInterval(() => {
+          showSlide(activeIndex + 1);
+        }, intervalTime);
+      }
+    };
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        showSlide(index);
+        startAutoplay();
+      });
+    });
+
+    slider.addEventListener("mouseenter", stopAutoplay);
+    slider.addEventListener("mouseleave", startAutoplay);
+    slider.addEventListener("focusin", stopAutoplay);
+    slider.addEventListener("focusout", (event) => {
+      if (!slider.contains(event.relatedTarget)) {
+        startAutoplay();
+      }
+    });
+
+    slider.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        showSlide(activeIndex - 1);
+        startAutoplay();
+      } else if (event.key === "ArrowRight") {
+        showSlide(activeIndex + 1);
+        startAutoplay();
+      }
+    });
+
+    let startX = 0;
+    slider.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      stopAutoplay();
+    }, { passive: true });
+
+    slider.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          showSlide(activeIndex + 1);
+        } else {
+          showSlide(activeIndex - 1);
+        }
+      }
+      startAutoplay();
+    }, { passive: true });
+
+    showSlide(activeIndex);
+    startAutoplay();
+  });
+
   const revealTargets = Array.from(document.querySelectorAll([
     ".section__heading",
     ".section--split > div",

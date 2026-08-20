@@ -60,7 +60,37 @@ $hero_badges = $rows($meta('_myliba_academy_hero_badges'));
 $nav_items = $rows($meta('_myliba_academy_nav_items'));
 $approach_steps = $rows($meta('_myliba_academy_approach_steps'));
 $stats = $rows($meta('_myliba_academy_stats'));
-$hero_image = $image('_myliba_academy_hero_image', 'academy-v2-hero__main-image', true);
+
+$hero_images_meta = get_post_meta($page_id, '_myliba_academy_hero_images', true);
+$hero_image_ids = [];
+if (is_array($hero_images_meta)) {
+    $hero_image_ids = array_values(array_filter(array_map('absint', $hero_images_meta)));
+} elseif (is_string($hero_images_meta) && trim($hero_images_meta) !== '') {
+    $decoded = json_decode($hero_images_meta, true);
+    if (is_array($decoded)) {
+        $hero_image_ids = array_values(array_filter(array_map('absint', $decoded)));
+    }
+}
+if (empty($hero_image_ids)) {
+    $single_id = absint(get_post_meta($page_id, '_myliba_academy_hero_image', true));
+    if ($single_id) {
+        $hero_image_ids = [$single_id];
+    }
+}
+
+$hero_slider_images = [];
+foreach ($hero_image_ids as $idx => $img_id) {
+    $img_html = wp_get_attachment_image($img_id, 'large', false, [
+        'class' => 'academy-v2-hero__main-image',
+        'loading' => $idx === 0 ? 'eager' : 'lazy',
+        'fetchpriority' => $idx === 0 ? 'high' : 'auto',
+        'decoding' => 'async',
+    ]);
+    if ($img_html) {
+        $hero_slider_images[] = $img_html;
+    }
+}
+
 $hero_visuals = array_filter([
     $image('_myliba_academy_certificate_image', 'academy-v2-hero__certificate', true),
     $image('_myliba_academy_icf_image', 'academy-v2-hero__icf', true),
@@ -135,12 +165,27 @@ get_header();
                     </div>
                 <?php endif; ?>
             </div>
-            <?php if ($hero_image || $hero_visuals || $featured_program): ?>
+            <?php if (!empty($hero_slider_images) || $hero_visuals || $featured_program): ?>
                 <div class="academy-v2-hero__visual" aria-hidden="true">
                     <span class="academy-v2-orbit academy-v2-orbit--one"></span>
                     <span class="academy-v2-orbit academy-v2-orbit--two"></span>
-                    <?php if ($hero_image): ?>
-                        <?php echo $hero_image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php if (count($hero_slider_images) > 1): ?>
+                        <div class="academy-v2-hero__slider" data-academy-hero-slider aria-roledescription="carousel" aria-label="<?php echo esc_attr(myliba_text('Academy hero gallery')); ?>">
+                            <div class="academy-v2-hero__slider-track">
+                                <?php foreach ($hero_slider_images as $slider_idx => $slider_img): ?>
+                                    <div class="academy-v2-hero__slide<?php echo $slider_idx === 0 ? ' is-active' : ''; ?>" data-academy-hero-slide aria-hidden="<?php echo $slider_idx === 0 ? 'false' : 'true'; ?>">
+                                        <?php echo $slider_img; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="academy-v2-hero__slider-dots" role="tablist" aria-label="<?php echo esc_attr(myliba_text('Slides')); ?>">
+                                <?php foreach ($hero_slider_images as $slider_idx => $slider_img): ?>
+                                    <button type="button" class="academy-v2-hero__slider-dot<?php echo $slider_idx === 0 ? ' is-active' : ''; ?>" role="tab" aria-selected="<?php echo $slider_idx === 0 ? 'true' : 'false'; ?>" aria-label="<?php echo esc_attr(sprintf(myliba_text('Slide %d'), $slider_idx + 1)); ?>" data-academy-hero-dot="<?php echo $slider_idx; ?>"></button>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php elseif (!empty($hero_slider_images)): ?>
+                        <?php echo $hero_slider_images[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     <?php elseif ($hero_visuals): ?>
                         <?php echo implode('', $hero_visuals); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     <?php else: ?>
