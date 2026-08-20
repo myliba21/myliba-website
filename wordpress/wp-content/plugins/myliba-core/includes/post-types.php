@@ -405,7 +405,12 @@ function register(): void
             'edit_published_posts' => 'manage_options',
             'create_posts' => 'do_not_allow',
         ],
-        'map_meta_cap' => true,
+        // These capability values deliberately reuse the primitive
+        // manage_options capability. Enabling meta-cap mapping here would
+        // register manage_options globally as an edit_post meta capability,
+        // causing every normal manage_options check to resolve to
+        // do_not_allow when no submission ID is supplied.
+        'map_meta_cap' => false,
     ]);
 }
 

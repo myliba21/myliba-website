@@ -1263,7 +1263,7 @@ function myliba_page_url(string $key): string
 {
     $lang = myliba_current_language();
     $paths = [
-        'products' => ['en' => 'en/our-products', 'tr' => 'tr/yazilim'],
+        'products' => ['en' => 'en/software', 'tr' => 'tr/yazilim'],
         'academy' => ['en' => 'en/okr-culture-academy', 'tr' => 'tr/okr-kultur-akademisi'],
         'culture' => ['en' => 'en/culture-analysis', 'tr' => 'tr/kultur-analizi'],
         'ethics' => ['en' => 'en/ethics-counsel', 'tr' => 'tr/etik-danismanlik'],
@@ -1378,8 +1378,7 @@ function myliba_localize_url(string $url, string $target_lang = ''): string
     $target_lang = $target_lang !== '' ? $target_lang : myliba_current_language();
 
     $known_routes = [
-        'products' => ['tr' => '/tr/urunler/', 'en' => '/en/our-products/'],
-        'products_alt' => ['tr' => '/tr/yazilim/', 'en' => '/en/software/'],
+        'products' => ['tr' => '/tr/yazilim/', 'en' => '/en/software/'],
         'academy' => ['tr' => '/tr/okr-kultur-akademisi/', 'en' => '/en/okr-culture-academy/'],
         'solutions' => ['tr' => '/tr/cozumler/', 'en' => '/en/solutions/'],
         'development' => ['tr' => '/tr/gelisim-merkezi/', 'en' => '/en/development-center/'],
@@ -2671,5 +2670,4 @@ function myliba_inject_contact_social_links(string $content): string
     return $content;
 }
 add_filter('the_content', 'myliba_inject_contact_social_links', 20);
-
 

@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: GlotPress/4.0.3\n"
+"X-Generator: GlotPress/4.1.0\n"
 "Language: tr\n"
 "Project-Id-Version: Themes - Twenty Twenty-Four\n"
 
@@ -23,35 +23,35 @@ msgstr "Yirmi Yirmi-Dört"
 msgid "Twenty Twenty-Four is designed to be flexible, versatile and applicable to any website. Its collection of templates and patterns tailor to different needs, such as presenting a business, blogging and writing or showcasing work. A multitude of possibilities open up with just a few adjustments to color and typography. Twenty Twenty-Four comes with style variations and full page designs to help speed up the site building process, is fully compatible with the site editor, and takes advantage of new design tools introduced in WordPress 6.4."
 msgstr "Yirmi Yirmi-Dört esnek, çok yönlü ve her web sitesine uygulanabilecek şekilde tasarlanmıştır. Bir işletmeyi tanıtmak, blog ve yazı yazmak veya çalışmaları sergilemek gibi farklı ihtiyaçlara göre uyarlanabilen bir şablon ve model koleksiyonudur. Renk ve tipografide yalnızca birkaç ayarlamayla çok sayıda olasılık ortaya çıkar. Yirmi Yirmi-Dört, site oluşturma sürecini hızlandırmaya yardımcı olmak için biçem çeşitleri ve tam sayfa tasarımlar ile birlikte gelir, site düzenleyiciyle tamamen uyumludur ve WordPress 6.4'te sunulan yeni tasarım araçlarından yararlanır."
 
-#: patterns/footer.php:96
+#: patterns/footer.php:101
 msgid "Twitter/X"
 msgstr "Twitter/X"
 
-#: patterns/footer.php:51
+#: patterns/footer.php:56
 msgid "Careers"
 msgstr "Kariyer"
 
-#: patterns/footer.php:50
+#: patterns/footer.php:55
 msgid "History"
 msgstr "Tarihçe"
 
-#: patterns/footer.php:49
+#: patterns/footer.php:54
 msgid "Team"
 msgstr "Ekip"
 
-#: patterns/footer.php:74
+#: patterns/footer.php:79
 msgid "Contact Us"
 msgstr "Bize ulaşın"
 
-#: patterns/footer.php:73
+#: patterns/footer.php:78
 msgid "Terms and Conditions"
 msgstr "Şartlar ve koşullar"
 
-#: patterns/footer.php:72
+#: patterns/footer.php:77
 msgid "Privacy Policy"
 msgstr "Gizlilik politikası"
 
-#: functions.php:199
+#: functions.php:188
 msgctxt "Block pattern category"
 msgid "Pages"
 msgstr "Sayfalar"
@@ -61,18 +61,18 @@ msgctxt "Pattern title"
 msgid "List of posts without images, 1 column"
 msgstr "Görselsiz yazı listesi, 1 sütun"
 
-#: patterns/hidden-portfolio-hero.php:16
+#: patterns/hidden-portfolio-hero.php:21
 msgid "I’m <em>Leia Acosta</em>, a passionate photographer who finds inspiration in capturing the fleeting beauty of life."
 msgstr "Ben <em>Leia Acosta</em>, hayatın geçici güzelliğini yakalayarak ilham bulan tutkulu bir fotoğrafçıyım."
 
-#: functions.php:200
+#: functions.php:189
 msgid "A collection of full page layouts."
 msgstr "Tam sayfa düzenlerinden oluşan bir koleksiyon."
 
 #. Author URI of the theme
 #. Translators: WordPress link.
-#: style.css patterns/footer-centered-logo-nav.php:22
-#: patterns/footer-colophon-3-col.php:91 patterns/footer.php:117
+#: style.css patterns/footer-centered-logo-nav.php:27
+#: patterns/footer-colophon-3-col.php:96 patterns/footer.php:122
 msgid "https://wordpress.org"
 msgstr "https://wordpress.org"
 
@@ -153,23 +153,23 @@ msgctxt "Template part name"
 msgid "Post Meta"
 msgstr "Yazı meta bilgileri"
 
-#: functions.php:111
+#: functions.php:108
 msgid "With asterisk"
 msgstr "Yıldız işareti ile"
 
-#: functions.php:93
+#: functions.php:90
 msgid "With arrow"
 msgstr "Ok ile"
 
-#: functions.php:74
+#: functions.php:71
 msgid "Checkmark"
 msgstr "Onay işareti"
 
-#: functions.php:51
+#: functions.php:48
 msgid "Pill"
 msgstr "Hap"
 
-#: functions.php:28
+#: functions.php:25
 msgid "Arrow icon"
 msgstr "Ok simgesi"
 
@@ -183,22 +183,22 @@ msgctxt "Font size name"
 msgid "Small"
 msgstr "Küçük"
 
-#: patterns/text-title-left-image-right.php:35
+#: patterns/text-title-left-image-right.php:40
 msgctxt "Call to Action button text"
 msgid "About us"
 msgstr "Hakkımızda"
 
-#: patterns/text-feature-grid-3-col.php:84
+#: patterns/text-feature-grid-3-col.php:89
 msgctxt "Sample feature heading"
 msgid "Consulting"
 msgstr "Müşavirlik"
 
-#: patterns/text-faq.php:15
+#: patterns/text-faq.php:20
 msgctxt "Heading of the FAQs"
 msgid "FAQs"
 msgstr "SSS"
 
-#: patterns/text-faq.php:12
+#: patterns/text-faq.php:17
 msgctxt "Name of the FAQ pattern"
 msgid "FAQs"
 msgstr "SSS"
@@ -208,12 +208,12 @@ msgctxt "Pattern title"
 msgid "FAQ"
 msgstr "SSS"
 
-#: patterns/team-4-col.php:97
+#: patterns/team-4-col.php:102
 msgctxt "Sample role of a team member"
 msgid "Architect"
 msgstr "Mimar"
 
-#: patterns/page-newsletter-landing.php:40
+#: patterns/page-newsletter-landing.php:45
 msgctxt "Sample content for newsletter subscribe button"
 msgid "Sign up"
 msgstr "Üye ol"
@@ -223,16 +223,16 @@ msgctxt "Pattern title"
 msgid "About"
 msgstr "Hakkında"
 
-#: patterns/hidden-sidebar.php:75
+#: patterns/hidden-sidebar.php:81
 msgctxt "search form placeholder"
 msgid "Search..."
 msgstr "Ara..."
 
-#: patterns/hidden-sidebar.php:49
+#: patterns/hidden-sidebar.php:55
 msgid "Useful Links"
 msgstr "İşe yarar bağlantılar"
 
-#: patterns/hidden-sidebar.php:33
+#: patterns/hidden-sidebar.php:39
 msgid "Popular Categories"
 msgstr "Popüler kategoriler"
 
@@ -241,12 +241,12 @@ msgctxt "Pattern title"
 msgid "Sidebar"
 msgstr "Kenar çubuğu"
 
-#: patterns/hidden-search.php:9
+#: patterns/hidden-search.php:14
 msgctxt "search button text"
 msgid "Search"
 msgstr "Ara"
 
-#: patterns/hidden-search.php:9 patterns/hidden-sidebar.php:75
+#: patterns/hidden-search.php:14 patterns/hidden-sidebar.php:81
 msgctxt "search form label"
 msgid "Search"
 msgstr "Ara"
@@ -256,19 +256,19 @@ msgctxt "Pattern title"
 msgid "Search"
 msgstr "Ara"
 
-#: patterns/hidden-post-navigation.php:12
+#: patterns/hidden-post-navigation.php:17
 msgctxt "Label before the title of the next post. There is a space after the colon."
 msgid "Next: "
 msgstr "Sonraki: "
 
-#: patterns/hidden-post-navigation.php:11
+#: patterns/hidden-post-navigation.php:16
 msgctxt "Label before the title of the previous post. There is a space after the colon."
 msgid "Previous: "
 msgstr "Önceki: "
 
-#: patterns/hidden-post-navigation.php:9 patterns/hidden-post-navigation.php:10
-#: patterns/hidden-posts-heading.php:10
-#: patterns/template-index-portfolio.php:16
+#: patterns/hidden-post-navigation.php:14
+#: patterns/hidden-post-navigation.php:15 patterns/hidden-posts-heading.php:16
+#: patterns/template-index-portfolio.php:21
 msgid "Posts"
 msgstr "Yazılar"
 
@@ -277,7 +277,7 @@ msgctxt "Pattern title"
 msgid "Post navigation"
 msgstr "Yazı dolaşımı"
 
-#: patterns/hidden-no-results.php:9
+#: patterns/hidden-no-results.php:15
 msgctxt "Message explaining that there are no results returned from a search"
 msgid "No posts were found."
 msgstr "İçerik bulunamadı."
@@ -287,7 +287,7 @@ msgctxt "Pattern title"
 msgid "No results"
 msgstr "Sonuç yok"
 
-#: patterns/hidden-comments.php:12
+#: patterns/hidden-comments.php:17
 msgid "Comments"
 msgstr "Yorumlar"
 
@@ -301,50 +301,50 @@ msgctxt "Pattern title"
 msgid "404"
 msgstr "404"
 
-#: patterns/footer.php:92
+#: patterns/footer.php:97
 msgid "Social Media"
 msgstr "Sosyal medya"
 
-#: patterns/footer.php:86
+#: patterns/footer.php:91
 msgid "Social"
 msgstr "Sosyal"
 
-#: patterns/footer.php:64 patterns/footer.php:70
+#: patterns/footer.php:69 patterns/footer.php:75
 msgid "Privacy"
 msgstr "Gizlilik"
 
-#: patterns/footer.php:41 patterns/footer.php:47
+#: patterns/footer.php:46 patterns/footer.php:52
 msgid "About"
 msgstr "Hakkında"
 
-#: patterns/footer-colophon-3-col.php:60 patterns/footer.php:94
+#: patterns/footer-colophon-3-col.php:65 patterns/footer.php:99
 msgid "Facebook"
 msgstr "Facebook"
 
-#: patterns/footer-colophon-3-col.php:60 patterns/footer.php:95
+#: patterns/footer-colophon-3-col.php:65 patterns/footer.php:100
 msgid "Instagram"
 msgstr "Instagram"
 
-#: patterns/footer-colophon-3-col.php:57
+#: patterns/footer-colophon-3-col.php:62
 msgid "Follow"
 msgstr "Takip et"
 
-#: patterns/cta-subscribe-centered.php:31
+#: patterns/cta-subscribe-centered.php:36
 msgctxt "Sample text for Sign Up Button"
 msgid "Sign up"
 msgstr "Üye ol"
 
-#: patterns/cta-pricing.php:157
+#: patterns/cta-pricing.php:162
 msgctxt "Sample heading for the third pricing level"
 msgid "Expert"
 msgstr "Uzman"
 
-#: patterns/cta-pricing.php:37
+#: patterns/cta-pricing.php:42
 msgctxt "Sample heading for the first pricing level"
 msgid "Free"
 msgstr "Ücretsiz"
 
-#: patterns/cta-pricing.php:11
+#: patterns/cta-pricing.php:16
 msgctxt "Name for the pricing pattern"
 msgid "Pricing Table"
 msgstr "Fiyatlandırma Tablosu"
@@ -354,7 +354,7 @@ msgctxt "Pattern title"
 msgid "Pricing"
 msgstr "Fiyatlandırma"
 
-#: patterns/banner-hero.php:37
+#: patterns/banner-hero.php:42
 msgctxt "Button text of the hero section"
 msgid "About us"
 msgstr "Hakkımızda"
@@ -364,26 +364,26 @@ msgctxt "Pattern title"
 msgid "Hero"
 msgstr "Manşet"
 
-#: patterns/hidden-404.php:10
+#: patterns/hidden-404.php:15
 msgctxt "Heading for a webpage that is not found"
 msgid "Page Not Found"
 msgstr "Sayfa bulunamadı"
 
-#: patterns/footer-colophon-3-col.php:39
+#: patterns/footer-colophon-3-col.php:44
 msgid "Contact"
 msgstr "İletişim"
 
-#: patterns/cta-pricing.php:203
+#: patterns/cta-pricing.php:208
 msgctxt "Button text for the third pricing level"
 msgid "Subscribe"
 msgstr "Abone ol"
 
-#: patterns/cta-pricing.php:145
+#: patterns/cta-pricing.php:150
 msgctxt "Button text for the second pricing level"
 msgid "Subscribe"
 msgstr "Abone ol"
 
-#: patterns/cta-pricing.php:87
+#: patterns/cta-pricing.php:92
 msgctxt "Button text for the first pricing level"
 msgid "Subscribe"
 msgstr "Abone ol"
@@ -778,17 +778,17 @@ msgctxt "Pattern title"
 msgid "Project description"
 msgstr "Proje açıklaması"
 
-#: patterns/cta-content-image-on-right.php:41
+#: patterns/cta-content-image-on-right.php:46
 msgctxt "Button text of this section"
 msgid "Download app"
 msgstr "Uygulamayı indir"
 
-#: patterns/cta-content-image-on-right.php:47
+#: patterns/cta-content-image-on-right.php:52
 msgctxt "Button text of this section"
 msgid "How it works"
 msgstr "Nasıl çalışır"
 
-#: patterns/cta-pricing.php:18
+#: patterns/cta-pricing.php:23
 msgctxt "Sample heading for pricing pattern"
 msgid "Our Services"
 msgstr "Hizmetlerimiz"
@@ -858,12 +858,12 @@ msgctxt "Style variation name"
 msgid "Ember"
 msgstr "Kor"
 
-#: patterns/text-title-left-image-right.php:28
+#: patterns/text-title-left-image-right.php:33
 msgctxt "Description for the About pattern"
 msgid "Leaving an indelible mark on the landscape of tomorrow."
 msgstr "Yarının manzarasına silinmez bir iz bırakmak."
 
-#: patterns/text-title-left-image-right.php:21
+#: patterns/text-title-left-image-right.php:26
 msgctxt "Headline for the About pattern"
 msgid "Études offers comprehensive consulting, management, design, and research solutions. Every architectural endeavor is an opportunity to shape the future."
 msgstr "Études, kapsamlı danışmanlık, yönetim, tasarım ve araştırma çözümleri sunar. Her mimari girişim, geleceği şekillendirme fırsatıdır."
@@ -873,17 +873,17 @@ msgctxt "Pattern title"
 msgid "Title text and button on left with image on right"
 msgstr "Başlık metni ve düğme sol tarafta, resim sağ tarafta"
 
-#: patterns/text-project-details.php:35 patterns/text-project-details.php:43
+#: patterns/text-project-details.php:40 patterns/text-project-details.php:48
 msgctxt "Descriptive text for the feature area"
 msgid "The revitalized Art Gallery is set to redefine the cultural landscape of Toronto, serving as a nexus of artistic expression, community engagement, and architectural marvel. The expansion and renovation project pay homage to the Art Gallery's rich history while embracing the future, ensuring that the gallery remains a beacon of inspiration."
 msgstr "Yeniden canlandırılan sanat galerisi, Toronto'nun kültürel manzarasını yeniden tanımlamaya hazırlanıyor ve sanatsal ifadenin, topluluk katılımının ve mimari harikanın bir bağlantı noktası olarak hizmet ediyor. Genişletme ve yenileme projesi, Sanat Galerisi'nin zengin tarihine saygı duruşunda bulunurken geleceği de kucaklıyor ve galerinin bir ilham kaynağı olarak kalmasını sağlıyor."
 
-#: patterns/text-project-details.php:27
+#: patterns/text-project-details.php:32
 msgctxt "Descriptive title for the feature area"
 msgid "With meticulous attention to detail and a commitment to excellence, we create spaces that inspire, elevate, and enrich the lives of those who inhabit them."
 msgstr "Detaylara büyük bir titizlikle dikkat etme ve mükemmelliğe olan bağlılığımızla, içinde yaşayanların hayatlarına ilham veren, yükselten ve zenginleştiren alanlar yaratıyoruz."
 
-#: patterns/text-project-details.php:18
+#: patterns/text-project-details.php:23
 msgctxt "Title text for the feature area"
 msgid "The revitalized art gallery is set to redefine cultural landscape."
 msgstr "Canlandırılmış sanat galerisi, kültürel manzarayı yeniden tanımlıyor."
@@ -893,46 +893,46 @@ msgctxt "Pattern title"
 msgid "Project details"
 msgstr "Proje detayları"
 
-#: patterns/text-feature-grid-3-col.php:112
+#: patterns/text-feature-grid-3-col.php:117
 msgctxt "Sample content"
 msgid "Experience the fusion of imagination and expertise with Études Architectural Solutions."
 msgstr "Études Mimari Çözümler ile hayal gücü ve uzmanlığın birleşimini deneyimleyin."
 
-#: patterns/text-feature-grid-3-col.php:108
+#: patterns/text-feature-grid-3-col.php:113
 msgctxt "Sample heading"
 msgid "Architectural Solutions"
 msgstr "Mimari çözümler"
 
-#: patterns/text-feature-grid-3-col.php:96
+#: patterns/text-feature-grid-3-col.php:101
 msgctxt "Sample feature heading"
 msgid "Project Management"
 msgstr "Proje yönetimi"
 
-#: patterns/text-feature-grid-3-col.php:63
+#: patterns/text-feature-grid-3-col.php:68
 msgctxt "Sample feature heading"
 msgid "App Access"
 msgstr "Uygulama erişimi"
 
-#: patterns/text-feature-grid-3-col.php:51
+#: patterns/text-feature-grid-3-col.php:56
 msgctxt "Sample feature heading"
 msgid "Continuous Support"
 msgstr "Sürekli destek"
 
-#: patterns/text-feature-grid-3-col.php:43
-#: patterns/text-feature-grid-3-col.php:55
-#: patterns/text-feature-grid-3-col.php:67
-#: patterns/text-feature-grid-3-col.php:88
-#: patterns/text-feature-grid-3-col.php:100
+#: patterns/text-feature-grid-3-col.php:48
+#: patterns/text-feature-grid-3-col.php:60
+#: patterns/text-feature-grid-3-col.php:72
+#: patterns/text-feature-grid-3-col.php:93
+#: patterns/text-feature-grid-3-col.php:105
 msgctxt "Sample feature content"
 msgid "Experience the fusion of imagination and expertise with Études Architectural Solutions."
 msgstr "Études Mimari Çözümler ile hayal gücü ve uzmanlığın birleşimini deneyimleyin."
 
-#: patterns/text-feature-grid-3-col.php:39
+#: patterns/text-feature-grid-3-col.php:44
 msgctxt "Sample feature heading"
 msgid "Renovation and restoration"
 msgstr "Yenileme ve restorasyon"
 
-#: patterns/text-feature-grid-3-col.php:24
+#: patterns/text-feature-grid-3-col.php:29
 msgctxt "Sub-heading of the features"
 msgid "Our comprehensive suite of professional services caters to a diverse clientele, ranging from homeowners to commercial developers."
 msgstr "Kapsamlı profesyonel hizmet paketimiz, ev sahiplerinden ticari geliştiricilere kadar çok çeşitli müşterilere hitap etmektedir."
@@ -942,7 +942,7 @@ msgctxt "Pattern title"
 msgid "Feature grid, 3 columns"
 msgstr "Özellik tablosu, 3 sütunlu"
 
-#: patterns/text-centered-statement.php:21
+#: patterns/text-centered-statement.php:26
 msgid "<em>Études</em> is not confined to the past—we are passionate about the cutting edge designs shaping our world today."
 msgstr "<em>Études</em> geçmişle sınırlı değil - dünyamızı bugün şekillendiren son teknoloji tasarımlara tutkulu bir ilgi duyuyoruz."
 
@@ -952,12 +952,12 @@ msgid "Centered statement"
 msgstr "Ortalanmış ifade"
 
 #. Translators: About text placeholder
-#: patterns/text-centered-statement-small.php:23
+#: patterns/text-centered-statement-small.php:28
 msgid "I write about finance, management and economy, my book “%1$s” is out now."
 msgstr "Finans, yönetim ve ekonomi konularında yazılar yazıyorum, kitabım \"%1$s\" şu anda satışta."
 
 #. Translators: About link placeholder
-#: patterns/text-centered-statement-small.php:20
+#: patterns/text-centered-statement-small.php:25
 msgid "Money Studies"
 msgstr "Para çalışmaları"
 
@@ -966,35 +966,35 @@ msgctxt "Pattern title"
 msgid "Centered statement, small"
 msgstr "Ortalanmış ifade, küçük"
 
-#: patterns/text-alternating-images.php:97
+#: patterns/text-alternating-images.php:102
 msgctxt "Sample list item"
 msgid "A world of thought-provoking articles."
 msgstr "Düşünce provokasyonu yaratan makaleler dünyası."
 
-#: patterns/text-alternating-images.php:91
+#: patterns/text-alternating-images.php:96
 msgctxt "Sample heading"
 msgid "Études Newsletter"
 msgstr "Études Bülteni"
 
-#: patterns/text-alternating-images.php:82
+#: patterns/text-alternating-images.php:87
 msgid "Windows of a building in Nuremberg, Germany"
 msgstr "Nürnberg, Almanya'daki bir binanın pencereleri"
 
-#: patterns/text-alternating-images.php:64
+#: patterns/text-alternating-images.php:69
 msgid "Tourist taking photo of a building"
 msgstr "Bir binanın fotoğrafını çeken turist"
 
-#: patterns/text-alternating-images.php:37
+#: patterns/text-alternating-images.php:42
 msgctxt "Sample list heading"
 msgid "Études Architect App"
 msgstr "Études mimar uygulaması"
 
-#: patterns/text-alternating-images.php:23
+#: patterns/text-alternating-images.php:28
 msgctxt "Sample subheading content"
 msgid "Our comprehensive suite of professional services caters to a diverse clientele, ranging from homeowners to commercial developers."
 msgstr "Kapsamlı profesyonel hizmet yelpazemiz, ev sahiplerinden ticari geliştiricilere kadar geniş bir müşteri kitlesine hitap ediyor."
 
-#: patterns/text-alternating-images.php:19
+#: patterns/text-alternating-images.php:24
 msgctxt "Sample heading content"
 msgid "An array of resources"
 msgstr "Bir dizi kaynak"
@@ -1004,22 +1004,22 @@ msgctxt "Pattern title"
 msgid "Text with alternating images"
 msgstr "Alternatif görseller içeren metin"
 
-#: patterns/testimonial-centered.php:39
+#: patterns/testimonial-centered.php:44
 msgctxt "Designation of Person Provided Testimonial"
 msgid "CEO, Greenprint"
 msgstr "CEO, Greenprint"
 
-#: patterns/testimonial-centered.php:35
+#: patterns/testimonial-centered.php:40
 msgctxt "Name of Person Provided the Testimonial"
 msgid "Annie Steiner"
 msgstr "Annie Steiner"
 
-#: patterns/testimonial-centered.php:26
+#: patterns/testimonial-centered.php:31
 msgctxt "Name of testimonial citation group"
 msgid "Testimonial source"
 msgstr "Görüş kaynağı"
 
-#: patterns/testimonial-centered.php:18
+#: patterns/testimonial-centered.php:23
 msgctxt "Testimonial Text or Review Text Got From the Person"
 msgid "“Études has saved us thousands of hours of work and has unlocked insights we never thought possible.”"
 msgstr "Études bizi binlerce saatlik çalışmadan kurtardı ve mümkün olduğunu asla düşünmediğimiz içgörülerin kilidini açtı."
@@ -1079,52 +1079,52 @@ msgctxt "Pattern title"
 msgid "Blogging archive template"
 msgstr "Blog arşiv şablonu"
 
-#: patterns/team-4-col.php:121
+#: patterns/team-4-col.php:126
 msgctxt "Sample role of a team member"
 msgid "Project Manager"
 msgstr "Proje yöneticisi"
 
-#: patterns/team-4-col.php:116
+#: patterns/team-4-col.php:121
 msgctxt "Sample name of a team member"
 msgid "Ivan Lawrence"
 msgstr "Ivan Lawrence"
 
-#: patterns/team-4-col.php:92
+#: patterns/team-4-col.php:97
 msgctxt "Sample name of a team member"
 msgid "Helga Steiner"
 msgstr "Helga Steiner"
 
-#: patterns/team-4-col.php:73
+#: patterns/team-4-col.php:78
 msgctxt "Sample role of a team member"
 msgid "Engineering Manager"
 msgstr "Mühendislik yöneticisi"
 
-#: patterns/team-4-col.php:68
+#: patterns/team-4-col.php:73
 msgctxt "Sample name of a team member"
 msgid "Rhye Moore"
 msgstr "Rhye Moore"
 
-#: patterns/team-4-col.php:49
+#: patterns/team-4-col.php:54
 msgctxt "Sample role of a team member"
 msgid "Founder, CEO & Architect"
 msgstr "Kurucu, CEO & Mimar"
 
-#: patterns/team-4-col.php:44
+#: patterns/team-4-col.php:49
 msgctxt "Sample name of a team member"
 msgid "Francesca Piovani"
 msgstr "Francesca Piovani"
 
-#: patterns/team-4-col.php:20
+#: patterns/team-4-col.php:25
 msgctxt "Sample descriptive text of the team pattern"
 msgid "Our comprehensive suite of professionals caters to a diverse team, ranging from seasoned architects to renowned engineers."
 msgstr "Kapsamlı profesyonel ekibimiz, deneyimli mimarlardan ünlü mühendislere kadar geniş bir gruba hitap etmektedir."
 
-#: patterns/team-4-col.php:16
+#: patterns/team-4-col.php:21
 msgctxt "Sample heading for the team pattern"
 msgid "Meet our team"
 msgstr "Ekibimizle tanışın"
 
-#: patterns/team-4-col.php:11
+#: patterns/team-4-col.php:16
 msgctxt "Name of team pattern"
 msgid "Team members"
 msgstr "Ekip üyeleri"
@@ -1139,8 +1139,8 @@ msgctxt "Pattern title"
 msgid "Posts with featured images only, 3 columns"
 msgstr "Sadece öne çıkan görseli olan yazılar, 3 sütun"
 
-#: patterns/posts-grid-2-col.php:14 patterns/posts-list.php:14
-#: patterns/template-index-blogging.php:16
+#: patterns/posts-grid-2-col.php:19 patterns/posts-list.php:19
+#: patterns/template-index-blogging.php:21
 msgid "Watch, Read, Listen"
 msgstr "İzle, oku, dinle"
 
@@ -1154,11 +1154,11 @@ msgctxt "Pattern title"
 msgid "List of posts, 1 column"
 msgstr "Yazı listesi, 1 sütun"
 
-#: patterns/page-rsvp-landing.php:49
+#: patterns/page-rsvp-landing.php:54
 msgid "Green staircase at Western University, London, Canada"
 msgstr "Western Universitesi, Londra, Kanada'daki yeşil merdivenler"
 
-#: patterns/page-rsvp-landing.php:14
+#: patterns/page-rsvp-landing.php:19
 msgctxt "Name of RSVP landing page pattern"
 msgid "RSVP Landing Page"
 msgstr "LCV açılış sayfası"
@@ -1173,7 +1173,7 @@ msgctxt "Pattern title"
 msgid "Portfolio project overview"
 msgstr "Portföy projesi genel görünümü"
 
-#: patterns/page-newsletter-landing.php:29
+#: patterns/page-newsletter-landing.php:34
 msgctxt "sample content for newsletter subscription"
 msgid "Subscribe to the newsletter and stay connected with our community"
 msgstr "Bültene abone olun ve topluluğumuzla bağlantıda kalın"
@@ -1198,23 +1198,23 @@ msgctxt "Pattern title"
 msgid "Blogging home"
 msgstr "Blog ana sayfası"
 
-#: patterns/hidden-sidebar.php:72
+#: patterns/hidden-sidebar.php:78
 msgid "Search the website"
 msgstr "Web sitesinde ara"
 
-#: patterns/hidden-sidebar.php:60
+#: patterns/hidden-sidebar.php:66
 msgid "Financial apps for families"
 msgstr "Aileler için finansal uygulamalar"
 
-#: patterns/hidden-sidebar.php:59
+#: patterns/hidden-sidebar.php:65
 msgid "Latest inflation report"
 msgstr "Son enflasyon raporu"
 
-#: patterns/hidden-sidebar.php:53
+#: patterns/hidden-sidebar.php:59
 msgid "Links I found useful and wanted to share."
 msgstr "İşe yarar bulduğum ve paylaşmak istediğim bağlantılar."
 
-#: patterns/hidden-sidebar.php:17
+#: patterns/hidden-sidebar.php:23
 msgid "About the author"
 msgstr "Yazar hakkında"
 
@@ -1228,31 +1228,31 @@ msgctxt "Pattern title"
 msgid "Portfolio hero"
 msgstr "Portföy manşet alanı"
 
-#: patterns/hidden-404.php:13
+#: patterns/hidden-404.php:18
 msgctxt "Message to convey that a webpage could not be found"
 msgid "The page you are looking for does not exist, or it has been moved. Please try searching using the form below."
 msgstr "Aradığınız sayfa mevcut değil veya taşınmış. Lütfen aşağıdaki formu kullanarak arama yapmayı deneyin."
 
-#: patterns/gallery-project-layout.php:54
+#: patterns/gallery-project-layout.php:59
 msgid "Art Gallery of Ontario, Toronto, Canada"
 msgstr "Ontario, Toronto, Kanada sanat galerisi"
 
-#: patterns/gallery-project-layout.php:49
+#: patterns/gallery-project-layout.php:54
 msgctxt "Sample text for the feature area"
 msgid "2. Case studies that celebrate the artistry can fuel curiosity and ignite inspiration."
 msgstr "2. Sanatçılığı öven vaka çalışmaları merakı körükleyebilir ve ilhamı ateşleyebilir."
 
-#: patterns/gallery-project-layout.php:38
+#: patterns/gallery-project-layout.php:43
 msgctxt "Sample text for the feature area"
 msgid "Our comprehensive suite of professional services caters to a diverse clientele, ranging from homeowners to commercial developers. With a commitment to innovation and sustainability, Études is the bridge that transforms architectural dreams into remarkable built realities."
 msgstr "Kapsamlı profesyonel hizmet paketimiz, ev sahiplerinden ticari geliştiricilere kadar çok çeşitli müşterilere hitap etmektedir. Yenilik ve sürdürülebilirliğe olan bağlılığıyla Études, mimari hayalleri dikkat çekici gerçek yapılara dönüştüren köprüdür."
 
-#: patterns/gallery-project-layout.php:26
+#: patterns/gallery-project-layout.php:31
 msgctxt "Sample text for the feature area"
 msgid "1. Through Études, we aspire to redefine architectural boundaries and usher in a new era of design excellence that leaves an indelible mark on the built environment."
 msgstr "1. Études aracılığıyla, mimari sınırları yeniden tanımlamayı ve yapısal çevrede silinmez bir iz bırakan yeni bir tasarım mükemmelliği çağını başlatmayı amaçlıyoruz."
 
-#: patterns/gallery-project-layout.php:21
+#: patterns/gallery-project-layout.php:26
 msgid "An empty staircase under an angular roof in Darling Harbour, Sydney, Australia"
 msgstr "Darling Limanı, Sidney, Avustralya'da açılı bir çatının altında boş bir merdiven"
 
@@ -1271,16 +1271,16 @@ msgctxt "Pattern title"
 msgid "Footer with colophon, 4 columns"
 msgstr "Kolofonlu alt kısım, 4 sütun"
 
-#: patterns/footer-colophon-3-col.php:82
+#: patterns/footer-colophon-3-col.php:87
 msgid "&copy;"
 msgstr "&copy;"
 
-#: patterns/footer-colophon-3-col.php:42
+#: patterns/footer-colophon-3-col.php:47
 msgctxt "Example email in site footer"
 msgid "info@example.com"
 msgstr "info@ornek.com"
 
-#: patterns/footer-colophon-3-col.php:30
+#: patterns/footer-colophon-3-col.php:35
 msgid "Keep up, get in touch."
 msgstr "Takipte kalın, iletişime geçin."
 
@@ -1290,8 +1290,8 @@ msgid "Footer with colophon, 3 columns"
 msgstr "Kolofonlu alt kısım, 3 sütun"
 
 #. Translators: Designed with WordPress
-#: patterns/footer-centered-logo-nav.php:25
-#: patterns/footer-colophon-3-col.php:94 patterns/footer.php:120
+#: patterns/footer-centered-logo-nav.php:30
+#: patterns/footer-colophon-3-col.php:99 patterns/footer.php:125
 msgid "Designed with %1$s"
 msgstr "%1$s ile tasarlandı"
 
@@ -1300,12 +1300,12 @@ msgctxt "Pattern title"
 msgid "Footer with centered logo and navigation"
 msgstr "Ortalanmış logo ve dolaşım menüsü ile alt kısım"
 
-#: patterns/cta-subscribe-centered.php:24
+#: patterns/cta-subscribe-centered.php:29
 msgctxt "Sample text for Subscriber Description"
 msgid "Stay in the loop with everything you need to know."
 msgstr "Bilmeniz gereken her şeyle güncel kalın."
 
-#: patterns/cta-subscribe-centered.php:20
+#: patterns/cta-subscribe-centered.php:25
 msgctxt "Sample text for Subscriber Heading with numbers"
 msgid "Join 900+ subscribers"
 msgstr "900+ aboneye siz de katılın"
@@ -1315,17 +1315,17 @@ msgctxt "Pattern title"
 msgid "Centered call to action"
 msgstr "Ortalanmış harekete geçirici mesaj"
 
-#: patterns/cta-services-image-left.php:39
+#: patterns/cta-services-image-left.php:44
 msgctxt "Sample button text to view the services"
 msgid "Our services"
 msgstr "Hizmetlerimiz"
 
-#: patterns/cta-services-image-left.php:32
+#: patterns/cta-services-image-left.php:37
 msgctxt "Sample description of the services pattern"
 msgid "Experience the fusion of imagination and expertise with Études—the catalyst for architectural transformations that enrich the world around us."
 msgstr "Etrafımızdaki dünyayı zenginleştiren mimari dönüşümlerin katalizörü olan Études ile hayal gücü ve uzmanlığın birleşimini deneyimleyin."
 
-#: patterns/cta-services-image-left.php:28
+#: patterns/cta-services-image-left.php:33
 msgctxt "Sample heading of the services pattern"
 msgid "Guiding your business through the project"
 msgstr "Proje boyunca işletmenize rehberlik"
@@ -1335,26 +1335,26 @@ msgctxt "Pattern title"
 msgid "Services call to action with image on left"
 msgstr "Solda resimle birlikte hizmetler harekete geçirici mesajı"
 
-#: patterns/cta-rsvp.php:50 patterns/text-title-left-image-right.php:51
+#: patterns/cta-rsvp.php:55 patterns/text-title-left-image-right.php:56
 msgid "A ramp along a curved wall in the Kiasma Museu, Helsinki, Finland"
 msgstr "Kiasma Müzesi'nde kavisli bir duvar boyunca bir rampa, Helsinki, Finlandiya"
 
-#: patterns/cta-rsvp.php:34 patterns/page-rsvp-landing.php:34
+#: patterns/cta-rsvp.php:39 patterns/page-rsvp-landing.php:39
 msgctxt "Call to action button text for the reservation button"
 msgid "Reserve your spot"
 msgstr "Yerinizi ayırtın"
 
-#: patterns/cta-rsvp.php:27 patterns/page-rsvp-landing.php:28
+#: patterns/cta-rsvp.php:32 patterns/page-rsvp-landing.php:33
 msgctxt "RSVP call to action description"
 msgid "Experience the fusion of imagination and expertise with Études Arch Summit, February 2025."
 msgstr "Şubat 2025'teki Études Arch Zirvesi ile hayal gücü ve uzmanlığın birleşimini deneyimleyin."
 
-#: patterns/cta-rsvp.php:21 patterns/page-rsvp-landing.php:23
+#: patterns/cta-rsvp.php:26 patterns/page-rsvp-landing.php:28
 msgctxt "Initials for ´please respond´"
 msgid "RSVP"
 msgstr "LCV"
 
-#: patterns/cta-rsvp.php:11
+#: patterns/cta-rsvp.php:16
 msgctxt "Name of RSVP pattern"
 msgid "RSVP"
 msgstr "LCV"
@@ -1364,86 +1364,86 @@ msgctxt "Pattern title"
 msgid "RSVP"
 msgstr "LCV"
 
-#: patterns/cta-pricing.php:189
+#: patterns/cta-pricing.php:194
 msgctxt "Feature for pricing level"
 msgid "Exclusive access to the <em>Études</em> app for iOS and Android"
 msgstr "iOS ve Android için <em>Études</em> uygulamasına özel erişim"
 
-#: patterns/cta-pricing.php:173
+#: patterns/cta-pricing.php:178
 msgctxt "Feature for pricing level"
 msgid "Exclusive, unlimited access to <em>Études Articles</em>."
 msgstr "<em>Etudes Makalelerine</em> özel, sınırsız erişim."
 
-#: patterns/cta-pricing.php:162
+#: patterns/cta-pricing.php:167
 msgctxt "Sample price for the third pricing level"
 msgid "$28"
 msgstr "28$"
 
-#: patterns/cta-pricing.php:115
+#: patterns/cta-pricing.php:120
 msgctxt "Feature for pricing level"
 msgid "Access to 20 exclusive <em>Études Articles</em> per month."
 msgstr "Aylık 20 özel <em>Etudes Makalesine</em> erişim."
 
-#: patterns/cta-pricing.php:104
+#: patterns/cta-pricing.php:109
 msgctxt "Sample price for the second pricing level"
 msgid "$12"
 msgstr "12$"
 
-#: patterns/cta-pricing.php:99
+#: patterns/cta-pricing.php:104
 msgctxt "Sample heading for the second pricing level"
 msgid "Connoisseur"
 msgstr "Uzman"
 
-#: patterns/cta-pricing.php:72 patterns/cta-pricing.php:131
+#: patterns/cta-pricing.php:77 patterns/cta-pricing.php:136
 msgctxt "Feature for pricing level"
 msgid "Exclusive access to the <em>Études</em> app for iOS and Android."
 msgstr "iOS ve Android için <em>Études</em> uygulamasına özel erişim."
 
-#: patterns/cta-pricing.php:62 patterns/cta-pricing.php:123
-#: patterns/cta-pricing.php:181
+#: patterns/cta-pricing.php:67 patterns/cta-pricing.php:128
+#: patterns/cta-pricing.php:186
 msgctxt "Feature for pricing level"
 msgid "Weekly print edition."
 msgstr "Haftalık basılı sürüm"
 
-#: patterns/cta-pricing.php:53
+#: patterns/cta-pricing.php:58
 msgctxt "Feature for pricing level"
 msgid "Access to 5 exclusive <em>Études Articles</em> per month."
 msgstr "Ayda 5 özel <em>Etudes Makalesine</em> erişim."
 
-#: patterns/cta-pricing.php:42
+#: patterns/cta-pricing.php:47
 msgctxt "Sample price for the first pricing level"
 msgid "$0"
 msgstr "0$"
 
-#: patterns/cta-pricing.php:22
+#: patterns/cta-pricing.php:27
 msgctxt "Sample description for a pricing table"
 msgid "We offer flexible options, which you can adapt to the different needs of each project."
 msgstr "Her projenin farklı ihtiyaçlarına göre uyarlayabileceğiniz esnek seçenekler sunuyoruz."
 
-#: patterns/cta-content-image-on-right.php:59
-#: patterns/cta-services-image-left.php:19
+#: patterns/cta-content-image-on-right.php:64
+#: patterns/cta-services-image-left.php:24
 msgid "White abstract geometric artwork from Dresden, Germany"
 msgstr "Dresden, Almanya'dan beyaz soyut geometrik sanat eserleri"
 
-#: patterns/cta-content-image-on-right.php:32
-#: patterns/text-alternating-images.php:52
+#: patterns/cta-content-image-on-right.php:37
+#: patterns/text-alternating-images.php:57
 msgctxt "Sample list item"
 msgid "Experience the world of architecture."
 msgstr "Mimarlık dünyasını deneyimleyin."
 
-#: patterns/cta-content-image-on-right.php:28
-#: patterns/text-alternating-images.php:48
+#: patterns/cta-content-image-on-right.php:33
+#: patterns/text-alternating-images.php:53
 msgctxt "Sample list item"
 msgid "Showcase your projects."
 msgstr "Projelerinizi tanıtın."
 
-#: patterns/cta-content-image-on-right.php:24
-#: patterns/text-alternating-images.php:44
+#: patterns/cta-content-image-on-right.php:29
+#: patterns/text-alternating-images.php:49
 msgctxt "Sample list item"
 msgid "Collaborate with fellow architects."
 msgstr "Diğer mimarlarla işbirliği yapın."
 
-#: patterns/cta-content-image-on-right.php:18
+#: patterns/cta-content-image-on-right.php:23
 msgctxt "Sample heading"
 msgid "Enhance your architectural journey with the Études Architect app."
 msgstr "Études Architect uygulamasıyla mimari yolculuğunuzu geliştirin."
@@ -1453,45 +1453,45 @@ msgctxt "Pattern title"
 msgid "Call to action with image on right"
 msgstr "Sağda görsel ile harekete geçirici mesaj"
 
-#: patterns/banner-project-description.php:41
+#: patterns/banner-project-description.php:47
 msgid "Hyatt Regency San Francisco, San Francisco, United States"
 msgstr "Hyatt Regency San Francisco, San Francisco, Amerika Birleşik Devletleri"
 
-#: patterns/banner-project-description.php:26
+#: patterns/banner-project-description.php:32
 msgctxt "Sample descriptive text for a project or post."
 msgid "This transformative project seeks to enhance the gallery's infrastructure, accessibility, and exhibition spaces while preserving its rich cultural heritage."
 msgstr "Bu dönüştürücü proje, galerinin zengin kültürel mirasını korurken altyapısını, erişilebilirliğini ve sergi alanlarını geliştirmeyi amaçlıyor."
 
-#: patterns/banner-project-description.php:17
+#: patterns/banner-project-description.php:23
 msgctxt "Sample title for a project or post"
 msgid "Art Gallery — Overview"
 msgstr "Sanat galerisi — Genel görünüm"
 
-#: patterns/banner-hero.php:52
+#: patterns/banner-hero.php:57
 msgid "Building exterior in Toronto, Canada"
 msgstr "Toronto, Kanada'da bina cephesi"
 
-#: patterns/banner-hero.php:26
+#: patterns/banner-hero.php:31
 msgctxt "Content of the hero section"
 msgid "Études is a pioneering firm that seamlessly merges creativity and functionality to redefine architectural excellence."
 msgstr "Études, mimari mükemmelliği yeniden tanımlamak için yaratıcılığı ve işlevselliği kusursuz bir şekilde birleştiren öncü bir firmadır."
 
-#: patterns/banner-hero.php:18
+#: patterns/banner-hero.php:23
 msgctxt "Heading of the hero section"
 msgid "A commitment to innovation and sustainability"
 msgstr "Yenilik ve sürdürülebilirliğe bağlılık"
 
-#: patterns/text-feature-grid-3-col.php:16
+#: patterns/text-feature-grid-3-col.php:21
 msgctxt "Heading of the features"
 msgid "A passion for creating spaces"
 msgstr "Mekan yaratma tutkusu"
 
-#: patterns/text-alternating-images.php:105
+#: patterns/text-alternating-images.php:110
 msgctxt "Sample list item"
 msgid "Exclusive access to design insights."
 msgstr "Tasarım iç görülerine özel erişim."
 
-#: patterns/text-alternating-images.php:101
+#: patterns/text-alternating-images.php:106
 msgctxt "Sample list item"
 msgid "Case studies that celebrate architecture."
 msgstr "Mimarlığı göklere çıkaran vaka çalışmaları."
@@ -1506,12 +1506,12 @@ msgctxt "Pattern title"
 msgid "Portfolio home image gallery"
 msgstr "Portföy ana sayfası görsel galerisi"
 
-#: patterns/hidden-post-meta.php:25
+#: patterns/hidden-post-meta.php:30
 msgctxt "Prefix for the post category block: in category name"
 msgid "in "
 msgstr "kategori: "
 
-#: patterns/hidden-post-meta.php:20
+#: patterns/hidden-post-meta.php:25
 msgctxt "Prefix for the post author block: By author name"
 msgid "by"
 msgstr "yazar:"

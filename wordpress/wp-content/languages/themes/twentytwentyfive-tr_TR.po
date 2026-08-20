@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: GlotPress/4.0.3\n"
+"X-Generator: GlotPress/4.1.0\n"
 "Language: tr\n"
 "Project-Id-Version: Themes - Twenty Twenty-Five\n"
 
@@ -76,7 +76,7 @@ msgctxt "Color name"
 msgid "Base"
 msgstr "Temel"
 
-#: functions.php:84
+#: functions.php:80
 msgid "Checkmark"
 msgstr "Onay işareti"
 
@@ -161,7 +161,7 @@ msgctxt "Pattern title"
 msgid "List of posts, 1 column"
 msgstr "Yazı listesi, 1 sütun"
 
-#: functions.php:114
+#: functions.php:109
 msgid "A collection of full page layouts."
 msgstr "Tam sayfa düzenlerinden oluşan bir koleksiyon."
 

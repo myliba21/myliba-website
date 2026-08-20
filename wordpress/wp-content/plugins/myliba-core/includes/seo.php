@@ -13,14 +13,28 @@ function boot(): void
     add_filter('wp_robots', __NAMESPACE__ . '\\robots');
     add_filter('robots_txt', __NAMESPACE__ . '\\robots_txt', 10, 2);
     add_filter('wp_sitemaps_enabled', __NAMESPACE__ . '\\sitemaps_enabled');
+    add_filter('wp_sitemaps_posts_query_args', __NAMESPACE__ . '\\sitemap_post_query_args', 10, 2);
     add_filter('document_title_parts', __NAMESPACE__ . '\\document_title');
+    add_action('template_redirect', __NAMESPACE__ . '\\redirect_legacy_locale_duplicate', 0);
     add_action('send_headers', __NAMESPACE__ . '\\send_noindex_header');
     add_action('wp_head', __NAMESPACE__ . '\\render_head', 2);
+    add_action('admin_notices', __NAMESPACE__ . '\\external_seo_plugin_notice');
 }
 
 function seo_plugin_active(): bool
 {
     return defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION') || defined('AIOSEO_VERSION');
+}
+
+function external_seo_plugin_notice(): void
+{
+    if (!seo_plugin_active() || !current_user_can('manage_options')) {
+        return;
+    }
+
+    echo '<div class="notice notice-warning"><p>'
+        . esc_html__('An external SEO plugin is active. Myliba avoids duplicate meta tags, so manage titles and descriptions in that plugin or deactivate it to use the Myliba SEO fields.', 'myliba')
+        . '</p></div>';
 }
 
 function current_post_noindex(): bool
@@ -92,6 +106,121 @@ function send_noindex_header(): void
     }
 }
 
+function sitemap_post_query_args(array $args, string $post_type): array
+{
+    $meta_query = isset($args['meta_query']) && is_array($args['meta_query']) ? $args['meta_query'] : [];
+    $meta_query[] = [
+        'relation' => 'OR',
+        ['key' => '_myliba_noindex', 'compare' => 'NOT EXISTS'],
+        ['key' => '_myliba_noindex', 'value' => '1', 'compare' => '!='],
+    ];
+    $args['meta_query'] = $meta_query;
+
+    if ($post_type === 'page') {
+        $excluded = isset($args['post__not_in']) && is_array($args['post__not_in']) ? $args['post__not_in'] : [];
+        $args['post__not_in'] = array_values(array_unique(array_merge($excluded, legacy_locale_duplicate_ids())));
+    }
+
+    return $args;
+}
+
+function legacy_locale_duplicate_map(): array
+{
+    static $map = null;
+
+    if (is_array($map)) {
+        return $map;
+    }
+
+    $map = [];
+    foreach (Options\locales() as $locale) {
+        $locale_page = get_page_by_path($locale);
+        if (!$locale_page instanceof \WP_Post) {
+            continue;
+        }
+
+        $localized_pages = get_posts([
+            'post_type' => 'page',
+            'post_status' => 'publish',
+            'post_parent' => $locale_page->ID,
+            'posts_per_page' => -1,
+            'no_found_rows' => true,
+            'meta_query' => [
+                ['key' => '_myliba_language', 'value' => $locale],
+                ['key' => '_myliba_translation_key', 'compare' => 'EXISTS'],
+            ],
+        ]);
+
+        foreach ($localized_pages as $localized_page) {
+            $translation_key = trim((string) get_post_meta($localized_page->ID, '_myliba_translation_key', true));
+            if ($translation_key === '') {
+                continue;
+            }
+
+            $legacy_pages = get_posts([
+                'post_type' => 'page',
+                'post_status' => 'publish',
+                'post_parent' => 0,
+                'post__not_in' => [$locale_page->ID],
+                'posts_per_page' => -1,
+                'no_found_rows' => true,
+                'meta_query' => [
+                    ['key' => '_myliba_language', 'value' => $locale],
+                    ['key' => '_myliba_translation_key', 'value' => $translation_key],
+                ],
+            ]);
+
+            foreach ($legacy_pages as $legacy_page) {
+                $map[(int) $legacy_page->ID] = (int) $localized_page->ID;
+            }
+        }
+    }
+
+    // Earlier migrations also created root-level pages for several landing
+    // resources. Prefer the localized custom-post URL when slug and language
+    // are an exact match.
+    $landing_pages = get_posts([
+        'post_type' => 'myliba_landing',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'no_found_rows' => true,
+    ]);
+    foreach ($landing_pages as $landing_page) {
+        $language = (string) get_post_meta($landing_page->ID, '_myliba_language', true);
+        $legacy_page = get_page_by_path($landing_page->post_name);
+        if (!$legacy_page instanceof \WP_Post || (int) $legacy_page->post_parent !== 0) {
+            continue;
+        }
+        if ((string) get_post_meta($legacy_page->ID, '_myliba_language', true) !== $language) {
+            continue;
+        }
+        $map[(int) $legacy_page->ID] = (int) $landing_page->ID;
+    }
+
+    return $map;
+}
+
+function legacy_locale_duplicate_ids(): array
+{
+    return array_map('intval', array_keys(legacy_locale_duplicate_map()));
+}
+
+function redirect_legacy_locale_duplicate(): void
+{
+    if (!is_page() || is_admin() || wp_doing_ajax()) {
+        return;
+    }
+
+    $map = legacy_locale_duplicate_map();
+    $post_id = (int) get_queried_object_id();
+    if (!isset($map[$post_id])) {
+        return;
+    }
+
+    wp_safe_redirect(get_permalink($map[$post_id]), 301);
+    exit;
+}
+
 function document_title(array $parts): array
 {
     if (!is_singular()) {
@@ -110,10 +239,6 @@ function document_title(array $parts): array
 
 function render_head(): void
 {
-    if (should_noindex()) {
-        echo "<meta name=\"robots\" content=\"noindex,nofollow\">\n";
-    }
-
     if (!seo_plugin_active()) {
         render_fallback_meta();
     }
@@ -123,6 +248,10 @@ function render_head(): void
 
 function render_fallback_meta(): void
 {
+    if (is_404()) {
+        return;
+    }
+
     $description = '';
     $post_id     = is_singular() ? get_queried_object_id() : 0;
 
@@ -142,7 +271,9 @@ function render_fallback_meta(): void
     }
 
     // ── Canonical ──────────────────────────────────────────────────────
-    printf("<link rel=\"canonical\" href=\"%s\">\n", esc_url(current_url()));
+    if (!is_404() && !is_search()) {
+        printf("<link rel=\"canonical\" href=\"%s\">\n", esc_url(current_url()));
+    }
 
     // ── Description ────────────────────────────────────────────────────
     if ($description) {
@@ -169,15 +300,19 @@ function render_fallback_meta(): void
     printf("<meta name=\"twitter:title\" content=\"%s\">\n", esc_attr(wp_get_document_title()));
 
     // ── Featured image for OG / Twitter ────────────────────────────────
-    if (is_singular() && has_post_thumbnail()) {
-        $image = wp_get_attachment_image_url(get_post_thumbnail_id(), 'large');
-        if ($image) {
-            printf("<meta property=\"og:image\" content=\"%s\">\n", esc_url($image));
-            printf("<meta name=\"twitter:image\" content=\"%s\">\n", esc_url($image));
-        }
+    $image_id = is_singular() && has_post_thumbnail() ? get_post_thumbnail_id() : (int) get_theme_mod('custom_logo');
+    $image = $image_id ? wp_get_attachment_image_src($image_id, 'large') : false;
+    if ($image) {
+        printf("<meta property=\"og:image\" content=\"%s\">\n", esc_url($image[0]));
+        printf("<meta property=\"og:image:width\" content=\"%d\">\n", (int) $image[1]);
+        printf("<meta property=\"og:image:height\" content=\"%d\">\n", (int) $image[2]);
+        printf("<meta property=\"og:image:alt\" content=\"%s\">\n", esc_attr(get_post_meta($image_id, '_wp_attachment_image_alt', true) ?: get_bloginfo('name')));
+        printf("<meta name=\"twitter:image\" content=\"%s\">\n", esc_url($image[0]));
     }
 
-    render_hreflang();
+    if (!is_404() && !is_search()) {
+        render_hreflang();
+    }
 }
 
 function render_hreflang(): void
@@ -213,14 +348,61 @@ function render_hreflang(): void
         }
     }
 
-    // Fallback hreflang when Polylang/WPML is not yet installed.
-    $current_lang = is_singular() ? (get_post_meta(get_queried_object_id(), '_myliba_language', true) ?: 'tr') : 'tr';
-    printf("<link rel=\"alternate\" hreflang=\"%s\" href=\"%s\">\n", esc_attr($current_lang), esc_url(current_url()));
-    printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url(home_url('/')));
+    $current_id = is_singular() ? (int) get_queried_object_id() : 0;
+    $current_lang = $current_id
+        ? (get_post_meta($current_id, '_myliba_language', true) ?: Options\get('default_locale', 'tr'))
+        : Options\get('default_locale', 'tr');
+    $translation_key = $current_id ? trim((string) get_post_meta($current_id, '_myliba_translation_key', true)) : '';
+    $alternates = [];
+
+    if ($current_id && $translation_key !== '') {
+        $peers = get_posts([
+            'post_type' => get_post_type($current_id) ?: 'any',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'no_found_rows' => true,
+            'meta_key' => '_myliba_translation_key',
+            'meta_value' => $translation_key,
+        ]);
+
+        foreach ($peers as $peer) {
+            $peer_lang = (string) get_post_meta($peer->ID, '_myliba_language', true);
+            if (!in_array($peer_lang, Options\locales(), true) || isset($alternates[$peer_lang])) {
+                continue;
+            }
+
+            if ($peer->post_type === 'page') {
+                $locale_page = get_page_by_path($peer_lang);
+                $is_locale_home = $locale_page instanceof \WP_Post && (int) $peer->ID === (int) $locale_page->ID;
+                $is_locale_child = $locale_page instanceof \WP_Post && (int) $peer->post_parent === (int) $locale_page->ID;
+                if (!$is_locale_home && !$is_locale_child) {
+                    continue;
+                }
+            }
+
+            $alternates[$peer_lang] = get_permalink($peer);
+        }
+    }
+
+    if (!$alternates) {
+        $alternates[(string) $current_lang] = current_url();
+    }
+
+    foreach ($alternates as $locale => $url) {
+        printf("<link rel=\"alternate\" hreflang=\"%s\" href=\"%s\">\n", esc_attr($locale), esc_url($url));
+    }
+
+    $default_locale = (string) Options\get('default_locale', 'tr');
+    $default_url = $alternates[$default_locale] ?? reset($alternates) ?: home_url('/');
+    printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url($default_url));
 }
 
 function render_schema(): void
 {
+    if (is_404() || is_search()) {
+        return;
+    }
+
     $schemas  = [];
     $same_as  = array_filter([
         Options\get('linkedin_url'),
@@ -237,29 +419,30 @@ function render_schema(): void
         'url'      => Options\get('organization_url', home_url('/')),
     ];
 
+    $logo_id = (int) get_theme_mod('custom_logo');
+    $logo_url = $logo_id ? wp_get_attachment_image_url($logo_id, 'full') : '';
+    if ($logo_url) {
+        $organization['logo'] = $logo_url;
+    }
+
     if ($same_as) {
         $organization['sameAs'] = array_values($same_as);
     }
 
-    // WebSite schema — enables sitelinks search in Google.
+    // WebSite identity. SearchAction is intentionally omitted because the
+    // public site does not expose a dedicated search results experience.
     $website = [
-        '@context'        => 'https://schema.org',
-        '@type'           => 'WebSite',
-        'name'            => Options\get('organization_name', 'Myliba'),
-        'url'             => home_url('/'),
-        'potentialAction' => [
-            '@type'       => 'SearchAction',
-            'target'      => [
-                '@type'       => 'EntryPoint',
-                'urlTemplate' => home_url('/?s={search_term_string}'),
-            ],
-            'query-input' => 'required name=search_term_string',
-        ],
+        '@context' => 'https://schema.org',
+        '@type' => 'WebSite',
+        'name' => Options\get('organization_name', 'Myliba'),
+        'url' => home_url('/'),
     ];
 
     $schemas[] = $organization;
     $schemas[] = $website;
-    $schemas[] = breadcrumb_schema();
+    if (!is_front_page()) {
+        $schemas[] = breadcrumb_schema();
+    }
 
     if (is_academy_landing()) {
         $schemas[] = educational_organization_schema();
@@ -268,6 +451,18 @@ function render_schema(): void
 
     if (is_singular('post')) {
         $schemas[] = article_schema();
+    }
+
+    if (is_singular('myliba_product')) {
+        $schemas[] = software_application_schema();
+    }
+
+    if (is_singular('myliba_event')) {
+        $schemas[] = event_schema();
+    }
+
+    if (is_singular('myliba_academy')) {
+        $schemas[] = course_schema(get_queried_object_id());
     }
 
     $faq = faq_schema();
@@ -333,6 +528,11 @@ function article_schema(): array
             '@type' => 'Organization',
             'name' => Options\get('organization_name', 'Myliba'),
         ],
+        'publisher' => [
+            '@type' => 'Organization',
+            'name' => Options\get('organization_name', 'Myliba'),
+            'url' => Options\get('organization_url', home_url('/')),
+        ],
         'mainEntityOfPage' => current_url(),
     ];
 
@@ -344,6 +544,118 @@ function article_schema(): array
     }
 
     return $schema;
+}
+
+function post_description(int $post_id): string
+{
+    $description = trim((string) get_post_meta($post_id, '_myliba_seo_description', true));
+    if ($description !== '') {
+        return $description;
+    }
+
+    $post = get_post($post_id);
+    if (!$post instanceof \WP_Post) {
+        return '';
+    }
+
+    return wp_trim_words(wp_strip_all_tags($post->post_excerpt ?: $post->post_content), 32);
+}
+
+function software_application_schema(): array
+{
+    $post_id = (int) get_queried_object_id();
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'SoftwareApplication',
+        'name' => get_the_title($post_id),
+        'description' => post_description($post_id),
+        'url' => current_url(),
+        'applicationCategory' => 'BusinessApplication',
+        'operatingSystem' => 'Web',
+        'provider' => [
+            '@type' => 'Organization',
+            'name' => Options\get('organization_name', 'Myliba'),
+            'url' => Options\get('organization_url', home_url('/')),
+        ],
+    ];
+
+    if (has_post_thumbnail($post_id)) {
+        $schema['image'] = wp_get_attachment_image_url(get_post_thumbnail_id($post_id), 'large');
+    }
+
+    return array_filter($schema);
+}
+
+function event_schema(): array
+{
+    $post_id = (int) get_queried_object_id();
+    $date = trim((string) get_post_meta($post_id, '_myliba_event_date', true));
+    $location = trim((string) get_post_meta($post_id, '_myliba_event_location', true));
+    $registration_url = trim((string) get_post_meta($post_id, '_myliba_event_url', true));
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Event',
+        'name' => get_the_title($post_id),
+        'description' => post_description($post_id),
+        'url' => current_url(),
+        'eventStatus' => 'https://schema.org/EventScheduled',
+        'eventAttendanceMode' => stripos($location, 'online') !== false
+            ? 'https://schema.org/OnlineEventAttendanceMode'
+            : 'https://schema.org/OfflineEventAttendanceMode',
+        'organizer' => [
+            '@type' => 'Organization',
+            'name' => Options\get('organization_name', 'Myliba'),
+            'url' => Options\get('organization_url', home_url('/')),
+        ],
+    ];
+
+    if ($date !== '') {
+        $timestamp = strtotime($date);
+        if ($timestamp) {
+            $schema['startDate'] = wp_date(DATE_W3C, $timestamp);
+        }
+    }
+
+    if (stripos($location, 'online') !== false) {
+        $schema['location'] = [
+            '@type' => 'VirtualLocation',
+            'url' => $registration_url ?: current_url(),
+        ];
+    } elseif ($location !== '') {
+        $schema['location'] = [
+            '@type' => 'Place',
+            'name' => $location,
+        ];
+    }
+
+    if (has_post_thumbnail($post_id)) {
+        $schema['image'] = [wp_get_attachment_image_url(get_post_thumbnail_id($post_id), 'large')];
+    }
+
+    return array_filter($schema);
+}
+
+function course_schema(int $post_id): array
+{
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Course',
+        'name' => get_the_title($post_id),
+        'description' => post_description($post_id),
+        'url' => current_url(),
+        'provider' => [
+            '@type' => 'EducationalOrganization',
+            'name' => Options\get('organization_name', 'Myliba'),
+            'url' => Options\get('organization_url', home_url('/')),
+        ],
+    ];
+
+    $certificate = trim((string) get_post_meta($post_id, '_myliba_academy_certificate_info', true));
+    if ($certificate !== '') {
+        $schema['educationalCredentialAwarded'] = $certificate;
+    }
+
+    return array_filter($schema);
 }
 
 function faq_schema(): array

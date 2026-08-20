@@ -126,9 +126,32 @@ function render_seo_box(\WP_Post $post): void
 {
     nonce();
 
-    field_text('_myliba_seo_title', __('SEO title', 'myliba'), get_post_meta($post->ID, '_myliba_seo_title', true));
-    field_textarea('_myliba_seo_description', __('Meta description', 'myliba'), get_post_meta($post->ID, '_myliba_seo_description', true));
+    $seo_title = (string) get_post_meta($post->ID, '_myliba_seo_title', true);
+    $seo_description = (string) get_post_meta($post->ID, '_myliba_seo_description', true);
+
+    echo '<p class="description">' . esc_html__('These values control the Google result title/description and social sharing metadata. Empty fields fall back to the content title and excerpt.', 'myliba') . '</p>';
+    field_text('_myliba_seo_title', __('SEO title', 'myliba'), $seo_title, __('Recommended: roughly 30–60 characters. Write a unique, intent-focused title.', 'myliba'));
+    echo '<p class="description" data-myliba-seo-count="_myliba_seo_title">' . esc_html(sprintf(__('Current length: %d characters', 'myliba'), mb_strlen($seo_title))) . '</p>';
+    field_textarea('_myliba_seo_description', __('Meta description', 'myliba'), $seo_description, __('Recommended: roughly 120–160 characters. Summarize the page and its value clearly.', 'myliba'));
+    echo '<p class="description" data-myliba-seo-count="_myliba_seo_description">' . esc_html(sprintf(__('Current length: %d characters', 'myliba'), mb_strlen($seo_description))) . '</p>';
     field_checkbox('_myliba_noindex', __('Noindex this content', 'myliba'), get_post_meta($post->ID, '_myliba_noindex', true) === '1');
+    echo '<p class="description">' . esc_html__('Noindex content is also removed from the XML sitemap.', 'myliba') . '</p>';
+    ?>
+    <script>
+        (function () {
+            ['_myliba_seo_title', '_myliba_seo_description'].forEach(function (id) {
+                var field = document.getElementById(id);
+                var counter = document.querySelector('[data-myliba-seo-count="' + id + '"]');
+                if (!field || !counter) return;
+                var update = function () {
+                    counter.textContent = <?php echo wp_json_encode(__('Current length:', 'myliba')); ?> + ' ' + Array.from(field.value).length + ' ' + <?php echo wp_json_encode(__('characters', 'myliba')); ?>;
+                };
+                field.addEventListener('input', update);
+                update();
+            });
+        }());
+    </script>
+    <?php
 }
 
 function render_event_box(\WP_Post $post): void
