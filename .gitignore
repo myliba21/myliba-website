@@ -10,6 +10,8 @@
 node_modules/
 dist/
 build/
+!wordpress/wp-content/themes/myliba/assets/css/dist/
+!wordpress/wp-content/themes/myliba/assets/css/dist/*.css
 
 # WordPress local state
 wordpress/.env

@@ -65,33 +65,54 @@ function myliba_asset_version(string $relative_path): string
 
 function myliba_enqueue_assets(): void
 {
-    wp_enqueue_style(
-        'myliba-fonts',
-        'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap',
-        [],
-        null
-    );
-    wp_enqueue_style('myliba-main', get_template_directory_uri() . '/assets/css/main.css', ['myliba-fonts'], myliba_asset_version('assets/css/main.css'));
+    $css_uri = get_template_directory_uri() . '/assets/css/dist/';
+    $enqueue_css = static function (string $handle, string $file, array $dependencies = []) use ($css_uri): void {
+        wp_enqueue_style(
+            $handle,
+            $css_uri . $file,
+            $dependencies,
+            myliba_asset_version('assets/css/dist/' . $file)
+        );
+    };
+
+    $enqueue_css('myliba-base', 'base.min.css');
+    $pre_shared_dependency = 'myliba-base';
+
+    if (myliba_is_academy_landing_page() || is_singular('myliba_academy') || is_post_type_archive('myliba_academy')) {
+        $enqueue_css('myliba-academy', 'academy.min.css', [$pre_shared_dependency]);
+        $pre_shared_dependency = 'myliba-academy';
+    } elseif (is_page(['yazilim', 'urunler', 'software', 'our-products']) || is_singular('myliba_product') || is_post_type_archive('myliba_product')) {
+        $enqueue_css('myliba-software', 'software.min.css', [$pre_shared_dependency]);
+        $pre_shared_dependency = 'myliba-software';
+    } elseif (is_page(['solutions', 'cozumler']) || is_singular('myliba_solution') || is_post_type_archive('myliba_solution')) {
+        $enqueue_css('myliba-solutions', 'solutions.min.css', [$pre_shared_dependency]);
+        $pre_shared_dependency = 'myliba-solutions';
+    } elseif (
+        is_page(['development-center', 'gelisim-merkezi'])
+        || is_singular(['myliba_report', 'myliba_ebook', 'myliba_event'])
+        || is_post_type_archive(['myliba_report', 'myliba_ebook', 'myliba_event'])
+    ) {
+        $enqueue_css('myliba-development', 'development.min.css', [$pre_shared_dependency]);
+        $pre_shared_dependency = 'myliba-development';
+    }
+
+    $enqueue_css('myliba-shared', 'shared.min.css', [$pre_shared_dependency]);
+    $page_dependency = 'myliba-shared';
+
+    if (is_page(['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz'])) {
+        $enqueue_css('myliba-story', 'story.min.css', [$page_dependency]);
+    } elseif (is_page(['etik-hat', 'etik-danismanlik', 'ethics-counsel', 'etik', 'ethics', 'whistleblowing'])) {
+        $enqueue_css('myliba-ethics', 'ethics.min.css', [$page_dependency]);
+    } elseif (is_page(['sss', 'faq', 'faqs', 'sikca-sorulan-sorular'])) {
+        $enqueue_css('myliba-faq', 'faq.min.css', [$page_dependency]);
+    }
+
     wp_enqueue_script('myliba-main', get_template_directory_uri() . '/assets/js/main.js', [], myliba_asset_version('assets/js/main.js'), [
         'strategy' => 'defer',
         'in_footer' => true,
     ]);
 }
 add_action('wp_enqueue_scripts', 'myliba_enqueue_assets');
-
-function myliba_resource_hints(array $urls, string $relation_type): array
-{
-    if ($relation_type === 'preconnect') {
-        $urls[] = 'https://fonts.googleapis.com';
-        $urls[] = [
-            'href' => 'https://fonts.gstatic.com',
-            'crossorigin' => 'anonymous',
-        ];
-    }
-
-    return $urls;
-}
-add_filter('wp_resource_hints', 'myliba_resource_hints', 10, 2);
 
 function myliba_cleanup_head(): void
 {
@@ -119,12 +140,12 @@ function myliba_dequeue_block_styles(): void
 }
 add_action('wp_enqueue_scripts', 'myliba_dequeue_block_styles', 100);
 
-function myliba_preload_main_stylesheet(): void
+function myliba_preload_base_stylesheet(): void
 {
-    $href = get_template_directory_uri() . '/assets/css/main.css?ver=' . rawurlencode(myliba_asset_version('assets/css/main.css'));
+    $href = get_template_directory_uri() . '/assets/css/dist/base.min.css?ver=' . rawurlencode(myliba_asset_version('assets/css/dist/base.min.css'));
     printf("<link rel=\"preload\" as=\"style\" href=\"%s\">\n", esc_url($href));
 }
-add_action('wp_head', 'myliba_preload_main_stylesheet', 1);
+add_action('wp_head', 'myliba_preload_base_stylesheet', 1);
 
 function myliba_render_critical_css(): void
 {
@@ -132,6 +153,9 @@ function myliba_render_critical_css(): void
     <style id="myliba-critical-css">
         :root{--primary:#ff5a2f;--primary-dark:#dc3e18;--accent:#2f6df6;--success:#16b887;--background:#fffdfb;--surface:#f8fafc;--foreground:#12131a;--text-secondary:#667085;--border:#eceff4;--shadow:0 24px 70px rgba(18,19,26,.10);--page-max:1440px;--content-gutter:max(24px,calc((100vw - var(--page-max))/2))}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#fffdfb 0%,#fff 34%,#f8fbff 100%);color:var(--foreground);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}img{display:block;height:auto;max-width:100%}.site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(18,19,26,.06);background:rgba(255,253,251,.84);backdrop-filter:blur(18px)}.site-header__inner{align-items:center;display:flex;gap:28px;margin:0 auto;max-width:1240px;min-height:68px;padding-left:24px;padding-right:24px}.site-brand{align-items:center;display:inline-flex;gap:10px;font-weight:900}.site-brand__logo{display:block;max-height:40px;max-width:min(220px,44vw);object-fit:contain;width:auto}.site-brand__mark{background:transparent;border-radius:0;display:grid;gap:3px;grid-template-columns:repeat(3,8px);height:30px;place-content:center;width:32px}.site-brand__mark span{border-radius:999px;display:block;width:8px}.site-brand__mark span:nth-child(1){background:var(--primary);height:23px}.site-brand__mark span:nth-child(2){background:var(--accent);height:30px}.site-brand__mark span:nth-child(3){background:var(--success);height:18px}.site-brand__text{font-size:1.04rem;letter-spacing:0}.site-nav{align-items:center;display:flex;flex:1;gap:6px;justify-content:center}.site-nav__menu{align-items:center;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;list-style:none;margin:0;padding:0}.site-nav a{border-radius:999px;color:#303645;font-size:.86rem;font-weight:700;padding:8px 11px}.site-actions{align-items:center;display:flex;gap:14px}.site-nav__mobile-cta,.nav-toggle{display:none}.myliba-button{align-items:center;border:1px solid transparent;border-radius:999px;display:inline-flex;font-size:.9rem;font-weight:900;justify-content:center;min-height:44px;padding:11px 18px}.myliba-button--small,.myliba-button--primary{background:linear-gradient(135deg,var(--primary),#ff764f);box-shadow:0 14px 30px rgba(255,90,47,.22);color:#fff}.myliba-button--ghost{background:#fff;border-color:var(--border);box-shadow:0 12px 30px rgba(18,19,26,.06);color:var(--foreground)}.hero{align-items:center;background:radial-gradient(circle at 76% 12%,rgba(47,109,246,.14),transparent 28%),radial-gradient(circle at 18% 28%,rgba(255,107,74,.14),transparent 30%),linear-gradient(180deg,#fffdfa 0%,#f7fbff 100%);display:grid;gap:clamp(36px,4vw,72px);grid-template-columns:minmax(430px,.86fr) minmax(600px,1.14fr);margin:0 auto;min-height:700px;padding:86px var(--content-gutter) 56px;position:relative;width:100%}.hero::before{background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(245,248,252,.66)),linear-gradient(90deg,rgba(255,107,74,.08),rgba(47,109,246,.07),rgba(22,184,135,.07));border:1px solid rgba(18,19,26,.04);border-radius:0 0 40px 40px;content:"";inset:0;position:absolute;z-index:-1}.eyebrow{color:var(--primary-dark);font-size:.72rem;font-weight:900;letter-spacing:.12em;margin:0 0 12px;text-transform:uppercase}.hero__content h1{font-size:clamp(3rem,4.6vw,5rem);letter-spacing:0;line-height:.96;margin:0;max-width:760px}.hero-title-rotator{display:grid;max-width:780px;overflow-wrap:anywhere}.hero-title-rotator__item{grid-area:1/1;opacity:0}.hero-title-rotator__item.is-active{opacity:1}.hero__subtitle{color:#586174;font-size:1.08rem;line-height:1.75;margin-top:20px;max-width:720px}.hero__actions,.hero__proof{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}.hero__proof{color:var(--text-secondary);font-size:.9rem;font-weight:800;gap:10px;margin-top:22px}.hero__proof span{background:rgba(255,255,255,.82);border:1px solid rgba(18,19,26,.08);border-radius:999px;box-shadow:0 10px 24px rgba(18,19,26,.04);padding:7px 11px}.hero-media-rotator{align-self:center;aspect-ratio:16/10;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(247,250,255,.9)),radial-gradient(circle at 82% 8%,rgba(47,109,246,.14),transparent 34%);border:1px solid rgba(47,109,246,.13);border-radius:22px;box-shadow:0 32px 92px rgba(18,19,26,.17);overflow:hidden;padding:10px;position:relative}.hero-media-rotator__frame{background:#eef3fb;border:1px solid rgba(21,23,34,.08);border-radius:16px;height:100%;overflow:hidden;position:relative}.hero-media-rotator__slide{inset:0;margin:0;opacity:0;position:absolute}.hero-media-rotator__slide.is-active{opacity:1;z-index:1}.hero-media-rotator__slide img{display:block;height:100%;object-fit:cover;object-position:top left;width:100%}.site-promo,.site-promo__content{height:50px;min-height:50px}.site-promo{border-radius:0;margin:0;max-width:none;width:100%}.site-promo__content{padding-bottom:0;padding-top:0}@media(max-width:1120px){.hero{grid-template-columns:1fr;min-height:auto}.site-actions{display:none}.nav-toggle{display:inline-flex}}@media(max-width:640px){.site-header__inner{min-height:64px;padding-left:18px;padding-right:18px}.hero{gap:28px;padding:44px 18px 40px}.hero__content h1{font-size:clamp(2.35rem,14vw,3.45rem)}.hero-media-rotator{border-radius:16px;padding:6px}}
         :root{--primary:#287f9f;--primary-dark:#155c75;--accent:#b63a48;--success:#3c9276;--background:#fbfcfb;--surface:#f4f8f7;--foreground:#26343a;--text-secondary:#607078;--border:#dce7e6;--brand-blue:#287f9f;--brand-yellow:#d2a51f;--brand-red:#b63a48;--brand-green:#3c9276;--blue-soft:#e1f0f5;--green-soft:#e4f2ed;--yellow-soft:#fff3c7;--red-soft:#f8e3e6;--shadow:0 24px 70px rgba(38,52,58,.10)}body{background:linear-gradient(180deg,#fbfcfb 0%,#fff 38%,#f3f8f7 100%);font-family:Manrope,Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.site-brand__mark{grid-template-columns:repeat(4,7px);width:37px}.site-brand__mark span{width:7px}.site-brand__mark span:nth-child(1){background:var(--brand-green)}.site-brand__mark span:nth-child(2){background:var(--brand-yellow)}.site-brand__mark span:nth-child(3){background:var(--brand-red)}.site-brand__mark span:nth-child(4){background:var(--brand-blue);height:27px}.myliba-button--small,.myliba-button--primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));box-shadow:0 14px 30px rgba(40,127,159,.22)}.hero{background:radial-gradient(circle at 78% 10%,rgba(40,127,159,.16),transparent 30%),radial-gradient(circle at 14% 22%,rgba(60,146,118,.14),transparent 31%),linear-gradient(180deg,#fbfcfb 0%,#f4f9f7 100%)}
+        :root{--fs-display:clamp(3rem,4.25vw,3rem);--fs-h1:clamp(2.5rem,3.5vw,3rem);--fs-lead:1.08rem;--fs-body:1rem}
+        .hero-slide__visual picture{display:block;width:100%}
+        .hero-slider{background:radial-gradient(circle at 78% 12%,rgba(23,109,137,.34),transparent 30%),radial-gradient(circle at 12% 88%,rgba(52,125,103,.23),transparent 32%),linear-gradient(135deg,#0f252d 0%,#102f39 52%,#142a32 100%);color:#fff;isolation:isolate;overflow:hidden;position:relative}.hero-slider__viewport{display:grid}.hero-slide{align-items:center;display:grid;gap:clamp(40px,5vw,76px);grid-area:1/1;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);min-height:660px;opacity:0;padding:36px var(--content-gutter) 40px;pointer-events:none;visibility:hidden}.hero-slide.is-active{opacity:1;pointer-events:auto;visibility:visible;z-index:1}.hero-slide__content{max-width:700px;position:relative;z-index:2}.hero-slide__title{color:#fff;font-size:var(--fs-display);letter-spacing:-.055em;line-height:1.015;margin:0;text-wrap:balance}.hero-slide__text{color:rgba(235,244,246,.76);font-size:var(--fs-lead);line-height:1.75;margin:22px 0 0;max-width:610px}.hero-slide__visual-wrap{align-self:center;display:flex;justify-content:center;min-width:0;position:relative;width:100%}.hero-slide__visual{align-items:center;background:rgba(255,255,255,.96);border:1px solid rgba(255,255,255,.54);border-radius:20px;box-shadow:0 42px 90px rgba(1,15,20,.42);display:flex;justify-content:center;max-width:100%;overflow:hidden;padding:10px;width:100%}.hero-slide__visual img{border-radius:13px;display:block;height:auto;max-height:520px;max-width:100%;object-fit:contain;width:100%}@media(max-width:1120px){.hero-slide{grid-template-columns:1fr}.hero-slide__visual-wrap{margin:20px auto 0;max-width:820px}}@media(max-width:640px){body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}.hero-slider,.hero-slide{min-height:calc(100svh - 121px)}.hero-slide{align-items:start;gap:0;grid-template-columns:minmax(0,1fr);padding:70px 18px 82px}.hero-slide__title{font-size:var(--fs-h1);line-height:1.02}.hero-slide__text{font-size:var(--fs-body);line-height:1.55;margin-top:18px}.hero-slide__visual-wrap,.hero-slider .hero__actions,.hero-slider .hero__proof,.hero-slider__controls{display:none}}
     </style>
     <?php
 }
@@ -553,7 +577,7 @@ function myliba_image_dimensions_for_source(string $source, string $url): array
 
 function myliba_lcp_hero_image(): array
 {
-    if (!is_front_page()) {
+    if (!is_front_page() && !myliba_is_locale_landing_page()) {
         return [];
     }
 
@@ -570,7 +594,24 @@ function myliba_preload_lcp_hero_image(): void
         return;
     }
 
-    printf("<link rel=\"preload\" as=\"image\" href=\"%s\" fetchpriority=\"high\">\n", esc_url((string) $image['url']));
+    $attributes = sprintf(
+        'href="%s" fetchpriority="high" media="(min-width: 641px)"',
+        esc_url((string) $image['url'])
+    );
+
+    $attachment_id = absint($image['attachment_id'] ?? 0);
+    if ($attachment_id) {
+        $srcset = wp_get_attachment_image_srcset($attachment_id, 'full');
+        if ($srcset) {
+            $attributes .= sprintf(
+                ' imagesrcset="%s" imagesizes="%s"',
+                esc_attr($srcset),
+                esc_attr('(min-width: 1440px) 760px, (max-width: 720px) calc(100vw - 36px), (max-width: 1120px) calc(100vw - 48px), 54vw')
+            );
+        }
+    }
+
+    printf("<link rel=\"preload\" as=\"image\" %s>\n", $attributes); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 add_action('wp_head', 'myliba_preload_lcp_hero_image', 1);
 
@@ -2670,4 +2711,3 @@ function myliba_inject_contact_social_links(string $content): string
     return $content;
 }
 add_filter('the_content', 'myliba_inject_contact_social_links', 20);
-

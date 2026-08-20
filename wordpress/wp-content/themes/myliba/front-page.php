@@ -59,10 +59,25 @@ foreach (myliba_home_sections($post_id) as $section) {
                             <div class="hero-slide__visual-wrap">
                                 <div class="hero-slide__visual">
                                     <?php if (!empty($image['url'])): ?>
-                                        <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>"
-                                            <?php echo !empty($image['width']) ? 'width="' . esc_attr((string) $image['width']) . '"' : ''; ?>
-                                            <?php echo !empty($image['height']) ? 'height="' . esc_attr((string) $image['height']) . '"' : ''; ?>
-                                            loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>" <?php echo $index === 0 ? 'fetchpriority="high"' : ''; ?> decoding="async">
+                                        <picture>
+                                            <source media="(max-width: 640px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
+                                        <?php if (!empty($image['attachment_id'])): ?>
+                                            <?php
+                                            echo wp_get_attachment_image((int) $image['attachment_id'], 'full', false, array_filter([
+                                                'alt' => (string) ($image['alt'] ?? ''),
+                                                'loading' => $index === 0 ? 'eager' : 'lazy',
+                                                'fetchpriority' => $index === 0 ? 'high' : null,
+                                                'decoding' => 'async',
+                                                'sizes' => '(min-width: 1440px) 760px, (max-width: 720px) calc(100vw - 36px), (max-width: 1120px) calc(100vw - 48px), 54vw',
+                                            ]));
+                                            ?>
+                                        <?php else: ?>
+                                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr((string) ($image['alt'] ?? '')); ?>"
+                                                <?php echo !empty($image['width']) ? 'width="' . esc_attr((string) $image['width']) . '"' : ''; ?>
+                                                <?php echo !empty($image['height']) ? 'height="' . esc_attr((string) $image['height']) . '"' : ''; ?>
+                                                loading="<?php echo $index === 0 ? 'eager' : 'lazy'; ?>" <?php echo $index === 0 ? 'fetchpriority="high"' : ''; ?> decoding="async">
+                                        <?php endif; ?>
+                                        </picture>
                                     <?php else: ?>
                                         <div class="hero-slide__placeholder" aria-hidden="true"></div>
                                     <?php endif; ?>
@@ -89,6 +104,8 @@ foreach (myliba_home_sections($post_id) as $section) {
                                     class="<?php echo $index === 0 ? 'is-active' : ''; ?>" type="button" role="tab"
                                     aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>"
                                     aria-controls="hero-slide-<?php echo esc_attr((string) ($row['id'] ?? $index)); ?>" data-hero-dot
+                                    aria-label="<?php echo esc_attr(sprintf(myliba_text('Slide %d'), $index + 1)); ?>"
+                                    tabindex="<?php echo $index === 0 ? '0' : '-1'; ?>"
                                     data-slide-label="<?php echo esc_attr(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?>"></button><?php endforeach; ?>
                         </div>
                         <button class="hero-slider__arrow" type="button" data-hero-next
@@ -152,7 +169,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                                 <?php endif; ?>
                             </span>
                             <span class="proof-stat__content">
-                                <h3><?php echo esc_html($value); ?></h3><span><?php echo esc_html($label); ?></span>
+                                <strong class="proof-stat__value"><?php echo esc_html($value); ?></strong><span><?php echo esc_html($label); ?></span>
                             </span>
                         </div>
                     <?php endforeach; ?>
@@ -407,10 +424,21 @@ foreach (myliba_home_sections($post_id) as $section) {
                                         href="<?php echo esc_url(myliba_page_url('products')); ?>"><?php echo esc_html(myliba_home_value('performance_button')); ?></a>
                                 </div>
                                 <?php if ($has_image): ?>
-                                    <figure><img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr((string) ($image['alt'] ?? '')); ?>"
-                                            <?php echo !empty($image['width']) ? 'width="' . esc_attr((string) $image['width']) . '"' : ''; ?>
-                                            <?php echo !empty($image['height']) ? 'height="' . esc_attr((string) $image['height']) . '"' : ''; ?>
-                                            loading="lazy" decoding="async"></figure>
+                                    <figure>
+                                        <?php if (!empty($image['attachment_id'])): ?>
+                                            <?php echo wp_get_attachment_image((int) $image['attachment_id'], 'large', false, [
+                                                'alt' => (string) ($image['alt'] ?? ''),
+                                                'loading' => 'lazy',
+                                                'decoding' => 'async',
+                                                'sizes' => '(max-width: 720px) calc(100vw - 36px), (max-width: 1120px) calc(100vw - 48px), 48vw',
+                                            ]); ?>
+                                        <?php else: ?>
+                                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr((string) ($image['alt'] ?? '')); ?>"
+                                                <?php echo !empty($image['width']) ? 'width="' . esc_attr((string) $image['width']) . '"' : ''; ?>
+                                                <?php echo !empty($image['height']) ? 'height="' . esc_attr((string) $image['height']) . '"' : ''; ?>
+                                                loading="lazy" decoding="async">
+                                        <?php endif; ?>
+                                    </figure>
                                 <?php else: ?>
                                     <div class="performance-tabs__visual-placeholder" aria-hidden="true">
                                         <span class="performance-tabs__visual-number"><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>

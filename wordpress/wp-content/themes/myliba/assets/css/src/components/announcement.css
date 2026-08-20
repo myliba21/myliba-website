@@ -1,0 +1,48 @@
+/* Keep the global announcement bar exactly 50px after all legacy overrides. */
+.site-promo {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  height: 50px;
+  margin: 0;
+  max-width: none;
+  min-height: 50px;
+  width: 100%;
+}
+
+.site-promo__content {
+  height: 50px;
+  min-height: 50px;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.site-promo__dismiss {
+  height: 40px;
+  top: 5px;
+  width: 40px;
+}
+
+@media (max-width: 720px) {
+  .site-promo__content {
+    display: flex;
+    padding: 0 50px 0 16px;
+  }
+
+  .site-promo__side {
+    display: none;
+  }
+
+  .site-promo__content strong {
+    font-size: var(--fs-small);
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hero-slider .hero__actions .myliba-button--primary {
+    display: inline-flex;
+  }
+}
+
