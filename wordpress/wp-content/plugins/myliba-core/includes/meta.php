@@ -24,16 +24,21 @@ function enqueue_admin_assets(): void
 function register_meta_boxes(string $post_type): void
 {
     $current_post = get_post();
+    $is_academy_page = $post_type === 'page'
+        && $current_post instanceof \WP_Post
+        && in_array($current_post->post_name, ['okr-kultur-akademisi', 'okr-culture-academy'], true);
     $is_special_page = $post_type === 'page'
         && $current_post instanceof \WP_Post
-        && (is_homepage_post($current_post->ID) || in_array($current_post->post_name, ['okr-kultur-akademisi', 'okr-culture-academy'], true));
+        && (is_homepage_post($current_post->ID) || $is_academy_page);
 
     if (in_array($post_type, ['page', 'post', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_case_study', 'myliba_landing', 'myliba_event', 'myliba_ebook', 'myliba_report', 'myliba_team', 'myliba_client_logo', 'myliba_faq', 'myliba_testimonial'], true)) {
         add_meta_box('myliba_language', __('Myliba Language', 'myliba'), __NAMESPACE__ . '\\render_language_box', $post_type, 'side');
     }
 
     if (in_array($post_type, ['page', 'post', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_case_study', 'myliba_landing', 'myliba_event', 'myliba_ebook', 'myliba_report'], true)) {
-        add_meta_box('myliba_hero', __('Myliba Hero', 'myliba'), __NAMESPACE__ . '\\render_hero_box', $post_type, 'normal', 'high');
+        if (!$is_academy_page) {
+            add_meta_box('myliba_hero', __('Myliba Hero', 'myliba'), __NAMESPACE__ . '\\render_hero_box', $post_type, 'normal', 'high');
+        }
         add_meta_box('myliba_seo', __('Myliba SEO', 'myliba'), __NAMESPACE__ . '\\render_seo_box', $post_type, 'normal');
     }
 
@@ -204,47 +209,9 @@ function render_academy_page_box(\WP_Post $post): void
 {
     nonce();
 
-    echo '<p class="description">' . esc_html__('These fields power the database-driven Academy landing page. Empty sections are not rendered.', 'myliba') . '</p>';
-    echo '<h3>' . esc_html__('Hero and navigation', 'myliba') . '</h3>';
-    field_text('_myliba_academy_hero_secondary_label', __('Secondary CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_secondary_label', true));
-    field_url('_myliba_academy_hero_secondary_url', __('Secondary CTA URL', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_secondary_url', true));
-    field_text('_myliba_academy_hero_tertiary_label', __('Tertiary CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_tertiary_label', true));
-    field_url('_myliba_academy_hero_tertiary_url', __('Tertiary CTA URL', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_tertiary_url', true));
-    field_textarea('_myliba_academy_hero_badges', __('Hero badges', 'myliba'), get_post_meta($post->ID, '_myliba_academy_hero_badges', true), __('One row per line as Value | Label.', 'myliba'));
-    $hero_images = get_post_meta($post->ID, '_myliba_academy_hero_images', true);
-    if (empty($hero_images)) {
-        $single_hero_image = get_post_meta($post->ID, '_myliba_academy_hero_image', true);
-        if ($single_hero_image) {
-            $hero_images = [absint($single_hero_image)];
-        }
-    }
-    field_gallery('_myliba_academy_hero_images', __('Hero Slider Görselleri (Birden fazla seçilebilir)', 'myliba'), $hero_images, __('Birden fazla resim seçildiğinde sağ alanda otomatik geçişli slider olarak gösterilir. Sıralamayı değiştirmek için sürükleyip bırakabilirsiniz.', 'myliba'));
-    field_media('_myliba_academy_icf_image', __('ICF approval badge', 'myliba'), get_post_meta($post->ID, '_myliba_academy_icf_image', true));
-    field_media('_myliba_academy_certificate_image', __('Certificate mock-up', 'myliba'), get_post_meta($post->ID, '_myliba_academy_certificate_image', true));
-    field_media('_myliba_academy_digital_badge_image', __('Digital badge', 'myliba'), get_post_meta($post->ID, '_myliba_academy_digital_badge_image', true));
-    field_media('_myliba_academy_platform_image', __('Myliba platform image', 'myliba'), get_post_meta($post->ID, '_myliba_academy_platform_image', true));
-    field_textarea('_myliba_academy_nav_items', __('Sticky section navigation', 'myliba'), get_post_meta($post->ID, '_myliba_academy_nav_items', true), __('One row per line as Label | anchor-without-hash.', 'myliba'));
-
-    echo '<h3>' . esc_html__('Trust and programs introduction', 'myliba') . '</h3>';
-    field_text('_myliba_academy_organization_name', __('Educational organization name', 'myliba'), get_post_meta($post->ID, '_myliba_academy_organization_name', true));
-    field_text('_myliba_academy_trust_title', __('Client references title', 'myliba'), get_post_meta($post->ID, '_myliba_academy_trust_title', true));
-    field_text('_myliba_academy_trust_label', __('Client references label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_trust_label', true));
-    field_textarea('_myliba_academy_trust_text', __('Client references description', 'myliba'), get_post_meta($post->ID, '_myliba_academy_trust_text', true));
-    field_text('_myliba_academy_programs_eyebrow', __('Programs eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_academy_programs_eyebrow', true));
-    field_textarea('_myliba_academy_programs_title', __('Programs title', 'myliba'), get_post_meta($post->ID, '_myliba_academy_programs_title', true));
-    field_textarea('_myliba_academy_programs_text', __('Programs introduction', 'myliba'), get_post_meta($post->ID, '_myliba_academy_programs_text', true));
-    field_text('_myliba_academy_benefits_title', __('Program benefits heading', 'myliba'), get_post_meta($post->ID, '_myliba_academy_benefits_title', true));
-    field_text('_myliba_academy_modules_title', __('Program modules heading', 'myliba'), get_post_meta($post->ID, '_myliba_academy_modules_title', true));
-
-    echo '<h3>' . esc_html__('Approach, proof and testimonials', 'myliba') . '</h3>';
-    field_textarea('_myliba_academy_approach_title', __('Approach title', 'myliba'), get_post_meta($post->ID, '_myliba_academy_approach_title', true));
-    field_textarea('_myliba_academy_approach_steps', __('Approach steps', 'myliba'), get_post_meta($post->ID, '_myliba_academy_approach_steps', true), __('One row per line as Title | Description.', 'myliba'));
-    field_textarea('_myliba_academy_stats', __('Statistics', 'myliba'), get_post_meta($post->ID, '_myliba_academy_stats', true), __('One row per line as Value | Label.', 'myliba'));
-    field_text('_myliba_academy_testimonials_title', __('Testimonials title', 'myliba'), get_post_meta($post->ID, '_myliba_academy_testimonials_title', true));
-    field_text('_myliba_academy_faq_title', __('FAQ title', 'myliba'), get_post_meta($post->ID, '_myliba_academy_faq_title', true));
-    field_text('_myliba_academy_faq_group', __('FAQ group', 'myliba'), get_post_meta($post->ID, '_myliba_academy_faq_group', true), __('Only FAQ records with this group are shown.', 'myliba'));
-
-    echo '<h3>' . esc_html__('Final call to action and contact form', 'myliba') . '</h3>';
+    echo '<p class="description">' . esc_html__('Bileşenleri sürükleyerek sıralayın; bir kartı açarak o bölüme ait içerikleri düzenleyin.', 'myliba') . '</p>';
+    render_academy_builder($post);
+    echo '<details class="myliba-academy-extra-settings"><summary>' . esc_html__('Kullanılmayan final CTA alanları', 'myliba') . '</summary>';
     field_text('_myliba_academy_final_eyebrow', __('Final CTA eyebrow', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_eyebrow', true), __('Örn: ICF Onaylı Sertifika Programı', 'myliba'));
     field_textarea('_myliba_academy_final_title', __('Final CTA title', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_title', true));
     field_textarea('_myliba_academy_final_text', __('Final CTA description', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_text', true));
@@ -252,12 +219,356 @@ function render_academy_page_box(\WP_Post $post): void
     field_url('_myliba_academy_final_primary_url', __('Final primary CTA URL', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_primary_url', true), __('Boş bırakılırsa başvuru formunu açar.', 'myliba'));
     field_text('_myliba_academy_final_secondary_label', __('Final secondary CTA label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_secondary_label', true));
     field_url('_myliba_academy_final_secondary_url', __('Final secondary CTA URL', 'myliba'), get_post_meta($post->ID, '_myliba_academy_final_secondary_url', true), __('Örn: #programlar', 'myliba'));
-    field_checkbox('_myliba_footer_cta_hide', __('Bu sayfada Footer CTA bannerını gizle', 'myliba'), get_post_meta($post->ID, '_myliba_footer_cta_hide', true) === '1');
-    field_text('_myliba_academy_contact_title', __('Form title', 'myliba'), get_post_meta($post->ID, '_myliba_academy_contact_title', true));
-    field_textarea('_myliba_academy_contact_text', __('Form description', 'myliba'), get_post_meta($post->ID, '_myliba_academy_contact_text', true));
-    field_text('_myliba_academy_form_button', __('Form button label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_form_button', true));
-    field_textarea('_myliba_academy_form_success', __('Successful submission message', 'myliba'), get_post_meta($post->ID, '_myliba_academy_form_success', true));
-    field_textarea('_myliba_academy_kvkk_text', __('KVKK consent label', 'myliba'), get_post_meta($post->ID, '_myliba_academy_kvkk_text', true));
+    echo '</details>';
+}
+
+function academy_program_posts(int $page_id): array
+{
+    $args = [
+        'post_type' => 'myliba_academy',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'meta_key' => '_myliba_order',
+        'orderby' => ['meta_value_num' => 'ASC', 'date' => 'DESC'],
+        'order' => 'ASC',
+        'suppress_filters' => false,
+    ];
+
+    if (function_exists('pll_get_post_language')) {
+        $language = pll_get_post_language($page_id, 'slug');
+        if (is_string($language) && $language !== '') {
+            $args['lang'] = $language;
+        }
+    } else {
+        $language = (string) get_post_meta($page_id, '_myliba_language', true);
+        if ($language !== '') {
+            $args['meta_query'] = [[
+                'key' => '_myliba_language',
+                'value' => $language,
+                'compare' => '=',
+            ]];
+        }
+    }
+
+    return get_posts($args);
+}
+
+function academy_program_section_key(int $program_id): string
+{
+    return 'program_' . $program_id;
+}
+
+function academy_program_id_from_section_key(string $key): int
+{
+    return preg_match('/^program_(\d+)$/', $key, $matches) ? absint($matches[1]) : 0;
+}
+
+function academy_section_definitions(int $page_id = 0): array
+{
+    $definitions = [
+        'hero' => __('Hero', 'myliba'),
+        'trust' => __('Müşteri referansları', 'myliba'),
+        'program_intro' => __('Programlar girişi', 'myliba'),
+    ];
+
+    if ($page_id > 0) {
+        foreach (academy_program_posts($page_id) as $program) {
+            $definitions[academy_program_section_key($program->ID)] = sprintf(
+                __('Akademi Programı — %s', 'myliba'),
+                get_the_title($program)
+            );
+        }
+    }
+
+    return array_merge($definitions, [
+        'approach' => __('Yaklaşım', 'myliba'),
+        'stats' => __('İstatistikler', 'myliba'),
+        'testimonials' => __('Katılımcı yorumları', 'myliba'),
+        'faq' => __('Sıkça sorulan sorular', 'myliba'),
+    ]);
+}
+
+function academy_sections(int $post_id): array
+{
+    $definitions = academy_section_definitions($post_id);
+    $sections = [];
+    $order = 10;
+
+    foreach ($definitions as $key => $label) {
+        $sections[$key] = [
+            'key' => $key,
+            'enabled' => true,
+            'order' => $order,
+        ];
+        $order += 10;
+    }
+
+    $raw = get_post_meta($post_id, '_myliba_academy_builder', true);
+    $saved = is_string($raw) && $raw !== '' ? json_decode($raw, true) : (is_array($raw) ? $raw : []);
+    $legacy_program_settings = null;
+    if (is_array($saved)) {
+        foreach ($saved as $item) {
+            if (is_array($item) && sanitize_key((string) ($item['key'] ?? '')) === 'programs') {
+                $legacy_program_settings = [
+                    'enabled' => !empty($item['enabled']),
+                    'order' => isset($item['order']) ? max(0, (int) $item['order']) : 40,
+                ];
+                break;
+            }
+        }
+
+        foreach ($saved as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $key = sanitize_key((string) ($item['key'] ?? ''));
+            if (!isset($definitions[$key])) {
+                continue;
+            }
+
+            $sections[$key] = [
+                'key' => $key,
+                'enabled' => !empty($item['enabled']),
+                'order' => isset($item['order']) ? max(0, (int) $item['order']) : $sections[$key]['order'],
+            ];
+        }
+    }
+
+    if ($legacy_program_settings !== null) {
+        $program_offset = 0;
+        foreach ($sections as $key => &$section) {
+            if (!academy_program_id_from_section_key($key)) {
+                continue;
+            }
+
+            $was_saved = false;
+            foreach ($saved as $item) {
+                if (is_array($item) && sanitize_key((string) ($item['key'] ?? '')) === $key) {
+                    $was_saved = true;
+                    break;
+                }
+            }
+            if (!$was_saved) {
+                $section['enabled'] = $legacy_program_settings['enabled'];
+                $section['order'] = $legacy_program_settings['order'] + $program_offset;
+            }
+            $program_offset++;
+        }
+        unset($section);
+    }
+
+    uasort($sections, static function (array $a, array $b): int {
+        return ($a['order'] <=> $b['order']) ?: strcmp($a['key'], $b['key']);
+    });
+
+    return array_values($sections);
+}
+
+function academy_section_summary(int $post_id, string $key): string
+{
+    $program_id = academy_program_id_from_section_key($key);
+    if ($program_id) {
+        $excerpt = trim((string) get_post_field('post_excerpt', $program_id));
+        return $excerpt !== ''
+            ? wp_trim_words(wp_strip_all_tags($excerpt), 18)
+            : __('İçerik “Akademi Programları” alanından düzenlenir.', 'myliba');
+    }
+
+    $summary = match ($key) {
+        'hero' => get_post_meta($post_id, '_myliba_hero_title', true),
+        'trust' => get_post_meta($post_id, '_myliba_academy_trust_title', true),
+        'program_intro' => get_post_meta($post_id, '_myliba_academy_programs_title', true),
+        'approach' => get_post_meta($post_id, '_myliba_academy_approach_title', true),
+        'stats' => get_post_meta($post_id, '_myliba_academy_stats', true),
+        'testimonials' => get_post_meta($post_id, '_myliba_academy_testimonials_title', true),
+        'faq' => get_post_meta($post_id, '_myliba_academy_faq_title', true),
+        default => '',
+    };
+
+    $summary = trim(wp_strip_all_tags((string) $summary));
+    if (str_contains($summary, "\n")) {
+        $summary = trim((string) strtok($summary, "\n"));
+    }
+
+    return $summary !== '' ? $summary : __('Henüz içerik girilmedi.', 'myliba');
+}
+
+function render_academy_section_fields(\WP_Post $post, string $key): void
+{
+    $post_id = $post->ID;
+    $program_id = academy_program_id_from_section_key($key);
+    if ($program_id) {
+        echo '<p class="myliba-academy-builder-card__notice">' . esc_html__('Bu programın metin ve içerikleri kendi Akademi Programı kaydından düzenlenir. Burada yalnızca sayfadaki konumunu ve görünürlüğünü yönetirsiniz.', 'myliba') . '</p>';
+        $edit_link = get_edit_post_link($program_id, 'raw');
+        if (is_string($edit_link) && $edit_link !== '') {
+            echo '<p><a class="button button-primary" href="' . esc_url($edit_link) . '">' . esc_html__('Program içeriğini düzenle', 'myliba') . '</a></p>';
+        }
+        return;
+    }
+
+    switch ($key) {
+        case 'hero':
+            field_text('_myliba_eyebrow', __('Üst etiket', 'myliba'), get_post_meta($post_id, '_myliba_eyebrow', true));
+            field_text('_myliba_hero_title', __('Ana başlık', 'myliba'), get_post_meta($post_id, '_myliba_hero_title', true));
+            field_textarea('_myliba_hero_subtitle', __('Açıklama', 'myliba'), get_post_meta($post_id, '_myliba_hero_subtitle', true));
+            field_text('_myliba_cta_label', __('Birincil buton etiketi', 'myliba'), get_post_meta($post_id, '_myliba_cta_label', true));
+            field_url('_myliba_cta_url', __('Birincil buton URL', 'myliba'), get_post_meta($post_id, '_myliba_cta_url', true));
+            field_text('_myliba_academy_hero_secondary_label', __('İkincil buton etiketi', 'myliba'), get_post_meta($post_id, '_myliba_academy_hero_secondary_label', true));
+            field_url('_myliba_academy_hero_secondary_url', __('İkincil buton URL', 'myliba'), get_post_meta($post_id, '_myliba_academy_hero_secondary_url', true));
+            field_text('_myliba_academy_hero_tertiary_label', __('Üçüncül bağlantı etiketi', 'myliba'), get_post_meta($post_id, '_myliba_academy_hero_tertiary_label', true));
+            field_url('_myliba_academy_hero_tertiary_url', __('Üçüncül bağlantı URL', 'myliba'), get_post_meta($post_id, '_myliba_academy_hero_tertiary_url', true));
+            field_textarea('_myliba_academy_hero_badges', __('Hero rozetleri', 'myliba'), get_post_meta($post_id, '_myliba_academy_hero_badges', true), __('Her satır: Değer | Etiket', 'myliba'));
+
+            $hero_images = get_post_meta($post_id, '_myliba_academy_hero_images', true);
+            if (empty($hero_images)) {
+                $single_hero_image = get_post_meta($post_id, '_myliba_academy_hero_image', true);
+                if ($single_hero_image) {
+                    $hero_images = [absint($single_hero_image)];
+                }
+            }
+            field_gallery('_myliba_academy_hero_images', __('Hero slider görselleri', 'myliba'), $hero_images, __('Görselleri kendi içlerinde de sürükleyerek sıralayabilirsiniz.', 'myliba'));
+            field_media('_myliba_academy_icf_image', __('ICF onay rozeti', 'myliba'), get_post_meta($post_id, '_myliba_academy_icf_image', true));
+            field_media('_myliba_academy_certificate_image', __('Sertifika görseli', 'myliba'), get_post_meta($post_id, '_myliba_academy_certificate_image', true));
+            field_media('_myliba_academy_digital_badge_image', __('Dijital rozet', 'myliba'), get_post_meta($post_id, '_myliba_academy_digital_badge_image', true));
+            field_media('_myliba_academy_platform_image', __('Myliba platform görseli', 'myliba'), get_post_meta($post_id, '_myliba_academy_platform_image', true));
+            field_textarea('_myliba_academy_nav_items', __('Sabit bölüm menüsü', 'myliba'), get_post_meta($post_id, '_myliba_academy_nav_items', true), __('Her satır: Etiket | anchorsuz-id', 'myliba'));
+
+            echo '<h4>' . esc_html__('Başvuru formu', 'myliba') . '</h4>';
+            field_text('_myliba_academy_contact_title', __('Form başlığı', 'myliba'), get_post_meta($post_id, '_myliba_academy_contact_title', true));
+            field_textarea('_myliba_academy_contact_text', __('Form açıklaması', 'myliba'), get_post_meta($post_id, '_myliba_academy_contact_text', true));
+            field_text('_myliba_academy_form_button', __('Form butonu', 'myliba'), get_post_meta($post_id, '_myliba_academy_form_button', true));
+            field_textarea('_myliba_academy_form_success', __('Başarılı gönderim mesajı', 'myliba'), get_post_meta($post_id, '_myliba_academy_form_success', true));
+            field_textarea('_myliba_academy_kvkk_text', __('KVKK onay metni', 'myliba'), get_post_meta($post_id, '_myliba_academy_kvkk_text', true));
+            break;
+
+        case 'trust':
+            field_text('_myliba_academy_organization_name', __('Eğitim kurumu adı', 'myliba'), get_post_meta($post_id, '_myliba_academy_organization_name', true));
+            field_text('_myliba_academy_trust_title', __('Müşteri referansları başlığı', 'myliba'), get_post_meta($post_id, '_myliba_academy_trust_title', true));
+            field_text('_myliba_academy_trust_label', __('Müşteri referansları etiketi', 'myliba'), get_post_meta($post_id, '_myliba_academy_trust_label', true));
+            field_textarea('_myliba_academy_trust_text', __('Müşteri referansları açıklaması', 'myliba'), get_post_meta($post_id, '_myliba_academy_trust_text', true));
+            break;
+
+        case 'program_intro':
+            field_text('_myliba_academy_programs_eyebrow', __('Programlar üst etiketi', 'myliba'), get_post_meta($post_id, '_myliba_academy_programs_eyebrow', true));
+            field_textarea('_myliba_academy_programs_title', __('Programlar başlığı', 'myliba'), get_post_meta($post_id, '_myliba_academy_programs_title', true));
+            field_textarea('_myliba_academy_programs_text', __('Programlar açıklaması', 'myliba'), get_post_meta($post_id, '_myliba_academy_programs_text', true));
+            field_text('_myliba_academy_benefits_title', __('Program kazanımları başlığı', 'myliba'), get_post_meta($post_id, '_myliba_academy_benefits_title', true));
+            field_text('_myliba_academy_modules_title', __('Program modülleri başlığı', 'myliba'), get_post_meta($post_id, '_myliba_academy_modules_title', true));
+            break;
+
+        case 'approach':
+            field_textarea('_myliba_academy_approach_title', __('Yaklaşım başlığı', 'myliba'), get_post_meta($post_id, '_myliba_academy_approach_title', true));
+            field_textarea('_myliba_academy_approach_steps', __('Yaklaşım adımları', 'myliba'), get_post_meta($post_id, '_myliba_academy_approach_steps', true), __('Her satır: Başlık | Açıklama', 'myliba'));
+            break;
+
+        case 'stats':
+            field_textarea('_myliba_academy_stats', __('İstatistikler', 'myliba'), get_post_meta($post_id, '_myliba_academy_stats', true), __('Her satır: Değer | Etiket', 'myliba'));
+            break;
+
+        case 'testimonials':
+            field_text('_myliba_academy_testimonials_title', __('Katılımcı yorumları başlığı', 'myliba'), get_post_meta($post_id, '_myliba_academy_testimonials_title', true));
+            echo '<p class="myliba-academy-builder-card__notice">' . esc_html__('Yorum kartları “Katılımcı Yorumları” kayıtlarından otomatik gelir.', 'myliba') . '</p>';
+            break;
+
+        case 'faq':
+            field_text('_myliba_academy_faq_title', __('SSS başlığı', 'myliba'), get_post_meta($post_id, '_myliba_academy_faq_title', true));
+            field_text('_myliba_academy_faq_group', __('SSS grubu', 'myliba'), get_post_meta($post_id, '_myliba_academy_faq_group', true), __('Yalnızca bu gruptaki SSS kayıtları gösterilir.', 'myliba'));
+            break;
+    }
+}
+
+function render_academy_builder(\WP_Post $post): void
+{
+    $sections = academy_sections($post->ID);
+    $definitions = academy_section_definitions($post->ID);
+
+    echo '<style>
+        .myliba-academy-builder{display:grid;gap:10px;margin:14px 0 24px}
+        .myliba-academy-builder-card{background:#fff;border:1px solid #c3c4c7;border-radius:8px;overflow:hidden}
+        .myliba-academy-builder-card.is-open{border-color:#2271b1;box-shadow:0 0 0 1px #2271b1}
+        .myliba-academy-builder-card.is-disabled{background:#f6f7f7;opacity:.65}
+        .myliba-academy-builder-card.ui-sortable-helper{box-shadow:0 8px 24px rgba(0,0,0,.15)}
+        .myliba-academy-builder-card__head{align-items:center;display:grid;gap:10px;grid-template-columns:auto minmax(0,1fr) 80px auto;padding:12px 14px}
+        .myliba-academy-builder-card__handle{background:#f6f7f7;border:1px solid #dcdcde;border-radius:6px;color:#646970;cursor:grab;font-weight:700;line-height:1;padding:6px 9px}
+        .myliba-academy-builder-card__main{display:grid;gap:3px;min-width:0}
+        .myliba-academy-builder-card__title-row{align-items:center;display:flex;gap:8px}
+        .myliba-academy-builder-card__label{align-items:center;display:flex;margin:0}
+        .myliba-academy-builder-card__title{background:none;border:0;color:#1d2327;cursor:pointer;font-weight:700;padding:0;text-align:left}
+        .myliba-academy-builder-card__summary{color:#646970;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .myliba-academy-builder-card__order{width:72px}
+        .myliba-academy-builder-card__toggle{background:none;border:1px solid #dcdcde;border-radius:6px;color:#2271b1;cursor:pointer;font-size:16px;line-height:1;padding:5px 9px;transition:transform .2s ease}
+        .myliba-academy-builder-card.is-open .myliba-academy-builder-card__toggle{transform:rotate(180deg)}
+        .myliba-academy-builder-card__body{background:#f9f9f9;border-top:1px solid #dcdcde;padding:16px 14px 8px}
+        .myliba-academy-builder-card__body[hidden]{display:none}
+        .myliba-academy-builder-card__body p{margin:0 0 12px}
+        .myliba-academy-builder-card__notice{background:#fff;border-left:4px solid #72aee6;padding:10px 12px}
+        .myliba-academy-extra-settings{border-top:1px solid #dcdcde;margin-top:20px;padding-top:14px}
+        .myliba-academy-extra-settings summary{cursor:pointer;font-weight:700;margin-bottom:12px}
+        @media(max-width:782px){.myliba-academy-builder-card__head{grid-template-columns:auto minmax(0,1fr) auto}.myliba-academy-builder-card__order{grid-column:2;width:100%}.myliba-academy-builder-card__summary{white-space:normal}}
+    </style>';
+    echo '<h3>' . esc_html__('Academy page components', 'myliba') . '</h3>';
+    echo '<p class="description">' . esc_html__('Drag components to change their order on the page. Uncheck a component to hide it.', 'myliba') . '</p>';
+    echo '<div class="myliba-academy-builder">';
+
+    foreach ($sections as $section) {
+        $key = $section['key'];
+        $label = $definitions[$key] ?? $key;
+        $panel_id = 'myliba-academy-section-' . sanitize_html_class($key);
+        echo '<div class="myliba-academy-builder-card' . (!empty($section['enabled']) ? '' : ' is-disabled') . '" data-section-key="' . esc_attr($key) . '">';
+        echo '<div class="myliba-academy-builder-card__head">';
+        echo '<span class="myliba-academy-builder-card__handle" title="' . esc_attr__('Drag to reorder', 'myliba') . '" aria-hidden="true">&#8942;&#8942;</span>';
+        echo '<div class="myliba-academy-builder-card__main"><div class="myliba-academy-builder-card__title-row">';
+        printf(
+            '<label class="myliba-academy-builder-card__label"><input type="checkbox" name="_myliba_academy_builder[%1$s][enabled]" value="1" %2$s><span class="screen-reader-text">%3$s</span></label>',
+            esc_attr($key),
+            checked(!empty($section['enabled']), true, false),
+            esc_html($label)
+        );
+        echo '<button type="button" class="myliba-academy-builder-card__title">' . esc_html($label) . '</button>';
+        echo '</div><span class="myliba-academy-builder-card__summary">' . esc_html(academy_section_summary($post->ID, $key)) . '</span></div>';
+        printf(
+            '<input class="myliba-academy-builder-card__order" type="number" name="_myliba_academy_builder[%1$s][order]" value="%2$d" aria-label="%3$s">',
+            esc_attr($key),
+            (int) $section['order'],
+            esc_attr__('Component order', 'myliba')
+        );
+        echo '<button type="button" class="myliba-academy-builder-card__toggle" aria-expanded="false" aria-controls="' . esc_attr($panel_id) . '" title="' . esc_attr__('İçeriği aç/kapat', 'myliba') . '">&#9660;</button>';
+        echo '</div>';
+        echo '<input type="hidden" name="_myliba_academy_builder[' . esc_attr($key) . '][key]" value="' . esc_attr($key) . '">';
+        echo '<div class="myliba-academy-builder-card__body" id="' . esc_attr($panel_id) . '" hidden>';
+        render_academy_section_fields($post, $key);
+        echo '</div>';
+        echo '</div>';
+    }
+
+    echo '</div>';
+    echo '<script>
+        jQuery(function($){
+            var $builder = $(".myliba-academy-builder");
+            if ($builder.sortable) {
+                $builder.sortable({
+                    handle: ".myliba-academy-builder-card__handle",
+                    update: function(){
+                        $builder.find(".myliba-academy-builder-card__order").each(function(index){
+                            $(this).val((index + 1) * 10);
+                        });
+                    }
+                });
+            }
+            $builder.on("change", "input[type=checkbox]", function(){
+                $(this).closest(".myliba-academy-builder-card").toggleClass("is-disabled", !this.checked);
+            });
+            $builder.on("click", ".myliba-academy-builder-card__toggle, .myliba-academy-builder-card__title", function(e){
+                e.preventDefault();
+                var $card = $(this).closest(".myliba-academy-builder-card");
+                var isOpen = !$card.hasClass("is-open");
+                $card.toggleClass("is-open", isOpen);
+                $card.find("> .myliba-academy-builder-card__body").prop("hidden", !isOpen);
+                $card.find("> .myliba-academy-builder-card__head .myliba-academy-builder-card__toggle").attr("aria-expanded", isOpen ? "true" : "false");
+            });
+        });
+    </script>';
 }
 
 function render_footer_cta_box(\WP_Post $post): void
@@ -1173,6 +1484,11 @@ function save(int $post_id, \WP_Post $post): void
             continue;
         }
 
+        if ($type === 'academy_builder') {
+            save_academy_builder($post_id);
+            continue;
+        }
+
         if ($type === 'hero_slides') {
             save_hero_slides($post_id);
             continue;
@@ -1386,6 +1702,38 @@ function save_homepage_builder(int $post_id): void
     update_post_meta($post_id, '_myliba_home_builder', wp_json_encode($sections));
 }
 
+function save_academy_builder(int $post_id): void
+{
+    if (!isset($_POST['_myliba_academy_builder']) || !is_array($_POST['_myliba_academy_builder'])) {
+        return;
+    }
+
+    $definitions = academy_section_definitions($post_id);
+    $sections = [];
+    foreach (wp_unslash($_POST['_myliba_academy_builder']) as $raw_key => $raw_section) {
+        if (!is_array($raw_section)) {
+            continue;
+        }
+
+        $key = sanitize_key((string) ($raw_section['key'] ?? $raw_key));
+        if (!isset($definitions[$key])) {
+            continue;
+        }
+
+        $sections[] = [
+            'key' => $key,
+            'enabled' => !empty($raw_section['enabled']),
+            'order' => isset($raw_section['order']) ? max(0, (int) $raw_section['order']) : 999,
+        ];
+    }
+
+    usort($sections, static function (array $a, array $b): int {
+        return ($a['order'] <=> $b['order']) ?: strcmp($a['key'], $b['key']);
+    });
+
+    update_post_meta($post_id, '_myliba_academy_builder', wp_json_encode($sections));
+}
+
 function field_definitions(string $post_type): array
 {
     $fields = [
@@ -1406,6 +1754,7 @@ function field_definitions(string $post_type): array
         '_myliba_related_modules' => 'textarea',
         '_myliba_faq_items' => 'textarea',
         '_myliba_home_builder' => 'builder',
+        '_myliba_academy_builder' => 'academy_builder',
         '_myliba_home_hero_slides_v2' => 'hero_slides',
         '_myliba_home_hero_slides' => 'textarea',
         '_myliba_home_hero_image_1' => 'number',

@@ -102,6 +102,7 @@ $featured_program = [];
 foreach ($programs->posts as $program_index => $program_post) {
     $layout = (string) get_post_meta($program_post->ID, '_myliba_academy_layout', true);
     $card = [
+        'id' => $program_post->ID,
         'number' => str_pad((string) ($program_index + 1), 2, '0', STR_PAD_LEFT),
         'title' => get_the_title($program_post),
         'eyebrow' => (string) get_post_meta($program_post->ID, '_myliba_academy_program_eyebrow', true),
@@ -115,11 +116,38 @@ foreach ($programs->posts as $program_index => $program_post) {
         $featured_program = $card;
     }
 }
+$academy_sections = function_exists('\\Myliba\\Core\\Meta\\academy_sections')
+    ? \Myliba\Core\Meta\academy_sections($page_id)
+    : [];
+$academy_section_map = [];
+foreach ($academy_sections as $section) {
+    if (is_array($section) && !empty($section['key'])) {
+        $academy_section_map[(string) $section['key']] = $section;
+    }
+}
+$academy_section_enabled = static fn(string $key): bool => !isset($academy_section_map[$key]) || !empty($academy_section_map[$key]['enabled']);
+$academy_section_style = static fn(string $key): string => sprintf(
+    'order:%d',
+    (int) ($academy_section_map[$key]['order'] ?? 999)
+);
+$academy_program_key = static fn(int $program_id): string => 'program_' . $program_id;
+$program_cards = array_values(array_filter(
+    $program_cards,
+    static fn(array $card): bool => $academy_section_enabled($academy_program_key((int) $card['id']))
+));
+$featured_program = [];
+foreach ($program_cards as $card_index => &$card) {
+    $card['number'] = str_pad((string) ($card_index + 1), 2, '0', STR_PAD_LEFT);
+    if (!$featured_program && $card['layout'] === 'featured') {
+        $featured_program = $card;
+    }
+}
+unset($card);
 $available_anchors = array_filter([
-    'programlar' => $programs->found_posts > 0,
-    'yaklasim' => $approach_steps && $meta('_myliba_academy_approach_title') !== '',
-    'yorumlar' => $testimonials->found_posts > 0 && $meta('_myliba_academy_testimonials_title') !== '',
-    'sss' => $faq_items && $meta('_myliba_academy_faq_title') !== '',
+    'programlar' => $academy_section_enabled('program_intro') && !empty($program_cards),
+    'yaklasim' => $academy_section_enabled('approach') && $approach_steps && $meta('_myliba_academy_approach_title') !== '',
+    'yorumlar' => $academy_section_enabled('testimonials') && $testimonials->found_posts > 0 && $meta('_myliba_academy_testimonials_title') !== '',
+    'sss' => $academy_section_enabled('faq') && $faq_items && $meta('_myliba_academy_faq_title') !== '',
     'iletisim' => $meta('_myliba_academy_final_title') !== '',
 ]);
 $nav_items = array_values(array_filter($nav_items, static fn(array $item): bool => isset($available_anchors[sanitize_title($item[1] ?? '')])));
@@ -127,8 +155,9 @@ $nav_items = array_values(array_filter($nav_items, static fn(array $item): bool 
 get_header();
 ?>
 
-<div class="academy-page academy-v2">
-    <?php if ($meta('_myliba_hero_title') !== ''): ?>
+<div class="academy-page academy-v2" style="display:flex;flex-direction:column">
+    <?php if ($academy_section_enabled('hero') && $meta('_myliba_hero_title') !== ''): ?>
+        <div class="academy-v2-component" style="<?php echo esc_attr($academy_section_style('hero')); ?>">
         <section class="academy-v2-hero">
             <div class="academy-v2-hero__content">
                 <?php if ($meta('_myliba_eyebrow') !== ''): ?>
@@ -212,9 +241,11 @@ get_header();
                 </div>
             <?php endif; ?>
         </section>
+        </div>
     <?php endif; ?>
 
-    <?php if ($meta('_myliba_academy_trust_title') !== ''): ?>
+    <?php if ($academy_section_enabled('trust') && $meta('_myliba_academy_trust_title') !== ''): ?>
+        <div class="academy-v2-component" style="<?php echo esc_attr($academy_section_style('trust')); ?>">
         <?php get_template_part('template-parts/client-logo-marquee', null, [
             'label' => $meta('_myliba_academy_trust_label'),
             'title' => $meta('_myliba_academy_trust_title'),
@@ -223,9 +254,11 @@ get_header();
             'heading_id' => 'academy-trust-title',
             'limit' => 30,
         ]); ?>
+        </div>
     <?php endif; ?>
 
-    <?php if ($meta('_myliba_academy_programs_title') !== ''): ?>
+    <?php if ($academy_section_enabled('program_intro') && $meta('_myliba_academy_programs_title') !== ''): ?>
+        <div class="academy-v2-component" style="<?php echo esc_attr($academy_section_style('program_intro')); ?>">
         <section id="programlar" class="section academy-v2-intro">
             <div class="academy-v2-intro__copy">
                 <div>
@@ -251,16 +284,20 @@ get_header();
                 </div>
             <?php endif; ?>
         </section>
+        </div>
     <?php endif; ?>
 
     <?php if ($programs->have_posts()): ?>
-        <div class="academy-v2-programs">
             <?php $program_index = 0; ?>
             <?php while ($programs->have_posts()):
                 $programs->the_post(); ?>
                 <?php
-                $program_index++;
                 $program_id = get_the_ID();
+                $program_section_key = $academy_program_key($program_id);
+                if (!$academy_section_enabled($program_section_key)) {
+                    continue;
+                }
+                $program_index++;
                 $layout = get_post_meta($program_id, '_myliba_academy_layout', true) ?: 'standard';
                 $benefits = myliba_lines((string) get_post_meta($program_id, '_myliba_academy_program_benefits', true));
                 $badges = myliba_lines((string) get_post_meta($program_id, '_myliba_academy_program_badges', true));
@@ -277,7 +314,8 @@ get_header();
                 $show_detailed_content = $content !== '' && trim(wp_strip_all_tags($content)) !== trim(wp_strip_all_tags($excerpt));
                 ?>
                 <section id="<?php echo esc_attr('program-' . $program_index); ?>"
-                    class="academy-v2-program academy-v2-program--<?php echo esc_attr(sanitize_html_class($layout)); ?>">
+                    class="academy-v2-component academy-v2-program academy-v2-program--<?php echo esc_attr(sanitize_html_class($layout)); ?>"
+                    style="<?php echo esc_attr($academy_section_style($program_section_key)); ?>">
                     <div class="section academy-v2-program__inner">
                         <div class="academy-v2-program__content">
                             <?php if ($eyebrow !== ''): ?>
@@ -353,10 +391,10 @@ get_header();
                 </section>
             <?php endwhile;
             wp_reset_postdata(); ?>
-        </div>
     <?php endif; ?>
 
-    <?php if ($approach_steps && $meta('_myliba_academy_approach_title') !== ''): ?>
+    <?php if ($academy_section_enabled('approach') && $approach_steps && $meta('_myliba_academy_approach_title') !== ''): ?>
+        <div class="academy-v2-component" style="<?php echo esc_attr($academy_section_style('approach')); ?>">
         <section id="yaklasim" class="academy-v2-approach">
             <div class="section">
                 <h2><?php echo esc_html($meta('_myliba_academy_approach_title')); ?></h2>
@@ -370,9 +408,11 @@ get_header();
                 </div>
             </div>
         </section>
+        </div>
     <?php endif; ?>
 
-    <?php if ($stats): ?>
+    <?php if ($academy_section_enabled('stats') && $stats): ?>
+        <div class="academy-v2-component" style="<?php echo esc_attr($academy_section_style('stats')); ?>">
         <section class="section academy-v2-stats"
             aria-label="<?php echo esc_attr($meta('_myliba_academy_approach_title')); ?>">
             <div class="academy-v2-stats__heading">
@@ -409,9 +449,11 @@ get_header();
                 <?php endforeach; ?>
             </div>
         </section>
+        </div>
     <?php endif; ?>
 
-    <?php if ($testimonials->have_posts() && $meta('_myliba_academy_testimonials_title') !== ''): ?>
+    <?php if ($academy_section_enabled('testimonials') && $testimonials->have_posts() && $meta('_myliba_academy_testimonials_title') !== ''): ?>
+        <div class="academy-v2-component" style="<?php echo esc_attr($academy_section_style('testimonials')); ?>">
         <section id="yorumlar" class="section academy-v2-testimonials" data-academy-slider
             aria-labelledby="academy-testimonials-title">
             <div class="academy-v2-section-head">
@@ -465,15 +507,20 @@ get_header();
                 wp_reset_postdata(); ?>
             </div>
         </section>
+        </div>
     <?php endif; ?>
 
-    <?php
-    get_template_part('template-parts/expand', null, [
-        'id' => 'sss',
-        'title' => $meta('_myliba_academy_faq_title'),
-        'items' => $faq_items,
-    ]);
-    ?>
+    <?php if ($academy_section_enabled('faq')): ?>
+        <div class="academy-v2-component" style="<?php echo esc_attr($academy_section_style('faq')); ?>">
+            <?php
+            get_template_part('template-parts/expand', null, [
+                'id' => 'sss',
+                'title' => $meta('_myliba_academy_faq_title'),
+                'items' => $faq_items,
+            ]);
+            ?>
+        </div>
+    <?php endif; ?>
 
     <!--     <?php if ($meta('_myliba_academy_final_title') !== ''): ?>
         <section id="iletisim" class="section academy-v2-final">
