@@ -168,14 +168,16 @@ function myliba_option(string $key, mixed $fallback = ''): mixed
         $value = $theme_mod;
     } elseif (function_exists('Myliba\\Core\\Options\\get')) {
         $value = \Myliba\Core\Options\get($key, $fallback);
-        if (!is_admin() && function_exists('Myliba\\Core\\Options\\localized_keys') && in_array($key, \Myliba\Core\Options\localized_keys(), true)) {
-            $localized_value = \Myliba\Core\Options\get($key . '_' . myliba_current_language(), '');
-            if (is_string($localized_value) && trim($localized_value) !== '') {
-                $value = $localized_value;
-            }
-        }
     } else {
         $value = $fallback;
+    }
+
+    // Locale-specific content must win over legacy Customizer values.
+    if (!is_admin() && function_exists('Myliba\\Core\\Options\\localized_keys') && in_array($key, \Myliba\Core\Options\localized_keys(), true)) {
+        $localized_value = \Myliba\Core\Options\get($key . '_' . myliba_current_language(), '');
+        if (is_string($localized_value) && trim($localized_value) !== '') {
+            $value = $localized_value;
+        }
     }
 
     $translatable_keys = [
