@@ -817,6 +817,18 @@ function ebook_definition(): array
     return [
         'label' => 'e-Kitap İçeriği',
         'groups' => [
+            'listing' => [
+                'label' => 'Liste Kartı ve Yönlendirme',
+                'fields' => [
+                    'listing_summary' => ['textarea', 'Liste kartında görünecek kısa özet'],
+                    'card_link_url' => ['text', 'Kart yönlendirme URL’si (Boş bırakılırsa e-Kitap detay sayfasına gider)'],
+                    'card_link_label' => ['text', 'Kart bağlantı etiketi (Örn: Kitabı inceleyin)'],
+                    'card_link_new_tab' => ['select', 'Bağlantı davranışı', [
+                        '0' => 'Aynı sekmede aç',
+                        '1' => 'Yeni sekmede aç',
+                    ]],
+                ],
+            ],
             'hero' => [
                 'label' => 'Hero ve İndirme Bilgileri',
                 'fields' => [
@@ -824,7 +836,7 @@ function ebook_definition(): array
                     'hero_title' => ['textarea', 'e-Kitap başlığı'],
                     'hero_summary' => ['textarea', 'e-Kitap açıklaması / Lead'],
                     'download_cta_label' => ['text', 'İndirme buton etiketi (Örn: e-Kitabı Ücretsiz İndirin)'],
-                    'download_file_url' => ['text', 'İndirme linki / PDF URL'],
+                    'download_file_url' => ['text', 'İndirme linki / PDF veya harici sayfa URL’si'],
                 ],
             ],
             'details' => [
@@ -882,6 +894,10 @@ function ebook_defaults(int $post_id): array
 
     return [
         'fields' => [
+            'listing_summary' => $summary,
+            'card_link_url' => '',
+            'card_link_label' => 'Kitabı İnceleyin',
+            'card_link_new_tab' => '0',
             'kicker' => $kicker,
             'hero_title' => $title,
             'hero_summary' => $summary,

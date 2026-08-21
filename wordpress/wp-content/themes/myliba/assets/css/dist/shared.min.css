@@ -52,7 +52,7 @@ gap: 6px;
 grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 .mega-menu--development .mega-menu__grid {
-grid-template-columns: repeat(3, minmax(0, 1fr));
+grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 .site-nav .mega-menu__card {
 align-content: center;

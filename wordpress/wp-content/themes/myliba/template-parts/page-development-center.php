@@ -9,7 +9,7 @@ $context = myliba_development_center_context();
 $items = myliba_development_center_items();
 $page_id = (int) $context['page_id'];
 $copy = static fn (string $key): string => \Myliba\Core\PageContent\text($page_id, 'development', $key);
-$card_keys = ['reports' => 'reports', 'blog' => 'blog', 'events' => 'events'];
+$card_keys = ['ebooks' => 'ebooks', 'reports' => 'reports', 'blog' => 'blog', 'events' => 'events'];
 ?>
 <section class="development-hero">
     <div class="development-shell">

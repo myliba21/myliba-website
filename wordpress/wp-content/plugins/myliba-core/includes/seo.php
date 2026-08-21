@@ -223,6 +223,12 @@ function redirect_legacy_locale_duplicate(): void
 
 function document_title(array $parts): array
 {
+    if (is_post_type_archive('myliba_ebook') && function_exists('myliba_current_language') && \myliba_current_language() === 'en') {
+        $parts['title'] = 'e-Books';
+
+        return $parts;
+    }
+
     if (!is_singular()) {
         return $parts;
     }

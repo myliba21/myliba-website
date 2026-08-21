@@ -74,6 +74,11 @@ function register_localized_rewrite_rules(): void
     }
 
     add_rewrite_rule(
+        '^tr/gelisim-merkezi/e-kitaplar/?$',
+        'index.php?post_type=myliba_ebook&myliba_route_locale=tr',
+        'top'
+    );
+    add_rewrite_rule(
         '^en/development-center/ebooks/?$',
         'index.php?post_type=myliba_ebook&myliba_route_locale=en',
         'top'
