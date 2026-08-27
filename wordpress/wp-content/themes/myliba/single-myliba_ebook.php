@@ -64,6 +64,21 @@ while (have_posts()) :
 
     $ebooks_archive_url = home_url(myliba_current_language() === 'en' ? '/en/development-center/ebooks/' : '/tr/gelisim-merkezi/e-kitaplar/');
     $editor_content = trim(wp_strip_all_tags((string) get_the_content()));
+    $is_english = myliba_current_language() === 'en';
+
+    // Retailers
+    $retailers = array_values(array_filter(
+        $content_rows('retailers'),
+        static fn (array $r): bool => ($r['name'] ?? '') !== '' && ($r['url'] ?? '') !== ''
+    ));
+    $retailers_heading    = $content_copy('retailers_heading');
+    $retailers_subheading = $content_copy('retailers_subheading');
+    if ($retailers_heading === '') {
+        $retailers_heading = $is_english ? 'Buy the book' : 'Kitabı satın alın';
+    }
+    if ($retailers_subheading === '') {
+        $retailers_subheading = $is_english ? 'Choose a retailer' : 'Satış noktasını seçin';
+    }
     ?>
     <article class="ebook-detail solution-detail">
         <section class="solution-detail__hero">
@@ -165,6 +180,24 @@ while (have_posts()) :
                 <article class="content">
                     <?php the_content(); ?>
                 </article>
+            </section>
+        <?php endif; ?>
+
+        <?php if (!empty($retailers)) : ?>
+            <section class="ebook-retailers solutions-shell">
+                <div class="development-resource-card__retailers">
+                    <div class="development-resource-card__retailer-heading">
+                        <span><?php echo esc_html($retailers_heading); ?></span>
+                        <small><?php echo esc_html($retailers_subheading); ?></small>
+                    </div>
+                    <div class="development-resource-card__retailer-list" aria-label="<?php echo esc_attr($is_english ? 'Online retailers selling this book' : 'Kitabın satıldığı çevrim içi mağazalar'); ?>">
+                        <?php foreach ($retailers as $retailer) : ?>
+                            <a href="<?php echo esc_url($retailer['url']); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr(sprintf($is_english ? '%s, opens in a new tab' : '%s, yeni sekmede açılır', $retailer['name'])); ?>">
+                                <span><?php echo esc_html($retailer['name']); ?></span><i aria-hidden="true">↗</i>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
             </section>
         <?php endif; ?>
 

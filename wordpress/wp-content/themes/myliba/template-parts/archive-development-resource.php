@@ -30,19 +30,6 @@ $archive_content = [
     'topics' => array_column($archive_rows('topics'), 'label'),
 ];
 
-$gen_z_book_retailers = [
-    ['name' => 'Kitapyurdu', 'url' => 'https://www.kitapyurdu.com/kitap/genz-ile-yuksek-performans-kulturu-yaratmak-nasrettin-hoca-yonetim-danismani-olursa/751529.html'],
-    ['name' => 'Kitapsepeti', 'url' => 'https://www.kitapsepeti.com/ceres-yayinlari'],
-    ['name' => 'Ekin Kitap', 'url' => 'https://www.ekinkitap.com/gen-z-ile-yuksek-performans-kulturu-yaratmak'],
-    ['name' => 'Kitapstore', 'url' => 'https://www.kitapstore.com/urun/770536/kitap/ceres-yayinlari/dilek-mete/gen-z-ile-yuksek-performans-kulturu-yaratmak/'],
-    ['name' => 'Ravza Kitap', 'url' => 'https://www.ravzakitap.com/gen-z-ile-yuksek-performans-kulturu-yaratmak'],
-    ['name' => 'İlla Kitap', 'url' => 'https://www.illakitap.com/gen-z-ile-yuksek-performans-kulturu-yaratmak'],
-    ['name' => 'Simurg Kitabevi', 'url' => 'https://www.simurgkitabevi.com/gen-z-ile-yuksek-performans-kulturu-yaratmak-nasrettin-hoca-yonetim-danismani-olursa-2026'],
-    ['name' => 'Kitapzen', 'url' => 'https://www.kitapzen.com/dilek-mete/gen-z-ile-yuksek-performans-kulturu-yaratmak.htm'],
-    ['name' => 'Şehadet Kitap', 'url' => 'https://www.sehadetkitap.com/urun/gen-z-ile-yuksek-performans-kulturu-yaratmak-nasrettin-hoca-yonetim-danismani-olursa'],
-    ['name' => 'NadirKitap', 'url' => 'https://www.nadirkitap.com/gen-z-ile-yuksek-performans-kulturu-yaratmak-nasrettin-hoca-yonetim-danismani-olursa-dilek-mete-ceres-yayinlari-kitap46770916.html'],
-    ['name' => 'Kitap Ambarı', 'url' => 'https://www.kitapambari.com/dilek-mete'],
-];
 $is_english = myliba_current_language() === 'en';
 ?>
 <div class="development-resource-archive development-resource-archive--<?php echo esc_attr($archive_key); ?>">
@@ -113,8 +100,21 @@ $is_english = myliba_current_language() === 'en';
                     $resource_new_tab = \Myliba\Core\PageContent\text($resource_id, 'ebook', 'card_link_new_tab') === '1';
                     $resource_author = \Myliba\Core\PageContent\text($resource_id, 'ebook', 'kicker');
 
-                    if (in_array(get_post_field('post_name', $resource_id), ['gen-z-ile-yuksek-performans-kulturu-yaratmak', 'creating-a-high-performance-culture-with-gen-z'], true)) {
-                        $resource_retailers = $gen_z_book_retailers;
+                    // Load retailer list from PageContent (admin-managed)
+                    $resource_retailers = array_filter(
+                        \Myliba\Core\PageContent\collection($resource_id, 'ebook', 'retailers'),
+                        static fn (array $r): bool => ($r['name'] ?? '') !== '' && ($r['url'] ?? '') !== ''
+                    );
+                    $resource_retailers = array_values($resource_retailers);
+
+                    // Retailer section headings (configurable, with sensible defaults)
+                    $retailers_heading    = \Myliba\Core\PageContent\text($resource_id, 'ebook', 'retailers_heading');
+                    $retailers_subheading = \Myliba\Core\PageContent\text($resource_id, 'ebook', 'retailers_subheading');
+                    if ($retailers_heading === '') {
+                        $retailers_heading = $is_english ? 'Buy the book' : 'Kitabı satın alın';
+                    }
+                    if ($retailers_subheading === '') {
+                        $retailers_subheading = $is_english ? 'Choose a retailer' : 'Satış noktasını seçin';
                     }
                 }
                 ?>
@@ -135,8 +135,8 @@ $is_english = myliba_current_language() === 'en';
                         <a class="development-resource-card__review" href="<?php echo esc_url($resource_url); ?>"<?php echo $resource_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html($resource_link_label); ?> <span aria-hidden="true">→</span></a>
                         <div class="development-resource-card__retailers">
                             <div class="development-resource-card__retailer-heading">
-                                <span><?php echo esc_html($is_english ? 'Buy the book' : 'Kitabı satın alın'); ?></span>
-                                <small><?php echo esc_html($is_english ? 'Choose a retailer' : 'Satış noktasını seçin'); ?></small>
+                                <span><?php echo esc_html($retailers_heading); ?></span>
+                                <small><?php echo esc_html($retailers_subheading); ?></small>
                             </div>
                             <div class="development-resource-card__retailer-list" aria-label="<?php echo esc_attr($is_english ? 'Online retailers selling this book' : 'Kitabın satıldığı çevrim içi mağazalar'); ?>">
                                 <?php foreach ($resource_retailers as $retailer) : ?>

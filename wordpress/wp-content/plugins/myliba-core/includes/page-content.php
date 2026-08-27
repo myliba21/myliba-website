@@ -870,6 +870,19 @@ function ebook_definition(): array
                     'cta_hide' => ['text', 'CTA Bannerı Gizle (1: gizle, 0: göster)'],
                 ],
             ],
+            'retailers' => [
+                'label' => 'Satış Noktaları',
+                'fields' => [
+                    'retailers_heading' => ['text', 'Bölüm başlığı (Örn: Kitabı satın alın)'],
+                    'retailers_subheading' => ['text', 'Alt başlık (Örn: Satış noktasını seçin)'],
+                ],
+                'collections' => [
+                    'retailers' => ['label' => 'Satış noktası listesi', 'fields' => [
+                        'name' => ['text', 'Satış noktası adı (Örn: Kitapyurdu)'],
+                        'url'  => ['text', 'Bağlantı URL\'si'],
+                    ]],
+                ],
+            ],
         ],
     ];
 }
@@ -922,6 +935,7 @@ function ebook_defaults(int $post_id): array
                 ['number' => '03', 'title' => 'Adil Karar Mekanizması', 'text' => '%100 objektif verilerle çalışanları geliştirme.'],
             ],
             'key_takeaways' => $takeaways,
+            'retailers'     => [],
         ],
     ];
 }
