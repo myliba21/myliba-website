@@ -769,6 +769,109 @@
   padding-top: 18px;
 }
 
+.development-resource-archive--ebooks .development-resource-card--with-retailers {
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(150px, 230px) minmax(0, 1fr);
+  min-height: 0;
+  padding: clamp(18px, 2.5vw, 30px);
+}
+
+.development-resource-card--with-retailers .development-resource-card__image {
+  grid-row: 1;
+}
+
+.development-resource-card--with-retailers .development-resource-card__body {
+  display: flex;
+  flex-direction: column;
+  grid-column: 2;
+  min-width: 0;
+}
+
+.development-resource-archive--ebooks .development-resource-card--with-retailers h3,
+.development-resource-archive--ebooks .development-resource-card--with-retailers p {
+  grid-column: auto;
+}
+
+.development-resource-card--with-retailers h3 a:focus-visible,
+.development-resource-card--with-retailers .development-resource-card__image:focus-visible,
+.development-resource-card__review:focus-visible,
+.development-resource-card__retailer-list a:focus-visible {
+  outline: 3px solid rgba(40, 127, 159, .34);
+  outline-offset: 3px;
+}
+
+.development-resource-card__review {
+  align-items: center;
+  color: var(--primary-dark);
+  display: inline-flex;
+  font-size: var(--fs-small);
+  font-weight: 850;
+  gap: 8px;
+  margin-top: 16px;
+  width: fit-content;
+}
+
+.development-resource-card__retailers {
+  border-top: 1px solid rgba(40, 127, 159, .16);
+  margin-top: 22px;
+  padding-top: 18px;
+}
+
+.development-resource-card__retailer-heading {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.development-resource-card__retailer-heading > span {
+  color: var(--foreground);
+  font-size: var(--fs-small);
+  font-weight: 900;
+}
+
+.development-resource-card__retailer-heading small {
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.development-resource-card__retailer-list {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.development-resource-card__retailer-list a {
+  align-items: center;
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid rgba(40, 127, 159, .18);
+  border-radius: 10px;
+  color: var(--foreground);
+  display: flex;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  gap: 8px;
+  justify-content: space-between;
+  min-height: 42px;
+  padding: 9px 11px;
+  transition: border-color .2s ease, box-shadow .2s ease, color .2s ease, transform .2s ease;
+}
+
+.development-resource-card__retailer-list a:hover {
+  border-color: var(--resource-accent);
+  box-shadow: 0 8px 20px rgba(38, 52, 58, .09);
+  color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.development-resource-card__retailer-list i {
+  font-style: normal;
+  opacity: .64;
+}
+
 .development-resource-list__empty {
   background:
     radial-gradient(circle at 95% 0, rgba(40, 127, 159, .38), transparent 31%),
@@ -881,6 +984,10 @@
     grid-template-columns: 1fr;
     max-width: 760px;
   }
+
+  .development-resource-card__retailer-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 700px) {
@@ -958,6 +1065,20 @@
 
   .development-resource-archive--ebooks .development-resource-card strong {
     padding-top: 12px;
+  }
+
+  .development-resource-archive--ebooks .development-resource-card--with-retailers {
+    column-gap: 16px;
+    grid-template-columns: 104px minmax(0, 1fr);
+  }
+
+  .development-resource-card__retailer-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .development-resource-card__retailer-list {
+    grid-template-columns: 1fr;
   }
 
   .development-resource-list__empty {

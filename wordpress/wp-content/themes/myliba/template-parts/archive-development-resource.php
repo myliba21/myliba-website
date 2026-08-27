@@ -29,6 +29,21 @@ $archive_content = [
     'empty_text' => $archive_copy('empty_text'),
     'topics' => array_column($archive_rows('topics'), 'label'),
 ];
+
+$gen_z_book_retailers = [
+    ['name' => 'Kitapyurdu', 'url' => 'https://www.kitapyurdu.com/kitap/genz-ile-yuksek-performans-kulturu-yaratmak-nasrettin-hoca-yonetim-danismani-olursa/751529.html'],
+    ['name' => 'Kitapsepeti', 'url' => 'https://www.kitapsepeti.com/ceres-yayinlari'],
+    ['name' => 'Ekin Kitap', 'url' => 'https://www.ekinkitap.com/gen-z-ile-yuksek-performans-kulturu-yaratmak'],
+    ['name' => 'Kitapstore', 'url' => 'https://www.kitapstore.com/urun/770536/kitap/ceres-yayinlari/dilek-mete/gen-z-ile-yuksek-performans-kulturu-yaratmak/'],
+    ['name' => 'Ravza Kitap', 'url' => 'https://www.ravzakitap.com/gen-z-ile-yuksek-performans-kulturu-yaratmak'],
+    ['name' => 'İlla Kitap', 'url' => 'https://www.illakitap.com/gen-z-ile-yuksek-performans-kulturu-yaratmak'],
+    ['name' => 'Simurg Kitabevi', 'url' => 'https://www.simurgkitabevi.com/gen-z-ile-yuksek-performans-kulturu-yaratmak-nasrettin-hoca-yonetim-danismani-olursa-2026'],
+    ['name' => 'Kitapzen', 'url' => 'https://www.kitapzen.com/dilek-mete/gen-z-ile-yuksek-performans-kulturu-yaratmak.htm'],
+    ['name' => 'Şehadet Kitap', 'url' => 'https://www.sehadetkitap.com/urun/gen-z-ile-yuksek-performans-kulturu-yaratmak-nasrettin-hoca-yonetim-danismani-olursa'],
+    ['name' => 'NadirKitap', 'url' => 'https://www.nadirkitap.com/gen-z-ile-yuksek-performans-kulturu-yaratmak-nasrettin-hoca-yonetim-danismani-olursa-dilek-mete-ceres-yayinlari-kitap46770916.html'],
+    ['name' => 'Kitap Ambarı', 'url' => 'https://www.kitapambari.com/dilek-mete'],
+];
+$is_english = myliba_current_language() === 'en';
 ?>
 <div class="development-resource-archive development-resource-archive--<?php echo esc_attr($archive_key); ?>">
 <section class="development-archive-hero">
@@ -86,6 +101,7 @@ $archive_content = [
                 $resource_link_label = $shared_copy('item_link_label');
                 $resource_new_tab = false;
                 $resource_author = '';
+                $resource_retailers = [];
 
                 if (!$is_report) {
                     $configured_url = \Myliba\Core\PageContent\text($resource_id, 'ebook', 'card_link_url');
@@ -96,26 +112,62 @@ $archive_content = [
                     $resource_link_label = $configured_label !== '' ? $configured_label : $resource_link_label;
                     $resource_new_tab = \Myliba\Core\PageContent\text($resource_id, 'ebook', 'card_link_new_tab') === '1';
                     $resource_author = \Myliba\Core\PageContent\text($resource_id, 'ebook', 'kicker');
+
+                    if (in_array(get_post_field('post_name', $resource_id), ['gen-z-ile-yuksek-performans-kulturu-yaratmak', 'creating-a-high-performance-culture-with-gen-z'], true)) {
+                        $resource_retailers = $gen_z_book_retailers;
+                    }
                 }
                 ?>
-                <a class="development-resource-card <?php echo $resource_index === 0 ? 'development-resource-card--featured' : ''; ?>" href="<?php echo esc_url($resource_url); ?>"<?php echo $resource_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
+                <?php if (!empty($resource_retailers)) : ?>
+                <article class="development-resource-card development-resource-card--with-retailers <?php echo $resource_index === 0 ? 'development-resource-card--featured' : ''; ?>">
                     <?php if (has_post_thumbnail()) : ?>
-                        <div class="development-resource-card__image">
+                        <a class="development-resource-card__image" href="<?php echo esc_url($resource_url); ?>"<?php echo $resource_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; ?> aria-label="<?php echo esc_attr($resource_link_label); ?>">
                             <?php the_post_thumbnail('large'); ?>
-                        </div>
+                        </a>
                     <?php endif; ?>
-                    <div class="development-resource-card__meta">
-                        <span><?php echo esc_html($shared_copy($is_report ? 'report_item_label' : 'ebook_item_label')); ?></span>
-                        <?php if (!$is_report && $resource_author !== '') : ?>
+                    <div class="development-resource-card__body">
+                        <div class="development-resource-card__meta">
+                            <span><?php echo esc_html($shared_copy('ebook_item_label')); ?></span>
                             <small><?php echo esc_html($resource_author); ?></small>
-                        <?php else : ?>
-                            <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
-                        <?php endif; ?>
+                        </div>
+                        <h3><a href="<?php echo esc_url($resource_url); ?>"<?php echo $resource_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php the_title(); ?></a></h3>
+                        <p><?php echo esc_html($resource_summary); ?></p>
+                        <a class="development-resource-card__review" href="<?php echo esc_url($resource_url); ?>"<?php echo $resource_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html($resource_link_label); ?> <span aria-hidden="true">→</span></a>
+                        <div class="development-resource-card__retailers">
+                            <div class="development-resource-card__retailer-heading">
+                                <span><?php echo esc_html($is_english ? 'Buy the book' : 'Kitabı satın alın'); ?></span>
+                                <small><?php echo esc_html($is_english ? 'Choose a retailer' : 'Satış noktasını seçin'); ?></small>
+                            </div>
+                            <div class="development-resource-card__retailer-list" aria-label="<?php echo esc_attr($is_english ? 'Online retailers selling this book' : 'Kitabın satıldığı çevrim içi mağazalar'); ?>">
+                                <?php foreach ($resource_retailers as $retailer) : ?>
+                                    <a href="<?php echo esc_url($retailer['url']); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr(sprintf($is_english ? '%s, opens in a new tab' : '%s, yeni sekmede açılır', $retailer['name'])); ?>">
+                                        <span><?php echo esc_html($retailer['name']); ?></span><i aria-hidden="true">↗</i>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
                     </div>
-                    <h3><?php the_title(); ?></h3>
-                    <p><?php echo esc_html($resource_summary); ?></p>
-                    <strong><?php echo esc_html($resource_link_label); ?> <span aria-hidden="true">→</span></strong>
-                </a>
+                </article>
+                <?php else : ?>
+                    <a class="development-resource-card <?php echo $resource_index === 0 ? 'development-resource-card--featured' : ''; ?>" href="<?php echo esc_url($resource_url); ?>"<?php echo $resource_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
+                        <?php if (has_post_thumbnail()) : ?>
+                            <div class="development-resource-card__image">
+                                <?php the_post_thumbnail('large'); ?>
+                            </div>
+                        <?php endif; ?>
+                        <div class="development-resource-card__meta">
+                            <span><?php echo esc_html($shared_copy($is_report ? 'report_item_label' : 'ebook_item_label')); ?></span>
+                            <?php if (!$is_report && $resource_author !== '') : ?>
+                                <small><?php echo esc_html($resource_author); ?></small>
+                            <?php else : ?>
+                                <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
+                            <?php endif; ?>
+                        </div>
+                        <h3><?php the_title(); ?></h3>
+                        <p><?php echo esc_html($resource_summary); ?></p>
+                        <strong><?php echo esc_html($resource_link_label); ?> <span aria-hidden="true">→</span></strong>
+                    </a>
+                <?php endif; ?>
                 <?php $resource_index++; ?>
             <?php endwhile; ?>
         </div>
