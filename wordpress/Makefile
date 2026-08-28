@@ -7,7 +7,7 @@ WORDPRESS_ADMIN_USER ?= admin
 WORDPRESS_ADMIN_PASSWORD ?= change-me-admin
 WORDPRESS_ADMIN_EMAIL ?= admin@example.com
 
-.PHONY: up install seed bootstrap down logs smtp-test
+.PHONY: up install seed bootstrap down logs smtp-test sync-blog
 
 up:
 	docker compose up -d
@@ -33,3 +33,6 @@ logs:
 
 smtp-test:
 	docker compose --profile tools run --rm wpcli wp eval 'wp_mail(get_option("admin_email"), "[Myliba] SMTP Test", "Bu bir test mailidir. WP Mail SMTP çalışıyor."); echo "Mail gönderildi.";'
+
+sync-blog:
+	docker compose --profile tools run --rm wpcli wp myliba sync-blog --yes

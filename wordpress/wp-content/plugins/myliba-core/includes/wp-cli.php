@@ -2046,4 +2046,170 @@ HTML,
 
         return $content[$key] ?? $content['generic'];
     }
+
+    /**
+     * Sync blog posts from the public myliba.com website.
+     *
+     * Fetches blog posts from both English and Turkish WordPress REST API
+     * endpoints, creates or updates them locally with the correct language
+     * metadata, downloads featured images, and preserves original dates.
+     *
+     * This command is idempotent — running it multiple times will update
+     * existing posts (matched by slug) instead of creating duplicates.
+     *
+     * ## OPTIONS
+     *
+     * [--source=<url>]
+     * : Public source URL. Defaults to https://myliba.com.
+     *
+     * [--yes]
+     * : Confirm the operation without prompting.
+     *
+     * ## EXAMPLES
+     *
+     *     wp myliba sync-blog
+     *     wp myliba sync-blog --source=https://myliba.com --yes
+     *
+     * @subcommand sync-blog
+     */
+    public function sync_blog(array $args, array $assoc_args): void
+    {
+        $source = rtrim((string) ($assoc_args['source'] ?? 'https://myliba.com'), '/');
+
+        if (empty($assoc_args['yes'])) {
+            \WP_CLI::confirm('Sync blog posts from ' . $source . '? Existing matching slugs will be updated.');
+        }
+
+        $en_count = $this->sync_blog_from_endpoint($source, $source . '/wp-json/wp/v2/posts', 'en');
+        $tr_count = $this->sync_blog_from_endpoint($source, $source . '/tr/wp-json/wp/v2/posts', 'tr');
+
+        \WP_CLI::success(sprintf(
+            'Blog sync completed. Synced %d EN post(s) and %d TR post(s).',
+            $en_count,
+            $tr_count
+        ));
+    }
+
+    /**
+     * Fetch and upsert blog posts from a single WP REST API endpoint with pagination.
+     */
+    private function sync_blog_from_endpoint(string $source, string $api_base, string $language): int
+    {
+        $page = 1;
+        $total_pages = 1;
+        $synced = 0;
+
+        do {
+            $url = add_query_arg([
+                'categories' => 4,
+                'per_page'   => 100,
+                'page'       => $page,
+                '_embed'     => 1,
+            ], $api_base);
+
+            \WP_CLI::log(sprintf('[%s] Fetching page %d: %s', strtoupper($language), $page, $url));
+
+            $response = wp_remote_get($url, [
+                'timeout'     => 30,
+                'redirection' => 5,
+                'headers'     => [
+                    'User-Agent' => 'Myliba Blog Sync',
+                ],
+            ]);
+
+            if (is_wp_error($response)) {
+                \WP_CLI::warning($url . ' failed: ' . $response->get_error_message());
+                break;
+            }
+
+            $code = (int) wp_remote_retrieve_response_code($response);
+            if ($code < 200 || $code >= 300) {
+                \WP_CLI::warning($url . ' returned HTTP ' . $code);
+                break;
+            }
+
+            if ($page === 1) {
+                $total_pages = max(1, (int) wp_remote_retrieve_header($response, 'X-WP-TotalPages'));
+                $total_items = (int) wp_remote_retrieve_header($response, 'X-WP-Total');
+                \WP_CLI::log(sprintf('[%s] Found %d post(s) across %d page(s).', strtoupper($language), $total_items, $total_pages));
+            }
+
+            $body = (string) wp_remote_retrieve_body($response);
+            $posts = json_decode($body, true);
+
+            if (!is_array($posts) || empty($posts)) {
+                break;
+            }
+
+            foreach ($posts as $item) {
+                if (!is_array($item)) {
+                    continue;
+                }
+
+                $title   = wp_strip_all_tags($item['title']['rendered'] ?? 'Untitled');
+                $slug    = sanitize_title((string) ($item['slug'] ?? $title));
+                $content = wp_kses_post($item['content']['rendered'] ?? '');
+                $excerpt = wp_strip_all_tags($item['excerpt']['rendered'] ?? '');
+                $date    = $item['date'] ?? '';
+                $date_gmt = $item['date_gmt'] ?? '';
+                $source_id = (int) ($item['id'] ?? 0);
+                $source_url = (string) ($item['link'] ?? '');
+
+                // Featured image URL from _embedded data
+                $featured_url = '';
+                if (!empty($item['_embedded']['wp:featuredmedia'][0]['source_url'])) {
+                    $featured_url = (string) $item['_embedded']['wp:featuredmedia'][0]['source_url'];
+                }
+
+                $meta = [
+                    '_myliba_language'        => $language,
+                    '_myliba_hero_title'      => $title,
+                    '_myliba_source_url'      => $source_url,
+                    '_myliba_source_id'       => (string) $source_id,
+                    '_myliba_seo_title'       => $title . ' | Myliba',
+                    '_myliba_seo_description' => $excerpt,
+                ];
+
+                // Upsert the post
+                $post_id = $this->upsert_post_type('post', $title, $slug, $content, $meta);
+
+                // Preserve original publication date
+                if ($date !== '') {
+                    wp_update_post([
+                        'ID'            => $post_id,
+                        'post_date'     => $date,
+                        'post_date_gmt' => $date_gmt !== '' ? $date_gmt : get_gmt_from_date($date),
+                        'edit_date'     => true,
+                    ]);
+                }
+
+                // Download and localize images in content
+                $localized_content = $this->replace_remote_images($content, $source, $post_id, false);
+
+                // Handle featured image separately
+                if ($featured_url !== '') {
+                    $abs_featured = $this->absolute_url($featured_url, $source);
+                    $attachment_id = $this->sideload_image($abs_featured, $post_id);
+                    if ($attachment_id && !has_post_thumbnail($post_id)) {
+                        set_post_thumbnail($post_id, $attachment_id);
+                    }
+                }
+
+                // Update content with localized image URLs
+                if ($localized_content !== $content) {
+                    wp_update_post([
+                        'ID'           => $post_id,
+                        'post_content' => $localized_content,
+                    ]);
+                }
+
+                $synced++;
+                \WP_CLI::log(sprintf('  ✓ [%s] %s (ID: %d)', strtoupper($language), $title, $post_id));
+            }
+
+            $page++;
+        } while ($page <= $total_pages);
+
+        return $synced;
+    }
 }
