@@ -16,6 +16,7 @@ function boot(): void
     add_filter('wp_sitemaps_posts_query_args', __NAMESPACE__ . '\\sitemap_post_query_args', 10, 2);
     add_filter('document_title_parts', __NAMESPACE__ . '\\document_title');
     add_action('template_redirect', __NAMESPACE__ . '\\redirect_legacy_locale_duplicate', 0);
+    add_action('template_redirect', __NAMESPACE__ . '\\render_llms_txt', 0);
     add_action('send_headers', __NAMESPACE__ . '\\send_noindex_header');
     add_action('wp_head', __NAMESPACE__ . '\\render_head', 2);
     add_action('admin_notices', __NAMESPACE__ . '\\external_seo_plugin_notice');
@@ -74,12 +75,21 @@ function should_noindex(): bool
     return is_staging_host() || !Options\indexing_enabled() || current_post_noindex();
 }
 
+function should_noindex_soft(): bool
+{
+    return !is_admin() && (is_author() || is_date() || is_search() || !empty($_GET['myliba_form']));
+}
+
 function robots(array $robots): array
 {
     if (should_noindex()) {
         unset($robots['index'], $robots['follow']);
         $robots['noindex'] = true;
         $robots['nofollow'] = true;
+    } elseif (should_noindex_soft()) {
+        unset($robots['index']);
+        $robots['noindex'] = true;
+        $robots['follow'] = true;
     }
 
     return $robots;
@@ -91,7 +101,103 @@ function robots_txt(string $output, bool $public): string
         return "User-agent: *\nDisallow: /\n";
     }
 
-    return $output;
+    $sitemap_url = home_url('/wp-sitemap.xml');
+
+    return implode("\n", [
+        '# ── General Crawlers ─────────────────────────────────────',
+        'User-agent: *',
+        'Disallow: /wp-admin/',
+        'Disallow: /wp-login.php',
+        'Disallow: /xmlrpc.php',
+        'Disallow: /?s=',
+        'Disallow: /*?s=*',
+        'Disallow: /*?myliba_form=*',
+        'Disallow: /author/',
+        'Allow: /wp-admin/admin-ajax.php',
+        'Allow: /wp-content/uploads/',
+        'Allow: /wp-content/themes/',
+        '',
+        '# ── OpenAI / ChatGPT & Search ─────────────────────────────',
+        'User-agent: GPTBot',
+        'Allow: /',
+        '',
+        'User-agent: OAI-SearchBot',
+        'Allow: /',
+        '',
+        'User-agent: ChatGPT-User',
+        'Allow: /',
+        '',
+        '# ── Perplexity AI ─────────────────────────────────────────',
+        'User-agent: PerplexityBot',
+        'Allow: /',
+        '',
+        '# ── Anthropic / Claude ────────────────────────────────────',
+        'User-agent: ClaudeBot',
+        'Allow: /',
+        '',
+        'User-agent: Claude-Web',
+        'Allow: /',
+        '',
+        'User-agent: anthropic-ai',
+        'Allow: /',
+        '',
+        '# ── Google Gemini & AI Overviews ──────────────────────────',
+        'User-agent: Google-Extended',
+        'Allow: /',
+        '',
+        '# ── Apple Intelligence ────────────────────────────────────',
+        'User-agent: Applebot',
+        'Allow: /',
+        '',
+        'User-agent: Applebot-Extended',
+        'Allow: /',
+        '',
+        '# ── Microsoft Copilot / Bing ──────────────────────────────',
+        'User-agent: Bingbot',
+        'Allow: /',
+        '',
+        '# ── Sitemap ───────────────────────────────────────────────',
+        'Sitemap: ' . esc_url($sitemap_url),
+        '',
+    ]);
+}
+
+function render_llms_txt(): void
+{
+    $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) wp_unslash($_SERVER['REQUEST_URI']) : '';
+    $path = trim((string) wp_parse_url($request_uri, PHP_URL_PATH), '/');
+
+    if ($path !== 'llms.txt') {
+        return;
+    }
+
+    if (should_noindex()) {
+        status_header(404);
+        exit;
+    }
+
+    header('Content-Type: text/plain; charset=utf-8');
+    header('X-Robots-Tag: noindex, follow', true);
+
+    $site_url = rtrim(home_url('/'), '/');
+
+    echo "# Myliba\n\n";
+    echo "> Myliba connects OKR, KPI, CFR, 1:1 meetings, feedback, actions and academy routines to help organizations build measurable performance and leadership culture.\n\n";
+    echo "## Core Solutions & Products\n\n";
+    echo "- [Yazılım / Platform]({$site_url}/tr/yazilim/): OKR ve performans yönetimi yazılımı.\n";
+    echo "- [Çözümlerimiz]({$site_url}/tr/cozumler/): Kurumsal gelişim programları, danışmanlık ve kültür analizi.\n";
+    echo "- [OKR & Kültür Akademisi]({$site_url}/tr/okr-kultur-akademisi/): Sertifikalı OKR ve liderlik eğitimleri.\n";
+    echo "- [Gelişim Merkezi]({$site_url}/tr/gelisim-merkezi/): Araştırmalar, e-kitaplar, raporlar ve etkinlikler.\n";
+    echo "- [İletişim & Demo]({$site_url}/tr/demo/): Demo talebi ve kurumsal iletişim.\n\n";
+    echo "## Resources\n\n";
+    echo "- [Raporlar ve Trendler]({$site_url}/tr/gelisim-merkezi/raporlar-ve-trendler/)\n";
+    echo "- [e-Kitaplar]({$site_url}/tr/gelisim-merkezi/e-kitaplar/)\n";
+    echo "- [Blog]({$site_url}/tr/yazilar/)\n";
+    echo "- [Etkinlikler]({$site_url}/tr/etkinlikler/)\n\n";
+    echo "## Sitemap\n\n";
+    echo "- {$site_url}/wp-sitemap.xml\n";
+
+    exit;
 }
 
 function sitemaps_enabled(bool $enabled): bool
@@ -103,6 +209,8 @@ function send_noindex_header(): void
 {
     if (should_noindex()) {
         header('X-Robots-Tag: noindex, nofollow', true);
+    } elseif (should_noindex_soft()) {
+        header('X-Robots-Tag: noindex, follow', true);
     }
 }
 
