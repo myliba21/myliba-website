@@ -501,53 +501,106 @@ a.site-promo__content:hover .site-promo__side {
   color: #ffffff;
 }
 
-@media (max-width: 960px) {
-  .site-promo__side {
-    max-width: 170px;
-  }
-}
-
-@media (max-width: 720px) {
+@media (max-width: 860px) {
   .site-promo {
-    min-height: 44px;
+    height: auto;
+    min-height: 0;
   }
 
   .site-promo__content {
-    gap: 10px;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    padding: 8px 48px 8px 12px;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px 10px;
+    height: auto;
+    min-height: 0;
+    padding: 10px 42px 10px 14px;
     text-align: left;
   }
 
   .site-promo__side {
+    border-radius: 999px;
+    display: inline-flex;
     font-size: 11px;
-    letter-spacing: 0.03em;
-    max-width: 130px;
-    padding: 7px 10px;
-  }
-
-  .site-promo__side--right {
-    font-size: 12px;
-    padding: 9px 12px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    max-width: none;
+    order: 1;
+    padding: 5px 10px;
+    white-space: nowrap;
   }
 
   .site-promo__content strong {
-    font-size: var(--fs-body-sm);
+    color: #ffffff;
+    flex: 1 1 100%;
+    font-size: 13.5px;
+    font-weight: 700;
+    justify-self: start;
+    letter-spacing: -0.01em;
+    line-height: 1.38;
+    order: 2;
+    overflow: visible;
     text-align: left;
-  }
-}
-
-@media (max-width: 380px) {
-  .site-promo__side {
-    display: none;
-  }
-
-  .site-promo__content {
-    grid-template-columns: minmax(0, 1fr) auto;
+    text-overflow: clip;
+    white-space: normal;
+    width: 100%;
   }
 
   .site-promo__side--right {
-    padding: 8px 10px;
+    border-radius: 999px;
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 750;
+    justify-self: start;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin-top: 1px;
+    order: 3;
+    padding: 6px 14px;
+    white-space: nowrap;
+  }
+
+  .site-promo__side:empty,
+  .site-promo__side--right:empty {
+    display: none;
+  }
+
+  .site-promo__dismiss {
+    align-items: center;
+    bottom: auto;
+    display: inline-flex;
+    font-size: 22px;
+    height: 32px;
+    justify-content: center;
+    line-height: 1;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    transform: none;
+    width: 32px;
+    z-index: 4;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-promo__content {
+    gap: 6px 8px;
+    padding: 9px 38px 9px 12px;
+  }
+
+  .site-promo__side {
+    font-size: 10.5px;
+    padding: 4px 8px;
+  }
+
+  .site-promo__content strong {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .site-promo__side--right {
+    font-size: 11.5px;
+    padding: 5px 12px;
   }
 }
 
