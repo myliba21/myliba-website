@@ -2793,3 +2793,21 @@ function myliba_inject_contact_social_links(string $content): string
     return $content;
 }
 add_filter('the_content', 'myliba_inject_contact_social_links', 20);
+
+/**
+ * Google Analytics (gtag.js)
+ */
+function add_google_analytics(): void
+{
+    ?>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XS07RX9WV1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XS07RX9WV1');
+    </script>
+    <?php
+}
+add_action('wp_head', 'add_google_analytics', 1);

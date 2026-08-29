@@ -26,7 +26,6 @@ linear-gradient(145deg, #fbfcfb 0%, #eef6f3 100%);
 border-bottom: 1px solid rgba(40, 127, 159, 0.12);
 }
 .development-hero .development-shell {
-max-width: 1040px;
 padding-bottom: clamp(40px, 4.9vw, 120px);
 padding-top: clamp(40px, 4.9vw, 120px);
 }

@@ -32,7 +32,6 @@
 }
 
 .development-hero .development-shell {
-  max-width: 1040px;
   padding-bottom: clamp(40px, 4.9vw, 120px);
   padding-top: clamp(40px, 4.9vw, 120px);
 }
