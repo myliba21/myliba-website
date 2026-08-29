@@ -543,8 +543,8 @@
   }
 
   .language-switcher__menu {
-    left: 0;
-    right: auto;
+    left: auto;
+    right: 0;
   }
 
   .site-nav__mobile-cta--portal {

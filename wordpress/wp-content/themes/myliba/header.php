@@ -21,6 +21,14 @@ $promo_url = trim((string) myliba_option('promo_url', ''));
 $promo_dismissible = myliba_option('promo_dismissible', '1') === '1' || myliba_option('promo_dismissible', '1') === 1 || myliba_option('promo_dismissible', '1') === true;
 
 $show_lang_switcher = myliba_option('header_lang_switcher_enabled', '1') !== '0';
+$language_links = $show_lang_switcher ? myliba_language_links() : [];
+$active_language = $language_links[0] ?? ['label' => 'TR', 'url' => home_url('/tr/'), 'active' => true];
+foreach ($language_links as $language) {
+    if (!empty($language['active'])) {
+        $active_language = $language;
+        break;
+    }
+}
 $portal_enabled = myliba_option('header_portal_enabled', '1') !== '0';
 $portal_label = (string) myliba_option('portal_cta_label', myliba_text('Portal login'));
 $portal_url = (string) myliba_option('portal_url', myliba_portal_url());
@@ -51,13 +59,6 @@ $demo_url = (string) myliba_option('demo_url', myliba_demo_url());
 <header class="site-header">
     <div class="site-header__inner">
         <?php myliba_brand_link(); ?>
-
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span class="screen-reader-text"><?php echo esc_html(myliba_text('Menu')); ?></span>
-        </button>
 
         <nav id="site-navigation" class="site-nav" aria-label="<?php echo esc_attr(myliba_text('Primary navigation')); ?>">
             <ul class="site-nav__menu">
@@ -212,25 +213,15 @@ $demo_url = (string) myliba_option('demo_url', myliba_demo_url());
         </nav>
 
         <div class="site-actions">
-            <?php if ($show_lang_switcher) : ?>
-                <?php
-                $language_links = myliba_language_links();
-                $active_language = $language_links[0] ?? ['label' => 'TR', 'url' => home_url('/tr/'), 'active' => true];
-                foreach ($language_links as $language) {
-                    if (!empty($language['active'])) {
-                        $active_language = $language;
-                        break;
-                    }
-                }
-                ?>
+            <?php if ($show_lang_switcher && !empty($language_links)) : ?>
                 <div class="language-switcher language-switcher--dropdown" aria-label="<?php echo esc_attr(myliba_text('Language switcher')); ?>">
-                    <button class="language-switcher__trigger" type="button" aria-haspopup="true">
+                    <button class="language-switcher__trigger" type="button" aria-haspopup="true" aria-expanded="false">
                         <span class="language-switcher__flag"><?php echo esc_html(myliba_language_flag((string) $active_language['label'])); ?></span>
                         <span><?php echo esc_html($active_language['label']); ?></span>
                     </button>
                     <div class="language-switcher__menu">
                         <?php foreach ($language_links as $language) : ?>
-                            <a class="<?php echo $language['active'] ? 'is-active' : ''; ?>" href="<?php echo esc_url($language['url']); ?>" data-myliba-locale="<?php echo esc_attr(strtolower((string) $language['label'])); ?>">
+                            <a class="<?php echo !empty($language['active']) ? 'is-active' : ''; ?>" href="<?php echo esc_url($language['url']); ?>" data-myliba-locale="<?php echo esc_attr(strtolower((string) $language['label'])); ?>"<?php echo !empty($language['active']) ? ' aria-current="true"' : ''; ?>>
                                 <span class="language-switcher__flag"><?php echo esc_html(myliba_language_flag((string) $language['label'])); ?></span>
                                 <span><?php echo esc_html($language['label']); ?></span>
                             </a>
@@ -249,6 +240,13 @@ $demo_url = (string) myliba_option('demo_url', myliba_demo_url());
                 </a>
             <?php endif; ?>
         </div>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="screen-reader-text"><?php echo esc_html(myliba_text('Menu')); ?></span>
+        </button>
     </div>
 </header>
 <main id="main" class="site-main">

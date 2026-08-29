@@ -1210,9 +1210,9 @@ img {
     border: 1px solid var(--border);
     border-radius: 8px;
     display: grid;
+    flex: 0 0 auto;
     gap: 4px;
     height: 42px;
-    margin-left: auto;
     place-content: center;
     width: 42px;
   }
@@ -1262,6 +1262,13 @@ img {
   }
 
   .site-actions {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .site-actions .myliba-button {
     display: none;
   }
 

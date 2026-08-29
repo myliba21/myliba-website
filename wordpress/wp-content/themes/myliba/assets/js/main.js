@@ -122,18 +122,26 @@
     });
   }
 
-  if (languageSwitcher && languageTrigger) {
+  const languageSwitchers = Array.from(document.querySelectorAll(".language-switcher--dropdown"));
+  languageSwitchers.forEach((languageSwitcher) => {
+    const languageTrigger = languageSwitcher.querySelector(".language-switcher__trigger");
+    if (!languageTrigger) {
+      return;
+    }
+
     let langCloseTimer;
 
     const openLanguageSwitcher = () => {
       window.clearTimeout(langCloseTimer);
       languageSwitcher.classList.add("is-open");
+      languageTrigger.setAttribute("aria-expanded", "true");
     };
 
     const queueCloseLanguageSwitcher = () => {
       window.clearTimeout(langCloseTimer);
       langCloseTimer = window.setTimeout(() => {
         languageSwitcher.classList.remove("is-open");
+        languageTrigger.setAttribute("aria-expanded", "false");
       }, 220);
     };
 
@@ -144,14 +152,17 @@
 
     languageTrigger.addEventListener("click", (event) => {
       event.preventDefault();
+      event.stopPropagation();
       window.clearTimeout(langCloseTimer);
-      languageSwitcher.classList.toggle("is-open");
+      const isOpen = languageSwitcher.classList.toggle("is-open");
+      languageTrigger.setAttribute("aria-expanded", String(isOpen));
     });
 
     document.addEventListener("click", (event) => {
       if (!languageSwitcher.contains(event.target)) {
         window.clearTimeout(langCloseTimer);
         languageSwitcher.classList.remove("is-open");
+        languageTrigger.setAttribute("aria-expanded", "false");
       }
     });
 
@@ -159,9 +170,10 @@
       if (event.key === "Escape") {
         window.clearTimeout(langCloseTimer);
         languageSwitcher.classList.remove("is-open");
+        languageTrigger.setAttribute("aria-expanded", "false");
       }
     });
-  }
+  });
 
   megaItems.forEach((megaItem) => {
     const megaToggle = megaItem.querySelector(".site-nav__link");
