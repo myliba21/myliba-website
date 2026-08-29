@@ -13,6 +13,8 @@ function boot(): void
     add_filter('wp_robots', __NAMESPACE__ . '\\robots');
     add_filter('robots_txt', __NAMESPACE__ . '\\robots_txt', 10, 2);
     add_filter('wp_sitemaps_enabled', __NAMESPACE__ . '\\sitemaps_enabled');
+    add_filter('wp_sitemaps_post_types', __NAMESPACE__ . '\\sitemap_post_types');
+    add_filter('wp_sitemaps_add_provider', __NAMESPACE__ . '\\sitemap_provider', 10, 2);
     add_filter('wp_sitemaps_posts_query_args', __NAMESPACE__ . '\\sitemap_post_query_args', 10, 2);
     add_filter('document_title_parts', __NAMESPACE__ . '\\document_title');
     add_action('template_redirect', __NAMESPACE__ . '\\redirect_legacy_locale_duplicate', 0);
@@ -203,6 +205,20 @@ function render_llms_txt(): void
 function sitemaps_enabled(bool $enabled): bool
 {
     return is_staging_host() || !Options\indexing_enabled() ? false : $enabled;
+}
+
+function sitemap_post_types(array $post_types): array
+{
+    foreach (['myliba_solution', 'myliba_academy', 'myliba_landing', 'myliba_ebook'] as $post_type) {
+        unset($post_types[$post_type]);
+    }
+
+    return $post_types;
+}
+
+function sitemap_provider($provider, string $name)
+{
+    return $name === 'users' ? false : $provider;
 }
 
 function send_noindex_header(): void
