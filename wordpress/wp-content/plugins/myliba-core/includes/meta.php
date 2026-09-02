@@ -1224,9 +1224,14 @@ function render_team_box(\WP_Post $post): void
 {
     nonce();
 
-    field_text('_myliba_person_role', __('Role', 'myliba'), get_post_meta($post->ID, '_myliba_person_role', true));
+    echo '<p class="description">Ad soyadı başlık alanına, detaylı biyografiyi ana içerik alanına, profil fotoğrafını Öne Çıkan Görsel alanına ekleyin.</p>';
+    field_text('_myliba_person_headline', 'Profil Başlığı', get_post_meta($post->ID, '_myliba_person_headline', true), 'Örn: Stratejiyi Eyleme İndiren, Otonom ve Çevik Ekip Mimarı');
+    field_text('_myliba_person_role', 'Unvanlar / Uzmanlıklar', get_post_meta($post->ID, '_myliba_person_role', true), 'Unvanları · işaretiyle ayırabilirsiniz.');
+    field_url('_myliba_person_website_url', 'Kişisel Web Sitesi', get_post_meta($post->ID, '_myliba_person_website_url', true));
+    field_text('_myliba_person_website_label', 'Web Sitesi Bağlantı Metni', get_post_meta($post->ID, '_myliba_person_website_label', true));
     field_url('_myliba_linkedin_url', __('LinkedIn URL', 'myliba'), get_post_meta($post->ID, '_myliba_linkedin_url', true));
-    field_number('_myliba_order', __('Sort order', 'myliba'), get_post_meta($post->ID, '_myliba_order', true));
+    field_number('_myliba_order', 'Sıralama', get_post_meta($post->ID, '_myliba_order', true));
+    echo '<p class="description">Küçük sayılar önce gösterilir (10, 20, 30…). Bir eğitmeni kaldırmak için kaydı Çöp Kutusu’na taşıyın.</p>';
 }
 
 function render_logo_box(\WP_Post $post): void
@@ -1965,7 +1970,10 @@ function field_definitions(string $post_type): array
 
     if ($post_type === 'myliba_team') {
         $fields += [
+            '_myliba_person_headline' => 'text',
             '_myliba_person_role' => 'text',
+            '_myliba_person_website_url' => 'url',
+            '_myliba_person_website_label' => 'text',
             '_myliba_linkedin_url' => 'url',
             '_myliba_order' => 'number',
         ];

@@ -15,20 +15,11 @@ services:
       retries: 10
     restart: unless-stopped
 
-  mailpit:
-    image: axllent/mailpit:latest
-    ports:
-      - "127.0.0.1:8025:8025"
-      - "127.0.0.1:1025:1025"
-    restart: unless-stopped
-
   wordpress:
     image: wordpress:php8.3-apache
     depends_on:
       db:
         condition: service_healthy
-      mailpit:
-        condition: service_started
     ports:
       - "127.0.0.1:${WORDPRESS_PORT:-8080}:80"
     environment:
@@ -56,19 +47,7 @@ services:
           define('AUTOMATIC_UPDATER_DISABLED', false);
         }
         // WP Mail SMTP configuration
-        define('WPMS_ON', true);
-        define('WPMS_MAIL_FROM', getenv('WPMS_MAIL_FROM') ?: 'hello@myliba.com');
-        define('WPMS_MAIL_FROM_NAME', getenv('WPMS_MAIL_FROM_NAME') ?: 'Myliba');
-        define('WPMS_MAIL_FROM_FORCE', true);
-        // Local: 'smtp' (Mailpit) — Production: 'gmail' (Google OAuth)
-        define('WPMS_MAILER', getenv('WPMS_MAILER') ?: 'smtp');
-        define('WPMS_SMTP_HOST', 'mailpit');
-        define('WPMS_SMTP_PORT', 1025);
-        define('WPMS_SSL', '');
-        define('WPMS_SMTP_AUTH', false);
-        define('WPMS_SMTP_AUTOTLS', false);
-        define('WPMS_GMAIL_CLIENT_ID', getenv('WPMS_GMAIL_CLIENT_ID') ?: '');
-        define('WPMS_GMAIL_CLIENT_SECRET', getenv('WPMS_GMAIL_CLIENT_SECRET') ?: '');
+        define('WPMS_ON', false);
         // PRODUCTION NOTE: Set the following before going live:
         //   define('WP_ENVIRONMENT_TYPE', 'production');
         //   define('WP_DEBUG', false);

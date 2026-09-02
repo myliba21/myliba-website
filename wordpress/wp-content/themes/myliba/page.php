@@ -29,6 +29,11 @@ if (is_page(['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsef
     return;
 }
 
+if (is_page(['egitmenlerimiz', 'our-trainers'])) {
+    require get_template_directory() . '/template-parts/page-trainers.php';
+    return;
+}
+
 if (is_page(['etik-hat', 'etik-danismanlik', 'ethics-counsel', 'etik', 'ethics', 'whistleblowing'])) {
     require get_template_directory() . '/template-parts/page-ethics.php';
     return;

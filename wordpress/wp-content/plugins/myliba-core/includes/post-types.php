@@ -368,12 +368,19 @@ function register(): void
 
     register_post_type('myliba_team', [
         'labels' => [
-            'name' => __('Team Members', 'myliba'),
-            'singular_name' => __('Team Member', 'myliba'),
+            'name' => 'Eğitmenler',
+            'singular_name' => 'Eğitmen',
+            'add_new_item' => 'Yeni Eğitmen Ekle',
+            'edit_item' => 'Eğitmeni Düzenle',
+            'new_item' => 'Yeni Eğitmen',
+            'view_item' => 'Eğitmeni Görüntüle',
+            'search_items' => 'Eğitmen Ara',
+            'not_found' => 'Eğitmen bulunamadı',
         ],
         'public' => true,
         'has_archive' => false,
-        'show_ui' => false,
+        'show_ui' => true,
+        'show_in_menu' => 'myliba-settings',
         'menu_icon' => 'dashicons-groups',
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'thumbnail', 'page-attributes', 'revisions'],
