@@ -22,8 +22,6 @@ while (have_posts()):
         $summary = (string) (get_post_meta($post_id, '_myliba_hero_subtitle', true) ?: get_the_excerpt());
     }
 
-    $hero_supporting = $content_copy('hero_supporting');
-
     $hero_primary_label = $content_copy('hero_primary_label');
     if ($hero_primary_label === '') {
         $hero_primary_label = (string) (get_post_meta($post_id, '_myliba_cta_label', true) ?: myliba_text('Programı birlikte tasarlayalım'));
@@ -145,32 +143,6 @@ while (have_posts()):
     }
 
     $steps = $content_rows('steps');
-    $intro_points = array_column($content_rows('intro_points'), 'text');
-    $principles = $content_rows('principles');
-    $results = array_column($content_rows('results'), 'text');
-
-    $principles_eyebrow = $content_copy('principles_eyebrow');
-    $principles_title = $content_copy('principles_title');
-    $principles_lead = $content_copy('principles_lead');
-    $results_eyebrow = $content_copy('results_eyebrow');
-    $results_title = $content_copy('results_title');
-    $results_lead = $content_copy('results_lead');
-    $experts_eyebrow = $content_copy('experts_eyebrow');
-    $experts_title = $content_copy('experts_title');
-    $experts_lead = $content_copy('experts_lead');
-    $experts_button_label = $content_copy('experts_button_label');
-    $thought_eyebrow = $content_copy('thought_eyebrow');
-    $thought_title = $content_copy('thought_title');
-    $thought_text = $content_copy('thought_text');
-    $book_title = $content_copy('book_title');
-    $book_subtitle = $content_copy('book_subtitle');
-    $book_quote_one = $content_copy('book_quote_one');
-    $book_quote_one_author = $content_copy('book_quote_one_author');
-    $book_quote_two = $content_copy('book_quote_two');
-    $book_quote_two_author = $content_copy('book_quote_two_author');
-    $book_link_label = $content_copy('book_link_label');
-    $book_link_url = $content_copy('book_link_url');
-    $is_consulting = get_post_field('post_name', $post_id) === 'danismanlik';
 
     $cta_eyebrow = $content_copy('cta_eyebrow');
     if ($cta_eyebrow === '') {
@@ -229,15 +201,12 @@ while (have_posts()):
                         <p class="eyebrow"><?php echo esc_html($kicker); ?></p>
                         <h1><?php echo esc_html($title); ?></h1>
                         <p class="solution-detail__lead"><?php echo esc_html($summary); ?></p>
-                        <?php if ($hero_supporting !== '') : ?>
-                            <p class="solution-detail__supporting"><?php echo esc_html($hero_supporting); ?></p>
-                        <?php endif; ?>
                         <div class="solution-detail__actions">
                             <a class="myliba-button myliba-button--primary"
                                 href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html($hero_primary_label); ?></a>
                             <?php if (!empty($steps)): ?>
                                 <a class="solution-detail__text-link"
-                                    href="<?php echo esc_attr($is_consulting ? '#danismanlarimiz' : '#calisma-modeli'); ?>"><?php echo esc_html($hero_secondary_label); ?> <span
+                                    href="#calisma-modeli"><?php echo esc_html($hero_secondary_label); ?> <span
                                         aria-hidden="true">↓</span></a>
                             <?php endif; ?>
                         </div>
@@ -285,36 +254,10 @@ while (have_posts()):
             </div>
             <div class="solution-detail__intro-copy">
                 <p><?php echo esc_html($intro); ?></p>
-                <?php if (!empty($intro_points)) : ?>
-                    <ul class="solution-detail__intro-points">
-                        <?php foreach ($intro_points as $point) : ?><li><?php echo esc_html($point); ?></li><?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
                 <a href="<?php echo esc_url(myliba_page_url('contact')); ?>"><?php echo esc_html($intro_link_label); ?>
                     <span aria-hidden="true">→</span></a>
             </div>
         </section>
-
-        <?php if (!empty($principles)) : ?>
-            <section class="consulting-principles">
-                <div class="solutions-shell">
-                    <header>
-                        <?php if ($principles_eyebrow !== '') : ?><p class="eyebrow"><?php echo esc_html($principles_eyebrow); ?></p><?php endif; ?>
-                        <h2><?php echo esc_html($principles_title); ?></h2>
-                        <?php if ($principles_lead !== '') : ?><p><?php echo esc_html($principles_lead); ?></p><?php endif; ?>
-                    </header>
-                    <div class="consulting-principles__grid">
-                        <?php foreach ($principles as $index => $principle) : ?>
-                            <article>
-                                <span><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-                                <h3><?php echo esc_html((string) ($principle['title'] ?? '')); ?></h3>
-                                <p><?php echo esc_html((string) ($principle['text'] ?? '')); ?></p>
-                            </article>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </section>
-        <?php endif; ?>
 
         <?php if (!empty($items)): ?>
             <section class="solution-outcomes">
@@ -388,85 +331,6 @@ while (have_posts()):
                     <?php endforeach; ?>
                 </div>
             </section>
-        <?php endif; ?>
-
-        <?php if (!empty($results)) : ?>
-            <section class="consulting-results">
-                <div class="solutions-shell">
-                    <header>
-                        <?php if ($results_eyebrow !== '') : ?><p class="eyebrow"><?php echo esc_html($results_eyebrow); ?></p><?php endif; ?>
-                        <h2><?php echo esc_html($results_title); ?></h2>
-                        <?php if ($results_lead !== '') : ?><p><?php echo esc_html($results_lead); ?></p><?php endif; ?>
-                    </header>
-                    <ul>
-                        <?php foreach ($results as $result) : ?><li><span aria-hidden="true">✓</span><?php echo esc_html($result); ?></li><?php endforeach; ?>
-                    </ul>
-                </div>
-            </section>
-        <?php endif; ?>
-
-        <?php if ($is_consulting) : ?>
-            <?php
-            $consultants = new WP_Query([
-                'post_type' => 'myliba_team',
-                'post_status' => 'publish',
-                'posts_per_page' => -1,
-                'meta_query' => [
-                    'language' => ['key' => '_myliba_language', 'value' => myliba_current_language()],
-                    'sort_order' => ['key' => '_myliba_order', 'compare' => 'EXISTS', 'type' => 'NUMERIC'],
-                ],
-                'orderby' => ['sort_order' => 'ASC', 'title' => 'ASC'],
-                'order' => 'ASC',
-            ]);
-            ?>
-            <?php if ($consultants->have_posts()) : ?>
-                <section id="danismanlarimiz" class="consulting-experts solutions-shell">
-                    <header>
-                        <?php if ($experts_eyebrow !== '') : ?><p class="eyebrow"><?php echo esc_html($experts_eyebrow); ?></p><?php endif; ?>
-                        <h2><?php echo esc_html($experts_title); ?></h2>
-                        <?php if ($experts_lead !== '') : ?><p><?php echo esc_html($experts_lead); ?></p><?php endif; ?>
-                    </header>
-                    <div class="consulting-experts__grid">
-                        <?php while ($consultants->have_posts()) : $consultants->the_post(); ?>
-                            <?php
-                            $consultant_id = get_the_ID();
-                            $headline = trim((string) get_post_meta($consultant_id, '_myliba_person_headline', true));
-                            $role = trim((string) get_post_meta($consultant_id, '_myliba_person_role', true));
-                            ?>
-                            <article>
-                                <div class="consulting-experts__photo">
-                                    <?php if (has_post_thumbnail()) : the_post_thumbnail('medium_large', ['loading' => 'lazy', 'decoding' => 'async']); else : ?>
-                                        <span aria-hidden="true"><?php echo esc_html(mb_substr(get_the_title(), 0, 1)); ?></span>
-                                    <?php endif; ?>
-                                </div>
-                                <h3><?php the_title(); ?></h3>
-                                <?php if ($headline !== '') : ?><strong><?php echo esc_html($headline); ?></strong><?php endif; ?>
-                                <?php if ($role !== '') : ?><p><?php echo esc_html($role); ?></p><?php endif; ?>
-                            </article>
-                        <?php endwhile; ?>
-                    </div>
-                    <a class="myliba-button myliba-button--ghost" href="<?php echo esc_url(myliba_page_url('trainers')); ?>"><?php echo esc_html($experts_button_label ?: 'Tüm Eğitmen ve Danışmanlarımız'); ?></a>
-                </section>
-            <?php endif; wp_reset_postdata(); ?>
-
-            <?php if ($thought_title !== '' || $book_title !== '') : ?>
-                <section class="consulting-thought">
-                    <div class="solutions-shell consulting-thought__grid">
-                        <div>
-                            <?php if ($thought_eyebrow !== '') : ?><p class="eyebrow"><?php echo esc_html($thought_eyebrow); ?></p><?php endif; ?>
-                            <h2><?php echo esc_html($thought_title); ?></h2>
-                            <p><?php echo esc_html($thought_text); ?></p>
-                            <?php if ($book_link_url !== '' && $book_link_label !== '') : ?><a href="<?php echo esc_url($book_link_url); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html($book_link_label); ?> <span aria-hidden="true">↗</span></a><?php endif; ?>
-                        </div>
-                        <article>
-                            <h3><?php echo esc_html($book_title); ?></h3>
-                            <?php if ($book_subtitle !== '') : ?><strong><?php echo esc_html($book_subtitle); ?></strong><?php endif; ?>
-                            <?php if ($book_quote_one !== '') : ?><blockquote><p>“<?php echo esc_html($book_quote_one); ?>”</p><cite>— <?php echo esc_html($book_quote_one_author); ?></cite></blockquote><?php endif; ?>
-                            <?php if ($book_quote_two !== '') : ?><blockquote><p>“<?php echo esc_html($book_quote_two); ?>”</p><cite>— <?php echo esc_html($book_quote_two_author); ?></cite></blockquote><?php endif; ?>
-                        </article>
-                    </div>
-                </section>
-            <?php endif; ?>
         <?php endif; ?>
 
         <?php get_template_part('template-parts/client-logo-marquee', null, [

@@ -84,7 +84,7 @@ function myliba_enqueue_assets(): void
     } elseif (is_page(['yazilim', 'urunler', 'software', 'our-products']) || is_singular('myliba_product') || is_post_type_archive('myliba_product')) {
         $enqueue_css('myliba-software', 'software.min.css', [$pre_shared_dependency]);
         $pre_shared_dependency = 'myliba-software';
-    } elseif (is_page(['solutions', 'cozumler', 'egitmenlerimiz', 'our-trainers']) || is_singular('myliba_solution') || is_post_type_archive('myliba_solution')) {
+    } elseif (is_page(['solutions', 'cozumler']) || is_singular('myliba_solution') || is_post_type_archive('myliba_solution')) {
         $enqueue_css('myliba-solutions', 'solutions.min.css', [$pre_shared_dependency]);
         $pre_shared_dependency = 'myliba-solutions';
     } elseif (
@@ -1315,7 +1315,6 @@ function myliba_page_url(string $key): string
         'contact' => ['en' => 'en/contact', 'tr' => 'tr/iletisim'],
         'demo' => ['en' => 'en/demo', 'tr' => 'tr/demo'],
         'story' => ['en' => 'en/our-story', 'tr' => 'tr/hikayemiz'],
-        'trainers' => ['en' => 'en/our-trainers', 'tr' => 'tr/egitmenlerimiz'],
         'faq' => ['en' => 'en/faq', 'tr' => 'tr/sss'],
         'security' => ['en' => 'en/security', 'tr' => 'tr/guvenlik'],
         'privacy' => ['en' => 'en/privacy-policy', 'tr' => 'tr/gizlilik-politikasi'],
@@ -1340,7 +1339,7 @@ function myliba_nav_items(): array
         'academy' => myliba_text('Akademi'),
         'solutions' => myliba_text('Çözümlerimiz'),
         'development' => myliba_text('Gelişim Merkezi'),
-        'story' => myliba_current_language() === 'en' ? 'About Us' : 'Hakkımızda',
+        'story' => myliba_text('Biz Kimiz'),
         'contact' => myliba_text('İletişim'),
     ];
 }
@@ -1425,7 +1424,6 @@ function myliba_localize_url(string $url, string $target_lang = ''): string
         'solutions' => ['tr' => '/tr/cozumler/', 'en' => '/en/solutions/'],
         'development' => ['tr' => '/tr/gelisim-merkezi/', 'en' => '/en/development-center/'],
         'story' => ['tr' => '/tr/hikayemiz/', 'en' => '/en/our-story/'],
-        'trainers' => ['tr' => '/tr/egitmenlerimiz/', 'en' => '/en/our-trainers/'],
         'contact' => ['tr' => '/tr/iletisim/', 'en' => '/en/contact/'],
         'demo' => ['tr' => '/tr/demo/', 'en' => '/en/demo/'],
         'blog' => ['tr' => '/tr/yazilar/', 'en' => '/en/blog/'],
@@ -1596,10 +1594,6 @@ function myliba_get_primary_nav_items(): array
                     $key = $slug ?: 'item-' . $top_item->ID;
                 }
 
-                if ($key === 'story') {
-                    $label = $lang === 'en' ? 'About Us' : 'Hakkımızda';
-                }
-
                 $items[] = [
                     'id' => (int) $top_item->ID,
                     'key' => $key,
@@ -1641,7 +1635,7 @@ function myliba_header_menu(): array
         ['key' => 'academy', 'label' => myliba_text('Akademi'), 'url' => myliba_page_url('academy')],
         ['key' => 'solutions', 'label' => myliba_text('Çözümlerimiz'), 'url' => myliba_page_url('solutions')],
         ['key' => 'development', 'label' => myliba_text('Gelişim Merkezi'), 'url' => myliba_page_url('development')],
-        ['key' => 'story', 'label' => myliba_current_language() === 'en' ? 'About Us' : 'Hakkımızda', 'url' => myliba_page_url('story')],
+        ['key' => 'story', 'label' => myliba_text('Biz Kimiz'), 'url' => myliba_page_url('story')],
         ['key' => 'contact', 'label' => myliba_text('İletişim'), 'url' => myliba_page_url('contact')],
     ];
 }
@@ -2068,7 +2062,7 @@ function myliba_header_menu_item_is_active(string $key, string $url): bool
         'development' => is_page(['development-center', 'gelisim-merkezi', 'blog', 'yazilar', 'events', 'etkinlikler']) || is_home() || is_singular('post') || is_category() || is_tag() || is_post_type_archive(['myliba_event', 'myliba_report', 'myliba_ebook']) || is_singular(['myliba_event', 'myliba_report', 'myliba_ebook']),
         'products' => is_page(['yazilim', 'urunler']) || is_singular('myliba_product') || is_post_type_archive('myliba_product'),
         'solutions' => is_page(['solutions', 'cozumler']) || is_singular('myliba_solution') || is_post_type_archive('myliba_solution'),
-        'story' => is_page(['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz', 'egitmenlerimiz', 'our-trainers']) || is_singular('myliba_team'),
+        'story' => is_page(['hikayemiz', 'our-story', 'biz-kimiz', 'about', 'about-us', 'felsefemiz']),
         default => false,
     };
 }

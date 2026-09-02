@@ -633,10 +633,6 @@
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
-.mega-menu--about .mega-menu__grid {
-  grid-template-columns: repeat(2, minmax(220px, 1fr));
-}
-
 .mega-menu__card {
   background: #fff;
   border-radius: 14px;
@@ -699,10 +695,6 @@
   }
 
   .mega-menu__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .mega-menu--about .mega-menu__grid {
     grid-template-columns: 1fr;
   }
 
@@ -1075,3 +1067,4 @@
   border-color: rgba(255, 255, 255, 0.3);
   color: #ffffff;
 }
+

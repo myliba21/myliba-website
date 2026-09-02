@@ -604,6 +604,7 @@ a.site-promo__content:hover .site-promo__side {
   }
 }
 
+
 @media (prefers-reduced-motion: reduce) {
   .site-promo::after {
     animation: none;

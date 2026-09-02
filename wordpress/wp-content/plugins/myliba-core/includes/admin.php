@@ -20,40 +20,6 @@ function boot(): void
     add_filter('enter_title_here', __NAMESPACE__ . '\\testimonial_title_placeholder', 10, 2);
     add_filter('manage_myliba_testimonial_posts_columns', __NAMESPACE__ . '\\testimonial_columns');
     add_action('manage_myliba_testimonial_posts_custom_column', __NAMESPACE__ . '\\render_testimonial_column', 10, 2);
-    add_filter('manage_myliba_team_posts_columns', __NAMESPACE__ . '\\team_columns');
-    add_action('manage_myliba_team_posts_custom_column', __NAMESPACE__ . '\\render_team_column', 10, 2);
-}
-
-function team_columns(array $columns): array
-{
-    return [
-        'cb' => $columns['cb'] ?? '<input type="checkbox" />',
-        'myliba_photo' => 'Fotoğraf',
-        'title' => 'Ad Soyad',
-        'myliba_role' => 'Unvan / Uzmanlık',
-        'myliba_order' => 'Sıra',
-        'date' => $columns['date'] ?? 'Tarih',
-    ];
-}
-
-function render_team_column(string $column, int $post_id): void
-{
-    if ($column === 'myliba_photo') {
-        echo get_the_post_thumbnail($post_id, [48, 48], [
-            'style' => 'width:48px;height:48px;border-radius:50%;object-fit:cover;',
-            'alt' => '',
-        ]) ?: '<span aria-hidden="true">—</span>';
-        return;
-    }
-
-    if ($column === 'myliba_role') {
-        echo esc_html((string) (get_post_meta($post_id, '_myliba_person_role', true) ?: '—'));
-        return;
-    }
-
-    if ($column === 'myliba_order') {
-        echo esc_html((string) (get_post_meta($post_id, '_myliba_order', true) ?: '—'));
-    }
 }
 
 function testimonial_title_placeholder(string $placeholder, \WP_Post $post): string
@@ -139,7 +105,6 @@ function simplify_admin_menu(): void
         'edit.php?post_type=myliba_event',
         'edit.php?post_type=myliba_ebook',
         'edit.php?post_type=myliba_report',
-        'edit.php?post_type=myliba_team',
         'edit.php?post_type=myliba_faq',
         'edit.php?post_type=myliba_client_logo',
         'edit.php?post_type=myliba_testimonial',

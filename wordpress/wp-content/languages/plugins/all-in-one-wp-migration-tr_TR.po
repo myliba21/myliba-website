@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: GlotPress/4.0.3\n"
+"X-Generator: GlotPress/4.1.0\n"
 "Language: tr\n"
 "Project-Id-Version: Plugins - All-in-One WP Migration and Backup - Stable (latest release)\n"
 
@@ -1492,7 +1492,7 @@ msgstr "Siteniz başarıyla içeri aktarıldı!"
 
 #. translators: 1: Number of files, 2: Progress.
 #: lib/model/import/class-ai1wm-import-content.php:109
-#: lib/model/import/class-ai1wm-import-content.php:242
+#: lib/model/import/class-ai1wm-import-content.php:254
 msgid "Restoring %1$d files...<br />%2$d%% complete"
 msgstr "%1$d dosya geri döndürülüyor...<br />%%%2$d tamamlandı"
 

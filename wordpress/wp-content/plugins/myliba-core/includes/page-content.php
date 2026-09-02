@@ -495,7 +495,6 @@ function solution_definition(): array
             'kicker' => ['text', 'Üst etiket (Pill)'],
             'hero_title' => ['textarea', 'Hero başlığı'],
             'hero_summary' => ['textarea', 'Hero açıklaması'],
-            'hero_supporting' => ['textarea', 'Hero ikinci açıklaması (Opsiyonel)'],
             'hero_primary_label' => ['text', 'Ana buton etiketi (Örn: Programı birlikte tasarlayalım)'],
             'hero_secondary_label' => ['text', 'İkincil buton etiketi (Örn: Çalışma modelini inceleyin)'],
             'hero_image' => ['media', 'Hero Sağ Görseli (Görsel seçildiğinde sağ tarafta bu görsel görünür; boş bırakılırsa yolculuk kutusu görünür)'],
@@ -510,18 +509,6 @@ function solution_definition(): array
             'intro_title' => ['textarea', 'Bölüm başlığı (Örn: Kültürü, hedefleri ve iş sonuçlarını birlikte geliştirin.)'],
             'intro' => ['textarea', 'Yaklaşım açıklaması'],
             'intro_link_label' => ['text', 'Bağlantı metni (Örn: İhtiyacınızı birlikte değerlendirelim)'],
-        ], 'collections' => [
-            'intro_points' => ['label' => 'Yaklaşımın sağladıkları', 'fields' => ['text' => ['textarea', 'Madde']]],
-        ]],
-        'principles' => ['label' => 'Değer Önerisi / Temel İlkeler', 'fields' => [
-            'principles_eyebrow' => ['text', 'Üst etiket'],
-            'principles_title' => ['textarea', 'Bölüm başlığı'],
-            'principles_lead' => ['textarea', 'Bölüm açıklaması'],
-        ], 'collections' => [
-            'principles' => ['label' => 'Temel ilkeler', 'fields' => [
-                'title' => ['text', 'İlke başlığı'],
-                'text' => ['textarea', 'İlke açıklaması'],
-            ]],
         ]],
         'audiences' => ['label' => 'Kimler İçin?', 'fields' => [
             'audiences_eyebrow' => ['text', 'Üst etiket (Örn: Kimler için?)'],
@@ -546,32 +533,6 @@ function solution_definition(): array
             'process_eyebrow' => ['text', 'Üst etiket (Örn: Çalışma modeli)'],
             'process_title' => ['textarea', 'Bölüm başlığı (Örn: Süreç adımları)'],
             'process_lead' => ['textarea', 'Açıklama (Örn: Her aşama bir sonraki adımı besler; tasarım, uygulama ve takip aynı gelişim ritminin parçasıdır.)'],
-        ]],
-        'results' => ['label' => 'Öne Çıkan Sonuçlar', 'fields' => [
-            'results_eyebrow' => ['text', 'Üst etiket'],
-            'results_title' => ['textarea', 'Bölüm başlığı'],
-            'results_lead' => ['textarea', 'Bölüm açıklaması'],
-        ], 'collections' => [
-            'results' => ['label' => 'Sonuç maddeleri', 'fields' => ['text' => ['textarea', 'Sonuç']]],
-        ]],
-        'experts' => ['label' => 'Danışman / Eğitmen Alanı', 'fields' => [
-            'experts_eyebrow' => ['text', 'Üst etiket'],
-            'experts_title' => ['textarea', 'Bölüm başlığı'],
-            'experts_lead' => ['textarea', 'Bölüm açıklaması'],
-            'experts_button_label' => ['text', 'Tüm eğitmenler butonu'],
-        ]],
-        'thought_leadership' => ['label' => 'Fikir Liderliği / Kitap', 'fields' => [
-            'thought_eyebrow' => ['text', 'Üst etiket'],
-            'thought_title' => ['textarea', 'Bölüm başlığı'],
-            'thought_text' => ['textarea', 'Açıklama'],
-            'book_title' => ['textarea', 'Kitap başlığı'],
-            'book_subtitle' => ['textarea', 'Kitap alt başlığı'],
-            'book_quote_one' => ['textarea', 'İlk alıntı'],
-            'book_quote_one_author' => ['text', 'İlk alıntı sahibi'],
-            'book_quote_two' => ['textarea', 'İkinci alıntı'],
-            'book_quote_two_author' => ['text', 'İkinci alıntı sahibi'],
-            'book_link_label' => ['text', 'Kitap bağlantı metni'],
-            'book_link_url' => ['text', 'Kitap bağlantısı'],
         ]],
         'cta' => ['label' => 'Final Aksiyon Çağrısı (CTA)', 'fields' => [
             'cta_eyebrow' => ['text', 'Üst etiket (Örn: 30 dakikalık keşif görüşmesi)'],
@@ -612,36 +573,13 @@ function solution_defaults(int $post_id): array
         ],
         'danismanlik' => [
             'kicker' => 'Stratejiden sürdürülebilir sisteme',
-            'hero_title' => 'Stratejiyi Bir Sunumdan Çıkarın, İşin İçinde Hayata Geçirin',
-            'summary' => 'Myliba Danışmanları, şirketinizin değer önermesini ve stratejisini; doğru kurgulanmış, şirketinize özel ve işin içinde ilerleyen bir dönüşüm sürecine dönüştürür.',
-            'hero_supporting' => 'Danışman; yalnızca öneri sunmaz. Ekibinizin bir parçası olarak çalışır, liderlere deneyim kazandırır, ekiplerin stratejiyi sahiplenmesini sağlar ve stratejinin günlük iş yapış biçimlerine yerleşmesine eşlik eder. Amaç nettir: Stratejinizi eyleme indirmek, yüksek performans kültürünü hızla geliştirmek ve bu değişimi danışmanlık sonrasında da sürdürülebilir kılmak.',
-            'hero_primary_label' => 'Danışmanlık Yaklaşımımızı Keşfedin',
-            'intro_eyebrow' => 'Birlikte uygulama',
-            'intro_title' => 'Dönüşüm, Uzaktan Tavsiye Vermekle Değil; Birlikte Uygulamakla Başlar',
-            'intro' => 'Şirketlerin stratejileri çoğu zaman doğru tasarlanır; ancak uygulama aşamasında öncelikler dağılır, ekipler arasında kopukluklar oluşur ve çalışanların katkısı görünmez hâle gelir. Myliba Danışmanları bu boşluğu kapatır. Danışman, şirketinize dışarıdan bakan bir göz olmanın ötesine geçer; sahada ekibinizle birlikte çalışır. Şirketinizin gerçeklerini, liderlik dinamiklerini, hedeflerini ve kültürünü anlayarak dönüşüm sürecini birlikte tasarlar ve uygular.',
-            'process_eyebrow' => 'Nasıl çalışırız?',
-            'process_title' => 'Danışmanlık Sürecimiz',
-            'process_lead' => 'Stratejiden kalıcı performans sistemine uzanan süreci ekibinizle birlikte, işin içinde tasarlar ve uygularız.',
-            'cta_eyebrow' => 'Birlikte eyleme geçelim',
-            'cta_title' => 'Stratejinizin Uygulanmasını Şansa Bırakmayın',
-            'cta_text' => 'Stratejinizin etkisi, ancak ekipleriniz onu anladığında, geliştirdiğinde ve günlük kararlarına taşıdığında ortaya çıkar. Myliba Danışmanları; stratejinizi eyleme indirmek, çalışan katkısını görünür kılmak, liderlik kapasitenizi geliştirmek ve yüksek performans kültürünü kalıcı hâle getirmek için sizinle sahada çalışır. Stratejinizi konuşalım; birlikte eyleme dönüştürelim.',
-            'cta_button_label' => 'Danışmanlık Görüşmesi Planlayın',
-            'benefits' => [],
+            'summary' => 'Stratejik hedeflerinizi netleştirin ve kurumunuza özel performans gelişim sistemini birlikte kurun.',
+            'hero_primary_label' => 'Dönüşümüzü birlikte tasarlayalım',
+            'intro_eyebrow' => 'MYLIBA yaklaşımı',
+            'intro' => 'Danışmanlık çalışmalarımız, hedef belirlemeden uygulama ve izleme sürecine kadar organizasyonunuzun ihtiyaçlarına göre yapılandırılır.',
+            'benefits' => ['Stratejik Hedef Haritası Oluşturma — şirket tepe hedeflerinin belirlenmesi ve otonom ekiplerin oluşturulması', 'Performans Gelişim Sistemi Kurulumu — performans gelişim altyapısının kurumunuza özel yapılandırılması', 'Uygulama, iletişim ve liderlik rutinlerinin organizasyonla birlikte tasarlanması'],
             'audiences' => ['Üst yönetim ekipleri', 'İnsan ve kültür liderleri', 'Strateji ve dönüşüm ekipleri'],
-            'intro_points' => ['Strateji, tüm çalışanların anlayabileceği ve katkı verebileceği hedeflere dönüşür.', 'Liderler, dönüşümü yönetirken deneyim kazanır.', 'Ekipler hedeflerini kendileri yazar, sahiplenir ve taahhütlerini şeffaf biçimde paylaşır.', 'Kurum içindeki silolar azalır; çapraz iş birliği güçlenir.', 'Performans geliştirme sistemi daha adil, görünür ve veri temelli hâle gelir.', 'Kültürel gelişim soyut bir niyet olmaktan çıkar; günlük iş yapış biçimlerine yerleşir.'],
-            'principles' => [
-                ['Stratejiyi Eyleme İndirmek', 'Stratejik önceliklerinizi netleştirir; bunları ekiplerin sahiplenebileceği somut hedeflere, aksiyonlara ve ölçülebilir sonuçlara dönüştürürüz. Böylece herkes yalnızca ne yapacağını değil, yaptığı işin stratejiye nasıl katkı sunduğunu da görür.'],
-                ['Dönüşümü İş Başında Öğrenmek', 'Danışmanlık süreci, rapor ve önerilerle sınırlı kalmaz. Liderler ve ekiplerle birlikte çalışarak dönüşümü işin içinde hayata geçiririz. Kurumunuz stratejiyi uygulama, hedef belirleme, iş birliği kurma, geri bildirim verme ve performansı geliştirme becerilerini kazanır.'],
-                ['Kalıcı Bir Kültür İnşa Etmek', 'Hedefimiz danışmanlık süresince iyileşme yaratmak değil, danışmanlık sonrasında da çalışmaya devam edecek bir yönetim sistemi ve kültür oluşturmaktır. Myliba yazılımıyla hedefler, katkılar, aksiyonlar, gelişim alanları ve performans göstergeleri görünür hâle gelir.'],
-            ],
-            'steps' => [
-                ['Stratejik Fotoğrafı Çekeriz', 'Şirketinizin değer önermesini, stratejik yönünü, mevcut hedef yapısını, ekipler arası çalışma biçimini ve kültürel ihtiyaçlarını birlikte değerlendiririz.\nDönüşümün nereden başlaması ve en yüksek etkinin nerede yaratılması gerektiğini netleştiririz.'],
-                ['Stratejiyi Hedeflere ve Aksiyonlara Dönüştürürüz', 'Stratejik öncelikleri ekiplerin sahipleneceği hedeflere; hedefleri açık aksiyonlara, sorumluluklara ve takip mekanizmalarına dönüştürürüz.\nHedefler arası bağlantıları görünür kılarız.'],
-                ['Liderleri ve Ekipleri Uygulamanın İçinde Geliştiririz', 'Liderlerle ve ekiplerle iş başında çalışırız. Ekip koçluğu yaklaşımıyla hedefleri netleştirmeye, taahhütleri duyurmaya, engelleri konuşmaya ve düzenli ilerlemeye destek oluruz.'],
-                ['İş Birliği ve Girişimcilik Kültürünü Güçlendiririz', 'Çapraz ekipleri bir araya getirerek siloları azaltır; ortak sonuçlar etrafında iş birliğini artırırız. Kurum içi girişimcilerin inisiyatif almasını destekleriz.'],
-                ['Performans Geliştirme Sistemini Kalıcılaştırırız', 'Myliba yazılımını kullanarak hedef, katkı, gelişim ve performans süreçlerini daha şeffaf, sürekli ve objektif bir yapıya taşırız.'],
-            ],
-            'results' => ['Stratejinizin eyleme dönüşmesini sağlayan net bir hedef haritası', 'Stratejik önceliklerle bağlantılı ekip hedefleri ve aksiyon planları', 'Hedeflerini yazan, taahhütlerini paylaşan ve sonuçlarının sorumluluğunu alan ekipler', 'Çevik ve yüksek performanslı ekipleri geliştirecek uygulama biçimleri', 'Çapraz iş birliğini güçlendiren, siloları azaltan ortak çalışma modeli', 'Kurum içi girişimciliği ve inisiyatif almayı destekleyen kültürel yapı', 'KPI karneleri ve ilerlemeyi görünür kılan takip rutinleri', 'Kültürel gelişim haritası', 'Adil ve güçlü kararlar için 16 farklı objektif veriyi kullanan performans geliştirme süreci', 'Danışmanlık sonrasında da devam edecek, Myliba destekli sürdürülebilir yönetim altyapısı'],
+            'steps' => [['İhtiyaç Analizi', 'Organizasyonunuzun mevcut yapısını, ihtiyaçlarını ve gelişim alanlarını birlikte ele alınır.'], ['Hedeflenen Yapı', 'Organizasyona uygun model, roller ve dönüşüm noktaları tasarlanır.'], ['Uygulama ve İzleme', 'Tasarlanan yaklaşımı işin içine taşır, ekiplerle birlikte hayata geçirir ve gelişim izlenir.']],
         ],
         'kultur-analizi' => [
             'kicker' => 'Veriye dayalı kültür dönüşümü',
@@ -654,17 +592,10 @@ function solution_defaults(int $post_id): array
         ],
     ];
     $item = $catalog[$slug] ?? [];
-    $is_approved_consulting = $slug === 'danismanlik';
-    $title = (string) ($is_approved_consulting
-        ? ($item['hero_title'] ?? '')
-        : (get_post_meta($post_id, '_myliba_hero_title', true) ?: ($item['hero_title'] ?? ($post instanceof \WP_Post ? get_the_title($post) : ''))));
+    $title = (string) (get_post_meta($post_id, '_myliba_hero_title', true) ?: ($post instanceof \WP_Post ? get_the_title($post) : ''));
     $kicker = (string) (get_post_meta($post_id, '_myliba_eyebrow', true) ?: get_post_meta($post_id, '_myliba_label', true) ?: ($item['kicker'] ?? 'Myliba Çözümü'));
-    $summary = (string) ($is_approved_consulting
-        ? ($item['summary'] ?? '')
-        : (get_post_meta($post_id, '_myliba_hero_subtitle', true) ?: ($post instanceof \WP_Post ? get_post_field('post_excerpt', $post) : '') ?: ($item['summary'] ?? '')));
-    $intro = (string) ($is_approved_consulting
-        ? ($item['intro'] ?? '')
-        : (get_post_meta($post_id, '_myliba_solution', true) ?: get_post_meta($post_id, '_myliba_problem', true) ?: ($post instanceof \WP_Post ? get_post_field('post_content', $post) : '') ?: ($item['intro'] ?? '')));
+    $summary = (string) (get_post_meta($post_id, '_myliba_hero_subtitle', true) ?: ($post instanceof \WP_Post ? get_post_field('post_excerpt', $post) : '') ?: ($item['summary'] ?? ''));
+    $intro = (string) (get_post_meta($post_id, '_myliba_solution', true) ?: get_post_meta($post_id, '_myliba_problem', true) ?: ($post instanceof \WP_Post ? get_post_field('post_content', $post) : '') ?: ($item['intro'] ?? ''));
 
     $meta_benefits = function_exists('myliba_lines') ? \myliba_lines((string) get_post_meta($post_id, '_myliba_benefits', true)) : [];
     $benefits_raw = !empty($meta_benefits) ? $meta_benefits : ($item['benefits'] ?? []);
@@ -689,15 +620,14 @@ function solution_defaults(int $post_id): array
         'kicker' => $kicker,
         'hero_title' => $title,
         'hero_summary' => $summary,
-        'hero_supporting' => (string) ($item['hero_supporting'] ?? ''),
-        'hero_primary_label' => (string) ($is_approved_consulting ? ($item['hero_primary_label'] ?? '') : (get_post_meta($post_id, '_myliba_cta_label', true) ?: ($item['hero_primary_label'] ?? 'Programı birlikte tasarlayalım'))),
-        'hero_secondary_label' => $slug === 'danismanlik' ? 'Danışmanlarımızla Tanışın' : 'Çalışma modelini inceleyin',
+        'hero_primary_label' => (string) (get_post_meta($post_id, '_myliba_cta_label', true) ?: ($item['hero_primary_label'] ?? 'Programı birlikte tasarlayalım')),
+        'hero_secondary_label' => 'Çalışma modelini inceleyin',
         'hero_image' => (string) (get_post_meta($post_id, '_myliba_hero_image', true) ?: ''),
         'hero_image_alt' => (string) (get_post_meta($post_id, '_myliba_hero_image_alt', true) ?: ''),
         'journey_eyebrow' => (string) (get_post_meta($post_id, '_myliba_journey_eyebrow', true) ?: 'Myliba gelişim yolculuğu'),
         'journey_title' => (string) (get_post_meta($post_id, '_myliba_journey_title', true) ?: "Kuruma özel.\nİşin içinde.\nÖlçülebilir."),
-        'intro_eyebrow' => (string) ($is_approved_consulting ? ($item['intro_eyebrow'] ?? '') : (get_post_meta($post_id, '_myliba_intro_eyebrow', true) ?: ($item['intro_eyebrow'] ?? 'Myliba yaklaşımı'))),
-        'intro_title' => (string) ($is_approved_consulting ? ($item['intro_title'] ?? '') : (get_post_meta($post_id, '_myliba_intro_title', true) ?: ($item['intro_title'] ?? 'Kültürü, hedefleri ve iş sonuçlarını birlikte geliştirin.'))),
+        'intro_eyebrow' => (string) (get_post_meta($post_id, '_myliba_intro_eyebrow', true) ?: ($item['intro_eyebrow'] ?? 'Myliba yaklaşımı')),
+        'intro_title' => (string) (get_post_meta($post_id, '_myliba_intro_title', true) ?: 'Kültürü, hedefleri ve iş sonuçlarını birlikte geliştirin.'),
         'intro' => $intro,
         'intro_link_label' => 'İhtiyacınızı birlikte değerlendirelim',
         'audiences_eyebrow' => (string) (get_post_meta($post_id, '_myliba_audiences_eyebrow', true) ?: 'Kimler için?'),
@@ -707,34 +637,13 @@ function solution_defaults(int $post_id): array
         'outcomes_lead' => (string) (get_post_meta($post_id, '_myliba_outcomes_lead', true) ?: 'Gelişimi tek seferlik bir müdahaleden çıkarıp, kurumun çalışma biçimine yerleştirin.'),
         'metrics_eyebrow' => (string) (get_post_meta($post_id, '_myliba_metrics_eyebrow', true) ?: 'Ölçüm alanları'),
         'metrics_title' => (string) (get_post_meta($post_id, '_myliba_metrics_title', true) ?: 'Kültürü dört kritik göstergeyle görünür kılın.'),
-        'process_eyebrow' => (string) ($is_approved_consulting ? ($item['process_eyebrow'] ?? '') : (get_post_meta($post_id, '_myliba_process_eyebrow', true) ?: 'Çalışma modeli')),
-        'process_title' => (string) ($is_approved_consulting ? ($item['process_title'] ?? '') : (get_post_meta($post_id, '_myliba_process_title', true) ?: ($title !== '' ? $title . ' süreci' : 'Çalışma Süreci'))),
-        'process_lead' => (string) ($is_approved_consulting ? ($item['process_lead'] ?? '') : (get_post_meta($post_id, '_myliba_process_lead', true) ?: ($item['process_lead'] ?? 'Her aşama bir sonraki adımı besler; tasarım, uygulama ve takip aynı gelişim ritminin parçasıdır.'))),
-        'principles_eyebrow' => 'Değer önerimiz',
-        'principles_title' => 'Size Özel, Hızlı ve Kalıcı Bir Dönüşüm Modeli',
-        'principles_lead' => 'Her şirketin stratejisi, kültürü, liderlik yapısı ve dönüşüm ihtiyacı farklıdır. Bu nedenle hazır reçetelerle değil, şirketinizin ihtiyaçlarına göre tasarlanmış bir süreçle ilerleriz.',
-        'results_eyebrow' => 'Öne çıkan sonuçlar',
-        'results_title' => 'Danışmanlık Sonunda Neye Sahip Olursunuz?',
-        'results_lead' => 'Danışmanlık sürecinin sonunda şirketinizde yalnızca yeni hedefler değil, stratejiyi hayata geçirecek bir çalışma sistemi oluşur.',
-        'experts_eyebrow' => 'Uzmanlarımız',
-        'experts_title' => 'Danışmanlarınızla Tanışın',
-        'experts_lead' => 'Strateji, kültür, liderlik ve hedef sistemlerini işin içinde geliştiren uzmanlarımızla tanışın.',
-        'experts_button_label' => 'Tüm Eğitmen ve Danışmanlarımız',
-        'thought_eyebrow' => 'Fikir liderliği',
-        'thought_title' => 'Danışmanlık Yaklaşımının Arkasındaki Fikir Liderliği',
-        'thought_text' => "Myliba Danışmanlık yaklaşımının temelinde, Dilek Mete'nin Ceres Yayınları'ndan çıkan kitabında detaylandırdığı insan odaklı, otonom ve çevik kültür mimarisi yer alır.",
-        'book_title' => 'Gen-Z ile Yüksek Performans Kültürü Yaratmak',
-        'book_subtitle' => 'Nasrettin Hoca Yönetim Danışmanı Olursa!',
-        'book_quote_one' => 'Dilek Mete, bu eseriyle performans yönetimindeki köhne yargıları bir kenara itip meseleye tam kalbinden, kültür perspektifinden bakıyor. Klasik sistemlerin duvarlarını cesurca yıkan, geleceğin yeni yaklaşımlarını tanımlayan, ezber bozan bir kılavuz niteliğinde bir eser.',
-        'book_quote_one_author' => 'Cem Çelebiler, Turknet CEO',
-        'book_quote_two' => "Dilek Mete, 'insan' meselesine hep 'kültür' penceresinden baktı. 2030'un belirsiz dünyasında sadece kârlılığı değil, etik ve insan onurunu merkeze alan organizasyonlar inşa ederek sürdürülebilir bir 'birlikte yaratma' vizyonu sunuyor.",
-        'book_quote_two_author' => 'Salim Kadıbeşegil, İtibar Yönetimi Danışmanı & Yazar',
-        'book_link_label' => 'Kitap ve Yazar Hakkında',
-        'book_link_url' => 'https://www.dilekmete.com/',
-        'cta_eyebrow' => (string) ($is_approved_consulting ? ($item['cta_eyebrow'] ?? '') : (get_post_meta($post_id, '_myliba_cta_eyebrow', true) ?: '30 dakikalık keşif görüşmesi')),
-        'cta_title' => (string) ($is_approved_consulting ? ($item['cta_title'] ?? '') : (get_post_meta($post_id, '_myliba_cta_title', true) ?: 'İhtiyacınıza uygun yolculuğu birlikte tasarlayalım.')),
-        'cta_text' => (string) ($is_approved_consulting ? ($item['cta_text'] ?? '') : (get_post_meta($post_id, '_myliba_cta_text', true) ?: 'Kurumunuzun hedeflerini dinleyelim; doğru programı, kapsamı ve çalışma modelini birlikte netleştirelim.')),
-        'cta_button_label' => (string) ($is_approved_consulting ? ($item['cta_button_label'] ?? '') : (get_post_meta($post_id, '_myliba_cta_button_label', true) ?: 'Görüşme planlayın')),
+        'process_eyebrow' => (string) (get_post_meta($post_id, '_myliba_process_eyebrow', true) ?: 'Çalışma modeli'),
+        'process_title' => (string) (get_post_meta($post_id, '_myliba_process_title', true) ?: ($title !== '' ? $title . ' süreci' : 'Çalışma Süreci')),
+        'process_lead' => (string) (get_post_meta($post_id, '_myliba_process_lead', true) ?: ($item['process_lead'] ?? 'Her aşama bir sonraki adımı besler; tasarım, uygulama ve takip aynı gelişim ritminin parçasıdır.')),
+        'cta_eyebrow' => (string) (get_post_meta($post_id, '_myliba_cta_eyebrow', true) ?: '30 dakikalık keşif görüşmesi'),
+        'cta_title' => (string) (get_post_meta($post_id, '_myliba_cta_title', true) ?: 'İhtiyacınıza uygun yolculuğu birlikte tasarlayalım.'),
+        'cta_text' => (string) (get_post_meta($post_id, '_myliba_cta_text', true) ?: 'Kurumunuzun hedeflerini dinleyelim; doğru programı, kapsamı ve çalışma modelini birlikte netleştirelim.'),
+        'cta_button_label' => (string) (get_post_meta($post_id, '_myliba_cta_button_label', true) ?: 'Görüşme planlayın'),
         'cta_button_url' => (string) (get_post_meta($post_id, '_myliba_cta_url', true) ?: '/tr/iletisim/'),
         'cta_secondary_label' => 'Tüm çözümleri görün',
         'cta_secondary_url' => '/tr/cozumler/',
@@ -744,9 +653,6 @@ function solution_defaults(int $post_id): array
         'audiences' => array_map(static fn (string $text): array => ['text' => $text], $audiences_raw),
         'metrics' => array_map(static fn (array $row): array => ['title' => $row[0], 'text' => $row[1]], $metrics_raw),
         'steps' => array_map(static fn (array $row): array => ['title' => $row[0], 'text' => $row[1]], $steps_raw),
-        'intro_points' => array_map(static fn (string $text): array => ['text' => $text], $item['intro_points'] ?? []),
-        'principles' => array_map(static fn (array $row): array => ['title' => $row[0], 'text' => $row[1]], $item['principles'] ?? []),
-        'results' => array_map(static fn (string $text): array => ['text' => $text], $item['results'] ?? []),
     ]];
 }
 
