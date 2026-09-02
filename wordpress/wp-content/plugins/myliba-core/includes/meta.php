@@ -27,6 +27,9 @@ function register_meta_boxes(string $post_type): void
     $is_academy_page = $post_type === 'page'
         && $current_post instanceof \WP_Post
         && in_array($current_post->post_name, ['okr-kultur-akademisi', 'okr-culture-academy'], true);
+    $is_trainers_page = $post_type === 'page'
+        && $current_post instanceof \WP_Post
+        && in_array($current_post->post_name, ['egitmenlerimiz', 'our-trainers'], true);
     $is_special_page = $post_type === 'page'
         && $current_post instanceof \WP_Post
         && (is_homepage_post($current_post->ID) || $is_academy_page);
@@ -36,7 +39,7 @@ function register_meta_boxes(string $post_type): void
     }
 
     if (in_array($post_type, ['page', 'post', 'myliba_product', 'myliba_solution', 'myliba_academy', 'myliba_case_study', 'myliba_landing', 'myliba_event', 'myliba_ebook', 'myliba_report'], true)) {
-        if (!$is_academy_page) {
+        if (!$is_academy_page && !$is_trainers_page) {
             add_meta_box('myliba_hero', __('Myliba Hero', 'myliba'), __NAMESPACE__ . '\\render_hero_box', $post_type, 'normal', 'high');
         }
         add_meta_box('myliba_seo', __('Myliba SEO', 'myliba'), __NAMESPACE__ . '\\render_seo_box', $post_type, 'normal');
@@ -58,6 +61,9 @@ function register_meta_boxes(string $post_type): void
         if ($current_post instanceof \WP_Post && in_array($current_post->post_name, ['okr-kultur-akademisi', 'okr-culture-academy'], true)) {
             add_meta_box('myliba_academy_page', __('Myliba Academy Landing Page', 'myliba'), __NAMESPACE__ . '\\render_academy_page_box', $post_type, 'normal');
         }
+        if ($is_trainers_page) {
+            add_meta_box('myliba_trainers_page', __('Eğitmenler Sayfası Metinleri', 'myliba'), __NAMESPACE__ . '\\render_trainers_page_box', $post_type, 'normal', 'high');
+        }
     }
 
     if (in_array($post_type, ['page', 'post', 'myliba_product', 'myliba_solution', 'myliba_case_study', 'myliba_landing', 'myliba_event', 'myliba_ebook', 'myliba_report'], true)) {
@@ -74,6 +80,7 @@ function register_meta_boxes(string $post_type): void
 
     if ($post_type === 'myliba_team') {
         add_meta_box('myliba_team_details', __('Team Details', 'myliba'), __NAMESPACE__ . '\\render_team_box', $post_type, 'side');
+        add_meta_box('myliba_seo', __('Myliba SEO', 'myliba'), __NAMESPACE__ . '\\render_seo_box', $post_type, 'normal');
     }
 
     if ($post_type === 'myliba_client_logo') {
@@ -1224,9 +1231,50 @@ function render_team_box(\WP_Post $post): void
 {
     nonce();
 
-    field_text('_myliba_person_role', __('Role', 'myliba'), get_post_meta($post->ID, '_myliba_person_role', true));
+    echo '<p class="description">Ad soyadı başlık alanına, detaylı biyografiyi ana içerik alanına, profil fotoğrafını Öne Çıkan Görsel alanına ekleyin.</p>';
+    field_text('_myliba_person_headline', 'Profil Başlığı', get_post_meta($post->ID, '_myliba_person_headline', true), 'Örn: Stratejiyi Eyleme İndiren, Otonom ve Çevik Ekip Mimarı');
+    field_text('_myliba_person_role', 'Unvanlar / Uzmanlıklar', get_post_meta($post->ID, '_myliba_person_role', true), 'Unvanları · işaretiyle ayırabilirsiniz.');
+    field_url('_myliba_person_website_url', 'Kişisel Web Sitesi', get_post_meta($post->ID, '_myliba_person_website_url', true));
+    field_text('_myliba_person_website_label', 'Web Sitesi Bağlantı Metni', get_post_meta($post->ID, '_myliba_person_website_label', true));
     field_url('_myliba_linkedin_url', __('LinkedIn URL', 'myliba'), get_post_meta($post->ID, '_myliba_linkedin_url', true));
-    field_number('_myliba_order', __('Sort order', 'myliba'), get_post_meta($post->ID, '_myliba_order', true));
+    field_url('_myliba_instagram_url', __('Instagram URL', 'myliba'), get_post_meta($post->ID, '_myliba_instagram_url', true));
+    field_url('_myliba_twitter_url', __('X (Twitter) URL', 'myliba'), get_post_meta($post->ID, '_myliba_twitter_url', true));
+    field_url('_myliba_youtube_url', __('YouTube URL', 'myliba'), get_post_meta($post->ID, '_myliba_youtube_url', true));
+    field_url('_myliba_facebook_url', __('Facebook URL', 'myliba'), get_post_meta($post->ID, '_myliba_facebook_url', true));
+    field_number('_myliba_order', 'Sıralama', get_post_meta($post->ID, '_myliba_order', true));
+    echo '<p class="description">Küçük sayılar önce gösterilir (10, 20, 30…). Bir eğitmeni kaldırmak için kaydı Çöp Kutusu’na taşıyın.</p>';
+}
+
+function render_trainers_page_box(\WP_Post $post): void
+{
+    nonce();
+
+    echo '<p class="description">Bu alanlar Eğitmenlerimiz liste sayfası ile aynı dildeki eğitmen detay sayfalarının ortak arayüz metinlerini yönetir. Kart özeti her eğitmen kaydındaki Özet alanından gelir.</p>';
+    echo '<h3>Hero</h3>';
+    field_text('_myliba_eyebrow', 'Üst Etiket', get_post_meta($post->ID, '_myliba_eyebrow', true));
+    field_text('_myliba_hero_title', 'Ana Başlık', get_post_meta($post->ID, '_myliba_hero_title', true));
+    field_textarea('_myliba_hero_subtitle', 'Ana Açıklama', get_post_meta($post->ID, '_myliba_hero_subtitle', true));
+
+    echo '<h3>Liste ve Kartlar</h3>';
+    field_text('_myliba_trainers_directory_eyebrow', 'Liste Üst Etiketi', get_post_meta($post->ID, '_myliba_trainers_directory_eyebrow', true));
+    field_text('_myliba_trainers_directory_title', 'Liste Başlığı', get_post_meta($post->ID, '_myliba_trainers_directory_title', true));
+    field_text('_myliba_trainers_card_kicker', 'Kart Tür Etiketi', get_post_meta($post->ID, '_myliba_trainers_card_kicker', true));
+    field_text('_myliba_trainers_card_overlay_label', 'Görsel Üzeri Bağlantı Metni', get_post_meta($post->ID, '_myliba_trainers_card_overlay_label', true));
+    field_text('_myliba_trainers_card_detail_label', 'Kart Detay Bağlantısı Metni', get_post_meta($post->ID, '_myliba_trainers_card_detail_label', true));
+    field_text('_myliba_trainers_card_aria_template', 'Kart Erişilebilirlik Metni', get_post_meta($post->ID, '_myliba_trainers_card_aria_template', true), 'Kişinin adı için {name} kullanın.');
+    field_text('_myliba_trainers_skills_label', 'Uzmanlık Alanları Erişilebilirlik Metni', get_post_meta($post->ID, '_myliba_trainers_skills_label', true));
+    field_text('_myliba_trainers_empty_text', 'Boş Liste Mesajı', get_post_meta($post->ID, '_myliba_trainers_empty_text', true));
+
+    echo '<h3>Profil Detay Sayfaları</h3>';
+    field_text('_myliba_trainers_profile_back_label', 'Geri Bağlantısı Metni', get_post_meta($post->ID, '_myliba_trainers_profile_back_label', true));
+    field_text('_myliba_trainers_profile_kicker', 'Profil Tür Etiketi', get_post_meta($post->ID, '_myliba_trainers_profile_kicker', true));
+    field_text('_myliba_trainers_profile_about_eyebrow', 'Hakkında Üst Etiketi', get_post_meta($post->ID, '_myliba_trainers_profile_about_eyebrow', true));
+    field_text('_myliba_trainers_profile_about_title', 'Hakkında Başlık Kalıbı', get_post_meta($post->ID, '_myliba_trainers_profile_about_title', true), 'Kişinin adı için {name} kullanın.');
+    field_text('_myliba_trainers_profile_website_label', 'Varsayılan Web Sitesi Metni', get_post_meta($post->ID, '_myliba_trainers_profile_website_label', true));
+    field_text('_myliba_trainers_profile_links_label', 'Web ve Sosyal Medya Erişilebilirlik Metni', get_post_meta($post->ID, '_myliba_trainers_profile_links_label', true));
+    field_text('_myliba_trainers_related_eyebrow', 'Diğer Uzmanlar Üst Etiketi', get_post_meta($post->ID, '_myliba_trainers_related_eyebrow', true));
+    field_text('_myliba_trainers_related_title', 'Diğer Uzmanlar Başlığı', get_post_meta($post->ID, '_myliba_trainers_related_title', true));
+    field_number('_myliba_trainers_related_limit', 'Gösterilecek Diğer Uzman Sayısı', get_post_meta($post->ID, '_myliba_trainers_related_limit', true));
 }
 
 function render_logo_box(\WP_Post $post): void
@@ -1952,6 +2000,23 @@ function field_definitions(string $post_type): array
         '_myliba_development_events_label' => 'text',
         '_myliba_development_events_text' => 'textarea',
         '_myliba_development_card_cta' => 'text',
+        '_myliba_trainers_directory_eyebrow' => 'text',
+        '_myliba_trainers_directory_title' => 'text',
+        '_myliba_trainers_card_kicker' => 'text',
+        '_myliba_trainers_card_overlay_label' => 'text',
+        '_myliba_trainers_card_detail_label' => 'text',
+        '_myliba_trainers_card_aria_template' => 'text',
+        '_myliba_trainers_skills_label' => 'text',
+        '_myliba_trainers_empty_text' => 'text',
+        '_myliba_trainers_profile_back_label' => 'text',
+        '_myliba_trainers_profile_kicker' => 'text',
+        '_myliba_trainers_profile_about_eyebrow' => 'text',
+        '_myliba_trainers_profile_about_title' => 'text',
+        '_myliba_trainers_profile_website_label' => 'text',
+        '_myliba_trainers_profile_links_label' => 'text',
+        '_myliba_trainers_related_eyebrow' => 'text',
+        '_myliba_trainers_related_title' => 'text',
+        '_myliba_trainers_related_limit' => 'number',
     ];
 
     if ($post_type === 'myliba_event') {
@@ -1965,8 +2030,15 @@ function field_definitions(string $post_type): array
 
     if ($post_type === 'myliba_team') {
         $fields += [
+            '_myliba_person_headline' => 'text',
             '_myliba_person_role' => 'text',
+            '_myliba_person_website_url' => 'url',
+            '_myliba_person_website_label' => 'text',
             '_myliba_linkedin_url' => 'url',
+            '_myliba_instagram_url' => 'url',
+            '_myliba_twitter_url' => 'url',
+            '_myliba_youtube_url' => 'url',
+            '_myliba_facebook_url' => 'url',
             '_myliba_order' => 'number',
         ];
     }

@@ -68,13 +68,14 @@ $demo_url = (string) myliba_option('demo_url', myliba_demo_url());
                     $has_custom_children = !empty($item['children']);
                     $is_mega_solutions = $item['key'] === 'solutions' && empty($item['children']);
                     $is_mega_development = $item['key'] === 'development' && empty($item['children']);
-                    $is_dropdown = $has_custom_children || $is_mega_solutions || $is_mega_development;
+                    $is_mega_about = $item['key'] === 'story';
+                    $is_dropdown = $has_custom_children || $is_mega_solutions || $is_mega_development || $is_mega_about;
 
                     $item_classes = 'site-nav__item';
                     if ($is_active) {
                         $item_classes .= ' is-active';
                     }
-                    if ($is_mega_solutions || $is_mega_development) {
+                    if ($is_mega_solutions || $is_mega_development || $is_mega_about) {
                         $item_classes .= ' site-nav__item--mega';
                     } elseif ($has_custom_children) {
                         $item_classes .= ' site-nav__item--dropdown menu-item-has-children';
@@ -95,7 +96,7 @@ $demo_url = (string) myliba_option('demo_url', myliba_demo_url());
                                aria-haspopup="true" aria-expanded="false" aria-controls="<?php echo esc_attr($mega_menu_id); ?>"<?php echo $aria_current; ?>>
                                 <?php echo esc_html($item['label']); ?>
                             </a>
-                            <?php if ($has_custom_children) : ?>
+                            <?php if ($has_custom_children && !$is_mega_about) : ?>
                                 <ul id="<?php echo esc_attr($mega_menu_id); ?>" class="site-nav__sub-menu sub-menu" aria-label="<?php echo esc_attr($item['label']); ?>">
                                     <?php foreach ($item['children'] as $child) : ?>
                                         <?php
@@ -111,6 +112,28 @@ $demo_url = (string) myliba_option('demo_url', myliba_demo_url());
                                         </li>
                                     <?php endforeach; ?>
                                 </ul>
+                            <?php elseif ($is_mega_about) : ?>
+                                <?php $header_lang = myliba_current_language(); ?>
+                                <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu mega-menu--about" aria-label="<?php echo esc_attr($header_lang === 'en' ? 'About Us menu' : 'Hakkımızda menüsü'); ?>">
+                                    <div class="mega-menu__intro">
+                                        <span><?php echo esc_html($header_lang === 'en' ? 'About Myliba' : 'Myliba Hakkında'); ?></span>
+                                        <strong><?php echo esc_html($header_lang === 'en' ? 'Meet the idea and the people behind the transformation.' : 'Dönüşümün arkasındaki yaklaşımı ve insanları tanıyın.'); ?></strong>
+                                        <p><?php echo esc_html($header_lang === 'en' ? 'Discover our story, trainers, and consultants.' : 'Hikâyemizi, eğitmenlerimizi ve danışmanlarımızı keşfedin.'); ?></p>
+                                        <a href="<?php echo esc_url($item['url']); ?>"><?php echo esc_html($header_lang === 'en' ? 'Who we are' : 'Biz Kimiz'); ?></a>
+                                    </div>
+                                    <div class="mega-menu__grid">
+                                        <a class="mega-menu__card" href="<?php echo esc_url(myliba_page_url('story')); ?>">
+                                            <span aria-hidden="true">B</span>
+                                            <strong><?php echo esc_html($header_lang === 'en' ? 'Who We Are' : 'Biz Kimiz'); ?></strong>
+                                            <small><?php echo esc_html($header_lang === 'en' ? 'Our purpose, approach, and values.' : 'Amacımızı, yaklaşımımızı ve değerlerimizi keşfedin.'); ?></small>
+                                        </a>
+                                        <a class="mega-menu__card" href="<?php echo esc_url(myliba_page_url('trainers')); ?>">
+                                            <span aria-hidden="true">E</span>
+                                            <strong><?php echo esc_html($header_lang === 'en' ? 'Our Trainers' : 'Eğitmenlerimiz'); ?></strong>
+                                            <small><?php echo esc_html($header_lang === 'en' ? 'Meet our trainers, coaches, and consultants.' : 'Eğitmen, koç ve danışmanlarımızla tanışın.'); ?></small>
+                                        </a>
+                                    </div>
+                                </div>
                             <?php elseif ($is_mega_solutions) : ?>
                                 <?php $header_lang = myliba_current_language(); ?>
                                 <div id="<?php echo esc_attr($mega_menu_id); ?>" class="mega-menu" aria-label="<?php echo esc_attr(myliba_text('Solutions menu')); ?>">

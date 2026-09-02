@@ -425,18 +425,25 @@ function render_fallback_meta(): void
     printf("<meta property=\"og:url\" content=\"%s\">\n", esc_url(current_url()));
     echo "<meta property=\"og:type\" content=\"" . (is_singular('post') ? 'article' : 'website') . "\">\n";
 
+    // Independently shareable trainer profiles must use their own portrait.
+    // If no portrait exists, do not inherit the site logo as a misleading item image.
+    $image_id = is_singular() && has_post_thumbnail()
+        ? get_post_thumbnail_id()
+        : (is_singular('myliba_team') ? 0 : (int) get_theme_mod('custom_logo'));
+    $image = $image_id ? wp_get_attachment_image_src($image_id, 'large') : false;
+
     // ── Twitter / X Card ───────────────────────────────────────────────
-    echo "<meta name=\"twitter:card\" content=\"summary_large_image\">\n";
+    echo '<meta name="twitter:card" content="' . ($image ? 'summary_large_image' : 'summary') . '">' . "\n";
     printf("<meta name=\"twitter:title\" content=\"%s\">\n", esc_attr(wp_get_document_title()));
 
     // ── Featured image for OG / Twitter ────────────────────────────────
-    $image_id = is_singular() && has_post_thumbnail() ? get_post_thumbnail_id() : (int) get_theme_mod('custom_logo');
-    $image = $image_id ? wp_get_attachment_image_src($image_id, 'large') : false;
     if ($image) {
         printf("<meta property=\"og:image\" content=\"%s\">\n", esc_url($image[0]));
         printf("<meta property=\"og:image:width\" content=\"%d\">\n", (int) $image[1]);
         printf("<meta property=\"og:image:height\" content=\"%d\">\n", (int) $image[2]);
-        printf("<meta property=\"og:image:alt\" content=\"%s\">\n", esc_attr(get_post_meta($image_id, '_wp_attachment_image_alt', true) ?: get_bloginfo('name')));
+        $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true)
+            ?: (is_singular('myliba_team') ? get_the_title($post_id) : get_bloginfo('name'));
+        printf("<meta property=\"og:image:alt\" content=\"%s\">\n", esc_attr($image_alt));
         printf("<meta name=\"twitter:image\" content=\"%s\">\n", esc_url($image[0]));
     }
 

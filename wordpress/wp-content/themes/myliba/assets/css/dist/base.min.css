@@ -2676,6 +2676,9 @@ line-height: 1.65;
 gap: 14px;
 grid-template-columns: repeat(5, minmax(0, 1fr));
 }
+.mega-menu--about .mega-menu__grid {
+grid-template-columns: repeat(2, minmax(220px, 1fr));
+}
 .mega-menu__card {
 background: #fff;
 border-radius: 14px;
@@ -2727,6 +2730,9 @@ min-height: 0;
 padding: 16px;
 }
 .mega-menu__grid {
+grid-template-columns: 1fr;
+}
+.mega-menu--about .mega-menu__grid {
 grid-template-columns: 1fr;
 }
 .mega-menu__card {

@@ -9,6 +9,10 @@ while (have_posts()) :
     the_post();
     $page_id = get_the_ID();
     $language = myliba_current_language();
+    $copy = static function (string $key, string $fallback) use ($page_id): string {
+        $value = trim((string) get_post_meta($page_id, $key, true));
+        return $value !== '' ? $value : $fallback;
+    };
     $title = trim((string) get_post_meta($page_id, '_myliba_hero_title', true)) ?: get_the_title();
     $lead = trim((string) get_post_meta($page_id, '_myliba_hero_subtitle', true));
     if ($lead === '') {
@@ -32,7 +36,7 @@ while (have_posts()) :
     <main class="trainers-page">
         <section class="trainers-hero">
             <div class="solutions-shell">
-                <p class="eyebrow"><?php echo esc_html($language === 'en' ? 'The people behind Myliba' : 'Myliba’nın arkasındaki insanlar'); ?></p>
+                <p class="eyebrow"><?php echo esc_html($copy('_myliba_eyebrow', $language === 'en' ? 'The people behind Myliba' : 'Myliba’nın arkasındaki insanlar')); ?></p>
                 <h1><?php echo esc_html($title); ?></h1>
                 <p><?php echo esc_html($lead); ?></p>
             </div>
@@ -46,8 +50,8 @@ while (have_posts()) :
 
         <section class="trainers-directory solutions-shell" aria-labelledby="trainers-directory-title">
             <header>
-                <p class="eyebrow"><?php echo esc_html($language === 'en' ? 'Our team' : 'Ekibimiz'); ?></p>
-                <h2 id="trainers-directory-title"><?php echo esc_html($language === 'en' ? 'Learn with experienced practitioners.' : 'Deneyimli uygulayıcılarla gelişin.'); ?></h2>
+                <p class="eyebrow"><?php echo esc_html($copy('_myliba_trainers_directory_eyebrow', $language === 'en' ? 'Our team' : 'Ekibimiz')); ?></p>
+                <h2 id="trainers-directory-title"><?php echo esc_html($copy('_myliba_trainers_directory_title', $language === 'en' ? 'Learn with experienced practitioners.' : 'Deneyimli uygulayıcılarla gelişin.')); ?></h2>
             </header>
 
             <?php if ($trainers->have_posts()) : ?>
@@ -57,39 +61,39 @@ while (have_posts()) :
                         $trainer_id = get_the_ID();
                         $headline = trim((string) get_post_meta($trainer_id, '_myliba_person_headline', true));
                         $role = trim((string) get_post_meta($trainer_id, '_myliba_person_role', true));
-                        $website_url = trim((string) get_post_meta($trainer_id, '_myliba_person_website_url', true));
-                        $website_label = trim((string) get_post_meta($trainer_id, '_myliba_person_website_label', true));
-                        $linkedin_url = trim((string) get_post_meta($trainer_id, '_myliba_linkedin_url', true));
+                        $role_parts = array_values(array_filter(array_map('trim', preg_split('/\s*·\s*/u', $role) ?: [])));
+                        $summary = trim((string) get_the_excerpt());
+                        if ($summary === '') {
+                            $summary = wp_trim_words(wp_strip_all_tags((string) get_the_content()), 28, '…');
+                        }
+                        $profile_url = get_permalink();
                         ?>
                         <article class="trainer-card">
-                            <div class="trainer-card__media">
+                            <a class="trainer-card__media" href="<?php echo esc_url($profile_url); ?>" aria-label="<?php echo esc_attr(str_replace('{name}', get_the_title(), $copy('_myliba_trainers_card_aria_template', $language === 'en' ? 'View {name} profile' : '{name} profilini inceleyin'))); ?>">
                                 <?php if (has_post_thumbnail()) : ?>
                                     <?php the_post_thumbnail('large', ['loading' => 'lazy', 'decoding' => 'async']); ?>
                                 <?php else : ?>
                                     <span aria-hidden="true"><?php echo esc_html(mb_substr(get_the_title(), 0, 1)); ?></span>
                                 <?php endif; ?>
-                            </div>
+                                <span class="trainer-card__media-action" aria-hidden="true"><?php echo esc_html($copy('_myliba_trainers_card_overlay_label', $language === 'en' ? 'View profile' : 'Profili incele')); ?> →</span>
+                            </a>
                             <div class="trainer-card__content">
-                                <h3><?php the_title(); ?></h3>
+                                <p class="trainer-card__kicker"><?php echo esc_html($copy('_myliba_trainers_card_kicker', $language === 'en' ? 'Trainer & Consultant' : 'Eğitmen & Danışman')); ?></p>
+                                <h3><a href="<?php echo esc_url($profile_url); ?>"><?php the_title(); ?></a></h3>
                                 <?php if ($headline !== '') : ?><strong><?php echo esc_html($headline); ?></strong><?php endif; ?>
-                                <?php if ($role !== '') : ?><p class="trainer-card__role"><?php echo esc_html($role); ?></p><?php endif; ?>
-                                <div class="trainer-card__bio"><?php the_content(); ?></div>
-                                <?php if ($website_url !== '' || $linkedin_url !== '') : ?>
-                                    <div class="trainer-card__links">
-                                        <?php if ($website_url !== '') : ?>
-                                            <a href="<?php echo esc_url($website_url); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html($website_label ?: ($language === 'en' ? 'Learn more' : 'Hakkında daha fazlası')); ?> <span aria-hidden="true">↗</span></a>
-                                        <?php endif; ?>
-                                        <?php if ($linkedin_url !== '') : ?>
-                                            <a href="<?php echo esc_url($linkedin_url); ?>" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-                                        <?php endif; ?>
-                                    </div>
+                                <?php if (!empty($role_parts)) : ?>
+                                    <ul class="trainer-card__skills" aria-label="<?php echo esc_attr($copy('_myliba_trainers_skills_label', $language === 'en' ? 'Areas of expertise' : 'Uzmanlık alanları')); ?>">
+                                        <?php foreach (array_slice($role_parts, 0, 3) as $role_part) : ?><li><?php echo esc_html($role_part); ?></li><?php endforeach; ?>
+                                    </ul>
                                 <?php endif; ?>
+                                <?php if ($summary !== '') : ?><p class="trainer-card__summary"><?php echo esc_html($summary); ?></p><?php endif; ?>
+                                <a class="trainer-card__detail-link" href="<?php echo esc_url($profile_url); ?>"><?php echo esc_html($copy('_myliba_trainers_card_detail_label', $language === 'en' ? 'View profile' : 'Detaylı profili incele')); ?> <span aria-hidden="true">→</span></a>
                             </div>
                         </article>
                     <?php endwhile; ?>
                 </div>
             <?php else : ?>
-                <p class="trainers-empty"><?php echo esc_html($language === 'en' ? 'Trainer profiles will be published soon.' : 'Eğitmen profilleri yakında yayınlanacak.'); ?></p>
+                <p class="trainers-empty"><?php echo esc_html($copy('_myliba_trainers_empty_text', $language === 'en' ? 'Trainer profiles will be published soon.' : 'Eğitmen profilleri yakında yayınlanacak.')); ?></p>
             <?php endif; ?>
             <?php wp_reset_postdata(); ?>
         </section>
