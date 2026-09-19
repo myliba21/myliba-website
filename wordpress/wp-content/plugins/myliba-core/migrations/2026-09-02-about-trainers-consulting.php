@@ -19,8 +19,8 @@ $trainers_page_data = [
     'post_title' => 'Eğitmenlerimiz',
     'post_name' => 'egitmenlerimiz',
     'post_parent' => $tr_home instanceof WP_Post ? $tr_home->ID : 0,
-    'post_content' => '<p>Myliba eğitmen ve danışmanları; strateji, kültür, liderlik, OKR ve yüksek performans alanlarındaki deneyimlerini kurumların gerçek iş gündemleriyle buluşturur.</p>',
-    'post_excerpt' => 'Stratejiyi, kültürü ve yüksek performansı günlük işin içine taşıyan eğitmen, koç ve danışmanlarımızla tanışın.',
+    'post_content' => '<h2>OKR, performans yönetimi ve kültürel dönüşüm uzmanları</h2><p>Myliba’nın OKR danışmanları ve performans uzmanları; stratejik önceliklerin hedeflere dönüştürülmesi, OKR ve KPI sistemlerinin birlikte yönetilmesi, liderlik gelişimi ve yüksek performans kültürünün günlük işleyişe yerleşmesi için kurumlarla çalışır.</p><h3>Hangi alanlarda destek oluyoruz?</h3><ul><li>OKR sistemi tasarımı, hedef yazımı ve stratejik hizalanma</li><li>Performans yönetimi, KPI, CFR ve sürekli gelişim rutinleri</li><li>Liderlik, yönetici koçluğu ve takım koçluğu</li><li>Kültürel dönüşüm, çalışan bağlılığı ve yüksek performans kültürü</li></ul><p>İhtiyacınıza uygun uzmanı inceleyebilir; kurumsal dönüşüm için <a href="/tr/cozumler/danismanlik/">Myliba danışmanlık yaklaşımını</a>, uygulamalı gelişim yolculukları için <a href="/tr/okr-kultur-akademisi/">OKR ve Kültür Akademisi’ni</a> keşfedebilirsiniz.</p>',
+    'post_excerpt' => 'Myliba’nın OKR, performans yönetimi, hedef sistemleri, liderlik ve kültürel dönüşüm alanlarında çalışan danışman, koç ve eğitmenleriyle tanışın.',
 ];
 
 $trainers_page_id = $trainers_page instanceof WP_Post
@@ -32,11 +32,11 @@ if (is_wp_error($trainers_page_id)) {
 $page_meta_defaults = [
     '_myliba_language' => 'tr',
     '_myliba_translation_key' => 'trainers',
-    '_myliba_hero_title' => 'Eğitmenlerimiz',
-    '_myliba_hero_subtitle' => 'Stratejiyi, kültürü ve yüksek performansı günlük işin içine taşıyan eğitmen, koç ve danışmanlarımızla tanışın.',
-    '_myliba_eyebrow' => 'Myliba’nın arkasındaki insanlar',
+    '_myliba_hero_title' => 'OKR Danışmanları ve Performans Yönetimi Uzmanları',
+    '_myliba_hero_subtitle' => 'Myliba’nın OKR, performans yönetimi, hedef sistemleri, liderlik ve kültürel dönüşüm alanlarında çalışan danışman, koç ve eğitmenleriyle tanışın.',
+    '_myliba_eyebrow' => 'OKR ve performans uzmanları',
     '_myliba_trainers_directory_eyebrow' => 'Ekibimiz',
-    '_myliba_trainers_directory_title' => 'Deneyimli uygulayıcılarla gelişin.',
+    '_myliba_trainers_directory_title' => 'Deneyimli OKR ve performans danışmanlarımızla tanışın.',
     '_myliba_trainers_card_kicker' => 'Eğitmen & Danışman',
     '_myliba_trainers_card_overlay_label' => 'Profili incele',
     '_myliba_trainers_card_detail_label' => 'Detaylı profili incele',
@@ -52,8 +52,8 @@ $page_meta_defaults = [
     '_myliba_trainers_related_eyebrow' => 'Ekibimiz',
     '_myliba_trainers_related_title' => 'Diğer uzmanlarımızla tanışın.',
     '_myliba_trainers_related_limit' => '3',
-    '_myliba_seo_title' => 'Eğitmenlerimiz ve Danışmanlarımız | Myliba',
-    '_myliba_seo_description' => 'Myliba’nın strateji, kültür, liderlik, OKR ve yüksek performans alanlarında çalışan eğitmen, koç ve danışmanlarıyla tanışın.',
+    '_myliba_seo_title' => 'OKR Danışmanları ve Performans Uzmanları | Myliba',
+    '_myliba_seo_description' => 'OKR, performans yönetimi, hedef sistemleri, liderlik ve kültürel dönüşüm alanlarında uzman Myliba danışmanları, koçları ve eğitmenleriyle tanışın.',
 ];
 foreach ($page_meta_defaults as $meta_key => $meta_value) {
     if ((string) get_post_meta($trainers_page_id, $meta_key, true) === '') {
@@ -69,8 +69,8 @@ $trainers_page_en_data = [
     'post_title' => 'Our Trainers',
     'post_name' => 'our-trainers',
     'post_parent' => $en_home instanceof WP_Post ? $en_home->ID : 0,
-    'post_content' => '<p>Myliba trainers and consultants bring their experience in strategy, culture, leadership, OKRs, and high performance into the real business priorities of organizations.</p>',
-    'post_excerpt' => 'Meet our trainers, coaches, and consultants who bring strategy, culture, and high performance into daily work.',
+    'post_content' => '<h2>Experts in OKRs, performance management, and cultural transformation</h2><p>Myliba’s OKR consultants and performance management experts work with organizations to translate strategic priorities into goals, manage OKRs and KPIs together, develop leaders, and embed a high-performance culture into everyday work.</p><h3>How we support organizations</h3><ul><li>OKR system design, goal setting, and strategic alignment</li><li>Performance management, KPI, CFR, and continuous development routines</li><li>Leadership development, executive coaching, and team coaching</li><li>Cultural transformation, employee engagement, and high-performance culture</li></ul><p>Explore the expert who best matches your needs, learn about <a href="/en/solutions/advisory-and-consulting/">Myliba strategic advisory and consulting</a>, or discover hands-on development journeys at the <a href="/en/okr-culture-academy/">OKR &amp; Culture Academy</a>.</p>',
+    'post_excerpt' => 'Meet Myliba consultants, coaches, and trainers specializing in OKRs, performance management, leadership, goal systems, and cultural transformation.',
 ];
 
 $trainers_page_en_id = $trainers_page_en instanceof WP_Post
@@ -82,11 +82,11 @@ if (is_wp_error($trainers_page_en_id)) {
 $page_en_meta_defaults = [
     '_myliba_language' => 'en',
     '_myliba_translation_key' => 'trainers',
-    '_myliba_hero_title' => 'Our Trainers',
-    '_myliba_hero_subtitle' => 'Meet our trainers, coaches, and consultants who bring strategy, culture, and high performance into daily work.',
-    '_myliba_eyebrow' => 'The people behind Myliba',
+    '_myliba_hero_title' => 'OKR Consultants and Performance Management Experts',
+    '_myliba_hero_subtitle' => 'Meet Myliba consultants, coaches, and trainers specializing in OKRs, performance management, leadership, goal systems, and cultural transformation.',
+    '_myliba_eyebrow' => 'OKR & performance experts',
     '_myliba_trainers_directory_eyebrow' => 'Our team',
-    '_myliba_trainers_directory_title' => 'Learn with experienced practitioners.',
+    '_myliba_trainers_directory_title' => 'Meet our experienced OKR and performance consultants.',
     '_myliba_trainers_card_kicker' => 'Trainer & Consultant',
     '_myliba_trainers_card_overlay_label' => 'View profile',
     '_myliba_trainers_card_detail_label' => 'View profile',
@@ -102,8 +102,8 @@ $page_en_meta_defaults = [
     '_myliba_trainers_related_eyebrow' => 'Our team',
     '_myliba_trainers_related_title' => 'Meet other experts.',
     '_myliba_trainers_related_limit' => '3',
-    '_myliba_seo_title' => 'Our Trainers and Consultants | Myliba',
-    '_myliba_seo_description' => 'Meet Myliba trainers, coaches, and consultants specializing in strategy, culture, leadership, OKRs, and high performance.',
+    '_myliba_seo_title' => 'OKR Consultants & Performance Experts | Myliba',
+    '_myliba_seo_description' => 'Meet Myliba consultants, coaches, and trainers specializing in OKRs, performance management, leadership, goal systems, and cultural transformation.',
 ];
 foreach ($page_en_meta_defaults as $meta_key => $meta_value) {
     if ((string) get_post_meta($trainers_page_en_id, $meta_key, true) === '') {
@@ -187,7 +187,7 @@ foreach ($people as $person) {
         '_myliba_person_website_url' => $person['website'],
         '_myliba_person_website_label' => $person['website_label'],
         '_myliba_order' => (string) $person['order'],
-        '_myliba_seo_title' => $person['name'] . ' | Myliba Eğitmen ve Danışman',
+        '_myliba_seo_title' => $person['name'] . ' | OKR ve Performans Uzmanı | Myliba',
         '_myliba_seo_description' => wp_trim_words(wp_strip_all_tags($person['bio']), 28, ''),
     ];
     foreach ($person_meta_defaults as $meta_key => $meta_value) {
@@ -286,7 +286,7 @@ foreach ($people_en as $person) {
         '_myliba_person_website_url' => $person['website'],
         '_myliba_person_website_label' => $person['website_label'],
         '_myliba_order' => (string) $person['order'],
-        '_myliba_seo_title' => $person['name'] . ' | Myliba Trainer & Consultant',
+        '_myliba_seo_title' => $person['name'] . ' | OKR & Performance Expert | Myliba',
         '_myliba_seo_description' => wp_trim_words(wp_strip_all_tags($person['bio']), 28, ''),
     ];
     foreach ($person_meta_defaults as $meta_key => $meta_value) {

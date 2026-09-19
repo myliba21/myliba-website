@@ -189,6 +189,8 @@ function render_llms_txt(): void
     echo "- [Yazılım / Platform]({$site_url}/tr/yazilim/): OKR ve performans yönetimi yazılımı.\n";
     echo "- [Çözümlerimiz]({$site_url}/tr/cozumler/): Kurumsal gelişim programları, danışmanlık ve kültür analizi.\n";
     echo "- [OKR & Kültür Akademisi]({$site_url}/tr/okr-kultur-akademisi/): Sertifikalı OKR ve liderlik eğitimleri.\n";
+    echo "- [OKR Danışmanları ve Performans Uzmanları]({$site_url}/tr/egitmenlerimiz/): Myliba'nın OKR, performans, liderlik ve kültürel dönüşüm uzmanları.\n";
+    echo "- [Stratejik Danışmanlık]({$site_url}/tr/cozumler/danismanlik/): OKR, hedef ve performans yönetimi danışmanlığı.\n";
     echo "- [Gelişim Merkezi]({$site_url}/tr/gelisim-merkezi/): Araştırmalar, e-kitaplar, raporlar ve etkinlikler.\n";
     echo "- [İletişim & Demo]({$site_url}/tr/demo/): Demo talebi ve kurumsal iletişim.\n\n";
     echo "## Resources\n\n";
@@ -196,6 +198,9 @@ function render_llms_txt(): void
     echo "- [e-Kitaplar]({$site_url}/tr/gelisim-merkezi/e-kitaplar/)\n";
     echo "- [Blog]({$site_url}/tr/yazilar/)\n";
     echo "- [Etkinlikler]({$site_url}/tr/etkinlikler/)\n\n";
+    echo "## English\n\n";
+    echo "- [OKR Consultants & Performance Management Experts]({$site_url}/en/our-trainers/)\n";
+    echo "- [Strategic Advisory & Consulting]({$site_url}/en/solutions/advisory-and-consulting/)\n\n";
     echo "## Sitemap\n\n";
     echo "- {$site_url}/wp-sitemap.xml\n";
 
@@ -552,6 +557,7 @@ function render_schema(): void
     $organization = [
         '@context' => 'https://schema.org',
         '@type'    => 'Organization',
+        '@id'      => home_url('/#organization'),
         'name'     => Options\get('organization_name', 'Myliba'),
         'url'      => Options\get('organization_url', home_url('/')),
     ];
@@ -571,8 +577,10 @@ function render_schema(): void
     $website = [
         '@context' => 'https://schema.org',
         '@type' => 'WebSite',
+        '@id' => home_url('/#website'),
         'name' => Options\get('organization_name', 'Myliba'),
         'url' => home_url('/'),
+        'publisher' => ['@id' => home_url('/#organization')],
     ];
 
     $schemas[] = $organization;
@@ -602,6 +610,12 @@ function render_schema(): void
         $schemas[] = course_schema(get_queried_object_id());
     }
 
+    if (is_singular('myliba_team')) {
+        $schemas[] = trainer_profile_schema((int) get_queried_object_id());
+    } elseif (is_trainers_directory()) {
+        $schemas[] = trainers_directory_schema((int) get_queried_object_id());
+    }
+
     $faq = faq_schema();
     if ($faq) {
         $schemas[] = $faq;
@@ -610,6 +624,125 @@ function render_schema(): void
     foreach (array_filter($schemas) as $schema) {
         echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES) . "</script>\n";
     }
+}
+
+function is_trainers_directory(): bool
+{
+    if (!is_page()) {
+        return false;
+    }
+
+    $post = get_post(get_queried_object_id());
+
+    return $post instanceof \WP_Post && in_array($post->post_name, ['egitmenlerimiz', 'our-trainers'], true);
+}
+
+function trainer_role_parts(int $post_id): array
+{
+    $roles = preg_split('/\s*·\s*/u', (string) get_post_meta($post_id, '_myliba_person_role', true)) ?: [];
+
+    return array_values(array_filter(array_map('trim', $roles)));
+}
+
+function trainer_same_as(int $post_id): array
+{
+    $urls = [trim((string) get_post_meta($post_id, '_myliba_person_website_url', true))];
+    foreach (['linkedin', 'instagram', 'twitter', 'youtube', 'facebook'] as $platform) {
+        $urls[] = trim((string) get_post_meta($post_id, '_myliba_' . $platform . '_url', true));
+    }
+
+    return array_values(array_unique(array_filter($urls)));
+}
+
+function trainer_person_schema(int $post_id): array
+{
+    $url = get_permalink($post_id);
+    $roles = trainer_role_parts($post_id);
+    $schema = [
+        '@type' => 'Person',
+        '@id' => $url . '#person',
+        'name' => get_the_title($post_id),
+        'url' => $url,
+        'description' => post_description($post_id),
+        'jobTitle' => $roles,
+        'knowsAbout' => $roles,
+        'worksFor' => ['@id' => home_url('/#organization')],
+    ];
+
+    if (has_post_thumbnail($post_id)) {
+        $image = wp_get_attachment_image_url(get_post_thumbnail_id($post_id), 'large');
+        if ($image) {
+            $schema['image'] = $image;
+        }
+    }
+
+    $same_as = trainer_same_as($post_id);
+    if ($same_as) {
+        $schema['sameAs'] = $same_as;
+    }
+
+    return array_filter($schema);
+}
+
+function trainer_profile_schema(int $post_id): array
+{
+    $language = (string) (get_post_meta($post_id, '_myliba_language', true) ?: Options\get('default_locale', 'tr'));
+
+    return [
+        '@context' => 'https://schema.org',
+        '@type' => 'ProfilePage',
+        '@id' => get_permalink($post_id) . '#profile-page',
+        'url' => get_permalink($post_id),
+        'name' => wp_get_document_title(),
+        'description' => post_description($post_id),
+        'inLanguage' => $language,
+        'dateCreated' => get_the_date(DATE_W3C, $post_id),
+        'dateModified' => get_the_modified_date(DATE_W3C, $post_id),
+        'mainEntity' => trainer_person_schema($post_id),
+        'isPartOf' => ['@id' => home_url('/#website')],
+    ];
+}
+
+function trainers_directory_schema(int $page_id): array
+{
+    $language = (string) (get_post_meta($page_id, '_myliba_language', true) ?: Options\get('default_locale', 'tr'));
+    $query = new \WP_Query([
+        'post_type' => 'myliba_team',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'no_found_rows' => true,
+        'meta_query' => [
+            'language' => ['key' => '_myliba_language', 'value' => $language],
+            'sort_order' => ['key' => '_myliba_order', 'compare' => 'EXISTS', 'type' => 'NUMERIC'],
+        ],
+        'orderby' => ['sort_order' => 'ASC', 'title' => 'ASC'],
+        'order' => 'ASC',
+    ]);
+    $items = [];
+
+    foreach ($query->posts as $position => $person) {
+        $items[] = [
+            '@type' => 'ListItem',
+            'position' => $position + 1,
+            'item' => trainer_person_schema((int) $person->ID),
+        ];
+    }
+
+    return [
+        '@context' => 'https://schema.org',
+        '@type' => 'CollectionPage',
+        '@id' => get_permalink($page_id) . '#directory',
+        'url' => get_permalink($page_id),
+        'name' => wp_get_document_title(),
+        'description' => post_description($page_id),
+        'inLanguage' => $language,
+        'isPartOf' => ['@id' => home_url('/#website')],
+        'mainEntity' => [
+            '@type' => 'ItemList',
+            'numberOfItems' => count($items),
+            'itemListElement' => $items,
+        ],
+    ];
 }
 
 function breadcrumb_schema(): array

@@ -2247,7 +2247,23 @@ function myliba_excerpt(int $post_id = 0, int $words = 28): string
 
     $source = $post->post_excerpt ?: $post->post_content;
 
-    return wp_trim_words(wp_strip_all_tags($source), $words);
+    return wp_trim_words(myliba_plain_text($source), $words);
+}
+
+/**
+ * Convert editor HTML to machine-readable plain text without joining the
+ * final word of one block to the first word of the next block.
+ */
+function myliba_plain_text(string $html): string
+{
+    $with_boundaries = preg_replace(
+        '/<\/(?:address|article|blockquote|div|figcaption|h[1-6]|li|p|section|td|th)>/i',
+        '$0 ',
+        $html
+    );
+    $text = wp_strip_all_tags((string) $with_boundaries);
+
+    return trim((string) preg_replace('/\s+/u', ' ', $text));
 }
 
 function myliba_get_entries(string $post_type, int $limit = 6, array $args = []): WP_Query

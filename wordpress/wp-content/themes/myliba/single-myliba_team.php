@@ -34,7 +34,7 @@ while (have_posts()) :
     $role_parts = array_values(array_filter(array_map('trim', preg_split('/\s*·\s*/u', $role) ?: [])));
     $back_url = myliba_page_url('trainers');
     ?>
-    <main class="trainer-profile">
+    <div class="trainer-profile">
         <section class="trainer-profile__hero">
             <div class="solutions-shell">
                 <a class="trainer-profile__back" href="<?php echo esc_url($back_url); ?>">← <?php echo esc_html($copy('_myliba_trainers_profile_back_label', $language === 'en' ? 'All trainers' : 'Tüm eğitmenler')); ?></a>
@@ -88,6 +88,27 @@ while (have_posts()) :
             </div>
         </section>
 
+        <section class="trainer-profile__paths" aria-labelledby="trainer-profile-paths-title">
+            <div class="solutions-shell">
+                <header>
+                    <p class="eyebrow"><?php echo esc_html($language === 'en' ? 'Work with our experts' : 'Uzmanlarımızla çalışın'); ?></p>
+                    <h2 id="trainer-profile-paths-title"><?php echo esc_html($language === 'en' ? 'Turn OKR and performance expertise into organizational practice.' : 'OKR ve performans uzmanlığını kurumunuzda uygulamaya dönüştürün.'); ?></h2>
+                </header>
+                <div class="trainer-profile__path-grid">
+                    <a href="<?php echo esc_url(home_url($language === 'en' ? '/en/solutions/advisory-and-consulting/' : '/tr/cozumler/danismanlik/')); ?>">
+                        <strong><?php echo esc_html($language === 'en' ? 'OKR & Performance Consulting' : 'OKR ve Performans Danışmanlığı'); ?></strong>
+                        <span><?php echo esc_html($language === 'en' ? 'Design goal, performance, leadership, and cultural transformation systems tailored to your organization.' : 'Kurumunuza özel hedef, performans, liderlik ve kültürel dönüşüm sistemleri tasarlayın.'); ?></span>
+                        <b aria-hidden="true">→</b>
+                    </a>
+                    <a href="<?php echo esc_url(home_url($language === 'en' ? '/en/okr-culture-academy/' : '/tr/okr-kultur-akademisi/')); ?>">
+                        <strong><?php echo esc_html($language === 'en' ? 'OKR & Culture Academy' : 'OKR ve Kültür Akademisi'); ?></strong>
+                        <span><?php echo esc_html($language === 'en' ? 'Build practical OKR, coaching, leadership, and performance-management capabilities.' : 'Uygulamalı OKR, koçluk, liderlik ve performans yönetimi yetkinlikleri geliştirin.'); ?></span>
+                        <b aria-hidden="true">→</b>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <?php
         $other_people = new WP_Query([
             'post_type' => 'myliba_team',
@@ -125,7 +146,7 @@ while (have_posts()) :
                 </div>
             </section>
         <?php endif; wp_reset_postdata(); ?>
-    </main>
+    </div>
     <?php
 endwhile;
 

@@ -17,8 +17,8 @@ while (have_posts()) :
     $lead = trim((string) get_post_meta($page_id, '_myliba_hero_subtitle', true));
     if ($lead === '') {
         $lead = $language === 'en'
-            ? 'Meet the trainers, coaches, and consultants who bring strategy, culture, and high performance into daily work.'
-            : 'Stratejiyi, kültürü ve yüksek performansı günlük işin içine taşıyan eğitmen, koç ve danışmanlarımızla tanışın.';
+            ? 'Meet Myliba consultants, coaches, and trainers specializing in OKRs, performance management, leadership, goal systems, and cultural transformation.'
+            : 'Myliba’nın OKR, performans yönetimi, hedef sistemleri, liderlik ve kültürel dönüşüm alanlarında çalışan danışman, koç ve eğitmenleriyle tanışın.';
     }
 
     $trainers = new WP_Query([
@@ -33,10 +33,10 @@ while (have_posts()) :
         'order' => 'ASC',
     ]);
     ?>
-    <main class="trainers-page">
+    <div class="trainers-page">
         <section class="trainers-hero">
             <div class="solutions-shell">
-                <p class="eyebrow"><?php echo esc_html($copy('_myliba_eyebrow', $language === 'en' ? 'The people behind Myliba' : 'Myliba’nın arkasındaki insanlar')); ?></p>
+                <p class="eyebrow"><?php echo esc_html($copy('_myliba_eyebrow', $language === 'en' ? 'OKR & performance experts' : 'OKR ve performans uzmanları')); ?></p>
                 <h1><?php echo esc_html($title); ?></h1>
                 <p><?php echo esc_html($lead); ?></p>
             </div>
@@ -51,7 +51,7 @@ while (have_posts()) :
         <section class="trainers-directory solutions-shell" aria-labelledby="trainers-directory-title">
             <header>
                 <p class="eyebrow"><?php echo esc_html($copy('_myliba_trainers_directory_eyebrow', $language === 'en' ? 'Our team' : 'Ekibimiz')); ?></p>
-                <h2 id="trainers-directory-title"><?php echo esc_html($copy('_myliba_trainers_directory_title', $language === 'en' ? 'Learn with experienced practitioners.' : 'Deneyimli uygulayıcılarla gelişin.')); ?></h2>
+                <h2 id="trainers-directory-title"><?php echo esc_html($copy('_myliba_trainers_directory_title', $language === 'en' ? 'Meet our experienced OKR and performance consultants.' : 'Deneyimli OKR ve performans danışmanlarımızla tanışın.')); ?></h2>
             </header>
 
             <?php if ($trainers->have_posts()) : ?>
@@ -62,10 +62,7 @@ while (have_posts()) :
                         $headline = trim((string) get_post_meta($trainer_id, '_myliba_person_headline', true));
                         $role = trim((string) get_post_meta($trainer_id, '_myliba_person_role', true));
                         $role_parts = array_values(array_filter(array_map('trim', preg_split('/\s*·\s*/u', $role) ?: [])));
-                        $summary = trim((string) get_the_excerpt());
-                        if ($summary === '') {
-                            $summary = wp_trim_words(wp_strip_all_tags((string) get_the_content()), 28, '…');
-                        }
+                        $summary = myliba_excerpt($trainer_id, 34);
                         $profile_url = get_permalink();
                         ?>
                         <article class="trainer-card">
@@ -97,7 +94,7 @@ while (have_posts()) :
             <?php endif; ?>
             <?php wp_reset_postdata(); ?>
         </section>
-    </main>
+    </div>
     <?php
 endwhile;
 
