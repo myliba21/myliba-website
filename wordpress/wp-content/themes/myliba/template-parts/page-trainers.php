@@ -17,8 +17,8 @@ while (have_posts()) :
     $lead = trim((string) get_post_meta($page_id, '_myliba_hero_subtitle', true));
     if ($lead === '') {
         $lead = $language === 'en'
-            ? 'Meet Myliba consultants, coaches, and trainers specializing in OKRs, performance management, leadership, goal systems, and cultural transformation.'
-            : 'Myliba’nın OKR, performans yönetimi, hedef sistemleri, liderlik ve kültürel dönüşüm alanlarında çalışan danışman, koç ve eğitmenleriyle tanışın.';
+            ? 'Meet Myliba OKR coaches and consultants specializing in OKR coaching, performance management, leadership, goal systems, and cultural transformation.'
+            : 'Kurumsal OKR koçluğu, OKR danışmanlığı, performans yönetimi, liderlik ve kültürel dönüşüm alanlarında çalışan Myliba uzmanlarıyla tanışın.';
     }
 
     $trainers = new WP_Query([
@@ -36,7 +36,7 @@ while (have_posts()) :
     <div class="trainers-page">
         <section class="trainers-hero">
             <div class="solutions-shell">
-                <p class="eyebrow"><?php echo esc_html($copy('_myliba_eyebrow', $language === 'en' ? 'OKR & performance experts' : 'OKR ve performans uzmanları')); ?></p>
+                <p class="eyebrow"><?php echo esc_html($copy('_myliba_eyebrow', $language === 'en' ? 'OKR coaches & consultants' : 'OKR koçları ve danışmanları')); ?></p>
                 <h1><?php echo esc_html($title); ?></h1>
                 <p><?php echo esc_html($lead); ?></p>
             </div>
@@ -51,7 +51,7 @@ while (have_posts()) :
         <section class="trainers-directory solutions-shell" aria-labelledby="trainers-directory-title">
             <header>
                 <p class="eyebrow"><?php echo esc_html($copy('_myliba_trainers_directory_eyebrow', $language === 'en' ? 'Our team' : 'Ekibimiz')); ?></p>
-                <h2 id="trainers-directory-title"><?php echo esc_html($copy('_myliba_trainers_directory_title', $language === 'en' ? 'Meet our experienced OKR and performance consultants.' : 'Deneyimli OKR ve performans danışmanlarımızla tanışın.')); ?></h2>
+                <h2 id="trainers-directory-title"><?php echo esc_html($copy('_myliba_trainers_directory_title', $language === 'en' ? 'Meet our experienced OKR coaches and consultants.' : 'Deneyimli OKR koçları ve OKR danışmanlarımızla tanışın.')); ?></h2>
             </header>
 
             <?php if ($trainers->have_posts()) : ?>

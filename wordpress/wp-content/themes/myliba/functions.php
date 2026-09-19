@@ -1306,6 +1306,7 @@ function myliba_page_url(string $key): string
     $paths = [
         'products' => ['en' => 'en/software', 'tr' => 'tr/yazilim'],
         'academy' => ['en' => 'en/okr-culture-academy', 'tr' => 'tr/okr-kultur-akademisi'],
+        'okr_coaching' => ['en' => 'en/okr-coaching', 'tr' => 'tr/okr-koclugu'],
         'culture' => ['en' => 'en/culture-analysis', 'tr' => 'tr/kultur-analizi'],
         'ethics' => ['en' => 'en/ethics-counsel', 'tr' => 'tr/etik-danismanlik'],
         'blog' => ['en' => 'en/blog', 'tr' => 'tr/yazilar'],
@@ -1422,6 +1423,7 @@ function myliba_localize_url(string $url, string $target_lang = ''): string
     $known_routes = [
         'products' => ['tr' => '/tr/yazilim/', 'en' => '/en/software/'],
         'academy' => ['tr' => '/tr/okr-kultur-akademisi/', 'en' => '/en/okr-culture-academy/'],
+        'okr_coaching' => ['tr' => '/tr/okr-koclugu/', 'en' => '/en/okr-coaching/'],
         'solutions' => ['tr' => '/tr/cozumler/', 'en' => '/en/solutions/'],
         'development' => ['tr' => '/tr/gelisim-merkezi/', 'en' => '/en/development-center/'],
         'story' => ['tr' => '/tr/hikayemiz/', 'en' => '/en/our-story/'],

@@ -189,7 +189,8 @@ function render_llms_txt(): void
     echo "- [Yazılım / Platform]({$site_url}/tr/yazilim/): OKR ve performans yönetimi yazılımı.\n";
     echo "- [Çözümlerimiz]({$site_url}/tr/cozumler/): Kurumsal gelişim programları, danışmanlık ve kültür analizi.\n";
     echo "- [OKR & Kültür Akademisi]({$site_url}/tr/okr-kultur-akademisi/): Sertifikalı OKR ve liderlik eğitimleri.\n";
-    echo "- [OKR Danışmanları ve Performans Uzmanları]({$site_url}/tr/egitmenlerimiz/): Myliba'nın OKR, performans, liderlik ve kültürel dönüşüm uzmanları.\n";
+    echo "- [Kurumsal OKR Koçluğu]({$site_url}/tr/okr-koclugu/): Kurumlarda OKR uygulaması, hedef yazımı, ekip hizalanması ve sürdürülebilir OKR ritimleri.\n";
+    echo "- [OKR Koçları ve OKR Danışmanları]({$site_url}/tr/egitmenlerimiz/): Kurumsal OKR koçluğu, OKR danışmanlığı, performans yönetimi, liderlik ve kültürel dönüşüm alanlarında çalışan Myliba uzmanları.\n";
     echo "- [Stratejik Danışmanlık]({$site_url}/tr/cozumler/danismanlik/): OKR, hedef ve performans yönetimi danışmanlığı.\n";
     echo "- [Gelişim Merkezi]({$site_url}/tr/gelisim-merkezi/): Araştırmalar, e-kitaplar, raporlar ve etkinlikler.\n";
     echo "- [İletişim & Demo]({$site_url}/tr/demo/): Demo talebi ve kurumsal iletişim.\n\n";
@@ -200,7 +201,8 @@ function render_llms_txt(): void
     echo "- [Etkinlikler]({$site_url}/tr/etkinlikler/)\n\n";
     echo "## English\n\n";
     echo "- [OKR Consultants & Performance Management Experts]({$site_url}/en/our-trainers/)\n";
-    echo "- [Strategic Advisory & Consulting]({$site_url}/en/solutions/advisory-and-consulting/)\n\n";
+    echo "- [Corporate OKR Coaching]({$site_url}/en/okr-coaching/): OKR implementation, goal quality, team alignment, check-ins, and sustainable OKR routines.\n";
+    echo "- [OKR Consulting and Coaching]({$site_url}/en/solutions/advisory-and-consulting/): Strategic alignment, OKR implementation, performance management, and high-performance culture consulting.\n\n";
     echo "## Sitemap\n\n";
     echo "- {$site_url}/wp-sitemap.xml\n";
 
@@ -616,6 +618,11 @@ function render_schema(): void
         $schemas[] = trainers_directory_schema((int) get_queried_object_id());
     }
 
+    $okr_service = okr_service_schema();
+    if ($okr_service) {
+        $schemas[] = $okr_service;
+    }
+
     $faq = faq_schema();
     if ($faq) {
         $schemas[] = $faq;
@@ -635,6 +642,55 @@ function is_trainers_directory(): bool
     $post = get_post(get_queried_object_id());
 
     return $post instanceof \WP_Post && in_array($post->post_name, ['egitmenlerimiz', 'our-trainers'], true);
+}
+
+function okr_service_schema(): array
+{
+    if (!is_singular()) {
+        return [];
+    }
+
+    $post_id = (int) get_queried_object_id();
+    $post = get_post($post_id);
+    if (!$post instanceof \WP_Post) {
+        return [];
+    }
+
+    $is_coaching_page = $post->post_type === 'page'
+        && in_array($post->post_name, ['okr-koclugu', 'okr-coaching'], true);
+    $is_consulting_page = $post->post_type === 'myliba_solution'
+        && in_array($post->post_name, ['danismanlik', 'advisory-and-consulting'], true);
+
+    if (!$is_coaching_page && !$is_consulting_page) {
+        return [];
+    }
+
+    $language = (string) (get_post_meta($post_id, '_myliba_language', true) ?: Options\get('default_locale', 'tr'));
+    $is_english = $language === 'en';
+
+    return [
+        '@context' => 'https://schema.org',
+        '@type' => 'Service',
+        '@id' => get_permalink($post_id) . '#service',
+        'name' => get_the_title($post_id),
+        'serviceType' => $is_coaching_page
+            ? ($is_english ? 'Corporate OKR Coaching' : 'Kurumsal OKR Koçluğu')
+            : ($is_english ? 'OKR Consulting' : 'OKR Danışmanlığı'),
+        'description' => post_description($post_id),
+        'url' => get_permalink($post_id),
+        'inLanguage' => $language,
+        'areaServed' => [
+            '@type' => 'AdministrativeArea',
+            'name' => $is_english ? 'Türkiye and international organizations' : 'Türkiye ve uluslararası kuruluşlar',
+        ],
+        'provider' => ['@id' => home_url('/#organization')],
+        'audience' => [
+            '@type' => 'BusinessAudience',
+            'audienceType' => $is_english
+                ? 'Leadership, strategy, transformation, and people teams'
+                : 'Liderlik, strateji, dönüşüm ve insan ekipleri',
+        ],
+    ];
 }
 
 function trainer_role_parts(int $post_id): array
