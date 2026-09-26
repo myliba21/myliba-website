@@ -1590,16 +1590,12 @@ function myliba_get_primary_nav_items(): array
                     $key = 'products';
                 } elseif (str_contains($url, '/akademi') || str_contains($url, '/academy') || in_array($slug, ['akademi', 'academy'], true)) {
                     $key = 'academy';
-                } elseif (str_contains($url, '/hikayemiz') || str_contains($url, '/biz-kimiz') || str_contains($url, '/our-story') || str_contains($url, '/about') || in_array($slug, ['biz-kimiz', 'hikayemiz', 'our-story', 'about-us', 'about'], true)) {
+                } elseif (in_array('mega-about', $classes, true) || str_contains($url, '/hikayemiz') || str_contains($url, '/biz-kimiz') || str_contains($url, '/our-story') || str_contains($url, '/about') || str_contains($url, '/hakkimizda') || in_array($slug, ['biz-kimiz', 'hikayemiz', 'our-story', 'about-us', 'about', 'hakkimizda'], true)) {
                     $key = 'story';
                 } elseif (str_contains($url, '/iletisim') || str_contains($url, '/contact') || in_array($slug, ['iletisim', 'contact', 'contact-us'], true)) {
                     $key = 'contact';
                 } else {
                     $key = $slug ?: 'item-' . $top_item->ID;
-                }
-
-                if ($key === 'story') {
-                    $label = $lang === 'en' ? 'About Us' : 'Hakkımızda';
                 }
 
                 $items[] = [
