@@ -13,9 +13,11 @@ function boot(): void
     add_filter('wp_robots', __NAMESPACE__ . '\\robots');
     add_filter('robots_txt', __NAMESPACE__ . '\\robots_txt', 10, 2);
     add_filter('wp_sitemaps_enabled', __NAMESPACE__ . '\\sitemaps_enabled');
-    add_filter('wp_sitemaps_post_types', __NAMESPACE__ . '\\sitemap_post_types');
+    add_filter('wp_sitemaps_taxonomies', __NAMESPACE__ . '\\sitemap_taxonomies');
     add_filter('wp_sitemaps_add_provider', __NAMESPACE__ . '\\sitemap_provider', 10, 2);
     add_filter('wp_sitemaps_posts_query_args', __NAMESPACE__ . '\\sitemap_post_query_args', 10, 2);
+    add_filter('wp_sitemaps_posts_pre_url_list', __NAMESPACE__ . '\\sitemap_page_urls_without_root', 10, 3);
+    add_action('wp_sitemaps_init', __NAMESPACE__ . '\\register_archive_sitemap');
     add_filter('document_title_parts', __NAMESPACE__ . '\\document_title');
     add_action('template_redirect', __NAMESPACE__ . '\\redirect_legacy_locale_duplicate', 0);
     add_action('template_redirect', __NAMESPACE__ . '\\render_llms_txt', 0);
@@ -79,7 +81,7 @@ function should_noindex(): bool
 
 function should_noindex_soft(): bool
 {
-    return !is_admin() && (is_author() || is_date() || is_search() || !empty($_GET['myliba_form']));
+    return !is_admin() && (is_author() || is_date() || is_search() || is_category() || is_tag() || !empty($_GET['myliba_form']));
 }
 
 function robots(array $robots): array
@@ -214,13 +216,97 @@ function sitemaps_enabled(bool $enabled): bool
     return is_staging_host() || !Options\indexing_enabled() ? false : $enabled;
 }
 
-function sitemap_post_types(array $post_types): array
+function sitemap_taxonomies(array $taxonomies): array
 {
-    foreach (['myliba_solution', 'myliba_academy', 'myliba_landing', 'myliba_ebook'] as $post_type) {
-        unset($post_types[$post_type]);
+    unset($taxonomies['category'], $taxonomies['post_tag']);
+
+    return $taxonomies;
+}
+
+function sitemap_page_urls_without_root($url_list, string $post_type, int $page_num)
+{
+    if ($post_type !== 'page' || $page_num !== 1 || get_option('show_on_front') !== 'posts') {
+        return $url_list;
     }
 
-    return $post_types;
+    if (is_array($url_list)) {
+        $entries = $url_list;
+    } else {
+        // Let the native provider generate its regular page list first.
+        remove_filter('wp_sitemaps_posts_pre_url_list', __NAMESPACE__ . '\\sitemap_page_urls_without_root', 10);
+        try {
+            $provider = new \WP_Sitemaps_Posts();
+            $entries = $provider->get_url_list($page_num, $post_type);
+        } finally {
+            add_filter('wp_sitemaps_posts_pre_url_list', __NAMESPACE__ . '\\sitemap_page_urls_without_root', 10, 3);
+        }
+    }
+
+    // WordPress inserts / as an extra page-sitemap entry for latest-posts
+    // homepages. Myliba uses / only as a noindex language selector.
+    $root = untrailingslashit(home_url('/'));
+    return array_values(array_filter($entries, static function ($entry) use ($root): bool {
+        return untrailingslashit((string) ($entry['loc'] ?? '')) !== $root;
+    }));
+}
+
+function register_archive_sitemap(\WP_Sitemaps $sitemaps): void
+{
+    if (!sitemaps_enabled(true)) {
+        return;
+    }
+
+    $sitemaps->registry->add_provider('mylibaarchives', new class extends \WP_Sitemaps_Provider {
+        public function __construct()
+        {
+            $this->name = 'mylibaarchives';
+            $this->object_type = 'archive';
+        }
+
+        public function get_max_num_pages($object_subtype = ''): int
+        {
+            return 1;
+        }
+
+        public function get_url_list($page_num, $object_subtype = ''): array
+        {
+            if ((int) $page_num !== 1) {
+                return [];
+            }
+
+            $archives = [
+                ['tr/gelisim-merkezi/e-kitaplar/', 'myliba_ebook', 'tr'],
+                ['en/development-center/ebooks/', 'myliba_ebook', 'en'],
+                ['tr/gelisim-merkezi/raporlar-ve-trendler/', 'myliba_report', 'tr'],
+                ['en/development-center/reports/', 'myliba_report', 'en'],
+            ];
+            $entries = [];
+
+            foreach ($archives as [$path, $post_type, $language]) {
+                $entry = ['loc' => home_url('/' . $path)];
+                $latest = get_posts([
+                    'post_type' => $post_type,
+                    'post_status' => 'publish',
+                    'posts_per_page' => 1,
+                    'orderby' => 'modified',
+                    'order' => 'DESC',
+                    'meta_key' => '_myliba_language',
+                    'meta_value' => $language,
+                    'fields' => 'ids',
+                    'no_found_rows' => true,
+                ]);
+                if ($latest) {
+                    $modified = get_post_modified_time(DATE_W3C, true, (int) $latest[0]);
+                    if ($modified) {
+                        $entry['lastmod'] = $modified;
+                    }
+                }
+                $entries[] = $entry;
+            }
+
+            return $entries;
+        }
+    });
 }
 
 function sitemap_provider($provider, string $name)
@@ -246,6 +332,24 @@ function sitemap_post_query_args(array $args, string $post_type): array
         ['key' => '_myliba_noindex', 'value' => '1', 'compare' => '!='],
     ];
     $args['meta_query'] = $meta_query;
+
+    if ($post_type === 'myliba_solution') {
+        $args['meta_query'][] = [
+            'relation' => 'OR',
+            ['key' => '_myliba_redirect_url', 'compare' => 'NOT EXISTS'],
+            ['key' => '_myliba_redirect_url', 'value' => '', 'compare' => '='],
+        ];
+
+        $redirect_slugs = ['kurumsal-gelisim-programlari', 'corporate-development-programs'];
+        $excluded = isset($args['post__not_in']) && is_array($args['post__not_in']) ? $args['post__not_in'] : [];
+        foreach ($redirect_slugs as $slug) {
+            $redirect_post = get_page_by_path($slug, OBJECT, 'myliba_solution');
+            if ($redirect_post instanceof \WP_Post) {
+                $excluded[] = $redirect_post->ID;
+            }
+        }
+        $args['post__not_in'] = array_values(array_unique($excluded));
+    }
 
     if ($post_type === 'page') {
         $excluded = isset($args['post__not_in']) && is_array($args['post__not_in']) ? $args['post__not_in'] : [];
@@ -568,6 +672,11 @@ function render_schema(): void
     $logo_url = $logo_id ? wp_get_attachment_image_url($logo_id, 'full') : '';
     if ($logo_url) {
         $organization['logo'] = $logo_url;
+    }
+
+    $organization_description = trim((string) get_bloginfo('description'));
+    if ($organization_description !== '') {
+        $organization['description'] = $organization_description;
     }
 
     if ($same_as) {
@@ -991,12 +1100,17 @@ function faq_schema(): array
     }
 
     $post_id = get_queried_object_id();
-    $items = get_post_meta($post_id, '_myliba_faq_items', true);
     $pairs = [];
 
-    foreach (preg_split('/\r\n|\r|\n/', (string) $items) ?: [] as $line) {
-        [$question, $answer] = array_pad(array_map('trim', explode('|', $line, 2)), 2, '');
-        if ($question && $answer) {
+    if (is_page(['sss', 'faq', 'faqs', 'sikca-sorulan-sorular']) && function_exists('Myliba\\Core\\PageContent\\collection')) {
+        // Use the same collection that renders the visible FAQ accordion.
+        $faq_rows = \Myliba\Core\PageContent\collection($post_id, 'faq', 'faqs');
+        foreach ($faq_rows as $row) {
+            $question = trim((string) ($row['question'] ?? ''));
+            $answer = trim(wp_strip_all_tags((string) ($row['answer'] ?? '')));
+            if ($question === '' || $answer === '') {
+                continue;
+            }
             $pairs[] = [
                 '@type' => 'Question',
                 'name' => $question,
@@ -1005,6 +1119,21 @@ function faq_schema(): array
                     'text' => $answer,
                 ],
             ];
+        }
+    } else {
+        $items = get_post_meta($post_id, '_myliba_faq_items', true);
+        foreach (preg_split('/\r\n|\r|\n/', (string) $items) ?: [] as $line) {
+            [$question, $answer] = array_pad(array_map('trim', explode('|', $line, 2)), 2, '');
+            if ($question && $answer) {
+                $pairs[] = [
+                    '@type' => 'Question',
+                    'name' => $question,
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $answer,
+                    ],
+                ];
+            }
         }
     }
 

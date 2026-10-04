@@ -938,7 +938,7 @@ function myliba_redirect_legacy_urls(): void
 
     if (preg_match('#^/([^/]+)$#', $path, $matches)) {
         $post = get_page_by_path(sanitize_title($matches[1]), OBJECT, 'post');
-        if ($post && get_post_meta($post->ID, '_myliba_language', true) === 'tr') {
+        if ($post && in_array(get_post_meta($post->ID, '_myliba_language', true), ['tr', 'en'], true)) {
             wp_safe_redirect(get_permalink($post), 301);
             exit;
         }
