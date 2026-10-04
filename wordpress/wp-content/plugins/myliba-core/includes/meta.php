@@ -148,10 +148,6 @@ function render_seo_box(\WP_Post $post): void
     echo '<p class="description" data-myliba-seo-count="_myliba_seo_description">' . esc_html(sprintf(__('Current length: %d characters', 'myliba'), mb_strlen($seo_description))) . '</p>';
     field_checkbox('_myliba_noindex', __('Noindex this content', 'myliba'), get_post_meta($post->ID, '_myliba_noindex', true) === '1');
     echo '<p class="description">' . esc_html__('Noindex content is also removed from the XML sitemap.', 'myliba') . '</p>';
-    if ($post->post_type === 'myliba_landing') {
-        field_checkbox('_myliba_seo_ready', __('Search content is ready', 'myliba'), get_post_meta($post->ID, '_myliba_seo_ready', true) === '1');
-        echo '<p class="description">' . esc_html__('Landing pages stay noindex and out of the sitemap until this is checked. Review the page title, language, links and complete content first.', 'myliba') . '</p>';
-    }
     ?>
     <script>
         (function () {
@@ -2022,10 +2018,6 @@ function field_definitions(string $post_type): array
         '_myliba_trainers_related_title' => 'text',
         '_myliba_trainers_related_limit' => 'number',
     ];
-
-    if ($post_type === 'myliba_landing') {
-        $fields['_myliba_seo_ready'] = 'checkbox';
-    }
 
     if ($post_type === 'myliba_event') {
         $fields += [

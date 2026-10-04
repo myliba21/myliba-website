@@ -49,16 +49,7 @@ function current_post_noindex(): bool
         return false;
     }
 
-    $post_id = get_queried_object_id();
-
-    // Seeded landing pages are drafts for search until an editor explicitly
-    // marks their content ready in the SEO box.
-    if (get_post_type($post_id) === 'myliba_landing'
-        && get_post_meta($post_id, '_myliba_seo_ready', true) !== '1') {
-        return true;
-    }
-
-    return get_post_meta($post_id, '_myliba_noindex', true) === '1';
+    return get_post_meta(get_queried_object_id(), '_myliba_noindex', true) === '1';
 }
 
 function public_origin_redirect_target(string $host, bool $secure, string $request_uri, string $site_url): string
@@ -384,13 +375,6 @@ function sitemap_post_query_args(array $args, string $post_type): array
         ['key' => '_myliba_noindex', 'value' => '1', 'compare' => '!='],
     ];
     $args['meta_query'] = $meta_query;
-
-    if ($post_type === 'myliba_landing') {
-        $args['meta_query'][] = [
-            'key' => '_myliba_seo_ready',
-            'value' => '1',
-        ];
-    }
 
     if ($post_type === 'myliba_solution') {
         $args['meta_query'][] = [
