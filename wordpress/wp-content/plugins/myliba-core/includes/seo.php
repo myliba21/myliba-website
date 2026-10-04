@@ -480,10 +480,11 @@ function document_title(array $parts): array
 
 function render_head(): void
 {
-    if (!seo_plugin_active()) {
-        render_fallback_meta();
+    if (seo_plugin_active()) {
+        return;
     }
 
+    render_fallback_meta();
     render_schema();
 }
 
@@ -696,7 +697,7 @@ function render_schema(): void
 
     $schemas[] = $organization;
     $schemas[] = $website;
-    if (!is_front_page()) {
+    if (is_singular() && !is_front_page()) {
         $schemas[] = breadcrumb_schema();
     }
 
@@ -717,7 +718,7 @@ function render_schema(): void
         $schemas[] = event_schema();
     }
 
-    if (is_singular('myliba_academy')) {
+    if (is_singular('myliba_academy') && academy_program_has_curriculum((int) get_queried_object_id())) {
         $schemas[] = course_schema(get_queried_object_id());
     }
 
@@ -738,7 +739,10 @@ function render_schema(): void
     }
 
     foreach (array_filter($schemas) as $schema) {
-        echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES) . "</script>\n";
+        echo '<script type="application/ld+json">' . wp_json_encode(
+            $schema,
+            JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+        ) . "</script>\n";
     }
 }
 
@@ -1045,9 +1049,9 @@ function event_schema(): array
     ];
 
     if ($date !== '') {
-        $timestamp = strtotime($date);
-        if ($timestamp) {
-            $schema['startDate'] = wp_date(DATE_W3C, $timestamp);
+        $event_time = \DateTimeImmutable::createFromFormat('!Y-m-d H:i', $date, wp_timezone());
+        if ($event_time instanceof \DateTimeImmutable) {
+            $schema['startDate'] = $event_time->format(DATE_W3C);
         }
     }
 
@@ -1075,7 +1079,7 @@ function course_schema(int $post_id): array
     $schema = [
         '@context' => 'https://schema.org',
         '@type' => 'Course',
-        'name' => get_the_title($post_id),
+        'name' => html_entity_decode(get_the_title($post_id), ENT_QUOTES | ENT_HTML5, 'UTF-8'),
         'description' => post_description($post_id),
         'url' => current_url(),
         'provider' => [
@@ -1091,6 +1095,11 @@ function course_schema(int $post_id): array
     }
 
     return array_filter($schema);
+}
+
+function academy_program_has_curriculum(int $post_id): bool
+{
+    return trim((string) get_post_meta($post_id, '_myliba_academy_program_modules', true)) !== '';
 }
 
 function faq_schema(): array
@@ -1138,18 +1147,33 @@ function faq_schema(): array
     }
 
     if (is_academy_landing()) {
+        // Academy FAQs are rendered from FAQ posts, never from the legacy field.
+        $pairs = [];
+        $sections = function_exists('Myliba\\Core\\Meta\\academy_sections')
+            ? \Myliba\Core\Meta\academy_sections($post_id)
+            : [];
+        if (isset($sections['faq']) && empty($sections['faq']['enabled'])) {
+            return [];
+        }
+
         $group = trim((string) get_post_meta($post_id, '_myliba_academy_faq_group', true));
         $meta_query = [];
+        $language = get_post_meta($post_id, '_myliba_language', true);
 
         if ($group !== '') {
             $meta_query[] = [
                 'key' => '_myliba_label',
                 'value' => $group,
             ];
+            if ($language !== '') {
+                $meta_query[] = [
+                    'key' => '_myliba_language',
+                    'value' => $language,
+                ];
+            }
         }
 
-        $language = get_post_meta($post_id, '_myliba_language', true);
-        if ($language !== '' && !function_exists('pll_current_language')) {
+        if ($group === '' && $language !== '' && !function_exists('pll_current_language')) {
             $meta_query[] = [
                 'key' => '_myliba_language',
                 'value' => $language,
@@ -1224,8 +1248,12 @@ function educational_organization_schema(): array
 
 function academy_course_schemas(): array
 {
-    $language = get_post_meta(get_queried_object_id(), '_myliba_language', true);
-    $academy_name = trim((string) get_post_meta(get_queried_object_id(), '_myliba_academy_organization_name', true));
+    $page_id = (int) get_queried_object_id();
+    $language = get_post_meta($page_id, '_myliba_language', true);
+    $academy_name = trim((string) get_post_meta($page_id, '_myliba_academy_organization_name', true));
+    $sections = function_exists('Myliba\\Core\\Meta\\academy_sections')
+        ? \Myliba\Core\Meta\academy_sections($page_id)
+        : [];
     $meta_query = [];
     if ($language !== '' && !function_exists('pll_current_language')) {
         $meta_query[] = [
@@ -1243,17 +1271,25 @@ function academy_course_schemas(): array
         'meta_query' => $meta_query,
     ]);
     $schemas = [];
+    $visible_program_position = 0;
 
     while ($query->have_posts()) {
         $query->the_post();
         $program_id = get_the_ID();
+        if (isset($sections['program_' . $program_id]) && empty($sections['program_' . $program_id]['enabled'])) {
+            continue;
+        }
+        $visible_program_position++;
+        if (!academy_program_has_curriculum($program_id)) {
+            continue;
+        }
         $description = get_the_excerpt() ?: wp_trim_words(wp_strip_all_tags((string) get_post_field('post_content', $program_id)), 32);
         $schema = [
             '@context' => 'https://schema.org',
             '@type' => 'Course',
-            'name' => get_the_title(),
+            'name' => html_entity_decode(get_the_title(), ENT_QUOTES | ENT_HTML5, 'UTF-8'),
             'description' => $description,
-            'url' => current_url() . '#program-' . (count($schemas) + 1),
+            'url' => current_url() . '#program-' . $visible_program_position,
             'provider' => [
                 '@type' => 'EducationalOrganization',
                 'name' => $academy_name ?: Options\get('organization_name', 'Myliba'),
