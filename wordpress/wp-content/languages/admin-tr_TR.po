@@ -190,67 +190,67 @@ msgctxt "label for responsive previews group"
 msgid "Responsive Views"
 msgstr "Duyarlı görünümler"
 
-#: wp-admin/about.php:148
+#: wp-admin/about.php:199
 msgid "WordPress 7.1 continues to polish accessibility across WordPress Core and Gutenberg, advancing the goals to meet accessibility standards. In this release, high impact changes include the new accessible tooltips API, improved predictability for screen readers, and improved labeling in many places in the admin. The editor adds extensive improvements to navigation and interaction."
 msgstr "WordPress 7.1, WordPress Çekirdeği ve Gutenberg genelinde erişilebilirliği daha da geliştirmeye devam ederek, erişilebilirlik standartlarını karşılama hedeflerini ilerletiyor. Bu sürümde, en önemli değişiklikler arasında yeni erişilebilir araç ipuçları API’si, ekran okuyucular için geliştirilmiş öngörülebilirlik ve yönetici panelinin birçok yerinde iyileştirilmiş etiketleme yer alıyor. Düzenleyici, gezinme ve etkileşim açısından kapsamlı iyileştirmeler getiriyor."
 
-#: wp-admin/about.php:139
+#: wp-admin/about.php:190
 msgid "Image compression, resizing, and thumbnail generation now happen in the browser, via a WebAssembly build of libvips, so large uploads won&#8217;t hit PHP memory limits or time out on shared hosts. This also frees up server CPU and memory, while producing smaller files for visitors. Media handling includes built-in support for AVIF, HEIC and HDR gain maps."
 msgstr "Görsel sıkıştırma, boyutlandırma ve küçük görsel oluşturma işlemleri artık tarayıcıda, libvips’in WebAssembly sürümü aracılığıyla gerçekleştiriliyor; böylece büyük boyutlu yüklemeler, paylaşımlı barındırma sunucularında PHP bellek sınırlarına ulaşmayacak veya zaman aşımına uğramayacak. Bu, ziyaretçiler için daha küçük dosyalar oluştururken, aynı zamanda sunucunun CPU ve bellek kaynaklarını da boşaltıyor. Medya işleme, AVIF, HEIC ve HDR kazanç haritaları için yerleşik destek içerir."
 
-#: wp-admin/about.php:138
+#: wp-admin/about.php:189
 msgid "Improved media handling"
 msgstr "Geliştirilmiş ortam işleme"
 
-#: wp-admin/about.php:123
+#: wp-admin/about.php:174
 msgid "Notes now support rich text and @mentions. Add bold, italic, code, and links so feedback reads clearly. Type &#8220;@&#8221; to pull up a list of collaborators to tag the right person directly, with built-in email notifications. Leave a note on a specific text selection instead of an entire block. Start more than one conversation on the same block. Collapse long notes to keep the margin tidy."
 msgstr "Notlar artık zengin metin ve @bahsetmelerini destekliyor. Geri bildirimlerin net bir şekilde okunabilmesi için kalın, italik, kod ve bağlantı ekleyin. &#8220;@&#8221; yazarak, yerleşik e-posta bildirimleri sayesinde doğru kişiyi doğrudan etiketlemek üzere işbirlikçilerin listesini açın. Tüm bloğu değil, belirli bir metin seçimini işaretleyerek not bırakın. Aynı blokta birden fazla sohbet başlatın. Kenar boşluğunu düzenli tutmak için uzun notları daraltın."
 
-#: wp-admin/about.php:122
+#: wp-admin/about.php:173
 msgid "More ways to leave feedback."
 msgstr "Geri bildirim bırakmanın daha fazla yolu."
 
-#: wp-admin/about.php:120
+#: wp-admin/about.php:171
 msgid "Inline notes with mentions and rich text"
 msgstr "Etiketler ve zengin metin içeren satır içi notlar"
 
-#: wp-admin/about.php:103
+#: wp-admin/about.php:154
 msgid "A new media editor modal replaces the old inline cropping tool, bringing freeform and aspect-ratio cropping, flip, precise rotation, and metadata editing together in a single streamlined workflow. The familiar Crop button still gets you there, now opening a dedicated space to crop, rotate, and adjust images before publishing."
 msgstr "Eski satır içi kırpma aracının yerini alan yeni ortam düzenleyici modülü, serbest biçimli ve en-boy oranına göre kırpma, ters çevirme, hassas döndürme ve meta veri düzenleme özelliklerini tek bir akıcı iş akışında bir araya getiriyor. Tanıdık “Kırp” düğmesi hâlâ aynı işlevi görüyor; artık yayınlamadan önce görselleri kırpmak, döndürmek ve ayarlamak için özel bir alan açıyor."
 
-#: wp-admin/about.php:102
+#: wp-admin/about.php:153
 msgid "One dedicated workflow for editing your images."
 msgstr "Görsellerinizi düzenlemek için özel bir iş akışı."
 
-#: wp-admin/about.php:100
+#: wp-admin/about.php:151
 msgid "A new way to crop"
 msgstr "Kırpmanın yeni yolu"
 
-#: wp-admin/about.php:93
+#: wp-admin/about.php:144
 msgid "The admin bar now stays with you across all editors, so you always know where you are. The admin bar also gets a small visual refresh."
 msgstr "Yönetici çubuğu artık tüm düzenleyicilerde her zaman görünür durumda, böylece nerede olduğunuzu her zaman bilirsiniz. Yönetici çubuğunda ayrıca küçük bir görsel güncelleme yapıldı."
 
-#: wp-admin/about.php:92
+#: wp-admin/about.php:143
 msgid "Consistent navigation, from dashboard to editor."
 msgstr "Başlangıç ekranından düzenleyiciye kadar tutarlı gezinme deneyimi."
 
-#: wp-admin/about.php:90
+#: wp-admin/about.php:141
 msgid "Admin bar, now in every editor"
 msgstr "Yönetici çubuğu, artık tüm düzenleyicilerde"
 
-#: wp-admin/about.php:73
+#: wp-admin/about.php:124
 msgid "WordPress 7.1 takes a major step toward built-in responsive design. Set how a block looks at different screen sizes directly in the editor, for both Global Styles and individual blocks, all without writing custom CSS."
 msgstr "WordPress 7.1, yerleşik duyarlı tasarıma doğru önemli bir adım atıyor. Hem genel stiller hem de tek tek bloklar için, bir bloğun farklı ekran boyutlarında nasıl görüneceğini doğrudan düzenleyicide ayarlayabilirsiniz; tüm bunları özel CSS yazmaya gerek kalmadan yapabilirsiniz."
 
-#: wp-admin/about.php:72
+#: wp-admin/about.php:123
 msgid "Style content your way, on every screen."
 msgstr "İçeriği her ekranda kendi tarzınıza göre düzenleyin."
 
-#: wp-admin/about.php:70
+#: wp-admin/about.php:121
 msgid "Apply responsive styles"
 msgstr "Duyarlı stilleri uygula"
 
-#: wp-admin/about.php:64
+#: wp-admin/about.php:115
 msgid "WordPress 7.1 makes styling and collaborating easier. Style how all blocks look across screen sizes and how the Button block responds to hover, focus, and active states, all without writing custom CSS. A streamlined media editor brings cropping, rotation, and metadata editing together in one workflow. Notes now support rich text and @mentions, and the admin bar travels with you into every editor, so the tools you rely on stay with you wherever you&#8217;re working."
 msgstr "WordPress 7.1, stil oluşturmayı ve ortak çalışmayı kolaylaştırıyor. Özel CSS yazmaya gerek kalmadan, tüm blokların farklı ekran boyutlarında nasıl görüneceğini ve Düğme bloğunun fareyle üzerine gelme, odaklanma ve etkin durumlara nasıl tepki vereceğini belirleyebilirsiniz. Sadeleştirilmiş ortam düzenleyicisi, kırpma, döndürme ve meta veri düzenleme işlemlerini tek bir iş akışında bir araya getirir. Notlar artık zengin metin ve @bahsetme özelliklerini destekliyor; ayrıca yönetici çubuğu her düzenleyiciye sizinle birlikte geliyor, böylece güvendiğiniz araçlar nerede çalışırsanız çalışın her zaman elinizin altında oluyor."
 
@@ -782,12 +782,12 @@ msgid "Skip to Editor"
 msgstr "Düzenleyiciye geç"
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:243
+#: wp-admin/about.php:294
 msgid "WordPress %s Field Guide"
 msgstr "WordPress %s alan rehberi"
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:216
+#: wp-admin/about.php:267
 msgid "WordPress %s Release Notes"
 msgstr "WordPress %s sürüm notları"
 
@@ -946,7 +946,7 @@ msgstr "Bir eklenti geliştiricisiyseniz, <a href=\"https://developer.wordpress.
 msgid "If you are a plugin author, you can learn more about <a href=\"https://developer.wordpress.org/plugins/privacy/adding-the-personal-data-eraser-to-your-plugin/\">how to add the Personal Data Eraser to a plugin</a>."
 msgstr "Bir eklenti geliştiricisiyseniz, <a href=\"https://developer.wordpress.org/plugins/privacy/adding-the-personal-data-eraser-to-your-plugin/\">Kişisel veri silicisini bir eklentiye nasıl ekleyeceğiniz</a> ile ilgili ayrıntılı bilgi alabilirsiniz."
 
-#: wp-admin/about.php:169
+#: wp-admin/about.php:220
 msgid "See everything new"
 msgstr "Yeni her şeyi görün"
 
@@ -956,11 +956,11 @@ msgid "https://wordpress.org/download/releases/%s/"
 msgstr "https://wordpress.org/download/releases/%s/"
 
 #. translators: %s: Version number.
-#: wp-admin/about.php:161
+#: wp-admin/about.php:212
 msgid "For a comprehensive overview of all the new features and enhancements in WordPress %s, please visit the feature-showcase website."
 msgstr "WordPress %s sürümündeki tüm yeni özellik ve geliştirmelerin kapsamlı özeti için özellik vitrini sitesine bakabilirsiniz."
 
-#: wp-admin/about.php:155
+#: wp-admin/about.php:206
 msgid "And much more"
 msgstr "Ve çok daha fazlası"
 
@@ -975,7 +975,7 @@ msgstr "Site simgesini değiştir"
 
 #. translators: 1: Plugin name, 2: Number of plugins, 3: A comma-separated list
 #. of plugin names.
-#: wp-admin/includes/plugin.php:1221
+#: wp-admin/includes/plugin.php:1227
 msgid "<strong>Error:</strong> %1$s requires %2$d plugin to be installed and activated: %3$s."
 msgid_plural "<strong>Error:</strong> %1$s requires %2$d plugins to be installed and activated: %3$s."
 msgstr[0] "<strong>Hata:</strong> %1$s için %2$d eklentinin kurulmuş ve etkinleştirilmiş olması gereklidir: %3$s."
@@ -1086,7 +1086,7 @@ msgid "Network Activate"
 msgstr "Ağda etkinleştir"
 
 #. translators: %s: Plugin name.
-#: wp-admin/includes/ajax-actions.php:4621
+#: wp-admin/includes/ajax-actions.php:4641
 msgid "%s is already active."
 msgstr "%s zaten etkin."
 
@@ -1166,12 +1166,12 @@ msgid "When using Bulk Edit, you can change the metadata (categories, author, et
 msgstr "Toplu düzenleme kullanılırken, seçilmiş tüm yazıların üst verilerini (kategoriler, yazar gibi) bir seferde değiştirebilirsiniz. Bir yazıyı gruptan kaldırmak için, görüntülenen toplu düzenleme alanında, adının yanındaki %s<span class=\"screen-reader-text\">Kaldır</span> düğmesine basmanız yeterlidir."
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:226
+#: wp-admin/about.php:277
 msgid "Read the WordPress %s Release Notes for information on installation, enhancements, fixed issues, release contributors, learning resources, and the list of file changes."
 msgstr "Kurulum bilgileri, iyileştirmeler, düzeltilen sorunlar, sürüme katkıda bulunanlar, öğrenme kaynakları ve dosya değişiklikleri listesi gibi bilgiler için WordPress %s dağıtım notlarını okuyun."
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:253
+#: wp-admin/about.php:304
 msgid "Explore the WordPress %s Field Guide. Learn about the changes in this release with detailed developer notes to help you build with WordPress."
 msgstr "WordPress %s saha rehberini keşfedin. WordPress ile derleme yapmanıza yardımcı olacak ayrıntılı geliştirici notları ve bu sürümdeki değişiklikler ile ilgili bilgi alın."
 
@@ -1654,7 +1654,7 @@ msgid "Be the future of WordPress"
 msgstr "WordPress’in geleceği olun"
 
 #. translators: 1: Learn WordPress link, 2: Workshops link.
-#: wp-admin/about.php:194
+#: wp-admin/about.php:245
 msgid "<a href=\"%1$s\">Learn WordPress</a> is a free resource for new and experienced WordPress users. Learn is stocked with how-to videos on using various features in WordPress, <a href=\"%2$s\">interactive workshops</a> for exploring topics in-depth, and lesson plans for diving deep into specific areas of WordPress."
 msgstr "<a href=\"%1$s\">Learn WordPress</a>, yeni ve deneyimli WordPress kullanıcıları için ücretsiz bir kaynaktır. Learn, çeşitli WordPress özelliklerinin kullanılması ile ilgili nasıl yapılır videoları, konuları derinlemesine keşfetmek için <a href=\"%2$s\">etkileşimli çalıştaylar</a> ve belirli WordPress alanlarına derinlemesine dalmak için ders planları ile doludur."
 
@@ -1800,12 +1800,12 @@ msgid "<a href=\"https://wordpress.org/documentation/article/customizer/\">Docum
 msgstr "<a href=\"https://wordpress.org/documentation/article/customizer/\">Özelleştirici yardımı</a>"
 
 #. translators: The localized WordPress download URL.
-#: wp-admin/about.php:334
+#: wp-admin/about.php:385
 msgid "https://wordpress.org/download/"
 msgstr "https://wordpress.org/download/"
 
 #. translators: %s: The major version of WordPress for this branch.
-#: wp-admin/about.php:331
+#: wp-admin/about.php:382
 msgid "This is the final release of WordPress %s"
 msgstr "Bu son WordPress %s sürümüdür"
 
@@ -2125,12 +2125,12 @@ msgid "Reach out to WordPress Core developers to ensure you'll never have this p
 msgstr "Bu sorunu bir daha asla yaşamayacağınızdan emin olmak için WordPress Core geliştiricilerine ulaşın."
 
 #. translators: 1: WordPress version number, 2: Link to update WordPress
-#: wp-admin/about.php:328
+#: wp-admin/about.php:379
 msgid "Important! Your version of WordPress (%1$s) will stop receiving security updates in the near future. To keep your site secure, please <a href=\"%2$s\">update to the latest version of WordPress</a>."
 msgstr "Önemli! WordPress sürümünüz (%1$s) yakın zamanda güvenlik güncellemelerini almayı durduracak. Sitenizi güvende tutmak için lütfen <a href=\"%2$s\">son WordPress sürümüne güncelleyin</a>."
 
 #. translators: 1: WordPress version number, 2: Link to update WordPress
-#: wp-admin/about.php:325
+#: wp-admin/about.php:376
 msgid "Important! Your version of WordPress (%1$s) is no longer supported, you will not receive any security updates for your website. To keep your site secure, please <a href=\"%2$s\">update to the latest version of WordPress</a>."
 msgstr "Önemli! WordPress sürümünüz (%1$s) artık desteklenmiyor. Artık siteniz için herhangi bir güvenlik güncellemesi alamayacaksınız. Sitenizi güvende tutmak için lütfen <a href=\"%2$s\">son WordPress sürümüne güncelleyin</a>."
 
@@ -2140,7 +2140,7 @@ msgid "https://make.wordpress.org/core/wordpress-%s-field-guide/"
 msgstr "https://make.wordpress.org/core/wordpress-%s-field-guide/"
 
 #. translators: %s: Version number.
-#: wp-admin/about.php:185
+#: wp-admin/about.php:236
 msgid "Learn more about WordPress %s"
 msgstr "WordPress %s ile ilgili ayrıntılı bilgi alın"
 
@@ -2200,7 +2200,7 @@ msgstr "<strong>Hata:</strong> %1$s dosyanız <a href=\"%2$s\">yazılabilir</a> 
 msgid "An avatar is an image that can be associated with a user across multiple websites. In this area, you can choose to display avatars of users who interact with the site."
 msgstr "Avatar, birden çok sitede bir kullanıcı ile ilişkilendirilebilen bir görseldir. Bu alanda, siteyle etkileşime giren kullanıcıların avatarlarını görüntülemeyi seçebilirsiniz."
 
-#: wp-admin/includes/post.php:1596
+#: wp-admin/includes/post.php:1610
 msgid "Change Permalink Structure"
 msgstr "Kalıcı bağlantı yapısını değiştir"
 
@@ -2522,19 +2522,19 @@ msgid "WordPress is created by a <a href=\"%1$s\">worldwide team</a> of passiona
 msgstr "WordPress <a href=\"%1$s\">dünya geneline yayılmış çok sayıda tutkulu katılımcı</a> tarafından oluşturulmuştur."
 
 #. translators: %s: Name of deactivated plugin.
-#: wp-admin/includes/plugin.php:2651
+#: wp-admin/includes/plugin.php:2657
 msgid "%s plugin deactivated during WordPress upgrade."
 msgstr "WordPress yükseltmesi sırasında %s eklentisi etkisizleştirildi."
 
 #. translators: 1: Name of deactivated plugin, 2: Plugin version deactivated,
 #. 3: Current WP version.
-#: wp-admin/includes/plugin.php:2639
+#: wp-admin/includes/plugin.php:2645
 msgid "%1$s %2$s was deactivated due to incompatibility with WordPress %3$s."
 msgstr "%1$s %2$s, WordPress %3$s sürümü ile uyumlu olmadığından etkisizleştirildi."
 
 #. translators: 1: Name of deactivated plugin, 2: Plugin version deactivated,
 #. 3: Current WP version, 4: Compatible plugin version.
-#: wp-admin/includes/plugin.php:2630
+#: wp-admin/includes/plugin.php:2636
 msgid "%1$s %2$s was deactivated due to incompatibility with WordPress %3$s, please upgrade to %1$s %4$s or later."
 msgstr "%1$s %2$s, WordPress %3$s sürümü ile uyumlu olmadığından etkisizleştirildi. Lütfen %1$s %4$s ya da üzerindeki bir sürüme yükseltin."
 
@@ -2840,11 +2840,11 @@ msgid "Want more events? <a href=\"%s\">Help organize the next one</a>!"
 msgstr "Daha fazla etkinlik mi istiyorsunuz? <a href=\"%s\">Bir sonrakini düzenlemeye yardımcı olun</a>!"
 
 #. translators: %s: User's display name.
-#: wp-admin/includes/ajax-actions.php:5669
+#: wp-admin/includes/ajax-actions.php:5689
 msgid "A password reset link was emailed to %s."
 msgstr "%s kullanıcısına e-posta ile parola sıfırlama bağlantısı gönderildi."
 
-#: wp-admin/includes/ajax-actions.php:5659
+#: wp-admin/includes/ajax-actions.php:5679
 msgid "Cannot send password reset, permission denied."
 msgstr "Parola sıfırlama iletisi gönderilemedi. İzin verilmiyor."
 
@@ -3034,7 +3034,7 @@ msgstr "Uygulama parolası ekle"
 msgid "Required to create an Application Password, but not to update the user."
 msgstr "Bir uygulama parolası oluşturmak için gerekir. Ancak kullanıcıyı güncellemek için gerekmez."
 
-#: wp-admin/about.php:269
+#: wp-admin/about.php:320
 msgid "Go to Updates"
 msgstr "Güncellemelere git"
 
@@ -3195,10 +3195,10 @@ msgstr "Son kullanılan"
 
 #. translators: 1: The Site Health action that is no longer used by core. 2:
 #. The new function that replaces it.
-#: wp-admin/includes/ajax-actions.php:5397
-#: wp-admin/includes/ajax-actions.php:5430
-#: wp-admin/includes/ajax-actions.php:5463
-#: wp-admin/includes/ajax-actions.php:5513
+#: wp-admin/includes/ajax-actions.php:5417
+#: wp-admin/includes/ajax-actions.php:5450
+#: wp-admin/includes/ajax-actions.php:5483
+#: wp-admin/includes/ajax-actions.php:5533
 msgid "The Site Health check for %1$s has been replaced with %2$s."
 msgstr "%1$s için site sağlığı denetimi %2$s ile değiştirildi."
 
@@ -3432,7 +3432,7 @@ msgctxt "theme"
 msgid "Activate &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; temasını etkinleştir"
 
-#: wp-admin/includes/ajax-actions.php:5603
+#: wp-admin/includes/ajax-actions.php:5623
 msgid "Sorry, you are not allowed to modify plugins."
 msgstr "Ne yazık ki, eklentileri düzenlemenize izin verilmiyor."
 
@@ -3647,39 +3647,39 @@ msgstr "Başarılı"
 
 #. translators: 1: Current WordPress version, 2: Plugin name, 3: Required
 #. WordPress version.
-#: wp-admin/includes/plugin.php:1192
+#: wp-admin/includes/plugin.php:1198
 msgctxt "plugin"
 msgid "<strong>Error:</strong> Current WordPress version (%1$s) does not meet minimum requirements for %2$s. The plugin requires WordPress %3$s."
 msgstr "<strong>Hata:</strong> Geçerli WordPress sürümü (%1$s), en düşük %2$s gereksinimlerini karşılamıyor. Eklenti için WordPress %3$s gereklidir."
 
 #. translators: 1: Current PHP version, 2: Plugin name, 3: Required PHP
 #. version.
-#: wp-admin/includes/plugin.php:1181
+#: wp-admin/includes/plugin.php:1187
 msgctxt "plugin"
 msgid "<strong>Error:</strong> Current PHP version (%1$s) does not meet minimum requirements for %2$s. The plugin requires PHP %3$s."
 msgstr "<strong>Hata:</strong> Geçerli PHP sürümü (%1$s), en düşük %2$s gereksinimlerini karşılamıyor. Eklenti için PHP %3$s gereklidir."
 
 #. translators: 1: Current WordPress version, 2: Current PHP version, 3: Plugin
 #. name, 4: Required WordPress version, 5: Required PHP version.
-#: wp-admin/includes/plugin.php:1168
+#: wp-admin/includes/plugin.php:1174
 msgctxt "plugin"
 msgid "<strong>Error:</strong> Current versions of WordPress (%1$s) and PHP (%2$s) do not meet minimum requirements for %3$s. The plugin requires WordPress %4$s and PHP %5$s."
 msgstr "<strong>Hata:</strong> Geçerli WordPress (%1$s) ve PHP (%2$s) sürümü, en düşük %3$s gereksinimlerini karşılamıyor. Eklenti için WordPress %4$s ve PHP %5$s gereklidir."
 
-#: wp-admin/includes/ajax-actions.php:5625
+#: wp-admin/includes/ajax-actions.php:5645
 msgid "Invalid data. The item does not exist."
 msgstr "Veriler geçersiz. Öge bulunamadı."
 
-#: wp-admin/includes/ajax-actions.php:5596
-#: wp-admin/includes/ajax-actions.php:5621
+#: wp-admin/includes/ajax-actions.php:5616
+#: wp-admin/includes/ajax-actions.php:5641
 msgid "Invalid data. Unknown type."
 msgstr "Veriler geçersiz. Tür bilinmiyor."
 
-#: wp-admin/includes/ajax-actions.php:5591
+#: wp-admin/includes/ajax-actions.php:5611
 msgid "Invalid data. Unknown state."
 msgstr "Veriler geçersiz. Durum bilinmiyor."
 
-#: wp-admin/includes/ajax-actions.php:5585
+#: wp-admin/includes/ajax-actions.php:5605
 msgid "Invalid data. No selected item."
 msgstr "Veriler geçersiz. Bir öge seçilmemiş."
 
@@ -4263,7 +4263,7 @@ msgstr "Varsayılan PHP saat dilimi geçerli"
 
 #. translators: %s: add_menu_page()
 #. translators: %s: add_submenu_page()
-#: wp-admin/includes/plugin.php:1420 wp-admin/includes/plugin.php:1524
+#: wp-admin/includes/plugin.php:1426 wp-admin/includes/plugin.php:1530
 msgid "The seventh parameter passed to %s should be numeric representing menu position."
 msgstr "%s için gönderilen yedinci değişken menü konumunu gösteren sayı olmalı."
 
@@ -4433,7 +4433,7 @@ msgstr "<a href=\"https://wordpress.org/documentation/article/settings-general-s
 msgid "You need to make this file writable before you can save your changes. See <a href=\"%s\">Changing File Permissions</a> for more information."
 msgstr "Değişikliklerinizi kaydetmeden önce bu dosyayı yazılabilir olarak ayarlamalısınız. Ayrıntılı bilgi almak için <a href=\"%s\">Dosya izinlerini değiştirmek</a> bölümüne bakabilirsiniz."
 
-#: wp-admin/includes/ajax-actions.php:2543
+#: wp-admin/includes/ajax-actions.php:2557
 msgid "Upload failed. Please reload and try again."
 msgstr "Yüklenemedi. Lütfen yeniden yüklemeyi deneyin."
 
@@ -4853,7 +4853,7 @@ msgstr "Tüm biçimler"
 msgid "Filter by post format"
 msgstr "Yazı biçimine göre süz"
 
-#: wp-admin/includes/plugin.php:2574 wp-admin/includes/plugin.php:2656
+#: wp-admin/includes/plugin.php:2580 wp-admin/includes/plugin.php:2662
 msgid "Go to the Plugins screen"
 msgstr "Eklentiler ekranına git"
 
@@ -4873,17 +4873,17 @@ msgid "The authenticity of %s could not be verified as signature verification is
 msgstr "Bu sistemde imza doğrulaması yapılamadığından %s paketinin özgünlüğü doğrulanamadı."
 
 #. translators: %s: Eraser friendly name.
-#: wp-admin/includes/ajax-actions.php:5265
+#: wp-admin/includes/ajax-actions.php:5285
 msgid "Eraser callback is not valid: %s."
 msgstr "Silici geri çağrısı geçersiz: %s."
 
 #. translators: %s: Eraser friendly name.
-#: wp-admin/includes/ajax-actions.php:5255
+#: wp-admin/includes/ajax-actions.php:5275
 msgid "Eraser does not include a callback: %s."
 msgstr "Silicide geri çağrı yok: %s."
 
-#: wp-admin/includes/ajax-actions.php:4977
-#: wp-admin/includes/ajax-actions.php:5168
+#: wp-admin/includes/ajax-actions.php:4997
+#: wp-admin/includes/ajax-actions.php:5188
 msgid "Sorry, you are not allowed to perform this action."
 msgstr "Ne yazık ki, bu işlemi yapmanıza izin verilmiyor."
 
@@ -6060,15 +6060,15 @@ msgstr "PHP nedir ve sitemi nasıl etkiler?"
 msgid "PHP Update Required"
 msgstr "PHP güncellemesi gerekli"
 
-#: wp-admin/includes/plugin.php:2572
+#: wp-admin/includes/plugin.php:2578
 msgid "You can find more details and make changes on the Plugins screen."
 msgstr "Eklentiler ekranında daha fazla ayrıntı bulabilir ve değişiklik yapabilirsiniz."
 
-#: wp-admin/includes/plugin.php:2571
+#: wp-admin/includes/plugin.php:2577
 msgid "One or more plugins failed to load properly."
 msgstr "Bir ya da birkaç eklenti düzgün yüklenemedi."
 
-#: wp-admin/includes/plugin.php:2541
+#: wp-admin/includes/plugin.php:2547
 msgid "Could not resume the plugin."
 msgstr "Eklenti sürdürülemedi."
 
@@ -6142,9 +6142,9 @@ msgstr "Bu eklenti, WordPress ve PHP sürümlerinizle çalışmaz."
 
 #. translators: %s: WordPress version number.
 #. translators: %s: WordPress version.
-#: wp-admin/about.php:21 wp-admin/includes/update.php:321
-#: wp-admin/index.php:119 wp-admin/install.php:242 wp-admin/update-core.php:94
-#: wp-admin/upgrade.php:96
+#: wp-admin/about.php:21 wp-admin/about.php:78 wp-admin/about.php:103
+#: wp-admin/includes/update.php:321 wp-admin/index.php:119
+#: wp-admin/install.php:242 wp-admin/update-core.php:94 wp-admin/upgrade.php:96
 msgid "https://wordpress.org/documentation/wordpress-version/version-%s/"
 msgstr "https://wordpress.org/documentation/wordpress-version/version-%s/"
 
@@ -6331,12 +6331,12 @@ msgid "Privacy Policy page updated successfully."
 msgstr "Gizlilik ilkesi sayfası güncellendi."
 
 #. translators: %s: admin_init
-#: wp-admin/includes/plugin.php:2428
+#: wp-admin/includes/plugin.php:2434
 msgid "The suggested privacy policy content should be added by using the %s (or later) action. Please see the inline documentation."
 msgstr "Önerilen gizlilik ilkesi içeriği %s (ya da sonrası) işlemi kullanılarak eklenmelidir. Lütfen satır içi belgelere bakın."
 
 #. translators: %s: admin_init
-#: wp-admin/includes/plugin.php:2417
+#: wp-admin/includes/plugin.php:2423
 msgid "The suggested privacy policy content should be added only in wp-admin by using the %s (or later) action."
 msgstr "Önerilen gizlilik ilkesi içeriği %s (ya da sonrası) işlemi kullanılarak wp-admin içinde eklenmelidir."
 
@@ -6719,7 +6719,7 @@ msgid "Report generated for"
 msgstr "Rapor oluşturulan kullanıcı"
 
 #. translators: %s: Exporter array index.
-#: wp-admin/includes/ajax-actions.php:5061
+#: wp-admin/includes/ajax-actions.php:5081
 msgid "Exporter array at index %s does not include a friendly name."
 msgstr "%s dizin numaralı dışa aktarıcı dizisinin kolay bir adı yok."
 
@@ -6731,72 +6731,72 @@ msgstr "Ne yazık ki, bu sitede kişisel verileri silmenize izin verilmiyor."
 msgid "Sorry, you are not allowed to export personal data on this site."
 msgstr "Ne yazık ki, bu sitede kişisel verileri dışa aktarmanıza izin verilmiyor."
 
-#: wp-admin/includes/ajax-actions.php:5228
+#: wp-admin/includes/ajax-actions.php:5248
 msgid "Eraser index is out of range."
 msgstr "Silici dizin numarası aralık dışında."
 
-#: wp-admin/includes/ajax-actions.php:5187
+#: wp-admin/includes/ajax-actions.php:5207
 msgid "Missing eraser index."
 msgstr "Silici dizin numarası eksik."
 
 #. translators: %s: Exporter friendly name.
-#: wp-admin/includes/ajax-actions.php:5112
+#: wp-admin/includes/ajax-actions.php:5132
 msgid "Expected done (boolean) in response array from exporter: %s."
 msgstr "Dışa aktarıcının yanıt dizisinde done (boolean) yanıtı bekleniyordu: %s."
 
 #. translators: %s: Exporter friendly name.
-#: wp-admin/includes/ajax-actions.php:5105
+#: wp-admin/includes/ajax-actions.php:5125
 msgid "Expected data array in response array from exporter: %s."
 msgstr "Dışa aktarıcı yanıt dizisinde veri dizisi bekleniyordu: %s."
 
 #. translators: %s: Exporter friendly name.
-#: wp-admin/includes/ajax-actions.php:5098
+#: wp-admin/includes/ajax-actions.php:5118
 msgid "Expected data in response array from exporter: %s."
 msgstr "Dışa aktarıcı yanıt dizisinde veriler bekleniyordu: %s."
 
 #. translators: %s: Exporter friendly name.
-#: wp-admin/includes/ajax-actions.php:5091
+#: wp-admin/includes/ajax-actions.php:5111
 msgid "Expected response as an array from exporter: %s."
 msgstr "Dışa aktarıcı yanıtı bir dizi olarak bekleniyordu: %s."
 
 #. translators: %s: Exporter friendly name.
-#: wp-admin/includes/ajax-actions.php:5077
+#: wp-admin/includes/ajax-actions.php:5097
 msgid "Exporter callback is not a valid callback: %s."
 msgstr "Dışa aktarıcı geri çağrısı geçerli değil: %s."
 
 #. translators: %s: Exporter friendly name.
-#: wp-admin/includes/ajax-actions.php:5070
+#: wp-admin/includes/ajax-actions.php:5090
 msgid "Exporter does not include a callback: %s."
 msgstr "Dışa aktarıcıda geri çağrı yok: %s."
 
 #. translators: %s: Exporter array index.
-#: wp-admin/includes/ajax-actions.php:5054
+#: wp-admin/includes/ajax-actions.php:5074
 msgid "Expected an array describing the exporter at index %s."
 msgstr "%s dizin numaralı dışa aktarıcıyı tanımlayan bir dizi bekleniyordu."
 
-#: wp-admin/includes/ajax-actions.php:5040
+#: wp-admin/includes/ajax-actions.php:5060
 msgid "Exporter index is out of range."
 msgstr "Dışa aktarıcı dizin numarası aralık dışında."
 
-#: wp-admin/includes/ajax-actions.php:5036
+#: wp-admin/includes/ajax-actions.php:5056
 msgid "Exporter index cannot be negative."
 msgstr "Dışa aktarıcı dizin numarası negatif olamaz."
 
-#: wp-admin/includes/ajax-actions.php:5030
+#: wp-admin/includes/ajax-actions.php:5050
 msgid "An exporter has improperly used the registration filter."
 msgstr "Bir dışa aktarıcı hesap açma süzgecini yanlış kullandı."
 
-#: wp-admin/includes/ajax-actions.php:5001
-#: wp-admin/includes/ajax-actions.php:5193
+#: wp-admin/includes/ajax-actions.php:5021
+#: wp-admin/includes/ajax-actions.php:5213
 msgid "Missing page index."
 msgstr "Sayfa dizin numarası eksik."
 
-#: wp-admin/includes/ajax-actions.php:4995
+#: wp-admin/includes/ajax-actions.php:5015
 msgid "Missing exporter index."
 msgstr "Dışa aktarıcı dizin numarası eksik."
 
-#: wp-admin/includes/ajax-actions.php:4986
-#: wp-admin/includes/ajax-actions.php:5177
+#: wp-admin/includes/ajax-actions.php:5006
+#: wp-admin/includes/ajax-actions.php:5197
 msgid "Invalid request type."
 msgstr "İstek türü geçersiz."
 
@@ -6924,7 +6924,7 @@ msgstr "Kişisel verilerin dışa aktarımı"
 msgid "Personal Data Export for %s"
 msgstr "%s için kişisel verilerin dışa aktarımı"
 
-#: wp-admin/includes/ajax-actions.php:4991
+#: wp-admin/includes/ajax-actions.php:5011
 msgid "A valid email address must be given."
 msgstr "Geçerli bir e-posta adresi verilmelidir."
 
@@ -6986,61 +6986,61 @@ msgstr "Doğrulama isteği yeniden gönderildi."
 msgid "Unable to initiate confirmation request."
 msgstr "Doğrulama isteği başlatılamadı."
 
-#: wp-admin/includes/ajax-actions.php:4973
-#: wp-admin/includes/ajax-actions.php:5163
+#: wp-admin/includes/ajax-actions.php:4993
+#: wp-admin/includes/ajax-actions.php:5183
 msgid "Invalid request ID."
 msgstr "İstek kimliği geçersiz."
 
 #. translators: 1: Eraser friendly name, 2: Eraser array index.
-#: wp-admin/includes/ajax-actions.php:5337
+#: wp-admin/includes/ajax-actions.php:5357
 msgid "Expected done flag in response array from %1$s eraser (index %2$d)."
 msgstr "%1$s silicisinin (%2$d dizin numaralı) yanıt dizisinde done (boolean) işareti bekleniyordu."
 
 #. translators: 1: Eraser friendly name, 2: Eraser array index.
-#: wp-admin/includes/ajax-actions.php:5326
+#: wp-admin/includes/ajax-actions.php:5346
 msgid "Expected messages key to reference an array in response array from %1$s eraser (index %2$d)."
 msgstr "%1$s silicisinin (%2$d dizin numaralı) yanıt dizisinde ileti anahtarlarının bir dizi başvurusu olması bekleniyordu."
 
 #. translators: 1: Eraser friendly name, 2: Eraser array index.
-#: wp-admin/includes/ajax-actions.php:5315
+#: wp-admin/includes/ajax-actions.php:5335
 msgid "Expected messages key in response array from %1$s eraser (index %2$d)."
 msgstr "%1$s silicisinin (%2$d dizin numaralı) yanıt dizisinde ileti anahtarları bekleniyordu."
 
 #. translators: 1: Eraser friendly name, 2: Eraser array index.
-#: wp-admin/includes/ajax-actions.php:5304
+#: wp-admin/includes/ajax-actions.php:5324
 msgid "Expected items_retained key in response array from %1$s eraser (index %2$d)."
 msgstr "%1$s silicisinin (%2$d dizin numaralı) yanıt dizisinde items_retained anahtarı bekleniyordu."
 
 #. translators: 1: Eraser friendly name, 2: Eraser array index.
-#: wp-admin/includes/ajax-actions.php:5293
+#: wp-admin/includes/ajax-actions.php:5313
 msgid "Expected items_removed key in response array from %1$s eraser (index %2$d)."
 msgstr "%1$s silicisinin (%2$d dizin numaralı) yanıt dizisinde items_removed anahtarı bekleniyordu."
 
 #. translators: 1: Eraser friendly name, 2: Eraser array index.
-#: wp-admin/includes/ajax-actions.php:5282
+#: wp-admin/includes/ajax-actions.php:5302
 msgid "Did not receive array from %1$s eraser (index %2$d)."
 msgstr "%1$s kişisinin (%2$d dizin numaralı) dizisi alınmadı."
 
 #. translators: %d: Eraser array index.
-#: wp-admin/includes/ajax-actions.php:5246
+#: wp-admin/includes/ajax-actions.php:5266
 msgid "Eraser array at index %d does not include a friendly name."
 msgstr "%d dizin numaralı silici dizisinin kolay bir adı yok."
 
 #. translators: %d: Eraser array index.
-#: wp-admin/includes/ajax-actions.php:5241
+#: wp-admin/includes/ajax-actions.php:5261
 msgid "Expected an array describing the eraser at index %d."
 msgstr "%d dizin numaralı siliciyi tanımlayan bir dizi bekleniyordu."
 
-#: wp-admin/includes/ajax-actions.php:5044
-#: wp-admin/includes/ajax-actions.php:5232
+#: wp-admin/includes/ajax-actions.php:5064
+#: wp-admin/includes/ajax-actions.php:5252
 msgid "Page index cannot be less than one."
 msgstr "Sayfa dizin numarası birden küçük olamaz."
 
-#: wp-admin/includes/ajax-actions.php:5224
+#: wp-admin/includes/ajax-actions.php:5244
 msgid "Eraser index cannot be less than one."
 msgstr "Silici dizin numarası bir değerinden küçük olamaz."
 
-#: wp-admin/includes/ajax-actions.php:5183
+#: wp-admin/includes/ajax-actions.php:5203
 msgid "Invalid email address in request."
 msgstr "İstekteki e-posta adresi geçersiz."
 
@@ -7158,7 +7158,7 @@ msgid "Installation Required"
 msgstr "Kurulması gerekli"
 
 #. translators: %s: Plugin filename.
-#: wp-admin/includes/plugin.php:1048
+#: wp-admin/includes/plugin.php:1054
 msgid "Could not fully remove the plugin %s."
 msgstr "%s eklentisi tam olarak kaldırılamadı."
 
@@ -7293,12 +7293,12 @@ msgid "Theme Installation"
 msgstr "Tema kurulumu"
 
 #. translators: %s: User's display name.
-#: wp-admin/includes/post.php:1884
+#: wp-admin/includes/post.php:1898
 msgid "%s is currently editing this post."
 msgstr "%s şu anda bu yazıyı düzenliyor."
 
 #. translators: %s: User's display name.
-#: wp-admin/includes/post.php:1881
+#: wp-admin/includes/post.php:1895
 msgid "%s is currently editing this post. Do you want to take over?"
 msgstr "%s şu anda bu yazıyı düzenliyor. Devralmak ister misiniz?"
 
@@ -7580,7 +7580,7 @@ msgctxt "Active plugin installations"
 msgid "Less Than 10"
 msgstr "10 taneden az"
 
-#: wp-admin/includes/ajax-actions.php:2626
+#: wp-admin/includes/ajax-actions.php:2640
 msgid "Sorry, you are not allowed to attach files to this post."
 msgstr "Ne yazık ki, bu yazıya dosya yüklemenize izin verilmiyor."
 
@@ -7711,7 +7711,7 @@ msgstr "Ne yazık ki, bu ağa kullanıcı eklemenize izin verilmiyor."
 msgid "Sorry, you are not allowed to edit this changeset."
 msgstr "Ne yazık ki, bu değişiklik kümesini değiştirmenize izin verilmiyor."
 
-#: wp-admin/includes/ajax-actions.php:4339 wp-admin/update.php:211
+#: wp-admin/includes/ajax-actions.php:4353 wp-admin/update.php:211
 #: wp-admin/update.php:234
 msgid "Sorry, you are not allowed to update themes for this site."
 msgstr "Ne yazık ki, bu sitedeki temaları güncellemenize izin verilmiyor."
@@ -7905,35 +7905,35 @@ msgstr "Ne yazık ki, bu sitenin gizlilik ayarlarını yönetmenize izin verilmi
 msgid "Sorry, you are not allowed to manage connectors on this site."
 msgstr "Ne yazık ki, bu sitedeki bağlayıcıları yönetme izniniz yok."
 
-#: wp-admin/includes/ajax-actions.php:4814
+#: wp-admin/includes/ajax-actions.php:4834
 msgid "Plugin could not be deleted."
 msgstr "Eklenti silinemedi."
 
-#: wp-admin/includes/ajax-actions.php:4668 wp-admin/update.php:29
+#: wp-admin/includes/ajax-actions.php:4688 wp-admin/update.php:29
 #: wp-admin/update.php:57 wp-admin/update.php:80
 msgid "Sorry, you are not allowed to update plugins for this site."
 msgstr "Ne yazık ki, bu sitede eklentileri güncellemenize izin verilmiyor."
 
-#: wp-admin/includes/ajax-actions.php:4614
+#: wp-admin/includes/ajax-actions.php:4628
 msgid "Sorry, you are not allowed to activate plugins on this site."
 msgstr "Ne yazık ki, bu sitede eklentileri etkinleştirmenize izin verilmiyor."
 
-#: wp-admin/includes/ajax-actions.php:4470
+#: wp-admin/includes/ajax-actions.php:4484
 msgid "Theme could not be deleted."
 msgstr "Tema silinemedi."
 
-#: wp-admin/includes/ajax-actions.php:4432
+#: wp-admin/includes/ajax-actions.php:4446
 msgid "Sorry, you are not allowed to delete themes on this site."
 msgstr "Ne yazık ki, bu sitede temaları silmenize izin verilmiyor."
 
-#: wp-admin/includes/ajax-actions.php:4212 wp-admin/theme-install.php:16
+#: wp-admin/includes/ajax-actions.php:4226 wp-admin/theme-install.php:16
 #: wp-admin/update.php:262 wp-admin/update.php:304 wp-admin/update.php:342
 msgid "Sorry, you are not allowed to install themes on this site."
 msgstr "Ne yazık ki, bu siteye tema kurmanıza izin verilmiyor."
 
-#: wp-admin/includes/ajax-actions.php:4199
-#: wp-admin/includes/ajax-actions.php:4325
-#: wp-admin/includes/ajax-actions.php:4420
+#: wp-admin/includes/ajax-actions.php:4213
+#: wp-admin/includes/ajax-actions.php:4339
+#: wp-admin/includes/ajax-actions.php:4434
 msgid "No theme specified."
 msgstr "Bir tema belirtilmemiş."
 
@@ -8151,7 +8151,7 @@ msgstr "Tema zip dosyası"
 msgid "Attach to existing content"
 msgstr "Var olan içeriğe ekle"
 
-#: wp-admin/includes/post.php:1685
+#: wp-admin/includes/post.php:1699
 msgid "Click the image to edit or update"
 msgstr "Düzenlemek ya da güncellemek için görsele tıklayın"
 
@@ -8391,8 +8391,9 @@ msgctxt "menu location"
 msgid "(Currently set to: %s)"
 msgstr "(Geçerli ayar: %s)"
 
+#. translators: %s: WordPress version.
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:299
+#: wp-admin/about.php:68 wp-admin/about.php:350
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>%s sürümü</strong> bir güvenlik açığını gideriyor."
 
@@ -8405,15 +8406,15 @@ msgstr "https://gravatar.com/"
 msgid "Profile Picture"
 msgstr "Profil görseli"
 
-#: wp-admin/about.php:296
+#: wp-admin/about.php:63 wp-admin/about.php:347
 msgid "Maintenance and Security Releases"
 msgstr "Bakım ve güvenlik dağıtımları"
 
-#: wp-admin/about.php:293
+#: wp-admin/about.php:344
 msgid "Security Releases"
 msgstr "Güvenlik dağıtımları"
 
-#: wp-admin/about.php:290
+#: wp-admin/about.php:341
 msgid "Maintenance Releases"
 msgstr "Bakım dağıtımları"
 
@@ -8646,11 +8647,11 @@ msgstr "Bağlantılar listesi"
 msgid "Get Version %s"
 msgstr "%s sürümünü alın"
 
-#: wp-admin/includes/post.php:1924
+#: wp-admin/includes/post.php:1938
 msgid "Saving revision&hellip;"
 msgstr "Sürüm kaydediliyor&hellip;"
 
-#: wp-admin/includes/post.php:1611
+#: wp-admin/includes/post.php:1625
 msgid "Edit permalink"
 msgstr "Kalıcı bağlantıyı düzenle"
 
@@ -8930,7 +8931,7 @@ msgstr "Yorumlar (%s)"
 msgid "Comments (%1$s) on &#8220;%2$s&#8221;"
 msgstr "&#8220;%2$s&#8221; için yorumlar (%1$s)"
 
-#: wp-admin/includes/ajax-actions.php:5613
+#: wp-admin/includes/ajax-actions.php:5633
 msgid "Sorry, you are not allowed to modify themes."
 msgstr "Ne yazık ki, temaları düzenlemenize izin verilmiyor."
 
@@ -9001,7 +9002,7 @@ msgid_plural "%s approved comments"
 msgstr[0] "%s onaylanmış yorum"
 msgstr[1] "%s onaylanmış yorum"
 
-#: wp-admin/includes/ajax-actions.php:4060
+#: wp-admin/includes/ajax-actions.php:4074
 msgid "Image could not be processed."
 msgstr "Görsel işlenemedi."
 
@@ -9447,19 +9448,19 @@ msgid "Filter by comment type"
 msgstr "Yorum türüne göre süz"
 
 #. translators: %s: User's display name.
-#: wp-admin/includes/ajax-actions.php:4035
+#: wp-admin/includes/ajax-actions.php:4049
 msgid "%s has been logged out."
 msgstr "%s çıkış yaptı."
 
-#: wp-admin/includes/ajax-actions.php:4031
+#: wp-admin/includes/ajax-actions.php:4045
 msgid "You are now logged out everywhere else."
 msgstr "Bunun dışındaki her yerden çıkış yaptınız."
 
-#: wp-admin/includes/ajax-actions.php:4022
+#: wp-admin/includes/ajax-actions.php:4036
 msgid "Could not log out user sessions. Please try again."
 msgstr "Kullanıcı oturumları kapatılamadı. Lütfen yeniden deneyin."
 
-#: wp-admin/includes/ajax-actions.php:3893
+#: wp-admin/includes/ajax-actions.php:3907
 msgid "This preview is unavailable in the editor."
 msgstr "Bu ön izleme düzenleyici içinden yapılamaz."
 
@@ -9642,7 +9643,7 @@ msgid "Beta Testing"
 msgstr "Beta testi"
 
 #. translators: %s: URL that could not be embedded.
-#: wp-admin/includes/ajax-actions.php:3859
+#: wp-admin/includes/ajax-actions.php:3873
 msgid "%s failed to embed."
 msgstr "%s gömülemedi."
 
@@ -10639,7 +10640,7 @@ msgstr "Bu ekranda gezinme menülerinizi yönetebilirsiniz."
 msgid "Menu locations updated."
 msgstr "Menü konumları güncellendi."
 
-#: wp-admin/includes/post.php:1925
+#: wp-admin/includes/post.php:1939
 msgid "Your latest changes were saved as a revision."
 msgstr "Son değişiklikleriniz bir sürüm olarak kaydedildi."
 
@@ -10842,7 +10843,7 @@ msgctxt "column name"
 msgid "Uploaded to"
 msgstr "Yüklendiği yer"
 
-#: wp-admin/includes/ajax-actions.php:2653
+#: wp-admin/includes/ajax-actions.php:2667
 #: wp-admin/includes/class-custom-background.php:524
 #: wp-admin/includes/class-custom-image-header.php:980
 msgid "The uploaded file is not a valid image. Please try again."
@@ -11595,7 +11596,7 @@ msgstr "Bu yazının geçerli sürümden daha yeni, otomatik olarak kaydedilmiş
 
 #: wp-admin/includes/class-custom-image-header.php:915
 #: wp-admin/includes/class-custom-image-header.php:1074
-#: wp-admin/includes/class-custom-image-header.php:1422
+#: wp-admin/includes/class-custom-image-header.php:1428
 msgid "Image could not be processed. Please go back and try again."
 msgstr "Görsel işlenemedi. Lütfen geri gidip yeniden deneyin."
 
@@ -11632,14 +11633,15 @@ msgstr "Bu siteye davet etmek istediğiniz ağ üzerinde bulunan bir kullanıcı
 msgid "Show Toolbar when viewing site"
 msgstr "Site görüntülenirken araç çubuğu görüntülensin"
 
+#. translators: %s: HelpHub URL.
 #. translators: %s: Documentation URL.
-#: wp-admin/about.php:322
+#: wp-admin/about.php:75 wp-admin/about.php:100 wp-admin/about.php:373
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Ayrıntılı bilgi almak için <a href=\"%s\">dağıtım notlarına</a> bakın."
 
 #. translators: 1: WordPress version number, 2: Plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:316
+#: wp-admin/about.php:88 wp-admin/about.php:367
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>%1$s sürümü</strong> ile bazı güvenlik açıkları kapatıldı ve %2$s hata düzeltildi."
@@ -11647,33 +11649,33 @@ msgstr[1] "<strong>%1$s sürümü</strong> ile bazı güvenlik açıkları kapat
 
 #. translators: 1: WordPress version number, 2: Plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:310
+#: wp-admin/about.php:361
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>%1$s sürümü</strong> ile bir güvenlik açığı kapatıldı ve %2$s hata düzeltildi."
 msgstr[1] "<strong>%1$s sürümü</strong> ile bir güvenlik açığı kapatıldı ve %2$s hata düzeltildi."
 
 #. translators: 1: WordPress version number, 2: Plural number of bugs.
-#: wp-admin/about.php:304
+#: wp-admin/about.php:355
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>%1$s sürümü</strong> ile %2$s hata düzeltildi."
 msgstr[1] "<strong>%1$s sürümü</strong> ile %2$s hata düzeltildi."
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:301
+#: wp-admin/about.php:352
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>%s sürümü</strong> ile bazı güvenlik açıkları giderildi."
 
-#: wp-admin/about.php:295
+#: wp-admin/about.php:346
 msgid "Maintenance and Security Release"
 msgstr "Bakım ve güvenlik dağıtımı"
 
-#: wp-admin/about.php:292
+#: wp-admin/about.php:343
 msgid "Security Release"
 msgstr "Güvenlik dağıtımı"
 
-#: wp-admin/about.php:289
+#: wp-admin/about.php:340
 msgid "Maintenance Release"
 msgstr "Bakım dağıtımı"
 
@@ -11946,15 +11948,15 @@ msgstr "<strong>Düzenle</strong> sizi bu yazının düzenleme ekranına götür
 msgid "Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, such as specifying a password, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users."
 msgstr "Çoklu site kurulumu olduğu için ağda var olan diğer kullanıcıları kullanıcı adı ya da e-posta adresi ile ekleyebilir ve rollerini atayabilirsiniz. Parola belirlemek gibi diğer seçenekler için ağ yöneticisi olmalı ve Ağ yönetimi > Tüm kullanıcılar bölümünden erişeceğiniz kullanıcının bağlantılarını kullanmalısınız."
 
-#: wp-admin/about.php:63
+#: wp-admin/about.php:114
 msgid "Welcome to WordPress 7.1"
 msgstr "WordPress 7.1 sürümüne hoş geldiniz"
 
-#: wp-admin/about.php:276
+#: wp-admin/about.php:327
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Başlangıç &rarr; Giriş bölümüne git"
 
-#: wp-admin/about.php:269
+#: wp-admin/about.php:320
 msgid "Go to Dashboard &rarr; Updates"
 msgstr "Başlangıç &rarr; Güncellemeler ekranına git"
 
@@ -12162,8 +12164,8 @@ msgstr "Süper yönetici"
 #. translators: %s: Theme version number.
 #. translators: %s: WordPress version.
 #. translators: %s: Theme version.
-#: wp-admin/includes/ajax-actions.php:4678
-#: wp-admin/includes/ajax-actions.php:4721
+#: wp-admin/includes/ajax-actions.php:4698
+#: wp-admin/includes/ajax-actions.php:4741
 #: wp-admin/includes/class-wp-debug-data.php:855
 #: wp-admin/includes/class-wp-debug-data.php:1031
 #: wp-admin/includes/class-wp-debug-data.php:1419
@@ -12451,7 +12453,7 @@ msgstr "Silinmek üzere seçtiğiniz kullanıcı:"
 msgid "%s Page Template"
 msgstr "%s sayfa şablonu"
 
-#: wp-admin/includes/ajax-actions.php:4783 wp-admin/plugins.php:667
+#: wp-admin/includes/ajax-actions.php:4803 wp-admin/plugins.php:667
 msgid "You cannot delete a plugin while it is active on the main site."
 msgstr "Ana sitede etkin olan bir eklentiyi silemezsiniz."
 
@@ -12584,7 +12586,7 @@ msgstr "Eklentiyi güncelle"
 msgid "Theme updated successfully."
 msgstr "Tema güncellendi."
 
-#: wp-admin/includes/ajax-actions.php:4399
+#: wp-admin/includes/ajax-actions.php:4413
 #: wp-admin/includes/class-theme-upgrader.php:63
 #: wp-admin/includes/class-theme-upgrader.php:100
 msgid "Theme update failed."
@@ -12595,7 +12597,7 @@ msgstr "Tema güncellenemedi."
 msgid "Plugin updated successfully."
 msgstr "Eklenti güncellendi."
 
-#: wp-admin/includes/ajax-actions.php:4740
+#: wp-admin/includes/ajax-actions.php:4760
 #: wp-admin/includes/class-plugin-upgrader.php:64
 #: wp-admin/includes/class-plugin-upgrader.php:91
 msgid "Plugin update failed."
@@ -13325,11 +13327,11 @@ msgstr "Yeni WordPress sitesi"
 msgid "My Site"
 msgstr "Benim sitem"
 
-#: wp-admin/includes/post.php:922
+#: wp-admin/includes/post.php:936
 msgid "Sorry, you are not allowed to create posts or drafts on this site."
 msgstr "Ne yazık ki, bu sitede yazı veya taslak oluşturmanıza izin verilmiyor."
 
-#: wp-admin/includes/post.php:920
+#: wp-admin/includes/post.php:934
 msgid "Sorry, you are not allowed to create pages on this site."
 msgstr "Ne yazık ki, bu sitede sayfa oluşturmanıza izin verilmiyor."
 
@@ -13636,7 +13638,7 @@ msgstr "WordPress güncellemeleri"
 msgid "Edit menu item"
 msgstr "Menü ögesini düzenle"
 
-#: wp-admin/about.php:276
+#: wp-admin/about.php:327
 msgid "Go to Dashboard"
 msgstr "Başlangıca git"
 
@@ -13778,7 +13780,7 @@ msgstr "Kullanılabilecek bileşenler"
 msgid "Error in displaying the widget settings form."
 msgstr "Bileşen ayarları formu görüntülenirken sorun çıktı."
 
-#: wp-admin/includes/misc.php:1368 wp-admin/includes/post.php:2149
+#: wp-admin/includes/misc.php:1368 wp-admin/includes/post.php:2163
 #: wp-admin/widgets-form.php:378
 msgid "Error while saving."
 msgstr "Kaydedilirken sorun çıktı."
@@ -14052,7 +14054,7 @@ msgid "You cannot edit this item because it is in the Trash. Please restore it a
 msgstr "Çöp kutusunda olduğundan bu nesneyi düzenleyemezsiniz. Lütfen çöp kutusundan çıkarıp yeniden deneyin."
 
 #: wp-admin/edit-tags.php:173 wp-admin/includes/class-wp-screen.php:299
-#: wp-admin/includes/post.php:2155 wp-admin/media-upload.php:47
+#: wp-admin/includes/post.php:2169 wp-admin/media-upload.php:47
 #: wp-admin/post.php:20 wp-admin/post.php:47 wp-admin/post.php:151
 #: wp-admin/term.php:43
 msgid "Sorry, you are not allowed to edit this item."
@@ -14164,7 +14166,7 @@ msgstr "Eklenti dosyaları"
 msgid "Select plugin to edit:"
 msgstr "Düzenlenecek eklentiyi seçin:"
 
-#: wp-admin/includes/ajax-actions.php:4953 wp-admin/plugin-editor.php:202
+#: wp-admin/includes/ajax-actions.php:4973 wp-admin/plugin-editor.php:202
 #: wp-admin/theme-editor.php:195
 msgid "File edited successfully."
 msgstr "Dosya düzenlendi."
@@ -14972,40 +14974,42 @@ msgstr "Bir %s sitesi daha"
 msgid "Just another WordPress site"
 msgstr "Bir WordPress sitesi daha"
 
-#: wp-admin/includes/post.php:763
+#: wp-admin/includes/post.php:777
 msgid "Auto Draft"
 msgstr "Otomatik taslak"
 
-#: wp-admin/includes/post.php:37 wp-admin/includes/post.php:82
+#: wp-admin/includes/post.php:37 wp-admin/includes/post.php:51
+#: wp-admin/includes/post.php:96
 msgid "Sorry, you are not allowed to edit posts as this user."
 msgstr "Ne yazık ki, bu kullanıcı olarak yazıları düzenlemenize izin verilmiyor."
 
-#: wp-admin/includes/post.php:35 wp-admin/includes/post.php:80
+#: wp-admin/includes/post.php:35 wp-admin/includes/post.php:49
+#: wp-admin/includes/post.php:94
 msgid "Sorry, you are not allowed to edit pages as this user."
 msgstr "Ne yazık ki, bu kullanıcı olarak sayfaları düzenlemenize izin verilmiyor."
 
-#: wp-admin/includes/plugin.php:1119
+#: wp-admin/includes/plugin.php:1125
 msgid "The plugin does not have a valid header."
 msgstr "Eklentinin geçerli bir üst bilgi bölümü yok."
 
-#: wp-admin/includes/plugin.php:1114
+#: wp-admin/includes/plugin.php:1120
 msgid "Plugin file does not exist."
 msgstr "Eklenti dosyası bulunamadı."
 
-#: wp-admin/includes/plugin.php:1111
+#: wp-admin/includes/plugin.php:1117
 msgid "Invalid plugin path."
 msgstr "Eklenti yolu geçersiz."
 
 #. translators: %s: Comma-separated list of plugin filenames.
-#: wp-admin/includes/plugin.php:1051
+#: wp-admin/includes/plugin.php:1057
 msgid "Could not fully remove the plugins %s."
 msgstr "%s eklentileri tam olarak kaldırılamadı."
 
-#: wp-admin/includes/plugin.php:886
+#: wp-admin/includes/plugin.php:892
 msgid "One of the plugins is invalid."
 msgstr "Eklentilerden biri geçersiz."
 
-#: wp-admin/includes/plugin.php:735
+#: wp-admin/includes/plugin.php:741
 msgid "The plugin generated unexpected output."
 msgstr "Eklenti beklenmeyen bir çıktı üretti."
 
@@ -15908,7 +15912,7 @@ msgstr "Gerekli klasörün konumu bulunamadı (%s)."
 msgid "Unable to locate WordPress content directory"
 msgstr "WordPress içerik klasörünün konumu bulunamadı."
 
-#: wp-admin/includes/class-wp-upgrader.php:194 wp-admin/includes/plugin.php:958
+#: wp-admin/includes/class-wp-upgrader.php:194 wp-admin/includes/plugin.php:964
 msgid "Unable to locate WordPress plugin directory."
 msgstr "WordPress eklenti klasörünün konumu bulunamadı."
 
@@ -15916,7 +15920,7 @@ msgstr "WordPress eklenti klasörünün konumu bulunamadı."
 msgid "Unable to locate WordPress root directory."
 msgstr "WordPress kök klasörünün konumu bulunamadı."
 
-#: wp-admin/includes/class-wp-upgrader.php:190 wp-admin/includes/plugin.php:952
+#: wp-admin/includes/class-wp-upgrader.php:190 wp-admin/includes/plugin.php:958
 #: wp-admin/includes/theme.php:66
 msgid "Filesystem error."
 msgstr "Dosya sistemi hatası."
@@ -16144,7 +16148,7 @@ msgstr "Yorumu güncelle"
 
 #. translators: 1: Post edited date, 2: Post edited time.
 #. translators: 1: Date of last edit, 2: Time of last edit.
-#: wp-admin/edit-form-advanced.php:660 wp-admin/includes/ajax-actions.php:2933
+#: wp-admin/edit-form-advanced.php:660 wp-admin/includes/ajax-actions.php:2947
 msgid "Last edited on %1$s at %2$s"
 msgstr "En son %1$s tarihinde %2$s saatinde düzenlendi"
 
@@ -16152,7 +16156,7 @@ msgstr "En son %1$s tarihinde %2$s saatinde düzenlendi"
 #. Post edited time.
 #. translators: 1: User's display name, 2: Date of last edit, 3: Time of last
 #. edit.
-#: wp-admin/edit-form-advanced.php:652 wp-admin/includes/ajax-actions.php:2930
+#: wp-admin/edit-form-advanced.php:652 wp-admin/includes/ajax-actions.php:2944
 msgid "Last edited by %1$s on %2$s at %3$s"
 msgstr "En son %1$s tarafından %2$s tarihinde %3$s saatinde düzenlendi"
 
@@ -16410,19 +16414,19 @@ msgstr "%s yüklenemedi."
 msgid "Invalid plugin page."
 msgstr "Eklenti sayfası geçersiz."
 
-#: wp-admin/includes/ajax-actions.php:2239
-#: wp-admin/includes/ajax-actions.php:2245
+#: wp-admin/includes/ajax-actions.php:2253
+#: wp-admin/includes/ajax-actions.php:2259
 #: wp-admin/includes/edit-tag-messages.php:18
 msgid "Item not updated."
 msgstr "Öge güncellenmedi."
 
 #. translators: %s: User's display name.
-#: wp-admin/includes/ajax-actions.php:2113
+#: wp-admin/includes/ajax-actions.php:2127
 msgid "Saving is disabled: %s is currently editing this post."
 msgstr "Kaydedilemez: Şu anda bu yazıyı %s düzenliyor."
 
 #. translators: %s: User's display name.
-#: wp-admin/includes/ajax-actions.php:2117
+#: wp-admin/includes/ajax-actions.php:2131
 msgid "Saving is disabled: %s is currently editing this page."
 msgstr "Kaydedilemez: Şu anda bu sayfayı %s düzenliyor."
 

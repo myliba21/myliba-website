@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 7.1.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-09-13 22:12:37+0000\n"
+"PO-Revision-Date: 2026-09-24 12:33:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -99,8 +99,8 @@ msgstr "j F Y H:i"
 #: wp-includes/script-loader.php:156 wp-includes/script-loader.php:476
 #: wp-admin/admin.php:118 wp-admin/edit-form-advanced.php:654
 #: wp-admin/edit-form-advanced.php:661 wp-admin/includes/ajax-actions.php:1662
-#: wp-admin/includes/ajax-actions.php:2919
-#: wp-admin/includes/ajax-actions.php:2922
+#: wp-admin/includes/ajax-actions.php:2933
+#: wp-admin/includes/ajax-actions.php:2936
 #: wp-admin/includes/class-wp-application-passwords-list-table.php:70
 #: wp-admin/includes/class-wp-application-passwords-list-table.php:85
 #: wp-admin/includes/class-wp-application-passwords-list-table.php:225
@@ -285,6 +285,10 @@ msgstr "Ocak"
 #, gp-priority: high
 msgid "Uncategorized"
 msgstr "Genel"
+
+#: wp-includes/class-wp-xmlrpc-server.php:1489
+msgid "Sorry, this post type is not supported over XML-RPC."
+msgstr "Üzgünüz, bu yazı tipi XML-RPC üzerinden desteklenmemektedir."
 
 #: wp-includes/build/pages/font-library/page.php:324
 #: wp-includes/build/pages/options-connectors/page.php:324
@@ -748,12 +752,12 @@ msgstr "[%1$s] “%2$s” üzerindeki bir notta sizden bahsedildi"
 msgid "%1$s mentioned you in a note on \"%2$s\"."
 msgstr "%1$s, “%2$s” üzerindeki bir notta sizden bahsetti."
 
-#: wp-includes/comment.php:2738 wp-admin/includes/ajax-actions.php:2110
+#: wp-includes/comment.php:2738 wp-admin/includes/ajax-actions.php:2124
 msgid "Someone"
 msgstr "Birisi"
 
-#: wp-includes/class-wp-xmlrpc-server.php:6489
-#: wp-includes/class-wp-xmlrpc-server.php:6496
+#: wp-includes/class-wp-xmlrpc-server.php:6516
+#: wp-includes/class-wp-xmlrpc-server.php:6523
 msgid "Invalid attachment data."
 msgstr "Geçersiz ek verisi."
 
@@ -774,7 +778,7 @@ msgid "A view configuration patch must declare a supported schema version."
 msgstr "Bir görünüm yapılandırması yaması, desteklenen bir şema sürümü bildirmelidir.⁠"
 
 #. translators: 1: oembed_providers, 2: The oEmbed provider URL pattern.
-#: wp-includes/class-wp-oembed.php:240
+#: wp-includes/class-wp-oembed.php:237
 msgid "The oEmbed provider data returned by the %1$s filter at key %2$s is malformed. The providers array must be a mapping of provider URL patterns to a tuple array consisting of a provider endpoint URL string at index 0 and an optional boolean regex flag at index 1."
 msgstr "%1$s süzgecinin %2$s anahtarında döndürdüğü oEmbed sağlayıcı verisi bozuk. Sağlayıcı dizisi; sağlayıcı URL kalıplarını, 0 dizinindeki bir sağlayıcı uç nokta URL dizgesi ile 1 dizinindeki isteğe bağlı bir mantıksal regex bayrağından oluşan bir demet dizisine eşleyen bir yapı olmalıdır."
 
@@ -1029,7 +1033,7 @@ msgstr "%1$s argümanı sağlandığında, “%2$s” betiği ya alt bilgide yaz
 #: wp-includes/class-wp-editor.php:1255
 #: wp-admin/includes/class-wp-posts-list-table.php:1652
 #: wp-admin/includes/class-wp-theme-install-list-table.php:348
-#: wp-admin/includes/meta-boxes.php:73 wp-admin/includes/post.php:1903
+#: wp-admin/includes/meta-boxes.php:73 wp-admin/includes/post.php:1917
 #: wp-admin/theme-install.php:427 wp-admin/theme-install.php:440
 #: wp-admin/theme-install.php:450 wp-admin/theme-install.php:457
 msgctxt "verb"
@@ -2041,7 +2045,7 @@ msgctxt "keyboard shortcut to open the command palette"
 msgid "⌘K"
 msgstr "⌘K"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:566
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:2107
 msgid "Sorry, you are not allowed to create notes for this post."
 msgstr "Ne yazık ki, bu yazı için not oluşturma izniniz yok."
 
@@ -2285,16 +2289,16 @@ msgstr "Yeni bir kullanıcı oluştururken user_pass alanı zorunludur. Kullanı
 
 #. translators: %s is the throwable class name
 #. translators: %s is the class name
-#: wp-includes/template.php:1026 wp-includes/template.php:1065
+#: wp-includes/template.php:1092 wp-includes/template.php:1131
 msgid "Uncaught \"%s\" thrown:"
 msgstr "Yakalanamayan \"%s\" atıldı:"
 
-#: wp-includes/template.php:975
+#: wp-includes/template.php:1041
 msgid "User error triggered:"
 msgstr "Kullanıcı hatası tetiklendi:"
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:153
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:602
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:2143
 msgid "Sorry, this post type does not support notes."
 msgstr "Ne yazık ki, bu yazı türünde notlar desteklenmiyor."
 
@@ -3096,7 +3100,7 @@ msgstr "Yükle"
 msgid "Email checks are rate limited to once every %s."
 msgstr "E-posta denetleme hızı %s ile sınırlıdır."
 
-#: wp-includes/theme.php:4357
+#: wp-includes/theme.php:4365
 msgid "This function should not be called before the theme directory is registered."
 msgstr "Bu işlev, tema dizini kaydedilmeden önce çağrılmamalıdır."
 
@@ -3200,12 +3204,12 @@ msgstr "Görsel ekle"
 msgid "Add Header Image"
 msgstr "Üst kısım görseli ekle"
 
-#: wp-includes/class-wp-xmlrpc-server.php:5060
-#: wp-includes/class-wp-xmlrpc-server.php:6621
+#: wp-includes/class-wp-xmlrpc-server.php:5087
+#: wp-includes/class-wp-xmlrpc-server.php:6648
 msgid "No posts found or an error occurred while retrieving posts."
 msgstr "Yazı bulunamadı veya yazılar alınırken bir sorun çıktı."
 
-#: wp-includes/class-wp-xmlrpc-server.php:4040
+#: wp-includes/class-wp-xmlrpc-server.php:4067
 msgid "An error occurred while processing your comment. Please ensure all fields are filled correctly and try again."
 msgstr "Yorumunuz işlenirken bir sorun çıktı. Lütfen tüm alanların doğru doldurulduğundan emin olun ve yeniden deneyin."
 
@@ -3684,7 +3688,7 @@ msgstr "https://developer.wordpress.org/advanced-administration/wordpress/cookie
 msgid "https://developer.wordpress.org/advanced-administration/wordpress/wp-config/"
 msgstr "https://developer.wordpress.org/advanced-administration/wordpress/wp-config/"
 
-#: wp-includes/theme.php:4234
+#: wp-includes/theme.php:4242
 msgid "Custom spacing sizes if defined by the theme."
 msgstr "Tema tarafından tanımlanmış ise özel boşluk boyutları."
 
@@ -3896,7 +3900,7 @@ msgctxt "block description"
 msgid "Reuse this design across your site."
 msgstr "Bu tasarım tüm sitede yeniden kullanılır."
 
-#: wp-includes/js/dist/editor.js:101469 wp-admin/about.php:147
+#: wp-includes/js/dist/editor.js:101469 wp-admin/about.php:198
 msgid "Accessibility"
 msgstr "Erişilebilirlik"
 
@@ -4384,10 +4388,10 @@ msgid "The plugin is not installed."
 msgstr "Eklenti kurulmamış."
 
 #: wp-includes/class-wp-plugin-dependencies.php:448
-#: wp-admin/includes/ajax-actions.php:4494
-#: wp-admin/includes/ajax-actions.php:4601
-#: wp-admin/includes/ajax-actions.php:4653
-#: wp-admin/includes/ajax-actions.php:4761
+#: wp-admin/includes/ajax-actions.php:4508
+#: wp-admin/includes/ajax-actions.php:4615
+#: wp-admin/includes/ajax-actions.php:4673
+#: wp-admin/includes/ajax-actions.php:4781
 msgid "No plugin specified."
 msgstr "Herhangi bir eklenti belirtilmemiş."
 
@@ -4397,7 +4401,7 @@ msgstr "Ayrıntılı bilgi almak için lütfen eklenti geliştiricileri ile gör
 
 #: wp-includes/class-wp-plugin-dependencies.php:420
 msgid "These plugins cannot be activated because their requirements are invalid."
-msgstr "Gereksinimleri geçersiz olduğundan bu eklentiler etkinleştirilemez. "
+msgstr "Gereksinimleri geçersiz olduğundan bu eklentiler etkinleştirilemez."
 
 #. translators: 1: First plugin name, 2: Second plugin name.
 #: wp-includes/class-wp-plugin-dependencies.php:411
@@ -4406,7 +4410,7 @@ msgid "%1$s requires %2$s"
 msgstr "%1$s için %2$s gerekli"
 
 #: wp-includes/class-wp-plugin-dependencies.php:373
-#: wp-admin/includes/plugin.php:1239
+#: wp-admin/includes/plugin.php:1245
 msgid "Please contact your network administrator."
 msgstr "Lütfen ağ yöneticiniz ile görüşün."
 
@@ -4414,7 +4418,7 @@ msgstr "Lütfen ağ yöneticiniz ile görüşün."
 #. translators: %s: Link to the plugins page.
 #: wp-includes/class-wp-plugin-dependencies.php:369
 #: wp-includes/class-wp-plugin-dependencies.php:378
-#: wp-admin/includes/plugin.php:1235 wp-admin/includes/plugin.php:1244
+#: wp-admin/includes/plugin.php:1241 wp-admin/includes/plugin.php:1250
 msgid "<a href=\"%s\">Manage plugins</a>."
 msgstr "<a href=\"%s\">Eklentileri yönet</a>."
 
@@ -4758,7 +4762,7 @@ msgstr "WordPress öğrenin"
 #: wp-admin/includes/class-wp-automatic-updater.php:506
 #: wp-admin/includes/class-wp-upgrader.php:189
 #: wp-admin/includes/class-wp-upgrader.php:1020 wp-admin/includes/file.php:1618
-#: wp-admin/includes/plugin.php:948 wp-admin/includes/theme.php:62
+#: wp-admin/includes/plugin.php:954 wp-admin/includes/theme.php:62
 msgid "Could not access filesystem."
 msgstr "Dosya sistemine ulaşılamadı."
 
@@ -5582,11 +5586,11 @@ msgstr "Bir %s dosyası yok gibi görünüyor. Kurulumu sürdürebilmek için bu
 msgid "The date and time the preferences were updated."
 msgstr "Ayarların güncellendiği tarih ve saat."
 
-#: wp-includes/theme.php:4151
+#: wp-includes/theme.php:4159
 msgid "Whether the theme disables generated layout styles."
 msgstr "Temanın oluşturulan yerleşim biçemlerini etkisiz bırakıp bırakmadığı."
 
-#: wp-includes/theme.php:3961
+#: wp-includes/theme.php:3969
 msgid "Whether a theme uses block-based template parts."
 msgstr "Bir temanın blok temelli şablon parçaları kullanıp kullanmadığı."
 
@@ -5742,7 +5746,7 @@ msgstr "Nesne ön belleği uyarlamanız, bellek içi çalışma ön belleğinin 
 
 #. translators: Custom template title in the Site Editor, referencing a deleted
 #. author. %s: Author nicename.
-#: wp-includes/block-template-utils.php:965
+#: wp-includes/block-template-utils.php:976
 msgid "Deleted author: %s"
 msgstr "Şu yazar silindi: %s"
 
@@ -5750,9 +5754,9 @@ msgstr "Şu yazar silindi: %s"
 #. translators: Custom template description in the Site Editor. %s: Term title.
 #. translators: Custom template description in the Site Editor. %s: Author
 #. name.
-#: wp-includes/block-template-utils.php:728
-#: wp-includes/block-template-utils.php:804
-#: wp-includes/block-template-utils.php:979
+#: wp-includes/block-template-utils.php:739
+#: wp-includes/block-template-utils.php:815
+#: wp-includes/block-template-utils.php:990
 msgid "Template for %s"
 msgstr "%s için şablon"
 
@@ -5760,8 +5764,8 @@ msgstr "%s için şablon"
 #. that was not found. 1: Post type singular name, 2: Post type slug.
 #. translators: Custom template title in the Site Editor, referencing a
 #. taxonomy term that was not found. 1: Taxonomy singular name, 2: Term slug.
-#: wp-includes/block-template-utils.php:709
-#: wp-includes/block-template-utils.php:786
+#: wp-includes/block-template-utils.php:720
+#: wp-includes/block-template-utils.php:797
 msgid "Not found: %1$s (%2$s)"
 msgstr "Bulunamadı: %1$s (%2$s)"
 
@@ -5780,7 +5784,7 @@ msgstr "%1$s kancası için zamanlanmış görev kapatılırken sorun çıktı. 
 msgid "Cron reschedule event error for hook: %1$s, Error code: %2$s, Error message: %3$s, Data: %4$s"
 msgstr "%1$s kancası için zamanlanmış görevin zamanı ayarlanırken sorun çıktı. Hata kodu: %2$s, Hata iletisi: %3$s, Veri: %4$s"
 
-#: wp-includes/theme.php:3954
+#: wp-includes/theme.php:3962
 msgid "Whether a theme uses block-based templates."
 msgstr "Bir temanın blok temelli şablonlar kullanıp kullanmadığı."
 
@@ -6168,7 +6172,7 @@ msgstr "YB"
 msgid "The description will be displayed in the menu if the active theme supports it."
 msgstr "Etkin tema destekliyorsa açıklama menüde görüntülenir."
 
-#: wp-includes/class-wp-xmlrpc-server.php:7098
+#: wp-includes/class-wp-xmlrpc-server.php:7125
 msgid "A title on that page cannot be found."
 msgstr "Bu sayfada bir başlık bulunamadı."
 
@@ -7082,11 +7086,11 @@ msgstr "Yazı biçimi bağlantısı"
 msgid "The calendar block is hidden because there are no published posts."
 msgstr "Yayınlanmış yazı olmadığı için takvim bloğu gizlendi."
 
-#: wp-includes/block-template-utils.php:1493
+#: wp-includes/block-template-utils.php:1504
 msgid "Unable to open export file (archive) for writing."
 msgstr "Dışarıya aktarılan (arşiv) dosyası yazılmak üzere açılamadı."
 
-#: wp-includes/block-template-utils.php:1484
+#: wp-includes/block-template-utils.php:1495
 msgid "Zip Export not supported."
 msgstr "Zip dışa aktarma desteklenmiyor."
 
@@ -7343,7 +7347,7 @@ msgctxt "Block pattern category"
 msgid "Media"
 msgstr "Ortam"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1583
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1606
 msgid "The date the comment was published, as GMT."
 msgstr "GMT olarak yorumun yayınlandığı tarih."
 
@@ -7372,23 +7376,23 @@ msgstr "Yazının GUID değeri, veri tabanında olduğu gibi."
 msgid "The date the post was published, in the site's timezone."
 msgstr "Sitenin saat diliminde yazının yayınlanma tarihi."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1596
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1619
 msgid "The ID for the parent of the comment."
 msgstr "Yorumun üst ögesinin kimliği."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1577
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1600
 msgid "The date the comment was published, in the site's timezone."
 msgstr "Sitenin saat diliminde yorumun yayınlanma tarihi."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1569
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1592
 msgid "HTML content for the comment, transformed for display."
 msgstr "Yorumun görüntülenmek üzere dönüştürülmüş HTML içeriği."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1564
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1587
 msgid "Content for the comment, as it exists in the database."
 msgstr "Yorumun içeriği, veri tabanında olduğu gibi."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1555
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1578
 msgid "The content for the comment."
 msgstr "Yorum için içerik."
 
@@ -8451,20 +8455,20 @@ msgstr "Model kimliği."
 msgid "Sorry, you are not allowed to browse the local block pattern directory."
 msgstr "Ne yazık ki, yerel blok model klasörüne göz atma izniniz yok."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1737
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1760
 msgid "Sort collection by comment attribute."
 msgstr "Derlemeyi yorum özniteliğine göre sıralar."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1616
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1639
 msgid "Type of the comment."
 msgstr "Yorum türü."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1589
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1612
 msgid "URL to the comment."
 msgstr "Yorum adresi."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:74
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1506
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1529
 msgid "Unique identifier for the comment."
 msgstr "Yorumun eşsiz belirteci."
 
@@ -8609,8 +8613,8 @@ msgstr "Şablonlar"
 #. translators: %1$s: action label ("Marked as resolved" or "Reopened"); %2$s:
 #. note text.
 #. translators: 1: Comment author, 2: Comment excerpt.
-#: wp-includes/block-template-utils.php:721
-#: wp-includes/block-template-utils.php:797
+#: wp-includes/block-template-utils.php:732
+#: wp-includes/block-template-utils.php:808
 #: wp-includes/js/dist/edit-site.js:23896
 #: wp-includes/js/dist/edit-site.js:24613
 #: wp-includes/js/dist/edit-site.js:25107
@@ -8658,8 +8662,8 @@ msgstr "Eşleşen şablon bulunamadı"
 msgid "No matching template found."
 msgstr "Eşleşen şablon bulunamadı."
 
-#: wp-includes/block-template-utils.php:847
-#: wp-includes/block-template-utils.php:916
+#: wp-includes/block-template-utils.php:858
+#: wp-includes/block-template-utils.php:927
 msgid "No theme is defined for this template."
 msgstr "Bu şablon için herhangi bir tema tanımlanmamış."
 
@@ -9437,7 +9441,7 @@ msgstr "Yol ayrıştırılamadı."
 msgid "The handler for the route is invalid."
 msgstr "Yol tanıtıcısı geçersiz."
 
-#: wp-includes/theme.php:2727
+#: wp-includes/theme.php:2735
 msgid "You need to pass an array of post formats."
 msgstr "Yazı biçimleri parametresi olarak bir dizi aktarmalısınız."
 
@@ -9446,8 +9450,8 @@ msgstr "Yazı biçimleri parametresi olarak bir dizi aktarmalısınız."
 msgid "This password reset request originated from the IP address %s."
 msgstr "Bu parola sıfırlama talebi %s IP adresinden geldi."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3971
-#: wp-includes/class-wp-xmlrpc-server.php:3978
+#: wp-includes/class-wp-xmlrpc-server.php:3998
+#: wp-includes/class-wp-xmlrpc-server.php:4005
 msgid "Sorry, you are not allowed to comment on this post."
 msgstr "Ne yazık ki, bu yazıya yorum yapma izniniz yok."
 
@@ -9500,7 +9504,7 @@ msgstr "Bu tema sizin WordPress sürümünüzle çalışmaz."
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:652
 #: wp-admin/includes/class-wp-plugins-list-table.php:1520
 #: wp-admin/includes/class-wp-plugins-list-table.php:1539
-#: wp-admin/includes/plugin.php:1153 wp-admin/includes/theme.php:924
+#: wp-admin/includes/plugin.php:1159 wp-admin/includes/theme.php:924
 #: wp-admin/includes/theme.php:955 wp-admin/includes/theme.php:1001
 #: wp-admin/includes/theme.php:1024 wp-admin/includes/update-core.php:1467
 #: wp-admin/includes/update.php:784 wp-admin/includes/update.php:811
@@ -9566,7 +9570,7 @@ msgid "Please use %s to add new schema properties."
 msgstr "Yeni şema özellikleri eklemek için lütfen %s kullanın."
 
 #. translators: %s: prepare_callback
-#: wp-includes/theme.php:3357
+#: wp-includes/theme.php:3365
 msgid "The \"%s\" must be a callable function."
 msgstr "\"%s\" çağrılabilir bir işlev olmalıdır."
 
@@ -9596,7 +9600,8 @@ msgid "Could not update attachment in the database."
 msgstr "Ek dosya veri tabanında güncellenemedi."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-plugins-controller.php:708
-#: wp-admin/plugins.php:50 wp-admin/plugins.php:178
+#: wp-admin/includes/ajax-actions.php:4634 wp-admin/plugins.php:50
+#: wp-admin/plugins.php:178
 msgid "Sorry, you are not allowed to activate this plugin."
 msgstr "Ne yazık ki, bu eklentiyi etkinleştirme izniniz yok."
 
@@ -9932,9 +9937,9 @@ msgstr "%1$s için \"type\" anahtar sözcüğü yalnızca iç türleri içerebil
 #. translators: 1: title of the menu. 2: status of the menu (draft, pending,
 #. etc.).
 #. translators: 1: Theme name. 2: Theme slug.
-#: wp-includes/block-template-utils.php:742
-#: wp-includes/block-template-utils.php:821
-#: wp-includes/block-template-utils.php:995 wp-includes/rest-api.php:790
+#: wp-includes/block-template-utils.php:753
+#: wp-includes/block-template-utils.php:832
+#: wp-includes/block-template-utils.php:1006 wp-includes/rest-api.php:790
 #: wp-includes/js/dist/block-library.js:44435
 #: wp-admin/includes/class-wp-debug-data.php:1152
 #: wp-admin/includes/class-wp-debug-data.php:1171
@@ -10114,7 +10119,7 @@ msgid "Cannot delete an active plugin. Please deactivate it first."
 msgstr "Etkinleştirilmiş bir eklenti silinemez. Lütfen önce etkisizleştirin."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-plugins-controller.php:507
-#: wp-admin/includes/ajax-actions.php:4774 wp-admin/plugins.php:271
+#: wp-admin/includes/ajax-actions.php:4794 wp-admin/plugins.php:271
 msgid "Sorry, you are not allowed to delete plugins for this site."
 msgstr "Ne yazık ki, bu sitede eklentileri silme izniniz yok."
 
@@ -10123,12 +10128,12 @@ msgid "Unable to determine what plugin was installed."
 msgstr "Hangi eklentinin kurulu olduğu belirlenemiyor."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-plugins-controller.php:349
-#: wp-admin/includes/ajax-actions.php:4255
-#: wp-admin/includes/ajax-actions.php:4388
-#: wp-admin/includes/ajax-actions.php:4452
-#: wp-admin/includes/ajax-actions.php:4552
-#: wp-admin/includes/ajax-actions.php:4729
-#: wp-admin/includes/ajax-actions.php:4798
+#: wp-admin/includes/ajax-actions.php:4269
+#: wp-admin/includes/ajax-actions.php:4402
+#: wp-admin/includes/ajax-actions.php:4466
+#: wp-admin/includes/ajax-actions.php:4566
+#: wp-admin/includes/ajax-actions.php:4749
+#: wp-admin/includes/ajax-actions.php:4818
 #: wp-admin/includes/class-wp-site-health.php:1970
 msgid "Unable to connect to the filesystem. Please confirm your credentials."
 msgstr "Dosya sistemi ile bağlantı kurulamadı. Lütfen kimlik doğrulama bilgilerinizi kontrol edin."
@@ -10138,7 +10143,7 @@ msgid "Sorry, you are not allowed to activate plugins."
 msgstr "Ne yazık ki, eklentileri etkinleştirme izniniz yok."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-plugins-controller.php:245
-#: wp-admin/includes/ajax-actions.php:4505 wp-admin/plugin-install.php:19
+#: wp-admin/includes/ajax-actions.php:4519 wp-admin/plugin-install.php:19
 #: wp-admin/update.php:107 wp-admin/update.php:152 wp-admin/update.php:190
 msgid "Sorry, you are not allowed to install plugins on this site."
 msgstr "Ne yazık ki, bu siteye eklenti kurma izniniz yok."
@@ -10152,8 +10157,8 @@ msgstr "Eklenti bulunamadı."
 #: wp-includes/rest-api/endpoints/class-wp-rest-plugins-controller.php:166
 #: wp-includes/rest-api/endpoints/class-wp-rest-plugins-controller.php:429
 #: wp-includes/rest-api/endpoints/class-wp-rest-plugins-controller.php:499
-#: wp-admin/includes/ajax-actions.php:4852
-#: wp-admin/includes/ajax-actions.php:4904 wp-admin/plugins.php:13
+#: wp-admin/includes/ajax-actions.php:4872
+#: wp-admin/includes/ajax-actions.php:4924 wp-admin/plugins.php:13
 msgid "Sorry, you are not allowed to manage plugins for this site."
 msgstr "Ne yazık ki, bu sitedeki eklentileri yönetme izniniz yok."
 
@@ -10404,27 +10409,27 @@ msgstr "Bir varsayılan üst veri değeri kaydedilirken, veri belirtilen tür il
 msgid "RSS Feed"
 msgstr "RSS akışı"
 
-#: wp-includes/theme.php:4312
+#: wp-includes/theme.php:4320
 msgid "The post types that support thumbnails or true if all post types are supported."
 msgstr "Küçük görselleri destekleyen yazı türleri ya da tüm yazı türleri destekleniyorsa doğru."
 
-#: wp-includes/theme.php:3344
+#: wp-includes/theme.php:3352
 msgid "When registering an \"object\" feature, the feature's schema must include the \"properties\" keyword."
 msgstr "Bir \"nesne\" özelliği kaydedilirken, özelliğin şemasında \"properties\" anahtar sözcüğü bulunmalıdır."
 
-#: wp-includes/theme.php:3337
+#: wp-includes/theme.php:3345
 msgid "When registering an \"array\" feature, the feature's schema must include the \"items\" keyword."
 msgstr "Bir \"dizi\" özelliği kaydedilirken, özelliğin şemasında \"items\" anahtar sözcüğü bulunmalıdır."
 
-#: wp-includes/theme.php:3330
+#: wp-includes/theme.php:3338
 msgid "When registering an \"array\" or \"object\" feature to show in the REST API, the feature's schema must also be defined."
 msgstr "REST API ile gösterilmek üzere bir \"dizi\" veya \"nesne\" özelliği kaydedilirken, özelliğin şeması da tanımlanmalıdır."
 
-#: wp-includes/theme.php:3322
+#: wp-includes/theme.php:3330
 msgid "When registering a \"variadic\" theme feature, the \"type\" must be an \"array\"."
 msgstr "\"Variadic\" tema özelliği kaydedilirken, \"type\" bir \"dizi\" olmalıdır."
 
-#: wp-includes/theme.php:3315
+#: wp-includes/theme.php:3323
 msgid "The feature \"type\" is not valid JSON Schema type."
 msgstr "\"type\" özelliği geçerli bir JSON şeması türü değil."
 
@@ -10526,19 +10531,19 @@ msgstr "Onay bağlantısı için e-postanızı kontrol edin, ardından <a href=\
 msgid "Password protected"
 msgstr "Parola korumalı"
 
-#: wp-includes/class-wp-xmlrpc-server.php:3473
-#: wp-includes/class-wp-xmlrpc-server.php:3476
+#: wp-includes/class-wp-xmlrpc-server.php:3500
+#: wp-includes/class-wp-xmlrpc-server.php:3503
 msgid "Sorry, the category could not be created."
 msgstr "Ne yazık ki, kategori oluşturulamadı."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1864
-#: wp-includes/class-wp-xmlrpc-server.php:5319
+#: wp-includes/class-wp-xmlrpc-server.php:1891
+#: wp-includes/class-wp-xmlrpc-server.php:5346
 msgid "Sorry, the post could not be deleted."
 msgstr "Ne yazık ki, yazı silinemedi."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1721
-#: wp-includes/class-wp-xmlrpc-server.php:5259
-#: wp-includes/class-wp-xmlrpc-server.php:6057
+#: wp-includes/class-wp-xmlrpc-server.php:1748
+#: wp-includes/class-wp-xmlrpc-server.php:5286
+#: wp-includes/class-wp-xmlrpc-server.php:6084
 msgid "Sorry, the post could not be updated."
 msgstr "Ne yazık ki, yazı güncellenemedi."
 
@@ -10683,82 +10688,82 @@ msgstr "Sonuç kümesini birkaç sınıflandırma ile arasındaki ilişkiyle sı
 msgid "The \"%1$s\" taxonomy \"%2$s\" property (%3$s) conflicts with an existing property on the REST API Posts Controller. Specify a custom \"rest_base\" when registering the taxonomy to avoid this error."
 msgstr "\"%1$s\" sınıflandırma \"%2$s\" özelliği (%3$s), REST API yazılar denetleyicisindeki var olan bir özellik ile çakışıyor. Bu sorunu önlemek için sınıflandırmayı kaydederken özel bir \"rest_base\" belirtin."
 
-#: wp-includes/theme.php:4340
+#: wp-includes/theme.php:4348
 msgid "Whether theme opts in to default WordPress block styles for viewing."
 msgstr "Temanın görüntülenmek üzere varsayılan WordPress blok biçemlerine katılıp katılmayacağı."
 
-#: wp-includes/theme.php:4333
+#: wp-includes/theme.php:4341
 msgid "Whether the theme can manage the document title tag."
 msgstr "Temanın document title kod imini yönetip yönetemeyeceği."
 
-#: wp-includes/theme.php:4266
+#: wp-includes/theme.php:4274
 msgid "Allows use of HTML5 markup for search forms, comment forms, comment lists, gallery, and caption."
 msgstr "Arama formları, yorum formları, yorum listeleri, galeri ve görsel yazısı için HTML5 biçimlendirmesinin kullanılmasına izin verir."
 
-#: wp-includes/theme.php:4258
+#: wp-includes/theme.php:4266
 msgid "Whether theme opts in to the editor styles CSS wrapper."
 msgstr "Temanın CSS kapsayıcısı düzenleyici biçemlerine katılıp katılmayacağı."
 
-#: wp-includes/theme.php:4209
+#: wp-includes/theme.php:4217
 msgid "Custom gradient presets if defined by the theme."
 msgstr "Tema tarafından tanımlanmışsa özel deişim hazır ayarları."
 
-#: wp-includes/theme.php:4184
+#: wp-includes/theme.php:4192
 msgid "Custom font sizes if defined by the theme."
 msgstr "Tema tarafından tanımlanmışsa özel yazı tipi boyutları."
 
-#: wp-includes/theme.php:4159
+#: wp-includes/theme.php:4167
 msgid "Custom color palette if defined by the theme."
 msgstr "Tema tarafından tanımlanmışsa özel renk paleti."
 
-#: wp-includes/theme.php:4144
+#: wp-includes/theme.php:4152
 msgid "Whether the theme disables custom gradients."
 msgstr "Temanın özel değişimleri etkisiz bırakıp bırakmayacağı."
 
-#: wp-includes/theme.php:4137
+#: wp-includes/theme.php:4145
 msgid "Whether the theme disables custom font sizes."
 msgstr "Temanın özel yazı tipi boyutlarını etkisiz bırakıp bırakmayacağı."
 
-#: wp-includes/theme.php:4130
+#: wp-includes/theme.php:4138
 msgid "Whether the theme disables custom colors."
 msgstr "Temanın özel renkleri etkisiz bırakıp bırakmayacağı."
 
-#: wp-includes/theme.php:4123
+#: wp-includes/theme.php:4131
 msgid "Whether theme opts in to the dark editor style UI."
 msgstr "Temanın koyu düzenleyici biçemi kullanıcı arayüzüne katılıp katılmayacağı."
 
-#: wp-includes/theme.php:4116
+#: wp-includes/theme.php:4124
 msgid "Whether the theme enables Selective Refresh for Widgets being managed with the Customizer."
 msgstr "Temanın bileşenler için seçiçi yenilemeyi özelleştirici tarafından etkinleştirip etkinleştirmeyeceği."
 
-#: wp-includes/theme.php:4083
+#: wp-includes/theme.php:4091
 msgid "Custom logo if defined by the theme."
 msgstr "Tema tarafından tanımlanmışsa özel logo."
 
-#: wp-includes/theme.php:3968
+#: wp-includes/theme.php:3976
 msgid "Custom background if defined by the theme."
 msgstr "Tema tarafından tanımlanmışsa özel arka plan."
 
-#: wp-includes/theme.php:4038
+#: wp-includes/theme.php:4046
 msgid "Custom header if defined by the theme."
 msgstr "Tema tarafından tanımlanmışsa özel üst bilgi."
 
-#: wp-includes/theme.php:3947
+#: wp-includes/theme.php:3955
 msgid "Whether posts and comments RSS feed links are added to head."
 msgstr "Başlığa yazı ve yorumların RSS akışı bağlantılarının eklenip eklenmeyeceği."
 
-#: wp-includes/theme.php:3940
+#: wp-includes/theme.php:3948
 msgid "Whether theme opts in to wide alignment CSS class."
 msgstr "Temanın geniş hizalama CSS sınıfına katılıp katılmayacağı."
 
-#: wp-includes/class-wp-xmlrpc-server.php:5098
-#: wp-includes/class-wp-xmlrpc-server.php:5111
+#: wp-includes/class-wp-xmlrpc-server.php:5125
+#: wp-includes/class-wp-xmlrpc-server.php:5138
 msgid "Sorry, this method is not supported."
 msgstr "Ne yazık ki, bu yöntem desteklenmiyor."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1723
-#: wp-includes/class-wp-xmlrpc-server.php:5179
-#: wp-includes/class-wp-xmlrpc-server.php:5689
+#: wp-includes/class-wp-xmlrpc-server.php:1750
+#: wp-includes/class-wp-xmlrpc-server.php:5206
+#: wp-includes/class-wp-xmlrpc-server.php:5716
 msgid "Sorry, the post could not be created."
 msgstr "Ne yazık ki, yazı oluşturulamadı."
 
@@ -11488,8 +11493,8 @@ msgstr "Kurtarma kipi hazırlandı. İlerlemek için lütfen oturum açın."
 msgid "Missing confirm key."
 msgstr "Eksik onay anahtarı."
 
-#: wp-login.php:1242 wp-admin/includes/ajax-actions.php:4967
-#: wp-admin/includes/ajax-actions.php:5157
+#: wp-login.php:1242 wp-admin/includes/ajax-actions.php:4987
+#: wp-admin/includes/ajax-actions.php:5177
 msgid "Missing request ID."
 msgstr "İstek kimliği eksik."
 
@@ -11687,8 +11692,8 @@ msgstr "Bir anahtar - değer uyumsuzluğu ile karşılaşıldı. Lütfen etkinle
 #: wp-includes/js/dist/editor.js:27334 wp-includes/js/dist/editor.js:96656
 msgid "%s word"
 msgid_plural "%s words"
-msgstr[0] "%d kelime"
-msgstr[1] "%d kelime"
+msgstr[0] "%s kelime"
+msgstr[1] "%s kelime"
 
 #: wp-includes/class-wp-editor.php:1404
 msgid "Classic Block Keyboard Shortcuts"
@@ -11700,7 +11705,7 @@ msgstr "Ne yazık ki, bu yazının otomatik kayıtlarını görüntüleme iznini
 
 #: wp-includes/view-config.php:235 wp-includes/js/dist/block-library.js:47643
 #: wp-includes/js/dist/editor.js:26660 wp-includes/js/dist/editor.js:87921
-#: wp-includes/js/dist/editor.js:87941 wp-admin/includes/ajax-actions.php:2304
+#: wp-includes/js/dist/editor.js:87941 wp-admin/includes/ajax-actions.php:2318
 #: wp-admin/includes/class-wp-posts-list-table.php:1317
 #: wp-admin/includes/class-wp-posts-list-table.php:2096
 #: wp-admin/includes/meta-boxes.php:115 wp-admin/includes/meta-boxes.php:156
@@ -11803,7 +11808,7 @@ msgid "Submit for Review"
 msgstr "İnceleme için gönder"
 
 #: wp-includes/js/dist/editor.js:8630 wp-includes/js/dist/editor.js:89164
-#: wp-admin/includes/post.php:1583 wp-admin/includes/post.php:1608
+#: wp-admin/includes/post.php:1597 wp-admin/includes/post.php:1622
 msgid "Permalink:"
 msgstr "Kalıcı bağlantı:"
 
@@ -11907,7 +11912,7 @@ msgstr "Bloğun öznitelikleri."
 msgid "Unique registered name for the block."
 msgstr "Bloğun benzersiz kayıtlı adı."
 
-#: wp-includes/theme.php:4326
+#: wp-includes/theme.php:4334
 msgid "Whether the theme supports responsive embedded content."
 msgstr "Temanın uyumlu gömülü içeriği destekleme durumu."
 
@@ -11921,7 +11926,7 @@ msgstr "Bugünden %s"
 msgid "Limit result set to themes assigned one or more statuses."
 msgstr "Sonuç kümesini bir ya da birkaç durum atanmış temayla sınırlandırır."
 
-#: wp-includes/theme.php:4289
+#: wp-includes/theme.php:4297
 msgid "Post formats supported."
 msgstr "Yazı biçimleri destekleniyor."
 
@@ -12568,7 +12573,7 @@ msgid "Looks like something&#8217;s gone wrong. Wait a couple seconds, and then 
 msgstr "Bir sorun çıktı gibi görünüyor. Birkaç saniye bekleyin ve sonra yeniden deneyin."
 
 #: wp-includes/class-wp-customize-manager.php:4344
-#: wp-includes/js/dist/editor.js:85739 wp-admin/includes/post.php:1910
+#: wp-includes/js/dist/editor.js:85739 wp-admin/includes/post.php:1924
 msgid "Take over"
 msgstr "Devral"
 
@@ -12578,7 +12583,7 @@ msgstr "Devral"
 #: wp-includes/js/dist/editor.js:98082 wp-includes/js/dist/editor.js:98242
 #: wp-includes/js/dist/script-modules/boot/index.js:10404
 #: wp-admin/comment.php:81 wp-admin/comment.php:293
-#: wp-admin/includes/post.php:1822 wp-admin/plugin-editor.php:376
+#: wp-admin/includes/post.php:1836 wp-admin/plugin-editor.php:376
 #: wp-admin/theme-editor.php:464
 msgid "Go back"
 msgstr "Geri dön"
@@ -13231,6 +13236,8 @@ msgstr "WordPress.org temalarında ara"
 msgid "Install &amp; Preview"
 msgstr "Kur ve ön izle"
 
+#: wp-includes/customize/class-wp-customize-header-image-setting.php:184
+#: wp-includes/customize/class-wp-customize-header-image-setting.php:194
 #: wp-includes/customize/class-wp-customize-nav-menu-item-setting.php:739
 #: wp-includes/rest-api/endpoints/class-wp-rest-menu-items-controller.php:883
 msgid "Invalid URL."
@@ -13330,7 +13337,7 @@ msgstr "Ay"
 #: wp-includes/js/dist/editor.js:43403 wp-includes/js/dist/editor.js:97578
 #: wp-includes/js/dist/media-utils.js:23787
 #: wp-includes/js/dist/script-modules/content-types/index.js:30145
-#: wp-admin/includes/ajax-actions.php:2292
+#: wp-admin/includes/ajax-actions.php:2306
 #: wp-admin/includes/class-wp-media-list-table.php:435
 #: wp-admin/includes/class-wp-posts-list-table.php:716
 #: wp-admin/includes/class-wp-posts-list-table.php:776
@@ -14063,11 +14070,11 @@ msgstr "Yazı türü tarafından kullanılan tüm yetkinlikler."
 msgid "An alphanumeric identifier for the status."
 msgstr "Durumun alfasayısal tanımlayıcısı."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1698
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1721
 msgid "Limit response to comments published before a given ISO8601 compliant date."
 msgstr "Yanıtı belirli bir ISO8601 uyumlu tarihinden önce yayınlanmış yorumlarla sınırlandırır."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1669
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1692
 msgid "Limit response to comments published after a given ISO8601 compliant date."
 msgstr "Yanıtı belirli bir ISO8601 uyumlu tarihten sonra yayınlanmış yorumlarla sınırlandırır."
 
@@ -14145,7 +14152,7 @@ msgstr "Terim silinemez."
 msgid "Sorry, you are not allowed to view themes."
 msgstr "Ne yazık ki, temaları görüntüleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2255
+#: wp-includes/class-wp-xmlrpc-server.php:2282
 #: wp-includes/rest-api/endpoints/class-wp-rest-menus-controller.php:207
 #: wp-includes/rest-api/endpoints/class-wp-rest-menus-controller.php:301
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:532
@@ -14239,7 +14246,7 @@ msgstr "[%1$s] %2$s sitesini etkinleştir"
 msgid "RSS Error:"
 msgstr "RSS sorunu:"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:663
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:665
 msgid "Cannot create a comment with that type."
 msgstr "Bu türde bir yorum oluşturulamaz."
 
@@ -14253,8 +14260,8 @@ msgstr "Adres son eki geçersiz."
 msgid "Invalid email address."
 msgstr "E-posta adresi geçersiz."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:687
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:946
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:689
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:969
 msgid "Invalid comment content."
 msgstr "Yorum içeriği geçersiz."
 
@@ -14267,69 +14274,69 @@ msgid "Invalid page template."
 msgstr "Sayfa şablonu geçersiz."
 
 #: wp-includes/post.php:4773 wp-includes/rest-api.php:2329
-#: wp-includes/script-loader.php:1369 wp-admin/includes/post.php:189
+#: wp-includes/script-loader.php:1369 wp-admin/includes/post.php:203
 msgid "Invalid date."
 msgstr "Tarih geçersiz."
 
-#: wp-includes/theme.php:1725
+#: wp-includes/theme.php:1733
 msgid "Video is playing."
 msgstr "Video oynatılıyor."
 
-#: wp-includes/theme.php:1724
+#: wp-includes/theme.php:1732
 msgid "Video is paused."
 msgstr "Video durduruldu."
 
-#: wp-includes/theme.php:2325
+#: wp-includes/theme.php:2333
 msgctxt "Theme starter content"
 msgid "Archives"
 msgstr "Arşivler"
 
-#: wp-includes/theme.php:2477
+#: wp-includes/theme.php:2485
 msgctxt "Theme starter content"
 msgid "This is an example of a homepage section. Homepage sections can be any page other than the homepage itself, including the page that shows your latest blog posts."
 msgstr "Bu örnek bir giriş sayfası bölümüdür. Giriş sayfası bölümleri giriş sayfasının dışında herhangi bir sayfa olabilir. Son blog yazılarınızı görüntüleyen sayfa ile birlikte."
 
-#: wp-includes/theme.php:2469
+#: wp-includes/theme.php:2477
 msgctxt "Theme starter content"
 msgid "News"
 msgstr "Haberler"
 
-#: wp-includes/theme.php:2460
+#: wp-includes/theme.php:2468
 msgctxt "Theme starter content"
 msgid "This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form."
 msgstr "Bu sayfada, adres ve telefon numarası gibi temel iletişim bilgileri bulunur. Ayrıca bir iletişim formu eklemek için bir eklenti de deneyebilirsiniz."
 
-#: wp-includes/theme.php:2452
+#: wp-includes/theme.php:2460
 msgctxt "Theme starter content"
 msgid "You might be an artist who would like to introduce yourself and your work here or maybe you are a business with a mission to describe."
 msgstr "Kendini ve işlerini tanıtmak isteyen bir sanatçı olabileceğiniz gibi misyonunu açıklamak isteyen bir firma da olabilirsiniz."
 
-#: wp-includes/theme.php:2444
+#: wp-includes/theme.php:2452
 msgctxt "Theme starter content"
 msgid "Welcome to your site! This is your homepage, which is what most visitors will see when they come to your site for the first time."
 msgstr "Sitenize hoş geldiniz! Burası sizin giriş sayfanızdır. Ziyaretçilerinizin çoğu sitenize geldiğinde ilk olarak bu sayfayı görür."
 
-#: wp-includes/theme.php:2355
+#: wp-includes/theme.php:2363
 msgctxt "Theme starter content"
 msgid "Recent Posts"
 msgstr "Son yazılar"
 
-#: wp-includes/theme.php:2349
+#: wp-includes/theme.php:2357
 msgctxt "Theme starter content"
 msgid "Recent Comments"
 msgstr "Son yorumlar"
 
-#: wp-includes/theme.php:2343
+#: wp-includes/theme.php:2351
 msgctxt "Theme starter content"
 msgid "Meta"
 msgstr "Üst veri"
 
-#: wp-includes/theme.php:2331
+#: wp-includes/theme.php:2339
 msgctxt "Theme starter content"
 msgid "Calendar"
 msgstr "Takvim"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:905
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:928
 msgid "Sorry, you are not allowed to change the comment type."
 msgstr "Ne yazık ki, yorum türünü değiştirme izniniz yok."
 
@@ -14348,8 +14355,8 @@ msgstr "Ne yazık ki, kullanıcıları bu parametreye göre sıralama izniniz yo
 msgid "Sorry, you are not allowed to filter users by role."
 msgstr "Ne yazık ki, kullanıcıları role göre süzme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3766
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1027
+#: wp-includes/class-wp-xmlrpc-server.php:3793
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1050
 msgid "Sorry, you are not allowed to delete this comment."
 msgstr "Ne yazık ki, yorumu silme izniniz yok."
 
@@ -14361,13 +14368,16 @@ msgstr "Ne yazık ki menü ögelerini görüntüleme izniniz yok."
 msgid "Sorry, you are not allowed to view revisions of this post."
 msgstr "Ne yazık ki, bu yazının sürümlerini görüntüleme izniniz yok."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:610
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:618
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:612
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:620
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:2151
 msgid "Sorry, you are not allowed to create a comment on this post."
 msgstr "Ne yazık ki, bu yazıya yorum yapma izniniz yok."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:584
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:594
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:604
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:2085
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:2124
 msgid "Sorry, you are not allowed to create this comment without a post."
 msgstr "Ne yazık ki, bir yazı olmadan yorum yapma izniniz yok."
 
@@ -14380,7 +14390,8 @@ msgstr "Ne yazık ki, '%s' yorumunu düzenleme izniniz yok."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:138
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:463
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:626
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:628
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:2159
 msgid "Sorry, you are not allowed to read the post for this comment."
 msgstr "Ne yazık ki, bu yorumun yazısını okuma izniniz yok."
 
@@ -14392,37 +14403,37 @@ msgstr "Ne yazık ki, bu yorumu okuma izniniz yok."
 msgid "Sorry, you are not allowed to read comments without a post."
 msgstr "Ne yazık ki, bir yazı olmadan yorumları okuma izniniz yok."
 
-#: wp-includes/theme.php:2434
+#: wp-includes/theme.php:2442
 msgctxt "Theme starter content"
 msgid "YouTube"
 msgstr "YouTube"
 
-#: wp-includes/theme.php:2422
+#: wp-includes/theme.php:2430
 msgctxt "Theme starter content"
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: wp-includes/theme.php:2418
+#: wp-includes/theme.php:2426
 msgctxt "Theme starter content"
 msgid "LinkedIn"
 msgstr "LinkedIn"
 
-#: wp-includes/theme.php:2410
+#: wp-includes/theme.php:2418
 msgctxt "Theme starter content"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: wp-includes/theme.php:2406
+#: wp-includes/theme.php:2414
 msgctxt "Theme starter content"
 msgid "Foursquare"
 msgstr "Foursquare"
 
-#: wp-includes/theme.php:2317
+#: wp-includes/theme.php:2325
 msgctxt "Theme starter content"
 msgid "This may be a good place to introduce yourself and your site or include some credits."
 msgstr "Burası kendinizi ya da sitenizi tanıtmak, ya da emeği geçenlerden bahsetmek için iyi bir yer olabilir."
 
-#: wp-includes/theme.php:2316
+#: wp-includes/theme.php:2324
 msgctxt "Theme starter content"
 msgid "About This Site"
 msgstr "Bu site hakkında"
@@ -14472,97 +14483,97 @@ msgstr "Videoyu değiştir"
 msgid "Select video"
 msgstr "Video seçin"
 
-#: wp-includes/theme.php:2474
+#: wp-includes/theme.php:2482
 msgctxt "Theme starter content"
 msgid "A homepage section"
 msgstr "Bir giriş sayfası bölümü"
 
-#: wp-includes/theme.php:2465
+#: wp-includes/theme.php:2473
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "Blog"
 
-#: wp-includes/theme.php:2457
+#: wp-includes/theme.php:2465
 msgctxt "Theme starter content"
 msgid "Contact"
 msgstr "Bize ulaşın"
 
-#: wp-includes/theme.php:2449
+#: wp-includes/theme.php:2457
 msgctxt "Theme starter content"
 msgid "About"
 msgstr "Hakkımızda"
 
-#: wp-includes/theme.php:2368 wp-includes/theme.php:2441
+#: wp-includes/theme.php:2376 wp-includes/theme.php:2449
 msgctxt "Theme starter content"
 msgid "Home"
 msgstr "Giriş"
 
-#: wp-includes/theme.php:2398
+#: wp-includes/theme.php:2406
 msgctxt "Theme starter content"
 msgid "Email"
 msgstr "E-posta"
 
-#: wp-includes/theme.php:2414
+#: wp-includes/theme.php:2422
 msgctxt "Theme starter content"
 msgid "Instagram"
 msgstr "Instagram"
 
-#: wp-includes/theme.php:2426
+#: wp-includes/theme.php:2434
 msgctxt "Theme starter content"
 msgid "Twitter"
 msgstr "Twitter"
 
-#: wp-includes/theme.php:2402
+#: wp-includes/theme.php:2410
 msgctxt "Theme starter content"
 msgid "Facebook"
 msgstr "Facebook"
 
-#: wp-includes/theme.php:2430
+#: wp-includes/theme.php:2438
 msgctxt "Theme starter content"
 msgid "Yelp"
 msgstr "Yelp"
 
-#: wp-includes/theme.php:2337
+#: wp-includes/theme.php:2345
 msgctxt "Theme starter content"
 msgid "Categories"
 msgstr "Kategoriler"
 
-#: wp-includes/theme.php:2361
+#: wp-includes/theme.php:2369
 msgctxt "Theme starter content"
 msgid "Search"
 msgstr "Site araması"
 
-#: wp-includes/theme.php:2306
+#: wp-includes/theme.php:2314
 msgctxt "Theme starter content"
 msgid "Saturday &amp; Sunday: 11:00AM&ndash;3:00PM"
 msgstr "Cumartesi ve Pazar: 11:00&ndash;15:00"
 
-#: wp-includes/theme.php:2305
+#: wp-includes/theme.php:2313
 msgctxt "Theme starter content"
 msgid "Monday&ndash;Friday: 9:00AM&ndash;5:00PM"
 msgstr "Pazartesi&ndash;Cuma: 9:00&ndash;17:00"
 
-#: wp-includes/theme.php:2304
+#: wp-includes/theme.php:2312
 msgctxt "Theme starter content"
 msgid "Hours"
 msgstr "Saatler"
 
-#: wp-includes/theme.php:2303
+#: wp-includes/theme.php:2311
 msgctxt "Theme starter content"
 msgid "New York, NY 10001"
 msgstr "İstanbul, 34000"
 
-#: wp-includes/theme.php:2302
+#: wp-includes/theme.php:2310
 msgctxt "Theme starter content"
 msgid "123 Main Street"
 msgstr "123 Ana cadde"
 
-#: wp-includes/theme.php:2301
+#: wp-includes/theme.php:2309
 msgctxt "Theme starter content"
 msgid "Address"
 msgstr "Adres"
 
-#: wp-includes/theme.php:2297
+#: wp-includes/theme.php:2305
 msgctxt "Theme starter content"
 msgid "Find Us"
 msgstr "Konumumuz"
@@ -14656,7 +14667,7 @@ msgid "The post does not support trashing. Set '%s' to delete."
 msgstr "Yazıların çöpe atılması desteklenmez. Silmek için '%s' olarak ayarlayın."
 
 #. translators: %s: force=true
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1080
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1103
 msgid "The comment does not support trashing. Set '%s' to delete."
 msgstr "Yorumların çöpe atılması desteklenmez. Silmek için '%s' olarak ayarlayın."
 
@@ -14672,8 +14683,8 @@ msgstr "Aktarılan JSON gövdesi  geçersiz."
 msgid "Limit result set to posts assigned one or more statuses."
 msgstr "Sonuç kümesini bir ya da birkaç durum atanmış yazılarla sınırlandırır."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:741
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:959
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:743
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:982
 msgid "Comment field exceeds maximum length allowed."
 msgstr "Yorum alanı izin verilen en fazla uzunluğu aşıyor."
 
@@ -14685,7 +14696,7 @@ msgstr "Yazı türü ile ilişkilendirilmiş sınıflandırmalar."
 msgid "Limit result set to posts with one or more specific slugs."
 msgstr "Sonuç kümesini belirli bir ya da birkaç yazı adres son eki ile sınırlandırır."
 
-#: wp-includes/class-wp-xmlrpc-server.php:4028
+#: wp-includes/class-wp-xmlrpc-server.php:4055
 msgid "Comment is required."
 msgstr "Yorum zorunludur."
 
@@ -14912,7 +14923,7 @@ msgstr "Sonuç kümesini belirli bir üst kimliği taşımayan tüm ögelerle s�
 msgid "Limit result set to items with particular parent IDs."
 msgstr "Sonuç kümesini belirli üst kimlikleri taşıyan ögelerle sınırlandırır."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1722
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1745
 #: wp-includes/rest-api/endpoints/class-wp-rest-pattern-directory-controller.php:337
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:3054
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:940
@@ -15098,7 +15109,7 @@ msgstr "Yazı parolası yanlış."
 msgid "You need to define a search term to order by relevance."
 msgstr "İlişkiye göre sıralamak için bir arama terimi belirtmelisiniz."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1795
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1818
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:108
 msgid "The password for the post if it is password protected."
 msgstr "Parola korumalı ise yazının parolası."
@@ -15183,23 +15194,23 @@ msgstr "Derlemenin geçerli sayfası."
 msgid "Method '%s' not implemented. Must be overridden in subclass."
 msgstr "'%s' yöntemi uygulanmamış. Alt sınıfta değiştirilmelidir."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1788
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1811
 msgid "Limit result set to comments assigned a specific type. Requires authorization."
 msgstr "Sonuç kümesini belirli bir türe atanmış yorumlarla sınırlandırır. Kimlik doğrulaması gerekir."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1780
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1803
 msgid "Limit result set to comments assigned a specific status. Requires authorization."
 msgstr "Sonuç kümesini belirli durumlar atanmış yorumlarla sınırlandırır. Kimlik doğrulaması gerekir."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1771
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1794
 msgid "Limit result set to comments assigned to specific post IDs."
 msgstr "Sonuç kümesini belirli yazı kimliklerinin yorumları ile sınırlandırır."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1762
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1785
 msgid "Ensure result set excludes specific parent IDs."
 msgstr "Sonuç kümesine belirli üst öge kimliklerinin katılmadığından emin olun."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1753
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1776
 msgid "Limit result set to comments of specific parent IDs."
 msgstr "Sonuç kümesini belirli üst öge kimliklerini taşıyan yorumlarla sınırlandırır."
 
@@ -15208,7 +15219,7 @@ msgstr "Sonuç kümesini belirli üst öge kimliklerini taşıyan yorumlarla sı
 msgid "Sort collection by object attribute."
 msgstr "Derlemeyi nesne özniteliğine göre sıralar."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1727
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1750
 #: wp-includes/rest-api/endpoints/class-wp-rest-menu-items-controller.php:959
 #: wp-includes/rest-api/endpoints/class-wp-rest-pattern-directory-controller.php:342
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:3059
@@ -15218,7 +15229,7 @@ msgstr "Derlemeyi nesne özniteliğine göre sıralar."
 msgid "Order sort attribute ascending or descending."
 msgstr "Sıralama özniteliğini artan ya da azalan olarak belirler."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1713
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1736
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:3032
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:931
 #: wp-includes/rest-api/endpoints/class-wp-rest-search-controller.php:348
@@ -15227,7 +15238,7 @@ msgstr "Sıralama özniteliğini artan ya da azalan olarak belirler."
 msgid "Limit result set to specific IDs."
 msgstr "Sonuç kümesini belirli kimliklerle sınırlandırır."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1704
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1727
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:3023
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:922
 #: wp-includes/rest-api/endpoints/class-wp-rest-search-controller.php:339
@@ -15240,15 +15251,15 @@ msgstr "Sonuç kümesine belirli kimliklerin katılmadığından emin olun."
 msgid "Limit response to posts published before a given ISO8601 compliant date."
 msgstr "Yanıtı ISO8601 uyumlu tarihten önce yayınlanmış kaynaklarla sınırlandırır."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1692
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1715
 msgid "Limit result set to that from a specific author email. Requires authorization."
 msgstr "Sonuç kümesini belirli yazar e-posta adresleriyle sınırlandırır. Kimlik doğrulaması gerekir."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1683
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1706
 msgid "Ensure result set excludes comments assigned to specific user IDs. Requires authorization."
 msgstr "Sonuç kümesine belirli kullanıcı kimliklerinin yorumlarının katılmadığından emin olun. Kimlik doğrulaması gerekir."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1675
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1698
 msgid "Limit result set to comments assigned to specific user IDs. Requires authorization."
 msgstr "Sonuç kümesini belirli kullanıcı kimliklerinin yorumları ile sınırlandırır. Kimlik doğrulaması gerekir."
 
@@ -15256,21 +15267,21 @@ msgstr "Sonuç kümesini belirli kullanıcı kimliklerinin yorumları ile sını
 msgid "Limit response to posts published after a given ISO8601 compliant date."
 msgstr "Yanıtı belirtilen bir ISO8601 uyumlu tarihten sonra yayınlamış yazılarla sınırlandırır."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1641
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1664
 msgid "Avatar URLs for the comment author."
 msgstr "Yorum yazarının avatar adresi."
 
 #. translators: %d: Avatar image size in pixels.
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1633
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1656
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1537
 msgid "Avatar URL with image size of %d pixels."
 msgstr "%d piksel görsel boyutlu avatar adresi."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1608
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1631
 msgid "State of the comment."
 msgstr "Yorumun durumu."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1602
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1625
 msgid "The ID of the associated post object."
 msgstr "İlişkilendirilmiş yazı nesnesinin kimliği."
 
@@ -15298,27 +15309,27 @@ msgstr "Yazının içeriği, veri tabanında olduğu gibi."
 msgid "The content for the post."
 msgstr "Yazının içeriği."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1547
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1570
 msgid "User agent for the comment author."
 msgstr "Yorum yazarının kullanıcı uygulaması (tarayıcı/işletim sistemi)."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1541
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1564
 msgid "URL for the comment author."
 msgstr "Yazar yorumunun adresi."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1533
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1556
 msgid "Display name for the comment author."
 msgstr "Yorum yazarının görüntülenecek adı."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1527
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1550
 msgid "IP address for the comment author."
 msgstr "Yorum yazarının IP adresi."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1517
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1540
 msgid "Email address for the comment author."
 msgstr "Yorum yazarının e-posta adresi."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1512
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1535
 msgid "The ID of the user object, if author was a user."
 msgstr "Yazar bir kullanıcı ise, kullanıcı nesnesinin kimliği."
 
@@ -15327,39 +15338,39 @@ msgstr "Yazar bir kullanıcı ise, kullanıcı nesnesinin kimliği."
 msgid "Unique identifier for the object."
 msgstr "Nesnenin benzersiz kimliği."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1429
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1452
 msgid "Invalid comment author ID."
 msgstr "Yorum yazarı kimliği geçersiz."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1101
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1124
 msgid "The comment cannot be deleted."
 msgstr "Yorum silinemez."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1088
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1111
 msgid "The comment has already been trashed."
 msgstr "Yorum zaten çöpte."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:969
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:992
 msgid "Updating comment failed."
 msgstr "Yorum güncellenemedi."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:935
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:958
 msgid "Updating comment status failed."
 msgstr "Yorum durumu güncellenemedi."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:798
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:800
 msgid "Creating comment failed."
 msgstr "Yorum oluşturulamadı."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:717
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:719
 msgid "Creating a comment requires valid author name and email values."
 msgstr "Yorum yapabilmek için geçerli bir yazar adı ve e-posta adresi yazılmalıdır."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:654
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:656
 msgid "Cannot create existing comment."
 msgstr "Var olan yorum oluşturulamaz."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3940 wp-includes/comment.php:4101
+#: wp-includes/class-wp-xmlrpc-server.php:3967 wp-includes/comment.php:4101
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:505
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:514
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:536
@@ -15637,30 +15648,30 @@ msgstr "Bu bileşeni düzenlemek için tıklayın."
 msgid "Click to edit this menu."
 msgstr "Bu menüyü düzenlemek için tıklayın."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3885
+#: wp-includes/class-wp-xmlrpc-server.php:3912
 msgid "Sorry, the comment could not be updated."
 msgstr "Ne yazık ki, yorumunuz düzenlenemedi."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2813
+#: wp-includes/class-wp-xmlrpc-server.php:2840
 msgid "Invalid role."
 msgstr "Rol geçersiz."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2432
+#: wp-includes/class-wp-xmlrpc-server.php:2459
 msgid "Sorry, you are not allowed to assign this term."
 msgstr "Ne yazık ki, bu terimi atama izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2352
+#: wp-includes/class-wp-xmlrpc-server.php:2379
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:754
 msgid "Sorry, you are not allowed to delete this term."
 msgstr "Ne yazık ki, bu terimi silme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2242
+#: wp-includes/class-wp-xmlrpc-server.php:2269
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:462
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:653
 msgid "Sorry, you are not allowed to edit this term."
 msgstr "Ne yazık ki, bu terimi düzenleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2167
+#: wp-includes/class-wp-xmlrpc-server.php:2194
 msgid "Sorry, the term could not be created."
 msgstr "Ne yazık ki, teriminiz oluşturulamadı."
 
@@ -15900,13 +15911,13 @@ msgid "Time Slider"
 msgstr "Zaman ayarı"
 
 #: wp-includes/blocks/playlist.php:95 wp-includes/blocks/playlist.php:165
-#: wp-includes/script-loader.php:1105 wp-includes/theme.php:1722
+#: wp-includes/script-loader.php:1105 wp-includes/theme.php:1730
 msgid "Pause"
 msgstr "Durdur"
 
 #: wp-includes/blocks/playlist-track.php:60 wp-includes/blocks/playlist.php:94
 #: wp-includes/blocks/playlist.php:166 wp-includes/script-loader.php:1104
-#: wp-includes/theme.php:1723 wp-includes/js/dist/block-library.js:56238
+#: wp-includes/theme.php:1731 wp-includes/js/dist/block-library.js:56238
 msgid "Play"
 msgstr "Oynat"
 
@@ -15928,21 +15939,21 @@ msgctxt "theme"
 msgid "Activate %s"
 msgstr "%s temasını etkinleştir"
 
-#: wp-includes/class-wp-xmlrpc-server.php:4944
+#: wp-includes/class-wp-xmlrpc-server.php:4971
 msgid "Sorry, you are not allowed to access user data on this site."
 msgstr "Ne yazık ki, bu sitedeki kullanıcı bilgilerine erişme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3050
-#: wp-includes/class-wp-xmlrpc-server.php:3274 wp-admin/includes/post.php:515
+#: wp-includes/class-wp-xmlrpc-server.php:3077
+#: wp-includes/class-wp-xmlrpc-server.php:3301 wp-admin/includes/post.php:529
 msgid "Sorry, you are not allowed to edit pages."
 msgstr "Ne yazık ki, sayfaları düzenleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2875
-#: wp-includes/class-wp-xmlrpc-server.php:2925
+#: wp-includes/class-wp-xmlrpc-server.php:2902
+#: wp-includes/class-wp-xmlrpc-server.php:2952
 msgid "Sorry, you are not allowed to edit your profile."
 msgstr "Ne yazık ki, kullanıcı profilinizi düzenleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2732
+#: wp-includes/class-wp-xmlrpc-server.php:2759
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:490
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:748
 #: wp-admin/user-edit.php:104 wp-admin/user-edit.php:136
@@ -15976,18 +15987,18 @@ msgstr "Sabit yerleşim"
 msgid "Tan"
 msgstr "Orta koyu"
 
-#: wp-includes/class-wp-xmlrpc-server.php:3007
-#: wp-includes/class-wp-xmlrpc-server.php:3225
-#: wp-admin/includes/ajax-actions.php:2098 wp-admin/includes/post.php:282
+#: wp-includes/class-wp-xmlrpc-server.php:3034
+#: wp-includes/class-wp-xmlrpc-server.php:3252
+#: wp-admin/includes/ajax-actions.php:2112 wp-admin/includes/post.php:296
 msgid "Sorry, you are not allowed to edit this page."
 msgstr "Ne yazık ki, bu sayfayı düzenleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3159
+#: wp-includes/class-wp-xmlrpc-server.php:3186
 msgid "Sorry, you are not allowed to delete this page."
 msgstr "Ne yazık ki, bu sayfayı silme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1858
-#: wp-includes/class-wp-xmlrpc-server.php:5313
+#: wp-includes/class-wp-xmlrpc-server.php:1885
+#: wp-includes/class-wp-xmlrpc-server.php:5340
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1074
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1128
 msgid "Sorry, you are not allowed to delete this post."
@@ -16061,20 +16072,20 @@ msgstr "Görsel kırpma alanı ön izleme. Fare ile işlem yapılması gerekir."
 msgid "A structure tag is required when using custom permalinks. <a href=\"%s\">Learn more</a>"
 msgstr "Özel kalıcı bağlantılar kullanırken bir yapı etiketi gereklidir. <a href=\"%s\">Ayrıntılı bilgi alın</a>"
 
-#: wp-includes/class-wp-xmlrpc-server.php:4394
-#: wp-includes/class-wp-xmlrpc-server.php:4450
-#: wp-includes/class-wp-xmlrpc-server.php:6479 wp-admin/async-upload.php:35
-#: wp-admin/includes/ajax-actions.php:2539
-#: wp-admin/includes/ajax-actions.php:2609 wp-admin/media-new.php:16
+#: wp-includes/class-wp-xmlrpc-server.php:4421
+#: wp-includes/class-wp-xmlrpc-server.php:4477
+#: wp-includes/class-wp-xmlrpc-server.php:6506 wp-admin/async-upload.php:35
+#: wp-admin/includes/ajax-actions.php:2553
+#: wp-admin/includes/ajax-actions.php:2623 wp-admin/media-new.php:16
 #: wp-admin/media-upload.php:20 wp-admin/upload.php:13
 msgid "Sorry, you are not allowed to upload files."
 msgstr "Ne yazık ki, bu dosyaları yükleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3437
+#: wp-includes/class-wp-xmlrpc-server.php:3464
 msgid "Sorry, you are not allowed to add a category."
 msgstr "Ne yazık ki, bu kategoriyi ekleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2795
+#: wp-includes/class-wp-xmlrpc-server.php:2822
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:498
 #: wp-admin/users.php:16
 msgid "Sorry, you are not allowed to list users."
@@ -16917,8 +16928,8 @@ msgstr "Devamını oku"
 msgid "When in reorder mode, additional controls to reorder widgets will be available in the widgets list above."
 msgstr "Yeniden sıralama kipinde aşağıdaki listedeki bileşenlerin sıralamasını değiştirmek için ek denetimler görüntülenir."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3631
-#: wp-includes/class-wp-xmlrpc-server.php:3834
+#: wp-includes/class-wp-xmlrpc-server.php:3658
+#: wp-includes/class-wp-xmlrpc-server.php:3861
 msgid "Sorry, you are not allowed to moderate or edit this comment."
 msgstr "Ne yazık ki, bu yorumu düzenleme ya da onaylama izniniz yok."
 
@@ -16933,7 +16944,7 @@ msgid "Live Preview: %s"
 msgstr "Canlı ön izleme: %s"
 
 #: wp-includes/class-wp-customize-manager.php:593
-#: wp-admin/includes/ajax-actions.php:4437 wp-admin/includes/file.php:446
+#: wp-admin/includes/ajax-actions.php:4451 wp-admin/includes/file.php:446
 #: wp-admin/includes/file.php:456 wp-admin/theme-editor.php:73
 #: wp-admin/theme-editor.php:77 wp-admin/themes.php:28 wp-admin/themes.php:71
 msgid "The requested theme does not exist."
@@ -17595,7 +17606,7 @@ msgid_plural "%1$s responses to %2$s"
 msgstr[0] "%2$s için %1$s yanıt"
 msgstr[1] "%2$s için %1$s yanıt"
 
-#: wp-includes/theme.php:3746
+#: wp-includes/theme.php:3754
 msgid "Customizer"
 msgstr "Özelleştirici"
 
@@ -17811,7 +17822,7 @@ msgid "Distraction-free writing mode"
 msgstr "Odaklanmayı sağlayan yazma kipi"
 
 #. translators: 1: title-tag, 2: wp_loaded
-#: wp-includes/theme.php:2932
+#: wp-includes/theme.php:2940
 msgid "Theme support for %1$s should be registered before the %2$s hook."
 msgstr "%1$s tema desteği %2$s kancasından önce kayıt edilmelidir."
 
@@ -17858,7 +17869,7 @@ msgstr "Şu değerler geçerli bir tarihi ifade etmiyorlar: Ay %1$s, Gün %2$s."
 msgid "%s must set a database connection for use with escaping."
 msgstr "%s temizleme için bir veri tabanı bağlantısı kurmalıdır."
 
-#: wp-includes/theme.php:2739
+#: wp-includes/theme.php:2747
 msgid "You need to pass an array of types."
 msgstr "Türlerden oluşan bir dizi aktarmalısınız."
 
@@ -17985,7 +17996,7 @@ msgstr "j F Y"
 
 #. translators: Custom template title in the Site Editor. %s: Author name.
 #. translators: %s: Name of the author e.g: "Admin".
-#: wp-includes/block-template-utils.php:973
+#: wp-includes/block-template-utils.php:984
 #: wp-includes/js/dist/edit-site.js:57116
 msgid "Author: %s"
 msgstr "Yazar: %s"
@@ -19095,7 +19106,7 @@ msgstr "Sağa yasla"
 
 #: wp-includes/class-wp-customize-widgets.php:807
 #: wp-admin/includes/ajax-actions.php:1129
-#: wp-admin/includes/ajax-actions.php:2414 wp-admin/js/media.js:127
+#: wp-admin/includes/ajax-actions.php:2428 wp-admin/js/media.js:127
 #: wp-admin/js/media.js:132 wp-admin/js/updates.js:2345
 msgid "An error has occurred. Please reload the page and try again."
 msgstr "Bir sorun çıktı. Lütfen sayfayı yenileyip yeniden deneyin."
@@ -19186,7 +19197,7 @@ msgstr "Değiştir"
 #: wp-includes/js/dist/editor.js:27265 wp-includes/js/dist/editor.js:85292
 #: wp-includes/js/dist/editor.js:88026 wp-includes/js/dist/editor.js:88071
 #: wp-includes/js/dist/script-modules/content-types/index.js:36214
-#: wp-admin/includes/ajax-actions.php:2292
+#: wp-admin/includes/ajax-actions.php:2306
 #: wp-admin/includes/class-wp-posts-list-table.php:2086
 #: wp-admin/includes/class-wp-privacy-requests-table.php:44
 msgid "Status"
@@ -19460,8 +19471,8 @@ msgstr "Gelecekte bu özelliğin kullanılabilmesi için JavaScript etkin olmal�
 #: wp-includes/script-loader.php:474 wp-admin/admin.php:119
 #: wp-admin/comment.php:237 wp-admin/edit-form-advanced.php:655
 #: wp-admin/edit-form-advanced.php:662 wp-admin/includes/ajax-actions.php:1663
-#: wp-admin/includes/ajax-actions.php:2920
-#: wp-admin/includes/ajax-actions.php:2923
+#: wp-admin/includes/ajax-actions.php:2934
+#: wp-admin/includes/ajax-actions.php:2937
 #: wp-admin/includes/class-wp-comments-list-table.php:1084
 #: wp-admin/includes/class-wp-posts-list-table.php:1304
 #: wp-admin/includes/class-wp-privacy-requests-table.php:497
@@ -19551,7 +19562,7 @@ msgstr "Site adresi (URL)"
 msgid "WordPress Address (URL)"
 msgstr "WordPress adresi (URL)"
 
-#: wp-includes/class-wp-xmlrpc-server.php:2738
+#: wp-includes/class-wp-xmlrpc-server.php:2765
 #: wp-includes/rest-api/endpoints/class-wp-rest-application-passwords-controller.php:692
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:447
 #: wp-includes/user.php:2276 wp-includes/user.php:2744
@@ -19581,8 +19592,8 @@ msgid "Random"
 msgstr "Rastgele"
 
 #: wp-includes/media-template.php:1551 wp-includes/media.php:5171
-#: wp-admin/includes/ajax-actions.php:2289
-#: wp-admin/includes/ajax-actions.php:3967
+#: wp-admin/includes/ajax-actions.php:2303
+#: wp-admin/includes/ajax-actions.php:3981
 #: wp-admin/includes/class-wp-list-table.php:379
 #: wp-admin/includes/class-wp-themes-list-table.php:92
 msgid "No items found."
@@ -19972,28 +19983,28 @@ msgstr "%1$s %2$s %3$s akışı"
 msgid "Display post date?"
 msgstr "Yazı tarihi görüntülensin mi?"
 
-#: wp-includes/class-wp-xmlrpc-server.php:5487 wp-admin/includes/post.php:41
-#: wp-admin/includes/post.php:86
+#: wp-includes/class-wp-xmlrpc-server.php:5514 wp-admin/includes/post.php:55
+#: wp-admin/includes/post.php:100
 msgid "Sorry, you are not allowed to create pages as this user."
 msgstr "Ne yazık ki, bu kullanıcı ile sayfa oluşturma izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:4732
-#: wp-includes/class-wp-xmlrpc-server.php:4815
+#: wp-includes/class-wp-xmlrpc-server.php:4759
+#: wp-includes/class-wp-xmlrpc-server.php:4842
 msgid "Sorry, revisions are disabled."
 msgstr "Ne yazık ki, sürüm özelliği etkin değil."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3335
-#: wp-includes/class-wp-xmlrpc-server.php:4727
-#: wp-includes/class-wp-xmlrpc-server.php:5051
-#: wp-includes/class-wp-xmlrpc-server.php:6285 wp-admin/includes/post.php:517
+#: wp-includes/class-wp-xmlrpc-server.php:3362
+#: wp-includes/class-wp-xmlrpc-server.php:4754
+#: wp-includes/class-wp-xmlrpc-server.php:5078
+#: wp-includes/class-wp-xmlrpc-server.php:6312 wp-admin/includes/post.php:531
 msgid "Sorry, you are not allowed to edit posts."
 msgstr "Ne yazık ki, yazıları düzenleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2968
+#: wp-includes/class-wp-xmlrpc-server.php:2995
 msgid "Sorry, the user could not be updated."
 msgstr "Ne yazık ki, kullanıcı güncellenemedi."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1778
+#: wp-includes/class-wp-xmlrpc-server.php:1805
 msgid "There is a revision of this post that is more recent."
 msgstr "Bu yazının daha güncel bir sürümü var."
 
@@ -20054,7 +20065,7 @@ msgstr "Bu XML-RPC yöntemine aktarılan değişkenler yetersiz."
 msgid "Sorry, you cannot stick a private post."
 msgstr "Ne yazık ki, bir özel yazıyı sabitleyemezsiniz."
 
-#: wp-includes/class-wp-xmlrpc-server.php:5985
+#: wp-includes/class-wp-xmlrpc-server.php:6012
 msgid "Sorry, you are not allowed to publish this page."
 msgstr "Ne yazık ki, bu sayfayı yayınlama izniniz yok."
 
@@ -20130,7 +20141,8 @@ msgstr "Görseli değiştir"
 msgid "Remove image"
 msgstr "Görseli kaldır"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:878
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:881
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:2114
 #: wp-admin/comment.php:85
 msgid "Sorry, you are not allowed to edit this comment."
 msgstr "Ne yazık ki, bu yorumu düzenleme izniniz yok."
@@ -20171,12 +20183,12 @@ msgstr "İzin verilen dosyalar"
 msgid "Remove"
 msgstr "Kaldır"
 
-#: wp-includes/class-wp-xmlrpc-server.php:2487
-#: wp-includes/class-wp-xmlrpc-server.php:2594
+#: wp-includes/class-wp-xmlrpc-server.php:2514
+#: wp-includes/class-wp-xmlrpc-server.php:2621
 msgid "Sorry, you are not allowed to assign terms in this taxonomy."
 msgstr "Ne yazık ki, bu sınıflandırmaya terim atama izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2362
+#: wp-includes/class-wp-xmlrpc-server.php:2389
 msgid "Sorry, deleting the term failed."
 msgstr "Ne yazık ki, terim silinemedi."
 
@@ -20186,14 +20198,14 @@ msgstr "Ne yazık ki, terim silinemedi."
 msgid "Sorry, you are not allowed to manage terms in this taxonomy."
 msgstr "Ne yazık ki, bu sınıflandırmadaki terimleri yönetme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2287
+#: wp-includes/class-wp-xmlrpc-server.php:2314
 msgid "Sorry, editing the term failed."
 msgstr "Ne yazık ki, terim düzenlenemedi."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1604
-#: wp-includes/class-wp-xmlrpc-server.php:2238
-#: wp-includes/class-wp-xmlrpc-server.php:2348
-#: wp-includes/class-wp-xmlrpc-server.php:2428
+#: wp-includes/class-wp-xmlrpc-server.php:1631
+#: wp-includes/class-wp-xmlrpc-server.php:2265
+#: wp-includes/class-wp-xmlrpc-server.php:2375
+#: wp-includes/class-wp-xmlrpc-server.php:2455
 #: wp-includes/rest-api/endpoints/class-wp-rest-menu-items-controller.php:437
 #: wp-includes/taxonomy.php:2482
 msgid "Invalid term ID."
@@ -20204,8 +20216,8 @@ msgstr "Terim kimliği geçersiz."
 msgid "Sorry, you are not allowed to edit terms in this taxonomy."
 msgstr "Ne yazık ki, bu sınıflandırmadaki terimleri düzenleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2146
-#: wp-includes/class-wp-xmlrpc-server.php:2266
+#: wp-includes/class-wp-xmlrpc-server.php:2173
+#: wp-includes/class-wp-xmlrpc-server.php:2293
 #: wp-includes/rest-api/endpoints/class-wp-rest-menus-controller.php:213
 #: wp-includes/rest-api/endpoints/class-wp-rest-menus-controller.php:307
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:542
@@ -20214,16 +20226,16 @@ msgstr "Ne yazık ki, bu sınıflandırmadaki terimleri düzenleme izniniz yok."
 msgid "Parent term does not exist."
 msgstr "Üst ifade bulunamadı."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2135
+#: wp-includes/class-wp-xmlrpc-server.php:2162
 msgid "This taxonomy is not hierarchical."
 msgstr "Sınıflandırma hiyerarşik değil."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2130
-#: wp-includes/class-wp-xmlrpc-server.php:2249
+#: wp-includes/class-wp-xmlrpc-server.php:2157
+#: wp-includes/class-wp-xmlrpc-server.php:2276
 msgid "The term name cannot be empty."
 msgstr "Terim adı boş olamaz."
 
-#: wp-includes/class-wp-xmlrpc-server.php:2120
+#: wp-includes/class-wp-xmlrpc-server.php:2147
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:511
 #: wp-admin/edit-tags.php:86
 msgid "Sorry, you are not allowed to create terms in this taxonomy."
@@ -20231,12 +20243,12 @@ msgstr "Ne yazık ki, bu sınıflandırmada yeni terimler oluşturma izniniz yok
 
 #: wp-includes/class-wp-tax-query.php:549
 #: wp-includes/class-wp-tax-query.php:556 wp-includes/class-wp-term.php:173
-#: wp-includes/class-wp-xmlrpc-server.php:2114
-#: wp-includes/class-wp-xmlrpc-server.php:2221
-#: wp-includes/class-wp-xmlrpc-server.php:2337
-#: wp-includes/class-wp-xmlrpc-server.php:2416
-#: wp-includes/class-wp-xmlrpc-server.php:2481
-#: wp-includes/class-wp-xmlrpc-server.php:2588
+#: wp-includes/class-wp-xmlrpc-server.php:2141
+#: wp-includes/class-wp-xmlrpc-server.php:2248
+#: wp-includes/class-wp-xmlrpc-server.php:2364
+#: wp-includes/class-wp-xmlrpc-server.php:2443
+#: wp-includes/class-wp-xmlrpc-server.php:2508
+#: wp-includes/class-wp-xmlrpc-server.php:2615
 #: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:193
 #: wp-includes/taxonomy.php:609 wp-includes/taxonomy.php:882
 #: wp-includes/taxonomy.php:983 wp-includes/taxonomy.php:1178
@@ -20333,8 +20345,8 @@ msgstr "Son yazılarınız"
 msgid "Navigation"
 msgstr "Gezinme"
 
-#: wp-includes/class-wp-xmlrpc-server.php:1475
-#: wp-includes/class-wp-xmlrpc-server.php:5811
+#: wp-includes/class-wp-xmlrpc-server.php:1502
+#: wp-includes/class-wp-xmlrpc-server.php:5838
 msgid "The post type may not be changed."
 msgstr "Yazı türü değiştirilemeyebilir."
 
@@ -20350,21 +20362,21 @@ msgstr "Varsayılan görsel boyutu"
 msgid "Image default link type"
 msgstr "Varsayılan görsel bağlantısı türü"
 
-#: wp-includes/class-wp-xmlrpc-server.php:1472
-#: wp-includes/class-wp-xmlrpc-server.php:1960
-#: wp-includes/class-wp-xmlrpc-server.php:4810
-#: wp-includes/class-wp-xmlrpc-server.php:4994
-#: wp-includes/class-wp-xmlrpc-server.php:5241
-#: wp-includes/class-wp-xmlrpc-server.php:5801
-#: wp-includes/class-wp-xmlrpc-server.php:6144
-#: wp-includes/class-wp-xmlrpc-server.php:6542
-#: wp-includes/class-wp-xmlrpc-server.php:6732
-#: wp-includes/class-wp-xmlrpc-server.php:6790
+#: wp-includes/class-wp-xmlrpc-server.php:1499
+#: wp-includes/class-wp-xmlrpc-server.php:1987
+#: wp-includes/class-wp-xmlrpc-server.php:4837
+#: wp-includes/class-wp-xmlrpc-server.php:5021
+#: wp-includes/class-wp-xmlrpc-server.php:5268
+#: wp-includes/class-wp-xmlrpc-server.php:5828
+#: wp-includes/class-wp-xmlrpc-server.php:6171
+#: wp-includes/class-wp-xmlrpc-server.php:6569
+#: wp-includes/class-wp-xmlrpc-server.php:6759
+#: wp-includes/class-wp-xmlrpc-server.php:6817
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:589
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:904
-#: wp-admin/includes/ajax-actions.php:2102 wp-admin/includes/media.php:3856
-#: wp-admin/includes/post.php:284 wp-admin/includes/post.php:2082
-#: wp-admin/includes/post.php:2086
+#: wp-admin/includes/ajax-actions.php:2116 wp-admin/includes/media.php:3856
+#: wp-admin/includes/post.php:298 wp-admin/includes/post.php:2096
+#: wp-admin/includes/post.php:2100
 msgid "Sorry, you are not allowed to edit this post."
 msgstr "Ne yazık ki, bu yazıyı düzenleme izniniz yok."
 
@@ -20373,15 +20385,15 @@ msgid "Edit Site"
 msgstr "Siteyi düzenle"
 
 #: wp-includes/post.php:5821 wp-admin/includes/ajax-actions.php:124
-#: wp-admin/includes/meta-boxes.php:583 wp-admin/includes/post.php:578
-#: wp-admin/includes/post.php:2261 wp-admin/js/inline-edit-post.js:417
+#: wp-admin/includes/meta-boxes.php:583 wp-admin/includes/post.php:592
+#: wp-admin/includes/post.php:2275 wp-admin/js/inline-edit-post.js:417
 #: wp-admin/js/tags-box.js:9 wp-admin/js/tags-suggest.js:8
 msgctxt "tag delimiter"
 msgid ","
 msgstr ","
 
-#: wp-includes/class-wp-xmlrpc-server.php:2026
-#: wp-includes/class-wp-xmlrpc-server.php:4600
+#: wp-includes/class-wp-xmlrpc-server.php:2053
+#: wp-includes/class-wp-xmlrpc-server.php:4627
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:95
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:162
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:167
@@ -20395,25 +20407,25 @@ msgstr "Ne yazık ki, bu yazı türündeki yazıları düzenleme izniniz yok."
 msgid "The post cannot be deleted."
 msgstr "Yazı silinemez."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3523
+#: wp-includes/class-wp-xmlrpc-server.php:3550
 msgid "Sorry, you are not allowed to delete this category."
 msgstr "Ne yazık ki, bu kategoriyi silme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1659
+#: wp-includes/class-wp-xmlrpc-server.php:1686
 msgid "Sorry, you are not allowed to add a term to one of the given taxonomies."
 msgstr "Ne yazık ki, belirtilen sınıflandırmalardan birine terim ekleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1651
+#: wp-includes/class-wp-xmlrpc-server.php:1678
 msgid "Ambiguous term name used in a hierarchical taxonomy. Please use term ID instead."
 msgstr "Hiyerarşik sınıflandırmada yinelenen bir ad kullanıldı. Lütfen ad yerine terim kimliğini kullanın."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1595
 #: wp-includes/class-wp-xmlrpc-server.php:1622
+#: wp-includes/class-wp-xmlrpc-server.php:1649
 msgid "Sorry, you are not allowed to assign a term to one of the given taxonomies."
 msgstr "Ne yazık ki, belirtilen sınıflandırmalardan biri için bir terim atama izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1591
 #: wp-includes/class-wp-xmlrpc-server.php:1618
+#: wp-includes/class-wp-xmlrpc-server.php:1645
 msgid "Sorry, one of the given taxonomies is not supported by the post type."
 msgstr "Ne yazık ki, belirtilen sınıflandırmalardan biri bu yazı türü tarafından desteklenmiyor."
 
@@ -20422,27 +20434,27 @@ msgstr "Ne yazık ki, belirtilen sınıflandırmalardan biri bu yazı türü tar
 msgid "Sorry, you are not allowed to view this item."
 msgstr "Ne yazık ki, bu yazıyı görüntüleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1518
-#: wp-includes/class-wp-xmlrpc-server.php:5495
+#: wp-includes/class-wp-xmlrpc-server.php:1545
+#: wp-includes/class-wp-xmlrpc-server.php:5522
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1404
 #: wp-includes/rest-api/endpoints/class-wp-rest-templates-controller.php:651
 msgid "Invalid author ID."
 msgstr "Yazar kimliği geçersiz."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1512
-#: wp-includes/class-wp-xmlrpc-server.php:5482
+#: wp-includes/class-wp-xmlrpc-server.php:1539
+#: wp-includes/class-wp-xmlrpc-server.php:5509
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:701
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:717
-#: wp-admin/includes/post.php:43 wp-admin/includes/post.php:88
+#: wp-admin/includes/post.php:57 wp-admin/includes/post.php:102
 #: wp-admin/post-new.php:61 wp-admin/press-this.php:20
 msgid "Sorry, you are not allowed to create posts as this user."
 msgstr "Ne yazık ki, bu kullanıcı adına yazı oluşturma izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1506
+#: wp-includes/class-wp-xmlrpc-server.php:1533
 msgid "Sorry, you are not allowed to create password protected posts in this post type."
 msgstr "Ne yazık ki, bu yazı türünde parola ile korunan bir yazı oluşturma izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1489
+#: wp-includes/class-wp-xmlrpc-server.php:1516
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1579
 msgid "Sorry, you are not allowed to create private posts in this post type."
 msgstr "Ne yazık ki, bu yazı türünde özel yazı oluşturma izniniz yok."
@@ -20860,8 +20872,8 @@ msgctxt "Post format"
 msgid "Audio"
 msgstr "Ses"
 
-#: wp-includes/class-wp-xmlrpc-server.php:5446
-#: wp-includes/class-wp-xmlrpc-server.php:5818
+#: wp-includes/class-wp-xmlrpc-server.php:5473
+#: wp-includes/class-wp-xmlrpc-server.php:5845
 msgid "Invalid post format."
 msgstr "Yazı biçimi geçersiz."
 
@@ -20934,10 +20946,10 @@ msgstr "Sayfa bulunamadı."
 msgid "Shortlink"
 msgstr "Kısa bağlantı"
 
-#: wp-includes/class-wp-xmlrpc-server.php:1568
-#: wp-includes/class-wp-xmlrpc-server.php:4402
-#: wp-includes/class-wp-xmlrpc-server.php:5663
-#: wp-includes/class-wp-xmlrpc-server.php:6082
+#: wp-includes/class-wp-xmlrpc-server.php:1595
+#: wp-includes/class-wp-xmlrpc-server.php:4429
+#: wp-includes/class-wp-xmlrpc-server.php:5690
+#: wp-includes/class-wp-xmlrpc-server.php:6109
 msgid "Invalid attachment ID."
 msgstr "Ek dosya kimliği geçersiz."
 
@@ -21251,36 +21263,36 @@ msgstr "Lütfen temanıza bir %s şablonu ekleyin."
 msgid "Theme without %s"
 msgstr "%s olmayan tema"
 
-#: wp-includes/class-wp-xmlrpc-server.php:3573
-#: wp-includes/class-wp-xmlrpc-server.php:6406
-#: wp-includes/class-wp-xmlrpc-server.php:6674
+#: wp-includes/class-wp-xmlrpc-server.php:3600
+#: wp-includes/class-wp-xmlrpc-server.php:6433
+#: wp-includes/class-wp-xmlrpc-server.php:6701
 msgid "Sorry, you must be able to edit posts on this site in order to view categories."
 msgstr "Ne yazık ki, kategorileri görüntülemek için bu sitede yazıları düzenleme izniniz olmalıdır."
 
-#: wp-includes/class-wp-xmlrpc-server.php:5404
+#: wp-includes/class-wp-xmlrpc-server.php:5431
 msgid "Sorry, you are not allowed to publish pages on this site."
 msgstr "Ne yazık ki, bu sitede sayfa yayınlama izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:5417
-#: wp-includes/class-wp-xmlrpc-server.php:5431
-#: wp-includes/class-wp-xmlrpc-server.php:5436
+#: wp-includes/class-wp-xmlrpc-server.php:5444
+#: wp-includes/class-wp-xmlrpc-server.php:5458
+#: wp-includes/class-wp-xmlrpc-server.php:5463
 msgid "Sorry, you are not allowed to publish posts on this site."
 msgstr "Ne yazık ki, bu sitede yazı yayınlama izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1479
-#: wp-includes/class-wp-xmlrpc-server.php:5149
+#: wp-includes/class-wp-xmlrpc-server.php:1506
+#: wp-includes/class-wp-xmlrpc-server.php:5176
 msgid "Sorry, you are not allowed to post on this site."
 msgstr "Ne yazık ki, bu sitede yazı yazma izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:4082
-#: wp-includes/class-wp-xmlrpc-server.php:4166
-#: wp-includes/class-wp-xmlrpc-server.php:4201
-#: wp-includes/class-wp-xmlrpc-server.php:4236
-#: wp-includes/class-wp-xmlrpc-server.php:4506
+#: wp-includes/class-wp-xmlrpc-server.php:4109
+#: wp-includes/class-wp-xmlrpc-server.php:4193
+#: wp-includes/class-wp-xmlrpc-server.php:4228
+#: wp-includes/class-wp-xmlrpc-server.php:4263
+#: wp-includes/class-wp-xmlrpc-server.php:4533
 msgid "Sorry, you are not allowed to access details about this site."
 msgstr "Ne yazık ki, bu site ile ilgili bilgilere erişme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3379
+#: wp-includes/class-wp-xmlrpc-server.php:3406
 msgid "Sorry, you must be able to edit posts on this site in order to view tags."
 msgstr "Ne yazık ki, etiketleri görüntülemek için bu sitede yazıları düzenleme izniniz olmalıdır."
 
@@ -21400,7 +21412,7 @@ msgid "Your email address will not be published."
 msgstr "E-posta adresiniz yayınlanmayacak."
 
 #: wp-includes/class-wp-http.php:295 wp-includes/class-wp-http.php:531
-#: wp-includes/class-wp-xmlrpc-server.php:6970
+#: wp-includes/class-wp-xmlrpc-server.php:6997
 msgid "A valid URL was not provided."
 msgstr "Geçerli bir adres belirtilmemiş."
 
@@ -21618,52 +21630,52 @@ msgstr "Menüler"
 msgid "Your PHP installation appears to be missing the MySQL extension which is required by WordPress."
 msgstr "PHP kurulumunuzda WordPress'in çalışması için gerekli olan MySQL eklentisi eksik."
 
-#: wp-includes/class-wp-xmlrpc-server.php:7222
+#: wp-includes/class-wp-xmlrpc-server.php:7249
 msgid "The specified target URL does not exist."
 msgstr "Belirlenmiş hedef adresi bulunamadı."
 
 #. translators: 1: URL of the page linked from, 2: URL of the page linked to.
-#: wp-includes/class-wp-xmlrpc-server.php:7189
+#: wp-includes/class-wp-xmlrpc-server.php:7216
 msgid "Pingback from %1$s to %2$s registered. Keep the web talking! :-)"
 msgstr "%1$s adresinden %2$s adresine gönderilen geri bağlantı kaydedildi."
 
-#: wp-includes/class-wp-xmlrpc-server.php:7142
+#: wp-includes/class-wp-xmlrpc-server.php:7169
 msgid "The source URL does not contain a link to the target URL, and so cannot be used as a source."
 msgstr "Kaynak adresinde, hedef adresin bağlantısı yok. Bu yüzden kaynak olarak kullanılamıyor."
 
-#: wp-includes/class-wp-xmlrpc-server.php:7077
+#: wp-includes/class-wp-xmlrpc-server.php:7104
 msgid "The source URL does not exist."
 msgstr "Kaynak adresi bulunamadı."
 
-#: wp-includes/class-wp-xmlrpc-server.php:7038
+#: wp-includes/class-wp-xmlrpc-server.php:7065
 msgid "The pingback has already been registered."
 msgstr "Geri bağlantı zaten kayıtlı."
 
-#: wp-includes/class-wp-xmlrpc-server.php:7028
+#: wp-includes/class-wp-xmlrpc-server.php:7055
 msgid "The source URL and the target URL cannot both point to the same resource."
 msgstr "Kaynak adresi ve hedef adres aynı kaynağı gösteremez."
 
-#: wp-includes/class-wp-xmlrpc-server.php:7017
-#: wp-includes/class-wp-xmlrpc-server.php:7024
-#: wp-includes/class-wp-xmlrpc-server.php:7033
-#: wp-includes/class-wp-xmlrpc-server.php:7215
+#: wp-includes/class-wp-xmlrpc-server.php:7044
+#: wp-includes/class-wp-xmlrpc-server.php:7051
+#: wp-includes/class-wp-xmlrpc-server.php:7060
+#: wp-includes/class-wp-xmlrpc-server.php:7242
 msgid "The specified target URL cannot be used as a target. It either does not exist, or it is not a pingback-enabled resource."
 msgstr "Belirtilen adres hedef olarak kullanılamaz. Böyle bir adres yok ya da ilgili adres geri bağlantıların etkin olduğu bir kaynak değil."
 
-#: wp-includes/class-wp-xmlrpc-server.php:6976
+#: wp-includes/class-wp-xmlrpc-server.php:7003
 msgid "Is there no link to us?"
 msgstr "Bize hiç bağlantı veren yok mu?"
 
 #. translators: 1: File name, 2: Error message.
-#: wp-includes/class-wp-xmlrpc-server.php:6532
+#: wp-includes/class-wp-xmlrpc-server.php:6559
 msgid "Could not write file %1$s (%2$s)."
 msgstr "Dosyaya yazılamadı %1$s (%2$s)."
 
-#: wp-includes/class-wp-xmlrpc-server.php:5875
+#: wp-includes/class-wp-xmlrpc-server.php:5902
 msgid "Sorry, you are not allowed to change the page author as this user."
 msgstr "Ne yazık ki, bu kullanıcı olarak sayfaların yazarlarını değiştirme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:5870
+#: wp-includes/class-wp-xmlrpc-server.php:5897
 msgid "Sorry, you are not allowed to change the post author as this user."
 msgstr "Ne yazık ki, bu kullanıcı olarak yazıların yazarlarını değiştirme izniniz yok."
 
@@ -21673,13 +21685,13 @@ msgstr "Ne yazık ki, bu kullanıcı olarak yazıları güncelleme izniniz yok."
 
 #: wp-includes/class-wp-customize-nav-menus.php:961
 #: wp-includes/class-wp-xmlrpc-server.php:1462
-#: wp-includes/class-wp-xmlrpc-server.php:2019
-#: wp-includes/class-wp-xmlrpc-server.php:3696
-#: wp-includes/class-wp-xmlrpc-server.php:4594
-#: wp-includes/class-wp-xmlrpc-server.php:5421
-#: wp-includes/class-wp-xmlrpc-server.php:5491
-#: wp-includes/class-wp-xmlrpc-server.php:5806
-#: wp-includes/class-wp-xmlrpc-server.php:5879 wp-includes/post.php:1929
+#: wp-includes/class-wp-xmlrpc-server.php:2046
+#: wp-includes/class-wp-xmlrpc-server.php:3723
+#: wp-includes/class-wp-xmlrpc-server.php:4621
+#: wp-includes/class-wp-xmlrpc-server.php:5448
+#: wp-includes/class-wp-xmlrpc-server.php:5518
+#: wp-includes/class-wp-xmlrpc-server.php:5833
+#: wp-includes/class-wp-xmlrpc-server.php:5906 wp-includes/post.php:1929
 #: wp-includes/rest-api/endpoints/class-wp-rest-menu-items-controller.php:457
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:146
 #: wp-admin/async-upload.php:43 wp-admin/edit.php:18 wp-admin/edit.php:41
@@ -21688,61 +21700,61 @@ msgstr "Ne yazık ki, bu kullanıcı olarak yazıları güncelleme izniniz yok."
 msgid "Invalid post type."
 msgstr "Yazı türü geçersiz."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1495
+#: wp-includes/class-wp-xmlrpc-server.php:1522
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1589
 msgid "Sorry, you are not allowed to publish posts in this post type."
 msgstr "Ne yazık ki, bu yazı türündeki yazıları yayınlama izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:5235
-#: wp-includes/class-wp-xmlrpc-server.php:5309
-#: wp-includes/class-wp-xmlrpc-server.php:6249
-#: wp-includes/class-wp-xmlrpc-server.php:6855
+#: wp-includes/class-wp-xmlrpc-server.php:5262
+#: wp-includes/class-wp-xmlrpc-server.php:5336
+#: wp-includes/class-wp-xmlrpc-server.php:6276
+#: wp-includes/class-wp-xmlrpc-server.php:6882
 msgid "Sorry, no such post."
 msgstr "Ne yazık ki, böyle bir yazı yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:5244
-#: wp-includes/class-wp-xmlrpc-server.php:5987
-#: wp-includes/class-wp-xmlrpc-server.php:6915
+#: wp-includes/class-wp-xmlrpc-server.php:5271
+#: wp-includes/class-wp-xmlrpc-server.php:6014
+#: wp-includes/class-wp-xmlrpc-server.php:6942
 msgid "Sorry, you are not allowed to publish this post."
 msgstr "Ne yazık ki, bu blogda yazı yayınlama izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:4337
+#: wp-includes/class-wp-xmlrpc-server.php:4364
 msgid "Sorry, you are not allowed to update options."
 msgstr "Ne yazık ki, ayarları güncelleme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:4124
+#: wp-includes/class-wp-xmlrpc-server.php:4151
 msgid "Sorry, you are not allowed to access details of this post."
 msgstr "Ne yazık ki, bu yazı ile ilgili bilgilere erişme izniniz yok."
 
-#: wp-includes/class-wp-xmlrpc-server.php:4017
+#: wp-includes/class-wp-xmlrpc-server.php:4044
 msgid "A valid email address is required."
 msgstr "Geçerli bir e-posta adresi gereklidir."
 
-#: wp-includes/class-wp-xmlrpc-server.php:4015
+#: wp-includes/class-wp-xmlrpc-server.php:4042
 msgid "Comment author name and email are required."
 msgstr "Yorum yazarının adı ve e-postası yazılmalıdır."
 
-#: wp-includes/class-wp-xmlrpc-server.php:1469
-#: wp-includes/class-wp-xmlrpc-server.php:1772
-#: wp-includes/class-wp-xmlrpc-server.php:1854
-#: wp-includes/class-wp-xmlrpc-server.php:1956
-#: wp-includes/class-wp-xmlrpc-server.php:3003
-#: wp-includes/class-wp-xmlrpc-server.php:3955
-#: wp-includes/class-wp-xmlrpc-server.php:3959
-#: wp-includes/class-wp-xmlrpc-server.php:4120
-#: wp-includes/class-wp-xmlrpc-server.php:4723
-#: wp-includes/class-wp-xmlrpc-server.php:4797
-#: wp-includes/class-wp-xmlrpc-server.php:4801
-#: wp-includes/class-wp-xmlrpc-server.php:4806
-#: wp-includes/class-wp-xmlrpc-server.php:4990
-#: wp-includes/class-wp-xmlrpc-server.php:5797
-#: wp-includes/class-wp-xmlrpc-server.php:6140
-#: wp-includes/class-wp-xmlrpc-server.php:6728
-#: wp-includes/class-wp-xmlrpc-server.php:6786
-#: wp-includes/class-wp-xmlrpc-server.php:6911 wp-includes/comment.php:2886
+#: wp-includes/class-wp-xmlrpc-server.php:1496
+#: wp-includes/class-wp-xmlrpc-server.php:1799
+#: wp-includes/class-wp-xmlrpc-server.php:1881
+#: wp-includes/class-wp-xmlrpc-server.php:1983
+#: wp-includes/class-wp-xmlrpc-server.php:3030
+#: wp-includes/class-wp-xmlrpc-server.php:3982
+#: wp-includes/class-wp-xmlrpc-server.php:3986
+#: wp-includes/class-wp-xmlrpc-server.php:4147
+#: wp-includes/class-wp-xmlrpc-server.php:4750
+#: wp-includes/class-wp-xmlrpc-server.php:4824
+#: wp-includes/class-wp-xmlrpc-server.php:4828
+#: wp-includes/class-wp-xmlrpc-server.php:4833
+#: wp-includes/class-wp-xmlrpc-server.php:5017
+#: wp-includes/class-wp-xmlrpc-server.php:5824
+#: wp-includes/class-wp-xmlrpc-server.php:6167
+#: wp-includes/class-wp-xmlrpc-server.php:6755
+#: wp-includes/class-wp-xmlrpc-server.php:6813
+#: wp-includes/class-wp-xmlrpc-server.php:6938 wp-includes/comment.php:2886
 #: wp-includes/post.php:4648 wp-includes/post.php:5339
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:417
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:922
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:945
 #: wp-includes/rest-api/endpoints/class-wp-rest-menu-items-controller.php:445
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:556
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:205
@@ -21750,27 +21762,27 @@ msgstr "Yorum yazarının adı ve e-postası yazılmalıdır."
 msgid "Invalid post ID."
 msgstr "Yazı kimliği geçersiz."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3684
-#: wp-includes/class-wp-xmlrpc-server.php:3848
+#: wp-includes/class-wp-xmlrpc-server.php:3711
+#: wp-includes/class-wp-xmlrpc-server.php:3875
 msgid "Invalid comment status."
 msgstr "Yorum durumu geçersiz."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3627
-#: wp-includes/class-wp-xmlrpc-server.php:3762
-#: wp-includes/class-wp-xmlrpc-server.php:3830 wp-includes/comment.php:2877
+#: wp-includes/class-wp-xmlrpc-server.php:3654
+#: wp-includes/class-wp-xmlrpc-server.php:3789
+#: wp-includes/class-wp-xmlrpc-server.php:3857 wp-includes/comment.php:2877
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:397
 #: wp-admin/comment.php:81 wp-admin/comment.php:293
 #: wp-admin/edit-comments.php:297
 msgid "Invalid comment ID."
 msgstr "Yorum kimliği geçersiz."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3165
+#: wp-includes/class-wp-xmlrpc-server.php:3192
 msgid "Failed to delete the page."
 msgstr "Sayfa silinemedi."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3018
-#: wp-includes/class-wp-xmlrpc-server.php:3154
-#: wp-includes/class-wp-xmlrpc-server.php:3220
+#: wp-includes/class-wp-xmlrpc-server.php:3045
+#: wp-includes/class-wp-xmlrpc-server.php:3181
+#: wp-includes/class-wp-xmlrpc-server.php:3247
 msgid "Sorry, no such page."
 msgstr "Ne yazık ki, böyle bir sayfa yok."
 
@@ -22016,7 +22028,7 @@ msgstr "Güvenlik hatası."
 msgid "IO error."
 msgstr "Dosya okuma/yazma sorunu."
 
-#: wp-includes/script-loader.php:1027 wp-admin/includes/ajax-actions.php:2583
+#: wp-includes/script-loader.php:1027 wp-admin/includes/ajax-actions.php:2597
 msgid "Upload failed."
 msgstr "Yüklenemedi."
 
@@ -22326,7 +22338,7 @@ msgid "This file is too big. Files must be less than %s KB in size."
 msgstr "Bu dosya çok büyük. Dosyalar %s KB boyutundan küçük olmalı."
 
 #. translators: %s: Allowed space allocation.
-#: wp-includes/class-wp-xmlrpc-server.php:6507 wp-admin/includes/media.php:3127
+#: wp-includes/class-wp-xmlrpc-server.php:6534 wp-admin/includes/media.php:3127
 #: wp-admin/includes/ms-deprecated.php:35 wp-admin/includes/ms.php:240
 msgid "Sorry, you have used your space allocation of %s. Please delete some files to upload more files."
 msgstr "Ne yazık ki, size ayrılmış %s depolama alanını doldurdunuz. Lütfen daha fazla dosya yükleyebilmek için bazı dosyaları silin."
@@ -22539,7 +22551,7 @@ msgstr "Döngü"
 
 #: wp-includes/js/dist/block-editor.js:50528
 #: wp-includes/js/dist/components.js:37192
-#: wp-admin/includes/ajax-actions.php:2292
+#: wp-admin/includes/ajax-actions.php:2306
 msgid "Type"
 msgstr "Tür"
 
@@ -22726,7 +22738,7 @@ msgid "Document properties"
 msgstr "Belge özellikleri"
 
 #: wp-includes/class-wp-editor.php:1373 wp-includes/script-loader.php:1320
-#: wp-includes/theme.php:3745 wp-admin/js/nav-menu.js:1575
+#: wp-includes/theme.php:3753 wp-admin/js/nav-menu.js:1575
 #: wp-admin/js/post.js:493 wp-admin/js/theme-plugin-editor.js:73
 #: wp-admin/js/user-profile.js:605 wp-admin/js/widgets.js:98
 msgid "The changes you made will be lost if you navigate away from this page."
@@ -23449,8 +23461,8 @@ msgstr "&laquo; Önceki sayfa"
 msgid "All"
 msgstr "Tümü"
 
-#: wp-includes/class-wp-xmlrpc-server.php:3963 wp-includes/comment.php:4022
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:634
+#: wp-includes/class-wp-xmlrpc-server.php:3990 wp-includes/comment.php:4022
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:636
 msgid "Sorry, comments are closed for this item."
 msgstr "Ne yazık ki, bu ögeye yorum yapma özelliği kapatılmış."
 
@@ -23869,7 +23881,7 @@ msgstr "Yardım"
 #: wp-includes/js/dist/media-utils.js:28541
 #: wp-includes/js/dist/script-modules/content-types/index.js:17041
 #: wp-includes/js/dist/script-modules/content-types/index.js:20593
-#: wp-includes/js/media-views.js:2922 wp-admin/includes/ajax-actions.php:2295
+#: wp-includes/js/media-views.js:2922 wp-admin/includes/ajax-actions.php:2309
 #: wp-admin/includes/media.php:3374 wp-admin/includes/revision.php:61
 #: wp-admin/includes/revision.php:64 wp-admin/includes/template.php:2098
 #: wp-admin/js/inline-edit-post.js:216
@@ -24878,7 +24890,7 @@ msgstr "Geri yükle"
 #: wp-admin/includes/class-wp-users-list-table.php:472
 #: wp-admin/includes/dashboard.php:772 wp-admin/includes/meta-boxes.php:135
 #: wp-admin/includes/meta-boxes.php:197 wp-admin/includes/meta-boxes.php:292
-#: wp-admin/includes/post.php:1611
+#: wp-admin/includes/post.php:1625
 #: wp-admin/includes/class-wp-ms-sites-list-table.php:766
 #: wp-admin/includes/class-wp-ms-users-list-table.php:411
 #: wp-admin/includes/class-wp-ms-users-list-table.php:548
@@ -24979,7 +24991,7 @@ msgstr "Siteyi görüntüle"
 #. translators: privacy request date format. See
 #. https://www.php.net/manual/en/datetime.format.php
 #: wp-includes/class-wp-editor.php:1823 wp-admin/comment.php:235
-#: wp-admin/includes/ajax-actions.php:2318
+#: wp-admin/includes/ajax-actions.php:2332
 #: wp-admin/includes/class-wp-comments-list-table.php:1082
 #: wp-admin/includes/class-wp-media-list-table.php:585
 #: wp-admin/includes/class-wp-posts-list-table.php:1302
@@ -24996,7 +25008,7 @@ msgstr "d.m.Y"
 #: wp-includes/js/dist/block-library.js:48027
 #: wp-includes/js/dist/editor.js:26654 wp-includes/js/dist/editor.js:87917
 #: wp-includes/js/dist/editor.js:87918 wp-includes/js/dist/editor.js:87926
-#: wp-admin/includes/ajax-actions.php:2310
+#: wp-admin/includes/ajax-actions.php:2324
 #: wp-admin/includes/class-wp-posts-list-table.php:2104
 #: wp-admin/includes/meta-boxes.php:122 wp-admin/includes/meta-boxes.php:160
 #: wp-admin/includes/meta-boxes.php:162
@@ -25004,7 +25016,7 @@ msgid "Draft"
 msgstr "Taslak"
 
 #: wp-includes/post.php:1363 wp-includes/js/dist/editor.js:26666
-#: wp-admin/includes/ajax-actions.php:2307
+#: wp-admin/includes/ajax-actions.php:2321
 #: wp-admin/includes/class-wp-posts-list-table.php:2103
 #: wp-admin/includes/meta-boxes.php:118 wp-admin/includes/meta-boxes.php:158
 msgid "Pending Review"
@@ -25014,7 +25026,7 @@ msgstr "Onaylanmayı bekliyor"
 #: wp-includes/script-loader.php:1311 wp-includes/view-config.php:221
 #: wp-includes/js/dist/block-library.js:47642
 #: wp-includes/js/dist/editor.js:26678 wp-includes/js/dist/editor.js:87922
-#: wp-includes/js/dist/editor.js:87946 wp-admin/includes/ajax-actions.php:2301
+#: wp-includes/js/dist/editor.js:87946 wp-admin/includes/ajax-actions.php:2315
 #: wp-admin/includes/class-wp-posts-list-table.php:1312
 #: wp-admin/includes/class-wp-posts-list-table.php:2095
 #: wp-admin/includes/meta-boxes.php:112 wp-admin/includes/meta-boxes.php:152
@@ -25034,7 +25046,7 @@ msgstr "Yayınlanmış"
 #: wp-includes/js/dist/media-utils.js:28538
 #: wp-includes/js/dist/script-modules/content-types/index.js:36163
 #: wp-includes/js/dist/script-modules/content-types/index.js:36628
-#: wp-includes/js/dist/widgets.js:1253 wp-admin/includes/ajax-actions.php:2292
+#: wp-includes/js/dist/widgets.js:1253 wp-admin/includes/ajax-actions.php:2306
 #: wp-admin/includes/class-wp-posts-list-table.php:773
 #: wp-admin/includes/class-wp-posts-list-table.php:780
 #: wp-admin/includes/class-wp-posts-list-table.php:1800
