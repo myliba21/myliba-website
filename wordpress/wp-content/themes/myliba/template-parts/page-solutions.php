@@ -44,11 +44,11 @@ $solutions = myliba_solution_catalog();
         <div class="solutions-cta__actions">
             <?php if ($copy('cta_button_label') !== ''): ?>
                 <a class="myliba-button myliba-button--primary"
-                    href="<?php echo esc_url($copy('cta_button_url') ?: myliba_page_url('contact')); ?>"><?php echo esc_html($copy('cta_button_label')); ?></a>
+                    href="<?php echo esc_url(myliba_localize_url($copy('cta_button_url') ?: myliba_page_url('contact'))); ?>"><?php echo esc_html($copy('cta_button_label')); ?></a>
             <?php endif; ?>
             <?php if ($copy('cta_secondary_label') !== ''): ?>
                 <a class="solutions-cta__secondary"
-                    href="<?php echo esc_url($copy('cta_secondary_url') ?: myliba_demo_url()); ?>"><?php echo esc_html($copy('cta_secondary_label')); ?></a>
+                    href="<?php echo esc_url(myliba_localize_url($copy('cta_secondary_url') ?: myliba_demo_url())); ?>"><?php echo esc_html($copy('cta_secondary_label')); ?></a>
             <?php endif; ?>
         </div>
     </div>

@@ -1414,11 +1414,26 @@ function myliba_get_translated_post_id(int $post_id, string $target_lang = ''): 
 function myliba_localize_url(string $url, string $target_lang = ''): string
 {
     $url = trim($url);
-    if ($url === '' || $url === '#' || str_starts_with($url, 'javascript:') || str_starts_with($url, 'mailto:') || str_starts_with($url, 'tel:')) {
+    if ($url === '' || str_starts_with($url, '#') || str_starts_with($url, '?')) {
+        return $url;
+    }
+
+    $parts = wp_parse_url($url);
+    if (!is_array($parts) || (isset($parts['scheme']) && !in_array(strtolower($parts['scheme']), ['http', 'https'], true))) {
+        return $url;
+    }
+    $host = strtolower((string) ($parts['host'] ?? ''));
+    $site_hosts = [strtolower((string) wp_parse_url(home_url('/'), PHP_URL_HOST)), 'myliba.com', 'www.myliba.com'];
+    if ($host !== '' && !in_array($host, $site_hosts, true)) {
         return $url;
     }
 
     $target_lang = $target_lang !== '' ? $target_lang : myliba_current_language();
+    if (!in_array($target_lang, ['tr', 'en'], true)) {
+        return $url;
+    }
+    $suffix = (isset($parts['query']) ? '?' . $parts['query'] : '')
+        . (isset($parts['fragment']) ? '#' . $parts['fragment'] : '');
 
     $known_routes = [
         'products' => ['tr' => '/tr/yazilim/', 'en' => '/en/software/'],
@@ -1438,26 +1453,37 @@ function myliba_localize_url(string $url, string $target_lang = ''): string
         'kvkk' => ['tr' => '/tr/kvkk/', 'en' => '/en/kvkk/'],
         'cookie' => ['tr' => '/tr/cerez-politikasi/', 'en' => '/en/cookie-policy/'],
         'terms' => ['tr' => '/tr/kullanim-sartlari/', 'en' => '/en/terms-of-use/'],
+        'ebooks' => ['tr' => '/tr/gelisim-merkezi/e-kitaplar/', 'en' => '/en/development-center/ebooks/'],
+        'reports' => ['tr' => '/tr/gelisim-merkezi/raporlar-ve-trendler/', 'en' => '/en/development-center/reports/'],
+        'consulting' => ['tr' => '/tr/cozumler/danismanlik/', 'en' => '/en/solutions/advisory-and-consulting/'],
+        'culture_solution' => ['tr' => '/tr/cozumler/kultur-analizi/', 'en' => '/en/solutions/culture-analysis-solution/'],
+        'simulations' => ['tr' => '/tr/cozumler/simulasyonlar-ve-takim-koclugu/', 'en' => '/en/solutions/simulations-and-team-coaching/'],
     ];
 
     $path = (string) wp_parse_url($url, PHP_URL_PATH);
     $path = '/' . trim($path, '/') . '/';
 
     foreach ($known_routes as $route) {
-        $source_key = $target_lang === 'en' ? 'tr' : 'en';
-        $target_key = $target_lang;
-
-        if ($path === $route[$source_key]) {
-            return home_url($route[$target_key]);
+        // Also repair stored mixed-language aliases such as /en/yazilim/.
+        $aliases = array_merge(array_values($route), [
+            '/en/' . substr($route['tr'], 4),
+            '/tr/' . substr($route['en'], 4),
+        ]);
+        if (in_array($path, $aliases, true)) {
+            return home_url($route[$target_lang]) . $suffix;
         }
     }
 
-    if ($target_lang === 'en' && str_starts_with($path, '/tr/')) {
-        return home_url('/en/' . ltrim(substr($path, 4), '/'));
-    } elseif ($target_lang === 'tr' && str_starts_with($path, '/en/')) {
-        return home_url('/tr/' . ltrim(substr($path, 4), '/'));
+    $source_lang = $target_lang === 'en' ? 'tr' : 'en';
+    if (str_starts_with($path, '/' . $source_lang . '/')) {
+        $post_id = url_to_postid(home_url($path));
+        $translated_id = $post_id ? myliba_get_translated_post_id($post_id, $target_lang) : 0;
+        if ($translated_id && $translated_id !== $post_id && get_post_status($translated_id) === 'publish') {
+            return get_permalink($translated_id) . $suffix;
+        }
     }
 
+    // Keep the working source URL when no translation exists; never invent a slug.
     return $url;
 }
 
@@ -1909,11 +1935,11 @@ function myliba_solution_url(string $slug): string
         }
 
         if ($redirect_url !== '') {
-            $urls[$cache_key] = filter_var($redirect_url, FILTER_VALIDATE_URL) ? $redirect_url : home_url($redirect_url);
+            $urls[$cache_key] = myliba_localize_url(filter_var($redirect_url, FILTER_VALIDATE_URL) ? $redirect_url : home_url($redirect_url));
             return $urls[$cache_key];
         }
 
-        $urls[$cache_key] = get_permalink($post_id);
+        $urls[$cache_key] = myliba_localize_url(get_permalink($post_id));
         return $urls[$cache_key];
     }
 

@@ -130,12 +130,12 @@ $footer_social_links = function_exists('myliba_social_links') ? myliba_social_li
                 </div>
                 <div class="site-footer__cta-actions">
                     <?php if ($page_cta['primary_label'] !== ''): ?>
-                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($page_cta['primary_url'] ?: '#'); ?>"<?php echo !empty($page_cta['primary_data_attr']) ? ' ' . esc_attr($page_cta['primary_data_attr']) : ''; ?>>
+                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_localize_url($page_cta['primary_url'] ?: '#')); ?>"<?php echo !empty($page_cta['primary_data_attr']) ? ' ' . esc_attr($page_cta['primary_data_attr']) : ''; ?>>
                             <?php echo esc_html($page_cta['primary_label']); ?>
                         </a>
                     <?php endif; ?>
                     <?php if ($page_cta['secondary_label'] !== ''): ?>
-                        <a class="myliba-button myliba-button--secondary" href="<?php echo esc_url($page_cta['secondary_url'] ?: '#'); ?>"<?php echo !empty($page_cta['secondary_data_attr']) ? ' ' . esc_attr($page_cta['secondary_data_attr']) : ''; ?>>
+                        <a class="myliba-button myliba-button--secondary" href="<?php echo esc_url(myliba_localize_url($page_cta['secondary_url'] ?: '#')); ?>"<?php echo !empty($page_cta['secondary_data_attr']) ? ' ' . esc_attr($page_cta['secondary_data_attr']) : ''; ?>>
                             <?php echo esc_html($page_cta['secondary_label']); ?>
                         </a>
                     <?php endif; ?>
@@ -200,7 +200,7 @@ $footer_social_links = function_exists('myliba_social_links') ? myliba_social_li
                 <ul class="site-footer__link-list">
                     <?php foreach ($footer_solution_links as $footer_link): ?>
                         <li><a
-                                href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a>
+                                href="<?php echo esc_url(myliba_localize_url($footer_link['url'])); ?>"><?php echo esc_html($footer_link['label']); ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -223,7 +223,7 @@ $footer_social_links = function_exists('myliba_social_links') ? myliba_social_li
                 <ul class="site-footer__link-list">
                     <?php foreach ($footer_development_links as $footer_link): ?>
                         <li><a
-                                href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a>
+                                href="<?php echo esc_url(myliba_localize_url($footer_link['url'])); ?>"><?php echo esc_html($footer_link['label']); ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -246,7 +246,7 @@ $footer_social_links = function_exists('myliba_social_links') ? myliba_social_li
                 <ul class="site-footer__link-list">
                     <?php foreach ($footer_company_links as $footer_link): ?>
                         <li><a
-                                href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a>
+                                href="<?php echo esc_url(myliba_localize_url($footer_link['url'])); ?>"><?php echo esc_html($footer_link['label']); ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -269,7 +269,7 @@ $footer_social_links = function_exists('myliba_social_links') ? myliba_social_li
                 <ul class="site-footer__link-list">
                     <?php foreach ($footer_legal_links as $footer_link): ?>
                         <li><a
-                                href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a>
+                                href="<?php echo esc_url(myliba_localize_url($footer_link['url'])); ?>"><?php echo esc_html($footer_link['label']); ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -307,7 +307,7 @@ $footer_social_links = function_exists('myliba_social_links') ? myliba_social_li
     </div>
 </footer>
 <div class="mobile-sticky-cta" aria-label="<?php echo esc_attr(myliba_text('Mobile conversion actions')); ?>">
-    <a class="mobile-sticky-cta__demo" href="<?php echo esc_url($footer_demo_url); ?>">
+    <a class="mobile-sticky-cta__demo" href="<?php echo esc_url(myliba_localize_url($footer_demo_url)); ?>">
         <?php echo esc_html($footer_demo_label); ?>
     </a>
     <a class="mobile-sticky-cta__portal" href="<?php echo esc_url(myliba_portal_url()); ?>">

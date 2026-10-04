@@ -180,6 +180,8 @@ function render_llms_txt(): void
         exit;
     }
 
+    // WordPress has already classified this virtual endpoint as a 404.
+    status_header(200);
     header('Content-Type: text/plain; charset=utf-8');
     header('X-Robots-Tag: noindex, follow', true);
 
@@ -504,6 +506,9 @@ function render_fallback_meta(): void
             $post        = get_post($post_id);
             $description = $post ? wp_trim_words(wp_strip_all_tags($post->post_excerpt ?: $post->post_content), 28) : '';
         }
+    } elseif (resource_archive()) {
+        $archive = resource_archive();
+        $description = $archive['descriptions'][current_language()];
     } else {
         $description = get_bloginfo('description');
     }
@@ -525,11 +530,7 @@ function render_fallback_meta(): void
     }
 
     // ── Open Graph ─────────────────────────────────────────────────────
-    $og_locale = function_exists('Myliba\\Core\\Options\\get') && \Myliba\Core\Options\get('default_locale') === 'tr' ? 'tr_TR' : 'en_US';
-    if (is_singular()) {
-        $lang      = get_post_meta($post_id, '_myliba_language', true);
-        $og_locale = $lang === 'tr' ? 'tr_TR' : 'en_US';
-    }
+    $og_locale = current_language() === 'tr' ? 'tr_TR' : 'en_US';
 
     printf("<meta property=\"og:locale\" content=\"%s\">\n", esc_attr($og_locale));
     printf("<meta property=\"og:site_name\" content=\"%s\">\n", esc_attr(get_bloginfo('name')));
@@ -564,8 +565,65 @@ function render_fallback_meta(): void
     }
 }
 
+function current_language(): string
+{
+    if (function_exists('myliba_current_language')) {
+        $language = \myliba_current_language();
+        if (in_array($language, Options\locales(), true)) {
+            return $language;
+        }
+    }
+
+    $language = (string) get_query_var('myliba_route_locale');
+    if (!in_array($language, Options\locales(), true) && is_singular()) {
+        $language = (string) get_post_meta(get_queried_object_id(), '_myliba_language', true);
+    }
+
+    return in_array($language, Options\locales(), true) ? $language : Options\get('default_locale', 'tr');
+}
+
+function resource_archive(): array
+{
+    if (is_post_type_archive('myliba_ebook')) {
+        return [
+            'paths' => ['tr' => '/tr/gelisim-merkezi/e-kitaplar/', 'en' => '/en/development-center/ebooks/'],
+            'descriptions' => [
+                'tr' => 'OKR, liderlik, performans ve kurum kültürü üzerine Myliba e-kitaplarını ve uygulama rehberlerini keşfedin.',
+                'en' => 'Explore Myliba e-books and practical guides on OKRs, leadership, performance and organizational culture.',
+            ],
+        ];
+    }
+
+    if (is_post_type_archive('myliba_report')) {
+        return [
+            'paths' => ['tr' => '/tr/gelisim-merkezi/raporlar-ve-trendler/', 'en' => '/en/development-center/reports/'],
+            'descriptions' => [
+                'tr' => 'Performans kültürü, liderlik ve iş dünyasının geleceğine odaklanan Myliba raporları ve trend araştırmalarını bu bölümden takip edin.',
+                'en' => 'Follow Myliba reports and trend research on performance culture, leadership and the future of work in this section.',
+            ],
+        ];
+    }
+
+    return [];
+}
+
 function render_hreflang(): void
 {
+    // These virtual archives are not translated WordPress page objects.
+    $archive = resource_archive();
+    if ($archive) {
+        $language = current_language();
+        $alternates = (int) get_query_var('paged') > 1
+            ? [$language => current_url()]
+            : array_map(static fn(string $path): string => home_url($path), $archive['paths']);
+        foreach ($alternates as $locale => $url) {
+            printf("<link rel=\"alternate\" hreflang=\"%s\" href=\"%s\">\n", esc_attr($locale), esc_url($url));
+        }
+        $default = $alternates[Options\get('default_locale', 'tr')] ?? $alternates[$language];
+        printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url($default));
+        return;
+    }
+
     if (function_exists('pll_the_languages')) {
         // Polylang handles hreflang — defer to it.
         $languages = pll_the_languages(['raw' => 1]);
@@ -598,9 +656,7 @@ function render_hreflang(): void
     }
 
     $current_id = is_singular() ? (int) get_queried_object_id() : 0;
-    $current_lang = $current_id
-        ? (get_post_meta($current_id, '_myliba_language', true) ?: Options\get('default_locale', 'tr'))
-        : Options\get('default_locale', 'tr');
+    $current_lang = current_language();
     $translation_key = $current_id ? trim((string) get_post_meta($current_id, '_myliba_translation_key', true)) : '';
     $alternates = [];
 
@@ -710,7 +766,7 @@ function render_schema(): void
         $schemas[] = article_schema();
     }
 
-    if (is_singular('myliba_product')) {
+    if (is_singular('myliba_product') || is_software_landing()) {
         $schemas[] = software_application_schema();
     }
 
@@ -1000,18 +1056,25 @@ function post_description(int $post_id): string
     return wp_trim_words(wp_strip_all_tags($post->post_excerpt ?: $post->post_content), 32);
 }
 
+function is_software_landing(): bool
+{
+    return is_page(['yazilim', 'urunler', 'software', 'our-products']);
+}
+
 function software_application_schema(): array
 {
     $post_id = (int) get_queried_object_id();
     $schema = [
         '@context' => 'https://schema.org',
         '@type' => 'SoftwareApplication',
+        '@id' => current_url() . '#software',
         'name' => get_the_title($post_id),
         'description' => post_description($post_id),
         'url' => current_url(),
         'applicationCategory' => 'BusinessApplication',
         'operatingSystem' => 'Web',
         'provider' => [
+            '@id' => home_url('/#organization'),
             '@type' => 'Organization',
             'name' => Options\get('organization_name', 'Myliba'),
             'url' => Options\get('organization_url', home_url('/')),
@@ -1111,9 +1174,9 @@ function faq_schema(): array
     $post_id = get_queried_object_id();
     $pairs = [];
 
-    if (is_page(['sss', 'faq', 'faqs', 'sikca-sorulan-sorular']) && function_exists('Myliba\\Core\\PageContent\\collection')) {
+    if ((is_page(['sss', 'faq', 'faqs', 'sikca-sorulan-sorular']) || is_software_landing()) && function_exists('Myliba\\Core\\PageContent\\collection')) {
         // Use the same collection that renders the visible FAQ accordion.
-        $faq_rows = \Myliba\Core\PageContent\collection($post_id, 'faq', 'faqs');
+        $faq_rows = \Myliba\Core\PageContent\collection($post_id, is_software_landing() ? 'software' : 'faq', 'faqs');
         foreach ($faq_rows as $row) {
             $question = trim((string) ($row['question'] ?? ''));
             $answer = trim(wp_strip_all_tags((string) ($row['answer'] ?? '')));

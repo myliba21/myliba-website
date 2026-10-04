@@ -358,7 +358,7 @@ get_header();
                                 <?php endif; ?>
                                 <div class="story-cta-box__actions">
                                     <?php if ($copy('final_primary_label') !== '') : ?>
-                                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($contact_url); ?>">
+                                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_localize_url($contact_url)); ?>">
                                             <?php echo esc_html($copy('final_primary_label')); ?>
                                         </a>
                                     <?php endif; ?>

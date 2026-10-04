@@ -20,7 +20,7 @@ $cta_url = myliba_meta('_myliba_cta_url', $post_id);
             <p class="hero__subtitle"><?php echo esc_html($subtitle); ?></p>
         <?php endif; ?>
         <?php if ($cta_label && $cta_url) : ?>
-            <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($cta_url); ?>"><?php echo esc_html($cta_label); ?></a>
+            <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_localize_url($cta_url)); ?>"><?php echo esc_html($cta_label); ?></a>
         <?php endif; ?>
     </div>
     <?php if (has_post_thumbnail($post_id)) : ?>

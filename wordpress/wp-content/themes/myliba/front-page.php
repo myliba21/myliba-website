@@ -45,7 +45,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                                             $button_style = in_array(($button['style'] ?? ''), ['primary', 'ghost', 'link'], true) ? $button['style'] : 'ghost';
                                             $button_class = $button_style === 'link' ? 'myliba-button myliba-button--ghost myliba-button--link' : 'myliba-button myliba-button--' . $button_style;
                                             ?>
-                                            <a class="<?php echo esc_attr($button_class); ?>" href="<?php echo esc_url((string) $button['url']); ?>"
+                                            <a class="<?php echo esc_attr($button_class); ?>" href="<?php echo esc_url(myliba_localize_url((string) $button['url'])); ?>"
                                                 <?php echo !empty($button['new_tab']) ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>
                                                 <?php echo !empty($button['aria_label']) ? 'aria-label="' . esc_attr((string) $button['aria_label']) . '"' : ''; ?>
                                                 <?php echo $index === 0 ? '' : 'tabindex="-1"'; ?>><?php echo esc_html((string) $button['label']); ?></a>
@@ -216,7 +216,7 @@ foreach (myliba_home_sections($post_id) as $section) {
                                     <?php endforeach; ?>
                                 </div>
                                 <?php if ($cta_label !== ''): ?>
-                                    <a class="offering-card__cta" href="<?php echo esc_url($cta_url); ?>">
+                                    <a class="offering-card__cta" href="<?php echo esc_url(myliba_localize_url($cta_url)); ?>">
                                         <span><?php echo esc_html($cta_label); ?></span><span aria-hidden="true">&#8594;</span>
                                     </a>
                                 <?php endif; ?>

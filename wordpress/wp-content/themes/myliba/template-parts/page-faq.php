@@ -191,7 +191,7 @@ get_header();
 
                                 <div class="faq-cta-card__actions">
                                     <?php if ($copy('cta_primary_label') !== ''): ?>
-                                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url($demo_url); ?>">
+                                        <a class="myliba-button myliba-button--primary" href="<?php echo esc_url(myliba_localize_url($demo_url)); ?>">
                                             <?php echo esc_html($copy('cta_primary_label')); ?>
                                         </a>
                                     <?php endif; ?>

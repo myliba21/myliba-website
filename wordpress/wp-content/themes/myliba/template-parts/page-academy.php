@@ -177,13 +177,13 @@ get_header();
                     <?php if ($meta('_myliba_academy_hero_secondary_label') !== ''): ?>
                         <?php if ($meta('_myliba_academy_hero_secondary_url') !== ''): ?><a
                                 class="myliba-button myliba-button--ghost"
-                                href="<?php echo esc_url($meta('_myliba_academy_hero_secondary_url')); ?>"><?php echo esc_html($meta('_myliba_academy_hero_secondary_label')); ?></a>
+                                href="<?php echo esc_url(myliba_localize_url($meta('_myliba_academy_hero_secondary_url'))); ?>"><?php echo esc_html($meta('_myliba_academy_hero_secondary_label')); ?></a>
                         <?php else: ?><button class="myliba-button myliba-button--ghost" type="button" data-academy-form-open
                                 data-participation="corporate"><?php echo esc_html($meta('_myliba_academy_hero_secondary_label')); ?></button><?php endif; ?>
                     <?php endif; ?>
                     <?php if ($meta('_myliba_academy_hero_tertiary_label') !== '' && $meta('_myliba_academy_hero_tertiary_url') !== ''): ?>
                         <a class="academy-v2-link"
-                            href="<?php echo esc_url($meta('_myliba_academy_hero_tertiary_url')); ?>"><?php echo esc_html($meta('_myliba_academy_hero_tertiary_label')); ?></a>
+                            href="<?php echo esc_url(myliba_localize_url($meta('_myliba_academy_hero_tertiary_url'))); ?>"><?php echo esc_html($meta('_myliba_academy_hero_tertiary_label')); ?></a>
                     <?php endif; ?>
                 </div>
                 <?php if ($hero_badges): ?>
@@ -341,14 +341,14 @@ get_header();
                             <div class="academy-v2-program__actions">
                                 <?php if ($secondary_label !== ''): ?>
                                     <?php if ($secondary_url !== ''): ?><a class="myliba-button myliba-button--ghost"
-                                            href="<?php echo esc_url($secondary_url); ?>"><?php echo esc_html($secondary_label); ?></a>
+                                            href="<?php echo esc_url(myliba_localize_url($secondary_url)); ?>"><?php echo esc_html($secondary_label); ?></a>
                                     <?php else: ?><button class="myliba-button myliba-button--ghost" type="button"
                                             data-academy-form-open
                                             data-program="<?php echo esc_attr(get_the_title()); ?>"><?php echo esc_html($secondary_label); ?></button><?php endif; ?>
                                 <?php endif; ?>
                                 <?php if ($primary_label !== ''): ?>
                                     <?php if ($primary_url !== ''): ?><a class="myliba-button myliba-button--primary"
-                                            href="<?php echo esc_url($primary_url); ?>"><?php echo esc_html($primary_label); ?></a>
+                                            href="<?php echo esc_url(myliba_localize_url($primary_url)); ?>"><?php echo esc_html($primary_label); ?></a>
                                     <?php else: ?><button class="myliba-button myliba-button--primary" type="button"
                                             data-academy-form-open
                                             data-program="<?php echo esc_attr(get_the_title()); ?>"><?php echo esc_html($primary_label); ?></button><?php endif; ?>
