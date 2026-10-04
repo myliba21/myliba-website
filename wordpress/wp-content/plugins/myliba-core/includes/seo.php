@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
 
 function boot(): void
 {
+    add_action('init', __NAMESPACE__ . '\\redirect_public_origin', 0);
     add_filter('wp_robots', __NAMESPACE__ . '\\robots');
     add_filter('robots_txt', __NAMESPACE__ . '\\robots_txt', 10, 2);
     add_filter('wp_sitemaps_enabled', __NAMESPACE__ . '\\sitemaps_enabled');
@@ -48,7 +49,56 @@ function current_post_noindex(): bool
         return false;
     }
 
-    return get_post_meta(get_queried_object_id(), '_myliba_noindex', true) === '1';
+    $post_id = get_queried_object_id();
+
+    // Seeded landing pages are drafts for search until an editor explicitly
+    // marks their content ready in the SEO box.
+    if (get_post_type($post_id) === 'myliba_landing'
+        && get_post_meta($post_id, '_myliba_seo_ready', true) !== '1') {
+        return true;
+    }
+
+    return get_post_meta($post_id, '_myliba_noindex', true) === '1';
+}
+
+function public_origin_redirect_target(string $host, bool $secure, string $request_uri, string $site_url): string
+{
+    $canonical_host = strtolower((string) wp_parse_url($site_url, PHP_URL_HOST));
+    $host = strtolower((string) preg_replace('/:\d+$/', '', $host));
+
+    // This rule belongs to the public production origin. Local and staging
+    // installations retain their own scheme, host and port.
+    if ($canonical_host !== 'www.myliba.com'
+        || !in_array($host, ['myliba.com', 'www.myliba.com'], true)
+        || ($host === $canonical_host && $secure)) {
+        return '';
+    }
+
+    $path = str_starts_with($request_uri, '/') ? $request_uri : '/';
+    return 'https://www.myliba.com' . $path;
+}
+
+function redirect_public_origin(): void
+{
+    if (!in_array($_SERVER['REQUEST_METHOD'] ?? '', ['GET', 'HEAD'], true)
+        || (defined('WP_CLI') && WP_CLI)
+        || wp_doing_cron()) {
+        return;
+    }
+
+    $forwarded_proto = strtolower(trim((string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '')));
+    $secure = is_ssl() || $forwarded_proto === 'https';
+    $target = public_origin_redirect_target(
+        (string) ($_SERVER['HTTP_HOST'] ?? ''),
+        $secure,
+        (string) ($_SERVER['REQUEST_URI'] ?? '/'),
+        home_url('/')
+    );
+
+    if ($target !== '') {
+        wp_safe_redirect($target, 301, 'Myliba canonical origin');
+        exit;
+    }
 }
 
 function staging_hosts(): array
@@ -335,6 +385,13 @@ function sitemap_post_query_args(array $args, string $post_type): array
     ];
     $args['meta_query'] = $meta_query;
 
+    if ($post_type === 'myliba_landing') {
+        $args['meta_query'][] = [
+            'key' => '_myliba_seo_ready',
+            'value' => '1',
+        ];
+    }
+
     if ($post_type === 'myliba_solution') {
         $args['meta_query'][] = [
             'relation' => 'OR',
@@ -355,6 +412,12 @@ function sitemap_post_query_args(array $args, string $post_type): array
 
     if ($post_type === 'page') {
         $excluded = isset($args['post__not_in']) && is_array($args['post__not_in']) ? $args['post__not_in'] : [];
+        foreach (['tr/kultur-analizi', 'en/culture-analysis'] as $old_path) {
+            $old_page = get_page_by_path($old_path);
+            if ($old_page instanceof \WP_Post) {
+                $excluded[] = (int) $old_page->ID;
+            }
+        }
         $args['post__not_in'] = array_values(array_unique(array_merge($excluded, legacy_locale_duplicate_ids())));
     }
 

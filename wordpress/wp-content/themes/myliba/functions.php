@@ -880,6 +880,15 @@ function myliba_redirect_legacy_urls(): void
     }
 
     $path = myliba_request_path();
+    $culture_redirects = [
+        '/tr/kultur-analizi' => '/tr/cozumler/kultur-analizi/',
+        '/en/culture-analysis' => '/en/solutions/culture-analysis-solution/',
+    ];
+    if (isset($culture_redirects[$path])) {
+        wp_safe_redirect(home_url($culture_redirects[$path]), 301);
+        exit;
+    }
+
     $page_redirects = [
         '/tr/urunler' => 'products',
         '/products' => 'products',
@@ -1307,7 +1316,7 @@ function myliba_page_url(string $key): string
         'products' => ['en' => 'en/software', 'tr' => 'tr/yazilim'],
         'academy' => ['en' => 'en/okr-culture-academy', 'tr' => 'tr/okr-kultur-akademisi'],
         'okr_coaching' => ['en' => 'en/okr-coaching', 'tr' => 'tr/okr-koclugu'],
-        'culture' => ['en' => 'en/culture-analysis', 'tr' => 'tr/kultur-analizi'],
+        'culture' => ['en' => 'en/solutions/culture-analysis-solution', 'tr' => 'tr/cozumler/kultur-analizi'],
         'ethics' => ['en' => 'en/ethics-counsel', 'tr' => 'tr/etik-danismanlik'],
         'blog' => ['en' => 'en/blog', 'tr' => 'tr/yazilar'],
         'solutions' => ['en' => 'en/solutions', 'tr' => 'tr/cozumler'],
