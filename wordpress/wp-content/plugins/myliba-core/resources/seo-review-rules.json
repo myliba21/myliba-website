@@ -1,0 +1,20 @@
+{
+  "version": "1.1",
+  "groups": {"C": "İçerik ve SEO", "T": "Teknik SEO", "A": "AI hazırlığı"},
+  "criteria": [
+    {"id":"C1","label":"Hedef soruyu ve arama niyetini karşılama","weight":10,"method":"editorial","guidance":"Hedef soruyu ve kitleyi belirtin; yazının bu ihtiyacı karşıladığını örneklerle inceleyin."},
+    {"id":"C2a","label":"Başlık ve açıklama alanları","weight":4,"method":"automatic","guidance":"SEO başlığını ve yazıya özgü açıklamayı tamamlayın."},
+    {"id":"C2b","label":"Başlık ve açıklamanın açıklığı ve özgünlüğü","weight":6,"method":"editorial","guidance":"Başlık ve açıklamanın yazının faydasını doğru ve ayırt edici biçimde anlattığını inceleyin."},
+    {"id":"C3a","label":"Alt başlıkların yapısı","weight":4,"method":"automatic","guidance":"Uzun yazıyı açıklayıcı H2 başlıklarla düzenleyin; tema yazı başlığını H1 olarak üretir."},
+    {"id":"C3b","label":"Anlatım ve okunabilirlik","weight":6,"method":"editorial","guidance":"Bölüm başlıklarının açıklığını, paragraf akışını ve gereksiz tekrarları inceleyin."},
+    {"id":"C4a","label":"Dahili bağlantı bulunması","weight":4,"method":"automatic","guidance":"Okurun ihtiyacına uygun bir ilgili yazı veya çözüm sayfasına açıklayıcı metinle bağlantı ekleyin."},
+    {"id":"C4b","label":"Bağlantıların ilgisi ve farklı değer","weight":6,"method":"editorial","guidance":"Bağlantıların bağlama uygunluğunu inceleyin; diğer içeriklerle farklılığı mevcut içerik envanteriyle doğrulayın."},
+    {"id":"T1","label":"Canlı erişim, HTTP ve indeksleme","weight":10,"method":"live","guidance":"Yayın sonrası HTTP yanıtı, robots ve noindex yönergelerini kontrol edin."},
+    {"id":"T2","label":"Canonical, yönlendirme ve dil alternatifleri","weight":8,"method":"live","guidance":"Canlı HTML üzerinde canonical, yönlendirmeler ve varsa hreflang tutarlılığını doğrulayın."},
+    {"id":"T3","label":"Tarama ve keşfedilebilirlik","weight":7,"method":"live","guidance":"Render edilen içerik, dahili bağlantılar ve sitemap üzerinden keşfedilebilirliği kontrol edin."},
+    {"id":"T4","label":"Schema ve görünür içerik uyumu","weight":5,"method":"live","guidance":"Canlı HTML üzerindeki yapılandırılmış verinin tekil ve görünür içerikle uyumlu olduğunu doğrulayın."},
+    {"id":"A1","label":"Ana soruya doğrudan ve anlaşılır cevap","weight":10,"method":"editorial","guidance":"Ana soruyu erken yanıtlayın; tanım, örnek veya karşılaştırmayla açıklayın."},
+    {"id":"A2","label":"Doğrulanabilir iddialar ve kaynaklar","weight":10,"method":"editorial","guidance":"Önemli iddiaları birincil kaynaklarla destekleyin; kaynak içeriği doğrulanamıyorsa kontrolü ölçülmedi olarak bırakın."},
+    {"id":"A3","label":"Açık kavramlar, uzmanlık ve özgün örnekler","weight":10,"method":"editorial","guidance":"Kavramları tanımlayın, somut örnek verin ve gerçek yazarlık/uzmanlık bilgilerini doğrulayın."}
+  ]
+}

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - Twenty Twenty-Four package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-06-06 09:29:39+0000\n"
+"PO-Revision-Date: 2026-09-26 06:39:19+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,6 +22,201 @@ msgstr "Yirmi Yirmi-Dört"
 #, gp-priority: high
 msgid "Twenty Twenty-Four is designed to be flexible, versatile and applicable to any website. Its collection of templates and patterns tailor to different needs, such as presenting a business, blogging and writing or showcasing work. A multitude of possibilities open up with just a few adjustments to color and typography. Twenty Twenty-Four comes with style variations and full page designs to help speed up the site building process, is fully compatible with the site editor, and takes advantage of new design tools introduced in WordPress 6.4."
 msgstr "Yirmi Yirmi-Dört esnek, çok yönlü ve her web sitesine uygulanabilecek şekilde tasarlanmıştır. Bir işletmeyi tanıtmak, blog ve yazı yazmak veya çalışmaları sergilemek gibi farklı ihtiyaçlara göre uyarlanabilen bir şablon ve model koleksiyonudur. Renk ve tipografide yalnızca birkaç ayarlamayla çok sayıda olasılık ortaya çıkar. Yirmi Yirmi-Dört, site oluşturma sürecini hızlandırmaya yardımcı olmak için biçem çeşitleri ve tam sayfa tasarımlar ile birlikte gelir, site düzenleyiciyle tamamen uyumludur ve WordPress 6.4'te sunulan yeni tasarım araçlarından yararlanır."
+
+#: patterns/text-centered-statement.php
+msgctxt "Pattern description"
+msgid "A centered text statement with a large amount of padding on all sides."
+msgstr "Her tarafında geniş iç boşluk bulunan, ortalanmış bir metin ifadesi."
+
+#: patterns/hidden-posts-heading.php
+msgctxt "Pattern title"
+msgid "Posts heading"
+msgstr "Yazılar başlığı"
+
+#: patterns/text-title-left-image-right.php
+msgctxt "Pattern description"
+msgid "A title, a paragraph and a CTA button on the left with an image on the right."
+msgstr "Solda bir başlık, bir paragraf ve bir harekete geçirici mesaj düğmesi, sağda ise bir görsel."
+
+#: patterns/text-project-details.php
+msgctxt "Pattern description"
+msgid "A text-only section for project details."
+msgstr "Proje ayrıntıları için salt metin içeren bir bölüm."
+
+#: patterns/text-feature-grid-3-col.php
+msgctxt "Pattern description"
+msgid "A feature grid of 2 rows and 3 columns with headings and text."
+msgstr "Başlıklar ve metinler içeren, 2 satır ve 3 sütundan oluşan bir özellik ızgarası."
+
+#: patterns/text-faq.php
+msgctxt "Pattern description"
+msgid "A FAQ section with a large FAQ heading and a group of questions and answers."
+msgstr "Büyük bir SSS başlığı ile soru ve cevap grubundan oluşan bir SSS bölümü."
+
+#: patterns/text-centered-statement-small.php
+msgctxt "Pattern description"
+msgid "A centered italic text statement with compact padding."
+msgstr "Kompakt iç boşluğa sahip, ortalanmış ve eğik bir metin ifadesi."
+
+#: patterns/text-alternating-images.php
+msgctxt "Pattern description"
+msgid "A text section, then a two-column section with text in one column and an image in the other."
+msgstr "Bir metin bölümü ve ardından bir sütunda metin, diğer sütunda görsel bulunan iki sütunlu bir bölüm."
+
+#: patterns/testimonial-centered.php
+msgctxt "Pattern description"
+msgid "A centered testimonial section with an avatar, name, and job title."
+msgstr "Profil resmi, isim ve unvan içeren ortalanmış bir müşteri görüşü bölümü."
+
+#: patterns/team-4-col.php
+msgctxt "Pattern description"
+msgid "A team section, with a heading, a paragraph, and 4 columns for team members."
+msgstr "Bir başlık, bir paragraf ve ekip üyeleri için 4 sütun içeren bir ekip bölümü."
+
+#: patterns/posts-list.php
+msgctxt "Pattern description"
+msgid "A list of posts without images, 1 column."
+msgstr "Görselsiz yazı listesi, 1 sütun."
+
+#: patterns/posts-images-only-offset-4-col.php
+msgctxt "Pattern description"
+msgid "A list of posts with featured images only, 4 columns."
+msgstr "Yalnızca öne çıkan görsellerin yer aldığı 4 sütunlu bir yazı listesi."
+
+#: patterns/posts-images-only-3-col.php
+msgctxt "Pattern description"
+msgid "A list of posts with featured images only, 3 columns."
+msgstr "Yalnızca öne çıkan görsellerin yer aldığı 3 sütunlu bir yazı listesi."
+
+#: patterns/posts-grid-2-col.php
+msgctxt "Pattern description"
+msgid "A grid of posts featuring the first post, 2 columns."
+msgstr "İlk yazıyı öne çıkaran 2 sütunlu bir yazı ızgarası."
+
+#: patterns/posts-3-col.php
+msgctxt "Pattern description"
+msgid "A list of posts, 3 columns."
+msgstr "3 sütunlu bir yazı listesi."
+
+#: patterns/posts-1-col.php
+msgctxt "Pattern description"
+msgid "A list of posts, 1 column."
+msgstr "1 sütunlu bir yazı listesi."
+
+#: patterns/page-portfolio-overview.php
+msgctxt "Pattern description"
+msgid "A full portfolio page with a section for project description, project details, a full screen image, and a gallery section with two images."
+msgstr "Proje açıklaması bölümü, proje ayrıntıları, tam ekran görsel ve iki görselli galeri bölümü içeren tam bir portföy sayfası."
+
+#: patterns/page-newsletter-landing.php
+msgctxt "Pattern description"
+msgid "A block with a newsletter subscription CTA for a landing page."
+msgstr "Bir karşılama sayfası için bülten aboneliği harekete geçirici mesajı (CTA) içeren bir blok."
+
+#: patterns/page-home-portfolio.php
+msgctxt "Pattern description"
+msgid "A portfolio home page with a description and a 4-column post section with only feature images."
+msgstr "Bir açıklama ve yalnızca öne çıkan görsellerin yer aldığı 4 sütunlu bir yazı bölümü içeren portföy ana sayfası."
+
+#: patterns/page-home-portfolio-gallery.php
+msgctxt "Pattern description"
+msgid "A portfolio home page that features a gallery."
+msgstr "Galeri içeren bir portföy ana sayfası."
+
+#: patterns/page-home-business.php
+msgctxt "Pattern description"
+msgid "A business home page with a hero section, a text section, a services section, a team section, a clients section, a FAQ section, and a CTA section."
+msgstr "Giriş (hero) bölümü, metin bölümü, hizmetler bölümü, ekip bölümü, müşteriler bölümü, SSS bölümü ve harekete geçirici mesaj (CTA) bölümü içeren kurumsal bir ana sayfa."
+
+#: patterns/page-home-blogging.php
+msgctxt "Pattern description"
+msgid "A blogging home page with a hero section, a text section, a blog section, and a CTA section."
+msgstr "Giriş bölümü, metin bölümü, blog bölümü ve eylem çağrısı bölümü içeren bir blog ana sayfası."
+
+#: patterns/page-about-business.php
+msgctxt "Pattern description"
+msgid "A business about page with a hero section, a text section, a services section, a team section, a clients section, a FAQ section, and a CTA section."
+msgstr "Giriş bölümü, metin bölümü, hizmetler bölümü, ekip bölümü, müşteriler bölümü, SSS bölümü ve eylem çağrısı bölümü içeren bir kurumsal hakkında sayfası."
+
+#: patterns/gallery-project-layout.php
+msgctxt "Pattern description"
+msgid "A gallery section with a project layout with 2 images."
+msgstr "2 görselli proje düzenine sahip bir galeri bölümü."
+
+#: patterns/gallery-offset-images-grid-4-col.php
+msgctxt "Pattern description"
+msgid "A gallery section with 4 columns and offset images."
+msgstr "4 sütunlu ve basamaklı görsellere sahip bir galeri bölümü."
+
+#: patterns/gallery-offset-images-grid-3-col.php
+msgctxt "Pattern description"
+msgid "A gallery section with 3 columns and offset images."
+msgstr "3 sütunlu ve basamaklı görsellere sahip bir galeri bölümü."
+
+#: patterns/gallery-offset-images-grid-2-col.php
+msgctxt "Pattern description"
+msgid "A gallery section with 2 columns and offset images."
+msgstr "2 sütunlu ve basamaklı görsellere sahip bir galeri bölümü."
+
+#: patterns/gallery-full-screen-image.php
+msgctxt "Pattern description"
+msgid "A cover image section that covers the entire width."
+msgstr "Tüm genişliği kaplayan bir kapak görseli bölümü."
+
+#: patterns/footer.php
+msgctxt "Pattern description"
+msgid "A footer section with a colophon and 4 columns."
+msgstr "Kolofon ve 4 sütun içeren bir alt kısım bölümü."
+
+#: patterns/footer-colophon-3-col.php
+msgctxt "Pattern description"
+msgid "A footer section with a colophon and 3 columns."
+msgstr "Kolofon ve 3 sütun içeren bir alt kısım bölümü."
+
+#: patterns/footer-centered-logo-nav.php
+msgctxt "Pattern description"
+msgid "A footer section with a centered logo, navigation, and WordPress credits."
+msgstr "Ortalanmış logo, dolaşım ve WordPress jeneriği içeren bir alt kısım bölümü."
+
+#: patterns/cta-subscribe-centered.php
+msgctxt "Pattern description"
+msgid "Subscribers CTA section with a title, a paragraph and a CTA button."
+msgstr "Başlık, paragraf ve eylem çağrısı düğmesi içeren aboneler eylem çağrısı bölümü."
+
+#: patterns/cta-services-image-left.php
+msgctxt "Pattern description"
+msgid "An image, title, paragraph and a CTA button to describe services."
+msgstr "Hizmetleri açıklamak için bir görsel, başlık, paragraf ve eylem çağrısı düğmesi."
+
+#: patterns/cta-rsvp.php patterns/page-rsvp-landing.php
+msgctxt "Pattern description"
+msgid "A large RSVP heading sideways, a description, and a CTA button."
+msgstr "Yan duran büyük bir LCV başlığı, bir açıklama ve bir eylem çağrısı düğmesi."
+
+#: patterns/cta-pricing.php
+msgctxt "Pattern description"
+msgid "A pricing section with a title, a paragraph and three pricing levels."
+msgstr "Başlık, paragraf ve üç fiyatlandırma düzeyi içeren bir fiyatlandırma bölümü."
+
+#: patterns/cta-content-image-on-right.php
+msgctxt "Pattern description"
+msgid "A title, paragraph, two CTA buttons, and an image for a general CTA section."
+msgstr "Genel bir eylem çağrısı bölümü için başlık, paragraf, iki eylem çağrısı düğmesi ve bir görsel."
+
+#: patterns/banner-project-description.php
+msgctxt "Pattern description"
+msgid "Project description section with title, paragraph, and an image."
+msgstr "Başlık, paragraf ve görsel içeren proje açıklaması bölümü."
+
+#: patterns/banner-hero.php
+msgctxt "Pattern description"
+msgid "A hero section with a title, a paragraph, a CTA button, and an image."
+msgstr "Başlık, paragraf, eylem çağrısı düğmesi ve görsel içeren bir ana tanıtım bölümü."
+
+#: patterns/text-faq.php:40
+msgctxt "Question in the FAQ pattern"
+msgid "Who is behind Études?"
+msgstr "Études'ün arkasında kim var?"
 
 #: patterns/footer.php:101
 msgid "Twitter/X"
@@ -1374,20 +1569,10 @@ msgctxt "Feature for pricing level"
 msgid "Exclusive, unlimited access to <em>Études Articles</em>."
 msgstr "<em>Etudes Makalelerine</em> özel, sınırsız erişim."
 
-#: patterns/cta-pricing.php:167
-msgctxt "Sample price for the third pricing level"
-msgid "$28"
-msgstr "28$"
-
 #: patterns/cta-pricing.php:120
 msgctxt "Feature for pricing level"
 msgid "Access to 20 exclusive <em>Études Articles</em> per month."
 msgstr "Aylık 20 özel <em>Etudes Makalesine</em> erişim."
-
-#: patterns/cta-pricing.php:109
-msgctxt "Sample price for the second pricing level"
-msgid "$12"
-msgstr "12$"
 
 #: patterns/cta-pricing.php:104
 msgctxt "Sample heading for the second pricing level"
@@ -1409,11 +1594,6 @@ msgstr "Haftalık basılı sürüm"
 msgctxt "Feature for pricing level"
 msgid "Access to 5 exclusive <em>Études Articles</em> per month."
 msgstr "Ayda 5 özel <em>Etudes Makalesine</em> erişim."
-
-#: patterns/cta-pricing.php:47
-msgctxt "Sample price for the first pricing level"
-msgid "$0"
-msgstr "0$"
 
 #: patterns/cta-pricing.php:27
 msgctxt "Sample description for a pricing table"
@@ -1545,6 +1725,47 @@ msgstr "Geniş görsel ile sayfa"
 msgctxt "Custom template name"
 msgid "Page with Sidebar"
 msgstr "Kenar çubuğu ile sayfa"
+
+#: patterns/text-faq.php:62
+msgctxt "Question in the FAQ pattern"
+msgid "Can I apply to be a part of the team or work as a contractor?"
+msgstr "Ekibin bir parçası olmak veya sözleşmeli olarak çalışmak için başvurabilir miyim?"
+
+#: patterns/text-faq.php:51
+msgctxt "Question in the FAQ pattern"
+msgid "I'd like to get to meet fellow architects, how can I do that?"
+msgstr "Meslektaşım olan mimarlarla tanışmak istiyorum, bunu nasıl yapabilirim?"
+
+#: patterns/text-faq.php:29
+msgctxt "Question in the FAQ pattern"
+msgid "What is your process working in smaller projects?"
+msgstr "Daha küçük projelerde çalışma süreciniz nasıldır?"
+
+#: patterns/text-faq.php:32 patterns/text-faq.php:43 patterns/text-faq.php:54
+#: patterns/text-faq.php:65
+msgctxt "Answer in the FAQ pattern"
+msgid "Études offers comprehensive consulting, management, design, and research solutions. Our vision is to be at the forefront of architectural innovation, fostering a global community of architects and enthusiasts united by a passion for creating spaces. Every architectural endeavor is an opportunity to shape the future."
+msgstr "Études kapsamlı danışmanlık, yönetim, tasarım ve araştırma çözümleri sunar. Vizyonumuz; mekânlar yaratma tutkusuyla birleşmiş küresel bir mimarlar ve meraklılar topluluğunu teşvik ederek mimari inovasyonun ön saflarında yer almaktır. Her mimari girişim, geleceği şekillendirmek için bir fırsattır."
+
+#: patterns/testimonial-centered.php:17
+msgctxt "Name of testimonial pattern"
+msgid "Testimonial"
+msgstr "Müşteri görüşü"
+
+#: patterns/cta-pricing.php:167
+msgctxt "Sample price for the third pricing level"
+msgid "$28"
+msgstr "28$"
+
+#: patterns/cta-pricing.php:109
+msgctxt "Sample price for the second pricing level"
+msgid "$12"
+msgstr "12$"
+
+#: patterns/cta-pricing.php:47
+msgctxt "Sample price for the first pricing level"
+msgid "$0"
+msgstr "0$"
 
 #. Author of the theme
 #: style.css

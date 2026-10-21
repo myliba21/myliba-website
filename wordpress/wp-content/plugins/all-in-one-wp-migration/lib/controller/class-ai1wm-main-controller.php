@@ -1005,7 +1005,7 @@ class Ai1wm_Main_Controller {
 			'ai1wm_uploader',
 			array(
 				'max_file_size' => wp_max_upload_size(),
-				'url'           => wp_make_link_relative( add_query_arg( array( 'ai1wm_import' => 1 ), admin_url( 'admin-ajax.php?action=ai1wm_import' ) ) ),
+				'url'           => wp_make_link_relative( add_query_arg( array( 'ai1wm_import' => 1, 'ai1wm_manual_import' => 1 ), admin_url( 'admin-ajax.php?action=ai1wm_import' ) ) ),
 				'params'        => array(
 					'priority'   => 5,
 					'secret_key' => get_option( AI1WM_SECRET_KEY ),

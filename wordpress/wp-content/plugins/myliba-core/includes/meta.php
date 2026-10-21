@@ -1849,6 +1849,8 @@ function field_definitions(string $post_type): array
         '_myliba_cta_url' => 'url',
         '_myliba_seo_title' => 'text',
         '_myliba_seo_description' => 'textarea',
+        '_myliba_review_question' => 'text',
+        '_myliba_review_audience' => 'text',
         '_myliba_noindex' => 'checkbox',
         '_myliba_label' => 'text',
         '_myliba_problem' => 'textarea',

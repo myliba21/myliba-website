@@ -86,6 +86,51 @@ Reusable CTA, footer, promo, and form content is managed under **Myliba → Site
 
 The version 0.3 migration keeps non-autoloaded backups of the former generated catalog, removes materialized or untranslated defaults, and migrates genuine active component overrides to the new interface-text store.
 
+## Blog SEO and AI readiness review
+
+Blog edit screens include **SEO ve AI Hazırlık Kontrolü**. Save the article and SEO
+fields, then select **İçeriği analiz et**. The report shows structural checks,
+evidence, recommendations, category scores, coverage, and the three highest-weight
+measured issues. Blog lists show the latest score and whether the report is stale.
+Changing content, custom fields, author context, or indexing settings invalidates
+the saved report. Unsaved changes disable analysis in both editors.
+
+The versioned rubric is `wp-content/plugins/myliba-core/resources/seo-review-rules.json`.
+Version 1.1 splits the skill's C2/C3/C4 weights into structural and editorial
+subchecks without changing category totals (content 40, technical 30, AI 30).
+Local checks never pretend to measure meaning, expertise, or live indexing.
+Scores exclude unmeasured checks, and coverage states how much was measured.
+This feature does not change front-end SEO tags or publishing permissions.
+
+For optional editorial suggestions, configure both values in the server environment
+or `wp-config.php` (never commit an API key):
+
+```php
+define('MYLIBA_SEO_AI_KEY', getenv('MYLIBA_SEO_AI_KEY') ?: '');
+define('MYLIBA_SEO_AI_MODEL', getenv('MYLIBA_SEO_AI_MODEL') ?: '');
+```
+
+For this local Compose setup, set `MYLIBA_SEO_AI_KEY` and `MYLIBA_SEO_AI_MODEL`
+in the ignored `wordpress/.env`, then run `docker compose up -d wordpress`
+from `wordpress/` to pass them into PHP. No key is stored in browser settings.
+
+Choose an OpenAI model available to your account that supports Responses API
+Structured Outputs. With both values present, **AI ile değerlendir** becomes
+available. The button sends the saved body, title, excerpt, SEO fields, target
+question/audience, and public author profile to OpenAI, and may incur API charges.
+It uses `store: false`, validates every returned check, keeps API keys server-side,
+and preserves the last successful report on failures. A matching content/model
+result is reused to avoid repeat charges. No request runs automatically on save.
+The model has no browsing tools; source verification, author credentials, content
+inventory comparisons, and live technical checks remain unmeasured when evidence
+is insufficient. Suggested edits require editorial review.
+
+To run integration checks against an installed local WordPress:
+
+```bash
+docker compose exec -T wordpress php wp-content/plugins/myliba-core/tests/seo-review.php
+```
+
 ## Staging index policy
 
 Indexing is disabled by default in `Myliba > Site Settings`. While the site is on a staging subdomain, keep it disabled and add Basic Auth or IP restriction at hosting level. When the final domain goes live, enable indexing, refresh permalinks, and submit the sitemap in Search Console.

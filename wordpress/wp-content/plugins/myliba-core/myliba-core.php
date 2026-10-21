@@ -26,6 +26,7 @@ $myliba_core_files = [
     'includes/meta.php',
     'includes/admin.php',
     'includes/seo.php',
+    'includes/seo-review.php',
     'includes/forms.php',
     'includes/images.php',
     'includes/wp-cli.php',
@@ -44,6 +45,7 @@ function boot(): void
     Meta\boot();
     Admin\boot();
     SEO\boot();
+    SEOReview\boot();
     Forms\boot();
     Images\boot();
 

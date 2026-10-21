@@ -2217,6 +2217,11 @@ abstract class Ai1wm_Database {
 			case stripos( $column_type, 'mediumblob' ) === 0:
 			case stripos( $column_type, 'longblob' ) === 0:
 			case stripos( $column_type, 'blob' ) === 0:
+				// A bare "0x" is not valid SQL, so an empty binary value must be dumped as an empty string literal
+				if ( $input === '' ) {
+					return "''";
+				}
+
 				return '0x' . bin2hex( $input );
 
 			default:
