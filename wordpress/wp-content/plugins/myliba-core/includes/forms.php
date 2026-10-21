@@ -269,12 +269,15 @@ function handle(): void
         'post_type' => 'myliba_submission',
         'post_status' => 'private',
         'post_title' => sprintf('%s %s - %s', $data['name'], $data['last_name'], current_time('mysql')),
-    ]);
+    ], true);
 
-    if ($post_id && !is_wp_error($post_id)) {
-        foreach ($data as $key => $value) {
-            update_post_meta($post_id, '_myliba_form_' . $key, $value);
-        }
+    if (!$post_id || is_wp_error($post_id)) {
+        wp_safe_redirect(add_query_arg('myliba_form', 'error', $redirect));
+        exit;
+    }
+
+    foreach ($data as $key => $value) {
+        update_post_meta($post_id, '_myliba_form_' . $key, $value);
     }
 
     send_notification($data);

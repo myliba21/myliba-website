@@ -1,0 +1,3066 @@
+{
+  "checked_at": "2026-10-21T21:29:13.867145+00:00",
+  "method": "HTTP GET; no form submission; no browser JavaScript execution",
+  "results": [
+    {
+      "url": "http://localhost:8080/",
+      "status": 200,
+      "final_url": "http://localhost:8080/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Myliba"
+      ],
+      "h1": [],
+      "canonical": [],
+      "alternates": [],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "noindex,follow"
+        }
+      ],
+      "schemas": [],
+      "links": [
+        "http://localhost:8080/en/"
+      ],
+      "forms": [],
+      "ga_tag_count": 0,
+      "lead_event_present": false
+    },
+    {
+      "url": "http://localhost:8080/tr/",
+      "status": 200,
+      "final_url": "http://localhost:8080/tr/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Myliba | OKR, Performans Yönetimi ve Kültür Dönüşümü"
+      ],
+      "h1": [
+        "Performansı ve Kültürü Geliştiren Platform"
+      ],
+      "canonical": [
+        "http://localhost:8080/tr/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "http://localhost:8080/en/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "http://localhost:8080/tr/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "http://localhost:8080/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Myliba, OKR ve performans yönetimi yazılımını akademi ve danışmanlıkla birleştirerek stratejiyi günlük iş akışına taşır."
+        },
+        {
+          "property": "og:url",
+          "content": "http://localhost:8080/tr/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "http://localhost:8080/#organization",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "logo": "http://localhost:8080/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "http://localhost:8080/#website",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "publisher": {
+            "@id": "http://localhost:8080/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "http://localhost:8080/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Myliba",
+              "item": "http://localhost:8080/tr/"
+            }
+          ]
+        }
+      ],
+      "links": [
+        "/tr/demo/",
+        "http://localhost:8080/en/",
+        "http://localhost:8080/tr/",
+        "http://localhost:8080/tr/cozumler/",
+        "http://localhost:8080/tr/cozumler/danismanlik/",
+        "http://localhost:8080/tr/cozumler/kultur-analizi/",
+        "http://localhost:8080/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "http://localhost:8080/tr/demo/",
+        "http://localhost:8080/tr/egitmenlerimiz/",
+        "http://localhost:8080/tr/etkinlikler/",
+        "http://localhost:8080/tr/gelisim-merkezi/",
+        "http://localhost:8080/tr/gelisim-merkezi/e-kitaplar/",
+        "http://localhost:8080/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "http://localhost:8080/tr/gizlilik-politikasi/",
+        "http://localhost:8080/tr/guvenlik/",
+        "http://localhost:8080/tr/hikayemiz/",
+        "http://localhost:8080/tr/iletisim/",
+        "http://localhost:8080/tr/okr-kultur-akademisi/",
+        "http://localhost:8080/tr/sss/",
+        "http://localhost:8080/tr/yazilar/",
+        "http://localhost:8080/tr/yazilim/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@localhost",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "http://localhost:8080/tr/yazilim/",
+      "status": 200,
+      "final_url": "http://localhost:8080/tr/yazilim/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Myliba Yazılım | Objektif Performans ve Hedef Yönetimi"
+      ],
+      "h1": [
+        "Yüksek Performanslı Organizasyonlar Yaratmak için Geliştirildi"
+      ],
+      "canonical": [
+        "http://localhost:8080/tr/yazilim/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "http://localhost:8080/en/software/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "http://localhost:8080/tr/yazilim/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "http://localhost:8080/en/software/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "OKR, KPI, 360° analiz, kültür ve yapay zekâ içgörüleriyle canlı, şeffaf ve veriye dayalı performans yönetimi."
+        },
+        {
+          "property": "og:url",
+          "content": "http://localhost:8080/tr/yazilim/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "http://localhost:8080/#organization",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "logo": "http://localhost:8080/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "http://localhost:8080/#website",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "publisher": {
+            "@id": "http://localhost:8080/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "http://localhost:8080/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Myliba",
+              "item": "http://localhost:8080/tr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Myliba Yazılım",
+              "item": "http://localhost:8080/tr/yazilim/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "@id": "http://localhost:8080/tr/yazilim/#software",
+          "name": "Myliba Yazılım",
+          "description": "OKR, KPI, 360° analiz, kültür ve yapay zekâ içgörüleriyle canlı, şeffaf ve veriye dayalı performans yönetimi.",
+          "url": "http://localhost:8080/tr/yazilim/",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "provider": {
+            "@id": "http://localhost:8080/#organization",
+            "@type": "Organization",
+            "name": "Myliba",
+            "url": "http://localhost:8080/"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Myliba hangi şirketler için uygundur?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Myliba, yüksek performansı geliştirmeye odaklanan büyüme aşamasındaki şirketlerden çok lokasyonlu büyük organizasyonlara kadar her ölçekte kurum için ölçeklenebilir bir çözümdür. Yapı, sektör ve ekip büyüklüğüne göre özelleştirilebilen Myliba; stratejik hedefleri çalışanların hedefleriyle buluşturmak, odağı güçlendirmek ve sürekli gelişim kültürü oluşturmak isteyen şirketler için uygundur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba Yazılım, geleneksel performans sistemlerinden nasıl ayrılır?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Myliba, yılda bir kez yapılan performans değerlendirmeleri yerine sürekli gelişimi destekleyen modern bir performans yaklaşımı sunar. Hedef yönetimi (OKR), KPI takibi, sürekli geri bildirim, ileri bildirim, takdir, yapay zekâ destekli içgörüler ve objektif raporlamayı bir araya getirerek gelişimi destekler. Böylece organizasyonlar geçmişi değerlendirmek yerine geleceği şekillendiren, veri odaklı ve çevik bir performans kültürü oluşturur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Performans değerlendirme formlarının yerine geçebilir mi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Evet. Myliba, geleneksel performans değerlendirme formlarının yerine geçebilecek kapsamlı bir performans yönetim altyapısı sunar. Hedefler (OKR), KPI'lar, aksiyonlar, sürekli geri bildirim, 360° analizler ve yapay zekâ destekli içgörüler sayesinde çalışan performansı yıl boyunca objektif verilere dayanır. Böylece yalnızca belirli dönemlerde yapılan değerlendirmeler yerine, sürekli gelişimi destekleyen ve karar alma süreçlerini güçlendiren modern bir performans yönetimi yaklaşımı benimsenir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba Yazılım içinde hem OKR (Hedef Yönetimi) hem de geleneksel KPI takibi aynı anda yapılabilir mi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Evet. Myliba'da OKR'ler ve KPI kartları birlikte kullanılabilir. Stratejik hedeflerinizi OKR'lerle yönetirken, operasyonel performansınızı KPI kartları üzerinden anlık olarak takip edebilirsiniz. KPI kartları; hedef değer, gerçekleşen değer, trend ve performans durumunu görünür kılarak ekiplerin kritik metriklerini düzenli şekilde izlemesini sağlar. Böylece stratejik hedefler ile günlük operasyonel sonuçlar tek bir yapı içinde birbirini destekleyecek şekilde yönetilir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba kültürel virüsleri ve riskleri nasıl tespit ediyor?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Myliba, çalışan geri bildirimleri, 360° isteklilik ve bağlılık analizleri, hedef ilerlemeleri ve organizasyon genelindeki etkileşimlerden elde edilen verileri yapay zekâ destekli analizlerle sunar. Bu sayede motivasyon düşüşü, iletişim kopukluğu, düşük bağlılık, ekipler arası uyumsuzluk, dedikodu, mobbing ve tükenmişlik riski gibi performansı olumsuz etkileyebilecek kültürel sinyaller erken aşamada görünür hale gelir. Elde edilen içgörüler sayesinde yöneticiler, sorunlar büyümeden önce proaktif aksiyon alabilir ve daha sağlıklı bir kurum kültürü oluşturabilir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Kurulum ne kadar sürer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Kurulum süresi organizasyon yapısına, veri aktarımına ve entegrasyon kapsamına göre değişir. İhtiyaç analizi sonrasında ekip yapısı, hedef döngüsü ve yetkilendirmeler planlanarak kademeli ve kontrollü bir devreye alma süreci yürütülür. Kurulum süreci boyunca uzman ekibimiz yapılandırma, eğitim ve canlıya geçiş aşamalarında destek sağlar."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba Yazılım mevcut araçlarla nasıl entegre olur?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "KPI ve organizasyon verileri API ve uygun veri bağlantıları üzerinden mevcut İK, iş zekâsı ve operasyon araçlarıyla ilişkilendirilebilir. Entegrasyon kapsamı kurumunuzun kullandığı sistemlere göre birlikte belirlenir."
+              }
+            }
+          ]
+        }
+      ],
+      "links": [
+        "#moduller",
+        "/tr/demo/",
+        "http://localhost:8080/en/software/",
+        "http://localhost:8080/tr/",
+        "http://localhost:8080/tr/cozumler/",
+        "http://localhost:8080/tr/cozumler/danismanlik/",
+        "http://localhost:8080/tr/cozumler/kultur-analizi/",
+        "http://localhost:8080/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "http://localhost:8080/tr/demo/",
+        "http://localhost:8080/tr/egitmenlerimiz/",
+        "http://localhost:8080/tr/etkinlikler/",
+        "http://localhost:8080/tr/gelisim-merkezi/",
+        "http://localhost:8080/tr/gelisim-merkezi/e-kitaplar/",
+        "http://localhost:8080/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "http://localhost:8080/tr/gizlilik-politikasi/",
+        "http://localhost:8080/tr/guvenlik/",
+        "http://localhost:8080/tr/hikayemiz/",
+        "http://localhost:8080/tr/iletisim/",
+        "http://localhost:8080/tr/okr-kultur-akademisi/",
+        "http://localhost:8080/tr/sss/",
+        "http://localhost:8080/tr/yazilar/",
+        "http://localhost:8080/tr/yazilim/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@localhost",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "http://localhost:8080/tr/icerikler/okr-yazilimi/",
+      "status": 200,
+      "final_url": "http://localhost:8080/tr/icerikler/okr-yazilimi/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "OKR Yazılımı: Hedef ve Aksiyon Yönetimi | Myliba"
+      ],
+      "h1": [
+        "OKR Yazılımı: Stratejiyi Hedef ve Aksiyona Bağlayın"
+      ],
+      "canonical": [
+        "http://localhost:8080/tr/icerikler/okr-yazilimi/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "http://localhost:8080/en/content/okr-software/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "http://localhost:8080/tr/icerikler/okr-yazilimi/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "http://localhost:8080/en/content/okr-software/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Myliba OKR yazılımı; hedefleri KPI, aksiyon ve CFR görüşmeleriyle bağlar. Ekipler arası hizalamayı, ilerleme takibini ve gelişim döngüsünü keşfedin."
+        },
+        {
+          "property": "og:url",
+          "content": "http://localhost:8080/tr/icerikler/okr-yazilimi/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "http://localhost:8080/#organization",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "logo": "http://localhost:8080/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "http://localhost:8080/#website",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "publisher": {
+            "@id": "http://localhost:8080/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "http://localhost:8080/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "OKR Yazılımı",
+              "item": "http://localhost:8080/tr/icerikler/okr-yazilimi/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "OKR yazılımı nedir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "OKR yazılımı, amaçları ve ölçülebilir anahtar sonuçları tanımlamaya, sahiplerini belirlemeye ve ilerlemeyi dönem boyunca izlemeye yardımcı olan araçtır."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba yalnızca OKR takibi mi yapar?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hayır. Myliba, OKR’leri KPI kartları, aksiyonlar, 1:1 görüşmeler, geri bildirim ve analitik içgörülerle aynı yönetim akışında ilişkilendirir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR ve KPI birlikte kullanılabilir mi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Evet. OKR değişim ve öncelikleri tarif ederken KPI süreklilik gösteren iş sonuçlarını izler; Myliba iki yaklaşımı birlikte görünür kılar."
+              }
+            }
+          ]
+        }
+      ],
+      "links": [
+        "/tr/demo/",
+        "http://localhost:8080/en/content/okr-software/",
+        "http://localhost:8080/tr/",
+        "http://localhost:8080/tr/cozumler/",
+        "http://localhost:8080/tr/cozumler/danismanlik/",
+        "http://localhost:8080/tr/cozumler/kultur-analizi/",
+        "http://localhost:8080/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "http://localhost:8080/tr/demo/",
+        "http://localhost:8080/tr/egitmenlerimiz/",
+        "http://localhost:8080/tr/etkinlikler/",
+        "http://localhost:8080/tr/gelisim-merkezi/",
+        "http://localhost:8080/tr/gelisim-merkezi/e-kitaplar/",
+        "http://localhost:8080/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "http://localhost:8080/tr/gizlilik-politikasi/",
+        "http://localhost:8080/tr/guvenlik/",
+        "http://localhost:8080/tr/hikayemiz/",
+        "http://localhost:8080/tr/icerikler/okr-yazilimi/",
+        "http://localhost:8080/tr/iletisim/",
+        "http://localhost:8080/tr/okr-kultur-akademisi/",
+        "http://localhost:8080/tr/sss/",
+        "http://localhost:8080/tr/yazilar/",
+        "http://localhost:8080/tr/yazilim/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@localhost",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "http://localhost:8080/tr/icerikler/performans-yonetimi/",
+      "status": 200,
+      "final_url": "http://localhost:8080/tr/icerikler/performans-yonetimi/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Performans Yönetimi ve Sürekli Gelişim | Myliba"
+      ],
+      "h1": [
+        "Performans Yönetimi: Yıl Sonundan Sürekli Gelişime"
+      ],
+      "canonical": [
+        "http://localhost:8080/tr/icerikler/performans-yonetimi/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "http://localhost:8080/en/content/performance-management/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "http://localhost:8080/tr/icerikler/performans-yonetimi/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "http://localhost:8080/en/content/performance-management/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Performans yönetimini yıllık formların ötesine taşıyın. Myliba ile OKR, KPI, aksiyon, 1:1 görüşme ve geri bildirimi bütüncül bir süreçte izleyin."
+        },
+        {
+          "property": "og:url",
+          "content": "http://localhost:8080/tr/icerikler/performans-yonetimi/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "http://localhost:8080/#organization",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "logo": "http://localhost:8080/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "http://localhost:8080/#website",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "publisher": {
+            "@id": "http://localhost:8080/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "http://localhost:8080/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Performans Yönetimi",
+              "item": "http://localhost:8080/tr/icerikler/performans-yonetimi/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Performans yönetimi nedir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Performans yönetimi, beklentilerin netleştirilmesi, sonuçların izlenmesi, düzenli geri bildirim ve gelişim kararlarının birlikte yürütüldüğü süreçtir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Yıllık değerlendirme yeterli midir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yıllık değerlendirme tek başına engelleri erken çözmez. Düzenli 1:1 görüşmeleri ve güncel hedef verileri süreci destekler."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR performans puanı mıdır?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hayır. OKR stratejik hedef ilerlemesini gösterir; bireysel performans yorumu için katkı, bağlam, davranış ve gelişim de değerlendirilmelidir."
+              }
+            }
+          ]
+        }
+      ],
+      "links": [
+        "/tr/demo/",
+        "http://localhost:8080/en/content/performance-management/",
+        "http://localhost:8080/tr/",
+        "http://localhost:8080/tr/cozumler/",
+        "http://localhost:8080/tr/cozumler/danismanlik/",
+        "http://localhost:8080/tr/cozumler/kultur-analizi/",
+        "http://localhost:8080/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "http://localhost:8080/tr/demo/",
+        "http://localhost:8080/tr/egitmenlerimiz/",
+        "http://localhost:8080/tr/etkinlikler/",
+        "http://localhost:8080/tr/gelisim-merkezi/",
+        "http://localhost:8080/tr/gelisim-merkezi/e-kitaplar/",
+        "http://localhost:8080/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "http://localhost:8080/tr/gizlilik-politikasi/",
+        "http://localhost:8080/tr/guvenlik/",
+        "http://localhost:8080/tr/hikayemiz/",
+        "http://localhost:8080/tr/icerikler/performans-yonetimi/",
+        "http://localhost:8080/tr/iletisim/",
+        "http://localhost:8080/tr/okr-kultur-akademisi/",
+        "http://localhost:8080/tr/sss/",
+        "http://localhost:8080/tr/yazilar/",
+        "http://localhost:8080/tr/yazilim/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@localhost",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "http://localhost:8080/tr/cozumler/danismanlik/",
+      "status": 200,
+      "final_url": "http://localhost:8080/tr/cozumler/danismanlik/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "OKR Danışmanlığı ve Kurumsal OKR Koçluğu | Myliba"
+      ],
+      "h1": [
+        "Danışman ve Koçlarımız ile Stratejiyi Hedeflere ve Sonuçlara Dönüştürün"
+      ],
+      "canonical": [
+        "http://localhost:8080/tr/cozumler/danismanlik/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "http://localhost:8080/en/solutions/advisory-and-consulting/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "http://localhost:8080/tr/cozumler/danismanlik/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "http://localhost:8080/en/solutions/advisory-and-consulting/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Myliba OKR danışmanlığı ve kurumsal OKR koçluğu ile stratejinizi ölçülebilir hedeflere dönüştürün; ekiplerinizi hizalayın ve performansı geliştirin."
+        },
+        {
+          "property": "og:url",
+          "content": "http://localhost:8080/tr/cozumler/danismanlik/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "http://localhost:8080/#organization",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "logo": "http://localhost:8080/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "http://localhost:8080/#website",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "publisher": {
+            "@id": "http://localhost:8080/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "http://localhost:8080/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Danışmanlık",
+              "item": "http://localhost:8080/tr/cozumler/danismanlik/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "@id": "http://localhost:8080/tr/cozumler/danismanlik/#service",
+          "name": "Danışmanlık",
+          "serviceType": "OKR Danışmanlığı",
+          "description": "Myliba OKR danışmanlığı ve kurumsal OKR koçluğu ile stratejinizi ölçülebilir hedeflere dönüştürün; ekiplerinizi hizalayın ve performansı geliştirin.",
+          "url": "http://localhost:8080/tr/cozumler/danismanlik/",
+          "inLanguage": "tr",
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Türkiye ve uluslararası kuruluşlar"
+          },
+          "provider": {
+            "@id": "http://localhost:8080/#organization"
+          },
+          "audience": {
+            "@type": "BusinessAudience",
+            "audienceType": "Liderlik, strateji, dönüşüm ve insan ekipleri"
+          }
+        }
+      ],
+      "links": [
+        "#danismanlarimiz",
+        "/tr/demo/",
+        "/tr/egitmenlerimiz/",
+        "/tr/okr-koclugu/",
+        "http://localhost:8080/en/solutions/advisory-and-consulting/",
+        "http://localhost:8080/tr/",
+        "http://localhost:8080/tr/cozumler/",
+        "http://localhost:8080/tr/cozumler/danismanlik/",
+        "http://localhost:8080/tr/cozumler/kultur-analizi/",
+        "http://localhost:8080/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "http://localhost:8080/tr/demo/",
+        "http://localhost:8080/tr/egitmenlerimiz/",
+        "http://localhost:8080/tr/ekibimiz/aysel-eker-tr/",
+        "http://localhost:8080/tr/ekibimiz/dilek-mete-tr/",
+        "http://localhost:8080/tr/ekibimiz/huri-sankur-tr/",
+        "http://localhost:8080/tr/etkinlikler/",
+        "http://localhost:8080/tr/gelisim-merkezi/",
+        "http://localhost:8080/tr/gelisim-merkezi/e-kitaplar/",
+        "http://localhost:8080/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "http://localhost:8080/tr/gizlilik-politikasi/",
+        "http://localhost:8080/tr/guvenlik/",
+        "http://localhost:8080/tr/hikayemiz/",
+        "http://localhost:8080/tr/iletisim/",
+        "http://localhost:8080/tr/okr-kultur-akademisi/",
+        "http://localhost:8080/tr/sss/",
+        "http://localhost:8080/tr/yazilar/",
+        "http://localhost:8080/tr/yazilim/",
+        "https://portal.myliba.com/",
+        "https://www.dilekmete.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@localhost",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "http://localhost:8080/tr/demo/",
+      "status": 200,
+      "final_url": "http://localhost:8080/tr/demo/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Myliba Demo Talebi | Yazılımı Canlı Görün"
+      ],
+      "h1": [
+        "Kişiselleştirilmiş Demo Talep Edin"
+      ],
+      "canonical": [
+        "http://localhost:8080/tr/demo/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "http://localhost:8080/en/demo/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "http://localhost:8080/tr/demo/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "http://localhost:8080/en/demo/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Myliba yazılımının OKR, KPI, CFR ve performans yönetimi özelliklerini canlı demoda görün; kurumunuzun ihtiyaçlarını birlikte değerlendirelim."
+        },
+        {
+          "property": "og:url",
+          "content": "http://localhost:8080/tr/demo/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "http://localhost:8080/#organization",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "logo": "http://localhost:8080/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "http://localhost:8080/#website",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "publisher": {
+            "@id": "http://localhost:8080/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "http://localhost:8080/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Myliba",
+              "item": "http://localhost:8080/tr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Demo",
+              "item": "http://localhost:8080/tr/demo/"
+            }
+          ]
+        }
+      ],
+      "links": [
+        "/tr/demo/",
+        "http://localhost:8080/en/demo/",
+        "http://localhost:8080/tr/",
+        "http://localhost:8080/tr/cozumler/",
+        "http://localhost:8080/tr/cozumler/danismanlik/",
+        "http://localhost:8080/tr/cozumler/kultur-analizi/",
+        "http://localhost:8080/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "http://localhost:8080/tr/demo/",
+        "http://localhost:8080/tr/egitmenlerimiz/",
+        "http://localhost:8080/tr/etkinlikler/",
+        "http://localhost:8080/tr/gelisim-merkezi/",
+        "http://localhost:8080/tr/gelisim-merkezi/e-kitaplar/",
+        "http://localhost:8080/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "http://localhost:8080/tr/gizlilik-politikasi/",
+        "http://localhost:8080/tr/guvenlik/",
+        "http://localhost:8080/tr/hikayemiz/",
+        "http://localhost:8080/tr/iletisim/",
+        "http://localhost:8080/tr/okr-kultur-akademisi/",
+        "http://localhost:8080/tr/sss/",
+        "http://localhost:8080/tr/yazilar/",
+        "http://localhost:8080/tr/yazilim/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@localhost",
+        "tel:+905539868699"
+      ],
+      "forms": [
+        {
+          "class": "myliba-form",
+          "method": "post",
+          "action": "http://localhost:8080/wp-admin/admin-post.php"
+        }
+      ],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "http://localhost:8080/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/",
+      "status": 200,
+      "final_url": "http://localhost:8080/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "OKR Nedir? Kurumlarda Performans ve Kültür"
+      ],
+      "h1": [
+        "OKR Nedir? Hedefleri Canlı Tutmanın ve Kurumda Gerçek Dönüşüm Başlatmanın Yolu"
+      ],
+      "canonical": [
+        "http://localhost:8080/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "http://localhost:8080/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "http://localhost:8080/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "OKR nedir, nasıl çalışır ve kurumlara ne kazandırır? OKR sistemiyle stratejiyi aksiyona, performansı ve kültürü sürdürülebilir gelişime dönüştürün."
+        },
+        {
+          "property": "og:url",
+          "content": "http://localhost:8080/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "http://localhost:8080/#organization",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "logo": "http://localhost:8080/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "http://localhost:8080/#website",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "publisher": {
+            "@id": "http://localhost:8080/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "http://localhost:8080/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "OKR Nedir? Hedefleri Canlı Tutmanın ve Kurumda Gerçek Dönüşüm Başlatmanın Yolu",
+              "item": "http://localhost:8080/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "OKR Nedir? Hedefleri Canlı Tutmanın ve Kurumda Gerçek Dönüşüm Başlatmanın Yolu",
+          "datePublished": "2026-09-21T07:40:23+03:00",
+          "dateModified": "2026-10-05T15:33:16+03:00",
+          "author": {
+            "@type": "Organization",
+            "name": "Myliba"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Myliba",
+            "url": "http://localhost:8080/"
+          },
+          "mainEntityOfPage": "http://localhost:8080/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+        }
+      ],
+      "links": [
+        "/tr/demo/",
+        "http://localhost:8080/en/",
+        "http://localhost:8080/tr/",
+        "http://localhost:8080/tr/cozumler/",
+        "http://localhost:8080/tr/cozumler/danismanlik/",
+        "http://localhost:8080/tr/cozumler/kultur-analizi/",
+        "http://localhost:8080/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "http://localhost:8080/tr/demo/",
+        "http://localhost:8080/tr/egitmenlerimiz/",
+        "http://localhost:8080/tr/etkinlikler/",
+        "http://localhost:8080/tr/gelisim-merkezi/",
+        "http://localhost:8080/tr/gelisim-merkezi/e-kitaplar/",
+        "http://localhost:8080/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "http://localhost:8080/tr/gizlilik-politikasi/",
+        "http://localhost:8080/tr/guvenlik/",
+        "http://localhost:8080/tr/hikayemiz/",
+        "http://localhost:8080/tr/iletisim/",
+        "http://localhost:8080/tr/okr-kultur-akademisi/",
+        "http://localhost:8080/tr/sss/",
+        "http://localhost:8080/tr/yazilar/",
+        "http://localhost:8080/tr/yazilar/ileri-bildirim-nasil-verilir-gelecege-donuk-ileri-bildirimin-pratik-rehberi/",
+        "http://localhost:8080/tr/yazilar/okr-hatalari-okr-ne-degildir-sirketlerin-dustugu-3-buyuk-hedef-yanilgisi/",
+        "http://localhost:8080/tr/yazilar/okr-ile-kulturel-donusum",
+        "http://localhost:8080/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/",
+        "http://localhost:8080/tr/yazilar/okrleriniz-ise-yariyor-mu-bu-3-soruyla-kendiniz-karar-verin/",
+        "http://localhost:8080/tr/yazilim/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@localhost",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "http://localhost:8080/tr/okr-koclugu/",
+      "status": 200,
+      "final_url": "http://localhost:8080/tr/okr-koclugu/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Kurumsal OKR Koçluğu ve OKR Koçları | Myliba"
+      ],
+      "h1": [
+        "OKR’ları Yazmakla Kalmayın, Kurumunuzda Çalıştırın"
+      ],
+      "canonical": [
+        "http://localhost:8080/tr/okr-koclugu/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "http://localhost:8080/tr/okr-koclugu/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "http://localhost:8080/en/okr-coaching/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "http://localhost:8080/en/okr-coaching/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Kurumsal OKR koçluğu ile etkili OKR yazımı, stratejik hizalanma, check-in ve CFR ritimleri geliştirin. Myliba OKR koçlarıyla tanışın."
+        },
+        {
+          "property": "og:url",
+          "content": "http://localhost:8080/tr/okr-koclugu/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "http://localhost:8080/#organization",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "logo": "http://localhost:8080/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "http://localhost:8080/#website",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "publisher": {
+            "@id": "http://localhost:8080/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "http://localhost:8080/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Myliba",
+              "item": "http://localhost:8080/tr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Kurumsal OKR Koçluğu",
+              "item": "http://localhost:8080/tr/okr-koclugu/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "@id": "http://localhost:8080/tr/okr-koclugu/#service",
+          "name": "Kurumsal OKR Koçluğu",
+          "serviceType": "Kurumsal OKR Koçluğu",
+          "description": "Kurumsal OKR koçluğu ile etkili OKR yazımı, stratejik hizalanma, check-in ve CFR ritimleri geliştirin. Myliba OKR koçlarıyla tanışın.",
+          "url": "http://localhost:8080/tr/okr-koclugu/",
+          "inLanguage": "tr",
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Türkiye ve uluslararası kuruluşlar"
+          },
+          "provider": {
+            "@id": "http://localhost:8080/#organization"
+          },
+          "audience": {
+            "@type": "BusinessAudience",
+            "audienceType": "Liderlik, strateji, dönüşüm ve insan ekipleri"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "OKR koçluğu nedir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "OKR koçluğu, liderlerin ve ekiplerin etkili OKR yazmasına, hedefleri stratejiyle hizalamasına ve düzenli takip alışkanlıkları geliştirmesine eşlik eden uygulamalı bir gelişim sürecidir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR danışmanlığı ile OKR koçluğu arasındaki fark nedir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "OKR danışmanlığı sistem tasarımı ve organizasyon çapındaki dönüşüme odaklanır. OKR koçluğu ise liderlerin ve ekiplerin mevcut sistemi daha etkili uygulama becerisini geliştirir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR koçluğu kimler için uygundur?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "OKR kullanan veya kullanmaya hazırlanan liderlik, strateji, dönüşüm, insan ve kültür ekipleri ile hedef kalitesini geliştirmek isteyen takımlar için uygundur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR koçluğu ne kadar sürer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Süre kurumun büyüklüğüne, mevcut OKR olgunluğuna ve kapsama göre belirlenir. İlk gelişim döngüsü çoğunlukla analiz, uygulama ve kalıcılaştırma aşamalarından oluşur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR koçluğu online yapılabilir mi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Süreç kurumun ihtiyacına göre çevrim içi, yüz yüze veya hibrit olarak tasarlanabilir."
+              }
+            }
+          ]
+        }
+      ],
+      "links": [
+        "/tr/cozumler/danismanlik/",
+        "/tr/demo/",
+        "/tr/egitmenlerimiz/",
+        "/tr/iletisim/",
+        "/tr/okr-kultur-akademisi/",
+        "http://localhost:8080/en/okr-coaching/",
+        "http://localhost:8080/tr/",
+        "http://localhost:8080/tr/cozumler/",
+        "http://localhost:8080/tr/cozumler/danismanlik/",
+        "http://localhost:8080/tr/cozumler/kultur-analizi/",
+        "http://localhost:8080/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "http://localhost:8080/tr/demo/",
+        "http://localhost:8080/tr/egitmenlerimiz/",
+        "http://localhost:8080/tr/etkinlikler/",
+        "http://localhost:8080/tr/gelisim-merkezi/",
+        "http://localhost:8080/tr/gelisim-merkezi/e-kitaplar/",
+        "http://localhost:8080/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "http://localhost:8080/tr/gizlilik-politikasi/",
+        "http://localhost:8080/tr/guvenlik/",
+        "http://localhost:8080/tr/hikayemiz/",
+        "http://localhost:8080/tr/iletisim/",
+        "http://localhost:8080/tr/okr-koclugu/",
+        "http://localhost:8080/tr/okr-kultur-akademisi/",
+        "http://localhost:8080/tr/sss/",
+        "http://localhost:8080/tr/yazilar/",
+        "http://localhost:8080/tr/yazilim/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@localhost",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "http://localhost:8080/tr/kultur-analizi/",
+      "status": 200,
+      "final_url": "http://localhost:8080/tr/cozumler/kultur-analizi/",
+      "redirects": [
+        {
+          "from": "http://localhost:8080/tr/kultur-analizi/",
+          "status": 301,
+          "to": "http://localhost:8080/tr/cozumler/kultur-analizi/"
+        }
+      ],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Kültür Analizi | Myliba"
+      ],
+      "h1": [
+        "Kültür Analizi"
+      ],
+      "canonical": [
+        "http://localhost:8080/tr/cozumler/kultur-analizi/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "http://localhost:8080/en/solutions/culture-analysis-solution/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "http://localhost:8080/tr/cozumler/kultur-analizi/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "http://localhost:8080/en/solutions/culture-analysis-solution/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Kültür analiziyle bağlılık, iş birliği ve performansı etkileyen davranış kalıplarını veriye dayalı içgörülerle görünür kılın."
+        },
+        {
+          "property": "og:url",
+          "content": "http://localhost:8080/tr/cozumler/kultur-analizi/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "http://localhost:8080/#organization",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "logo": "http://localhost:8080/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "http://localhost:8080/#website",
+          "name": "Myliba",
+          "url": "http://localhost:8080/",
+          "publisher": {
+            "@id": "http://localhost:8080/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "http://localhost:8080/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Kültür Analizi",
+              "item": "http://localhost:8080/tr/cozumler/kultur-analizi/"
+            }
+          ]
+        }
+      ],
+      "links": [
+        "#calisma-modeli",
+        "/tr/demo/",
+        "http://localhost:8080/en/solutions/culture-analysis-solution/",
+        "http://localhost:8080/tr/",
+        "http://localhost:8080/tr/cozumler/",
+        "http://localhost:8080/tr/cozumler/danismanlik/",
+        "http://localhost:8080/tr/cozumler/kultur-analizi/",
+        "http://localhost:8080/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "http://localhost:8080/tr/demo/",
+        "http://localhost:8080/tr/egitmenlerimiz/",
+        "http://localhost:8080/tr/etkinlikler/",
+        "http://localhost:8080/tr/gelisim-merkezi/",
+        "http://localhost:8080/tr/gelisim-merkezi/e-kitaplar/",
+        "http://localhost:8080/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "http://localhost:8080/tr/gizlilik-politikasi/",
+        "http://localhost:8080/tr/guvenlik/",
+        "http://localhost:8080/tr/hikayemiz/",
+        "http://localhost:8080/tr/iletisim/",
+        "http://localhost:8080/tr/okr-kultur-akademisi/",
+        "http://localhost:8080/tr/sss/",
+        "http://localhost:8080/tr/yazilar/",
+        "http://localhost:8080/tr/yazilim/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@localhost",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "http://localhost:8080/robots.txt",
+      "status": 200,
+      "final_url": "http://localhost:8080/robots.txt",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8"
+      },
+      "body": "# ── General Crawlers ─────────────────────────────────────\nUser-agent: *\nDisallow: /wp-admin/\nDisallow: /wp-login.php\nDisallow: /xmlrpc.php\nDisallow: /?s=\nDisallow: /*?s=*\nDisallow: /*?myliba_form=*\nDisallow: /author/\nAllow: /wp-admin/admin-ajax.php\nAllow: /wp-content/uploads/\nAllow: /wp-content/themes/\n\n# ── OpenAI / ChatGPT & Search ─────────────────────────────\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\n# ── Perplexity AI ─────────────────────────────────────────\nUser-agent: PerplexityBot\nAllow: /\n\n# ── Anthropic / Claude ────────────────────────────────────\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nUser-agent: anthropic-ai\nAllow: /\n\n# ── Google Gemini & AI Overviews ──────────────────────────\nUser-agent: Google-Extended\nAllow: /\n\n# ── Apple Intelligence ────────────────────────────────────\nUser-agent: Applebot\nAllow: /\n\nUser-agent: Applebot-Extended\nAllow: /\n\n# ── Microsoft Copilot / Bing ──────────────────────────────\nUser-agent: Bingbot\nAllow: /\n\n# ── Sitemap ───────────────────────────────────────────────\nSitemap: http://localhost:8080/wp-sitemap.xml\n"
+    },
+    {
+      "url": "http://localhost:8080/wp-sitemap.xml",
+      "status": 200,
+      "final_url": "http://localhost:8080/wp-sitemap.xml",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "application/xml; charset=UTF-8"
+      },
+      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<?xml-stylesheet type=\"text/xsl\" href=\"http://localhost:8080/wp-sitemap-index.xsl\" ?>\n<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><sitemap><loc>http://localhost:8080/wp-sitemap-posts-post-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-page-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_solution-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_academy-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_landing-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_event-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_ebook-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_team-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-mylibaarchives-1.xml</loc></sitemap></sitemapindex>\n"
+    },
+    {
+      "url": "http://localhost:8080/sitemap.xml",
+      "status": 200,
+      "final_url": "http://localhost:8080/wp-sitemap.xml",
+      "redirects": [
+        {
+          "from": "http://localhost:8080/sitemap.xml",
+          "status": 301,
+          "to": "http://localhost:8080/wp-sitemap.xml"
+        }
+      ],
+      "headers": {
+        "Content-Type": "application/xml; charset=UTF-8"
+      },
+      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<?xml-stylesheet type=\"text/xsl\" href=\"http://localhost:8080/wp-sitemap-index.xsl\" ?>\n<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><sitemap><loc>http://localhost:8080/wp-sitemap-posts-post-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-page-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_solution-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_academy-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_landing-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_event-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_ebook-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-posts-myliba_team-1.xml</loc></sitemap><sitemap><loc>http://localhost:8080/wp-sitemap-mylibaarchives-1.xml</loc></sitemap></sitemapindex>\n"
+    },
+    {
+      "url": "https://www.myliba.com/",
+      "status": 200,
+      "final_url": "https://www.myliba.com/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Myliba"
+      ],
+      "h1": [],
+      "canonical": [],
+      "alternates": [],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "noindex,follow"
+        }
+      ],
+      "schemas": [],
+      "links": [
+        "https://www.myliba.com/en/"
+      ],
+      "forms": [],
+      "ga_tag_count": 0,
+      "lead_event_present": false
+    },
+    {
+      "url": "https://www.myliba.com/tr/",
+      "status": 200,
+      "final_url": "https://www.myliba.com/tr/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Myliba | OKR, Performans Yönetimi ve Kültür Dönüşümü"
+      ],
+      "h1": [
+        "Performansı ve Kültürü Geliştiren Platform"
+      ],
+      "canonical": [
+        "https://www.myliba.com/tr/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "https://www.myliba.com/en/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "https://www.myliba.com/tr/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "https://www.myliba.com/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Myliba, OKR ve performans yönetimi yazılımını akademi ve danışmanlıkla birleştirerek stratejiyi günlük iş akışına taşır."
+        },
+        {
+          "property": "og:url",
+          "content": "https://www.myliba.com/tr/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://www.myliba.com/#organization",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "logo": "https://www.myliba.com/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.myliba.com/#website",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "publisher": {
+            "@id": "https://www.myliba.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/tr/"
+            }
+          ]
+        }
+      ],
+      "links": [
+        "/tr/demo/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.myliba.com/en/",
+        "https://www.myliba.com/tr/",
+        "https://www.myliba.com/tr/cozumler/",
+        "https://www.myliba.com/tr/cozumler/danismanlik/",
+        "https://www.myliba.com/tr/cozumler/kultur-analizi/",
+        "https://www.myliba.com/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "https://www.myliba.com/tr/demo/",
+        "https://www.myliba.com/tr/egitmenlerimiz/",
+        "https://www.myliba.com/tr/etkinlikler/",
+        "https://www.myliba.com/tr/gelisim-merkezi/",
+        "https://www.myliba.com/tr/gelisim-merkezi/e-kitaplar/",
+        "https://www.myliba.com/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "https://www.myliba.com/tr/gizlilik-politikasi/",
+        "https://www.myliba.com/tr/guvenlik/",
+        "https://www.myliba.com/tr/hikayemiz/",
+        "https://www.myliba.com/tr/iletisim/",
+        "https://www.myliba.com/tr/okr-kultur-akademisi/",
+        "https://www.myliba.com/tr/sss/",
+        "https://www.myliba.com/tr/yazilar/",
+        "https://www.myliba.com/tr/yazilim/",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@myliba.com",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "https://www.myliba.com/tr/yazilim/",
+      "error": "<urlopen error _ssl.c:1112: The handshake operation timed out>"
+    },
+    {
+      "url": "https://www.myliba.com/tr/icerikler/okr-yazilimi/",
+      "error": "<urlopen error _ssl.c:1112: The handshake operation timed out>"
+    },
+    {
+      "url": "https://www.myliba.com/tr/icerikler/performans-yonetimi/",
+      "status": 200,
+      "final_url": "https://www.myliba.com/tr/icerikler/performans-yonetimi/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Performans Yönetimi ve Sürekli Gelişim | Myliba"
+      ],
+      "h1": [
+        "Performans Yönetimi: Yıl Sonundan Sürekli Gelişime"
+      ],
+      "canonical": [
+        "https://www.myliba.com/tr/icerikler/performans-yonetimi/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "https://www.myliba.com/en/content/performance-management/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "https://www.myliba.com/tr/icerikler/performans-yonetimi/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "https://www.myliba.com/en/content/performance-management/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Performans yönetimini yıllık formların ötesine taşıyın. Myliba ile OKR, KPI, aksiyon, 1:1 görüşme ve geri bildirimi bütüncül bir süreçte izleyin."
+        },
+        {
+          "property": "og:url",
+          "content": "https://www.myliba.com/tr/icerikler/performans-yonetimi/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://www.myliba.com/#organization",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "logo": "https://www.myliba.com/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.myliba.com/#website",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "publisher": {
+            "@id": "https://www.myliba.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Performans Yönetimi",
+              "item": "https://www.myliba.com/tr/icerikler/performans-yonetimi/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Performans yönetimi nedir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Performans yönetimi, beklentilerin netleştirilmesi, sonuçların izlenmesi, düzenli geri bildirim ve gelişim kararlarının birlikte yürütüldüğü süreçtir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Yıllık değerlendirme yeterli midir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yıllık değerlendirme tek başına engelleri erken çözmez. Düzenli 1:1 görüşmeleri ve güncel hedef verileri süreci destekler."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR performans puanı mıdır?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hayır. OKR stratejik hedef ilerlemesini gösterir; bireysel performans yorumu için katkı, bağlam, davranış ve gelişim de değerlendirilmelidir."
+              }
+            }
+          ]
+        }
+      ],
+      "links": [
+        "/tr/demo/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.myliba.com/en/content/performance-management/",
+        "https://www.myliba.com/tr/",
+        "https://www.myliba.com/tr/cozumler/",
+        "https://www.myliba.com/tr/cozumler/danismanlik/",
+        "https://www.myliba.com/tr/cozumler/kultur-analizi/",
+        "https://www.myliba.com/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "https://www.myliba.com/tr/demo/",
+        "https://www.myliba.com/tr/egitmenlerimiz/",
+        "https://www.myliba.com/tr/etkinlikler/",
+        "https://www.myliba.com/tr/gelisim-merkezi/",
+        "https://www.myliba.com/tr/gelisim-merkezi/e-kitaplar/",
+        "https://www.myliba.com/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "https://www.myliba.com/tr/gizlilik-politikasi/",
+        "https://www.myliba.com/tr/guvenlik/",
+        "https://www.myliba.com/tr/hikayemiz/",
+        "https://www.myliba.com/tr/icerikler/performans-yonetimi/",
+        "https://www.myliba.com/tr/iletisim/",
+        "https://www.myliba.com/tr/okr-kultur-akademisi/",
+        "https://www.myliba.com/tr/sss/",
+        "https://www.myliba.com/tr/yazilar/",
+        "https://www.myliba.com/tr/yazilim/",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@myliba.com",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "https://www.myliba.com/tr/cozumler/danismanlik/",
+      "status": 200,
+      "final_url": "https://www.myliba.com/tr/cozumler/danismanlik/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "OKR Danışmanlığı ve Kurumsal OKR Koçluğu | Myliba"
+      ],
+      "h1": [
+        "Danışman ve Koçlarımız ile Stratejiyi Hedeflere ve Sonuçlara Dönüştürün"
+      ],
+      "canonical": [
+        "https://www.myliba.com/tr/cozumler/danismanlik/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "https://www.myliba.com/en/solutions/advisory-and-consulting/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "https://www.myliba.com/tr/cozumler/danismanlik/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "https://www.myliba.com/en/solutions/advisory-and-consulting/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Myliba OKR danışmanlığı ve kurumsal OKR koçluğu ile stratejinizi ölçülebilir hedeflere dönüştürün; ekiplerinizi hizalayın ve performansı geliştirin."
+        },
+        {
+          "property": "og:url",
+          "content": "https://www.myliba.com/tr/cozumler/danismanlik/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://www.myliba.com/#organization",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "logo": "https://www.myliba.com/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.myliba.com/#website",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "publisher": {
+            "@id": "https://www.myliba.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Danışmanlık",
+              "item": "https://www.myliba.com/tr/cozumler/danismanlik/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "@id": "https://www.myliba.com/tr/cozumler/danismanlik/#service",
+          "name": "Danışmanlık",
+          "serviceType": "OKR Danışmanlığı",
+          "description": "Myliba OKR danışmanlığı ve kurumsal OKR koçluğu ile stratejinizi ölçülebilir hedeflere dönüştürün; ekiplerinizi hizalayın ve performansı geliştirin.",
+          "url": "https://www.myliba.com/tr/cozumler/danismanlik/",
+          "inLanguage": "tr",
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Türkiye ve uluslararası kuruluşlar"
+          },
+          "provider": {
+            "@id": "https://www.myliba.com/#organization"
+          },
+          "audience": {
+            "@type": "BusinessAudience",
+            "audienceType": "Liderlik, strateji, dönüşüm ve insan ekipleri"
+          }
+        }
+      ],
+      "links": [
+        "#danismanlarimiz",
+        "/tr/demo/",
+        "/tr/egitmenlerimiz/",
+        "/tr/okr-koclugu/",
+        "https://portal.myliba.com/",
+        "https://www.dilekmete.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.myliba.com/en/solutions/advisory-and-consulting/",
+        "https://www.myliba.com/tr/",
+        "https://www.myliba.com/tr/cozumler/",
+        "https://www.myliba.com/tr/cozumler/danismanlik/",
+        "https://www.myliba.com/tr/cozumler/kultur-analizi/",
+        "https://www.myliba.com/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "https://www.myliba.com/tr/demo/",
+        "https://www.myliba.com/tr/egitmenlerimiz/",
+        "https://www.myliba.com/tr/ekibimiz/aysel-eker-tr/",
+        "https://www.myliba.com/tr/ekibimiz/dilek-mete-tr/",
+        "https://www.myliba.com/tr/ekibimiz/huri-sankur-tr/",
+        "https://www.myliba.com/tr/etkinlikler/",
+        "https://www.myliba.com/tr/gelisim-merkezi/",
+        "https://www.myliba.com/tr/gelisim-merkezi/e-kitaplar/",
+        "https://www.myliba.com/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "https://www.myliba.com/tr/gizlilik-politikasi/",
+        "https://www.myliba.com/tr/guvenlik/",
+        "https://www.myliba.com/tr/hikayemiz/",
+        "https://www.myliba.com/tr/iletisim/",
+        "https://www.myliba.com/tr/okr-kultur-akademisi/",
+        "https://www.myliba.com/tr/sss/",
+        "https://www.myliba.com/tr/yazilar/",
+        "https://www.myliba.com/tr/yazilim/",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@myliba.com",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "https://www.myliba.com/tr/demo/",
+      "status": 200,
+      "final_url": "https://www.myliba.com/tr/demo/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Myliba Demo Talebi | Yazılımı Canlı Görün"
+      ],
+      "h1": [
+        "Kişiselleştirilmiş Demo Talep Edin"
+      ],
+      "canonical": [
+        "https://www.myliba.com/tr/demo/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "https://www.myliba.com/en/demo/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "https://www.myliba.com/tr/demo/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "https://www.myliba.com/en/demo/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Myliba yazılımının OKR, KPI, CFR ve performans yönetimi özelliklerini canlı demoda görün; kurumunuzun ihtiyaçlarını birlikte değerlendirelim."
+        },
+        {
+          "property": "og:url",
+          "content": "https://www.myliba.com/tr/demo/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://www.myliba.com/#organization",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "logo": "https://www.myliba.com/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.myliba.com/#website",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "publisher": {
+            "@id": "https://www.myliba.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/tr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Demo",
+              "item": "https://www.myliba.com/tr/demo/"
+            }
+          ]
+        }
+      ],
+      "links": [
+        "/tr/demo/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.myliba.com/en/demo/",
+        "https://www.myliba.com/tr/",
+        "https://www.myliba.com/tr/cozumler/",
+        "https://www.myliba.com/tr/cozumler/danismanlik/",
+        "https://www.myliba.com/tr/cozumler/kultur-analizi/",
+        "https://www.myliba.com/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "https://www.myliba.com/tr/demo/",
+        "https://www.myliba.com/tr/egitmenlerimiz/",
+        "https://www.myliba.com/tr/etkinlikler/",
+        "https://www.myliba.com/tr/gelisim-merkezi/",
+        "https://www.myliba.com/tr/gelisim-merkezi/e-kitaplar/",
+        "https://www.myliba.com/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "https://www.myliba.com/tr/gizlilik-politikasi/",
+        "https://www.myliba.com/tr/guvenlik/",
+        "https://www.myliba.com/tr/hikayemiz/",
+        "https://www.myliba.com/tr/iletisim/",
+        "https://www.myliba.com/tr/okr-kultur-akademisi/",
+        "https://www.myliba.com/tr/sss/",
+        "https://www.myliba.com/tr/yazilar/",
+        "https://www.myliba.com/tr/yazilim/",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@myliba.com",
+        "tel:+905539868699"
+      ],
+      "forms": [
+        {
+          "class": "myliba-form",
+          "method": "post",
+          "action": "https://www.myliba.com/wp-admin/admin-post.php"
+        }
+      ],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "https://www.myliba.com/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/",
+      "status": 200,
+      "final_url": "https://www.myliba.com/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "OKR Nedir? Kurumlarda Performans ve Kültür"
+      ],
+      "h1": [
+        "OKR Nedir? Hedefleri Canlı Tutmanın ve Kurumda Gerçek Dönüşüm Başlatmanın Yolu"
+      ],
+      "canonical": [
+        "https://www.myliba.com/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "https://www.myliba.com/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "https://www.myliba.com/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "OKR nedir, nasıl çalışır ve kurumlara ne kazandırır? OKR sistemiyle stratejiyi aksiyona, performansı ve kültürü sürdürülebilir gelişime dönüştürün."
+        },
+        {
+          "property": "og:url",
+          "content": "https://www.myliba.com/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://www.myliba.com/#organization",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "logo": "https://www.myliba.com/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.myliba.com/#website",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "publisher": {
+            "@id": "https://www.myliba.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "OKR Nedir? Hedefleri Canlı Tutmanın ve Kurumda Gerçek Dönüşüm Başlatmanın Yolu",
+              "item": "https://www.myliba.com/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "OKR Nedir? Hedefleri Canlı Tutmanın ve Kurumda Gerçek Dönüşüm Başlatmanın Yolu",
+          "datePublished": "2026-09-21T07:40:23+03:00",
+          "dateModified": "2026-10-05T15:33:16+03:00",
+          "author": {
+            "@type": "Organization",
+            "name": "Myliba"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Myliba",
+            "url": "https://www.myliba.com/"
+          },
+          "mainEntityOfPage": "https://www.myliba.com/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/"
+        }
+      ],
+      "links": [
+        "/tr/demo/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.myliba.com/en/",
+        "https://www.myliba.com/tr/",
+        "https://www.myliba.com/tr/cozumler/",
+        "https://www.myliba.com/tr/cozumler/danismanlik/",
+        "https://www.myliba.com/tr/cozumler/kultur-analizi/",
+        "https://www.myliba.com/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "https://www.myliba.com/tr/demo/",
+        "https://www.myliba.com/tr/egitmenlerimiz/",
+        "https://www.myliba.com/tr/etkinlikler/",
+        "https://www.myliba.com/tr/gelisim-merkezi/",
+        "https://www.myliba.com/tr/gelisim-merkezi/e-kitaplar/",
+        "https://www.myliba.com/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "https://www.myliba.com/tr/gizlilik-politikasi/",
+        "https://www.myliba.com/tr/guvenlik/",
+        "https://www.myliba.com/tr/hikayemiz/",
+        "https://www.myliba.com/tr/iletisim/",
+        "https://www.myliba.com/tr/okr-kultur-akademisi/",
+        "https://www.myliba.com/tr/sss/",
+        "https://www.myliba.com/tr/yazilar/",
+        "https://www.myliba.com/tr/yazilar/ileri-bildirim-nasil-verilir-gelecege-donuk-ileri-bildirimin-pratik-rehberi/",
+        "https://www.myliba.com/tr/yazilar/okr-hatalari-okr-ne-degildir-sirketlerin-dustugu-3-buyuk-hedef-yanilgisi/",
+        "https://www.myliba.com/tr/yazilar/okr-ile-kulturel-donusum",
+        "https://www.myliba.com/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-ve-kurumda-gercek-donusum-baslatmanin-yolu/",
+        "https://www.myliba.com/tr/yazilar/okrleriniz-ise-yariyor-mu-bu-3-soruyla-kendiniz-karar-verin/",
+        "https://www.myliba.com/tr/yazilim/",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@myliba.com",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "https://www.myliba.com/tr/okr-koclugu/",
+      "status": 200,
+      "final_url": "https://www.myliba.com/tr/okr-koclugu/",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Kurumsal OKR Koçluğu ve OKR Koçları | Myliba"
+      ],
+      "h1": [
+        "OKR’ları Yazmakla Kalmayın, Kurumunuzda Çalıştırın"
+      ],
+      "canonical": [
+        "https://www.myliba.com/tr/okr-koclugu/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "https://www.myliba.com/tr/okr-koclugu/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "https://www.myliba.com/en/okr-coaching/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "https://www.myliba.com/en/okr-coaching/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Kurumsal OKR koçluğu ile etkili OKR yazımı, stratejik hizalanma, check-in ve CFR ritimleri geliştirin. Myliba OKR koçlarıyla tanışın."
+        },
+        {
+          "property": "og:url",
+          "content": "https://www.myliba.com/tr/okr-koclugu/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://www.myliba.com/#organization",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "logo": "https://www.myliba.com/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.myliba.com/#website",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "publisher": {
+            "@id": "https://www.myliba.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/tr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Kurumsal OKR Koçluğu",
+              "item": "https://www.myliba.com/tr/okr-koclugu/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "@id": "https://www.myliba.com/tr/okr-koclugu/#service",
+          "name": "Kurumsal OKR Koçluğu",
+          "serviceType": "Kurumsal OKR Koçluğu",
+          "description": "Kurumsal OKR koçluğu ile etkili OKR yazımı, stratejik hizalanma, check-in ve CFR ritimleri geliştirin. Myliba OKR koçlarıyla tanışın.",
+          "url": "https://www.myliba.com/tr/okr-koclugu/",
+          "inLanguage": "tr",
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Türkiye ve uluslararası kuruluşlar"
+          },
+          "provider": {
+            "@id": "https://www.myliba.com/#organization"
+          },
+          "audience": {
+            "@type": "BusinessAudience",
+            "audienceType": "Liderlik, strateji, dönüşüm ve insan ekipleri"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "OKR koçluğu nedir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "OKR koçluğu, liderlerin ve ekiplerin etkili OKR yazmasına, hedefleri stratejiyle hizalamasına ve düzenli takip alışkanlıkları geliştirmesine eşlik eden uygulamalı bir gelişim sürecidir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR danışmanlığı ile OKR koçluğu arasındaki fark nedir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "OKR danışmanlığı sistem tasarımı ve organizasyon çapındaki dönüşüme odaklanır. OKR koçluğu ise liderlerin ve ekiplerin mevcut sistemi daha etkili uygulama becerisini geliştirir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR koçluğu kimler için uygundur?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "OKR kullanan veya kullanmaya hazırlanan liderlik, strateji, dönüşüm, insan ve kültür ekipleri ile hedef kalitesini geliştirmek isteyen takımlar için uygundur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR koçluğu ne kadar sürer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Süre kurumun büyüklüğüne, mevcut OKR olgunluğuna ve kapsama göre belirlenir. İlk gelişim döngüsü çoğunlukla analiz, uygulama ve kalıcılaştırma aşamalarından oluşur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "OKR koçluğu online yapılabilir mi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Süreç kurumun ihtiyacına göre çevrim içi, yüz yüze veya hibrit olarak tasarlanabilir."
+              }
+            }
+          ]
+        }
+      ],
+      "links": [
+        "/tr/cozumler/danismanlik/",
+        "/tr/demo/",
+        "/tr/egitmenlerimiz/",
+        "/tr/iletisim/",
+        "/tr/okr-kultur-akademisi/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.myliba.com/en/okr-coaching/",
+        "https://www.myliba.com/tr/",
+        "https://www.myliba.com/tr/cozumler/",
+        "https://www.myliba.com/tr/cozumler/danismanlik/",
+        "https://www.myliba.com/tr/cozumler/kultur-analizi/",
+        "https://www.myliba.com/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "https://www.myliba.com/tr/demo/",
+        "https://www.myliba.com/tr/egitmenlerimiz/",
+        "https://www.myliba.com/tr/etkinlikler/",
+        "https://www.myliba.com/tr/gelisim-merkezi/",
+        "https://www.myliba.com/tr/gelisim-merkezi/e-kitaplar/",
+        "https://www.myliba.com/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "https://www.myliba.com/tr/gizlilik-politikasi/",
+        "https://www.myliba.com/tr/guvenlik/",
+        "https://www.myliba.com/tr/hikayemiz/",
+        "https://www.myliba.com/tr/iletisim/",
+        "https://www.myliba.com/tr/okr-koclugu/",
+        "https://www.myliba.com/tr/okr-kultur-akademisi/",
+        "https://www.myliba.com/tr/sss/",
+        "https://www.myliba.com/tr/yazilar/",
+        "https://www.myliba.com/tr/yazilim/",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@myliba.com",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "https://www.myliba.com/tr/kultur-analizi/",
+      "status": 200,
+      "final_url": "https://www.myliba.com/tr/cozumler/kultur-analizi/",
+      "redirects": [
+        {
+          "from": "https://www.myliba.com/tr/kultur-analizi/",
+          "status": 301,
+          "to": "https://www.myliba.com/tr/cozumler/kultur-analizi/"
+        }
+      ],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Kültür Analizi | Myliba"
+      ],
+      "h1": [
+        "Kültür Analizi"
+      ],
+      "canonical": [
+        "https://www.myliba.com/tr/cozumler/kultur-analizi/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "https://www.myliba.com/en/solutions/culture-analysis-solution/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "https://www.myliba.com/tr/cozumler/kultur-analizi/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "https://www.myliba.com/en/solutions/culture-analysis-solution/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "Kültür analiziyle bağlılık, iş birliği ve performansı etkileyen davranış kalıplarını veriye dayalı içgörülerle görünür kılın."
+        },
+        {
+          "property": "og:url",
+          "content": "https://www.myliba.com/tr/cozumler/kultur-analizi/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://www.myliba.com/#organization",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "logo": "https://www.myliba.com/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.myliba.com/#website",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "publisher": {
+            "@id": "https://www.myliba.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Kültür Analizi",
+              "item": "https://www.myliba.com/tr/cozumler/kultur-analizi/"
+            }
+          ]
+        }
+      ],
+      "links": [
+        "#calisma-modeli",
+        "/tr/demo/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.myliba.com/en/solutions/culture-analysis-solution/",
+        "https://www.myliba.com/tr/",
+        "https://www.myliba.com/tr/cozumler/",
+        "https://www.myliba.com/tr/cozumler/danismanlik/",
+        "https://www.myliba.com/tr/cozumler/kultur-analizi/",
+        "https://www.myliba.com/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "https://www.myliba.com/tr/demo/",
+        "https://www.myliba.com/tr/egitmenlerimiz/",
+        "https://www.myliba.com/tr/etkinlikler/",
+        "https://www.myliba.com/tr/gelisim-merkezi/",
+        "https://www.myliba.com/tr/gelisim-merkezi/e-kitaplar/",
+        "https://www.myliba.com/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "https://www.myliba.com/tr/gizlilik-politikasi/",
+        "https://www.myliba.com/tr/guvenlik/",
+        "https://www.myliba.com/tr/hikayemiz/",
+        "https://www.myliba.com/tr/iletisim/",
+        "https://www.myliba.com/tr/okr-kultur-akademisi/",
+        "https://www.myliba.com/tr/sss/",
+        "https://www.myliba.com/tr/yazilar/",
+        "https://www.myliba.com/tr/yazilim/",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@myliba.com",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "https://www.myliba.com/robots.txt",
+      "status": 200,
+      "final_url": "https://www.myliba.com/robots.txt",
+      "redirects": [],
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8"
+      },
+      "body": "# ── General Crawlers ─────────────────────────────────────\nUser-agent: *\nDisallow: /wp-admin/\nDisallow: /wp-login.php\nDisallow: /xmlrpc.php\nDisallow: /?s=\nDisallow: /*?s=*\nDisallow: /*?myliba_form=*\nDisallow: /author/\nAllow: /wp-admin/admin-ajax.php\nAllow: /wp-content/uploads/\nAllow: /wp-content/themes/\n\n# ── OpenAI / ChatGPT & Search ─────────────────────────────\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\n# ── Perplexity AI ─────────────────────────────────────────\nUser-agent: PerplexityBot\nAllow: /\n\n# ── Anthropic / Claude ────────────────────────────────────\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nUser-agent: anthropic-ai\nAllow: /\n\n# ── Google Gemini & AI Overviews ──────────────────────────\nUser-agent: Google-Extended\nAllow: /\n\n# ── Apple Intelligence ────────────────────────────────────\nUser-agent: Applebot\nAllow: /\n\nUser-agent: Applebot-Extended\nAllow: /\n\n# ── Microsoft Copilot / Bing ──────────────────────────────\nUser-agent: Bingbot\nAllow: /\n\n# ── Sitemap ───────────────────────────────────────────────\nSitemap: https://www.myliba.com/wp-sitemap.xml\n"
+    },
+    {
+      "url": "https://www.myliba.com/wp-sitemap.xml",
+      "error": "<urlopen error _ssl.c:1112: The handshake operation timed out>"
+    },
+    {
+      "url": "https://www.myliba.com/sitemap.xml",
+      "status": 200,
+      "final_url": "https://www.myliba.com/wp-sitemap.xml",
+      "redirects": [
+        {
+          "from": "https://www.myliba.com/sitemap.xml",
+          "status": 301,
+          "to": "https://www.myliba.com/wp-sitemap.xml"
+        }
+      ],
+      "headers": {
+        "Content-Type": "application/xml; charset=UTF-8"
+      },
+      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<?xml-stylesheet type=\"text/xsl\" href=\"https://www.myliba.com/wp-sitemap-index.xsl\" ?>\n<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><sitemap><loc>https://www.myliba.com/wp-sitemap-posts-post-1.xml</loc></sitemap><sitemap><loc>https://www.myliba.com/wp-sitemap-posts-page-1.xml</loc></sitemap><sitemap><loc>https://www.myliba.com/wp-sitemap-posts-myliba_solution-1.xml</loc></sitemap><sitemap><loc>https://www.myliba.com/wp-sitemap-posts-myliba_academy-1.xml</loc></sitemap><sitemap><loc>https://www.myliba.com/wp-sitemap-posts-myliba_landing-1.xml</loc></sitemap><sitemap><loc>https://www.myliba.com/wp-sitemap-posts-myliba_event-1.xml</loc></sitemap><sitemap><loc>https://www.myliba.com/wp-sitemap-posts-myliba_ebook-1.xml</loc></sitemap><sitemap><loc>https://www.myliba.com/wp-sitemap-posts-myliba_team-1.xml</loc></sitemap><sitemap><loc>https://www.myliba.com/wp-sitemap-mylibaarchives-1.xml</loc></sitemap></sitemapindex>\n"
+    },
+    {
+      "url": "http://myliba.com/tr/yazilim/",
+      "status": 200,
+      "final_url": "https://www.myliba.com/tr/yazilim/",
+      "redirects": [
+        {
+          "from": "http://myliba.com/tr/yazilim/",
+          "status": 301,
+          "to": "https://www.myliba.com/tr/yazilim/"
+        }
+      ],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Myliba Yazılım | Objektif Performans ve Hedef Yönetimi"
+      ],
+      "h1": [
+        "Yüksek Performanslı Organizasyonlar Yaratmak için Geliştirildi"
+      ],
+      "canonical": [
+        "https://www.myliba.com/tr/yazilim/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "https://www.myliba.com/en/software/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "https://www.myliba.com/tr/yazilim/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "https://www.myliba.com/en/software/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "OKR, KPI, 360° analiz, kültür ve yapay zekâ içgörüleriyle canlı, şeffaf ve veriye dayalı performans yönetimi."
+        },
+        {
+          "property": "og:url",
+          "content": "https://www.myliba.com/tr/yazilim/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://www.myliba.com/#organization",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "logo": "https://www.myliba.com/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.myliba.com/#website",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "publisher": {
+            "@id": "https://www.myliba.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/tr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Myliba Yazılım",
+              "item": "https://www.myliba.com/tr/yazilim/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "@id": "https://www.myliba.com/tr/yazilim/#software",
+          "name": "Myliba Yazılım",
+          "description": "OKR, KPI, 360° analiz, kültür ve yapay zekâ içgörüleriyle canlı, şeffaf ve veriye dayalı performans yönetimi.",
+          "url": "https://www.myliba.com/tr/yazilim/",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "provider": {
+            "@id": "https://www.myliba.com/#organization",
+            "@type": "Organization",
+            "name": "Myliba",
+            "url": "https://www.myliba.com/"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Myliba hangi şirketler için uygundur?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Myliba, yüksek performansı geliştirmeye odaklanan büyüme aşamasındaki şirketlerden çok lokasyonlu büyük organizasyonlara kadar her ölçekte kurum için ölçeklenebilir bir çözümdür. Yapı, sektör ve ekip büyüklüğüne göre özelleştirilebilen Myliba; stratejik hedefleri çalışanların hedefleriyle buluşturmak, odağı güçlendirmek ve sürekli gelişim kültürü oluşturmak isteyen şirketler için uygundur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba Yazılım, geleneksel performans sistemlerinden nasıl ayrılır?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Myliba, yılda bir kez yapılan performans değerlendirmeleri yerine sürekli gelişimi destekleyen modern bir performans yaklaşımı sunar. Hedef yönetimi (OKR), KPI takibi, sürekli geri bildirim, ileri bildirim, takdir, yapay zekâ destekli içgörüler ve objektif raporlamayı bir araya getirerek gelişimi destekler. Böylece organizasyonlar geçmişi değerlendirmek yerine geleceği şekillendiren, veri odaklı ve çevik bir performans kültürü oluşturur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Performans değerlendirme formlarının yerine geçebilir mi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Evet. Myliba, geleneksel performans değerlendirme formlarının yerine geçebilecek kapsamlı bir performans yönetim altyapısı sunar. Hedefler (OKR), KPI'lar, aksiyonlar, sürekli geri bildirim, 360° analizler ve yapay zekâ destekli içgörüler sayesinde çalışan performansı yıl boyunca objektif verilere dayanır. Böylece yalnızca belirli dönemlerde yapılan değerlendirmeler yerine, sürekli gelişimi destekleyen ve karar alma süreçlerini güçlendiren modern bir performans yönetimi yaklaşımı benimsenir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba Yazılım içinde hem OKR (Hedef Yönetimi) hem de geleneksel KPI takibi aynı anda yapılabilir mi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Evet. Myliba'da OKR'ler ve KPI kartları birlikte kullanılabilir. Stratejik hedeflerinizi OKR'lerle yönetirken, operasyonel performansınızı KPI kartları üzerinden anlık olarak takip edebilirsiniz. KPI kartları; hedef değer, gerçekleşen değer, trend ve performans durumunu görünür kılarak ekiplerin kritik metriklerini düzenli şekilde izlemesini sağlar. Böylece stratejik hedefler ile günlük operasyonel sonuçlar tek bir yapı içinde birbirini destekleyecek şekilde yönetilir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba kültürel virüsleri ve riskleri nasıl tespit ediyor?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Myliba, çalışan geri bildirimleri, 360° isteklilik ve bağlılık analizleri, hedef ilerlemeleri ve organizasyon genelindeki etkileşimlerden elde edilen verileri yapay zekâ destekli analizlerle sunar. Bu sayede motivasyon düşüşü, iletişim kopukluğu, düşük bağlılık, ekipler arası uyumsuzluk, dedikodu, mobbing ve tükenmişlik riski gibi performansı olumsuz etkileyebilecek kültürel sinyaller erken aşamada görünür hale gelir. Elde edilen içgörüler sayesinde yöneticiler, sorunlar büyümeden önce proaktif aksiyon alabilir ve daha sağlıklı bir kurum kültürü oluşturabilir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Kurulum ne kadar sürer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Kurulum süresi organizasyon yapısına, veri aktarımına ve entegrasyon kapsamına göre değişir. İhtiyaç analizi sonrasında ekip yapısı, hedef döngüsü ve yetkilendirmeler planlanarak kademeli ve kontrollü bir devreye alma süreci yürütülür. Kurulum süreci boyunca uzman ekibimiz yapılandırma, eğitim ve canlıya geçiş aşamalarında destek sağlar."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba Yazılım mevcut araçlarla nasıl entegre olur?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "KPI ve organizasyon verileri API ve uygun veri bağlantıları üzerinden mevcut İK, iş zekâsı ve operasyon araçlarıyla ilişkilendirilebilir. Entegrasyon kapsamı kurumunuzun kullandığı sistemlere göre birlikte belirlenir."
+              }
+            }
+          ]
+        }
+      ],
+      "links": [
+        "#moduller",
+        "/tr/demo/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.myliba.com/en/software/",
+        "https://www.myliba.com/tr/",
+        "https://www.myliba.com/tr/cozumler/",
+        "https://www.myliba.com/tr/cozumler/danismanlik/",
+        "https://www.myliba.com/tr/cozumler/kultur-analizi/",
+        "https://www.myliba.com/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "https://www.myliba.com/tr/demo/",
+        "https://www.myliba.com/tr/egitmenlerimiz/",
+        "https://www.myliba.com/tr/etkinlikler/",
+        "https://www.myliba.com/tr/gelisim-merkezi/",
+        "https://www.myliba.com/tr/gelisim-merkezi/e-kitaplar/",
+        "https://www.myliba.com/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "https://www.myliba.com/tr/gizlilik-politikasi/",
+        "https://www.myliba.com/tr/guvenlik/",
+        "https://www.myliba.com/tr/hikayemiz/",
+        "https://www.myliba.com/tr/iletisim/",
+        "https://www.myliba.com/tr/okr-kultur-akademisi/",
+        "https://www.myliba.com/tr/sss/",
+        "https://www.myliba.com/tr/yazilar/",
+        "https://www.myliba.com/tr/yazilim/",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@myliba.com",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    },
+    {
+      "url": "https://myliba.com/tr/yazilim/",
+      "status": 200,
+      "final_url": "https://www.myliba.com/tr/yazilim/",
+      "redirects": [
+        {
+          "from": "https://myliba.com/tr/yazilim/",
+          "status": 301,
+          "to": "https://www.myliba.com/tr/yazilim/"
+        }
+      ],
+      "headers": {
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "title": [
+        "Myliba Yazılım | Objektif Performans ve Hedef Yönetimi"
+      ],
+      "h1": [
+        "Yüksek Performanslı Organizasyonlar Yaratmak için Geliştirildi"
+      ],
+      "canonical": [
+        "https://www.myliba.com/tr/yazilim/"
+      ],
+      "alternates": [
+        {
+          "rel": "alternate",
+          "hreflang": "en",
+          "href": "https://www.myliba.com/en/software/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "tr",
+          "href": "https://www.myliba.com/tr/yazilim/"
+        },
+        {
+          "rel": "alternate",
+          "hreflang": "x-default",
+          "href": "https://www.myliba.com/en/software/"
+        }
+      ],
+      "meta": [
+        {
+          "name": "robots",
+          "content": "max-image-preview:large"
+        },
+        {
+          "name": "description",
+          "content": "OKR, KPI, 360° analiz, kültür ve yapay zekâ içgörüleriyle canlı, şeffaf ve veriye dayalı performans yönetimi."
+        },
+        {
+          "property": "og:url",
+          "content": "https://www.myliba.com/tr/yazilim/"
+        }
+      ],
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://www.myliba.com/#organization",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "logo": "https://www.myliba.com/wp-content/uploads/2026/06/myliba-main-logo-scaled.webp",
+          "sameAs": [
+            "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+            "https://www.instagram.com/myliba",
+            "https://x.com/myliba",
+            "https://www.youtube.com/@myliba"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.myliba.com/#website",
+          "name": "Myliba",
+          "url": "https://www.myliba.com/",
+          "publisher": {
+            "@id": "https://www.myliba.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Myliba",
+              "item": "https://www.myliba.com/tr/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Myliba Yazılım",
+              "item": "https://www.myliba.com/tr/yazilim/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "@id": "https://www.myliba.com/tr/yazilim/#software",
+          "name": "Myliba Yazılım",
+          "description": "OKR, KPI, 360° analiz, kültür ve yapay zekâ içgörüleriyle canlı, şeffaf ve veriye dayalı performans yönetimi.",
+          "url": "https://www.myliba.com/tr/yazilim/",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "provider": {
+            "@id": "https://www.myliba.com/#organization",
+            "@type": "Organization",
+            "name": "Myliba",
+            "url": "https://www.myliba.com/"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Myliba hangi şirketler için uygundur?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Myliba, yüksek performansı geliştirmeye odaklanan büyüme aşamasındaki şirketlerden çok lokasyonlu büyük organizasyonlara kadar her ölçekte kurum için ölçeklenebilir bir çözümdür. Yapı, sektör ve ekip büyüklüğüne göre özelleştirilebilen Myliba; stratejik hedefleri çalışanların hedefleriyle buluşturmak, odağı güçlendirmek ve sürekli gelişim kültürü oluşturmak isteyen şirketler için uygundur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba Yazılım, geleneksel performans sistemlerinden nasıl ayrılır?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Myliba, yılda bir kez yapılan performans değerlendirmeleri yerine sürekli gelişimi destekleyen modern bir performans yaklaşımı sunar. Hedef yönetimi (OKR), KPI takibi, sürekli geri bildirim, ileri bildirim, takdir, yapay zekâ destekli içgörüler ve objektif raporlamayı bir araya getirerek gelişimi destekler. Böylece organizasyonlar geçmişi değerlendirmek yerine geleceği şekillendiren, veri odaklı ve çevik bir performans kültürü oluşturur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Performans değerlendirme formlarının yerine geçebilir mi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Evet. Myliba, geleneksel performans değerlendirme formlarının yerine geçebilecek kapsamlı bir performans yönetim altyapısı sunar. Hedefler (OKR), KPI'lar, aksiyonlar, sürekli geri bildirim, 360° analizler ve yapay zekâ destekli içgörüler sayesinde çalışan performansı yıl boyunca objektif verilere dayanır. Böylece yalnızca belirli dönemlerde yapılan değerlendirmeler yerine, sürekli gelişimi destekleyen ve karar alma süreçlerini güçlendiren modern bir performans yönetimi yaklaşımı benimsenir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba Yazılım içinde hem OKR (Hedef Yönetimi) hem de geleneksel KPI takibi aynı anda yapılabilir mi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Evet. Myliba'da OKR'ler ve KPI kartları birlikte kullanılabilir. Stratejik hedeflerinizi OKR'lerle yönetirken, operasyonel performansınızı KPI kartları üzerinden anlık olarak takip edebilirsiniz. KPI kartları; hedef değer, gerçekleşen değer, trend ve performans durumunu görünür kılarak ekiplerin kritik metriklerini düzenli şekilde izlemesini sağlar. Böylece stratejik hedefler ile günlük operasyonel sonuçlar tek bir yapı içinde birbirini destekleyecek şekilde yönetilir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba kültürel virüsleri ve riskleri nasıl tespit ediyor?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Myliba, çalışan geri bildirimleri, 360° isteklilik ve bağlılık analizleri, hedef ilerlemeleri ve organizasyon genelindeki etkileşimlerden elde edilen verileri yapay zekâ destekli analizlerle sunar. Bu sayede motivasyon düşüşü, iletişim kopukluğu, düşük bağlılık, ekipler arası uyumsuzluk, dedikodu, mobbing ve tükenmişlik riski gibi performansı olumsuz etkileyebilecek kültürel sinyaller erken aşamada görünür hale gelir. Elde edilen içgörüler sayesinde yöneticiler, sorunlar büyümeden önce proaktif aksiyon alabilir ve daha sağlıklı bir kurum kültürü oluşturabilir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Kurulum ne kadar sürer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Kurulum süresi organizasyon yapısına, veri aktarımına ve entegrasyon kapsamına göre değişir. İhtiyaç analizi sonrasında ekip yapısı, hedef döngüsü ve yetkilendirmeler planlanarak kademeli ve kontrollü bir devreye alma süreci yürütülür. Kurulum süreci boyunca uzman ekibimiz yapılandırma, eğitim ve canlıya geçiş aşamalarında destek sağlar."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Myliba Yazılım mevcut araçlarla nasıl entegre olur?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "KPI ve organizasyon verileri API ve uygun veri bağlantıları üzerinden mevcut İK, iş zekâsı ve operasyon araçlarıyla ilişkilendirilebilir. Entegrasyon kapsamı kurumunuzun kullandığı sistemlere göre birlikte belirlenir."
+              }
+            }
+          ]
+        }
+      ],
+      "links": [
+        "#moduller",
+        "/tr/demo/",
+        "https://portal.myliba.com/",
+        "https://www.instagram.com/myliba",
+        "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7508508051415482368",
+        "https://www.linkedin.com/company/myliba/posts/?feedView=all",
+        "https://www.myliba.com/en/software/",
+        "https://www.myliba.com/tr/",
+        "https://www.myliba.com/tr/cozumler/",
+        "https://www.myliba.com/tr/cozumler/danismanlik/",
+        "https://www.myliba.com/tr/cozumler/kultur-analizi/",
+        "https://www.myliba.com/tr/cozumler/simulasyonlar-ve-takim-koclugu/",
+        "https://www.myliba.com/tr/demo/",
+        "https://www.myliba.com/tr/egitmenlerimiz/",
+        "https://www.myliba.com/tr/etkinlikler/",
+        "https://www.myliba.com/tr/gelisim-merkezi/",
+        "https://www.myliba.com/tr/gelisim-merkezi/e-kitaplar/",
+        "https://www.myliba.com/tr/gelisim-merkezi/raporlar-ve-trendler/",
+        "https://www.myliba.com/tr/gizlilik-politikasi/",
+        "https://www.myliba.com/tr/guvenlik/",
+        "https://www.myliba.com/tr/hikayemiz/",
+        "https://www.myliba.com/tr/iletisim/",
+        "https://www.myliba.com/tr/okr-kultur-akademisi/",
+        "https://www.myliba.com/tr/sss/",
+        "https://www.myliba.com/tr/yazilar/",
+        "https://www.myliba.com/tr/yazilim/",
+        "https://www.youtube.com/@myliba",
+        "https://x.com/myliba",
+        "mailto:hello@myliba.com",
+        "tel:+905539868699"
+      ],
+      "forms": [],
+      "ga_tag_count": 1,
+      "lead_event_present": false
+    }
+  ]
+}
