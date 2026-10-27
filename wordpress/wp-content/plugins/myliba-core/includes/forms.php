@@ -280,7 +280,19 @@ function handle(): void
         update_post_meta($post_id, '_myliba_form_' . $key, $value);
     }
 
-    send_notification($data);
+    // The request is already stored. A broken mail transport must not turn
+    // a saved lead into a fatal page or encourage duplicate submissions.
+    $notification_accepted = false;
+    try {
+        $notification_accepted = send_notification($data);
+    } catch (\Throwable $error) {
+        // Transport errors may contain addresses or SMTP credentials. Keep
+        // only the submission ID in the log; inspect transport logs separately.
+    }
+    update_post_meta($post_id, '_myliba_notification_status', $notification_accepted ? 'accepted' : 'failed');
+    if (!$notification_accepted) {
+        error_log(sprintf('[Myliba] Notification failed for saved submission %d.', $post_id));
+    }
 
     wp_safe_redirect(add_query_arg('myliba_form', 'success', $redirect));
     exit;
@@ -328,7 +340,7 @@ function rate_limited(): bool
     return false;
 }
 
-function send_notification(array $data): void
+function send_notification(array $data): bool
 {
     $to = Options\get('contact_email', get_option('admin_email'));
     $subject = sprintf('[Myliba] %s request from %s', ucfirst($data['type']), $data['name']);
@@ -353,5 +365,5 @@ function send_notification(array $data): void
     if (is_email($data['email'])) {
         $headers[] = 'Reply-To: ' . $data['email'];
     }
-    wp_mail($to, $subject, $body, $headers);
+    return (bool) wp_mail($to, $subject, $body, $headers);
 }

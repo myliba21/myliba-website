@@ -46,6 +46,9 @@ function wp_insert_post($postarr, $wp_error = false, $fire_after_hooks = true)
 function wp_mail($to, $subject, $message, $headers = '', $attachments = [])
 {
     $GLOBALS['form_test_mails'][] = compact('to', 'subject', 'message');
+    if ($GLOBALS['form_test_mail_result'] instanceof \Throwable) {
+        throw $GLOBALS['form_test_mail_result'];
+    }
     return $GLOBALS['form_test_mail_result'];
 }
 
@@ -78,6 +81,8 @@ try {
     $cases = [
         ['saved', [], 'real', true, false, 'success', 1, 1],
         ['notification failed after save', [], 'real', false, false, 'success', 1, 1],
+        ['mailer PHP error after save', [], 'real', new \Error('Call to undefined function PHPMailer\\PHPMailer\\mail()'), false, 'success', 1, 1],
+        ['mailer exception after save', [], 'real', new \RuntimeException('Simulated SMTP exception'), false, 'success', 1, 1],
         ['zero insertion result', [], 'zero', true, false, 'error', 1, 0],
         ['WP_Error insertion result', [], 'error', true, false, 'error', 1, 0],
         ['invalid nonce', ['myliba_contact_nonce' => 'invalid'], 'real', true, false, 'error', 0, 0],
@@ -109,13 +114,17 @@ try {
         if ($created) {
             $id = end($GLOBALS['form_test_ids']);
             form_test_verify(get_post_status($id) === 'private', $label . ': record must be private');
+            form_test_verify(
+                get_post_meta($id, '_myliba_notification_status', true) === ($mail_result === true ? 'accepted' : 'failed'),
+                $label . ': notification failure must remain visible on the saved record'
+            );
             foreach (['form_context' => 'demo', 'email' => $valid['email'], 'company' => $valid['company']] as $key => $value) {
                 form_test_verify(get_post_meta($id, '_myliba_form_' . $key, true) === $value, $label . ': missing ' . $key);
             }
         }
         echo 'PASS: ' . $label . "\n";
     }
-    echo 'Passed ' . $GLOBALS['form_test_checks'] . " checks across 8 scenarios.\n";
+    echo 'Passed ' . $GLOBALS['form_test_checks'] . ' checks across ' . count($cases) . " scenarios.\n";
 } finally {
     foreach ($GLOBALS['form_test_ids'] as $id) {
         \wp_delete_post($id, true);
