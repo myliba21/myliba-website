@@ -1,5 +1,18 @@
 # Uygulama kaydı
 
+## 23 Kasım 2026 — Yazılım sayfasına Myliba Çarkı animasyonu (yalnız yerel)
+
+`/tr/yazilim/` ve `/en/software/` sayfalarında "Tek ve sürekli bir çalışma döngüsü" bölümüne, başlık ile adım kartları arasına Myliba Çarkı animasyonu eklendi. Hero'ya konmadı; video LCP öğesi olmuyor.
+
+- Dosyalar temada: `assets/video/myliba-cark-tr-{720,480}.mp4`, `myliba-wheel-en-{720,480}.mp4` (sessiz, H.264, faststart, yaklaşık 0,5–0,8 MB) ve WebP posterler (~40 KB). Kaynak videolar 1080 px ve ~3,6 MB idi.
+- HTML'de video `src` yok, `preload="none"`. `main.js` bölüm görünüme yaklaşınca 600 px altında 480, üstünde 720 sürümünü yükleyip sessiz döngüde oynatır, görünümden çıkınca durdurur. `prefers-reduced-motion` ve Save-Data kullanıcılarına yalnız poster gösterilir. Duraklat/oynat düğmesi var (WCAG 2.2.2).
+- CLS önlemi: `width/height=720` ve `aspect-ratio: 1/1`.
+- Videodaki bilgi HTML'de de var: başlık (h3), açıklama ve KPI / OKR / Taahhütler / Davranışlar listesi. Video `aria-describedby` ile bu metne bağlı. Metinler `myliba_text()` üzerinden geçiyor, TR/EN karşılıkları `content.php` içinde; Myliba → Site Texts'ten düzenlenebilir.
+- **Schema eklenmedi.** Animasyon dekoratif/anlatım amaçlı olduğundan VideoObject üretilmiyor; canonical, meta ve schema çıktısı değişmedi (sayfada tek canonical doğrulandı).
+- Editör alanı: Yazılım Sayfası İçeriği → Çalışma Döngüsü → `workflow_wheel_hide` (1: gizle).
+
+Doğrulanan: `php -l` (3 dosya), `node --check main.js`, CSS build; localhost'ta ilk yüklemede mp4 isteği olmadığı, kaydırınca oynadığı, 1440 px'de iki sütun, 375 px'de tek sütun/taşma yok ve 480 sürümü, EN sayfasında EN video ve metinler, konsolda hata yok. Canlıya alınmadı, commit yapılmadı.
+
 ## 22 Ekim 2026 — Yeni istemci kimliğinin eşleştirilmesi
 
 Kullanıcı istemci oluşturma/WordPress kayıt adımlarını tamamladığını belirtti. Google Cloud'da “OAuth client created” penceresi görüldü; yeni public istemci kimliği `…7lqipo2bdtstvct90qte16g0vrrhqetq.apps.googleusercontent.com`. WordPress'te eski istemci kimliği kaldığı için yalnız public istemci kimliği yeni kayıtla eşleştirildi ve “Ayarlar başarıyla kaydedildi” doğrulandı. Kullanıcının girdiği gizli anahtar değiştirilmedi veya çıktıya alınmadı.

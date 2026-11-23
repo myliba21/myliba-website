@@ -115,6 +115,52 @@ get_header();
                 </div>
                 <p><?php echo esc_html($copy('workflow_text')); ?></p>
             </header>
+            <?php
+            $wheel_hidden = trim($copy('workflow_wheel_hide')) === '1';
+            if (!$wheel_hidden):
+                $wheel_slug = myliba_current_language() === 'en' ? 'myliba-wheel-en' : 'myliba-cark-tr';
+                $wheel_base = get_template_directory_uri() . '/assets/video/' . $wheel_slug;
+                $wheel_version = myliba_asset_version('assets/video/' . $wheel_slug . '-720.mp4');
+                $wheel_quadrants = [
+                    ['modifier' => 'kpi', 'title' => 'KPI', 'question' => myliba_text('Hangi sonuçlara ulaştık?')],
+                    ['modifier' => 'okr', 'title' => 'OKR', 'question' => myliba_text('Farklı ne yapacağız?')],
+                    ['modifier' => 'commitments', 'title' => myliba_text('Taahhütler'), 'question' => myliba_text('Nasıl katkı sağlarım?')],
+                    ['modifier' => 'behaviors', 'title' => myliba_text('Davranışlar'), 'question' => myliba_text('Etkim ve katkım ne?')],
+                ];
+            ?>
+                <div class="software-wheel">
+                    <figure class="software-wheel__media" data-wheel>
+                        <video class="software-wheel__video"
+                            width="720" height="720"
+                            muted loop playsinline disablepictureinpicture disableremoteplayback
+                            preload="none"
+                            poster="<?php echo esc_url($wheel_base . '-poster.webp?ver=' . $wheel_version); ?>"
+                            aria-label="<?php echo esc_attr(myliba_text('Myliba Çarkı animasyonu: KPI, OKR, taahhütler ve davranışlar CFR etrafında dönüyor.')); ?>"
+                            aria-describedby="software-wheel-text"
+                            data-src-small="<?php echo esc_url($wheel_base . '-480.mp4?ver=' . $wheel_version); ?>"
+                            data-src-large="<?php echo esc_url($wheel_base . '-720.mp4?ver=' . $wheel_version); ?>"></video>
+                        <button type="button" class="software-wheel__toggle" data-wheel-toggle hidden
+                            data-label-pause="<?php echo esc_attr(myliba_text('Animasyonu duraklat')); ?>"
+                            data-label-play="<?php echo esc_attr(myliba_text('Animasyonu oynat')); ?>"
+                            aria-label="<?php echo esc_attr(myliba_text('Animasyonu oynat')); ?>">
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </figure>
+                    <div class="software-wheel__copy" id="software-wheel-text">
+                        <p class="eyebrow"><?php echo esc_html(myliba_text('Myliba Çarkı')); ?></p>
+                        <h3><?php echo esc_html(myliba_text('Strateji ile eylemi, geçmiş ile geleceği tek döngüde buluşturan model')); ?></h3>
+                        <p><?php echo esc_html(myliba_text('Dikey eksen stratejiden eyleme, yatay eksen geri bildirimden ileri bildirime uzanır. Merkezde oyunun kurallarını belirleyen CFR yer alır; etkin dinleme, güçlü sorular, tanıma ve takdir sürekli ve anlamlı bir diyaloğu besler.')); ?></p>
+                        <ul class="software-wheel__list">
+                            <?php foreach ($wheel_quadrants as $quadrant): ?>
+                                <li class="software-wheel__item software-wheel__item--<?php echo esc_attr($quadrant['modifier']); ?>">
+                                    <strong><?php echo esc_html($quadrant['title']); ?></strong>
+                                    <span><?php echo esc_html($quadrant['question']); ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+            <?php endif; ?>
             <div class="software-workflow__grid">
                 <?php foreach ($workflow_steps as $index => $step): ?>
                     <article>

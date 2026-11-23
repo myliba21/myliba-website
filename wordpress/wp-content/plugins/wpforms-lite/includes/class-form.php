@@ -578,7 +578,7 @@ class WPForms_Form_Handler {
 		// Typically, it happens if the form was created with a form template and a user was not redirected to a form editing screen afterward.
 		// This is only possible if a user has 'wpforms_create_forms' and no 'wpforms_edit_own_forms' capability.
 		if ( is_array( $args_form_data ) ) {
-			$args['post_content'] = wpforms_encode( array_replace_recursive( $form_content, $args_form_data ) );
+			$args['post_content'] = wpforms_encode( $this->set_form_currency( array_replace_recursive( $form_content, $args_form_data ), false ) );
 		}
 
 		// Merge args and create the form.
@@ -752,6 +752,8 @@ class WPForms_Form_Handler {
 
 		unset( $notification );
 
+		$data = $this->set_form_currency( $data, ( $args['context'] ?? '' ) === 'save_form', (int) $form_id );
+
 		/**
 		 * Allow changing post data before saving.
 		 *
@@ -845,6 +847,65 @@ class WPForms_Form_Handler {
 		}
 
 		return $notifications;
+	}
+
+	/**
+	 * Record the currency the form's payment amounts are saved in.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param array $data       Form data.
+	 * @param bool  $is_builder Whether the amounts were just re-emitted by the Form Builder.
+	 * @param int   $form_id    ID of the form being updated, 0 for a new form.
+	 *
+	 * @return array
+	 */
+	private function set_form_currency( array $data, bool $is_builder, int $form_id = 0 ): array {
+
+		if ( ! wpforms_has_payment( 'form', $data ) ) {
+			if ( $is_builder ) {
+				unset( $data['settings']['form_currency'] );
+			}
+
+			return $data;
+		}
+
+		// The Form Builder renders every stored amount in the current currency, so it saves them in it.
+		if ( $is_builder ) {
+			$data['settings']['form_currency'] = wpforms_get_currency();
+
+			return $data;
+		}
+
+		if ( ! empty( $data['settings']['form_currency'] ) ) {
+			return $data;
+		}
+
+		// Any other save writes the stored amounts back as they are, so they keep the currency they are read with.
+		$stored = $form_id ? $this->get(
+			$form_id,
+			[
+				'content_only' => true,
+				'cap'          => false,
+			]
+		) : [];
+		$stored = is_array( $stored ) ? $stored : [];
+
+		if ( ! empty( $stored['settings']['form_currency'] ) ) {
+			$data['settings']['form_currency'] = $stored['settings']['form_currency'];
+
+			return $data;
+		}
+
+		// A form saved before the currency was recorded stays without it, so it is still read with the legacy currency.
+		if ( wpforms_has_payment( 'form', $stored ) ) {
+			return $data;
+		}
+
+		// The payment fields are new to the form, so their amounts are in the current currency.
+		$data['settings']['form_currency'] = wpforms_get_currency();
+
+		return $data;
 	}
 
 	/**
@@ -1203,7 +1264,7 @@ class WPForms_Form_Handler {
 			$field_id     = $set_field_id > $max_field_id ? $set_field_id : $max_field_id + 1;
 		} elseif ( ! empty( $form['field_id'] ) ) {
 			$field_id = absint( $form['field_id'] );
-			$field_id = $max_field_id > $field_id ? $max_field_id + 1 : $field_id;
+			$field_id = $max_field_id >= $field_id ? $max_field_id + 1 : $field_id;
 		}
 
 		$form['field_id'] = $field_id + 1;
@@ -1336,6 +1397,97 @@ class WPForms_Form_Handler {
 		do_action( 'wpforms_update_form_meta', $form_id, $form, $meta_key, $meta_value ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
 
 		return $form_id;
+	}
+
+	/**
+	 * Update top-level settings of a form without re-saving the whole form.
+	 *
+	 * Unlike `update()`, nothing else in the form is normalized or re-sanitized.
+	 *
+	 * @since 2.0.5
+	 *
+	 * @param string|int $form_id  Form ID.
+	 * @param array      $settings Settings key => value to write.
+	 * @param array      $args     Additional arguments: `cap`, `skip_revision`.
+	 *
+	 * @return false|int|WP_Error
+	 */
+	public function update_settings( $form_id, array $settings, array $args = [] ) { // phpcs:ignore WPForms.PHP.HooksMethod.InvalidPlaceForAddingHooks
+
+		if ( empty( $form_id ) || empty( $settings ) ) {
+			return false;
+		}
+
+		$this->remove_form_content_filters();
+
+		if ( ! isset( $args['cap'] ) ) {
+			$args['cap'] = 'edit_form_single';
+		}
+
+		$form = $this->get_single( absint( $form_id ), $args );
+
+		if ( empty( $form ) ) {
+			return false;
+		}
+
+		$data = wpforms_decode( $form->post_content );
+
+		// wpforms_decode() falls back to false or an empty array on bad JSON;
+		// writing settings onto either would leave the form holding only settings.
+		if ( ! is_array( $data ) || empty( $data ) ) {
+			return false;
+		}
+
+		foreach ( $settings as $key => $value ) {
+			$data['settings'][ wpforms_sanitize_key( $key ) ] = $value;
+		}
+
+		$form = [
+			'ID'           => $form_id,
+			'post_content' => wpforms_encode( $data ),
+		];
+
+		/**
+		 * Filter the form before its settings are updated.
+		 *
+		 * @since 2.0.5
+		 *
+		 * @param array $form Form post data.
+		 * @param array $data Form data.
+		 */
+		$form = (array) apply_filters( 'wpforms_form_handler_update_settings_args', $form, $data );
+
+		if ( ! empty( $args['skip_revision'] ) ) {
+			remove_action( 'post_updated', 'wp_save_post_revision' );
+		}
+
+		try {
+			$result = wp_update_post( $form, true );
+		} finally {
+			if ( ! empty( $args['skip_revision'] ) ) {
+				add_action( 'post_updated', 'wp_save_post_revision' );
+			}
+		}
+
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+
+		if ( ! $result ) {
+			return false;
+		}
+
+		/**
+		 * Fires after form settings are updated.
+		 *
+		 * @since 2.0.5
+		 *
+		 * @param int   $form_id  Form ID.
+		 * @param array $settings Settings written.
+		 */
+		do_action( 'wpforms_form_handler_update_settings_after', (int) $form_id, $settings );
+
+		return (int) $form_id;
 	}
 
 	/**

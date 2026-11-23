@@ -156,6 +156,7 @@ function software_definition(): array
                     'workflow_eyebrow' => ['text', 'Üst etiket'],
                     'workflow_title' => ['textarea', 'Başlık'],
                     'workflow_text' => ['textarea', 'Açıklama'],
+                    'workflow_wheel_hide' => ['text', 'Myliba Çarkı animasyonunu gizle (1: gizle, 0: göster). Video ve açıklama metinleri dile göre otomatik seçilir; metinler Myliba → Site Texts altından düzenlenir.'],
                 ],
                 'collections' => [
                     'workflow_steps' => ['label' => 'Adımlar', 'fields' => [
@@ -246,6 +247,7 @@ function software_defaults(): array
             'workflow_eyebrow' => 'Tek ve sürekli bir çalışma döngüsü',
             'workflow_title' => 'Stratejiden Sonuçlara Kesintisiz Bir Yönetim Teknolojisi',
             'workflow_text' => 'Yıl sonunu beklemeden hedefleri, aksiyonları, gelişim odaklı geri-ileri bildirimleri ve risk sinyallerini tek bir çalışma ritminde yönetin.',
+            'workflow_wheel_hide' => '0',
             'why_eyebrow' => 'Neden Myliba?',
             'why_title' => 'Myliba Yazılım: Şirketinizin Verimliliğini Katlayan Stratejik İş Ortağı',
             'why_formula_label' => 'Formülümüz',

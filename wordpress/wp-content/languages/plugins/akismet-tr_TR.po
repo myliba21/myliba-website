@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Anti-spam: Spam Protection - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-08-18 07:18:46+0000\n"
+"PO-Revision-Date: 2026-10-30 00:43:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -633,7 +633,7 @@ msgstr "İstatistiklerin yanıtı çözülemedi."
 
 #: class.akismet-cli.php:161
 msgid "Currently unable to fetch stats. Please try again."
-msgstr "Şu anda istatistik getirilemiyor. Lütfen tekrar deneyin."
+msgstr "Şu anda istatistik getirilemiyor. Lütfen yeniden deneyin."
 
 #: class.akismet-cli.php:135
 msgid "API key must be set to fetch stats."
@@ -891,7 +891,7 @@ msgstr "Etkinleştirildi."
 
 #: views/config.php:128
 msgid "Akismet encountered a problem with a previous SSL request and disabled it temporarily. It will begin using SSL for requests again shortly."
-msgstr "Akismet daha önceki bir SSL isteğinde problemle karşılaşmış ve geçici olarak etkisizleştirmiş. Kısa bir süre sonra SSL isteklerini tekrar devreye alacaktır."
+msgstr "Akismet daha önceki bir SSL isteğinde problemle karşılaşmış ve geçici olarak etkisizleştirmiş. Kısa bir süre sonra SSL isteklerini yeniden devreye alacaktır."
 
 #: views/config.php:127
 msgid "Temporarily disabled."

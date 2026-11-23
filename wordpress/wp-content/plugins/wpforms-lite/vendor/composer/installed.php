@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'awesomemotive/wpforms',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => 'ff5a96f5d79355a7c6c671f22385d55e6c314bba',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
+        'reference' => '6c8ca936a476d8d45645b19f1edaafefd7132aa2',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -47,9 +47,9 @@
             'dev_requirement' => false,
         ),
         'awesomemotive/wpforms' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'ff5a96f5d79355a7c6c671f22385d55e6c314bba',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => '6c8ca936a476d8d45645b19f1edaafefd7132aa2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -74,9 +74,9 @@
             'dev_requirement' => false,
         ),
         'enshrined/svg-sanitize' => array(
-            'pretty_version' => '0.22.0',
-            'version' => '0.22.0.0',
-            'reference' => '0afa95ea74be155a7bcd6c6fb60c276c39984500',
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'reference' => 'f3300fcd1bbf67d205b52217c75d0f7d6a8c47ff',
             'type' => 'library',
             'install_path' => __DIR__ . '/../enshrined/svg-sanitize',
             'aliases' => array(),
@@ -117,17 +117,6 @@
             'install_path' => __DIR__ . '/../psr/log',
             'aliases' => array(),
             'dev_requirement' => false,
-        ),
-        'roave/security-advisories' => array(
-            'pretty_version' => 'dev-latest',
-            'version' => 'dev-latest',
-            'reference' => '08ce189d89be521a44e20b191a2418b299a44b2b',
-            'type' => 'metapackage',
-            'install_path' => null,
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
-            'dev_requirement' => true,
         ),
         'square/square' => array(
             'pretty_version' => '40.0.0.20250123',

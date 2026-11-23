@@ -613,6 +613,47 @@ function wpforms_get_currency() {
 }
 
 /**
+ * Get the currency the form's payment amounts were saved in.
+ *
+ * @since 2.0.3
+ *
+ * @param array $form_data Form data and settings.
+ *
+ * @return string Currency ISO code.
+ */
+function wpforms_get_form_currency( array $form_data ): string {
+
+	$currencies = wpforms_get_currencies();
+	$currency   = isset( $form_data['settings']['form_currency'] ) ? strtoupper( (string) $form_data['settings']['form_currency'] ) : '';
+
+	if ( $currency !== '' && isset( $currencies[ $currency ] ) ) {
+		return $currency;
+	}
+
+	$legacy_currency = strtoupper( (string) get_option( 'wpforms_legacy_form_currency', '' ) );
+
+	return isset( $currencies[ $legacy_currency ] ) ? $legacy_currency : wpforms_get_currency();
+}
+
+/**
+ * Sanitize an amount stored in the form data, e.g. a payment field price or choice value.
+ *
+ * Unlike a submitted amount, a stored one is not in the current currency's format but in the
+ * format of the currency the form was saved in, so it is parsed with that currency.
+ *
+ * @since 2.0.3
+ *
+ * @param mixed $amount    Stored amount, cast to a string.
+ * @param array $form_data Form data and settings.
+ *
+ * @return string Sanitized amount with a dot as the decimal separator.
+ */
+function wpforms_sanitize_form_amount( $amount, array $form_data ): string {
+
+	return (string) wpforms_sanitize_amount( (string) $amount, wpforms_get_form_currency( $form_data ) );
+}
+
+/**
  * Return recognized payment field types.
  *
  * @since 1.0.0
@@ -777,7 +818,7 @@ function wpforms_get_payment_items( $fields = [] ) {
 			empty( $field['amount'] ) ||
 			! in_array( $field['type'], $payment_fields, true ) ||
 			empty( wpforms_sanitize_amount( $field['amount'] ) ) ||
-			( isset( $field['quantity'] ) && ! $field['quantity'] )
+			wpforms_payment_is_zero_quantity( $field )
 		) {
 			// Remove all non-payment fields as well as payment fields with no amount or empty quantity.
 			unset( $fields[ $id ] );
@@ -821,6 +862,22 @@ function wpforms_payment_has_quantity( array $field, array $form_data ): bool {
 	// Otherwise return true.
 	// It covers the Dropdown Items field (and others where the quantity will be supported).
 	return true;
+}
+
+/**
+ * Determine whether a payment field was submitted with a quantity of 0.
+ *
+ * Only payment fields with quantity enabled carry the `quantity` key, so a field without it is never a zero-quantity item.
+ *
+ * @since 2.0.5
+ *
+ * @param array $field Entry field data.
+ *
+ * @return bool
+ */
+function wpforms_payment_is_zero_quantity( array $field ): bool {
+
+	return isset( $field['quantity'] ) && ! $field['quantity'];
 }
 
 /**

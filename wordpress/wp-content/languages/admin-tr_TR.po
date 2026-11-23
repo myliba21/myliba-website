@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 7.1.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-08-19 19:54:09+0000\n"
+"PO-Revision-Date: 2026-11-20 21:32:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,6 +36,14 @@ msgstr "1"
 msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "3"
+
+#: wp-admin/includes/comment.php:259 wp-admin/includes/comment.php:283
+msgid "Sorry, you are not allowed to move this comment to that post."
+msgstr "Üzgünüz, bu yorumu o yazıya taşımanıza izin verilmiyor."
+
+#: wp-admin/includes/comment.php:89
+msgid "The comment type cannot be changed."
+msgstr "Yorum türü değiştirilemez."
 
 #: wp-admin/users.php:757
 msgid "Users could not be deleted because no user was selected for content reassignment."
@@ -128,23 +136,23 @@ msgstr "Bu kullanıcının herhangi bir içeriği yok."
 msgid "%1$s (ID #%2$s): What should be done with the content owned by this user?"
 msgstr "%1$s (Kimlik No. #%2$s): Bu kullanıcıya ait içerikle ne yapılmalı?"
 
-#: wp-admin/includes/comment.php:155
+#: wp-admin/includes/comment.php:193
 msgid "The comment cannot be moved there because it or its replies would exceed the maximum threading depth."
 msgstr "Bu yorum, kendisi veya yanıtları en fazla konu derinliğini aşacağı için oraya taşınamaz."
 
-#: wp-admin/includes/comment.php:118
+#: wp-admin/includes/comment.php:156
 msgid "A comment cannot be a reply to one of its own replies."
 msgstr "Bir yorum, kendi yanıtlarından birine yanıt olamaz."
 
-#: wp-admin/includes/comment.php:108
+#: wp-admin/includes/comment.php:146
 msgid "Invalid parent comment."
 msgstr "Geçersiz üst yorum."
 
-#: wp-admin/includes/comment.php:92
+#: wp-admin/includes/comment.php:130
 msgid "A comment cannot be a reply to itself."
 msgstr "Bir yorum, kendi kendine yanıt olamaz."
 
-#: wp-admin/includes/comment.php:88
+#: wp-admin/includes/comment.php:126
 msgid "The comment parent cannot be changed because threaded comments are disabled."
 msgstr "Yorum dizisi devre dışı bırakıldığından, yorumun üst yorumu değiştirilemez."
 
@@ -163,7 +171,7 @@ msgstr "%s öğesinin alt öğesi"
 #. found.
 #: wp-admin/includes/class-wp-list-table.php:1033
 msgid "0 items"
-msgstr "0 öğe"
+msgstr "0 öge"
 
 #: wp-admin/font-library.php:32
 msgid "The Fonts screen requires JavaScript. Please enable JavaScript in your browser settings to install and manage fonts."
@@ -190,67 +198,67 @@ msgctxt "label for responsive previews group"
 msgid "Responsive Views"
 msgstr "Duyarlı görünümler"
 
-#: wp-admin/about.php:224
+#: wp-admin/about.php:264
 msgid "WordPress 7.1 continues to polish accessibility across WordPress Core and Gutenberg, advancing the goals to meet accessibility standards. In this release, high impact changes include the new accessible tooltips API, improved predictability for screen readers, and improved labeling in many places in the admin. The editor adds extensive improvements to navigation and interaction."
 msgstr "WordPress 7.1, WordPress Çekirdeği ve Gutenberg genelinde erişilebilirliği daha da geliştirmeye devam ederek, erişilebilirlik standartlarını karşılama hedeflerini ilerletiyor. Bu sürümde, en önemli değişiklikler arasında yeni erişilebilir araç ipuçları API’si, ekran okuyucular için geliştirilmiş öngörülebilirlik ve yönetici panelinin birçok yerinde iyileştirilmiş etiketleme yer alıyor. Düzenleyici, gezinme ve etkileşim açısından kapsamlı iyileştirmeler getiriyor."
 
-#: wp-admin/about.php:215
+#: wp-admin/about.php:255
 msgid "Image compression, resizing, and thumbnail generation now happen in the browser, via a WebAssembly build of libvips, so large uploads won&#8217;t hit PHP memory limits or time out on shared hosts. This also frees up server CPU and memory, while producing smaller files for visitors. Media handling includes built-in support for AVIF, HEIC and HDR gain maps."
 msgstr "Görsel sıkıştırma, boyutlandırma ve küçük görsel oluşturma işlemleri artık tarayıcıda, libvips’in WebAssembly sürümü aracılığıyla gerçekleştiriliyor; böylece büyük boyutlu yüklemeler, paylaşımlı barındırma sunucularında PHP bellek sınırlarına ulaşmayacak veya zaman aşımına uğramayacak. Bu, ziyaretçiler için daha küçük dosyalar oluştururken, aynı zamanda sunucunun CPU ve bellek kaynaklarını da boşaltıyor. Medya işleme, AVIF, HEIC ve HDR kazanç haritaları için yerleşik destek içerir."
 
-#: wp-admin/about.php:214
+#: wp-admin/about.php:254
 msgid "Improved media handling"
 msgstr "Geliştirilmiş ortam işleme"
 
-#: wp-admin/about.php:199
+#: wp-admin/about.php:239
 msgid "Notes now support rich text and @mentions. Add bold, italic, code, and links so feedback reads clearly. Type &#8220;@&#8221; to pull up a list of collaborators to tag the right person directly, with built-in email notifications. Leave a note on a specific text selection instead of an entire block. Start more than one conversation on the same block. Collapse long notes to keep the margin tidy."
 msgstr "Notlar artık zengin metin ve @bahsetmelerini destekliyor. Geri bildirimlerin net bir şekilde okunabilmesi için kalın, italik, kod ve bağlantı ekleyin. &#8220;@&#8221; yazarak, yerleşik e-posta bildirimleri sayesinde doğru kişiyi doğrudan etiketlemek üzere işbirlikçilerin listesini açın. Tüm bloğu değil, belirli bir metin seçimini işaretleyerek not bırakın. Aynı blokta birden fazla sohbet başlatın. Kenar boşluğunu düzenli tutmak için uzun notları daraltın."
 
-#: wp-admin/about.php:198
+#: wp-admin/about.php:238
 msgid "More ways to leave feedback."
 msgstr "Geri bildirim bırakmanın daha fazla yolu."
 
-#: wp-admin/about.php:196
+#: wp-admin/about.php:236
 msgid "Inline notes with mentions and rich text"
 msgstr "Etiketler ve zengin metin içeren satır içi notlar"
 
-#: wp-admin/about.php:179
+#: wp-admin/about.php:219
 msgid "A new media editor modal replaces the old inline cropping tool, bringing freeform and aspect-ratio cropping, flip, precise rotation, and metadata editing together in a single streamlined workflow. The familiar Crop button still gets you there, now opening a dedicated space to crop, rotate, and adjust images before publishing."
 msgstr "Eski satır içi kırpma aracının yerini alan yeni ortam düzenleyici modülü, serbest biçimli ve en-boy oranına göre kırpma, ters çevirme, hassas döndürme ve meta veri düzenleme özelliklerini tek bir akıcı iş akışında bir araya getiriyor. Tanıdık “Kırp” düğmesi hâlâ aynı işlevi görüyor; artık yayınlamadan önce görselleri kırpmak, döndürmek ve ayarlamak için özel bir alan açıyor."
 
-#: wp-admin/about.php:178
+#: wp-admin/about.php:218
 msgid "One dedicated workflow for editing your images."
 msgstr "Görsellerinizi düzenlemek için özel bir iş akışı."
 
-#: wp-admin/about.php:176
+#: wp-admin/about.php:216
 msgid "A new way to crop"
 msgstr "Kırpmanın yeni yolu"
 
-#: wp-admin/about.php:169
+#: wp-admin/about.php:209
 msgid "The admin bar now stays with you across all editors, so you always know where you are. The admin bar also gets a small visual refresh."
 msgstr "Yönetici çubuğu artık tüm düzenleyicilerde her zaman görünür durumda, böylece nerede olduğunuzu her zaman bilirsiniz. Yönetici çubuğunda ayrıca küçük bir görsel güncelleme yapıldı."
 
-#: wp-admin/about.php:168
+#: wp-admin/about.php:208
 msgid "Consistent navigation, from dashboard to editor."
 msgstr "Başlangıç ekranından düzenleyiciye kadar tutarlı gezinme deneyimi."
 
-#: wp-admin/about.php:166
+#: wp-admin/about.php:206
 msgid "Admin bar, now in every editor"
 msgstr "Yönetici çubuğu, artık tüm düzenleyicilerde"
 
-#: wp-admin/about.php:149
+#: wp-admin/about.php:189
 msgid "WordPress 7.1 takes a major step toward built-in responsive design. Set how a block looks at different screen sizes directly in the editor, for both Global Styles and individual blocks, all without writing custom CSS."
 msgstr "WordPress 7.1, yerleşik duyarlı tasarıma doğru önemli bir adım atıyor. Hem genel stiller hem de tek tek bloklar için, bir bloğun farklı ekran boyutlarında nasıl görüneceğini doğrudan düzenleyicide ayarlayabilirsiniz; tüm bunları özel CSS yazmaya gerek kalmadan yapabilirsiniz."
 
-#: wp-admin/about.php:148
+#: wp-admin/about.php:188
 msgid "Style content your way, on every screen."
 msgstr "İçeriği her ekranda kendi tarzınıza göre düzenleyin."
 
-#: wp-admin/about.php:146
+#: wp-admin/about.php:186
 msgid "Apply responsive styles"
 msgstr "Duyarlı stilleri uygula"
 
-#: wp-admin/about.php:140
+#: wp-admin/about.php:180
 msgid "WordPress 7.1 makes styling and collaborating easier. Style how all blocks look across screen sizes and how the Button block responds to hover, focus, and active states, all without writing custom CSS. A streamlined media editor brings cropping, rotation, and metadata editing together in one workflow. Notes now support rich text and @mentions, and the admin bar travels with you into every editor, so the tools you rely on stay with you wherever you&#8217;re working."
 msgstr "WordPress 7.1, stil oluşturmayı ve ortak çalışmayı kolaylaştırıyor. Özel CSS yazmaya gerek kalmadan, tüm blokların farklı ekran boyutlarında nasıl görüneceğini ve Düğme bloğunun fareyle üzerine gelme, odaklanma ve etkin durumlara nasıl tepki vereceğini belirleyebilirsiniz. Sadeleştirilmiş ortam düzenleyicisi, kırpma, döndürme ve meta veri düzenleme işlemlerini tek bir iş akışında bir araya getirir. Notlar artık zengin metin ve @bahsetme özelliklerini destekliyor; ayrıca yönetici çubuğu her düzenleyiciye sizinle birlikte geliyor, böylece güvendiğiniz araçlar nerede çalışırsanız çalışın her zaman elinizin altında oluyor."
 
@@ -782,12 +790,12 @@ msgid "Skip to Editor"
 msgstr "Düzenleyiciye geç"
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:319
+#: wp-admin/about.php:359
 msgid "WordPress %s Field Guide"
 msgstr "WordPress %s alan rehberi"
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:292
+#: wp-admin/about.php:332
 msgid "WordPress %s Release Notes"
 msgstr "WordPress %s sürüm notları"
 
@@ -946,7 +954,7 @@ msgstr "Bir eklenti geliştiricisiyseniz, <a href=\"https://developer.wordpress.
 msgid "If you are a plugin author, you can learn more about <a href=\"https://developer.wordpress.org/plugins/privacy/adding-the-personal-data-eraser-to-your-plugin/\">how to add the Personal Data Eraser to a plugin</a>."
 msgstr "Bir eklenti geliştiricisiyseniz, <a href=\"https://developer.wordpress.org/plugins/privacy/adding-the-personal-data-eraser-to-your-plugin/\">Kişisel veri silicisini bir eklentiye nasıl ekleyeceğiniz</a> ile ilgili ayrıntılı bilgi alabilirsiniz."
 
-#: wp-admin/about.php:245
+#: wp-admin/about.php:285
 msgid "See everything new"
 msgstr "Yeni her şeyi görün"
 
@@ -956,11 +964,11 @@ msgid "https://wordpress.org/download/releases/%s/"
 msgstr "https://wordpress.org/download/releases/%s/"
 
 #. translators: %s: Version number.
-#: wp-admin/about.php:237
+#: wp-admin/about.php:277
 msgid "For a comprehensive overview of all the new features and enhancements in WordPress %s, please visit the feature-showcase website."
 msgstr "WordPress %s sürümündeki tüm yeni özellik ve geliştirmelerin kapsamlı özeti için özellik vitrini sitesine bakabilirsiniz."
 
-#: wp-admin/about.php:231
+#: wp-admin/about.php:271
 msgid "And much more"
 msgstr "Ve çok daha fazlası"
 
@@ -1166,12 +1174,12 @@ msgid "When using Bulk Edit, you can change the metadata (categories, author, et
 msgstr "Toplu düzenleme kullanılırken, seçilmiş tüm yazıların üst verilerini (kategoriler, yazar gibi) bir seferde değiştirebilirsiniz. Bir yazıyı gruptan kaldırmak için, görüntülenen toplu düzenleme alanında, adının yanındaki %s<span class=\"screen-reader-text\">Kaldır</span> düğmesine basmanız yeterlidir."
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:302
+#: wp-admin/about.php:342
 msgid "Read the WordPress %s Release Notes for information on installation, enhancements, fixed issues, release contributors, learning resources, and the list of file changes."
 msgstr "Kurulum bilgileri, iyileştirmeler, düzeltilen sorunlar, sürüme katkıda bulunanlar, öğrenme kaynakları ve dosya değişiklikleri listesi gibi bilgiler için WordPress %s dağıtım notlarını okuyun."
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:329
+#: wp-admin/about.php:369
 msgid "Explore the WordPress %s Field Guide. Learn about the changes in this release with detailed developer notes to help you build with WordPress."
 msgstr "WordPress %s saha rehberini keşfedin. WordPress ile derleme yapmanıza yardımcı olacak ayrıntılı geliştirici notları ve bu sürümdeki değişiklikler ile ilgili bilgi alın."
 
@@ -1654,7 +1662,7 @@ msgid "Be the future of WordPress"
 msgstr "WordPress’in geleceği olun"
 
 #. translators: 1: Learn WordPress link, 2: Workshops link.
-#: wp-admin/about.php:270
+#: wp-admin/about.php:310
 msgid "<a href=\"%1$s\">Learn WordPress</a> is a free resource for new and experienced WordPress users. Learn is stocked with how-to videos on using various features in WordPress, <a href=\"%2$s\">interactive workshops</a> for exploring topics in-depth, and lesson plans for diving deep into specific areas of WordPress."
 msgstr "<a href=\"%1$s\">Learn WordPress</a>, yeni ve deneyimli WordPress kullanıcıları için ücretsiz bir kaynaktır. Learn, çeşitli WordPress özelliklerinin kullanılması ile ilgili nasıl yapılır videoları, konuları derinlemesine keşfetmek için <a href=\"%2$s\">etkileşimli çalıştaylar</a> ve belirli WordPress alanlarına derinlemesine dalmak için ders planları ile doludur."
 
@@ -1800,12 +1808,12 @@ msgid "<a href=\"https://wordpress.org/documentation/article/customizer/\">Docum
 msgstr "<a href=\"https://wordpress.org/documentation/article/customizer/\">Özelleştirici yardımı</a>"
 
 #. translators: The localized WordPress download URL.
-#: wp-admin/about.php:410
+#: wp-admin/about.php:450
 msgid "https://wordpress.org/download/"
 msgstr "https://wordpress.org/download/"
 
 #. translators: %s: The major version of WordPress for this branch.
-#: wp-admin/about.php:407
+#: wp-admin/about.php:447
 msgid "This is the final release of WordPress %s"
 msgstr "Bu son WordPress %s sürümüdür"
 
@@ -1878,12 +1886,12 @@ msgstr "%s için yapılandırma kuralları:"
 #. translators: Hidden accessibility text.
 #: wp-admin/options-permalink.php:366
 msgid "Customize permalink structure by selecting available tags"
-msgstr "Kullanılabilecek kod imlerini seçerek kalıcı bağlantı yapısını özelleştirin"
+msgstr "Kullanılabilecek etiketleri seçerek kalıcı bağlantı yapısını özelleştirin"
 
 #. translators: %s: %postname%
 #: wp-admin/options-permalink.php:322
 msgid "Select the permalink structure for your website. Including the %s tag makes links easy to understand, and can help your posts rank higher in search engines."
-msgstr "Sitenizin kalıcı bağlantı yapısını seçin. %s kod iminin eklenmesi, bağlantıların anlaşılmasını kolaylaştırır ve yazılarınızın arama motorlarında daha üst sıralarda yer almasına yardımcı olabilir."
+msgstr "Sitenizin kalıcı bağlantı yapısını seçin. %s etiketin eklenmesi, bağlantıların anlaşılmasını kolaylaştırır ve yazılarınızın arama motorlarında daha üst sıralarda yer almasına yardımcı olabilir."
 
 #. translators: %s: Permalink structure tag.
 #: wp-admin/options-permalink.php:313
@@ -2125,12 +2133,12 @@ msgid "Reach out to WordPress Core developers to ensure you'll never have this p
 msgstr "Bu sorunu bir daha asla yaşamayacağınızdan emin olmak için WordPress Core geliştiricilerine ulaşın."
 
 #. translators: 1: WordPress version number, 2: Link to update WordPress
-#: wp-admin/about.php:404
+#: wp-admin/about.php:444
 msgid "Important! Your version of WordPress (%1$s) will stop receiving security updates in the near future. To keep your site secure, please <a href=\"%2$s\">update to the latest version of WordPress</a>."
 msgstr "Önemli! WordPress sürümünüz (%1$s) yakın zamanda güvenlik güncellemelerini almayı durduracak. Sitenizi güvende tutmak için lütfen <a href=\"%2$s\">son WordPress sürümüne güncelleyin</a>."
 
 #. translators: 1: WordPress version number, 2: Link to update WordPress
-#: wp-admin/about.php:401
+#: wp-admin/about.php:441
 msgid "Important! Your version of WordPress (%1$s) is no longer supported, you will not receive any security updates for your website. To keep your site secure, please <a href=\"%2$s\">update to the latest version of WordPress</a>."
 msgstr "Önemli! WordPress sürümünüz (%1$s) artık desteklenmiyor. Artık siteniz için herhangi bir güvenlik güncellemesi alamayacaksınız. Sitenizi güvende tutmak için lütfen <a href=\"%2$s\">son WordPress sürümüne güncelleyin</a>."
 
@@ -2140,7 +2148,7 @@ msgid "https://make.wordpress.org/core/wordpress-%s-field-guide/"
 msgstr "https://make.wordpress.org/core/wordpress-%s-field-guide/"
 
 #. translators: %s: Version number.
-#: wp-admin/about.php:261
+#: wp-admin/about.php:301
 msgid "Learn more about WordPress %s"
 msgstr "WordPress %s ile ilgili ayrıntılı bilgi alın"
 
@@ -3034,7 +3042,7 @@ msgstr "Uygulama parolası ekle"
 msgid "Required to create an Application Password, but not to update the user."
 msgstr "Bir uygulama parolası oluşturmak için gerekir. Ancak kullanıcıyı güncellemek için gerekmez."
 
-#: wp-admin/about.php:345
+#: wp-admin/about.php:385
 msgid "Go to Updates"
 msgstr "Güncellemelere git"
 
@@ -4399,7 +4407,7 @@ msgstr "<a href=\"https://developer.wordpress.org/plugins/\">Eklenti geliştirme
 
 #: wp-admin/theme-editor.php:55
 msgid "<a href=\"https://developer.wordpress.org/themes/basics/template-tags/\">Documentation on Template Tags</a>"
-msgstr "<a href=\"https://developer.wordpress.org/themes/basics/template-tags/\">Şablon kod imleri yardımı</a>"
+msgstr "<a href=\"https://developer.wordpress.org/themes/basics/template-tags/\">Şablon etiketler yardımı</a>"
 
 #: wp-admin/themes.php:208
 msgid "<a href=\"https://wordpress.org/documentation/article/work-with-themes/\">Documentation on Using Themes</a>"
@@ -4599,7 +4607,7 @@ msgstr "<a href=\"https://wordpress.org/documentation/article/settings-writing-s
 
 #: wp-admin/edit-tags.php:312
 msgid "<a href=\"https://wordpress.org/documentation/article/posts-tags-screen/\">Documentation on Tags</a>"
-msgstr "<a href=\"https://wordpress.org/documentation/article/posts-tags-screen/\">Kod imleri yardımı</a>"
+msgstr "<a href=\"https://wordpress.org/documentation/article/posts-tags-screen/\">Etiket yardımı</a>"
 
 #: wp-admin/edit-tags.php:308
 msgid "<a href=\"https://wordpress.org/documentation/article/posts-categories-screen/\">Documentation on Categories</a>"
@@ -5047,8 +5055,8 @@ msgstr "Bu ayarlar, WordPress parçalarının nereye ve nasıl yükleneceğini d
 #: wp-admin/site-health.php:294 wp-admin/js/site-health.js:176
 msgid "%s item with no issues detected"
 msgid_plural "%s items with no issues detected"
-msgstr[0] "Sorun bulunmayan %s öğe"
-msgstr[1] "Sorun bulunmayan %s öğe"
+msgstr[0] "Sorun bulunmayan %s öge"
+msgstr[1] "Sorun bulunmayan %s öge"
 
 #. translators: %s: Number of recommended improvements.
 #: wp-admin/site-health.php:273 wp-admin/js/site-health.js:171
@@ -6142,10 +6150,10 @@ msgstr "Bu eklenti, WordPress ve PHP sürümlerinizle çalışmaz."
 
 #. translators: %s: WordPress version number.
 #. translators: %s: WordPress version.
-#: wp-admin/about.php:21 wp-admin/about.php:83 wp-admin/about.php:103
-#: wp-admin/about.php:128 wp-admin/includes/update.php:321
-#: wp-admin/index.php:119 wp-admin/install.php:242 wp-admin/update-core.php:94
-#: wp-admin/upgrade.php:96
+#: wp-admin/about.php:21 wp-admin/about.php:78 wp-admin/about.php:98
+#: wp-admin/about.php:123 wp-admin/about.php:143 wp-admin/about.php:168
+#: wp-admin/includes/update.php:321 wp-admin/index.php:119
+#: wp-admin/install.php:242 wp-admin/update-core.php:94 wp-admin/upgrade.php:96
 msgid "https://wordpress.org/documentation/wordpress-version/version-%s/"
 msgstr "https://wordpress.org/documentation/wordpress-version/version-%s/"
 
@@ -7227,7 +7235,7 @@ msgstr "Giriş sayfası: %s"
 
 #: wp-admin/options-permalink.php:382
 msgid "Available tags:"
-msgstr "Kullanılabilecek kod imleri:"
+msgstr "Kullanılabilecek etiketler:"
 
 #. translators: %s: Permalink structure tag.
 #: wp-admin/options-permalink.php:315
@@ -7984,7 +7992,7 @@ msgstr "Özetler, içeriğinizin temanızda kullanılmak üzere özel olarak haz
 
 #: wp-admin/edit-form-advanced.php:288
 msgid "The Code mode allows you to enter HTML along with your post text. Note that &lt;p&gt; and &lt;br&gt; tags are converted to line breaks when switching to the Code editor to make it less cluttered. When you type, a single line break can be used instead of typing &lt;br&gt;, and two line breaks instead of paragraph tags. The line breaks are converted back to tags automatically."
-msgstr "Kod kipi, yazı içeriğinizde HTML yazmanızı sağlar. Kod düzenleyicisine geçerken daha az karmaşık olması için &lt;p&gt; ve &lt;br&gt; kod imlerinin satır sonlarına dönüştürüleceğini unutmayın. Yazarken, &lt;br&gt; yazmak yerine tek bir satır sonu ve paragraf kod imleri yerine iki satır sonu kullanılabilir. Satır sonları otomatik olarak yeniden kod imlerine dönüştürülür."
+msgstr "Kod kipi, yazı içeriğinizde HTML yazmanızı sağlar. Kod düzenleyicisine geçerken daha az karmaşık olması için &lt;p&gt; ve &lt;br&gt; etiketlerin satır sonlarına dönüştürüleceğini unutmayın. Yazarken, &lt;br&gt; yazmak yerine tek bir satır sonu ve paragraf kod imleri yerine iki satır sonu kullanılabilir. Satır sonları otomatik olarak yeniden kod imlerine dönüştürülür."
 
 #: wp-admin/edit-form-advanced.php:287
 msgid "Visual mode gives you an editor that is similar to a word processor. Click the Extended Toolbar button to get a second row of controls."
@@ -8394,7 +8402,7 @@ msgstr "(Geçerli ayar: %s)"
 
 #. translators: %s: WordPress version.
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:93 wp-admin/about.php:375
+#: wp-admin/about.php:133 wp-admin/about.php:415
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>%s sürümü</strong> bir güvenlik açığını gideriyor."
 
@@ -8407,15 +8415,15 @@ msgstr "https://gravatar.com/"
 msgid "Profile Picture"
 msgstr "Profil görseli"
 
-#: wp-admin/about.php:63 wp-admin/about.php:372
+#: wp-admin/about.php:63 wp-admin/about.php:412
 msgid "Maintenance and Security Releases"
 msgstr "Bakım ve güvenlik dağıtımları"
 
-#: wp-admin/about.php:369
+#: wp-admin/about.php:409
 msgid "Security Releases"
 msgstr "Güvenlik dağıtımları"
 
-#: wp-admin/about.php:366
+#: wp-admin/about.php:406
 msgid "Maintenance Releases"
 msgstr "Bakım dağıtımları"
 
@@ -8426,7 +8434,7 @@ msgstr "Düz"
 #. translators: %s: Documentation URL.
 #: wp-admin/options-permalink.php:226
 msgid "WordPress offers you the ability to create a custom URL structure for your permalinks and archives. Custom URL structures can improve the aesthetics, usability, and forward-compatibility of your links. A <a href=\"%s\">number of tags are available</a>, and here are some examples to get you started."
-msgstr "WordPress kalıcı bağlantılar ve arşivler için özel adres yapıları oluşturabilmenizi sağlar. Özel adres yapıları bağlantılarınızın estetiğini, kullanılabilirlliğini ve ileriye dönük uyumluluğunu artırır. Kullanabileceğiniz <a href=\"%s\">belli sayıda kod imi vardır</a> ve başlayabilmeniz için birkaç örneği burada bulabilirsiniz."
+msgstr "WordPress kalıcı bağlantılar ve arşivler için özel adres yapıları oluşturabilmenizi sağlar. Özel adres yapıları bağlantılarınızın estetiğini, kullanılabilirlliğini ve ileriye dönük uyumluluğunu artırır. Kullanabileceğiniz <a href=\"%s\">belli sayıda etiket vardır</a> ve başlayabilmeniz için birkaç örneği burada bulabilirsiniz."
 
 #: wp-admin/options-permalink.php:34
 msgid "Permalinks can contain useful information, such as the post date, title, or other elements. You can choose from any of the suggested permalink formats, or you can craft your own if you select Custom Structure."
@@ -10045,8 +10053,8 @@ msgstr "Siteniz %1$s WordPress %2$s sürümüne güncellenirken ciddi bir sorun 
 msgid "WordPress %s is also now available."
 msgstr "WordPress %s yayınlanmış."
 
-#: wp-admin/includes/update-core.php:1619
-#: wp-admin/includes/update-core.php:1655
+#: wp-admin/includes/update-core.php:1620
+#: wp-admin/includes/update-core.php:1656
 msgid "The update cannot be installed because your site is unable to copy some files. This is usually due to inconsistent file permissions."
 msgstr "Bazı dosyalar kopyalanamadığı için güncelleme yapılamadı. Bu durum genellikle tutarsız dosya izinlerinden kaynaklanır."
 
@@ -10161,7 +10169,7 @@ msgstr "Çevirileri güncelle"
 msgid "Background updates"
 msgstr "Arka plan güncellemeleri"
 
-#: wp-admin/includes/update-core.php:1722
+#: wp-admin/includes/update-core.php:1723
 msgid "There is not enough free disk space to complete the update."
 msgstr "Bu güncellemeyi yapabilmek için yeterli boş disk alanı yok."
 
@@ -10239,7 +10247,7 @@ msgstr "Yazdığınız kullanıcı adında geçersiz karakterler var."
 msgid "Please provide a valid username."
 msgstr "Lütfen geçerli bir kullanıcı adı yazın."
 
-#: wp-admin/includes/update-core.php:1636
+#: wp-admin/includes/update-core.php:1637
 msgid "Copying the required files&#8230;"
 msgstr "Gerekli dosyalar kopyalanıyor&#8230;"
 
@@ -10925,7 +10933,7 @@ msgid "Search engine visibility"
 msgstr "Arama motoru görünürlüğü"
 
 #. translators: 1: WordPress version, 2: URL to About screen.
-#: wp-admin/includes/update-core.php:2024 wp-admin/update-core.php:923
+#: wp-admin/includes/update-core.php:2025 wp-admin/update-core.php:923
 msgid "Welcome to WordPress %1$s. You will be redirected to the About WordPress screen. If not, click <a href=\"%2$s\">here</a>."
 msgstr "WordPress %1$s sürümüne hoş geldiniz. WordPress hakkında sayfasına yönlendirileceksiniz. Bunu istemiyorsanız, <a href=\"%2$s\">buraya</a> tıklayın."
 
@@ -11636,15 +11644,15 @@ msgstr "Site görüntülenirken araç çubuğu görüntülensin"
 
 #. translators: %s: HelpHub URL.
 #. translators: %s: Documentation URL.
-#: wp-admin/about.php:80 wp-admin/about.php:100 wp-admin/about.php:125
-#: wp-admin/about.php:398
+#: wp-admin/about.php:75 wp-admin/about.php:95 wp-admin/about.php:120
+#: wp-admin/about.php:140 wp-admin/about.php:165 wp-admin/about.php:438
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Ayrıntılı bilgi almak için <a href=\"%s\">dağıtım notlarına</a> bakın."
 
 #. translators: 1: WordPress version number, 2: Plural number of bugs.
 #. translators: 1: WordPress version number, 2: Plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:68 wp-admin/about.php:113 wp-admin/about.php:392
+#: wp-admin/about.php:108 wp-admin/about.php:153 wp-admin/about.php:432
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>%1$s sürümü</strong> ile bazı güvenlik açıkları kapatıldı ve %2$s hata düzeltildi."
@@ -11652,33 +11660,34 @@ msgstr[1] "<strong>%1$s sürümü</strong> ile bazı güvenlik açıkları kapat
 
 #. translators: 1: WordPress version number, 2: Plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:386
+#: wp-admin/about.php:426
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>%1$s sürümü</strong> ile bir güvenlik açığı kapatıldı ve %2$s hata düzeltildi."
 msgstr[1] "<strong>%1$s sürümü</strong> ile bir güvenlik açığı kapatıldı ve %2$s hata düzeltildi."
 
 #. translators: 1: WordPress version number, 2: Plural number of bugs.
-#: wp-admin/about.php:380
+#: wp-admin/about.php:420
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>%1$s sürümü</strong> ile %2$s hata düzeltildi."
 msgstr[1] "<strong>%1$s sürümü</strong> ile %2$s hata düzeltildi."
 
+#. translators: %s: WordPress version.
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:377
+#: wp-admin/about.php:68 wp-admin/about.php:88 wp-admin/about.php:417
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>%s sürümü</strong> ile bazı güvenlik açıkları giderildi."
 
-#: wp-admin/about.php:371
+#: wp-admin/about.php:411
 msgid "Maintenance and Security Release"
 msgstr "Bakım ve güvenlik dağıtımı"
 
-#: wp-admin/about.php:368
+#: wp-admin/about.php:408
 msgid "Security Release"
 msgstr "Güvenlik dağıtımı"
 
-#: wp-admin/about.php:365
+#: wp-admin/about.php:405
 msgid "Maintenance Release"
 msgstr "Bakım dağıtımı"
 
@@ -11692,7 +11701,7 @@ msgid "This screen allows you to choose your permalink structure. You can choose
 msgstr "Bu ekranda varsayılan kalıcı bağlantı yapısını seçilebilir. Genel ayarlardan birini kullanabilir ya da kendi özel adres yapınızı oluşturabilirsiniz."
 
 #. translators: 1: WordPress version, 2: URL to About screen.
-#: wp-admin/includes/update-core.php:2032 wp-admin/update-core.php:931
+#: wp-admin/includes/update-core.php:2033 wp-admin/update-core.php:931
 msgid "Welcome to WordPress %1$s. <a href=\"%2$s\">Learn more</a>."
 msgstr "WordPress %1$s&#8217;e hoş geldiniz. <a href=\"%2$s\">Ayrıntılı bilgi almak için</a>."
 
@@ -11951,15 +11960,15 @@ msgstr "<strong>Düzenle</strong> sizi bu yazının düzenleme ekranına götür
 msgid "Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, such as specifying a password, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users."
 msgstr "Çoklu site kurulumu olduğu için ağda var olan diğer kullanıcıları kullanıcı adı ya da e-posta adresi ile ekleyebilir ve rollerini atayabilirsiniz. Parola belirlemek gibi diğer seçenekler için ağ yöneticisi olmalı ve Ağ yönetimi > Tüm kullanıcılar bölümünden erişeceğiniz kullanıcının bağlantılarını kullanmalısınız."
 
-#: wp-admin/about.php:139
+#: wp-admin/about.php:179
 msgid "Welcome to WordPress 7.1"
 msgstr "WordPress 7.1 sürümüne hoş geldiniz"
 
-#: wp-admin/about.php:352
+#: wp-admin/about.php:392
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Başlangıç &rarr; Giriş bölümüne git"
 
-#: wp-admin/about.php:345
+#: wp-admin/about.php:385
 msgid "Go to Dashboard &rarr; Updates"
 msgstr "Başlangıç &rarr; Güncellemeler ekranına git"
 
@@ -13612,7 +13621,7 @@ msgid "User already exists. Password inherited."
 msgstr "Kullanıcı zaten var. Parola devralındı."
 
 #: wp-admin/includes/class-wp-automatic-updater.php:529
-#: wp-admin/includes/update-core.php:2018 wp-admin/update-core.php:919
+#: wp-admin/includes/update-core.php:2019 wp-admin/update-core.php:919
 msgid "WordPress updated successfully."
 msgstr "WordPress güncellendi."
 
@@ -13641,7 +13650,7 @@ msgstr "WordPress güncellemeleri"
 msgid "Edit menu item"
 msgstr "Menü ögesini düzenle"
 
-#: wp-admin/about.php:352
+#: wp-admin/about.php:392
 msgid "Go to Dashboard"
 msgstr "Başlangıca git"
 
@@ -14281,7 +14290,7 @@ msgstr "%s dosyasının iznini geçici bir süre için yazılabilir olarak ayarl
 
 #: wp-admin/options-permalink.php:443
 msgid "Tag base"
-msgstr "Kod imi temeli"
+msgstr "Etiket temeli"
 
 #. translators: Prefix for category permalinks.
 #: wp-admin/options-permalink.php:423
@@ -14712,7 +14721,7 @@ msgstr "%s sürümüne güncelle"
 msgid "You are using a development version (%1$s). Cool! Please <a href=\"%2$s\">stay updated</a>."
 msgstr "Şu anda bir geliştirme sürümü (%1$s) kullanıyorsunuz. Harika! Lütfen <a href=\"%2$s\">güncel sürümü kullanın</a>."
 
-#: wp-admin/includes/update-core.php:1891
+#: wp-admin/includes/update-core.php:1892
 msgid "Upgrading database&#8230;"
 msgstr "Veri tabanı güncelleniyor&#8230;"
 
@@ -15567,7 +15576,7 @@ msgid "Empty archive."
 msgstr "Arşiv boş."
 
 #: wp-admin/includes/file.php:1836 wp-admin/includes/file.php:1995
-#: wp-admin/includes/file.php:2053 wp-admin/includes/update-core.php:1829
+#: wp-admin/includes/file.php:2053 wp-admin/includes/update-core.php:1830
 msgid "Could not copy file."
 msgstr "Dosya kopyalanamadı."
 
@@ -15872,12 +15881,12 @@ msgid "The plugin is at the latest version."
 msgstr "Eklentinin sürümü güncel."
 
 #: wp-admin/includes/class-wp-upgrader.php:210
-#: wp-admin/includes/update-core.php:1776
+#: wp-admin/includes/update-core.php:1777
 msgid "Disabling Maintenance mode&#8230;"
 msgstr "Bakım modundan çıkılıyor&#8230;"
 
 #: wp-admin/includes/class-wp-upgrader.php:209
-#: wp-admin/includes/update-core.php:1627
+#: wp-admin/includes/update-core.php:1628
 msgid "Enabling Maintenance mode&#8230;"
 msgstr "Bakım moduna giriliyor&#8230;"
 
@@ -16391,7 +16400,7 @@ msgid "This comment is in the Trash. Please move it out of the Trash if you want
 msgstr "Bu yorum çöpe atılmış. Düzenlemek istiyorsanız önce yorumu çöpten çıkarmalısınız."
 
 #: wp-admin/comment.php:296 wp-admin/edit-comments.php:300
-#: wp-admin/includes/comment.php:56
+#: wp-admin/includes/comment.php:58
 msgid "Sorry, you are not allowed to edit comments on this post."
 msgstr "Ne yazık ki, bu yazıya yapılmış yorumları düzenlemenize izin verilmiyor."
 

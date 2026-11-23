@@ -885,3 +885,95 @@
     });
   }
 })();
+
+// Software page: Myliba wheel animation.
+// The video has no src in the HTML, so nothing is downloaded until the section
+// approaches the viewport. Reduced-motion and Save-Data users only see the
+// poster until they press play.
+(function () {
+  const wheel = document.querySelector("[data-wheel]");
+  const video = wheel ? wheel.querySelector("video") : null;
+  if (!wheel || !video) {
+    return;
+  }
+
+  const toggle = wheel.querySelector("[data-wheel-toggle]");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const saveData = Boolean(navigator.connection && navigator.connection.saveData);
+  let loaded = false;
+  let inView = false;
+  let userPaused = reducedMotion.matches || saveData;
+
+  const load = () => {
+    if (loaded) {
+      return;
+    }
+    const small = window.matchMedia("(max-width: 600px)").matches;
+    const src = small ? video.dataset.srcSmall : video.dataset.srcLarge;
+    if (!src) {
+      return;
+    }
+    video.src = src;
+    loaded = true;
+  };
+
+  const syncToggle = () => {
+    if (!toggle) {
+      return;
+    }
+    const playing = !video.paused;
+    toggle.hidden = false;
+    toggle.classList.toggle("is-playing", playing);
+    toggle.setAttribute("aria-label", playing ? toggle.dataset.labelPause : toggle.dataset.labelPlay);
+  };
+
+  const play = () => {
+    load();
+    const attempt = video.play();
+    if (attempt && typeof attempt.catch === "function") {
+      attempt.catch(syncToggle);
+    }
+  };
+
+  video.addEventListener("play", syncToggle);
+  video.addEventListener("pause", syncToggle);
+
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      if (video.paused) {
+        userPaused = false;
+        play();
+      } else {
+        userPaused = true;
+        video.pause();
+      }
+    });
+    syncToggle();
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    if (!userPaused) {
+      play();
+    }
+    return;
+  }
+
+  new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      inView = entry.isIntersecting;
+      if (inView && !userPaused) {
+        play();
+      } else if (!inView && !video.paused) {
+        video.pause();
+      }
+    });
+  }, { rootMargin: "200px 0px" }).observe(wheel);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      video.pause();
+    } else if (inView && !userPaused) {
+      play();
+    }
+  });
+})();

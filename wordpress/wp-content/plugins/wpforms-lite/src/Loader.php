@@ -79,6 +79,23 @@ class Loader {
 			'name' => 'Emails\Summaries',
 		];
 
+		// Weekly summary metrics; the Lite or Pro implementation is resolved here.
+		$this->classes[] = [
+			'name' => 'Emails\Summaries\Data',
+			'id'   => 'emails_summaries_data',
+			'hook' => false,
+		];
+
+		$this->classes[] = [
+			'name' => 'Emails\Summaries\Milestones',
+			'id'   => 'emails_summaries_milestones',
+		];
+
+		$this->classes[] = [
+			'name' => 'Emails\Summaries\Tracking',
+			'id'   => 'emails_summaries_tracking',
+		];
+
 		$this->classes[] = [
 			'name' => 'Helpers\Plugin',
 			'id'   => 'plugin',
@@ -196,6 +213,41 @@ class Loader {
 		];
 
 		$this->classes[] = [
+			'name' => 'Frontend\EmbedContext',
+			'id'   => 'embed_context',
+		];
+
+		$this->classes[] = [
+			'name' => 'Frontend\ThemesEditor',
+			'id'   => 'themes_editor',
+		];
+
+		$this->classes[] = [
+			'name' => 'Frontend\ThemesEditor\Overrides',
+			'id'   => 'themes_editor_overrides',
+		];
+
+		$this->classes[] = [
+			'name' => 'Frontend\ThemesEditor\Resolver',
+			'id'   => 'themes_editor_resolver',
+		];
+
+		$this->classes[] = [
+			'name' => 'Frontend\ThemesEditor\EmbedFinder',
+			'id'   => 'themes_editor_embed_finder',
+		];
+
+		$this->classes[] = [
+			'name' => 'Frontend\Themes\Schema',
+			'id'   => 'themes_schema',
+		];
+
+		$this->classes[] = [
+			'name' => 'Frontend\Themes\SettingsSanitizer',
+			'id'   => 'themes_settings_sanitizer',
+		];
+
+		$this->classes[] = [
 			'name' => 'Frontend\Classic',
 			'id'   => 'frontend_classic',
 		];
@@ -223,6 +275,9 @@ class Loader {
 			[
 				'name' => 'Admin\Notice',
 				'id'   => 'notice',
+			],
+			[
+				'name' => 'Admin\AntiSpamUpgrade',
 			],
 			[
 				'name' => 'Admin\Settings\Captcha\ConfigurationError',
@@ -948,6 +1003,16 @@ class Loader {
 				'id'   => 'tasks_meta',
 				'hook' => false,
 				'run'  => false,
+			],
+			// Armed here rather than by UpgradeBase::run_async() so the admin
+			// notice can re-run it after the migration is already recorded, and
+			// so the action callback is registered on WP-Cron requests too.
+			// init() returns immediately while the status option is unset.
+			[
+				'name'     => 'Migrations\Tasks\AntiSpamUpgradeTask',
+				'id'       => 'antispam_upgrade_task',
+				'hook'     => 'init',
+				'priority' => PHP_INT_MAX,
 			]
 		);
 	}
@@ -1200,6 +1265,13 @@ class Loader {
 			'condition' => wpforms()->is_pro() && ProAnalytics::is_allowed(),
 		];
 
+		// Runs on both tiers and on every licence: Lite collects form-level rows too, and a
+		// Pro install below the Analytics licence still aggregates field-level ones.
+		$this->classes[] = [
+			'name' => 'Analytics\Reset',
+			'id'   => 'analytics_reset',
+		];
+
 		$this->classes[] = [
 			'name' => 'Analytics\Aggregation',
 			'id'   => 'analytics_aggregation',
@@ -1234,6 +1306,12 @@ class Loader {
 			'id'        => 'analytics_ajax',
 			'hook'      => 'admin_init',
 			'condition' => wpforms()->is_pro() && ProAnalytics::is_allowed() && wpforms_is_admin_ajax(),
+		];
+
+		$this->classes[] = [
+			'name'      => 'Admin\Settings\AnalyticsReset',
+			'id'        => 'settings_analytics_reset',
+			'condition' => is_admin() && wpforms()->is_pro() && ProAnalytics::is_allowed(),
 		];
 	}
 }

@@ -1,9 +1,9 @@
 === WPForms - AI Form Builder for WordPress - Contact Forms, Payment Forms, Survey Form, Quiz & More ===
-Contributors: wpforms, smub, slaFFik
+Contributors: wpforms, smub
 Tags: contact form, contact form plugin, forms, form builder, custom form
 Requires at least: 5.5
 Tested up to: 7.1
-Stable tag: 2.0.2.2
+Stable tag: 2.0.5.1
 Requires PHP: 7.2
 License: GNU General Public License v2.0 or later
 
@@ -392,6 +392,93 @@ Thank you,
 Syed Balkhi
 
 == Changelog ==
+= 2.0.5.1 =
+- Added: Form themes can now be edited live on any page with a form using the new front-end theme editor, for the whole form or for a single embed.
+- Added: Drip is now built into WPForms and works on every plan, including Lite.
+- Added: New Email Summaries Recipients and From Email settings in WPForms > Settings > Email screen.
+- Added: Added ability for admins to set a custom 'From' email address for weekly Email Summaries, with validation on save and fallback to admin email when empty.
+- Changed: The Form Builder Themes panel and style settings in the Gutenberg block and Elementor widget were replaced with an Edit Theme button that opens the front-end theme editor.
+- Changed: PayPal Commerce payments put on hold by PayPal are now recorded as Pending and completed when PayPal releases the funds, instead of being rejected as declined.
+- Changed: Permanently deleting a form now also deletes its Form Analytics data.
+- Changed: The Disable Email Summaries setting moved from the Misc settings to a new Email Summary section in the Email settings.
+- Changed: Payment items with a quantity of 0 are no longer included in the `{all_fields}` smart tag in notification emails, consistent with other empty fields.
+- Fixed: Text typed right after picking a smart tag from the Smart Tags list in Form Builder settings appeared before the tag instead of after it.
+- Fixed: Notifications sent with the Legacy email template used an invalid or non-Email-field smart tag in the From Email field as-is instead of falling back to the site admin email.
+- Fixed: Custom form themes were saved to the server repeatedly while editing a template or template part in the Site Editor.
+- Fixed: A template favorited or unfavorited while the template list was still loading could show its old state in Favorite Templates for up to a day.
+- Fixed: The WordPress admin and WPForms admin pages could show a critical error with some third-party plugins active, such as WP Job Manager – Company Profiles.
+- Fixed: The "Other" choice of a Checkboxes field was not preselected when the AI Smart Form Editor was asked to make it the default.
+- Fixed: Row checkboxes and first-column text in the payments table were misaligned with the rest of the row on WordPress 7.1 and newer.
+- Fixed: A form theme color containing CSS code could change the styling of the whole page instead of only the form.
+- Fixed: Line breaks in custom notification email messages were lost on some servers, causing the entire message to appear as one paragraph.
+- Fixed: Form location link handling in the Locations column of the Forms list was improved for better security.
+- Fixed: Dynamic Choices handling in the Dropdown, Multiple Choice, and Checkboxes fields was improved for better security.
+- Fixed: Display of Multiple Choice and Checkboxes field values on the single payment page was improved for better security.
+- Fixed: Forms using PayPal Commerce payment conditional logic could not be submitted when the conditions skipped the PayPal payment.
+
+= 2.0.4 =
+- Added: Trial period option for Stripe subscriptions to delay the first payment by a set number of days.
+- Added: Typing an approval such as "yes" in the AI Form Generator chat now applies the generated form, the same as clicking the Use This Form button.
+- Added: The Locations column in the Forms list now includes pages where a form is embedded with the WPForms Elementor widget.
+- Added: The Email field no longer suggests a correction when a visitor enters an email address with a valid domain extension.
+- Added: Single Line Text and Paragraph Text fields can now require a minimum number of characters or words through the Limit Length option.
+- Added: Cloudflare Turnstile can now start the verification when a visitor first interacts with the form instead of on page load.
+- Changed: Updated DOMPurify library to 3.4.17.
+- Changed: Updated jQuery Validation library to 1.22.1.
+- Fixed: A PHP notice appeared on Elementor pages with debug mode enabled when the WPForms widget had no form to display.
+- Fixed: The Dashboard page kept showing outdated stats, such as the number of forms, for up to an hour after forms were imported from a WPForms export file.
+- Fixed: WPForms AI refused to add an Other choice to Checkboxes fields when generating or editing a form, claiming it was only supported for Multiple Choice fields.
+- Fixed: Spaces next to smart tags in Form Builder settings were saved as non-breaking spaces instead of regular spaces.
+- Fixed: A critical error occurred when the Email field received a malformed address with an overly long domain label.
+- Fixed: The Setup Checklist, Dashboard, and Payments page showed Stripe as connected for a live account whose setup on Stripe was started but not completed.
+- Fixed: Sites where Form Analytics tables had not been created or could not be created ran extra database checks on every page load, including visitors' page views.
+- Fixed: Background process failures and other repeating errors could take up to an hour to appear in WPForms Logs after logging was enabled.
+- Fixed: Feature tooltip handling in the admin area was improved for better security.
+- Fixed: WPForms abilities broke the site's MCP connection in AI clients with strict tool validation.
+- Fixed: Modern Dropdown fields on Divi pages could show every choice as plain text in some cases.
+- Fixed: AI Form Generator compatibility with Ninja Form plugin.
+- Fixed: A critical error occurred in the admin area on WordPress 6.3 and older when a background task was more than a day overdue.
+- Fixed: A Confirmation message showed the selected choices of a Checkboxes, Dropdown, Ranking or Payment Checkbox field joined together.
+
+= 2.0.3.1 =
+- Fixed: Field value smart tags could turn submitted text into HTML markup in a Confirmation message or a form or field description.
+- Fixed: Form Analytics caused JavaScript errors on pages with forms in older browsers or when its tracking script failed to load.
+
+= 2.0.3 =
+- Added: New Add Other Choice option for the Checkboxes field lets users type their own answer when none of the predefined choices fit.
+- Added: Prefill by URL now preselects Checkbox Items, Multiple Items, and Dropdown Items choices when the amount in the link is written in the site currency's format, such as 10,50 or 1,200.00.
+- Added: The Form Builder now displays the PayPal Commerce addon name correctly in payment settings and addon install prompts.
+- Added: WPForms now logs notifications that aren't sent due to invalid email addresses in the "Send To" field, even when logging is disabled, and logs invalid addresses removed from "Send To" or CC.
+- Changed: Improved how the Stripe connection data is stored.
+- Changed: Updated DOMPurify library to 3.4.15.
+- Changed: Forms using the older anti-spam honeypot or token check are now automatically upgraded to modern anti-spam protection, with each form's previous version saved as a revision you can restore.
+- Changed: Failures to start background processes are now recorded if WPForms Logs is enabled.
+- Changed: Updated the SVG sanitization library for improved security and compatibility with files from older graphic editors.
+- Changed: Clarified the anti-spam settings in the Form Builder: the modern protection toggle is now labeled "Enable anti-spam protection", the older setting is labeled as legacy, and the note on auto-upgraded forms explains how to switch back.
+- Changed: The confirmation message now receives focus after an AJAX form submission, so screen readers announce it to visitors.
+- Changed: Screen readers now announce the actual validation message instead of "Error message" for invalid fields when Modern Markup is enabled.
+- Changed: Columns on the Forms Overview page were reordered, and the Tags and Author columns are now hidden by default.
+- Changed: The weekly Email Summary now shows key stats with week-over-week trends, a breakdown of entries by form, and highlights tailored to the site's activity and setup.
+- Fixed: Clicking a field in the Form Builder could open a different field's settings in forms built with WPForms AI. Saving then merged the two fields into one and moved the survivor up the form.
+- Fixed: Removed provider connection or settings block could not be redone in the Form Builder.
+- Fixed: Stripe Custom Meta kept the empty Meta Key field highlighted after undoing the Object Type and Meta Value selections in the Form Builder.
+- Fixed: A smart tag with a long label overflowed its field in the Form Builder and could not be fully reached with the keyboard; it is now truncated with the full label shown on hover.
+- Fixed: Fields with validation errors were not marked with the aria-invalid attribute for screen readers after form submission, only after leaving an individual field.
+- Fixed: The standard Submit button appeared alongside the PayPal Commerce smart payment buttons in the Form Builder preview after undoing and redoing an AI Smart Form Editor change that removed the PayPal Commerce field.
+- Fixed: PayPal Payments remained switched off and displayed a notice to enable it again after undoing the removal of a PayPal Commerce field.
+- Fixed: Removing a PayPal Commerce field added three steps to the Form Builder undo history instead of one, causing two subsequent undo presses to do nothing.
+- Fixed: Payment notices appeared in the Form Builder while the AI Smart Form Editor was applying changes, including after it deleted the payment field the notice referred to.
+- Fixed: In the Form Builder, pressing Undo after removing a tag from a multi-select option cleared the entire selection instead of restoring the removed tag when that removal was the first change made to the option.
+- Fixed: Submitting a form with a Dropdown Items or Multiple Items payment field failed with a fatal error instead of showing the "Invalid payment option" message when the field received a malformed value.
+- Fixed: The forms table on the Dashboard page was missing space below its last row in Firefox.
+- Fixed: Icon Choices did not follow the button background color in forms using Modern Markup on WordPress 5.5.
+- Fixed: The page shifted horizontally when the What's New modal was opened or closed on WordPress 5.5.
+- Fixed: Payment field prices could be displayed incorrectly when the site currency was switched to another currency.
+- Fixed: A fatal error occurred on the WPForms > Settings pages when product education was disabled by another plugin.
+- Fixed: The Embedded Post/Page Title smart tag did not always display its value as plain text, so unsafe markup could appear in a form.
+- Fixed: Sites where the Dashboard data tables had not been created yet ran an extra database check on every page load, which could overload large multisite networks after an upgrade.
+- Fixed: Modern anti-spam protection could be missing from a form when a page had several forms with different anti-spam settings.
+
 = 2.0.2.2 =
 - Added: Support for the Nigerian Naira (NGN), Ghanaian Cedi (GHS), and Kenyan Shilling (KES) currencies.
 - Fixed: The Setup Wizard handed off to its hosted version even when that version could not connect back to the site, so it failed on its first request instead of falling back to the local Getting Started setup.
@@ -412,6 +499,7 @@ Syed Balkhi
 - Added: Suggested privacy policy text for the AI features now appears on the WordPress Privacy Policy Guide screen (Settings > Privacy > Policy Guide), so site owners can adopt it into their own policy.
 - Changed: The "Minimum time to submit" spam protection is now measured on the server, so it can no longer be bypassed by bots.
 - Changed: The Form Builder no longer saves the form and creates a revision when a WPForms AI editing prompt makes no changes to the form.
+- Changed: Builder keyboard shortcuts on Mac now use ⌘ instead of Ctrl where possible, and the Keyboard Shortcuts popup reflects the platform.
 - Fixed: Installing an addon or plugin from WPForms was reported as failed when it printed a message during activation, even though it was successfully installed and active.
 - Fixed: A Cloudflare Turnstile warning appeared in the browser console after a form was successfully submitted.
 - Fixed: On right-to-left sites, the back arrow and card arrows in the Form Embed Wizard's Add to a New Page popup pointed the wrong way, and the QR Code icon was separated from its accompanying text.
@@ -477,7 +565,7 @@ Syed Balkhi
 - Changed: The Form Builder Setup panel now opens significantly faster.
 - Changed: Updated DOMPurify library to 3.4.11.
 - Changed: The AI Chat button in the Form Builder is now shown in grey and displays a tooltip explaining that WPForms AI is not available on local sites.
-- Changed: Updated woocommerce/action-scheduler library to 4.0.0.
+- Changed: Updated `woocommerce/action-scheduler` library to 4.0.0.
 - Changed: Stripe payment security is enhanced with automatic detection and blocking of card testing attacks and other fraudulent activity.
 - Fixed: Randomize the position of the correct answer in AI-generated graded quizzes.
 - Fixed: Admin notices about incompatible WPForms versions are now shown only to users who can update plugins.

@@ -675,7 +675,7 @@ class WPForms_Builder {
 			'dom-purify',
 			WPFORMS_PLUGIN_URL . 'assets/lib/purify.min.js',
 			[],
-			'3.4.13',
+			'3.4.17',
 			false
 		);
 
@@ -900,6 +900,12 @@ class WPForms_Builder {
 			'field_move_at_start'                     => esc_html__( '%s is already at the start.', 'wpforms-lite' ),
 			/* translators: %1$s - field label, %2$d - new field position, %3$d - total number of fields. */
 			'field_moved'                             => esc_html__( '%1$s moved to position %2$d of %3$d.', 'wpforms-lite' ),
+			/* translators: %1$s - field label, %2$d - new field position, %3$d - total number of fields, %4$s - Layout or Repeater field label. */
+			'field_moved_into'                        => esc_html__( '%1$s moved into %4$s, position %2$d of %3$d.', 'wpforms-lite' ),
+			/* translators: %1$s - field label, %2$d - new field position, %3$d - total number of fields, %4$s - Layout or Repeater field label. */
+			'field_moved_out_of'                      => esc_html__( '%1$s moved out of %4$s, position %2$d of %3$d.', 'wpforms-lite' ),
+			/* translators: %1$s - field label, %2$d - new field position, %3$d - total number of fields, %4$s - Layout or Repeater field label. */
+			'field_moved_past'                        => esc_html__( '%1$s moved past %4$s, position %2$d of %3$d.', 'wpforms-lite' ),
 			'fields_available'                        => esc_html__( 'Available Fields', 'wpforms-lite' ),
 			'fields_unavailable'                      => esc_html__( 'No fields available', 'wpforms-lite' ),
 			'heads_up'                                => esc_html__( 'Heads up!', 'wpforms-lite' ),
@@ -1224,7 +1230,6 @@ class WPForms_Builder {
 			'UndoRedoInputCodeMirror'           => "undo-redo/input-codemirror$min.js",
 			'UndoRedoInputTinyMCE'              => "undo-redo/input-tinymce$min.js",
 			'UndoRedoChoicesList'               => "undo-redo/choices-list$min.js",
-			'UndoRedoFormThemes'                => "undo-redo/form-themes$min.js",
 			'UndoRedoDateTimePickers'           => "undo-redo/date-time-pickers$min.js",
 			'UndoRedoActionFieldAdd'            => "undo-redo/action-field-add$min.js",
 			'UndoRedoActionFieldDelete'         => "undo-redo/action-field-delete$min.js",

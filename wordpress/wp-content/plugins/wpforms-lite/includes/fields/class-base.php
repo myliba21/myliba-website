@@ -160,6 +160,15 @@ abstract class WPForms_Field {
 	protected $frontend_obj;
 
 	/**
+	 * Rendered dynamic choice IDs keyed by form, field and dynamic source, then by choice ID.
+	 *
+	 * @since 2.0.5
+	 *
+	 * @var array
+	 */
+	private $dynamic_choice_ids = [];
+
+	/**
 	 * Primary class constructor.
 	 *
 	 * @since 1.0.0
@@ -276,6 +285,27 @@ abstract class WPForms_Field {
 
 		// Add classes to the builder field preview.
 		add_filter( 'wpforms_field_preview_class', [ $this, 'preview_field_class' ], 10, 2 );
+
+		// Load assets.
+		add_action( 'wpforms_builder_enqueues', [ $this, 'other_option_builder_assets' ] );
+	}
+
+	/**
+	 * The other option builder assets.
+	 *
+	 * @since 2.0.3
+	 */
+	public function other_option_builder_assets(): void {
+
+		$min = wpforms_get_min_suffix();
+
+		wp_enqueue_script(
+			'wpforms-other-option-choice',
+			WPFORMS_PLUGIN_URL . "assets/js/admin/builder/other-option-choice{$min}.js",
+			[ 'jquery', 'wpforms-builder' ],
+			WPFORMS_VERSION,
+			false
+		);
 	}
 
 	/**
@@ -1147,7 +1177,13 @@ abstract class WPForms_Field {
 
 			// Select.
 			case 'select':
-				$output = $this->field_element_select( $args, $class, $id, $slug, $attrs );
+				$after = ! empty( $args['after'] ) ? '<span class="after-input sub-label">' . esc_html( $args['after'] ) . '</span>' : '';
+
+				if ( ! empty( $after ) ) {
+					$class .= ' has-after';
+				}
+
+				$output = $this->field_element_select( $args, $class, $id, $slug, $attrs ) . $after;
 				break;
 
 			case 'select-multiple':
@@ -1841,7 +1877,7 @@ abstract class WPForms_Field {
 					$fld .= sprintf(
 						'<input type="text" name="%s[value]" value="%s" class="value wpforms-money-input" placeholder="%s">',
 						esc_attr( $base ),
-						esc_attr( wpforms_format_amount( wpforms_sanitize_amount( $value['value'] ) ) ),
+						esc_attr( wpforms_format_amount( $this->sanitize_form_amount( $value['value'] ) ) ),
 						wpforms_format_amount( 0 )
 					);
 					$fld .= '<a class="add" href="#"><i class="fa fa-plus-circle"></i></a><a class="remove" href="#"><i class="fa fa-minus-circle"></i></a>';
@@ -3264,7 +3300,7 @@ abstract class WPForms_Field {
 						}
 
 						$label  = $this->get_choices_label( $value['label'] ?? '', $key + 1, $field );
-						$label .= ! empty( $field['show_price_after_labels'] ) && isset( $value['value'] ) ? ' - ' . wpforms_format_amount( wpforms_sanitize_amount( $value['value'] ), true ) : '';
+						$label .= ! empty( $field['show_price_after_labels'] ) && isset( $value['value'] ) ? ' - ' . wpforms_format_amount( $this->sanitize_form_amount( $value['value'] ), true ) : '';
 
 						$options .= sprintf(
 							'<option value="%2$s" %1$s>%2$s</option>',
@@ -3320,7 +3356,7 @@ abstract class WPForms_Field {
 						);
 
 						$label  = $this->get_choices_label( $value['label'] ?? '', $key + 1, $field );
-						$label .= ! empty( $field['show_price_after_labels'] ) && isset( $value['value'] ) ? $this->get_price_after_label( $value['value'] ) : '';
+						$label .= ! empty( $field['show_price_after_labels'] ) && isset( $value['value'] ) ? $this->get_price_after_label( wpforms_format_amount( $this->sanitize_form_amount( $value['value'] ) ) ) : '';
 
 						if ( $with_images ) {
 
@@ -3397,8 +3433,8 @@ abstract class WPForms_Field {
 
 					$output .= '</ul>';
 
-					// Multiple choice: Another option.
-					if ( $type === 'radio' ) {
+					// Multiple choice: The other option.
+					if ( wpforms_field_supports_other_choice( $field ) ) {
 
 						$placeholder   = ! empty( $field['other_placeholder'] ) ? $field['other_placeholder'] : '';
 						$default_value = ( ! empty( $field['show_values'] ) && isset( $value['value'] ) && $value['value'] !== '' ) ? $value['value'] : '';
@@ -3953,15 +3989,17 @@ abstract class WPForms_Field {
 	 */
 	private function get_field_html( array $field, string $value, array $form_data ): string {
 
+		// The choices value is rebuilt from raw stored data, so it must be escaped before it is wrapped in markup.
+		// It is escaped, not stripped, so text such as `<3` survives.
 		if ( ! empty( $field['image'] ) ) {
-			$value = $this->get_choices_value( $field, $form_data );
+			$value = esc_html( $this->get_choices_value( $field, $form_data ) );
 
 			return $this->get_field_html_image( $field['image'], $value );
 		}
 
 		if ( ! empty( $field['images'] ) ) {
 			$items  = [];
-			$value  = $this->get_choices_value( $field, $form_data );
+			$value  = esc_html( $this->get_choices_value( $field, $form_data ) );
 			$values = explode( "\n", $value );
 
 			foreach ( $values as $key => $choice_label ) {
@@ -4328,10 +4366,109 @@ abstract class WPForms_Field {
 			return false;
 		}
 
-		$form_id = absint( $form_data['id'] );
-		$dynamic = wpforms_get_field_dynamic_choices( $field, $form_id, $form_data );
+		return empty( $this->get_dynamic_choice_ids( (array) $field, (array) $form_data ) );
+	}
 
-		return empty( $dynamic );
+	/**
+	 * Get the IDs of the dynamic choices the field renders, as array keys.
+	 *
+	 * Validation and formatting read this list so they accept exactly what the visitor was shown.
+	 *
+	 * @since 2.0.5
+	 *
+	 * @param array $field     Field settings.
+	 * @param array $form_data Form data and settings.
+	 *
+	 * @return array
+	 */
+	protected function get_dynamic_choice_ids( array $field, array $form_data ): array {
+
+		$current_form_id = absint( $form_data['id'] ?? 0 );
+		$cache_key       = implode(
+			':',
+			[
+				$current_form_id,
+				$field['id'] ?? '',
+				$field['dynamic_choices'] ?? '',
+				$field['dynamic_post_type'] ?? '',
+				$field['dynamic_taxonomy'] ?? '',
+			]
+		);
+
+		if ( isset( $this->dynamic_choice_ids[ $cache_key ] ) ) {
+			return $this->dynamic_choice_ids[ $cache_key ];
+		}
+
+		$choices = wpforms_get_field_dynamic_choices( $field, $current_form_id, $form_data );
+		$ids     = [];
+
+		// The helper returns false, not an empty array, when the dynamic source is unset.
+		foreach ( is_array( $choices ) ? $choices : [] as $choice ) {
+			$ids[ (int) $choice['value'] ] = true;
+		}
+
+		$this->dynamic_choice_ids[ $cache_key ] = $ids;
+
+		return $ids;
+	}
+
+	/**
+	 * Get the post titles or term names of the submitted IDs that are among the rendered choices, in submission order.
+	 *
+	 * An empty submission returns early, so no choice list is built for it.
+	 *
+	 * @since 2.0.5
+	 *
+	 * @param array $ids       Submitted choice IDs.
+	 * @param array $field     Field settings.
+	 * @param array $form_data Form data and settings.
+	 *
+	 * @return array
+	 */
+	protected function get_submitted_dynamic_choice_labels( array $ids, array $field, array $form_data ): array {
+
+		$ids = array_filter( array_map( 'intval', $ids ) );
+
+		if ( empty( $ids ) ) {
+			return [];
+		}
+
+		$rendered  = $this->get_dynamic_choice_ids( $field, $form_data );
+		$submitted = [];
+
+		foreach ( $ids as $id ) {
+			$label = isset( $rendered[ $id ] ) ? $this->get_dynamic_choice_label( $id, $field ) : null;
+
+			if ( $label !== null ) {
+				$submitted[] = $label;
+			}
+		}
+
+		return $submitted;
+	}
+
+	/**
+	 * Get the plain post title or term name of a rendered dynamic choice.
+	 *
+	 * @since 2.0.5
+	 *
+	 * @param int   $id    Post or term ID.
+	 * @param array $field Field settings.
+	 *
+	 * @return string|null
+	 */
+	private function get_dynamic_choice_label( int $id, array $field ) {
+
+		if ( ( $field['dynamic_choices'] ?? '' ) === 'taxonomy' ) {
+			$term = get_term( $id, $field['dynamic_taxonomy'] ?? '' );
+
+			return $term instanceof WP_Term ? wpforms_get_term_name( $term ) : null;
+		}
+
+		// Rendered labels carry the hierarchy padding, so read the plain title.
+		$post = get_post( $id );
+
+		return $post instanceof WP_Post ? wpforms_get_post_title( $post ) : null;
 	}
 
 	/**
@@ -4348,6 +4485,47 @@ abstract class WPForms_Field {
 	protected function is_other_submission( $field_submit ): bool {
 
 		return is_array( $field_submit ) && ! empty( $field_submit['other'] );
+	}
+
+	/**
+	 * Validate the Other choice free-text value.
+	 *
+	 * When the Other choice is selected, its text input is required, but a
+	 * whitespace-only value passes the client-side required check. Enforce a
+	 * non-empty trimmed value server-side. Read-only fields are skipped because
+	 * saving a read-only field strips the required flag.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param int          $field_id     Field ID.
+	 * @param string|array $field_submit Submitted value.
+	 * @param array        $form_data    Form data.
+	 */
+	protected function validate_other_choice_value( $field_id, $field_submit, array $form_data ): void {
+
+		$field_id = (int) $field_id;
+		$field    = isset( $form_data['fields'][ $field_id ] ) ? (array) $form_data['fields'][ $field_id ] : [];
+
+		if ( ! empty( $field['read_only'] ) ) {
+			return;
+		}
+
+		// A non-scalar Other value can only come from a hand-crafted request; treat it as absent.
+		if ( ! is_array( $field_submit ) || ! isset( $field_submit['other'] ) || ! is_scalar( $field_submit['other'] ) ) {
+			return;
+		}
+
+		[ , $has_other ] = $this->build_choices_allowlist( $field );
+
+		if ( ! $has_other ) {
+			return;
+		}
+
+		if ( trim( (string) $field_submit['other'] ) !== '' ) {
+			return;
+		}
+
+		wpforms()->obj( 'process' )->errors[ $form_data['id'] ][ $field_id ] = wpforms_get_required_label();
 	}
 
 	/**
@@ -4703,8 +4881,8 @@ abstract class WPForms_Field {
 	/**
 	 * Validate a dynamic post-type choice submission.
 	 *
-	 * Each submitted ID must cast to a positive integer AND map to a post of the
-	 * field's configured `dynamic_post_type`.
+	 * Each submitted ID must cast to a positive integer AND be one of the posts
+	 * the field renders as choices.
 	 *
 	 * @since 1.10.0.5
 	 *
@@ -4723,16 +4901,16 @@ abstract class WPForms_Field {
 			return;
 		}
 
+		$rendered = $this->get_dynamic_choice_ids( $field, $form_data );
+
 		$this->validate_dynamic_id_submission(
 			$field_id,
 			$field_submit,
 			$field,
 			$form_data,
-			static function ( $id ) use ( $post_type ) {
+			static function ( $id ) use ( $rendered ) {
 
-				$post = get_post( $id );
-
-				return ! empty( $post ) && ! is_wp_error( $post ) && $post->post_type === $post_type;
+				return isset( $rendered[ (int) $id ] );
 			}
 		);
 	}
@@ -4740,8 +4918,8 @@ abstract class WPForms_Field {
 	/**
 	 * Validate a dynamic taxonomy choice submission.
 	 *
-	 * Each submitted ID must cast to a positive integer AND map to a term in the
-	 * field's configured `dynamic_taxonomy`.
+	 * Each submitted ID must cast to a positive integer AND be one of the terms
+	 * the field renders as choices.
 	 *
 	 * @since 1.10.0.5
 	 *
@@ -4760,16 +4938,16 @@ abstract class WPForms_Field {
 			return;
 		}
 
+		$rendered = $this->get_dynamic_choice_ids( $field, $form_data );
+
 		$this->validate_dynamic_id_submission(
 			$field_id,
 			$field_submit,
 			$field,
 			$form_data,
-			static function ( $id ) use ( $taxonomy ) {
+			static function ( $id ) use ( $rendered ) {
 
-				$term = get_term( $id, $taxonomy );
-
-				return ! empty( $term ) && ! is_wp_error( $term );
+				return isset( $rendered[ (int) $id ] );
 			}
 		);
 	}
@@ -5171,15 +5349,74 @@ abstract class WPForms_Field {
 	/**
 	 * Get formatted price after label.
 	 *
+	 * The amount is expected in the current currency's format, as the field properties carry it in
+	 * `data-amount`; a stored value must be converted with `sanitize_form_amount()` before the call.
+	 *
 	 * @since 1.9.2
 	 *
-	 * @param float $amount Amount.
+	 * @param float|string $amount Amount in the current currency's format.
 	 *
 	 * @return string
 	 */
 	protected function get_price_after_label( $amount ): string {
 
 		return sprintf( ' - <span class="wpforms-currency-symbol">%s</span>', wpforms_format_amount( wpforms_sanitize_amount( $amount ), true ) );
+	}
+
+	/**
+	 * Sanitize an amount stored in the form data, parsing it with the form's saved currency.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param mixed      $amount    Stored amount, cast to a string.
+	 * @param array|null $form_data Form data and settings, when available in the calling context.
+	 *
+	 * @return string Sanitized amount with a dot as the decimal separator.
+	 */
+	protected function sanitize_form_amount( $amount, ?array $form_data = null ): string {
+
+		if ( $form_data === null ) {
+			$form_data = $this->form_data;
+		}
+
+		if ( empty( $form_data ) && class_exists( 'WPForms_Builder', false ) ) {
+			$form_data = WPForms_Builder::instance()->form_data;
+		}
+
+		return wpforms_sanitize_form_amount( $amount, is_array( $form_data ) ? $form_data : [] );
+	}
+
+	/**
+	 * Get the label of the payment choice whose amount matches a prefilled value.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param string $raw_value Raw prefilled value.
+	 * @param array  $choices   Field choices.
+	 *
+	 * @return string|null
+	 */
+	protected function get_payment_choice_label_by_amount( $raw_value, array $choices ) {
+
+		$formatted = wpforms_format_amount( wpforms_sanitize_amount( $raw_value ) );
+
+		// Only machine format or the site currency's exact display format is an amount.
+		// Other separator mixes are ambiguous, e.g. `1,200.00` under a comma-decimal currency, and would preselect a wrong choice.
+		if ( ! is_numeric( $raw_value ) && $formatted !== $raw_value ) {
+			return null;
+		}
+
+		foreach ( $choices as $choice ) {
+			// The URL value is in the site currency, a stored choice amount is in the form's saved one.
+			if ( wpforms_format_amount( $this->sanitize_form_amount( $choice['value'] ?? '' ) ) === $formatted ) {
+				$label = (string) ( $choice['label'] ?? '' );
+
+				// An empty label matches the first empty-labelled choice, not necessarily this one.
+				return sanitize_text_field( $label ) === '' ? null : $label;
+			}
+		}
+
+		return null;
 	}
 
 	/**
