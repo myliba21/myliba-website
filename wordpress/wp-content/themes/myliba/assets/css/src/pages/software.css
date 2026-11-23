@@ -488,71 +488,18 @@
 
 .software-wheel__media {
   aspect-ratio: 1 / 1;
-  background: #0b1330;
-  border-radius: 28px;
-  box-shadow: 0 30px 70px -40px rgba(11, 19, 48, .55);
+  background: transparent;
   margin: 0;
-  overflow: hidden;
   position: relative;
 }
 
-.software-wheel__video {
+.software-wheel__svg {
   aspect-ratio: 1 / 1;
   display: block;
+  filter: drop-shadow(0 22px 34px rgba(11, 19, 48, .28));
+  font-family: inherit;
   height: auto;
-  object-fit: cover;
   width: 100%;
-}
-
-.software-wheel__toggle {
-  align-items: center;
-  backdrop-filter: blur(6px);
-  background: rgba(255, 255, 255, .14);
-  border: 1px solid rgba(255, 255, 255, .28);
-  border-radius: 50%;
-  bottom: 16px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  height: 44px;
-  justify-content: center;
-  padding: 0;
-  position: absolute;
-  right: 16px;
-  transition: background .2s ease;
-  width: 44px;
-}
-
-.software-wheel__toggle[hidden] {
-  display: none;
-}
-
-.software-wheel__toggle:hover,
-.software-wheel__toggle:focus-visible {
-  background: rgba(255, 255, 255, .26);
-}
-
-.software-wheel__toggle:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 3px;
-}
-
-.software-wheel__toggle span {
-  border-bottom: 7px solid transparent;
-  border-left: 11px solid currentColor;
-  border-top: 7px solid transparent;
-  height: 0;
-  margin-left: 3px;
-  width: 0;
-}
-
-.software-wheel__toggle.is-playing span {
-  border: 0;
-  border-left: 4px solid currentColor;
-  border-right: 4px solid currentColor;
-  height: 14px;
-  margin-left: 0;
-  width: 12px;
 }
 
 .software-wheel__copy h3 {
@@ -614,10 +561,6 @@
 }
 
 @media (max-width: 480px) {
-  .software-wheel__media {
-    border-radius: 20px;
-  }
-
   .software-wheel__list {
     grid-template-columns: 1fr;
   }

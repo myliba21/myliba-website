@@ -1,5 +1,46 @@
 # Uygulama kaydı
 
+## 23 Kasım 2026 — Blog yazarı (gerçek uzman) ve Myliba Çarkı SVG (yerel, canlıya alınmadı)
+
+**Blog yazarı**
+- `myliba-core/includes/seo.php`: `post_author_profile()` eklendi. Yazının WordPress yazarı, yazının dilinde yayımlanmış bir ekip profiliyle (`myliba_team`) aynı adı taşıyorsa yazar olarak o kişi kullanılır; eşleşme yoksa (teknik/yönetici hesapları) eskisi gibi "Myliba Team" kalır. Uydurma yazar atanmaz.
+- `Article` schema: `author` artık `Person` (ad, profil URL'si, `worksFor` Myliba, profil başlığı `description`); eşleşme yoksa `Organization`.
+- `themes/myliba/single.php`: yazar kartı kişinin adını, profil başlığını ve profil bağlantısını gösterir (`rel="author"`). Yeni metinler: `Author`/`Yazar`, `View profile`/`Profili görüntüle`.
+- Yerel durum: 49 yazının 48'inin WordPress yazarı Huri Sankur (TR `/tr/ekibimiz/huri-sankur-tr/`, EN `/en/team/huri-sankur/`). `What Is OKR` (ID 1226) `admin` hesabında; "Myliba Team" olarak kalıyor, yazar editörden düzeltilmeli.
+- Doğrulama (localhost): `/tr/yazilar/cfr-nedir/` ve `/en/blog/okr-examples/` kart + schema Person; `/en/blog/what-is-okr/` Myliba Team; tek H1.
+
+**Myliba Çarkı: mp4 yerine satır içi SVG**
+- `template-parts/software-wheel-svg.php` (yeni): çark satır içi SVG; tüm etiketler `myliba_text()` üzerinden TR/EN (EN karşılıkları eski İngilizce videodaki ifadelerle aynı). C2PA metadata bloğu çıkarıldı, id'ler `mw-` önekli.
+- `template-parts/page-software.php`: `<video>` kaldırıldı. `assets/js/main.js`: çark kodu SVG'ye uyarlandı (azaltılmış hareket tercihi, ekran dışı/sekme gizli iken duraklatma, duraklat/oynat düğmesi). `software.css`: `.software-wheel__svg`.
+- Etki: yaklaşık 2,7 MB video + poster yerine ~7 KB işaretleme; etiketler artık DOM'da gerçek metin (taranabilir, keskin, çevrilebilir). `assets/video/` altındaki 6 dosya artık kullanılmıyor (silinmedi).
+- Doğrulama (localhost): `/tr/yazilim/` ve `/en/software/` çark iki dilde doğru, animasyon çalışıyor, düğme duraklatıyor/oynatıyor, sayfada `<video>` yok.
+
+**Çift yazılar (karar bekliyor, değişiklik yapılmadı)** — GSC son 3 ay:
+- OKR nedir: ID 1253 (21.09.2026, 3.134 gösterim / 9 tıklama) ana sayfa; `iki-dakikada-okrs-nedir-ogrenin` (ID 1042, 13.02.2024, 23 gösterim).
+- CFR nedir: `cfr-nedir-hedef-ve-performans-yonetiminde-cfrin-rolu` (ID 1023, 12.06.2025, 292 gösterim / 1 tıklama) ana sayfa; `cfr-nedir` (ID 1040, 13.02.2024, gösterim yok).
+
+## 23 Kasım 2026 — Teknik paket 2 canlıda: denetim
+
+Kullanıcı `make pairs-apply` (23 çift, 0 atlandı) ve `make predeploy` (HAZIR) sonrasında canlıya aldı (16:55). Canlıda sitemap'teki 121 URL kullanıcının tarayıcısından çerezsiz tarandı.
+
+| Kontrol | Sonuç |
+| --- | --- |
+| 200, yönlendirmesiz, self-canonical, tek description, noindex yok | 121 / 121 |
+| Tek H1 | 121 / 121 (önce 6 yazıda çift) |
+| JSON-LD parse hatası, PHP uyarı çıktısı | 0 |
+| BreadcrumbList: boş/varlık kalıntılı ad ya da köke işaret eden öğe | 0 |
+| Article: `image` ve `inLanguage` | Tüm blog yazılarında var |
+| Blog hreflang | 46 yazı karşılıklı eşleşiyor (23 çift), 3 eşsiz TR yazı, hata 0 |
+| Altı yazının SEO başlık/açıklaması | Yeni değerler yayında (51–64 / 155–159 karakter) |
+| Organization `sameAs` | LinkedIn şirket adresi temiz; dört profil |
+| Logo alt metni olarak dosya adı | 0 / 38 |
+| `/llms.txt` | 200; Türkçe özet, 5 TR + 5 EN konu sayfası |
+| Kök → `/tr/`, `/tr/hakkimizda/` → `/tr/hikayemiz/`, `/event/okr-kpi/` 410 | Korunuyor |
+| `/tr/demo/` form, `/tr/yazilim/` video, WP Mail SMTP (sabitten) | Yerinde |
+| HTML ilk bayt (ardışık üç istek) | 1,4 / 0,9 / 0,6 sn (tarama hemen sonrası) |
+
+Ölçülmeyen: Rich Results Test, mobil görünüm, Core Web Vitals, klon sonrası gerçek form gönderimi.
+
 ## 23 Kasım 2026 — Teknik paket 2 (yerel; canlıya alınmadı)
 
 Kaynak: `audit-2026-11-23.md` B4, B5, B7, B8, C3. `seo-ai-review` skill'i erişilebilir değil; proje kurallarıyla denetlendi.

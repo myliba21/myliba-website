@@ -845,6 +845,22 @@ padding: 18px;
 font-size: var(--fs-lead);
 margin: 0 0 10px;
 }
+.author-card .eyebrow {
+margin: 0 0 6px;
+}
+.author-card h2 a {
+color: inherit;
+text-decoration: none;
+}
+.author-card h2 a:hover,
+.author-card h2 a:focus-visible,
+.author-card__link {
+text-decoration: underline;
+text-underline-offset: 3px;
+}
+.author-card__link {
+font-weight: 600;
+}
 .cta-panel {
 background: var(--foreground);
 color: #fff;

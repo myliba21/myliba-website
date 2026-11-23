@@ -30,9 +30,19 @@ $headings = $matches[1] ?? [];
                     </ol>
                 </div>
             <?php endif; ?>
+            <?php $author_profile = function_exists('Myliba\\Core\\SEO\\post_author_profile') ? \Myliba\Core\SEO\post_author_profile((int) get_queried_object_id()) : null; ?>
             <div class="author-card">
-                <h2><?php echo esc_html(myliba_text('Myliba Team')); ?></h2>
-                <p><?php echo esc_html(myliba_text('Insights on OKR, KPI, CFR, performance culture, feedback and leadership routines.')); ?></p>
+                <?php if ($author_profile) : ?>
+                    <p class="eyebrow"><?php echo esc_html(myliba_text('Author')); ?></p>
+                    <h2><a href="<?php echo esc_url($author_profile['url']); ?>" rel="author"><?php echo esc_html($author_profile['name']); ?></a></h2>
+                    <?php if ($author_profile['headline'] !== '') : ?>
+                        <p><?php echo esc_html($author_profile['headline']); ?></p>
+                    <?php endif; ?>
+                    <p><a class="author-card__link" href="<?php echo esc_url($author_profile['url']); ?>"><?php echo esc_html(myliba_text('View profile')); ?> →</a></p>
+                <?php else : ?>
+                    <h2><?php echo esc_html(myliba_text('Myliba Team')); ?></h2>
+                    <p><?php echo esc_html(myliba_text('Insights on OKR, KPI, CFR, performance culture, feedback and leadership routines.')); ?></p>
+                <?php endif; ?>
             </div>
             <div class="cta-panel">
                 <h2><?php echo esc_html(myliba_text('Turn this into practice.')); ?></h2>

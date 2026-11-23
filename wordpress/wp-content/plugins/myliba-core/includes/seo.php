@@ -1214,6 +1214,90 @@ function breadcrumb_schema(): array
     ];
 }
 
+/**
+ * Byline for a blog post: the WordPress author, but only when that person has
+ * a published team profile in the post's language. Technical/admin accounts
+ * therefore never appear as an expert; callers fall back to the brand.
+ *
+ * @return array{id:int,name:string,url:string,headline:string}|null
+ */
+function post_author_profile(int $post_id): ?array
+{
+    static $cache = [];
+    if (array_key_exists($post_id, $cache)) {
+        return $cache[$post_id];
+    }
+
+    $cache[$post_id] = null;
+    $post = get_post($post_id);
+    if (!$post || $post->post_type !== 'post') {
+        return null;
+    }
+
+    $name = trim((string) get_the_author_meta('display_name', (int) $post->post_author));
+    if ($name === '') {
+        return null;
+    }
+
+    $language = (string) get_post_meta($post_id, '_myliba_language', true);
+    if (!in_array($language, Options\locales(), true)) {
+        $language = current_language();
+    }
+
+    $profiles = get_posts([
+        'post_type' => 'myliba_team',
+        'post_status' => 'publish',
+        'title' => $name,
+        'posts_per_page' => 10,
+        'no_found_rows' => true,
+    ]);
+
+    foreach ($profiles as $profile) {
+        if ((string) get_post_meta($profile->ID, '_myliba_language', true) !== $language) {
+            continue;
+        }
+        if ((string) get_post_meta($profile->ID, '_myliba_noindex', true) === '1') {
+            continue;
+        }
+
+        $cache[$post_id] = [
+            'id' => (int) $profile->ID,
+            'name' => $name,
+            'url' => (string) get_permalink($profile),
+            'headline' => trim((string) get_post_meta($profile->ID, '_myliba_person_headline', true)),
+        ];
+        break;
+    }
+
+    return $cache[$post_id];
+}
+
+function article_author_schema(int $post_id): array
+{
+    $profile = post_author_profile($post_id);
+    if ($profile === null) {
+        return [
+            '@type' => 'Organization',
+            'name' => Options\get('organization_name', 'Myliba'),
+        ];
+    }
+
+    $author = [
+        '@type' => 'Person',
+        'name' => $profile['name'],
+        'url' => $profile['url'],
+        'worksFor' => [
+            '@type' => 'Organization',
+            'name' => Options\get('organization_name', 'Myliba'),
+        ],
+    ];
+    if ($profile['headline'] !== '') {
+        $author['description'] = $profile['headline'];
+    }
+
+    return $author;
+}
+
 function article_schema(): array
 {
     $post_id = get_queried_object_id();
@@ -1223,10 +1307,7 @@ function article_schema(): array
         'headline' => get_the_title($post_id),
         'datePublished' => get_the_date(DATE_W3C, $post_id),
         'dateModified' => get_the_modified_date(DATE_W3C, $post_id),
-        'author' => [
-            '@type' => 'Organization',
-            'name' => Options\get('organization_name', 'Myliba'),
-        ],
+        'author' => article_author_schema($post_id),
         'publisher' => [
             '@type' => 'Organization',
             'name' => Options\get('organization_name', 'Myliba'),
