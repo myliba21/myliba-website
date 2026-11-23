@@ -22,6 +22,7 @@ function boot(): void
     add_filter('document_title_parts', __NAMESPACE__ . '\\document_title');
     add_action('template_redirect', __NAMESPACE__ . '\\redirect_legacy_locale_duplicate', 0);
     add_action('template_redirect', __NAMESPACE__ . '\\render_llms_txt', 0);
+    add_action('template_redirect', __NAMESPACE__ . '\\handle_legacy_urls', 1);
     add_action('send_headers', __NAMESPACE__ . '\\send_noindex_header');
     add_action('wp_head', __NAMESPACE__ . '\\render_head', 2);
     add_action('admin_notices', __NAMESPACE__ . '\\external_seo_plugin_notice');
@@ -89,6 +90,73 @@ function redirect_public_origin(): void
     if ($target !== '') {
         wp_safe_redirect($target, 301, 'Myliba canonical origin');
         exit;
+    }
+}
+
+/**
+ * Addresses from the previous site that search engines still request and
+ * that have a clear successor. Keys are paths without a trailing slash.
+ * Source: Search Console "Not found (404)" list, 23 November 2026.
+ */
+function legacy_redirect_map(): array
+{
+    return [
+        '/tr/hakkimizda' => '/tr/hikayemiz/',
+        '/tr/kvkk-aydinlatma' => '/tr/gizlilik-politikasi/',
+        '/tr/myliba-privacy-policy' => '/tr/gizlilik-politikasi/',
+        '/privacy-policy-webinar' => '/en/privacy-policy/',
+        '/myliba-user-agreement' => '/en/terms-of-use/',
+        '/etik-hat-ihlali-bildirimi' => '/tr/etik-danismanlik/',
+        '/iletisim' => '/tr/iletisim/',
+        '/okr-academy-contact-form' => '/en/okr-culture-academy/',
+        '/our-products' => '/en/software/',
+        '/category/blog' => '/en/blog/',
+        '/tr/category/blog' => '/tr/yazilar/',
+        '/tr/urunlerimiz' => '/tr/yazilim/',
+    ];
+}
+
+/**
+ * Old event URLs have no successor page. Answering 410 tells crawlers the
+ * removal is deliberate; redirecting them all to a listing would read as a
+ * soft 404.
+ */
+function legacy_path_is_gone(string $path): bool
+{
+    return (bool) preg_match('#^/(?:tr/)?event/|^/events(?:/|$)#', $path);
+}
+
+function legacy_redirect_target(string $path): string
+{
+    $key = rtrim($path, '/');
+    // Old paginated archives collapse onto the first page of the successor.
+    $key = (string) preg_replace('#/page/\d+$#', '', $key);
+    $map = legacy_redirect_map();
+
+    return $key !== '' && isset($map[$key]) ? $map[$key] : '';
+}
+
+function handle_legacy_urls(): void
+{
+    if (!is_404() || is_admin() || !in_array($_SERVER['REQUEST_METHOD'] ?? '', ['GET', 'HEAD'], true)) {
+        return;
+    }
+
+    $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) wp_unslash($_SERVER['REQUEST_URI']) : '';
+    $path = (string) wp_parse_url($request_uri, PHP_URL_PATH);
+    if ($path === '') {
+        return;
+    }
+
+    $target = legacy_redirect_target($path);
+    if ($target !== '') {
+        wp_safe_redirect(home_url($target), 301, 'Myliba legacy URL');
+        exit;
+    }
+
+    if (legacy_path_is_gone($path)) {
+        status_header(410);
+        nocache_headers();
     }
 }
 
@@ -697,7 +765,13 @@ function render_hreflang(): void
                     );
                 }
             }
-            printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url(home_url('/')));
+            // The bare domain redirects to a language home, so it cannot be an
+            // hreflang target. Use the same fallback language as inner pages.
+            $default_locale = (string) Options\get('default_locale', 'tr');
+            if (!in_array($default_locale, Options\locales(), true)) {
+                $default_locale = 'tr';
+            }
+            printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url(home_url('/' . $default_locale . '/')));
             return;
         }
     }

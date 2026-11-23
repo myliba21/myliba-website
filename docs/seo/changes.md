@@ -1,5 +1,45 @@
 # Uygulama kaydı
 
+## 23 Kasım 2026 — Kök adres yönlendirmesi ve eski adresler (yerel; canlıya alınmadı)
+
+Kullanıcı `audit-2026-11-23.md` A3 ve A6 için öneriyi onayladı.
+
+**Kök adres (`themes/myliba/functions.php::myliba_redirect_root_to_preferred_locale`).** noindex + meta-refresh'li dil seçici sayfası kaldırıldı. Yeni davranış: dil çerezi varsa o dile 302 (değişmedi); çerez yoksa ve `Accept-Language` başlığı yoksa ya da Türkçe içeriyorsa `/tr/` adresine **301**; başlık başka bir dil istiyorsa `/en/` adresine 302. Yanıt `nocache` başlıkları ve `Vary: Accept-Language, Cookie` taşır; aksi halde tarayıcı 301'i önbelleğe alıp sonraki dil seçimini yok sayar.
+
+**hreflang (`seo.php::render_hreflang`).** Dil ana sayfalarında `x-default` artık köke değil, iç sayfalarla aynı kurala (`default_locale`, şu an `en`) göre dil ana sayfasına işaret ediyor. Denetimdeki "x-default → /tr/" önerisi uygulanmadı: `x-default` yalnız Türkçe ve İngilizce dışındaki dillerde arayanlar için yedektir; onlar için İngilizce sayfa daha uygun ve iç sayfalarla tutarlı. Türkiye aramalarını etkilemez.
+
+**Eski adresler (`seo.php::handle_legacy_urls`, `template_redirect` öncelik 1, yalnız 404 durumunda).** 12 yol için 301: `/tr/hakkimizda` → `/tr/hikayemiz/`; `/tr/kvkk-aydinlatma`, `/tr/myliba-privacy-policy` → `/tr/gizlilik-politikasi/`; `/privacy-policy-webinar` → `/en/privacy-policy/`; `/myliba-user-agreement` → `/en/terms-of-use/`; `/etik-hat-ihlali-bildirimi` → `/tr/etik-danismanlik/`; `/iletisim` → `/tr/iletisim/`; `/okr-academy-contact-form` → `/en/okr-culture-academy/`; `/our-products` → `/en/software/`; `/category/blog` → `/en/blog/`; `/tr/category/blog` (sayfalama dahil) → `/tr/yazilar/`; `/tr/urunlerimiz` → `/tr/yazilim/`. Eski etkinlik yolları (`/event/…`, `/tr/event/…`, `/events/…`) için **410**. İngilizce slug'lar denetimdeki taslaktan farklı olarak İngilizce karşılıklara yönlendirildi. `/en/blog/practical-okr-operating-rhythm/`, feed ve alt alan adı kayıtları kapsam dışı.
+
+Yerel doğrulama (tarayıcıdan): kök `tr` başlığıyla `/tr/`, `en` ve `de` başlığıyla `/en/` sonucuna ulaşıyor; 10 eski adres beklenen hedefe ulaşıyor; üç etkinlik yolu 410; rastgele olmayan adres 404; `/tr/etkinlikler/`, `/en/events/`, `/tr/yazilim/`, `/tr/iletisim/` 200. TR ana sayfa hreflang: `en>/en/ tr>/tr/ x-default>/en/`, canonical `/tr/`. İki dosya PHP 8.3 sözdizimi kontrolünden geçti; eşleme işlevleri ayrı denendi.
+
+Doğrulanmayan: yönlendirme durum kodları (tarayıcı `fetch` 301/302 ayrımını göstermez; kod incelemesine dayanıyor), `Accept-Language` göndermeyen istemci (Googlebot) davranışı, canlıda yönlendirme zinciri (`myliba.com` → `www` → `/tr/` iki adım olacak). Canlıya alındıktan sonra harici bir istekle teyit edilmeli. Sitemap, canonical ve noindex mantığına dokunulmadı; kök zaten sitemap dışında.
+
+Geri alma: iki dosyadaki bu değişiklikleri önceki commit'e döndürmek. 301'ler tarayıcıda önbelleğe alınmıyor; arama motorları birkaç günde eski duruma döner.
+
+## 23 Kasım 2026 — SEO paketi 1 canlıda: yayın sonrası denetim
+
+Kullanıcı `make links-apply` (17 kayıtta 25 bağlantı) ve `make predeploy` (HAZIR; form testi geçti) sonrasında All-in-One ile canlıya aldı. Canlıda sitemap'teki 121 URL'nin tamamı tarandı (16:10 TSİ, kullanıcının tarayıcısından).
+
+| Kontrol | Sonuç |
+| --- | --- |
+| HTTP 200, yönlendirmesiz | 121 / 121 |
+| Tek ve self canonical, tek description, noindex yok | 121 / 121 |
+| JSON-LD parse hatası / PHP uyarı çıktısı | 0 / 0 |
+| Footer "Öne çıkan konular" (6 bağlantı) | 121 / 121 |
+| Sitemap sayfalarından 404'e giden iç bağlantı | 0 (önce `/category/blog/`, `/tr/category/blog/`, `/our-products/`) |
+| Para sayfalarına bağlantı veren sayfa sayısı | TR 63, EN 60 (önce 2–4) |
+| `/en/solutions/corporate-development-programs/` | `/en/okr-culture-academy/` (önce TR sayfa); EN footer doğrudan bağlanıyor |
+| `/tr/yazilim/` video, `/tr/demo/` form | Yerinde |
+| WP Mail SMTP | SMTP, `smtp.gmail.com`, sabitten; klon sonrası korunmuş |
+| Site Settings | contact_email hello@myliba.com, indexing açık; "arama motorlarını engelle" kapalı |
+| HTML ilk bayt (boşta, ardışık) | 0,5–0,7 sn; boşta kalmış ilk istek 2,3 sn |
+
+Kalanlar: çift H1 olan 6 yazı (denetim B7); `okr-hatalari-…` yazısının hero düğmesinde kısa slug'a giden tek bağlantı (şablon/alan kaynaklı, gövde betiği kapsamaz); `/category/blog/` adresinin kendisi hâlâ 404 (301 haritası onay bekliyor). Form Submissions 39 kayda döndü (bugünkü test kayıtları klonla silindi, beklenen).
+
+Search Console dizin istekleri (üçünde de "Indexing requested" onayı): `/tr/icerikler/geri-bildirim-kulturu/`, `/tr/yazilar/okr-ornekleri/`, `/tr/okr-kultur-akademisi/icf-onayli-okr-kultur-koclugu/`. Bugünkü toplam sekiz URL. Denetim ekranı hâlâ "Referring page: None detected" gösteriyor; Google yeni iç bağlantıları henüz taramadı.
+
+Ölçülmeyen: gerçek form gönderimi (klon sonrası), mobil görünüm, Core Web Vitals.
+
 ## 23 Kasım 2026 — SEO paketi 1 (yerel): iç bağlantılar, EN yönlendirme, form sınırı
 
 Yalnız yerelde; canlıya alınmadı. Kaynak: `audit-2026-11-23.md` A1 ve A5.

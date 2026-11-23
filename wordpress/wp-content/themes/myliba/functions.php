@@ -787,50 +787,24 @@ function myliba_redirect_root_to_preferred_locale(): void
         exit;
     }
 
-    $browser_fallback = myliba_preferred_locale();
-    $home_base = trailingslashit(home_url('/'));
+    // No stored preference. Turkish is the primary market, so the bare domain
+    // permanently redirects to /tr/: links pointing at the root now count for
+    // an indexable page instead of the former noindex language selector.
+    // Visitors whose browser explicitly prefers another language still reach
+    // the English site, with a temporary redirect.
+    $accept_language = isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])
+        ? sanitize_text_field(wp_unslash($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+        : '';
+    $locale = $accept_language !== '' ? myliba_locale_from_accept_language($accept_language) : 'tr';
+    if (!in_array($locale, myliba_available_locales(), true)) {
+        $locale = 'tr';
+    }
+
+    // Browsers cache permanent redirects; without these headers a later
+    // language choice (cookie) would never be consulted for the root URL.
     nocache_headers();
-    status_header(200);
-    ?>
-    <!doctype html>
-    <html lang="<?php echo esc_attr($browser_fallback === 'tr' ? 'tr-TR' : 'en-US'); ?>">
-    <head>
-        <meta charset="<?php bloginfo('charset'); ?>">
-        <meta name="robots" content="noindex,follow">
-        <meta http-equiv="refresh" content="1;url=<?php echo esc_url(home_url('/' . $browser_fallback . '/')); ?>">
-        <title><?php echo esc_html(get_bloginfo('name')); ?></title>
-    </head>
-    <body>
-        <script>
-        (() => {
-            const supported = ["tr", "en"];
-            let stored = "";
-            try {
-                stored = window.localStorage.getItem("myliba_locale") || "";
-            } catch (error) {}
-
-            let locale = "";
-            if (supported.includes(stored)) {
-                locale = stored;
-            } else {
-                const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
-                    ? navigator.languages
-                    : [navigator.language || ""];
-                const isTurkish = browserLanguages.some((lang) => String(lang).toLowerCase().startsWith("tr"));
-                locale = isTurkish ? "tr" : "en";
-                try {
-                    window.localStorage.setItem("myliba_locale", locale);
-                } catch (error) {}
-            }
-
-            document.cookie = `myliba_locale=${locale}; path=/; max-age=31536000; samesite=lax`;
-            window.location.replace(<?php echo wp_json_encode($home_base); ?> + locale + "/");
-        })();
-        </script>
-        <p><a href="<?php echo esc_url(home_url('/' . $browser_fallback . '/')); ?>"><?php echo esc_html(myliba_text('Continue')); ?></a></p>
-    </body>
-    </html>
-    <?php
+    header('Vary: Accept-Language, Cookie', false);
+    wp_safe_redirect(home_url('/' . $locale . '/'), $locale === 'tr' ? 301 : 302, 'Myliba root');
     exit;
 }
 add_action('template_redirect', 'myliba_redirect_root_to_preferred_locale', 0);
