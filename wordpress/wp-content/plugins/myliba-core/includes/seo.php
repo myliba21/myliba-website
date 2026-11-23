@@ -298,6 +298,7 @@ function render_llms_txt(): void
 
     echo "# Myliba\n\n";
     echo "> Myliba connects OKR, KPI, CFR, 1:1 meetings, feedback, actions and academy routines to help organizations build measurable performance and leadership culture.\n\n";
+    echo "Myliba; OKR, KPI, CFR, 1:1 görüşmeler, geri bildirim ve aksiyonları tek platformda birleştiren OKR ve performans yönetimi yazılımıdır. Yazılımın yanında OKR danışmanlığı, kurumsal OKR koçluğu ve akademi programları sunar. Birincil pazar Türkiye'dir; içerik Türkçe ve İngilizce yayımlanır.\n\n";
     echo "## Core Solutions & Products\n\n";
     echo "- [Yazılım / Platform]({$site_url}/tr/yazilim/): OKR ve performans yönetimi yazılımı.\n";
     echo "- [Çözümlerimiz]({$site_url}/tr/cozumler/): Kurumsal gelişim programları, danışmanlık ve kültür analizi.\n";
@@ -316,10 +317,49 @@ function render_llms_txt(): void
     echo "- [OKR Consultants & Performance Management Experts]({$site_url}/en/our-trainers/)\n";
     echo "- [Corporate OKR Coaching]({$site_url}/en/okr-coaching/): OKR implementation, goal quality, team alignment, check-ins, and sustainable OKR routines.\n";
     echo "- [OKR Consulting and Coaching]({$site_url}/en/solutions/advisory-and-consulting/): Strategic alignment, OKR implementation, performance management, and high-performance culture consulting.\n\n";
+    foreach (['tr' => 'Konu sayfaları (Türkçe)', 'en' => 'Topic pages (English)'] as $language => $heading) {
+        $lines = llms_landing_lines($language);
+        if ($lines) {
+            echo "## {$heading}\n\n" . implode("\n", $lines) . "\n\n";
+        }
+    }
     echo "## Sitemap\n\n";
     echo "- {$site_url}/wp-sitemap.xml\n";
 
     exit;
+}
+
+/**
+ * Published, indexable landing pages of one language as llms.txt list items.
+ *
+ * @return string[]
+ */
+function llms_landing_lines(string $language): array
+{
+    $ids = get_posts([
+        'post_type' => 'myliba_landing',
+        'post_status' => 'publish',
+        'posts_per_page' => 20,
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'fields' => 'ids',
+        'no_found_rows' => true,
+        'meta_key' => '_myliba_language',
+        'meta_value' => $language,
+    ]);
+
+    $lines = [];
+    foreach ($ids as $id) {
+        $id = (int) $id;
+        if (get_post_meta($id, '_myliba_noindex', true) === '1') {
+            continue;
+        }
+        $description = trim((string) get_post_meta($id, '_myliba_seo_description', true));
+        $description = (string) preg_replace('/\s+/', ' ', $description);
+        $lines[] = sprintf('- [%s](%s)%s', get_the_title($id), get_permalink($id), $description !== '' ? ': ' . $description : '');
+    }
+
+    return $lines;
 }
 
 function sitemaps_enabled(bool $enabled): bool
@@ -823,6 +863,27 @@ function render_hreflang(): void
     printf("<link rel=\"alternate\" hreflang=\"x-default\" href=\"%s\">\n", esc_url($default_url));
 }
 
+/**
+ * sameAs must identify the profile itself. Settings sometimes hold a deep
+ * link copied from the browser (a feed view with a query string).
+ */
+function profile_url(string $url): string
+{
+    $url = trim($url);
+    if ($url === '' || !filter_var($url, FILTER_VALIDATE_URL)) {
+        return '';
+    }
+
+    $parts = wp_parse_url($url);
+    $host = strtolower((string) ($parts['host'] ?? ''));
+    $path = (string) ($parts['path'] ?? '/');
+    if (str_contains($host, 'linkedin.com')) {
+        $path = (string) preg_replace('#/(posts|about|jobs|people|life)/?$#', '/', $path);
+    }
+
+    return 'https://' . $host . ($path === '' ? '/' : $path);
+}
+
 function render_schema(): void
 {
     if (is_404() || is_search()) {
@@ -830,13 +891,13 @@ function render_schema(): void
     }
 
     $schemas  = [];
-    $same_as  = array_filter([
-        Options\get('linkedin_url'),
-        Options\get('instagram_url'),
-        Options\get('twitter_url'),
-        Options\get('youtube_url'),
-        Options\get('facebook_url'),
-    ]);
+    $same_as  = array_filter(array_map(__NAMESPACE__ . '\\profile_url', [
+        (string) Options\get('linkedin_url'),
+        (string) Options\get('instagram_url'),
+        (string) Options\get('twitter_url'),
+        (string) Options\get('youtube_url'),
+        (string) Options\get('facebook_url'),
+    ]));
 
     $organization = [
         '@context' => 'https://schema.org',
@@ -1093,36 +1154,58 @@ function trainers_directory_schema(int $page_id): array
 
 function breadcrumb_schema(): array
 {
+    $language = current_language();
+    if (!in_array($language, Options\locales(), true)) {
+        $language = 'tr';
+    }
+
+    // The trail starts at the language home: the bare domain only redirects.
     $items = [
         [
             '@type' => 'ListItem',
             'position' => 1,
             'name' => get_bloginfo('name'),
-            'item' => home_url('/'),
+            'item' => home_url('/' . $language . '/'),
         ],
     ];
 
-    if (is_singular()) {
-        $post = get_post(get_queried_object_id());
-        if ($post && $post->post_parent) {
-            $parent = get_post($post->post_parent);
-            if ($parent) {
-                $items[] = [
-                    '@type' => 'ListItem',
-                    'position' => count($items) + 1,
-                    'name' => get_the_title($parent),
-                    'item' => get_permalink($parent),
-                ];
-            }
-        }
+    if (!is_singular()) {
+        return [];
+    }
 
+    $post = get_post(get_queried_object_id());
+    $locale_page = get_page_by_path($language);
+    $locale_page_id = $locale_page instanceof \WP_Post ? (int) $locale_page->ID : 0;
+    if (!$post || ($locale_page_id && (int) $post->ID === $locale_page_id)) {
+        // A language home has no trail of its own.
+        return [];
+    }
+
+    if ($post->post_type === 'post') {
         $items[] = [
             '@type' => 'ListItem',
             'position' => count($items) + 1,
-            'name' => get_the_title(),
-            'item' => current_url(),
+            'name' => 'Blog',
+            'item' => home_url($language === 'en' ? '/en/blog/' : '/tr/yazilar/'),
         ];
+    } elseif ($post->post_parent && (int) $post->post_parent !== $locale_page_id) {
+        $parent = get_post($post->post_parent);
+        if ($parent) {
+            $items[] = [
+                '@type' => 'ListItem',
+                'position' => count($items) + 1,
+                'name' => html_entity_decode(wp_strip_all_tags(get_the_title($parent)), ENT_QUOTES | ENT_HTML5, 'UTF-8'),
+                'item' => get_permalink($parent),
+            ];
+        }
     }
+
+    $items[] = [
+        '@type' => 'ListItem',
+        'position' => count($items) + 1,
+        'name' => html_entity_decode(wp_strip_all_tags(get_the_title($post)), ENT_QUOTES | ENT_HTML5, 'UTF-8'),
+        'item' => current_url(),
+    ];
 
     return [
         '@context' => 'https://schema.org',
@@ -1152,10 +1235,39 @@ function article_schema(): array
         'mainEntityOfPage' => current_url(),
     ];
 
+    $language = current_language();
+    if (in_array($language, Options\locales(), true)) {
+        $schema['inLanguage'] = $language;
+    }
+
+    $logo_id = (int) get_theme_mod('custom_logo');
+    $logo_url = $logo_id ? wp_get_attachment_image_url($logo_id, 'full') : '';
+    if ($logo_url) {
+        $schema['publisher']['logo'] = [
+            '@type' => 'ImageObject',
+            'url' => $logo_url,
+        ];
+    }
+
     if (has_post_thumbnail($post_id)) {
         $image = wp_get_attachment_image_url(get_post_thumbnail_id($post_id), 'large');
         if ($image) {
             $schema['image'] = $image;
+        }
+    }
+
+    // Most posts open with an infographic instead of a featured image. It is
+    // visible on the page, so it is a truthful image for the article.
+    if (empty($schema['image'])) {
+        $post = get_post($post_id);
+        if ($post && preg_match('/<img[^>]+src=["\']([^"\']+)["\']/i', (string) $post->post_content, $match)) {
+            $src = html_entity_decode($match[1], ENT_QUOTES);
+            if (str_starts_with($src, '/') && !str_starts_with($src, '//')) {
+                $src = home_url($src);
+            }
+            if (filter_var($src, FILTER_VALIDATE_URL)) {
+                $schema['image'] = esc_url_raw($src);
+            }
         }
     }
 

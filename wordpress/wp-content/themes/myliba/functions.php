@@ -2875,6 +2875,22 @@ function myliba_inject_contact_social_links(string $content): string
 add_filter('the_content', 'myliba_inject_contact_social_links', 20);
 
 /**
+ * The single-post template prints the post title as the page's only H1.
+ * An H1 typed inside the article body would create a second one, so body
+ * H1 headings are rendered as H2.
+ */
+function myliba_demote_content_h1(string $content): string
+{
+    // single.php filters the body outside the loop, so the loop state is not a usable signal here.
+    if (is_admin() || !is_singular('post') || stripos($content, '<h1') === false) {
+        return $content;
+    }
+
+    return (string) preg_replace('#<(/?)h1(\b[^>]*)>#i', '<$1h2$2>', $content);
+}
+add_filter('the_content', 'myliba_demote_content_h1', 9);
+
+/**
  * Google Analytics (gtag.js)
  */
 function add_google_analytics(): void

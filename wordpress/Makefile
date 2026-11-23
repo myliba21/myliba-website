@@ -7,7 +7,7 @@ WORDPRESS_ADMIN_USER ?= admin
 WORDPRESS_ADMIN_PASSWORD ?= change-me-admin
 WORDPRESS_ADMIN_EMAIL ?= admin@example.com
 
-.PHONY: up install seed bootstrap down logs smtp-test sync-blog pull-live predeploy links-preview links-apply
+.PHONY: up install seed bootstrap down logs smtp-test sync-blog pull-live predeploy links-preview links-apply pairs-preview pairs-apply
 
 up:
 	docker compose up -d
@@ -51,3 +51,10 @@ links-preview:
 
 links-apply:
 	docker compose --profile tools run --rm wpcli wp eval-file wp-content/plugins/myliba-core/migrations/2026-11-23-internal-links.php apply
+
+# Blog yazılarında TR–EN eşleştirme (hreflang). docs/seo/audit-2026-11-23.md, B4.
+pairs-preview:
+	docker compose --profile tools run --rm wpcli wp eval-file wp-content/plugins/myliba-core/migrations/2026-11-23-post-translation-pairs.php
+
+pairs-apply:
+	docker compose --profile tools run --rm wpcli wp eval-file wp-content/plugins/myliba-core/migrations/2026-11-23-post-translation-pairs.php apply

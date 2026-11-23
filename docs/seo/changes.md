@@ -1,5 +1,76 @@
 # Uygulama kaydı
 
+## 23 Kasım 2026 — Teknik paket 2 (yerel; canlıya alınmadı)
+
+Kaynak: `audit-2026-11-23.md` B4, B5, B7, B8, C3. `seo-ai-review` skill'i erişilebilir değil; proje kurallarıyla denetlendi.
+
+**Schema (`myliba-core/includes/seo.php`).**
+- `profile_url()`: Organization `sameAs` adresleri sorgu dizgisinden ve LinkedIn alt yollarından arındırılıyor (`…/company/myliba/posts/?feedView=all` → `…/company/myliba/`). Ayar kaydı değişmedi.
+- `breadcrumb_schema()`: iz dil ana sayfasından başlıyor (`/tr/` ya da `/en/`; kök artık yönlendirme). "Myliba > Myliba > Sayfa" tekrarı kalktı; blog yazılarında "Blog" katmanı eklendi; dil ana sayfalarında BreadcrumbList üretilmiyor; adlardaki HTML varlıkları (`&#038;`, `&#8217;`) çözülüyor.
+- `article_schema()`: `inLanguage`, yayıncı logosu ve görsel eklendi. Öne çıkarılmış görsel yoksa gövdedeki ilk görsel kullanılıyor (sayfada görünen infografik). Yazar hâlâ Organization; gerçek yazar kararı bekliyor.
+
+**llms.txt (`seo.php::render_llms_txt`, `llms_landing_lines`).** Türkçe özet paragrafı ve yayımlanmış, noindex olmayan landing sayfalarının iki dilde otomatik listesi (başlık + meta açıklama) eklendi.
+
+**Tema.**
+- `functions.php::myliba_demote_content_h1`: yazı gövdesine yazılmış H1 başlıkları H2 olarak basılıyor (`single.php` gövdeyi döngü dışında süzdüğü için koşul yalnız `is_singular('post')`). Altı yazıdaki çift H1 giderildi; veritabanındaki içerik değişmedi.
+- `template-parts/client-logo-marquee.php`: başlığı dosya adı olan logolarda alt metin ve aria-label boş bırakılıyor (önce `referans-logolar-01.png`). Gerçek müşteri adları girilirse kendiliğinden kullanılır.
+
+**Dört yazının SEO alanları (yerel panelden; H1, gövde, URL aynı).**
+
+| ID | Başlık (karakter) | Açıklama |
+| --- | --- | --- |
+| 1017 | Modern Yetenek Yönetimi Nasıl Yapılır? OKR, CFR ve Koçluk (57; önce 106) | 159 karakter; önce gövdeden 270 |
+| 1019 | OKR ile Kültürel Dönüşüm: Şirketler Nereden Başlamalı? (54; önce 63, "\| Myliba" ekli) | 159; önce 243 |
+| 1015 | OKR’de Hesap Verebilirlik Nedir? Güven ve Şeffaflık (51; önce 68) | 155; önce 230 |
+| 1289 | değişmedi (64) | 159; önce başlığın aynısı |
+
+Açıklamalar yalnız gövdede bulunan bölümleri anlatır.
+
+**Blog TR–EN eşleştirme betiği.** `migrations/2026-11-23-post-translation-pairs.php`, `make pairs-preview` / `make pairs-apply`: 23 çift için ortak `_myliba_translation_key`. Henüz çalıştırılmadı; uygulanınca hreflang ve dil değiştirici yazının karşılığını gösterir. Karşılığı olmayan üç TR yazı: `hedefini-belirle-ve-duyur`, `my-life-balance-model`, `okr-ve-cfr-ile-5-kulturel-basamakta-donusum`.
+
+**Yerel doğrulama.** Sitemap'teki 121 URL tarandı: 121/121 200, tek H1, tek canonical, tek description, JSON-LD parse hatası yok, breadcrumb adlarında varlık kalıntısı yok, PHP uyarı çıktısı yok, footer satırı 6 bağlantı. Dört yazıda ana içerik kelime sayısı kayıt öncesiyle aynı. Değişen PHP dosyaları ve betik PHP 8.3 sözdizimi kontrolünden geçti; `profile_url` ayrı denendi.
+
+**Kapsamdan çıkanlar.**
+- *Ana sayfa görseli (B8):* denetimdeki "871 KB preload" bulgusu yanlıştı. Preload etiketi `imagesrcset` taşıyor; tarayıcı 1536 px'lik türevi yüklüyor. Değişiklik gerekmedi.
+- *Sayfa önbelleği (A2):* yapılmadı. LiteSpeed Cache yalnız LiteSpeed sunucusunda çalışır; yerel Apache'de davranışı (form nonce süresi, kök adresin çerez/dil ayrımı) denenemez. Canlıda kontrollü bir deneme penceresi gerektirir.
+- *Sayfalama hreflang'i, `base.min.css` boyutu, bir yazının hero düğmesindeki kısa adres:* düşük öncelik, dokunulmadı.
+
+Doğrulanmayan: Rich Results Test, mobil görünüm, `make predeploy` (kullanıcı çalıştıracak). Yeni canonical/meta üreticisi eklenmedi; staging korumalarına dokunulmadı.
+
+## 23 Kasım 2026 — İki yazının SEO başlığı ve açıklaması (yerel; canlıya alınmadı)
+
+Kaynak: `audit-2026-11-23.md` B2. `seo-ai-review` skill'i bu oturumda erişilebilir değil; denetim proje kurallarıyla (`meta.php` alan önerileri: başlık 30–60, açıklama 120–160 karakter; `seo-review-rules.json` C2) yapıldı. Yalnız `_myliba_seo_title` ve `_myliba_seo_description` alanları yerel panelden değiştirildi; H1, gövde ve URL aynı.
+
+Dayanak (Search Console, son 3 ay, sayfa filtresiyle sorgular):
+
+| Yazı | Gösterim / tıklama / konum | Başlıca sorgular |
+| --- | --- | --- |
+| `/tr/yazilar/okr-nedir-hedefleri-canli-tutmanin-…/` (ID 1253) | 3.130 / 9 / 8,0 | okr (2.108), okr ne demek (161), okr açılımı (49), okr sistemi nedir (34), okr nedir (25; konum 15,9) |
+| `/tr/yazilar/geribildirim-ileri-bildirim-farki/` (ID 1021) | 3.340 / 9 / 7,8 | geri bildirim nedir (612), geribildirim (228), geribildirim nedir (154), geri bildirim ne demek (126), ileri bildirim nedir (89), feedforward ne demek (62) |
+
+| Yazı | Önce | Sonra |
+| --- | --- | --- |
+| 1253 başlık | OKR Nedir? Kurumlarda Performans ve Kültür | OKR Nedir? Açılımı, Anlamı ve Kurumlarda Uygulaması (51) |
+| 1253 açıklama | OKR nedir, nasıl çalışır ve kurumlara ne kazandırır? … (147) | OKR (Objectives and Key Results), hedefleri ölçülebilir temel sonuçlara bağlayan hedef yönetimi yöntemidir. Açılımını, yapısını ve uygulama adımlarını öğrenin. (159) |
+| 1021 başlık | Geri Bildirim mi, İleri Bildirim mi? Farkları ve En Etkin Kullanımları \| Myliba (79) | Geri Bildirim Nedir? İleri Bildirim (Feedforward) ile Farkı (59) |
+| 1021 açıklama | Gövdeden alınmış, 257 karakter | Geri bildirim geçmiş davranışa dair farkındalık kazandırır; ileri bildirim (feedforward) geleceğe dönük öneri sunar. İkisinin farkını ve örneklerini inceleyin. (159) |
+
+Gerekçe: iki sayfa da tanım sorgularında ("ne demek", "nedir", "açılımı") ilk sayfada görünüp tıklanmıyor; eski başlıklar bu niyeti karşılamıyordu. Yeni metinler gövdede bulunan içeriği anlatır (açılım, yapı, uygulama adımları; iki kavramın tanımı ve örnek cümleler); gövdede olmayan bir vaat eklenmedi.
+
+Yerel doğrulama: iki sayfada `<title>`, meta description ve og:title yeni değerleri gösteriyor; tek H1, tek canonical, tek description; ana içerik kelime sayısı kayıttan önceki ölçümle aynı (1.498 ve 797); Article JSON-LD parse ediliyor.
+
+Açık not: 1253 gövdesinde kaynağı doğrulanmamış bir istatistik var ("hedeflerin %67 daha güçlü… performansın 2 katına çıktığı (McKinsey, 2025)"). Değiştirilmedi; kaynak bağlantısı eklenmeli ya da ifade kaldırılmalı (B9). Aynı niyetteki ikinci yazı `iki-dakikada-okrs-nedir-ogrenin` ("OKR Nedir? 2 Dakikada OKR Rehberi") ile ayrım kararı (B3) bekliyor. Sonuç 2–4 hafta sonra aynı sayfa filtresiyle CTR üzerinden değerlendirilmeli; sıralama değişimi garanti değildir.
+
+## 23 Kasım 2026 — Kök yönlendirme ve eski adresler canlıda: denetim
+
+Kullanıcı canlıya aldı (16:24). Canlıda kullanıcının tarayıcısından çerezsiz isteklerle: kök `tr` diliyle `/tr/`, `en` diliyle `/en/` sonucuna ulaşıyor; 11 eski adres beklenen hedefe ulaşıyor (`/tr/hakkimizda/`, `/tr/kvkk-aydinlatma/`, `/tr/myliba-privacy-policy/`, `/privacy-policy-webinar/`, `/iletisim`, `/etik-hat-ihlali-bildirimi/`, `/our-products/`, `/category/blog/`, `/tr/category/blog/`, `/myliba-user-agreement`, `/okr-academy-contact-form/`); `/event/okr-kpi/`, `/tr/event/…`, `/events/list/` 410; olmayan adres 404; `/tr/etkinlikler/`, `/en/events/`, `/tr/yazilim/`, `/tr/demo/`, sitemap ve robots 200. `/tr/urunlerimiz/` canlıda zaten `/tr/cozumler/` adresine yönleniyordu (404 olmadığı için yeni kural devreye girmiyor). TR ana sayfa: `x-default>/en/`, canonical `/tr/`, footer satırı 6 bağlantı.
+
+Harici, çerezsiz bir istekle (WebFetch) kök adres Türkçe ana sayfa içeriğini döndürdü: canonical `/tr/`, noindex yok, meta refresh yok.
+
+Doğrulanamayan: 301/302 durum kodlarının kendisi (kullanılan araçlar ara yanıt kodunu göstermiyor); kod `wp_safe_redirect(…, 301)` çağırıyor. Search Console URL Denetimi birkaç gün içinde "Yönlendirmeli sayfa" olarak gösterecektir.
+
+Search Console: "Not found (404)" sorunu için düzeltme doğrulaması başlatıldı ("Validation started 11/23/26"). Eski etkinlik adresleri bilerek 410 döndüğü için doğrulama bu adreslerde "başarısız" görünebilir; beklenen durumdur.
+
 ## 23 Kasım 2026 — Kök adres yönlendirmesi ve eski adresler (yerel; canlıya alınmadı)
 
 Kullanıcı `audit-2026-11-23.md` A3 ve A6 için öneriyi onayladı.

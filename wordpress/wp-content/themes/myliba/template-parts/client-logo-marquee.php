@@ -59,13 +59,18 @@ $aria_label = (string) ($component['title'] ?: myliba_text('Client logos'));
                         $is_duplicate = $repeat > 0;
                         $logo_url = (string) myliba_meta('_myliba_logo_url', $logo_post->ID);
                         $logo_name = get_the_title($logo_post);
+                        // Logos imported in bulk carry their file name as title;
+                        // a file name is not a text alternative.
+                        if (preg_match('/\.(png|jpe?g|webp|svg|gif)$/i', $logo_name)) {
+                            $logo_name = '';
+                        }
                         $logo_image = get_the_post_thumbnail($logo_post->ID, 'medium', [
                             'loading' => 'lazy',
                             'alt' => $logo_name,
                         ]);
                         ?>
                         <?php if ($logo_url !== '') : ?>
-                            <a class="trust-logo" href="<?php echo esc_url($logo_url); ?>" aria-label="<?php echo esc_attr($logo_name); ?>" <?php echo $is_duplicate ? 'aria-hidden="true" tabindex="-1"' : ''; ?>><?php echo wp_kses_post($logo_image); ?></a>
+                            <a class="trust-logo" href="<?php echo esc_url($logo_url); ?>"<?php echo $logo_name !== '' ? ' aria-label="' . esc_attr($logo_name) . '"' : ''; ?> <?php echo $is_duplicate ? 'aria-hidden="true" tabindex="-1"' : ''; ?>><?php echo wp_kses_post($logo_image); ?></a>
                         <?php else : ?>
                             <span class="trust-logo" <?php echo $is_duplicate ? 'aria-hidden="true"' : ''; ?>><?php echo wp_kses_post($logo_image); ?></span>
                         <?php endif; ?>
