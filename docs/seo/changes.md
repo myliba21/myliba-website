@@ -1,5 +1,25 @@
 # Uygulama kaydı
 
+## 23 Kasım 2026 — Canlı form çökmesi: korumalı forms.php yeniden yüklendi
+
+Kullanıcı canlıda form gönderiminin hata verdiğini bildirdi. Canlı panelde 14:47 tarihli yeni kayıt görüldü (39 → 40): talep kaydedilmiş, hata kayıttan sonraki bildirim adımında. Canlıdaki `includes/forms.php` (14.709 bayt, sha256 `a8d8bf9f…`) 22 Ekim'deki Throwable korumasını ve kayıt kontrolünü içermiyordu. Neden: canlı dosyalar yerele alınırken korumasız sürüm çalışma klasörünün üzerine yazılmış ve `db32f9dd` commit'i ile kayda geçip yayımlanmış. Hata ekranı doğrudan görülmedi; teşhis kayıt saati, kod ve 28 Ağustos/22 Ekim'deki aynı hata kaydına dayanıyor.
+
+Yapılan (kullanıcı onayıyla): yerelde `includes/forms.php` ve `tests/forms.php` `60e724b3` sürümüne döndürüldü (commit edilmedi). Canlıda eski dosya web kökü dışına `/home/u0269638/forms.php.bak-20261123-live` olarak yedeklendi; korumalı dosya cPanel Dosya Yöneticisi ile üzerine yüklendi. Canlı dosya geri okunarak doğrulandı: 15.477 bayt, sha256 `6737ca97…`, yerel dosyayla aynı. Sonrasında `/tr/demo/`, `/tr/iletisim/`, `/tr/okr-kultur-akademisi/`, `/en/demo/` 200, form HTML'de, hata çıktısı yok.
+
+Doğrulanmayan: gerçek form gönderimi (kullanıcı test edecek) ve e-posta teslimi. Bu düzeltme çökmeyi önler, e-posta göndermez; canlıda gönderici hâlâ yapılandırılmamış. PHP sözdizimi kontrolü ve test betiği bu turda çalıştırılamadı (Docker'a erişim yok); yüklenen dosya 22 Ekim'de 10 senaryo / 70 kontrolle test edilen sürümle aynıdır. Geri alma: yedek dosyayı aynı konuma kopyalamak. SEO etkisi yok.
+
+## 23 Kasım 2026 — Yayın sonrası kontrol, OPcache ve dizin istekleri
+
+Kullanıcı yazılım sayfası videosunu ve form düzeltmelerini All-in-One WP Migration ile canlıya aldı; ardından www.myliba.com ve Natro paneli üzerinde işlem yapılmasını onayladı. Kod veya içerik değiştirilmedi.
+
+**Yayın sonrası kontrol (canlı, salt okunur).** `/tr/yazilim/` 200, tek H1, tek description, self-canonical, noindex yok; Organization, WebSite, BreadcrumbList, SoftwareApplication, FAQPage JSON-LD parse ediliyor. Video öğesi sayfada, `preload="none"` ve poster ile; `myliba-cark-tr-720.mp4` 200. `robots.txt` engelsiz ve sitemap satırı var; `wp-sitemap.xml` 9 alt liste, page listesi 36 URL. `/tr/`, `/tr/demo/`, `/en/software/` 200 ve indekslenebilir; demo formu HTML'de. cPanel hata günlüğünde kayıt yok.
+
+**OPcache açıldı (Natro cPanel → Select PHP Version, PHP 8.3).** `opcache` uzantısı kapalıydı; işaretlendi, panel "Module opcache saved" yanıtı verdi. Aynı tarayıcıdan `no-store` isteklerle HTML ilk bayt süresi: önce 1,1–1,4 sn, sonra 0,5–0,6 sn (`/tr/`, `/tr/yazilim/`, `/tr/demo/`, `/tr/yazilar/`). Tek konum, tek zaman dilimi. Geri alma: aynı ekranda işareti kaldırmak. Sayfa önbelleği hâlâ yok.
+
+**Search Console dizin istekleri.** "Keşfedildi – dizine eklenmedi" durumundaki beş URL için URL Denetimi'nden istek gönderildi ve "Indexing requested" onayı görüldü: `/tr/icerikler/okr-yazilimi/`, `/tr/icerikler/performans-yonetimi/`, `/tr/icerikler/okr-yonetimi/`, `/tr/icerikler/kpi-ve-okr/`, `/tr/okr-koclugu/`. Denetimde "Referring page: None detected" görüldü; iç bağlantı eksikliği sürüyor. İstek, dizine eklenme garantisi değildir.
+
+**Açık bulgu: canlıda e-posta göndericisi yapılandırılmamış.** WP Mail SMTP 4.10.4 "Henüz bir posta gönderici kurulumunuz yok" uyarısı gösteriyor; seçili yöntem varsayılan PHP mail, Google istemci bilgileri kayıtlı değil. Form kayıtları oluşuyor (Form Submissions: 39 kayıt, sonuncusu 23.11.2026 13:18) fakat bildirim e-postasının teslimi doğrulanmadı. Gizli anahtar girişi ve Google yetkilendirmesi kullanıcıya bırakıldı; test e-postası gönderilmedi.
+
 ## 23 Kasım 2026 — Yazılım sayfasına Myliba Çarkı animasyonu (yalnız yerel)
 
 `/tr/yazilim/` ve `/en/software/` sayfalarında "Tek ve sürekli bir çalışma döngüsü" bölümüne, başlık ile adım kartları arasına Myliba Çarkı animasyonu eklendi. Hero'ya konmadı; video LCP öğesi olmuyor.
