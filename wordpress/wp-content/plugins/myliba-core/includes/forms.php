@@ -319,6 +319,12 @@ function academy_program_exists(string $program): bool
 
 function rate_limited(): bool
 {
+    // Site administrators test the forms repeatedly after each release; the
+    // per-address limit is meant for anonymous visitors.
+    if (is_user_logged_in() && current_user_can('manage_options')) {
+        return false;
+    }
+
     // Client-supplied forwarding headers are intentionally ignored here.
     // Hosts with a trusted reverse proxy may provide the resolved address via
     // this filter after validating the proxy hop themselves.

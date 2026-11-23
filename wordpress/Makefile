@@ -7,7 +7,7 @@ WORDPRESS_ADMIN_USER ?= admin
 WORDPRESS_ADMIN_PASSWORD ?= change-me-admin
 WORDPRESS_ADMIN_EMAIL ?= admin@example.com
 
-.PHONY: up install seed bootstrap down logs smtp-test sync-blog
+.PHONY: up install seed bootstrap down logs smtp-test sync-blog pull-live predeploy links-preview links-apply
 
 up:
 	docker compose up -d
@@ -36,3 +36,18 @@ smtp-test:
 
 sync-blog:
 	docker compose --profile tools run --rm wpcli wp myliba sync-blog --yes
+
+# Canlı veritabanının son anlık görüntüsünü yerele alır (tek yön: canlı → yerel).
+pull-live:
+	bash scripts/pull-live.sh
+
+# All-in-One export almadan önce çalıştırın; hiçbir şeyi değiştirmez.
+predeploy:
+	bash scripts/predeploy-check.sh
+
+# Gövdelerdeki kırık/yönlendirmeli iç bağlantılar (docs/seo/audit-2026-11-23.md, A5).
+links-preview:
+	docker compose --profile tools run --rm wpcli wp eval-file wp-content/plugins/myliba-core/migrations/2026-11-23-internal-links.php
+
+links-apply:
+	docker compose --profile tools run --rm wpcli wp eval-file wp-content/plugins/myliba-core/migrations/2026-11-23-internal-links.php apply

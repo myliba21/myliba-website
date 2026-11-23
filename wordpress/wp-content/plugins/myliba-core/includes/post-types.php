@@ -169,6 +169,12 @@ function redirect_solution_custom_url(): void
 
     if ($redirect_url !== '') {
         $target = filter_var($redirect_url, FILTER_VALIDATE_URL) ? $redirect_url : home_url($redirect_url);
+        // A stored redirect must never send an English solution URL to the
+        // Turkish page (or the reverse); keep the visitor in the post's language.
+        $language = sanitize_key((string) get_post_meta($post_id, '_myliba_language', true));
+        if (function_exists('myliba_localize_url') && in_array($language, ['tr', 'en'], true)) {
+            $target = myliba_localize_url($target, $language);
+        }
         wp_safe_redirect($target, 301);
         exit;
     }

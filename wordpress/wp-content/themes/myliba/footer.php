@@ -277,6 +277,18 @@ $footer_social_links = function_exists('myliba_social_links') ? myliba_social_li
         </nav>
     </div>
 
+    <?php $footer_topic_links = myliba_footer_topic_links(); ?>
+    <?php if (!empty($footer_topic_links)): ?>
+        <nav class="site-footer__topics" aria-label="<?php echo esc_attr(myliba_text('Featured topics')); ?>">
+            <h3><?php echo esc_html(myliba_text('Featured topics')); ?></h3>
+            <ul>
+                <?php foreach ($footer_topic_links as $footer_link): ?>
+                    <li><a href="<?php echo esc_url($footer_link['url']); ?>"><?php echo esc_html($footer_link['label']); ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </nav>
+    <?php endif; ?>
+
     <div class="site-footer__bottom">
         <p><?php echo esc_html(sprintf(myliba_text('Copyright %1$s %2$s. All rights reserved.'), date_i18n('Y'), $footer_organization_name)); ?>
         </p>

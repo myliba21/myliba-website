@@ -37,3 +37,6 @@ wordpress/wp-content/ai1wm-backups/*
 !wordpress/wp-content/ai1wm-backups/index.php
 !wordpress/wp-content/ai1wm-backups/robots.txt
 !wordpress/wp-content/ai1wm-backups/web.config
+
+# make pull-live öncesi alınan yerel veritabanı yedekleri
+wordpress/.local-backups/

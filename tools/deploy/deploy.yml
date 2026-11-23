@@ -1,0 +1,76 @@
+name: Canlıya al (tema + myliba-core)
+
+# Yalnızca kod yayımlanır: myliba teması ve myliba-core eklentisi.
+# Veritabanı, uploads, wp-config.php ve üçüncü parti eklentilere dokunulmaz.
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Canlıya almak için "deploy" yazın'
+        required: true
+        type: string
+      dry_run:
+        description: 'Deneme: dosya yüklemeden yalnızca neyin değişeceğini göster'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Production
+    runs-on: ubuntu-latest
+    if: ${{ inputs.confirm == 'deploy' && github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: PHP sözdizimi kontrolü
+        run: |
+          set -e
+          find wordpress/wp-content/themes/myliba wordpress/wp-content/plugins/myliba-core \
+            -name '*.php' -print0 | xargs -0 -n1 -P4 php -l > /dev/null
+
+      - name: Form koruması yerinde mi
+        run: |
+          # 23 Kasım 2026: korumasız forms.php canlıya çıkıp form gönderimini çökertti.
+          grep -q '_myliba_notification_status' wordpress/wp-content/plugins/myliba-core/includes/forms.php
+          grep -q 'Throwable' wordpress/wp-content/plugins/myliba-core/includes/forms.php
+
+      - name: Tema
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./wordpress/wp-content/themes/myliba/
+          server-dir: public_html/wp-content/themes/myliba/
+          dry-run: ${{ inputs.dry_run }}
+          exclude: |
+            **/.DS_Store
+            **/assets/css/src/**
+
+      - name: myliba-core
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./wordpress/wp-content/plugins/myliba-core/
+          server-dir: public_html/wp-content/plugins/myliba-core/
+          dry-run: ${{ inputs.dry_run }}
+          exclude: |
+            **/.DS_Store
+            **/tests/**

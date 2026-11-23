@@ -1006,6 +1006,7 @@ function myliba_translation_defaults(): array
         'questions found' => 'soru bulundu',
         'I consent to being contacted about this request and accept the privacy notice.' => 'Bu taleple ilgili tarafımla iletişime geçilmesine izin veriyor ve gizlilik bildirimini kabul ediyorum.',
         'Website' => 'Web sitesi',
+        'Featured topics' => 'Öne çıkan konular',
         'The form could not be sent. Please try again.' => 'Form gönderilemedi. Lütfen tekrar deneyin.',
         'First name' => 'Ad',
         'Name' => 'Adınız',
@@ -1968,6 +1969,56 @@ function myliba_solution_url(string $slug): string
 
     $urls[$cache_key] = home_url('/tr/cozumler/' . $slug . '/');
     return $urls[$cache_key];
+}
+
+/**
+ * Sitewide footer links to the SEO landing pages of the current language.
+ *
+ * Landing pages were only reachable through the XML sitemap and a couple of
+ * in-content links, so search engines discovered them without ever crawling
+ * them. Listing them in the footer gives every landing an internal link from
+ * each page; new landings are picked up automatically.
+ */
+function myliba_footer_topic_links(): array
+{
+    static $cache = [];
+    $language = myliba_current_language();
+    if (isset($cache[$language])) {
+        return $cache[$language];
+    }
+
+    $links = [];
+    $landing_ids = get_posts([
+        'post_type' => 'myliba_landing',
+        'post_status' => 'publish',
+        'posts_per_page' => 12,
+        'orderby' => ['menu_order' => 'ASC', 'title' => 'ASC'],
+        'fields' => 'ids',
+        'no_found_rows' => true,
+        'meta_key' => '_myliba_language',
+        'meta_value' => $language,
+    ]);
+    foreach ($landing_ids as $landing_id) {
+        $landing_id = (int) $landing_id;
+        if (get_post_meta($landing_id, '_myliba_noindex', true) === '1') {
+            continue;
+        }
+        $links[] = [
+            'label' => get_the_title($landing_id),
+            'url' => get_permalink($landing_id),
+        ];
+    }
+
+    $coaching_page = get_page_by_path($language === 'en' ? 'en/okr-coaching' : 'tr/okr-koclugu');
+    if ($coaching_page instanceof \WP_Post && $coaching_page->post_status === 'publish') {
+        $links[] = [
+            'label' => get_the_title($coaching_page),
+            'url' => get_permalink($coaching_page),
+        ];
+    }
+
+    $cache[$language] = $links;
+    return $links;
 }
 
 function myliba_development_center_page_id(): int

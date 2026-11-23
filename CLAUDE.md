@@ -65,3 +65,4 @@ seo_geo_implementation_plan.md      the SEO/GEO roadmap and business rules (read
 - **Secrets:** API keys (e.g. `MYLIBA_SEO_AI_KEY`, `MYLIBA_SEO_AI_MODEL`) come from the server environment or `wp-config.php`; never commit `.env` or keys.
 - After PHP changes: `php -l <file>` (or via the wordpress container), run the relevant test script, then check the page on http://localhost:8080. Report what you verified.
 - No deployment to production and no commits/pushes unless the user asks.
+- **Deployment:** the owner deploys by full clone with All-in-One WP Migration (live → local, work, local → live). Before any export run `make predeploy` from `wordpress/`. Never copy code files from live over the git working tree. Live-only settings that must survive a clone (SMTP `WPMS_*`) belong in the live `wp-config.php`. Details and the unused code-only alternative: `docs/deployment.md`.

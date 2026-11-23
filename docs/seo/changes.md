@@ -1,5 +1,34 @@
 # Uygulama kaydı
 
+## 23 Kasım 2026 — SEO paketi 1 (yerel): iç bağlantılar, EN yönlendirme, form sınırı
+
+Yalnız yerelde; canlıya alınmadı. Kaynak: `audit-2026-11-23.md` A1 ve A5.
+
+- **Footer "Öne çıkan konular" satırı.** `themes/myliba/functions.php::myliba_footer_topic_links()` geçerli dildeki yayımlanmış ve noindex olmayan `myliba_landing` kayıtlarını ve OKR koçluğu sayfasını listeler; `footer.php` bunu sütunların altında gösterir. Stil `assets/css/src/base/theme-refinements.css`, `node tools/build-css.mjs` ile `dist/base.min.css` yeniden üretildi (yalnız bu paket değişti). Başlık `myliba_text('Featured topics')` üzerinden çevrilir.
+- **EN çözüm yönlendirmesi.** `myliba-core/includes/post-types.php::redirect_solution_custom_url()` hedefi kaydın diline çeviriyor; `/en/solutions/corporate-development-programs/` artık `/en/okr-culture-academy/` adresine gidiyor (önce `/tr/okr-kultur-akademisi/`). Yerel panelde "Footer Solutions (EN)" menüsündeki özel bağlantı doğrudan `/en/okr-culture-academy/` yapıldı (veritabanı değişikliği; klonla taşınır).
+- **Form deneme sınırı.** `forms.php::rate_limited()` oturum açmış yöneticileri (`manage_options`) muaf tutuyor. Ziyaretçi sınırı (saatte 5) değişmedi.
+- **Gövde bağlantıları için betik.** `migrations/2026-11-23-internal-links.php`; `make links-preview` / `make links-apply`. Henüz çalıştırılmadı.
+
+Yerel doğrulama (tarayıcıdan, `localhost:8080`): `/tr/`, `/en/`, `/tr/demo/`, `/tr/iletisim/`, `/tr/icerikler/okr-yazilimi/`, `/en/content/okr-software/`, `/en/blog/what-is-okr/` 200; her birinde tek canonical, tek H1 (ölçülenlerde), footer satırında 6 bağlantı (5 landing + OKR koçluğu), PHP uyarı çıktısı yok. EN footer'da eski çözüm adresine bağlantı kalmadı. Değişen dört PHP dosyası ve betik PHP 8.3 sözdizimi kontrolünden geçti; betiğin dönüştürme işlevi örnek HTML ile denendi (iç/dış bağlantı, sorgu dizgili adres, çapa, idempotentlik).
+
+Doğrulanmayan: form test betiği ve `make predeploy` (Docker'a erişim yok), mobil görünüm, tam site taraması. Yeni canonical/meta/schema üreticisi eklenmedi; staging noindex korumalarına dokunulmadı.
+
+## 23 Kasım 2026 — Canlı e-posta gönderimi wp-config sabitleriyle kuruldu
+
+Kullanıcı Google uygulama şifresi oluşturdu ve `WPMS_*` sabitlerini canlı `public_html/wp-config.php` dosyasına kendisi yazdı (ilk denemede blok ana dizindeki kullanılmayan `~/wp-config.php` dosyasına girilmişti; orada hâlâ duruyor, silinmesi önerildi). Parola görülmedi; dosyada yalnız satırların varlığı ve biçimi denetlendi (10/10, 82–91. satırlar).
+
+Doğrulama: WP Mail SMTP ekranında yöntem SMTP, `smtp.gmail.com:587` TLS, kullanıcı ve gönderen okan.toper@myliba.com; alanlar sabitten kilitli, "gönderici kurulu değil" uyarısı kalktı. `/tr/`, `/tr/demo/`, `/tr/yazilim/` 200. Kullanıcı onayıyla okan.toper@myliba.com adresine tek test e-postası gönderildi; eklenti "Test email sent successfully" yanıtı verdi. Bu, SMTP sunucusunun iletiyi kabul ettiğini gösterir; gelen kutusuna teslim ve gerçek form bildirimi (hello@myliba.com) kullanıcı tarafından teyit edilecek.
+
+Ayar `wp-config.php` içinde olduğu için All-in-One klonlarında silinmez. Yerel akış `docs/deployment.md` içinde; export öncesi `make predeploy`.
+
+## 23 Kasım 2026 — Yayın yöntemi: kod ve veri ayrıldı (kurulum sürüyor)
+
+Kullanıcı isteğiyle All-in-One import yerine geçecek düzen hazırlandı; ayrıntı `docs/deployment.md`. Eklenen dosyalar: `tools/deploy/deploy.yml` (GitHub Actions; `.github/workflows/` altına kopyalanacak), `tools/server/myliba-db-dump.php`, `wordpress/scripts/pull-live.sh`, `myliba-core/includes/local-dev.php`; `Makefile`, `.env.example`, `.gitignore`, `myliba-core.php` güncellendi.
+
+Doğrulanan: yeni PHP dosyaları ve `myliba-core.php` için PHP 8.3 sözdizimi kontrolü geçti; döküm betiği sahte `wp-config.php` ve sahte `mysqldump` ile çalıştırılıp çıktı/meta dosyası üretildi; `pull-live.sh` için `bash -n` geçti. Sunucuda `~/myliba-sync/` (0700) oluşturuldu ve döküm betiği yüklendi.
+
+Doğrulanmayan / bekleyen: zamanlanmış görev eklenmedi (kullanıcı onayı bekliyor), sunucuda gerçek döküm alınmadı, FTP hesabı ve GitHub Secrets yok, iş akışı hiç çalışmadı, `make pull-live` yerel Docker'da denenmedi. `local-dev.php` yalnız `local` ortam türünde çalışır; canlıda davranış değişikliği ve SEO etkisi yok.
+
 ## 23 Kasım 2026 — Canlı form çökmesi: korumalı forms.php yeniden yüklendi
 
 Kullanıcı canlıda form gönderiminin hata verdiğini bildirdi. Canlı panelde 14:47 tarihli yeni kayıt görüldü (39 → 40): talep kaydedilmiş, hata kayıttan sonraki bildirim adımında. Canlıdaki `includes/forms.php` (14.709 bayt, sha256 `a8d8bf9f…`) 22 Ekim'deki Throwable korumasını ve kayıt kontrolünü içermiyordu. Neden: canlı dosyalar yerele alınırken korumasız sürüm çalışma klasörünün üzerine yazılmış ve `db32f9dd` commit'i ile kayda geçip yayımlanmış. Hata ekranı doğrudan görülmedi; teşhis kayıt saati, kod ve 28 Ağustos/22 Ekim'deki aynı hata kaydına dayanıyor.
